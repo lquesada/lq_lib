@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="bgGrad" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#141E30" />
+      <stop offset="60%" stop-color="#0E1624" />
+      <stop offset="100%" stop-color="#070A10" />
+    </radialGradient>
+
+    <!-- Beacon Glow -->
+    <radialGradient id="beaconGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00E5FF" stop-opacity="1" />
+      <stop offset="40%" stop-color="#00B0FF" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#00E5FF" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Cyan to Blue Wave Gradient -->
+    <linearGradient id="waveCyanBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00E5FF" />
+      <stop offset="100%" stop-color="#2979FF" />
+    </linearGradient>
+
+    <!-- Blue to Violet Gradient -->
+    <linearGradient id="waveBlueViolet" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2979FF" />
+      <stop offset="100%" stop-color="#7C4DFF" />
+    </linearGradient>
+
+    <!-- Lightning Spark Gradient -->
+    <linearGradient id="sparkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFEE58" />
+      <stop offset="100%" stop-color="#FF9100" />
+    </linearGradient>
+
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Squircle / Rounded Plate -->
+  <rect x="24" y="24" width="464" height="464" rx="96" fill="url(#bgGrad)" stroke="#1E293B" stroke-width="4" />
+
+  <!-- Hexagonal Tech Orbitals -->
+  <polygon points="256,64 420,158 420,354 256,448 92,354 92,158" fill="none" stroke="#162032" stroke-width="3" />
+  <polygon points="256,96 392,174 392,338 256,416 120,338 120,174" fill="none" stroke="#1E293B" stroke-width="2" stroke-dasharray="8 6" />
+
+  <!-- Radar Circles -->
+  <circle cx="256" cy="256" r="140" fill="none" stroke="#162032" stroke-width="2" />
+  <circle cx="256" cy="256" r="80" fill="none" stroke="#1E293B" stroke-width="2" />
+
+  <!-- 8-Tone Waterfall Spectrum Bars (LQ8 8-Tone Modulation) -->
+  <g transform="translate(0, 40)">
+    <rect x="156" y="320" width="14" height="40" rx="3" fill="#00E5FF" />
+    <rect x="182" y="300" width="14" height="60" rx="3" fill="#00B0FF" />
+    <rect x="208" y="275" width="14" height="85" rx="3" fill="#2979FF" />
+    <rect x="234" y="250" width="14" height="110" rx="3" fill="#00E676" />
+    <rect x="264" y="250" width="14" height="110" rx="3" fill="#00E676" />
+    <rect x="290" y="275" width="14" height="85" rx="3" fill="#2979FF" />
+    <rect x="316" y="300" width="14" height="60" rx="3" fill="#00B0FF" />
+    <rect x="342" y="320" width="14" height="40" rx="3" fill="#00E5FF" />
+  </g>
+
+  <!-- Concentric RF Radiation Wave Arcs -->
+  <!-- Outer Ring Arc (Violet) -->
+  <path d="M144,116 A160,160 0 0,1 368,116" fill="none" stroke="url(#waveBlueViolet)" stroke-width="8" stroke-linecap="round" filter="url(#glow)" />
+  <path d="M144,284 A160,160 0 0,0 368,284" fill="none" stroke="url(#waveBlueViolet)" stroke-width="8" stroke-linecap="round" />
+
+  <!-- Middle Ring Arc (Blue) -->
+  <path d="M176,148 A116,116 0 0,1 336,148" fill="none" stroke="url(#waveCyanBlue)" stroke-width="8" stroke-linecap="round" filter="url(#glow)" />
+  <path d="M176,252 A116,116 0 0,0 336,252" fill="none" stroke="url(#waveCyanBlue)" stroke-width="8" stroke-linecap="round" />
+
+  <!-- Inner Ring Arc (Cyan) -->
+  <path d="M208,180 A70,70 0 0,1 304,180" fill="none" stroke="#00E5FF" stroke-width="8" stroke-linecap="round" filter="url(#glow)" />
+  <path d="M208,220 A70,70 0 0,0 304,220" fill="none" stroke="#00E5FF" stroke-width="8" stroke-linecap="round" />
+
+  <!-- Antenna Mast Tower Structure -->
+  <polygon points="250,200 262,200 270,360 242,360" fill="#FFFFFF" />
+  <polygon points="228,350 284,350 292,364 220,364" fill="#ECEFF1" />
+  <!-- Tower Cross Lattice -->
+  <line x1="248" y1="230" x2="264" y2="260" stroke="#0D131F" stroke-width="4" stroke-linecap="round" />
+  <line x1="264" y1="230" x2="248" y2="260" stroke="#0D131F" stroke-width="4" stroke-linecap="round" />
+  <line x1="246" y1="280" x2="266" y2="310" stroke="#0D131F" stroke-width="4" stroke-linecap="round" />
+  <line x1="266" y1="280" x2="246" y2="310" stroke="#0D131F" stroke-width="4" stroke-linecap="round" />
+
+  <!-- Radiating Apex Sphere & Glow -->
+  <circle cx="256" cy="200" r="30" fill="url(#beaconGlow)" />
+  <circle cx="256" cy="200" r="14" fill="#00E5FF" filter="url(#glow)" />
+  <circle cx="256" cy="200" r="7" fill="#FFFFFF" />
+
+  <!-- Golden Lightning / Energy Spark at Top -->
+  <polygon points="258,90 242,138 260,138 250,184 274,130 256,130" fill="url(#sparkGrad)" filter="url(#glow)" />
+
+  <!-- Brand Typography "qFT8" -->
+  <text x="256" y="445" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" font-weight="900" font-size="34" fill="#FFFFFF" text-anchor="middle" letter-spacing="4">qFT8</text>
+</svg>

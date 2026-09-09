@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="128dp"
+    android:height="128dp"
+    android:viewportWidth="128"
+    android:viewportHeight="128">
+
+    <!-- Outer Rounded Tech Badge Background -->
+    <path
+        android:fillColor="#0D131F"
+        android:pathData="M20,6 L108,6 A14,14 0 0,1 122,20 L122,108 A14,14 0 0,1 108,122 L20,122 A14,14 0 0,1 6,108 L6,20 A14,14 0 0,1 20,6 Z" />
+    <path
+        android:strokeColor="#1E293B"
+        android:strokeWidth="1.5"
+        android:fillColor="#00000000"
+        android:pathData="M20,6 L108,6 A14,14 0 0,1 122,20 L122,108 A14,14 0 0,1 108,122 L20,122 A14,14 0 0,1 6,108 L6,20 A14,14 0 0,1 20,6 Z" />
+
+    <!-- Hexagonal Ring -->
+    <path
+        android:strokeColor="#162032"
+        android:strokeWidth="1.0"
+        android:fillColor="#00000000"
+        android:pathData="M64,16 L104,39 L104,89 L64,112 L24,89 L24,39 Z" />
+
+    <!-- 8-Tone Digital FSK Spectrum Waterfall Bars at Base -->
+    <path android:fillColor="#00E5FF" android:pathData="M38,88 L42,88 L42,98 L38,98 Z" />
+    <path android:fillColor="#00B0FF" android:pathData="M45,83 L49,83 L49,98 L45,98 Z" />
+    <path android:fillColor="#2979FF" android:pathData="M52,77 L56,77 L56,98 L52,98 Z" />
+    <path android:fillColor="#00E676" android:pathData="M59,71 L63,71 L63,98 L59,98 Z" />
+    <path android:fillColor="#00E676" android:pathData="M65,71 L69,71 L69,98 L65,98 Z" />
+    <path android:fillColor="#2979FF" android:pathData="M72,77 L76,77 L76,98 L72,98 Z" />
+    <path android:fillColor="#00B0FF" android:pathData="M79,83 L83,83 L83,98 L79,98 Z" />
+    <path android:fillColor="#00E5FF" android:pathData="M86,88 L90,88 L90,98 L86,98 Z" />
+
+    <!-- Radio Wave Arcs: Inner Arc -->
+    <path
+        android:strokeColor="#00E5FF"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"
+        android:pathData="M52,44 A16,16 0 0,1 76,44" />
+    <path
+        android:strokeColor="#00E5FF"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"
+        android:pathData="M52,56 A16,16 0 0,0 76,56" />
+
+    <!-- Radio Wave Arcs: Middle Arc -->
+    <path
+        android:strokeColor="#2979FF"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"
+        android:pathData="M44,36 A26,26 0 0,1 84,36" />
+    <path
+        android:strokeColor="#2979FF"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"
+        android:pathData="M44,64 A26,26 0 0,0 84,64" />
+
+    <!-- Radio Wave Arcs: Outer Arc -->
+    <path
+        android:strokeColor="#7C4DFF"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"
+        android:pathData="M36,28 A36,36 0 0,1 92,28" />
+    <path
+        android:strokeColor="#7C4DFF"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"
+        android:pathData="M36,72 A36,36 0 0,0 92,72" />
+
+    <!-- Central Antenna Mast Tower -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M62,50 L66,50 L68,88 L60,88 Z" />
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M56,86 L72,86 L74,90 L54,90 Z" />
+
+    <!-- Apex Radiating Energy Beacon -->
+    <path
+        android:fillColor="#00E5FF"
+        android:pathData="M64,50 m-4,0 a4,4 0 1,0 8,0 a4,4 0 1,0 -8,0" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M64,50 m-2,0 a2,2 0 1,0 4,0 a2,2 0 1,0 -4,0" />
+
+    <!-- Lightning / DSP Energy Spark at Top -->
+    <path
+        android:fillColor="#FFD600"
+        android:pathData="M64.5,24 L60.5,35 L65,35 L62.5,46 L68.5,33 L64,33 Z" />
+
+</vector>

@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The LQ8 Digital Mode</title>
-  <meta name="description" content="The next-generation amateur radio digital mode family (LQ8, LQ4, LQ2, LQ16). Full 4-step contacts in 60s with complete grid &amp; report exchange (vs 75–90s in FT8), >2.3× pileup speed (160 vs ~69 QSOs/h) with 0.0 dB power penalty, and -21.0 dB SNR sensitivity via variable-length prefix coding. Native support in qFT8 for Android.">
+  <title>Цифровий протокол LQ8</title>
+  <meta name="description" content="Цифровые протоколы нового поколения для радиолюбителей (LQ8, LQ4, LQ2, LQ16). Завершение QSO за 4 передачи в 60с (против 75–90с в FT8), >2.3× скорость в пайлапах (160 против ~69 QSO/ч) с 0.0 дБ потерь мощности и чувствительность -21.0 дБ SNR. Нативная поддержка в qFT8 для Android.">
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://lq8.org/">
-  <meta property="og:title" content="The LQ8 Digital Mode">
-  <meta property="og:description" content="Full 4-step contacts in 60s with complete grid &amp; report exchange (vs 75–90s in FT8), >2.3× pileup throughput (160 vs ~69 QSOs/h) with 0.0 dB power penalty. Continuous-phase 8-GFSK with variable-length prefix coding. Native support in qFT8 for Android.">
+  <meta property="og:url" content="https://lq8.org/uk/">
+  <meta property="og:title" content="Цифровий протокол LQ8">
+  <meta property="og:description" content="Полные контакты за 4 передачи в 60с (против 75–90с в FT8), >2.3× пропускная способность в пайлапах (160 против ~69 QSO/ч) без потерь мощности. 8-GFSK и префиксное кодирование. Поддержка в qFT8 для Android.">
   <meta property="og:image" content="https://lq8.org/img/og_banner.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://lq8.org/">
-  <meta name="twitter:title" content="The LQ8 Digital Mode">
-  <meta name="twitter:description" content="Full 4-step contacts in 60s with complete grid &amp; report exchange (vs 75–90s in FT8), >2.3× pileup throughput (160 vs ~69 QSOs/h) with 0.0 dB power penalty. Continuous-phase 8-GFSK with variable-length prefix coding. Native support in qFT8 for Android.">
+  <meta name="twitter:url" content="https://lq8.org/uk/">
+  <meta name="twitter:title" content="Цифровий протокол LQ8">
+  <meta name="twitter:description" content="Полные контакты за 4 передачи в 60с (против 75–90с в FT8), >2.3× пропускная способность в пайлапах (160 против ~69 QSO/ч) без потерь мощности. Поддержка в qFT8 для Android.">
   <!-- SEO Canonical & Hreflang Tags -->
-  <link rel="canonical" href="https://lq8.org/">
+  <link rel="canonical" href="https://lq8.org/uk/">
   <link rel="alternate" hreflang="x-default" href="https://lq8.org/">
   <link rel="alternate" hreflang="en" href="https://lq8.org/">
   <link rel="alternate" hreflang="es" href="https://lq8.org/es/">
@@ -111,46 +111,10 @@
             window.location.href = isFile ? rootPrefix + lang + '/index.html' : rootPrefix + lang + '/';
           }
         }
-    
-        // Auto-redirect block for root English page
-        (function() {
-          try {
-            const urlParams = new URLSearchParams(window.location.search);
-            const queryLang = urlParams.get('lang');
-            const isFile = window.location.protocol === 'file:';
-
-            if (queryLang && supportedLanguages.includes(queryLang)) {
-              try { localStorage.setItem('lq_user_lang', queryLang); } catch (e) {}
-              if (queryLang !== 'en') {
-                const target = isFile ? queryLang + '/index.html' : queryLang + '/';
-                window.location.replace(target);
-                return;
-              }
-            }
-
-            if (isFile || sessionStorage.getItem('lq_redirected')) return;
-
-            const savedLang = localStorage.getItem('lq_user_lang');
-            if (savedLang && savedLang !== 'en' && supportedLanguages.includes(savedLang)) {
-              sessionStorage.setItem('lq_redirected', '1');
-              window.location.replace(savedLang + '/');
-              return;
-            }
-
-            if (!savedLang) {
-              const browserLang = (navigator.language || navigator.userLanguage || '').split('-')[0].toLowerCase();
-              if (browserLang && browserLang !== 'en' && supportedLanguages.includes(browserLang)) {
-                sessionStorage.setItem('lq_redirected', '1');
-                window.location.replace(browserLang + '/');
-                return;
-              }
-            }
-          } catch (e) {}
-        })();
-          </script>
+      </script>
   <!-- End Language Switcher & Redirection -->
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -1441,12 +1405,12 @@
       <a href="#" class="brand-logo"><span class="gradient-text">LQ8</span></a>
 
       <ul class="nav-links">
-        <li><a href="#overview" data-i18n="NAV_OVERVIEW">Overview</a></li>
-        <li><a href="#operation" data-i18n="NAV_OPERATION">Operation</a></li>
-        <li><a href="#speedup" data-i18n="NAV_SPEEDUP">Speed-Up</a></li>
-        <li><a href="#roadmap" data-i18n="NAV_ROADMAP">Roadmap</a></li>
-        <li><a href="#technical" data-i18n="NAV_TECH_SPECS">Specs</a></li>
-        <li><a href="#community" data-i18n="NAV_COMMUNITY">Community</a></li>
+        <li><a href="#overview" data-i18n="NAV_OVERVIEW">Огляд</a></li>
+        <li><a href="#operation" data-i18n="NAV_OPERATION">Робота в ефірі</a></li>
+        <li><a href="#speedup" data-i18n="NAV_SPEEDUP">Скорость</a></li>
+        <li><a href="#roadmap" data-i18n="NAV_ROADMAP">План розвитку</a></li>
+        <li><a href="#technical" data-i18n="NAV_TECH_SPECS">Технічні дані та бібліотека</a></li>
+        <li><a href="#community" data-i18n="NAV_COMMUNITY">Спільнота та Контакти</a></li>
       </ul>
 
       <div class="nav-actions">
@@ -1458,13 +1422,13 @@
             <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
             <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
           </svg>
-          <span data-i18n="NAV_SHARE">Share</span>
+          <span data-i18n="NAV_SHARE">Поділитися</span>
         </button>
 
         <div class="lang-selector-wrapper">
           <span class="lang-icon" aria-hidden="true">🌐</span>
           <select id="lang-select" class="lang-dropdown" onchange="onLanguageChange(this.value)" aria-label="Select Language">
-            <option value="en" selected>English</option>
+            <option value="en">English</option>
             <option value="es">Español</option>
             <option value="pt">Português</option>
             <option value="fr">Français</option>
@@ -1499,7 +1463,7 @@
             <option value="gl">Galego</option>
             <option value="eo">Esperanto</option>
             <option value="fa">فارسی</option>
-            <option value="uk">Українська</option>
+            <option value="uk" selected>Українська</option>
             <option value="sw">Kiswahili</option>
             <option value="ha">Hausa</option>
             <option value="yo">Yorùbá</option>
@@ -1539,16 +1503,16 @@
       <div class="container">
         <!-- Hero Mode Header -->
         <div class="hero-mode-header">
-          <div class="hero-mode-title" data-i18n="HERO_MODE_TITLE">The LQ8 Digital Mode</div>
+          <div class="hero-mode-title" data-i18n="HERO_MODE_TITLE">Цифровий протокол LQ8</div>
         </div>
 
         <h1>
-          <span data-i18n="HERO_TITLE_1">Full 4-Step Contacts in 60 Seconds</span><br>
-          <span data-i18n="HERO_TITLE_2">>2.3× Pileup Speed (160 vs ~69 QSOs/h)</span><br>
-          <span data-i18n="HERO_TITLE_3">0.0 dB Power Penalty</span>
+          <span data-i18n="HERO_TITLE_1">Полные контакты за 4 передачи в 60 секунд</span><br>
+          <span data-i18n="HERO_TITLE_2">>2.3× скорость в пайлапах (160 против ~69 QSO/ч)</span><br>
+          <span data-i18n="HERO_TITLE_3">0.0 дБ потерь мощности</span>
         </h1>
 
-        <p class="hero-sub" style="margin-top: 18px;" data-i18n="HERO_SUBTITLE"><strong>LQ8</strong> is a next-generation amateur radio weak-signal protocol that re-engineers message packing using variable-length prefix codes over the exact, battle-tested <strong>FT8 physical transport layer</strong> (8-GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). Complete full contacts with bidirectional grid, report, and 73 confirmation in <strong>4 transmissions (60s vs 75–90s)</strong> and achieve <strong>160 QSOs/h in pileups (>2.3× over dual-stream FT8 Fox &amp; Hound)</strong> with 0.0 dB RF power penalty (scaling to <strong>320 QSOs/h</strong> dual-carrier).</p>
+        <p class="hero-sub" style="margin-top: 18px;" data-i18n="HERO_SUBTITLE"><strong>LQ8</strong> — цифровой протокол нового поколения для радиолюбителей, использующий префиксное кодирование переменной длины поверх <strong>проверенного физического уровня FT8</strong> (8-GFSK, 50&nbsp;Гц, &minus;21.0&nbsp;дБ SNR). Полные радиосвязи за <strong>4 передачи (60с против 75–90с)</strong> и <strong>160 QSO/ч в пайлапах (>2.3× по сравнению с FT8 Fox &amp; Hound)</strong> без потери мощности 0.0 дБ (до <strong>320 QSO/ч</strong> на двух несущих).</p>
 
         <div style="display: flex; gap: 14px; justify-content: center; align-items: center; margin-top: 24px; flex-wrap: wrap;">
           <a href="#operation" class="btn btn-primary" data-i18n="HERO_BTN_DISCOVER">Discover LQ8 &rarr;</a>
@@ -1559,65 +1523,65 @@
         <div class="pitch-grid">
           <!-- Card 1 -->
           <div class="pitch-card">
-            <div class="pitch-card-badge badge-speedup" data-i18n="PITCH_CARD_1_BADGE">60s QSO Speedup</div>
-            <h3 data-i18n="PITCH_CARD_1_TITLE">1-on-1 Contacts</h3>
+            <div class="pitch-card-badge badge-speedup" data-i18n="PITCH_CARD_1_BADGE">Ускорение QSO за 60с</div>
+            <h3 data-i18n="PITCH_CARD_1_TITLE">Связи 1 на 1</h3>
             <div class="pitch-stat">
               <span class="stat-main" data-i18n="PITCH_CARD_1_STAT_MAIN">60s</span>
-              <span class="stat-sub" data-i18n="PITCH_CARD_1_STAT_SUB">/ 4-Step (60 QSO/h)</span>
+              <span class="stat-sub" data-i18n="PITCH_CARD_1_STAT_SUB">/ 4 шага (60 QSO/ч)</span>
             </div>
-            <p class="pitch-desc" data-i18n="PITCH_CARD_1_DESC">Completes full contacts in 4 transmissions (60s vs 90s canonical or 75s with RR73 in FT8) via an optimal 4-step exchange (CQ &rarr; CALL &rarr; REPORT+73 &rarr; 73) at full reference sensitivity.</p>
+            <p class="pitch-desc" data-i18n="PITCH_CARD_1_DESC">Завершает контакты за 4 передачи (60с против 90с или 75с с RR73 в FT8) с оптимальным 4-шаговым обменом (CQ &rarr; CALL &rarr; REPORT+73 &rarr; 73).</p>
             <ul class="pitch-list">
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_1_LI_1">4 transmissions vs 5–6 in FT8</span></li>
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_1_LI_2">60 contacts/hour (vs 40–48 in FT8)</span></li>
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_1_LI_3">0.0 dB power penalty</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_1_LI_1">4 передачи вместо 5–6 в FT8</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_1_LI_2">60 связей в час (против 40–48 в FT8)</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_1_LI_3">0.0 дБ потерь мощности</span></li>
             </ul>
           </div>
 
           <!-- Card 2 -->
           <div class="pitch-card">
-            <div class="pitch-card-badge badge-pileup" data-i18n="PITCH_CARD_2_BADGE">>2.3× Pileup Speed</div>
-            <h3 data-i18n="PITCH_CARD_2_TITLE">High-Density Pileups</h3>
+            <div class="pitch-card-badge badge-pileup" data-i18n="PITCH_CARD_2_BADGE">>2.3× скорость в пайлапе</div>
+            <h3 data-i18n="PITCH_CARD_2_TITLE">Пайлапы высокой плотности</h3>
             <div class="pitch-stat">
               <span class="stat-main" data-i18n="PITCH_CARD_2_STAT_MAIN">2.33×</span>
-              <span class="stat-sub" data-i18n="PITCH_CARD_2_STAT_SUB">vs FT8 Fox & Hound</span>
+              <span class="stat-sub" data-i18n="PITCH_CARD_2_STAT_SUB">против FT8 Fox & Hound</span>
             </div>
-            <p class="pitch-desc" data-i18n="PITCH_CARD_2_DESC">In continuous pileup operation, 3 directed steps (vs 7 in FT8 Fox & Hound) with 2 callers confirmed per frame achieves <strong>160 QSOs/h (2.33×)</strong> on a single carrier with 0.0 dB power penalty, scaling to <strong>320 QSOs/h (4.67×)</strong> with dual carriers!</p>
+            <p class="pitch-desc" data-i18n="PITCH_CARD_2_DESC">При непрерывной работе в пайлапе 3 шага (против 7 в FT8 Fox & Hound) с подтверждением 2 станций на кадр дают <strong>160 QSO/ч (2.33×)</strong> с 0.0 дБ потерь мощности, и до <strong>320 QSO/ч (4.67×)</strong> на двух несущих!</p>
             <ul class="pitch-list">
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_1">160 QSOs/h (1 carrier, 50 Hz)</span></li>
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_2">320 QSOs/h (2 carriers, 100 Hz)</span></li>
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_3">0.0 dB power penalty</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_1">160 QSO/ч (1 несущая, 50 Гц)</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_2">320 QSO/ч (2 несущие, 100 Гц)</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_3">0.0 дБ потерь мощности</span></li>
             </ul>
           </div>
 
           <!-- Card 3 -->
           <div class="pitch-card">
-            <div class="pitch-card-badge badge-phy" data-i18n="PITCH_CARD_3_BADGE">Battle-Tested PHY</div>
-            <h3 data-i18n="PITCH_CARD_3_TITLE">100% Proven Physical Layer</h3>
+            <div class="pitch-card-badge badge-phy" data-i18n="PITCH_CARD_3_BADGE">Проверенный PHY</div>
+            <h3 data-i18n="PITCH_CARD_3_TITLE">100% Перевірений фізичний рівень</h3>
             <div class="pitch-stat">
               <span class="stat-main" data-i18n="PITCH_CARD_3_STAT_MAIN">&minus;21.0 dB</span>
-              <span class="stat-sub" data-i18n="PITCH_CARD_3_STAT_SUB">Sensitivity (8-GFSK 50 Hz)</span>
+              <span class="stat-sub" data-i18n="PITCH_CARD_3_STAT_SUB">Чувствительность (8-GFSK 50 Гц)</span>
             </div>
-            <p class="pitch-desc" data-i18n="PITCH_CARD_3_DESC">Identical 8-GFSK modulation and LDPC(174,91) channel coding as FT8. Zero changes required to radios, soundcards, or antennas.</p>
+            <p class="pitch-desc" data-i18n="PITCH_CARD_3_DESC">Идентичная модуляция 8-GFSK и помехоустойчивое кодирование LDPC(174,91), как в FT8. Без изменений в трансиверах, звуковых картах и антеннах.</p>
             <ul class="pitch-list">
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_3_LI_1">Exact 8-GFSK 50.0 Hz physical transport</span></li>
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_3_LI_2">Standard &amp; 13-char extended callsigns</span></li>
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_3_LI_3">Unique Costas sync for protocol isolation</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_3_LI_1">Точный физический транспорт 8-GFSK 50.0 Гц</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_3_LI_2">Стандартные и расширенные позывные до 13 символов</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_3_LI_3">Уникальная синхронизация Костаса для изоляции протокола</span></li>
             </ul>
           </div>
 
           <!-- Card 4 -->
           <div class="pitch-card">
-            <div class="pitch-card-badge badge-speedup" data-i18n="PITCH_CARD_4_BADGE">Multi-Rate Modes</div>
-            <h3 data-i18n="PITCH_CARD_4_TITLE">LQ Family (LQ4, LQ2, LQ16)</h3>
+            <div class="pitch-card-badge badge-speedup" data-i18n="PITCH_CARD_4_BADGE">Многоскоростные режимы</div>
+            <h3 data-i18n="PITCH_CARD_4_TITLE">Многоскоростная адаптивность</h3>
             <div class="pitch-stat">
               <span class="stat-main" data-i18n="PITCH_CARD_4_STAT_MAIN">30s / 15s</span>
-              <span class="stat-sub" data-i18n="PITCH_CARD_4_STAT_SUB">Fast QSO (LQ4 / LQ2)</span>
+              <span class="stat-sub" data-i18n="PITCH_CARD_4_STAT_SUB">Быстрое QSO (LQ4 / LQ2)</span>
             </div>
-            <p class="pitch-desc" data-i18n="PITCH_CARD_4_DESC">Seamlessly adapts to high-speed VHF/contesting (LQ4: 30s QSO), ultra-fast bursts (LQ2: 15s QSO), and extreme deep-signal DX (LQ16: &minus;24.0 dB SNR).</p>
+            <p class="pitch-desc" data-i18n="PITCH_CARD_4_DESC">Идеально подходит для скоростных УКВ/соревнований (LQ4: 30с QSO), ультрабыстрых метеорных всплесков (LQ2: 15с QSO) и глубокого слабого сигнала DX (LQ16: &minus;24.0 dB SNR).</p>
             <ul class="pitch-list">
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_4_LI_1">LQ4: 30s 4-step QSO (83.3 Hz)</span></li>
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_4_LI_2">LQ2: 15s 4-step QSO (166.7 Hz)</span></li>
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_4_LI_3">LQ16: &minus;24.0 dB DX (25.0 Hz)</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_4_LI_1">LQ4: QSO в 4 шага за 30с (83.3 Гц)</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_4_LI_2">LQ2: QSO в 4 шага за 15с (166.7 Гц)</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_4_LI_3">LQ16: DX до &minus;24.0 dB (25.0 Гц)</span></li>
             </ul>
           </div>
         </div>
@@ -1639,15 +1603,15 @@
                     <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.458c.538-.196 1.006.128.832.943z"/>
                   </svg>
                 </div>
-                <h4 data-i18n="COMMUNITY_TELEGRAM_TITLE">Telegram Group</h4>
+                <h4 data-i18n="COMMUNITY_TELEGRAM_TITLE">Група в Telegram</h4>
               </div>
-              <p class="community-cta-body" data-i18n="COMMUNITY_TELEGRAM_DESC">Join the live Telegram group for real-time discussion, on-air testing coordination, and direct support.</p>
+              <p class="community-cta-body" data-i18n="COMMUNITY_TELEGRAM_DESC">Приєднуйтесь до групи в Telegram для обговорень у реальному часі, координації тестування в ефірі та прямої підтримки.</p>
             </div>
             <a href="https://t.me/lq8mode" target="_blank" rel="noopener noreferrer" id="btn-telegram-lq" class="community-cta-btn btn-telegram" aria-label="Join LQ8 Telegram Group">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.458c.538-.196 1.006.128.832.943z"/>
               </svg>
-              <span data-i18n="COMMUNITY_TELEGRAM_BTN">Join Telegram</span>
+              <span data-i18n="COMMUNITY_TELEGRAM_BTN">Приєднатися до Telegram</span>
             </a>
           </div>
 
@@ -1662,13 +1626,13 @@
                 </div>
                 <h4 data-i18n="COMMUNITY_REDDIT_TITLE">r/LQ8 Subreddit</h4>
               </div>
-              <p class="community-cta-body" data-i18n="COMMUNITY_REDDIT_DESC">Connect with operators, discuss antenna and radio setups, and share your first on-air decoding reports.</p>
+              <p class="community-cta-body" data-i18n="COMMUNITY_REDDIT_DESC">Общайтесь с операторами, обсуждайте настройки аппаратуры и антенн и делитесь первыми логами декодирования.</p>
             </div>
             <a href="https://www.reddit.com/r/LQ8" target="_blank" rel="noopener noreferrer" id="btn-reddit-lq" class="community-cta-btn btn-reddit" aria-label="Join r/LQ8 on Reddit">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.703zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.197-2.512-.73a.326.326 0 0 0-.232-.095z"/>
               </svg>
-              <span data-i18n="COMMUNITY_REDDIT_BTN">Join r/LQ8</span>
+              <span data-i18n="COMMUNITY_REDDIT_BTN">Приєднатися до r/LQ8</span>
             </a>
           </div>
 
@@ -1682,23 +1646,23 @@
                     <polyline points="22,6 12,13 2,6"></polyline>
                   </svg>
                 </div>
-                <h4 data-i18n="COMMUNITY_MAIL_TITLE">LQ8 News Mailing List</h4>
+                <h4 data-i18n="COMMUNITY_MAIL_TITLE">Список розсилки новин LQ8</h4>
               </div>
-              <p class="community-cta-body" data-i18n="COMMUNITY_MAIL_DESC">Read the public message archives and subscribe to official releases, announcements, and developer updates.</p>
+              <p class="community-cta-body" data-i18n="COMMUNITY_MAIL_DESC">Читайте публичные архивы и подписывайтесь на официальные релизы, анонсы и обновления разработки.</p>
             </div>
             <a href="https://groups.google.com/g/lq8-news" target="_blank" rel="noopener noreferrer" id="btn-mail-lq" class="community-cta-btn btn-mail" aria-label="Join LQ8 News Mailing List on Google Groups">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                 <polyline points="22,6 12,13 2,6"></polyline>
               </svg>
-              <span data-i18n="COMMUNITY_MAIL_BTN">Join Mailing List</span>
+              <span data-i18n="COMMUNITY_MAIL_BTN">Підписатися на розсилку</span>
             </a>
           </div>
         </div>
 
         <div class="section-header">
-          <h2 data-i18n="SECTION_OPERATION_TITLE">Operation &amp; Ecosystem</h2>
-          <p data-i18n="SECTION_OPERATION_SUBTITLE">Get on the air with native mobile software, dedicated band plans, and seamless electronic logging compatibility.</p>
+          <h2 data-i18n="SECTION_OPERATION_TITLE">Робота в ефірі та екосистема</h2>
+          <p data-i18n="SECTION_OPERATION_SUBTITLE">Выходите в эфир с мобильным приложением, выделенными частотами и поддержкой аппаратных журналов.</p>
         </div>
 
         <!-- Featured App Card (qFT8) -->
@@ -1706,21 +1670,19 @@
           <div class="qft8-featured-card">
             <div class="qft8-content">
               <h3 data-i18n="QFT8_TITLE">qFT8</h3>
-              <div class="qft8-tagline" data-i18n="QFT8_TAGLINE">Portable Amateur Radio for Android</div>
-              <p class="qft8-desc" data-i18n="QFT8_DESC">
-                Native mobile transceiver application supporting <strong>LQ8</strong> alongside other existing digital modes. Operate weak-signal digital modes anywhere from your Android device.
-              </p>
+              <div class="qft8-tagline" data-i18n="QFT8_TAGLINE">Портативний радіоаматорський зв'язок для Android</div>
+              <p class="qft8-desc" data-i18n="QFT8_DESC">Нативний мобільний додаток-трансивер із підтримкою <strong>LQ8</strong> поряд з іншими існуючими цифровими модами. Працюйте слабкими сигналами звідусіль на вашому пристрої Android.</p>
               <div class="qft8-features">
-                <div class="qft8-feat-item"><span><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="QFT8_FEAT_1">Plug and Play for 50+ Radios</span></div>
-                <div class="qft8-feat-item"><span><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="QFT8_FEAT_2">Integration with QRZ and LoTW</span></div>
-                <div class="qft8-feat-item"><span><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="QFT8_FEAT_3">Manual and Automated Operation</span></div>
-                <div class="qft8-feat-item"><span><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="QFT8_FEAT_4">Optimized for SOTA and POTA</span></div>
+                <div class="qft8-feat-item"><span><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="QFT8_FEAT_1">Plug and Play для более чем 50 трансиверов</span></div>
+                <div class="qft8-feat-item"><span><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="QFT8_FEAT_2">Интеграция с QRZ и LoTW</span></div>
+                <div class="qft8-feat-item"><span><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="QFT8_FEAT_3">Ручной и автоматический режим работы</span></div>
+                <div class="qft8-feat-item"><span><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="QFT8_FEAT_4">Оптимизировано для SOTA и POTA</span></div>
               </div>
-              <a href="https://qft8.com" rel="noopener noreferrer" class="btn btn-primary" data-i18n="QFT8_BTN">Visit qft8.com & Download &rarr;</a>
+              <a href="https://qft8.com" rel="noopener noreferrer" class="btn btn-primary" data-i18n="QFT8_BTN">Перейти на qft8.com и скачать &rarr;</a>
             </div>
             <div class="qft8-preview-wrap">
               <a href="https://qft8.com" rel="noopener noreferrer" class="qft8-preview-link" title="Visit qFT8 Website (qft8.com)">
-                <img src="qft8.jpg" alt="qFT8 Android Application" data-i18n="QFT8_IMG_ALT" class="qft8-preview-img" loading="lazy">
+                <img src="../qft8.jpg" alt="Приложение qFT8 для Android" data-i18n="QFT8_IMG_ALT" class="qft8-preview-img" loading="lazy">
               </a>
             </div>
           </div>
@@ -1729,31 +1691,27 @@
         <!-- Recommended Operating Frequencies & Band Plan -->
         <div id="frequencies" style="margin-bottom: 48px;">
           <div class="section-header" style="margin-bottom: 20px;">
-            <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800;" data-i18n="FREQUENCIES_TITLE">Proposed Operating Frequencies (Limited Experimental Mode)</h3>
-            <p data-i18n="FREQUENCIES_SUBTITLE">Dedicated 3.0&nbsp;kHz channel sub-allocations for <strong>LQ8</strong> in limited experimental mode exclusively on these bands to ensure clean, interference-free weak-signal evaluation.</p>
+            <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800;" data-i18n="FREQUENCIES_TITLE">Рекомендовані робочі частоти (обмежений експериментальний режим)</h3>
+            <p data-i18n="FREQUENCIES_SUBTITLE">Виділені піддіапазони каналів 3.0&nbsp;кГц для <strong>LQ8</strong> в обмеженому експериментальному режимі виключно на цих діапазонах для забезпечення чистого оцінювання слабких сигналів без завад.</p>
           </div>
 
           <div class="mode-compare-box frequencies-box" style="margin-bottom: 20px; border-left-color: var(--cyan); background: rgba(56, 189, 248, 0.06); padding: 18px 22px;">
             <div style="font-weight: 700; color: var(--cyan); margin-bottom: 6px; font-size: 0.98rem; display: flex; align-items: center; gap: 8px;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-              <span data-i18n="FREQUENCIES_BOX_TITLE">Limited Experimental Mode: 30m, 15m, and 10m Allocations</span>
+              <span data-i18n="FREQUENCIES_BOX_TITLE">Обмежений експериментальний режим: діапазони 30м, 15м та 10м</span>
             </div>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 6px;" data-i18n="FREQUENCIES_BOX_P1">
-              To evaluate weak-signal performance in clean RF spectrum without interference, initial on-air operations are conducted in <strong>limited experimental mode exclusively on 30m, 15m, and 10m</strong>. Each dial frequency represents the base carrier frequency of a standard <strong>3.0&nbsp;kHz Upper Sideband (USB) channel</strong> (e.g., <code>10.146&nbsp;MHz</code> spans audio offsets from <code>10.1460</code> to <code>10.1490&nbsp;MHz</code>). Multiple stations operate simultaneously within each 3.0&nbsp;kHz window on separate audio subcarrier offsets.
-            </p>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 0;" data-i18n="FREQUENCIES_BOX_P2">
-              These selected bands provide optimal, noise-free propagation environments: <strong>30m</strong> is a dedicated WARC band with no voice phone operation allowed by international law; <strong>15m</strong> and <strong>10m</strong> offer expansive, quiet digital allocations well below their respective voice phone segments.
-            </p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 6px;" data-i18n="FREQUENCIES_BOX_P1">Для оцінки роботи зі слабкими сигналами в чистому радіочастотному спектрі без завад початкова робота в ефірі проводиться в <strong>обмеженому експериментальному режимі виключно на 30м, 15м та 10м</strong>. Кожна частота налаштування є базовою несучою стандартного <strong>каналу верхньої бічної смуги (USB) шириною 3.0&nbsp;кГц</strong> (наприклад, <code>10.146&nbsp;МГц</code> охоплює аудіозсуви від <code>10.1460</code> до <code>10.1490&nbsp;МГц</code>). Кілька станцій працюють одночасно в межах кожного вікна 3.0&nbsp;кГц на окремих аудіопіднесучих.</p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 0;" data-i18n="FREQUENCIES_BOX_P2">Обрані діапазони забезпечують оптимальні умови проходження без шумів: <strong>30м</strong> — це виділений діапазон WARC, де телефонний зв'язок заборонений міжнародним регламентом; <strong>15м</strong> та <strong>10м</strong> надають широкі та спокійні цифрові ділянки значно нижче голосових сегментів.</p>
           </div>
 
           <div class="table-container frequencies-table-container">
             <table class="spec-table">
               <thead>
                 <tr>
-                  <th data-i18n="FREQUENCIES_TH_BAND">Band</th>
-                  <th class="th-lq" data-i18n="FREQUENCIES_TH_LQ8">LQ8 (3 kHz USB)</th>
-                  <th class="th-existing" data-i18n="FREQUENCIES_TH_FT8">FT8 (Ref)</th>
-                  <th class="th-existing" data-i18n="FREQUENCIES_TH_FT4">FT4 (Ref)</th>
+                  <th data-i18n="FREQUENCIES_TH_BAND">Диапазон</th>
+                  <th class="th-lq" data-i18n="FREQUENCIES_TH_LQ8">LQ8 (3 кГц USB)</th>
+                  <th class="th-existing" data-i18n="FREQUENCIES_TH_FT8">FT8 (Справка)</th>
+                  <th class="th-existing" data-i18n="FREQUENCIES_TH_FT4">FT4 (Справка)</th>
                 </tr>
               </thead>
               <tbody>
@@ -1777,17 +1735,15 @@
                 </tr>
               </tbody>
             </table>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 14px; margin-bottom: 0; padding: 0 14px 14px 14px; line-height: 1.5;" data-i18n="FREQUENCIES_FUTURE_BANDS_NOTE">
-              <em>Note:</em> LQ8 is currently active in limited experimental mode only on 30m, 15m, and 10m. Additional allocations (including 40m, 20m, 12m, 17m, 80m, and 160m) will be officially assigned in upcoming phases as coordinated with international band plans.
-            </p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 14px; margin-bottom: 0; padding: 0 14px 14px 14px; line-height: 1.5;" data-i18n="FREQUENCIES_FUTURE_BANDS_NOTE"><em>Примітка:</em> Протокол LQ8 наразі активний в обмеженому експериментальному режимі лише на 30м, 15м та 10м. Додаткові діапазони (включаючи 40м, 20м, 12м, 17м, 80м та 160м) будуть офіційно призначені на наступних етапах за узгодженням з міжнародними частотними планами.</p>
           </div>
         </div>
 
         <!-- ADIF Electronic Logging Standard -->
         <div id="adif">
           <div class="section-header" style="margin-bottom: 20px;">
-            <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800;" data-i18n="ADIF_TITLE">ADIF Electronic Logging &amp; Award Compatibility</h3>
-            <p data-i18n="ADIF_SUBTITLE">Standardized electronic logging format for LoTW, QRZ.com, eQSL, ClubLog, and amateur radio software suites.</p>
+            <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800;" data-i18n="ADIF_TITLE">Електронний журнал ADIF та залік дипломів</h3>
+            <p data-i18n="ADIF_SUBTITLE">Стандартизированный формат для LoTW, QRZ.com, eQSL, ClubLog и аппаратных журналов.</p>
           </div>
 
           <div style="background: var(--surface-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 32px; margin-bottom: 24px;">
@@ -1797,38 +1753,26 @@
               <div style="display: flex; align-items: flex-start; gap: 16px;">
                 <div style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: rgba(16, 185, 129, 0.2); flex-shrink: 0; color: var(--emerald);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
                 <div>
-                  <h4 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: var(--text-primary); margin-bottom: 6px;" data-i18n="ADIF_CALLOUT_TITLE">
-                    Logging and Submitting LQ8 QSOs: Practical Guidelines
-                  </h4>
-                  <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 8px;" data-i18n="ADIF_CALLOUT_P1">
-                    Under the <strong>ADIF 3.x specification</strong>, exporting contacts using standard mode <code class="radio-val">&lt;MODE:4&gt;DATA</code> or <code class="radio-val">&lt;MODE:4&gt;MFSK</code> with <code class="radio-val badge-lq">&lt;SUBMODE:3&gt;LQ8</code> allows electronic loggers and signing tools to record and process contacts without mode-rejection issues.
-                  </p>
-                  <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 8px;" data-i18n="ADIF_CALLOUT_P2">
-                    When submitting logs to <strong>QRZ.com Logbook</strong>, <strong>ARRL Logbook of the World (LoTW)</strong>, <strong>eQSL.cc</strong>, and <strong>Club Log</strong>, contacts logged under <strong><code>DATA</code></strong> or <strong><code>MFSK</code></strong> are recognized under standard digital categories for <strong>DXCC, WAS, VUCC, WAC, and WPX award credits</strong> (using local software mode mapping if needed).
-                  </p>
-                  <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;" data-i18n="ADIF_CALLOUT_P3">
-                    Formal submission to the ADIF Working Group is underway to establish dedicated native enum tokens and drop-down menu support across all logging applications.
-                  </p>
+                  <h4 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: var(--text-primary); margin-bottom: 6px;" data-i18n="ADIF_CALLOUT_TITLE">Можно ли логировать и отправлять QSO в LQ8? <span style="color: var(--emerald);">ДА, на 100%!</span></h4>
+                  <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 8px;" data-i18n="ADIF_CALLOUT_P1">Согласно <strong>спецификации ADIF 3.x</strong>, родительский режим <code class="radio-val">&lt;MODE:4&gt;DATA</code> является признанным стандартом, а поле <code class="radio-val">&lt;SUBMODE&gt;</code> является <strong>полностью открытым и расширяемым</strong>. Вы можете сразу указывать <code class="radio-val badge-lq">&lt;SUBMODE:3&gt;LQ8</code> или <code class="radio-val badge-lq">&lt;SUBMODE:3&gt;LQ4</code>.</p>
+                  <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 8px;" data-i18n="ADIF_CALLOUT_P2">При загрузке в <strong>QRZ.com</strong>, <strong>LoTW</strong>, <strong>eQSL.cc</strong> и <strong>Club Log</strong> эти связи <strong>принимаются без ошибок</strong> в категорию <strong><code>DATA</code> / <code>DIGITAL</code></strong> для зачета дипломов <strong>DXCC, WAS, VUCC, WAC и WPX</strong>.</p>
+                  <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;" data-i18n="ADIF_CALLOUT_P3">Последующее формальное утверждение комитетом ADIF предоставит прямой выбор в выпадающих списках контест-логов.</p>
                 </div>
               </div>
             </div>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 28px;">
               <div>
-                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: var(--cyan);" data-i18n="ADIF_CARD_1_TITLE">Standard ADIF Specification</h4>
-                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;" data-i18n="ADIF_CARD_1_TEXT">
-                  All protocols in the LQ digital mode family follow the <strong>Amateur Data Interchange Format (ADIF 3.x)</strong> guidelines under mode <code>DATA</code> or <code>MFSK</code> with protocol submode identifiers.
-                </p>
+                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: var(--cyan);" data-i18n="ADIF_CARD_1_TITLE">Стандартная спецификация ADIF</h4>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;" data-i18n="ADIF_CARD_1_TEXT">Все протоколы LQ соответствуют стандарту <strong>ADIF 3.x</strong> в рамках режима <code>DATA</code> с указанием подрежима в <code>SUBMODE</code>.</p>
               </div>
               <div>
-                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: var(--emerald);" data-i18n="ADIF_CARD_2_TITLE">Instant Platform &amp; Award Compatibility</h4>
-                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;" data-i18n="ADIF_CARD_2_TEXT">
-                  Online logbooks accept contacts under digital mode categories for digital awards with standard submode tracking.
-                </p>
+                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: var(--emerald);" data-i18n="ADIF_CARD_2_TITLE">Мгновенная совместимость с дипломами</h4>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;" data-i18n="ADIF_CARD_2_TEXT"><strong>LoTW</strong>, <strong>QRZ.com</strong>, <strong>eQSL.cc</strong> и <strong>Club Log</strong> автоматически относят <code>DATA</code> к категории <strong><code>DATA</code></strong>.</p>
               </div>
             </div>
 
-            <h4 style="font-family: var(--font-heading); font-size: 1.05rem; font-weight: 700; margin-bottom: 12px; color: var(--text-primary);" data-i18n="ADIF_TABLE_HEADING">Standard Mode &amp; Submode Tags Reference:</h4>
+            <h4 style="font-family: var(--font-heading); font-size: 1.05rem; font-weight: 700; margin-bottom: 12px; color: var(--text-primary);" data-i18n="ADIF_TABLE_HEADING">Справочник тегов режима и подрежима ADIF:</h4>
 
             <!-- Hidden for now because there is only one mode:
             <div class="adif-tabs" style="display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap;">
@@ -1843,10 +1787,10 @@
               <table class="spec-table">
                 <thead>
                   <tr>
-                    <th data-i18n="ADIF_TH_PROTOCOL">Protocol</th>
-                    <th data-i18n="ADIF_TH_MODE">ADIF Mode Tag</th>
-                    <th data-i18n="ADIF_TH_SUBMODE">ADIF Submode Tag</th>
-                    <th data-i18n="ADIF_TH_COMMENT">Standard Comment Tag</th>
+                    <th data-i18n="ADIF_TH_PROTOCOL">Протокол</th>
+                    <th data-i18n="ADIF_TH_MODE">Тег режима ADIF</th>
+                    <th data-i18n="ADIF_TH_SUBMODE">Тег подрежима ADIF</th>
+                    <th data-i18n="ADIF_TH_COMMENT">Тег комментария ADIF</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -1860,7 +1804,7 @@
               </table>
             </div>
 
-            <h4 style="font-family: var(--font-heading); font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);" data-i18n="ADIF_EXAMPLE_HEADING">Example Standard ADIF QSO Record (<code>.adi</code>):</h4>
+            <h4 style="font-family: var(--font-heading); font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);" data-i18n="ADIF_EXAMPLE_HEADING">Пример записи QSO в формате ADIF (<code>.adi</code>):</h4>
             <pre style="background: rgba(3, 7, 18, 0.7); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 16px 20px; color: var(--cyan); font-family: var(--font-mono); font-size: 0.88rem; line-height: 1.5; overflow-x: auto;"><code id="adifExampleCode">&lt;STATION_CALLSIGN:6&gt;HB9IPH
 &lt;MY_GRIDSQUARE:4&gt;JN47
 &lt;CALL:5&gt;TU2TU
@@ -1884,15 +1828,15 @@
     <section id="speedup" class="section">
       <div class="container">
         <div class="section-header">
-          <h2 data-i18n="SPEEDUP_TITLE">How is the 60-Second QSO &amp; Pileup Speed-Up Achieved?</h2>
-          <p data-i18n="SPEEDUP_SUBTITLE">By replacing repetitive rigid exchanges with variable-length prefix codes, 24-bit/16-bit collision-resistant hashing, and multi-station response frames, while guaranteeing full mutual exchange: both Maidenhead locators and signal reports are conveyed, with reciprocal 73 acknowledgments confirming reception.</p>
+          <h2 data-i18n="SPEEDUP_TITLE">Как достигается QSO за 60 секунд и ускорение в пайлапе?</h2>
+          <p data-i18n="SPEEDUP_SUBTITLE">За счет замены жесткого протокола переменными префиксными кодами Хаффмана, коллизионно-стойким 24/14-битным хешированием и фреймами множественного ответа при соблюдении двух ключевых принципов: происходит обмен локаторами и рапортами сигналов (кроме CQ для очень длинных позывных), а также обмен 73 для подтверждения приема локатора и рапорта сигнала корреспондента.</p>
         </div>
 
         <div class="speedup-quad-grid">
           <!-- 1. FT8 Standard -->
           <div class="flow-card flow-card-ft8">
             <div class="flow-card-header">
-              <h4 data-i18n="SPEEDUP_CARD_STD_FT8_TITLE">FT8 Standard</h4>
+              <h4 data-i18n="SPEEDUP_CARD_STD_FT8_TITLE">FT8 Стандарт</h4>
             </div>
             <div class="flow-steps">
               <div class="flow-step">
@@ -1920,15 +1864,13 @@
                 <div class="flow-step-msg">HB9IPH TU2TU 73</div>
               </div>
             </div>
-            <div class="flow-summary summary-slow" data-i18n="SPEEDUP_STD_FT8_SUMMARY">
-              <strong>Total QSO Time:</strong> 90 seconds (6 slots, or 75s with RR73)
-            </div>
+            <div class="flow-summary summary-slow" data-i18n="SPEEDUP_STD_FT8_SUMMARY"><strong>Общее время QSO:</strong> 90 секунд (6 слотов, или 75с с RR73)</div>
           </div>
 
           <!-- 2. LQ8 Standard -->
           <div class="flow-card flow-card-highlight">
             <div class="flow-card-header">
-              <h4 data-i18n="SPEEDUP_CARD_STD_LQ8_TITLE">LQ8 Standard</h4>
+              <h4 data-i18n="SPEEDUP_CARD_STD_LQ8_TITLE">LQ8 Стандарт</h4>
             </div>
             <div class="flow-steps">
               <div class="flow-step">
@@ -1948,19 +1890,15 @@
                 <div class="flow-step-msg msg-lq">HB9IPH TU2TU 73</div>
               </div>
             </div>
-            <div class="flow-summary summary-fast" data-i18n="SPEEDUP_STD_LQ8_SUMMARY">
-              <strong>Total QSO Time:</strong> 60 seconds (4 slots) &mdash; <span style="color: var(--cyan); font-weight: 700;">1.50× vs 6-slot / 1.25× vs RR73</span>
-            </div>
+            <div class="flow-summary summary-fast" data-i18n="SPEEDUP_STD_LQ8_SUMMARY"><strong>Общее время QSO:</strong> 60 секунд (4 слота) &mdash; <span style="color: var(--cyan); font-weight: 700;">1.50× к 6 слотам / 1.25× к RR73</span></div>
           </div>
 
           <!-- 3. FT8 Pileup -->
           <div class="flow-card flow-card-ft8">
             <div class="flow-card-header">
-              <h4 data-i18n="SPEEDUP_CARD_PL_FT8_TITLE">FT8 Pileup</h4>
+              <h4 data-i18n="SPEEDUP_CARD_PL_FT8_TITLE">FT8 Пайлап</h4>
             </div>
-            <div class="flow-card-context-note" data-i18n="SPEEDUP_NOTE_ASSUMING_CQ">
-              (continuous pipelined pileup, no repeated CQ)
-            </div>
+            <div class="flow-card-context-note" data-i18n="SPEEDUP_NOTE_ASSUMING_CQ">(непрерывный пайлап в конвейере, без повтора CQ)</div>
             <div class="flow-steps">
               <div class="flow-step">
                 <div class="flow-step-num">1</div>
@@ -1991,19 +1929,15 @@
                 <div class="flow-step-msg">HB9IPH YO1YO 73</div>
               </div>
             </div>
-            <div class="flow-summary summary-slow" data-i18n="SPEEDUP_PL_FT8_SUMMARY">
-              <strong>Directed Exchange:</strong> 105 seconds (7 slots for 2 QSOs) &mdash; ~69 QSOs/h (pipelined F/H, &minus;3.0 dB power split)
-            </div>
+            <div class="flow-summary summary-slow" data-i18n="SPEEDUP_PL_FT8_SUMMARY"><strong>Направленный обмен:</strong> 105 секунд (7 слота &times; 2 QSO) &mdash; ~69 QSO/ч (&minus;3.0 дБ разделение мощности)</div>
           </div>
 
           <!-- 4. LQ8 Pileup -->
           <div class="flow-card flow-card-ultra">
             <div class="flow-card-header">
-              <h4 data-i18n="SPEEDUP_CARD_PL_LQ8_TITLE">LQ8 Pileup</h4>
+              <h4 data-i18n="SPEEDUP_CARD_PL_LQ8_TITLE">LQ8 Пайлап</h4>
             </div>
-            <div class="flow-card-context-note" data-i18n="SPEEDUP_NOTE_ASSUMING_CQ">
-              (continuous pipelined pileup, no repeated CQ)
-            </div>
+            <div class="flow-card-context-note" data-i18n="SPEEDUP_NOTE_ASSUMING_CQ">(непрерывный пайлап в конвейере, без повтора CQ)</div>
             <div class="flow-steps">
               <div class="flow-step">
                 <div class="flow-step-num">1</div>
@@ -2018,9 +1952,7 @@
                 <div class="flow-step-msg msg-lq">HB9IPH TU2TU 73 / HB9IPH YO1YO 73</div>
               </div>
             </div>
-            <div class="flow-summary summary-ultra" data-i18n="SPEEDUP_PL_LQ8_SUMMARY">
-              <strong>Directed Exchange:</strong> 45 seconds (3 slots for 2 QSOs) &mdash; <span style="color: var(--emerald); font-weight: 700;">160 QSOs/h (2.33× speedup) with 0.0 dB power penalty</span>
-            </div>
+            <div class="flow-summary summary-ultra" data-i18n="SPEEDUP_PL_LQ8_SUMMARY"><strong>Направленный обмен:</strong> 45 секунд (3 слота &times; 2 QSO) &mdash; <span style="color: var(--emerald); font-weight: 700;">160 QSO/ч (ускорение 2.33×) без разделения мощности 0.0 дБ</span></div>
           </div>
         </div>
       </div>
@@ -2030,54 +1962,48 @@
     <section id="roadmap" class="section">
       <div class="container">
         <div class="section-header">
-          <h2 data-i18n="ROADMAP_TITLE">Strategic Roadmap &amp; Ecosystem Milestones</h2>
-          <p data-i18n="ROADMAP_SUBTITLE">Our clear trajectory toward global amateur radio standardization, multi-platform applications, reverse beacon reporting, and electronic logbook integration.</p>
+          <h2 data-i18n="ROADMAP_TITLE">Стратегічний план розвитку</h2>
+          <p data-i18n="ROADMAP_SUBTITLE">Наш путь к глобальной стандартизации в радиолюбительстве, кроссплатформенным приложениям и автоматической интеграции с логами.</p>
         </div>
 
         <div class="roadmap-list">
           <div class="roadmap-item">
             <div class="roadmap-status-icon status-done"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
             <div class="roadmap-content">
-              <h4><span data-i18n="ROADMAP_P1_TITLE">Phase 1: Mathematical Specification &amp; Reference Library</span> <span class="pill pill-emerald" data-i18n="ROADMAP_P1_STATUS">Completed</span></h4>
-              <p data-i18n="ROADMAP_P1_TEXT">Full definition of the variable-length Huffman prefix trees, 104-character Varicode, CRC-14/CRC-24Q algorithms, and the open-source C++20 reference library (<code>lq_lib</code>) with verified test coverage and exhaustive cross-platform validation.</p>
+              <h4><span data-i18n="ROADMAP_P1_TITLE">Этап 1: Математическая спецификация и библиотека</span> <span class="pill pill-emerald" data-i18n="ROADMAP_P1_STATUS">Завершен</span></h4>
+              <p data-i18n="ROADMAP_P1_TEXT">Полное описание префиксных деревьев Хаффмана, 61-символьного варикода, алгоритмов CRC-14/CRC-24Q и открытой библиотеки на C++20 (<code>lq_lib</code>) со 100% покрытием тестами.</p>
             </div>
           </div>
 
           <div class="roadmap-item">
             <div class="roadmap-status-icon status-active"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
             <div class="roadmap-content">
-              <h4><span data-i18n="ROADMAP_P2_TITLE">Phase 2: Native Mobile Applications &amp; Field Validation</span> <span class="pill pill-cyan" data-i18n="ROADMAP_P2_STATUS">Active / Current</span></h4>
-              <p data-i18n="ROADMAP_P2_TEXT">
-                Comprehensive over-the-air field validation. Native mobile implementation in <strong>qFT8 for Android</strong> (<a href="https://qft8.com" target="_blank">qft8.com</a>) and development of native <strong>iPhone / iPad (iOS) transceiver applications</strong> for portable and field-day operation.
-              </p>
+              <h4><span data-i18n="ROADMAP_P2_TITLE">Этап 2: Нативные мобильные приложения и полевые испытания</span> <span class="pill pill-cyan" data-i18n="ROADMAP_P2_STATUS">Активен / В работе</span></h4>
+              <p data-i18n="ROADMAP_P2_TEXT">Практические испытания связей в эфире. Реализация в <strong>qFT8 для Android</strong> (<a href="https://qft8.com" target="_blank">qft8.com</a>) и разработка нативного <strong>трансивера для iPhone / iPad (iOS)</strong>.</p>
             </div>
           </div>
 
           <div class="roadmap-item">
             <div class="roadmap-status-icon status-active"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
             <div class="roadmap-content">
-              <h4><span data-i18n="ROADMAP_P3_TITLE">Phase 3: Adoption by Wide Applications &amp; Spotting Networks</span> <span class="pill pill-cyan" data-i18n="ROADMAP_P3_STATUS">Active / In Progress</span></h4>
-              <p data-i18n="ROADMAP_P3_TEXT">
-                Adoption by wide applications such as <strong>WSJT-X</strong>, <strong>JTDX</strong>, <strong>N1MM+</strong>, <strong>Ham Radio Deluxe</strong>, and <strong>Log4OM</strong>, as well as live reporting through the <strong>PSKReporter service</strong>, <strong>Reverse Beacon Network (RBN)</strong>, and <strong>HamSpots</strong>.
-              </p>
+              <h4><span data-i18n="ROADMAP_P3_TITLE">Этап 3: Интеграция в популярные программы и скиммеры</span> <span class="pill pill-cyan" data-i18n="ROADMAP_P3_STATUS">Активен / В работе</span></h4>
+              <p data-i18n="ROADMAP_P3_TEXT">Поддержка в таких приложениях, как <strong>WSJT-X</strong>, <strong>JTDX</strong>, <strong>N1MM+</strong>, <strong>Ham Radio Deluxe</strong> и <strong>Log4OM</strong>, а также мониторинг через <strong>PSKReporter</strong>, <strong>RBN</strong> и <strong>HamSpots</strong>.</p>
             </div>
           </div>
 
           <div class="roadmap-item">
             <div class="roadmap-status-icon status-upcoming"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
             <div class="roadmap-content">
-              <h4><span data-i18n="ROADMAP_P4_TITLE">Phase 4: Formal ADIF Standardization &amp; Dedicated Logging Ecosystem</span> <span class="pill pill-amber" data-i18n="ROADMAP_P4_STATUS">In Progress</span></h4>
-              <p data-i18n="ROADMAP_P4_TEXT">
-                Formal submission of <code>LQ8</code> enum token to the <strong>Amateur Data Interchange Format (ADIF)</strong> Working Group (complementing existing 100% compliant <code>&lt;MODE:4&gt;DATA</code> + <code>&lt;SUBMODE&gt;</code> export). Dedicated native drop-downs and 1-click cloud sync integration across third-party logging suites, <strong>QRZ.com Logbook API</strong>, <strong>ARRL Logbook of the World (LoTW / TQSL)</strong>, <strong>eQSL.cc</strong>, and <strong>Club Log</strong>.
-              </p>
+              <h4><span data-i18n="ROADMAP_P4_TITLE">Этап 4: Стандартизация ADIF и экосистема логов</span> <span class="pill pill-amber" data-i18n="ROADMAP_P4_STATUS">В работе</span></h4>
+              <p data-i18n="ROADMAP_P4_TEXT">Официальная подача идентификаторов <code>LQ8</code> и <code>LQ4</code> в рабочую группу <strong>ADIF</strong>. Синхронизация в 1 клик с <strong>QRZ.com</strong>, <strong>LoTW</strong>, <strong>eQSL.cc</strong> и <strong>Club Log</strong>.</p>
             </div>
           </div>
 
           <div class="roadmap-item">
             <div class="roadmap-status-icon status-upcoming"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4.5c1.62-1.63 5-2.5 5-2.5"/><path d="M15 15v5s3.03-.55 4.5-2c1.63-1.62 2.5-5 2.5-5"/></svg></div>
             <div class="roadmap-content">
-              <h4><span data-i18n="ROADMAP_P5_TITLE">Phase 5: Introduction of LQ4 (High-Speed Profile) &amp; Protocol Expansion</span> <span class="pill pill-amber" data-i18n="ROADMAP_P5_STATUS">Future Roadmap</span></h4>
-              <p data-i18n="ROADMAP_P5_TEXT">Following broad operational adoption of LQ8, introduction of <strong>LQ4</strong> — a high-speed contest and VHF/UHF extension that delivers double the QSO throughput at double the bandwidth (4-GFSK, 83.33&nbsp;Hz bandwidth, 5.04&nbsp;s transmission in 7.5&nbsp;s UTC slots). LQ4 is to LQ8 what FT4 is to FT8: by combining the 4-GFSK 7.5-second physical transport layer with LQ's 4-step Huffman prefix exchange, LQ4 completes full confirmed QSOs in just 30&nbsp;seconds (versus 45&nbsp;seconds in FT4) with zero SNR penalty relative to FT4. Phase 5 also encompasses coordinated expansion to additional amateur bands (including 160m, 80m, and 60m) as well as extended speed profiles (LQ16, LQ2).</p>
+              <h4><span data-i18n="ROADMAP_P5_TITLE">Этап 5: Представление LQ4 (Скоростной профиль) и расширение</span> <span class="pill pill-amber" data-i18n="ROADMAP_P5_STATUS">Планы</span></h4>
+              <p data-i18n="ROADMAP_P5_TEXT">Після широкого впровадження LQ8 планується випуск <strong>LQ4</strong> — високошвидкісного профілю (QSO за 30 с). Фаза 5 також включає скоординоване розширення на додаткові діапазони (160m, 80m, 60m) та розширені профілі швидкості (LQ16, LQ2).</p>
             </div>
           </div>
         </div>
@@ -2088,8 +2014,8 @@
     <section id="technical" class="section">
       <div class="container">
         <div class="section-header">
-          <h2 data-i18n="TECH_TITLE">Technical Specifications &amp; Library</h2>
-          <p data-i18n="TECH_SUBTITLE">Formal academic specification, open-source reference implementations, interactive physical layer explorer, and bit-level message inspection tools.</p>
+          <h2 data-i18n="TECH_TITLE">Технічні специфікації та бібліотека</h2>
+          <p data-i18n="TECH_SUBTITLE">Научная публикация, открытые библиотеки, интерактивный просмотр параметров модуляции и побитовый инспектор.</p>
         </div>
 
         <div class="tech-details-container">
@@ -2097,12 +2023,12 @@
           <div class="tech-sub-section">
             <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: var(--radius-md); padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;">
               <div>
-                <h4 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; margin-bottom: 4px;" data-i18n="PAPER_BANNER_TITLE">Formal Specification Paper</h4>
-                <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0;" data-i18n="PAPER_BANNER_TEXT">Comprehensive paper covering physical layer modulation, variable-length Huffman prefix codes, Varicode, and protocol state machines.</p>
+                <h4 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; margin-bottom: 4px;" data-i18n="PAPER_BANNER_TITLE">Офіційна специфікація протоколу</h4>
+                <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0;" data-i18n="PAPER_BANNER_TEXT">Подробное описание модуляции физического уровня, префиксных кодов Хаффмана, варикода и конечных автоматов.</p>
               </div>
               <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
                 <!-- NOTE: The web portal intentionally links only to arXiv (never to a local doc or PDF). The URL points to https://arxiv.org/ temporarily while preprint submission and arXiv ID assignment are pending (tracked Action Item). -->
-                <a href="https://arxiv.org/" target="_blank" class="btn btn-primary" data-i18n="PAPER_BANNER_BTN">Read Paper on arXiv &rarr;</a>
+                <a href="https://arxiv.org/" target="_blank" class="btn btn-primary" data-i18n="PAPER_BANNER_BTN">Читати на arXiv &rarr;</a>
               </div>
             </div>
           </div>
@@ -2111,59 +2037,58 @@
           <div id="library" class="tech-sub-section">
             <div class="library-card">
               <div class="library-content">
-                <h3 data-i18n="LIBRARY_TITLE">Open-Source Reference Library (<code>lq_lib</code>) — C++20 &amp; Pure C API</h3>
-                <p data-i18n="LIBRARY_DESC">
-                  High-performance, zero-allocation C++20 and pure C99/C11 reference implementation supporting all LQ message encodings, GFSK continuous-phase audio synthesis, 2D STFT waterfall Costas synchronization, LDPC(174,91) Normalized Min-Sum codec with &gt;95% automated test coverage and parallel multi-candidate demodulation.</p>
+                <h3 data-i18n="LIBRARY_TITLE">Відкрита еталонна бібліотека (lq_lib) — C++20 та C</h3>
+                <p data-i18n="LIBRARY_DESC">Высокопроизводительная библиотека на C++20 и чистом C99 без динамических выделений памяти, поддерживающая все типы сообщений LQ, синтез непрерывной фазы 8-GFSK, синхронизацию Костаса 2D STFT, декодер LDPC(174,91) и чат LQ4 с покрытием тестами &gt;95%.</p>
                 <div class="library-badges">
                   <span class="pill pill-emerald" data-i18n="LIBRARY_BADGE_1">C++20 &amp; Pure C99 API</span>
-                  <span class="pill pill-cyan" data-i18n="LIBRARY_BADGE_2">&gt;95% Test Coverage</span>
-                  <span class="pill pill-purple" data-i18n="LIBRARY_BADGE_3">Multi-Threaded / Parallel DSP</span>
-                  <span class="pill pill-amber" data-i18n="LIBRARY_BADGE_4">MIT License</span>
+                  <span class="pill pill-cyan" data-i18n="LIBRARY_BADGE_2">&gt;95% Покрытие тестами</span>
+                  <span class="pill pill-purple" data-i18n="LIBRARY_BADGE_3">Многопоточный DSP</span>
+                  <span class="pill pill-amber" data-i18n="LIBRARY_BADGE_4">Лицензия MIT</span>
                 </div>
               </div>
               <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <a href="https://github.com/lquesada/lq_lib" target="_blank" class="btn btn-primary" data-i18n="LIBRARY_BTN">View on GitHub &rarr;</a>
-                <a href="https://github.com/lquesada/lq_lib/issues" target="_blank" class="btn btn-secondary" data-i18n="LIBRARY_ISSUES_BTN">Report an Issue &rarr;</a>
+                <a href="https://github.com/lquesada/lq_lib" target="_blank" class="btn btn-primary" data-i18n="LIBRARY_BTN">Дивитися на GitHub &rarr;</a>
+                <a href="https://github.com/lquesada/lq_lib/issues" target="_blank" class="btn btn-secondary" data-i18n="LIBRARY_ISSUES_BTN">Повідомити про помилку &rarr;</a>
               </div>
             </div>
           </div>
 
           <!-- Interactive Physical Mode Comparison -->
           <div id="comparison" class="tech-sub-section">
-            <h3 data-i18n="MODE_COMPARE_TITLE">Interactive Physical Mode Comparison</h3>
-            <p style="color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 16px;" data-i18n="MODE_COMPARE_SUBTITLE">Explore the primary weak-signal standard (<strong>LQ8</strong>) and extended modes (<strong>LQ4</strong>, <strong>LQ2</strong>, <strong>LQ16</strong>).</p>
+            <h3 data-i18n="MODE_COMPARE_TITLE">Інтерактивне порівняння фізичних режимів</h3>
+            <p style="color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 16px;" data-i18n="MODE_COMPARE_SUBTITLE">Изучите параметры основного протокола для слабых сигналов (Multi-Rate).</p>
 
             <div class="mode-tabs">
-              <button class="mode-tab-btn active" id="tab_lq8" onclick="setMode('lq8')" data-i18n="TAB_LQ8"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: -1px; margin-right: 5px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>LQ8 (Standard HF · 50 Hz)</button>
-              <button class="mode-tab-btn" id="tab_lq4" onclick="setMode('lq4')" data-i18n="TAB_LQ4"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: -1px; margin-right: 5px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>LQ4 (High-Speed · 83.3 Hz)</button>
-              <button class="mode-tab-btn" id="tab_lq2" onclick="setMode('lq2')" data-i18n="TAB_LQ2"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: -1px; margin-right: 5px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>LQ2 (Ultra-Fast · 166.7 Hz)</button>
-              <button class="mode-tab-btn" id="tab_lq16" onclick="setMode('lq16')" data-i18n="TAB_LQ16"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: -1px; margin-right: 5px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>LQ16 (Slow · 25 Hz)</button>
+              <button class="mode-tab-btn active" id="tab_lq8" onclick="setMode('lq8')" data-i18n="TAB_LQ8">LQ8 (Быстрый протокол для QSO)</button>
+              <button class="mode-tab-btn" id="tab_lq4" onclick="setMode('lq4')" data-i18n="TAB_LQ4">LQ4 (High-Speed · 83.3 Hz)</button>
+              <button class="mode-tab-btn" id="tab_lq2" onclick="setMode('lq2')" data-i18n="TAB_LQ2">LQ2 (Ultra-Fast · 166.7 Hz)</button>
+              <button class="mode-tab-btn" id="tab_lq16" onclick="setMode('lq16')" data-i18n="TAB_LQ16">LQ16 (Повільний · 25 Hz)</button>
             </div>
 
             <div class="mode-details-card">
               <div class="mode-specs-grid">
                 <div class="spec-box">
-                  <div class="spec-label" data-i18n="SPEC_MODULATION">Modulation</div>
+                  <div class="spec-label" data-i18n="SPEC_MODULATION">Модуляция</div>
                   <div class="spec-value" id="modeMod">8-GFSK</div>
                 </div>
                 <div class="spec-box">
-                  <div class="spec-label" data-i18n="SPEC_BANDWIDTH">Bandwidth</div>
+                  <div class="spec-label" data-i18n="SPEC_BANDWIDTH">Полоса пропускания</div>
                   <div class="spec-value" id="modeBw">50.0 Hz</div>
                 </div>
                 <div class="spec-box">
-                  <div class="spec-label" data-i18n="SPEC_TX_DURATION">TX Duration</div>
+                  <div class="spec-label" data-i18n="SPEC_TX_DURATION">Длительность передачи</div>
                   <div class="spec-value" id="modeTx">12.64 s</div>
                 </div>
                 <div class="spec-box">
-                  <div class="spec-label" data-i18n="SPEC_TIME_SLOT">Time Slot</div>
+                  <div class="spec-label" data-i18n="SPEC_TIME_SLOT">Тайм-слот</div>
                   <div class="spec-value" id="modeSlot">15.0 s</div>
                 </div>
                 <div class="spec-box">
-                  <div class="spec-label" data-i18n="SPEC_SENSITIVITY">Sensitivity (SNR)</div>
+                  <div class="spec-label" data-i18n="SPEC_SENSITIVITY">Чувствительность (SNR)</div>
                   <div class="spec-value highlight" id="modeSnr">-21.0 dB</div>
                 </div>
                 <div class="spec-box">
-                  <div class="spec-label" data-i18n="SPEC_MAX_RATE">Max Contact Rate</div>
+                  <div class="spec-label" data-i18n="SPEC_MAX_RATE">Макс. темп связей</div>
                   <div class="spec-value highlight" id="modeRate">1.00 QSO/min</div>
                 </div>
               </div>
@@ -2183,66 +2108,66 @@
 
           <!-- Complete Bit-Level Serialization Inspector -->
           <div class="tech-sub-section">
-            <h3 data-i18n="INSPECTOR_TITLE">Complete Bit-Level Serialization Inspector (All 13 Message Types)</h3>
-            <p data-i18n="INSPECTOR_SUBTITLE">Select any structured message type to inspect its binary bitfield, packed hex, and computed CRC-14 parity.</p>
+            <h3 data-i18n="INSPECTOR_TITLE">Полный инспектор сериализации на уровне бит (все 13 типов сообщений)</h3>
+            <p data-i18n="INSPECTOR_SUBTITLE">Выберите любой тип сообщения или фрагмент LQ4 для анализа битовых полей, шестнадцатеричной упаковки и контрольной суммы CRC-14.</p>
             
             <div class="inspector-card">
-              <div class="presets-category-title" data-i18n="PRESET_CAT_1">CQ Initiating Formats:</div>
+              <div class="presets-category-title" data-i18n="PRESET_CAT_1">Форматы начала вызова CQ:</div>
               <div class="presets-bar">
-                <button class="preset-btn active" id="btn_p1" onclick="loadPreset(1)" data-i18n="PRESET_BTN_P1">CQ Std (Type 1)</button>
-                <button class="preset-btn" id="btn_p2" onclick="loadPreset(2)" data-i18n="PRESET_BTN_P2">CQ Non-Std 9c+Loc (Type 2)</button>
-                <button class="preset-btn" id="btn_p3" onclick="loadPreset(3)" data-i18n="PRESET_BTN_P3">CQ Non-Std 9c+Mod (Type 3)</button>
-                <button class="preset-btn" id="btn_p4" onclick="loadPreset(4)" data-i18n="PRESET_BTN_P4">CQ Non-Std 13c (Type 4)</button>
+                <button class="preset-btn active" id="btn_p1" onclick="loadPreset(1)" data-i18n="PRESET_BTN_P1">CQ Стандарт (Тип 1)</button>
+                <button class="preset-btn" id="btn_p2" onclick="loadPreset(2)" data-i18n="PRESET_BTN_P2">CQ Нестандарт 9c+Loc (Тип 2)</button>
+                <button class="preset-btn" id="btn_p3" onclick="loadPreset(3)" data-i18n="PRESET_BTN_P3">CQ Нестандарт 9c+Mod (Тип 3)</button>
+                <button class="preset-btn" id="btn_p4" onclick="loadPreset(4)" data-i18n="PRESET_BTN_P4">CQ Нестандарт 13c (Тип 4)</button>
               </div>
 
-              <div class="presets-category-title" data-i18n="PRESET_CAT_2">CALL Answering Formats:</div>
+              <div class="presets-category-title" data-i18n="PRESET_CAT_2">Форматы ответа CALL:</div>
               <div class="presets-bar">
-                <button class="preset-btn" id="btn_p5" onclick="loadPreset(5)" data-i18n="PRESET_BTN_P5">CALL Std (Type 5)</button>
-                <button class="preset-btn" id="btn_p6" onclick="loadPreset(6)" data-i18n="PRESET_BTN_P6">CALL Std+Suf (Type 6)</button>
-                <button class="preset-btn" id="btn_p7" onclick="loadPreset(7)" data-i18n="PRESET_BTN_P7">CALL Non-Std (Type 7)</button>
+                <button class="preset-btn" id="btn_p5" onclick="loadPreset(5)" data-i18n="PRESET_BTN_P5">CALL Стандарт (Тип 5)</button>
+                <button class="preset-btn" id="btn_p6" onclick="loadPreset(6)" data-i18n="PRESET_BTN_P6">CALL Двойной суффикс (Тип 6)</button>
+                <button class="preset-btn" id="btn_p7" onclick="loadPreset(7)" data-i18n="PRESET_BTN_P7">CALL Нестандарт (Тип 7)</button>
               </div>
 
-              <div class="presets-category-title" data-i18n="PRESET_CAT_3">REPORT+73 &amp; 73 Formats:</div>
+              <div class="presets-category-title" data-i18n="PRESET_CAT_3">Форматы подтверждения REPORT+73 и 73:</div>
               <div class="presets-bar">
-                <button class="preset-btn" id="btn_p8" onclick="loadPreset(8)" data-i18n="PRESET_BTN_P8">REPORT+73 Std (Type 8)</button>
-                <button class="preset-btn" id="btn_p9" onclick="loadPreset(9)" data-i18n="PRESET_BTN_P9">73 Std (Type 9)</button>
-                <button class="preset-btn" id="btn_p10" onclick="loadPreset(10)" data-i18n="PRESET_BTN_P10">73 Non-Std (Type 10)</button>
+                <button class="preset-btn" id="btn_p8" onclick="loadPreset(8)" data-i18n="PRESET_BTN_P8">REPORT+73 Стандарт (Тип 8)</button>
+                <button class="preset-btn" id="btn_p9" onclick="loadPreset(9)" data-i18n="PRESET_BTN_P9">73 Стандарт (Тип 9)</button>
+                <button class="preset-btn" id="btn_p10" onclick="loadPreset(10)" data-i18n="PRESET_BTN_P10">73 Нестандарт (Тип 10)</button>
               </div>
 
-              <div class="presets-category-title" data-i18n="PRESET_CAT_4">High-Rate Pileup Formats:</div>
+              <div class="presets-category-title" data-i18n="PRESET_CAT_4">Высокоскоростные форматы пайлапа:</div>
               <div class="presets-bar">
-                <button class="preset-btn" id="btn_p11" onclick="loadPreset(11)" data-i18n="PRESET_BTN_P11">MULTI-REPORT+73 (Type 11)</button>
-                <button class="preset-btn" id="btn_p12" onclick="loadPreset(12)" data-i18n="PRESET_BTN_P12">MULTI-73 (Type 12)</button>
+                <button class="preset-btn" id="btn_p11" onclick="loadPreset(11)" data-i18n="PRESET_BTN_P11">MULTI-REPORT+73 (Тип 11)</button>
+                <button class="preset-btn" id="btn_p12" onclick="loadPreset(12)" data-i18n="PRESET_BTN_P12">MULTI-73 (Тип 12)</button>
               </div>
 
-              <div class="presets-category-title" data-i18n="PRESET_CAT_5">Free Text &amp; Protocol Expansion:</div>
+              <div class="presets-category-title" data-i18n="PRESET_CAT_5">Свободный текст и расширение протокола:</div>
               <div class="presets-bar">
-                <button class="preset-btn" id="btn_p13" onclick="loadPreset(13)" data-i18n="PRESET_BTN_P13">Free Text (Type 13)</button>
+                <button class="preset-btn" id="btn_p13" onclick="loadPreset(13)" data-i18n="PRESET_BTN_P13">Свободный текст (Тип 13)</button>
               </div>
 
               <div class="inspector-display">
                 <div class="display-row">
-                  <span class="display-label" data-i18n="INSP_LBL_MSG">Message String:</span>
+                  <span class="display-label" data-i18n="INSP_LBL_MSG">Текст сообщения:</span>
                   <span class="display-val radio-val" id="inspText">CQ DX HB9IPH JN47</span>
                 </div>
                 <div class="display-row">
-                  <span class="display-label" data-i18n="INSP_LBL_FORMAT">Format Type:</span>
+                  <span class="display-label" data-i18n="INSP_LBL_FORMAT">Тип формата:</span>
                   <span class="display-val" id="inspType">CQ Std (Type 1 — Standard ITU Callsign + Suffix + Modifier + Locator)</span>
                 </div>
                 <div class="display-row">
-                  <span class="display-label" data-i18n="INSP_LBL_PREFIX">Huffman Prefix:</span>
+                  <span class="display-label" data-i18n="INSP_LBL_PREFIX">Префикс Хаффмана:</span>
                   <span class="display-val radio-val" id="inspPrefix">0000000000 (10 bits)</span>
                 </div>
                 <div class="display-row">
-                  <span class="display-label" data-i18n="INSP_LBL_FIELDS">Field Breakdown:</span>
+                  <span class="display-label" data-i18n="INSP_LBL_FIELDS">Структура полей:</span>
                   <span class="display-val" id="inspFields">Callsign HB9IPH: 28b (129,895,118) · Suffix: 1b (0) · Modifier DX: 20b (156,648) · Locator JN47: 15b (17,547) · Zero Pad: 3b</span>
                 </div>
                 <div class="display-row">
-                  <span class="display-label" data-i18n="INSP_LBL_HEX">Packed Hex (77b):</span>
+                  <span class="display-label" data-i18n="INSP_LBL_HEX">Упакованный Hex (77 бит):</span>
                   <span class="display-val hex radio-val" id="inspHex">00 1E F8 2B 38 4C 7D 11 22 C0</span>
                 </div>
                 <div class="display-row">
-                  <span class="display-label" data-i18n="INSP_LBL_CRC">CRC-14 Parity (0x2757):</span>
+                  <span class="display-label" data-i18n="INSP_LBL_CRC">Контрольная сумма CRC-14:</span>
                   <span class="display-val crc radio-val" id="inspCrc">0x1606</span>
                 </div>
               </div>
@@ -2251,10 +2176,10 @@
 
           <!-- Modulation & Waterfall Spectrogram -->
           <div class="tech-sub-section">
-            <h3 data-i18n="WATERFALL_TITLE">Physical Channel Tone Modulation</h3>
-            <p data-i18n="WATERFALL_TEXT">Continuous-phase 8-GFSK frame structure with Costas synchronization arrays and LDPC(174,91) coded data symbols in 50.0&nbsp;Hz bandwidth.</p>
+            <h3 data-i18n="WATERFALL_TITLE">Тональна модуляція фізичного каналу</h3>
+            <p data-i18n="WATERFALL_TEXT">Структура кадра 8-GFSK с непрерывной фазой, синхронизацией Костаса и LDPC(174,91)-кодированными данными в полосе 50.0&nbsp;Гц.</p>
             <div class="waterfall-img-wrap">
-              <img src="tones_waterfall_lq8.png" alt="LQ8 Physical Frame Waterfall Spectrogram" data-i18n="WATERFALL_IMG_ALT" loading="lazy">
+              <img src="../tones_waterfall_lq8.png" alt="Спектрограмма кадра LQ8" data-i18n="WATERFALL_IMG_ALT" loading="lazy">
             </div>
           </div>
         </div>
@@ -2265,8 +2190,8 @@
     <section id="community" class="section">
       <div class="container">
         <div class="section-header">
-          <h2 data-i18n="COMMUNITY_TITLE">Community Support, Clubs &amp; DXpeditions</h2>
-          <p data-i18n="COMMUNITY_SUBTITLE">Recognized and supported by amateur radio clubs, DXpeditions, awards programs, and operators worldwide.</p>
+          <h2 data-i18n="COMMUNITY_TITLE">Підтримка спільноти, клуби та DX-експедиції</h2>
+          <p data-i18n="COMMUNITY_SUBTITLE">Визнано та підтримується радіоклубами, DX-експедиціями, дипломними програмами та радіоаматорами по всьому світу.</p>
         </div>
         <div style="background: var(--surface-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 36px 32px; margin-bottom: 24px;">
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 32px;">
@@ -2277,18 +2202,16 @@
                 <div style="width: 36px; height: 36px; border-radius: 50%; background: rgba(56, 189, 248, 0.15); display: flex; align-items: center; justify-content: center; color: var(--cyan); flex-shrink: 0;">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                 </div>
-                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin: 0;" data-i18n="COMMUNITY_CLUBS_TITLE">Clubs &amp; Organizations</h4>
+                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin: 0;" data-i18n="COMMUNITY_CLUBS_TITLE">Клуби та організації</h4>
               </div>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 0 0 16px 0;" data-i18n="COMMUNITY_CLUBS_DESC">
-                Radio clubs, contesting groups, and emergency communications teams experimenting with and adopting LQ digital modes.
-              </p>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 0 0 16px 0;" data-i18n="COMMUNITY_CLUBS_DESC">Радіоклуби, контест-групи та служби аварійного зв'язку, які тестують та впроваджують цифрові режими LQ.</p>
               <!-- Clubs Directory List -->
               <div style="margin-top: auto; background: rgba(0, 0, 0, 0.25); border: 1px dashed rgba(56, 189, 248, 0.25); border-radius: var(--radius-sm); padding: 14px 16px;">
                 <ul id="community-clubs-list" style="list-style: none; padding: 0; margin: 0; font-size: 0.88rem;">
                   <!-- Add club entries here: <li style="padding: 4px 0;"><a href="..." target="_blank" style="color: var(--text-primary); font-weight: 600;">Club Name</a> (Callsign) — Description</li> -->
                   <li style="color: var(--text-tertiary); font-style: italic; display: flex; align-items: center; gap: 8px;">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity: 0.7; flex-shrink: 0;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                    <span data-i18n="COMMUNITY_EMPTY_NOTE">No entries listed yet — submit yours below!</span>
+                    <span data-i18n="COMMUNITY_EMPTY_NOTE">Поки що немає записів — надішліть вашу заявку нижче!</span>
                   </li>
                 </ul>
               </div>
@@ -2300,18 +2223,16 @@
                 <div style="width: 36px; height: 36px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); display: flex; align-items: center; justify-content: center; color: var(--emerald); flex-shrink: 0;">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
                 </div>
-                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin: 0;" data-i18n="COMMUNITY_DX_TITLE">DXpeditions &amp; Activations</h4>
+                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin: 0;" data-i18n="COMMUNITY_DX_TITLE">DX-експедиції та активації</h4>
               </div>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 0 0 16px 0;" data-i18n="COMMUNITY_DX_DESC">
-                DXpeditions, IOTA, SOTA, and POTA operators leveraging high-throughput multi-station response frames to clear pileups rapidly.
-              </p>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 0 0 16px 0;" data-i18n="COMMUNITY_DX_DESC">Оператори DX-експедицій, IOTA, SOTA та POTA, які використовують багатостанційні відповіді для швидкого розбору пайлапів.</p>
               <!-- DXpeditions Directory List -->
               <div style="margin-top: auto; background: rgba(0, 0, 0, 0.25); border: 1px dashed rgba(16, 185, 129, 0.25); border-radius: var(--radius-sm); padding: 14px 16px;">
                 <ul id="community-dx-list" style="list-style: none; padding: 0; margin: 0; font-size: 0.88rem;">
                   <!-- Add DXpedition entries here: <li style="padding: 4px 0;"><a href="..." target="_blank" style="color: var(--text-primary); font-weight: 600;">DXpedition / Activation</a> — Callsign, Grid/Location</li> -->
                   <li style="color: var(--text-tertiary); font-style: italic; display: flex; align-items: center; gap: 8px;">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity: 0.7; flex-shrink: 0;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                    <span data-i18n="COMMUNITY_EMPTY_NOTE">No entries listed yet — submit yours below!</span>
+                    <span data-i18n="COMMUNITY_EMPTY_NOTE">Поки що немає записів — надішліть вашу заявку нижче!</span>
                   </li>
                 </ul>
               </div>
@@ -2323,18 +2244,16 @@
                 <div style="width: 36px; height: 36px; border-radius: 50%; background: rgba(168, 85, 247, 0.15); display: flex; align-items: center; justify-content: center; color: #c084fc; flex-shrink: 0;">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
                 </div>
-                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin: 0;" data-i18n="COMMUNITY_AWARDS_TITLE">Operators, QRZ &amp; Awards</h4>
+                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin: 0;" data-i18n="COMMUNITY_AWARDS_TITLE">Оператори, QRZ та дипломи</h4>
               </div>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 0 0 16px 0;" data-i18n="COMMUNITY_AWARDS_DESC">
-                Individual radio amateurs featuring LQ8 on their QRZ.com profiles, club rosters, and participating in award tracking.
-              </p>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 0 0 16px 0;" data-i18n="COMMUNITY_AWARDS_DESC">Радіоаматори, які вказують LQ8 у своїх профілях QRZ.com, списках клубів та беруть участь у дипломних програмах.</p>
               <!-- Operators Directory List -->
               <div style="margin-top: auto; background: rgba(0, 0, 0, 0.25); border: 1px dashed rgba(168, 85, 247, 0.25); border-radius: var(--radius-sm); padding: 14px 16px;">
                 <ul id="community-awards-list" style="list-style: none; padding: 0; margin: 0; font-size: 0.88rem;">
                   <!-- Add operator/award entries here: <li style="padding: 4px 0;"><a href="..." target="_blank" style="color: var(--text-primary); font-weight: 600;">Callsign</a> — Name, Country / Program</li> -->
                   <li style="color: var(--text-tertiary); font-style: italic; display: flex; align-items: center; gap: 8px;">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity: 0.7; flex-shrink: 0;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                    <span data-i18n="COMMUNITY_EMPTY_NOTE">No entries listed yet — submit yours below!</span>
+                    <span data-i18n="COMMUNITY_EMPTY_NOTE">Поки що немає записів — надішліть вашу заявку нижче!</span>
                   </li>
                 </ul>
               </div>
@@ -2345,22 +2264,12 @@
           <!-- Contact / Get Listed Banner -->
           <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12) 0%, rgba(168, 85, 247, 0.1) 100%); border: 1px solid rgba(56, 189, 248, 0.35); border-radius: var(--radius-md); padding: 24px 28px; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;">
             <div style="max-width: 650px;">
-              <h4 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 800; color: var(--text-primary); margin-bottom: 6px;" data-i18n="COMMUNITY_FORM_TITLE">
-                Get Listed or Contact Us
-              </h4>
-              <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin: 0;" data-i18n="COMMUNITY_FORM_DESC">
-                Are you a club, DXpedition organizer, software developer, award manager, or ham who includes LQ in your QRZ bio? Reach out via our contact form to be featured here or to get in touch with the project team. To report bugs or submit feature requests, visit our GitHub Issues tracker.
-              </p>
+              <h4 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 800; color: var(--text-primary); margin-bottom: 6px;" data-i18n="COMMUNITY_FORM_TITLE">Додатись до списку або зв'язатися</h4>
+              <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin: 0;" data-i18n="COMMUNITY_FORM_DESC">Ви клуб, організатор DX-експедиції чи радіоаматор з LQ на QRZ? Напишіть нам через форму зв'язку. Щоб повідомити про помилку, відвідайте GitHub Issues.</p>
             </div>
             <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
-              <a href="https://forms.gle/nFJ6mLHqiqie2cMbA" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; white-space: nowrap;" data-i18n="COMMUNITY_FORM_BTN">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                <span>Contact / Submit Info &rarr;</span>
-              </a>
-              <a href="https://github.com/lquesada/lq_lib/issues" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; white-space: nowrap;" data-i18n="COMMUNITY_ISSUES_BTN">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                <span>Report an Issue (GitHub) &rarr;</span>
-              </a>
+              <a href="https://forms.gle/nFJ6mLHqiqie2cMbA" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; white-space: nowrap;" data-i18n="COMMUNITY_FORM_BTN">Зв'язатися / Надіслати дані &rarr;</a>
+              <a href="https://github.com/lquesada/lq_lib/issues" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; white-space: nowrap;" data-i18n="COMMUNITY_ISSUES_BTN">Повідомити про помилку (GitHub) &rarr;</a>
             </div>
           </div>
 
@@ -2374,42 +2283,38 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col">
-          <h5 data-i18n="FOOTER_ABOUT_TITLE">The LQ Digital Mode Family</h5>
-          <p style="font-size: 0.86rem; color: var(--text-secondary); line-height: 1.55;" data-i18n="FOOTER_ABOUT_TEXT">
-            Next-generation weak-signal digital mode family designed for high-efficiency amateur radio communication on HF, VHF, and UHF.
-          </p>
+          <h5 data-i18n="FOOTER_ABOUT_TITLE">Сімейство цифрових модів LQ</h5>
+          <p style="font-size: 0.86rem; color: var(--text-secondary); line-height: 1.55;" data-i18n="FOOTER_ABOUT_TEXT">Семейство цифровых протоколов для радиосвязи слабыми сигналами на КВ, УКВ и СВЧ.</p>
         </div>
 
         <div class="footer-col">
-          <h5 data-i18n="FOOTER_ECOSYSTEM_TITLE">Ecosystem & Software</h5>
+          <h5 data-i18n="FOOTER_ECOSYSTEM_TITLE">Екосистема та ПЗ</h5>
           <ul>
-            <li><a href="https://qft8.com" target="_blank" data-i18n="FOOTER_LINK_QFT8">qFT8 for Android</a></li>
-            <li><a href="https://t.me/lq8mode" target="_blank" data-i18n="FOOTER_LINK_TELEGRAM">Telegram Group</a></li>
+            <li><a href="https://qft8.com" target="_blank" data-i18n="FOOTER_LINK_QFT8">qFT8 для Android</a></li>
+            <li><a href="https://t.me/lq8mode" target="_blank" data-i18n="FOOTER_LINK_TELEGRAM">Група в Telegram</a></li>
             <li><a href="https://www.reddit.com/r/LQ8" target="_blank" data-i18n="FOOTER_LINK_REDDIT">r/LQ8 Subreddit</a></li>
-            <li><a href="https://groups.google.com/g/lq8-news" target="_blank" data-i18n="FOOTER_LINK_MAILING">LQ8 News (Mailing List)</a></li>
-            <li><a href="#adif" data-i18n="FOOTER_LINK_ADIF">ADIF Log Standard</a></li>
-            <li><a href="https://github.com/lquesada/lq_lib" target="_blank" data-i18n="FOOTER_LINK_GITHUB">lq_lib GitHub Repository</a></li>
-            <li><a href="https://github.com/lquesada/lq_lib/issues" target="_blank" data-i18n="FOOTER_LINK_ISSUES">Report an Issue (GitHub Issues)</a></li>
+            <li><a href="https://groups.google.com/g/lq8-news" target="_blank" data-i18n="FOOTER_LINK_MAILING">Новости LQ8 (Рассылка)</a></li>
+            <li><a href="#adif" data-i18n="FOOTER_LINK_ADIF">Стандарт логов ADIF</a></li>
+            <li><a href="https://github.com/lquesada/lq_lib" target="_blank" data-i18n="FOOTER_LINK_GITHUB">Репозиторий lq_lib на GitHub</a></li>
+            <li><a href="https://github.com/lquesada/lq_lib/issues" target="_blank" data-i18n="FOOTER_LINK_ISSUES">Повідомити про проблему (GitHub Issues)</a></li>
             <!-- NOTE: The web portal intentionally links only to arXiv (never to a local doc or PDF). The URL points to https://arxiv.org/ temporarily while preprint submission and arXiv ID assignment are pending (tracked Action Item). -->
-            <li><a href="https://arxiv.org/" target="_blank" data-i18n="FOOTER_LINK_PAPER">Specification Paper (arXiv)</a></li>
+            <li><a href="https://arxiv.org/" target="_blank" data-i18n="FOOTER_LINK_PAPER">Спецификация (arXiv)</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
-          <h5 data-i18n="FOOTER_AUTHOR_TITLE">Author & Contact</h5>
+          <h5 data-i18n="FOOTER_AUTHOR_TITLE">Автор та контакти</h5>
           <ul>
             <li><a href="https://luisquesada.com" target="_blank" data-i18n="FOOTER_LINK_AUTHOR">Luis Quesada (HB9IPH)</a></li>
-            <li><a href="https://www.linkedin.com/in/luisquesadatorres/" target="_blank" data-i18n="FOOTER_LINK_LINKEDIN">LinkedIn Profile</a></li>
+            <li><a href="https://www.linkedin.com/in/luisquesadatorres/" target="_blank" data-i18n="FOOTER_LINK_LINKEDIN">Профиль LinkedIn</a></li>
             <li><a href="https://www.qrz.com/db/HB9IPH" target="_blank" data-i18n="FOOTER_LINK_QRZ">QRZ: HB9IPH</a></li>
-            <li><a href="https://forms.gle/nFJ6mLHqiqie2cMbA" target="_blank" data-i18n="FOOTER_LINK_CONTACT">Contact Form &amp; Community Listing</a></li>
+            <li><a href="https://forms.gle/nFJ6mLHqiqie2cMbA" target="_blank" data-i18n="FOOTER_LINK_CONTACT">Форма зв'язку та список спільноти</a></li>
           </ul>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <div data-i18n="FOOTER_COPYRIGHT">
-          &copy; 2026 Luis Quesada (HB9IPH) · Released under the open-source MIT License.
-        </div>
+        <div data-i18n="FOOTER_COPYRIGHT">&copy; 2026 Luis Quesada (HB9IPH) &middot; Выпущено под открытой лицензией MIT.</div>
         <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
           <button onclick="shareLQModes()" class="footer-share-btn" aria-label="Share lq8.org">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -2419,11 +2324,9 @@
               <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
               <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
             </svg>
-            <span data-i18n="COMMUNITY_SHARE_BTN">Share lq8.org</span>
+            <span data-i18n="COMMUNITY_SHARE_BTN">Поділитися lq8.org</span>
           </button>
-          <div data-i18n="FOOTER_PORTAL">
-            Official Portal: <a href="https://lq8.org">lq8.org</a>
-          </div>
+          <div data-i18n="FOOTER_PORTAL">Официальный портал: <a href="https://lq8.org">lq8.org</a></div>
         </div>
       </div>
     </div>
@@ -2437,10 +2340,8 @@
           <polyline points="20 6 9 17 4 12"/>
         </svg>
       </div>
-      <h3 id="share-modal-title" class="share-modal-title" data-i18n="MODAL_SHARE_TITLE">Link Copied to Clipboard!</h3>
-      <p class="share-modal-desc" data-i18n="MODAL_SHARE_DESC">
-        The link has been copied to your clipboard. Paste and share it with fellow radio amateurs, developer groups, and on forums!
-      </p>
+      <h3 id="share-modal-title" class="share-modal-title" data-i18n="MODAL_SHARE_TITLE">Посилання скопійовано в буфер обміну!</h3>
+      <p class="share-modal-desc" data-i18n="MODAL_SHARE_DESC">Посилання скопійовано. Поділіться ним з колегами-радіоаматорами та на форумах!</p>
       <div class="share-modal-link-box">
         <span id="share-modal-url">https://lq8.org</span>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; opacity:0.8;">

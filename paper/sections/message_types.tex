@@ -1,0 +1,159 @@
+% =============================================================================
+% The LQ Digital Mode Family — Reference Implementation (lq_lib)
+%
+% Author:  Luis Quesada (HB9IPH)
+% Web:     https://luisquesada.com
+% Portal:  https://lquesada.github.io/lq_lib/
+% GitHub:  https://github.com/lquesada/lq_lib
+% App:     qFT8 — Portable Amateur Radio for Android (https://qft8.com)
+%
+% License: MIT License (https://github.com/lquesada/lq_lib/blob/main/LICENSE)
+%
+% Copyright (c) 2026 Luis Quesada (HB9IPH)
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in
+% all copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+% =============================================================================
+
+% ===========================================================================
+%  Section III: Message Architecture (ALLOCATION: PAGE 3 & PAGE 4)
+%  Section text MUST fit entirely on Page 3.
+%  Dedicated full-page Tables 2, 3, 4 (table*) MUST occupy Page 4.
+%  Terminates with \newpage.
+% ===========================================================================
+
+\section{Message Architecture}
+\label{sec:msg_arch}
+\label{sec:typedetails}
+\label{sec:huffman}
+
+To maximize channel efficiency within the 77-bit physical frame budget, \LQ{} replaces fixed-width bit fields with an entropy-matched variable-length message architecture.
+
+\subsection{Design Motivation \& Prefix-Free Framing}
+\label{sec:huffman:motivation}
+
+Under a strict 77-bit physical payload budget, conventional fixed-width message headers impose an unnecessary penalty on high-entropy transmissions. In a standard \msgtype{CALL} reply, encoding two 28-bit standard callsigns, a 15-bit Maidenhead grid locator, and a 5-bit measured SNR report requires 76 information bits:
+\begin{equation}
+  \underbrace{1\text{b}}_{\text{Prefix}} + \underbrace{28\text{b}}_{\text{Target}} + \underbrace{28\text{b}}_{\text{Caller}} + \underbrace{15\text{b}}_{\text{Locator}} + \underbrace{5\text{b}}_{\text{SNR}} = \mathbf{77\text{ bits}}.
+\label{eq:call_budget}
+\end{equation}
+Uniform 3-bit or 4-bit type headers exceed the remaining 1-bit margin, preventing simultaneous transmission of locator and report in conventional protocols.
+
+\LQ{} resolves this constraint by synthesizing variable-length prefix coding~\cite{huffman,shannon} with physical-layer bit budgets. Assigning a \textbf{1-bit} codeword (\texttt{1}) to the dominant \msgtype{CALL std (nosuf)} format preserves 76 bits for payload data, combining station identification, locator delivery, and signal report measurement into a single frame. Simpler messages (such as standard CQ, requiring 43 payload bits) readily accommodate longer prefix codes.
+
+Formally, the prefix code $\mathcal{C} = \{c_1, c_2, \ldots, c_k\}$ is \emph{prefix-free}:
+\begin{equation}
+  \forall\, i \neq j: \quad c_i \text{ is not a prefix of } c_j.
+\end{equation}
+The receiver traverses a binary prefix tree bit-by-bit from the most-significant bit until reaching a terminal leaf node, identifying the message type without length fields or delimiters. Although the mathematical binary prefix tree across all 16 slots satisfies $\sum_{i=1}^{16} 2^{-\text{len}_i} = 1.0$, the active operational codebook is intentionally prefix-free without being Kraft-complete because Types~14--16 are explicitly reserved for future backward-compatible protocol expansions rather than active operational message formats.
+
+\subsection{Operational Categories \& Message Catalogue}
+\label{sec:msg:catalogue}
+
+Stations select transmission formats according to the operational categories defined in Table~\ref{tab:categories_of_operation}. Table~\ref{tab:huffman} catalogues all 16 message slots with their prefix codewords, payload layouts, and bit budgets. Frame payloads $\le 77$ bits are zero-padded to the 77-bit link-layer boundary. Payloads are serialized in big-endian bit order (MSB first) into a 10-byte buffer: bit 0 corresponds to \texttt{0x80} of Byte 0, bit 7 to \texttt{0x01} of Byte 0, and bits 77--79 (the three least significant bits of Byte 9) are set to zero.
+
+\textbf{Field Designations in Table~\ref{tab:huffman}:}
+\begin{itemize}[leftmargin=1.4em, itemsep=1.5pt plus 1.0pt minus 0.5pt, topsep=2pt plus 1.0pt minus 0.5pt, parsep=0pt]
+  \item \textbf{Canonical Short Identifiers:} Standardized mnemonics: \textbf{CQ}, \textbf{CALL}, \textbf{RPT73} (for \msgtype{REPORT+73}), \textbf{73}, \textbf{RPT73M} (for \msgtype{MULTI-REPORT+73}), and \textbf{73M} (for \msgtype{MULTI-73}).
+  \item \textbf{Prefix \& Standard Callsign:} ``Code'' denotes prefix length; ``call:std'' is a 28-bit standard callsign (Section~\ref{sec:std_call}).
+  \item \textbf{Non-Standard Callsigns \& Suffixes:} ``call:$n$'' is an $n$-character non-standard callsign packed via Base-38 (Section~\ref{sec:nonstd_call}); ``Suf'' encodes 1-bit portable modifiers (\texttt{0}=\emph{none}, \texttt{1}=\texttt{/P}). Type~5 omits suffixes to pack two standard callsigns, locator, and SNR into 77 bits ($1+28+28+15+5=77\text{b}$).
+  \item \textbf{Callsign Hashes:} ``Hash'' is a 24-bit CRC-24/Q hash ($2^{24} \approx 16.78\times 10^6$ bins); ``hash$^\dagger$'' is the 16-bit DX hash (Section~\ref{sec:hash}).
+  \item \textbf{Multi-Station Fields:} Type~11 Fox pileup sequences $[\text{Prefix}_3 \mid \text{DX}_{16} \mid \text{Tgt1}_{24} \mid \text{SNR1}_5 \mid \text{Tgt2}_{24} \mid \text{SNR2}_5]$ (77 bits); Type~12 formats $[\text{Prefix}_8 \mid \text{DX}_{16} \mid \text{Tgt1}_{24} \mid \text{Tgt2}_{24} \mid 00000_2]$ (77 bits, 5 zero-padded bits).
+  \item \textbf{Modifiers, Locators \& SNR:} ``Mod'' is a 20-bit modifier (Section~\ref{sec:modifier}); ``loc'' is a 15-bit locator (Section~\ref{sec:locator}); ``SNR'' is a 5-bit report (Section~\ref{sec:rst}).
+\end{itemize}
+
+\begin{table*}[p]
+\centering
+
+% --- Table 2: Operational Categories ---
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{0.95}
+\caption{Operational categories and corresponding 4-step message sequences.}
+\label{tab:categories_of_operation}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}clcccc@{}}
+\toprule
+\textbf{Cat.} & \textbf{Callsign / Mode Configuration} & \textbf{Step 1: CQ} & \textbf{Step 2: CALL} & \textbf{Step 3: REPORT+73} & \textbf{Step 4: 73} \\
+\midrule
+\textbf{A} & Standard (no suffixes) & Type 1 & Type 5 & Type 8 & Type 9 \\
+\textbf{B} & Standard + std suffix (\texttt{/P}) & Type 1 & Type 6 & Type 8 & Type 9 \\
+\textbf{C} & Non-standard ($\le 9$ chars) + optional suffix & Type 2 / 3 & Type 7$^*$ / Type 6 & Type 11 & Type 10 / 12 \\
+\textbf{D} & Long compound ($10$--$13$ chars) + optional suffix & Type 4 & ---$^\ddagger$ & Type 11 & Type 12 \\
+\textbf{E} & Multi-station reply & --- & --- & Type 11 (Fox) & \makecell{Type 12 (Fox) /\\ Type 9, 10 (Hounds)} \\
+\bottomrule
+\multicolumn{6}{@{}p{\textwidth}@{}}{\vspace{2pt}\footnotesize $^*$In Step~2, Category~C callers transmit Type~7 (clear-text callsign, suffix, SNR to target 20-bit hash); standard callers answering a Category~C CQ transmit Type~6 (locator, SNR to target 24-bit hash). \quad $^\ddagger$Category~D compound stations ($10$--$13$ chars) initiate contact via CQ (Type~4) or free text (Type~13).}
+\end{tabular*}
+
+\vspace{6pt plus 1fill}
+
+% --- Table 3: Complete Message Catalogue ---
+\caption{Complete \LQ{} message-type catalogue.}
+\label{tab:huffman}
+\small
+\setlength{\tabcolsep}{2.5pt}
+\renewcommand{\arraystretch}{0.94}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lclccccccccr@{}}
+\toprule
+\textbf{Huffman Code} & \textbf{ID} & \textbf{Type} & \multicolumn{8}{c}{\textbf{Bits (Payload)}} & \textbf{Total} \\
+\cmidrule(lr){4-11}
+& & & \textbf{Code} & \textbf{Target} & \textbf{Suf} & \textbf{Caller} & \textbf{Suf} & \textbf{Modifier} & \textbf{Locator} & \textbf{SNR} & \\
+\midrule
+\bitfield{\szero\szero\szero\szero\szero\szero\szero\szero\szero\szero}         & 1  & CQ std+suf                      & 10 & ---           & ---   & 28 call:std   & 1 suf & 20 mod & 15 loc & ---   & 74 \\
+\bitfield{\szero\szero\szero\szero\szero\szero\szero\szero\szero1}              & 2  & CQ non-std~1                    & 10 & ---           & ---   & 48 call:9     & 1 suf & ---    & 15 loc & ---   & 74 \\
+\bitfield{\szero\szero\szero\szero\szero\szero\szero1}                          & 3  & CQ non-std~2                    & 8  & ---           & ---   & 48 call:9     & 1 suf & 20 mod & ---    & ---   & 77 \\
+\bitfield{\szero\szero\szero\szero\szero\szero1}                                  & 4  & CQ non-std~3                    & 7  & ---           & ---   & 69 call:13    & 1 suf & ---    & ---    & ---   & 77 \\
+\bitfield{1}                                                                  & 5  & CALL std (nosuf)                & 1  & 28 call:std   & ---$^*$ & 28 call:std & ---$^*$ & ---  & 15 loc & 5 SNR & 77 \\
+\bitfield{\szero1\szero\szero}                                                & 6  & CALL std+suf                    & 4  & 24 hash       & ---   & 28 call:std   & 1 suf & ---    & 15 loc & 5 SNR & 77 \\
+\bitfield{\szero\szero1}                                                       & 7  & CALL non-std                    & 3  & 20 hash       & ---   & 48 call:9     & 1 suf & ---    & ---    & 5 SNR & 77 \\
+\bitfield{\szero\szero\szero\szero\szero\szero\szero\szero1\szero}              & 8  & REPORT+73 std+suf (RPT73)       & 10 & 28 call:std   & 1 suf & 28 call:std   & 1 suf & ---    & ---    & 5 SNR & 73 \\
+\bitfield{\szero\szero\szero\szero\szero\szero\szero\szero11}                  & 9  & 73 std+suf                      & 10 & 28 call:std   & 1 suf & 28 call:std   & 1 suf & ---    & ---    & ---   & 68 \\
+\bitfield{\szero\szero\szero1}                                                & 10 & 73 non-std                      & 4  & 24 hash       & ---   & 48 call:9     & 1 suf & ---    & ---    & ---   & 77 \\
+\bitfield{\szero11}                                                           & 11 & MULTI-REPORT+73 (RPT73M)        & 3  & \multicolumn{7}{c}{16 hash$^\dagger$ \quad+\quad 2 $\times$ (24 hash + 5 SNR)} & 77 \\
+\bitfield{\szero\szero\szero\szero\szero111}                                  & 12 & MULTI-73 (73M)                  & 8  & \multicolumn{7}{c}{16 hash$^\dagger$ \quad+\quad 2 $\times$ 24 hash}            & 72 \\
+\bitfield{\szero1\szero1}                                                     & 13 & FREE TEXT                       & 4  & \multicolumn{7}{c}{73 text (Varicode)} & 77 \\
+\bitfield{\szero\szero\szero\szero1}                                           & 14 & \emph{(reserved A)}             & 5  & \multicolumn{7}{c}{72 payload} & 77 \\
+\bitfield{\szero\szero\szero\szero\szero1\szero}                              & 15 & \emph{(reserved B)}             & 7  & \multicolumn{7}{c}{70 payload} & 77 \\
+\bitfield{\szero\szero\szero\szero\szero11\szero}                             & 16 & \emph{(reserved C)}             & 8  & \multicolumn{7}{c}{69 payload} & 77 \\
+\bottomrule
+\multicolumn{12}{@{}p{\textwidth}@{}}{\vspace{2pt}\footnotesize $^*$Type~5 omits suffix fields to pack two standard callsigns, locator, and SNR into 77 bits ($1+28+28+15+5=77\text{b}$). \quad $^\dagger$16-bit DX hash (Section~\ref{sec:hash}). \quad The ``Total'' column indicates active information bits; formats with Total $< 77$ bits (Types 1, 2, 8, 9, 12) are right-padded with trailing zeros ($77 - \text{Total}$ bits) to complete the 77-bit physical frame boundary prior to CRC-14 computation.}
+\end{tabular*}
+
+\vspace{6pt plus 1fill}
+
+% --- Table 4: LQ Varicode Assignments ---
+\input{tables/varicode_table}
+
+\end{table*}
+
+\subsection{Protocol Boundary Conditions \& Canonical Precedence}
+\label{sec:msg:limitations}
+
+To eliminate ambiguity across station profiles, \LQ{} formalizes eight canonical precedence and boundary rules:
+\begin{enumerate}[leftmargin=1.4em, itemsep=1.5pt plus 1pt minus 0.5pt, topsep=2pt, parsep=0pt]
+  \item \textbf{Strict Canonical Precedence:} Transmitters \textbf{must} use the most compact format permitted by their callsign: Type~5 precedes Type~6, and Type~6 precedes Type~7 for CALL; Type~8 precedes Type~11 for REPORT+73; Type~9 precedes Types~10 and 12 for 73. Hashed formats are prohibited if standard representation fits, ensuring deterministic decode interpretation.
+  \item \textbf{Deterministic Hash Disambiguation:} In 1-on-1 exchanges, decoders strictly following canonical precedence ignore incoming hashed frames (Types~7, 10, 11) for local address matching, preventing spurious collisions against standard stations during active contacts.
+  \item \textbf{Universal Locator and SNR in Type~6:} Type~6 allocates 4 prefix bits and 24 target hash bits, leaving 49 bits for caller callsign, suffix, 15-bit locator, and 5-bit SNR ($4+24+28+1+15+5=77\text{b}$). Suffixed callers deliver locator and SNR on their initial call without extra steps.
+  \item \textbf{Clear-Text Identity in Type~7:} Type~7 encodes the target via 20-bit hash ($H_{20} = H_{24} \gg 4$), the non-standard caller via clear-text 48-bit Base-38 representation ($\le 9$ characters), 1-bit suffix (\texttt{/P}), and 5-bit SNR ($3+20+48+1+5 = 77\text{b}$), delivering unhashed identity directly in Step~2.
+  \item \textbf{Single-Target Multi-Station Framing:} When confirming a single station in Fox pileup mode (Types~11 and 12), Target~2 duplicates Target~1 (identical hash and SNR), which decoders process as a single-station transmission. In standard 1-on-1 contacts, Type~8 strictly supersedes Type~11; single-target Type~11 is reserved for non-standard callers or split-frequency F/H schedules.
+  \item \textbf{Collision Resistance:} Uniform 24-bit callsign hashes ($2^{24} \approx 16.78\times 10^6$ bins) yield $P_{\text{collision}} \le 0.75\%$ across 500 stations, disambiguated via local callsign caches and canonical precedence.
+  \item \textbf{Compound Callsigns:} Stations with callsigns exceeding 9 characters (up to 13 characters, e.g., \callsign{3B9/HB9IPH/P}, Category~D) utilize the 69-bit Base-38 field in CQ frames (Type~4); directed replies use CQ or free text (Type~13).
+  \item \textbf{Verification \& Compatibility:} Bit-exact codec traces and golden vectors across all 13 message formats are verified in the reference suite~\cite{lqlib} across AWGN, Rayleigh fading, and clock-drift conditions. Compliant decoders treat unassigned opcodes (Types~14--16) as valid framing boundaries, safely ignoring them.
+\end{enumerate}
+\vspace*{-4.0pt}
+
+\pagebreak

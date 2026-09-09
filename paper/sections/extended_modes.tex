@@ -1,0 +1,109 @@
+% =============================================================================
+% The LQ Digital Mode Family — Reference Implementation (lq_lib)
+%
+% Author:  Luis Quesada (HB9IPH)
+% Web:     https://luisquesada.com
+% Portal:  https://lquesada.github.io/lq_lib/
+% GitHub:  https://github.com/lquesada/lq_lib
+% App:     qFT8 — Portable Amateur Radio for Android (https://qft8.com)
+%
+% License: MIT License (https://github.com/lquesada/lq_lib/blob/main/LICENSE)
+%
+% Copyright (c) 2026 Luis Quesada (HB9IPH)
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in
+% all copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+% =============================================================================
+
+% ===========================================================================
+%  Section VI: Extended Modes (LQ16, LQ4, LQ2) (ALLOCATION: PAGE 7)
+%  Must fit entirely on Page 7 along with Table 6 (Gallager LDPC Matrix).
+%  Terminates with \newpage.
+% ===========================================================================
+
+\section{Extended Modes: LQ16, LQ4, and LQ2}
+\label{sec:extended_modes}
+
+While \textbf{LQ8} is the primary mode for 15-second scheduled weak-signal communications, the 77-bit variable-length architecture scales across three complementary physical profiles (Table~\ref{tab:comparison}):
+\begin{itemize}[leftmargin=1.2em, topsep=1.5pt plus 1.5pt minus 0.5pt, itemsep=0.8pt plus 1.2pt minus 0.4pt, parsep=0pt]
+  \item \textbf{LQ16 (Slow / Ultra Weak):} 8-GFSK mode for severe weak-signal conditions ($-24.0$\,dB SNR threshold in 2500\,Hz) with 320\,ms symbol period (25.0\,Hz bandwidth, $BT = 2.0$, 25.28\,s duration) for extreme weak-signal and EME paths.
+  \item \textbf{LQ4 (Fast / Contest):} 4-GFSK mode for rapid contesting and pileups (30.0\,s contact, $120$\,QSOs/h standard, $320$\,QSOs/h Fox/Hound) with 48\,ms symbol period, 83.3\,Hz bandwidth, and 5.04\,s transmission in 7.5\,s UTC slots.
+  \item \textbf{LQ2 (Turbo Burst):} 4-GFSK high-throughput profile for dynamic burst channels (15.0\,s full contact, $240$\,QSOs/h standard, $640$\,QSOs/h Fox/Hound) with 24\,ms symbol period, 166.7\,Hz bandwidth, and 2.52\,s transmission in 3.75\,s slots for meteor scatter.
+\end{itemize}
+
+\subsection{4-GFSK Frame Structure \& Modulation}
+
+\LQ4 and \LQ2 transmit 105 symbols/frame using continuous-phase 4-GFSK ($BT = 1.0$, tone spacing $\Delta f = 1/T_s$, modulation index $h = 1.0$):
+\begin{itemize}[leftmargin=1.2em, topsep=1.5pt plus 1.5pt minus 0.5pt, itemsep=0.8pt plus 1.2pt minus 0.4pt, parsep=0pt]
+  \item \textbf{Consolidated Framing Sequence:} The 105-symbol frame is partitioned into: tone-0 ramp-up (sym~0, $T_{\text{ramp}} = T_s / 2$, 24\,ms in \LQ4, 12\,ms in \LQ2); Costas sync $S_1 = [0, 2, 3, 1]$ (syms~1--4); Data Block~1 (syms~5--33, 29 symbols, codeword bits $0\dots 57$); Costas $S_2 = [1, 3, 2, 0]$ (syms~34--37); Data Block~2 (syms~38--66, 29 symbols, bits $58\dots 115$); Costas $S_3 = [2, 0, 1, 3]$ (syms~67--70); Data Block~3 (syms~71--99, 29 symbols, bits $116\dots 173$); Costas $S_4 = [3, 1, 0, 2]$ (syms~100--103); and tone-0 ramp-down (sym~104, $T_{\text{ramp}} = T_s / 2$).
+  \item \textbf{Scrambling \& Whitening:} Prior to CRC-14/LDPC channel encoding, the 77-bit payload is bitwise XORed with the 10-byte whitening sequence (\texttt{4A 5E 89 B4 B0 8A 79 55 BE 28}$_{16}$) to suppress discrete spectral lines. Bits 77--79 (byte 9, \texttt{0x28}) are zeros prior to CRC-14 calculation.
+  \item \textbf{Data Framing \& Gray Coding:} Codeword bits are mapped sequentially without bit interleaving. The three 29-symbol data blocks map consecutive pairs $(b_{2k}, b_{2k+1})$ of the 174-bit codeword to 4-GFSK tones via Gray coding (\texttt{00}$\to$0, \texttt{01}$\to$1, \texttt{11}$\to$2, \texttt{10}$\to$3).
+  \item \textbf{Ramping \& Guard Margins:} Tone-0 symbols at indices 0 and 104 frame the sequence ($5.04$\,s for \LQ4, $2.52$\,s for \LQ2). Guard intervals ($2.46$\,s in \LQ4, $1.23$\,s in \LQ2) absorb propagation delay and T/R turnaround.
+\end{itemize}
+
+\subsection{Profile Selection and Channel Matching}
+\label{sec:channel_matching}
+
+Transceivers dynamically select operational profiles according to ionospheric channel coherence time $T_c$ and link signal-to-noise ratio:
+\begin{itemize}[leftmargin=1.2em, topsep=1.5pt plus 1.5pt minus 0.5pt, itemsep=0.8pt plus 1.2pt minus 0.4pt, parsep=0pt]
+  \item When $\text{SNR} < -21.0$\,dB and Doppler spread $\sigma_f \le 0.5$\,Hz, \LQ16 provides a $+3.0$\,dB gain over \LQ8, sustaining readability down to $-24.0$\,dB for extreme paths.
+  \item In rapid-fading channels ($T_c < 10$\,s), \LQ4's 48\,ms symbols and 7.5\,s slots ensure robust sync, completing verified contacts in 30.0\,s before phase degrades.
+  \item For dynamic burst channels (e.g., meteor scatter), \LQ2's 2.52\,s bursts capture transient trails, completing 4-slot exchanges in 15.0\,s.
+\end{itemize}
+\vspace*{-4.0pt}
+
+\begin{table*}[!t]
+\centering
+\caption{Multi-mode parameter and performance comparison across standard reference modes and the \LQ{} family.}
+\label{tab:comparison}
+\small
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{0.86}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccccc@{}}
+\toprule
+\textbf{Parameter} & \textbf{FT8 (Ref)} & \textbf{FT4 (Ref)} & \textbf{\LQ8} & \textbf{\LQ16} & \textbf{\LQ4} & \textbf{\LQ2} \\
+\midrule
+Modulation            & 8-GFSK   & 4-GFSK   & 8-GFSK   & 8-GFSK   & 4-GFSK   & 4-GFSK \\
+Bandwidth             & 50.0\,Hz & 83.3\,Hz & 50.0\,Hz & 25.0\,Hz & 83.3\,Hz & 166.7\,Hz \\
+Time slot             & 15.0\,s  & 7.5\,s   & 15.0\,s  & 30.0\,s  & 7.5\,s   & 3.75\,s \\
+Transmission time     & 12.64\,s & 5.04\,s  & 12.64\,s & 25.28\,s & 5.04\,s  & 2.52\,s \\
+Sensitivity (SNR)     & $-$21.0\,dB& $-$17.5\,dB & $-$21.0\,dB& $-$24.0\,dB & $-$17.5\,dB & $-$14.0\,dB \\
+Relative RF power req.& \textbf{0\,dB (ref)}& +3.5\,dB (2.2$\times$)& 0\,dB (ident.)& $-$3.0\,dB (0.5$\times$)& +3.5\,dB (2.2$\times$)& +7.0\,dB (5.0$\times$) \\
+\midrule
+Type coding           & Fixed    & Fixed    & Huffman  & Huffman  & Huffman  & Huffman \\
+QSO messages          & 5--6     & 5--6     & 4        & 4        & 4        & 4 \\
+QSO duration          & 75.0--90.0\,s & 37.5--45.0\,s & 60.0\,s & 120.0\,s & 30.0\,s & 15.0\,s \\
+Standard QSO Rate$^*$ & 40--48/h & 80--96/h & 60/h     & 30/h     & 120/h    & 240/h \\
+Pileup Rate (1-carrier)$^*$& 60/h & 120/h   & 160/h    & 80/h     & 320/h    & 640/h \\
+Pileup Rate (2-carrier)$^*$& 120/h& 240/h   & 320/h    & 160/h    & 640/h    & 1280/h \\
+\midrule
+Standard Suffixes     & /P, /R   & /P, /R   & /P       & /P       & /P       & /P       \\
+Max non-std callsign  & 11 chars & 11 chars & 13 + std suffix & 13 + std suffix & 13 + std suffix & 13 + std suffix \\
+Callsign hash length  & 10/12/22-b& 10/12/22-b& 24/20/16-b& 24/20/16-b& 24/20/16-b& 24/20/16-b \\
+Free-text alphabet    & 42 chars & 42 chars & 104 chars & 104 chars & 104 chars & 104 chars \\
+Free-text capacity    & 71 bits ($\sim$13 c) & 71 bits ($\sim$13 c) & 73 bits ($\sim$17 c) & 73 bits ($\sim$17 c) & 73 bits ($\sim$17 c) & 73 bits ($\sim$17 c) \\
+\bottomrule
+\multicolumn{7}{@{}p{\textwidth}@{}}{\footnotesize $^*$FT8/FT4 contacts require 5--6 messages (75--90\,s / 37.5--45\,s) using \texttt{RR73} or \texttt{RRR}/73; \LQ{} completes full contacts in 4 messages (60\,s in \LQ8). Peak rates assume continuous zero-loss operation. Pileup rates reflect Fox and Hound mode confirming 1 station/slot in FT8/FT4 vs.\ 2 stations/slot in \LQ{} (Type~11).}\end{tabular*}
+\end{table*}
+
+\pagebreak
+
+
+
+
+

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- 8-Tone Digital FSK Spectrum Waterfall Bars at Base (LQ8 8-Tone Modulation) -->
+    <!-- Tone 0 -->
+    <path
+        android:fillColor="#00E5FF"
+        android:pathData="M33,76 L36,76 L36,83 L33,83 Z" />
+    <!-- Tone 1 -->
+    <path
+        android:fillColor="#00B0FF"
+        android:pathData="M39,72 L42,72 L42,83 L39,83 Z" />
+    <!-- Tone 2 -->
+    <path
+        android:fillColor="#2979FF"
+        android:pathData="M45,67 L48,67 L48,83 L45,83 Z" />
+    <!-- Tone 3 -->
+    <path
+        android:fillColor="#00E676"
+        android:pathData="M51,62 L54,62 L54,83 L51,83 Z" />
+    <!-- Tone 4 -->
+    <path
+        android:fillColor="#00E676"
+        android:pathData="M54,62 L57,62 L57,83 L54,83 Z" />
+    <!-- Tone 5 -->
+    <path
+        android:fillColor="#2979FF"
+        android:pathData="M60,67 L63,67 L63,83 L60,83 Z" />
+    <!-- Tone 6 -->
+    <path
+        android:fillColor="#00B0FF"
+        android:pathData="M66,72 L69,72 L69,83 L66,83 Z" />
+    <!-- Tone 7 -->
+    <path
+        android:fillColor="#00E5FF"
+        android:pathData="M72,76 L75,76 L75,83 L72,83 Z" />
+
+    <!-- Radio Wave Arcs: Inner Arc -->
+    <path
+        android:strokeColor="#00E5FF"
+        android:strokeWidth="2.0"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"
+        android:pathData="M44,38 A14,14 0 0,1 64,38" />
+    <path
+        android:strokeColor="#00E5FF"
+        android:strokeWidth="2.0"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"
+        android:pathData="M44,48 A14,14 0 0,0 64,48" />
+
+    <!-- Radio Wave Arcs: Middle Arc -->
+    <path
+        android:strokeColor="#2979FF"
+        android:strokeWidth="2.2"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"
+        android:pathData="M38,32 A22,22 0 0,1 70,32" />
+    <path
+        android:strokeColor="#2979FF"
+        android:strokeWidth="2.2"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"
+        android:pathData="M38,54 A22,22 0 0,0 70,54" />
+
+    <!-- Radio Wave Arcs: Outer Arc -->
+    <path
+        android:strokeColor="#7C4DFF"
+        android:strokeWidth="2.2"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"
+        android:pathData="M32,26 A30,30 0 0,1 76,26" />
+    <path
+        android:strokeColor="#7C4DFF"
+        android:strokeWidth="2.2"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"
+        android:pathData="M32,60 A30,30 0 0,0 76,60" />
+
+    <!-- Central Antenna Mast Tower -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M52.5,43 L55.5,43 L57,75 L51,75 Z" />
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M48,73 L60,73 L62,76 L46,76 Z" />
+    <!-- Tower Lattice Cross-bracing -->
+    <path
+        android:strokeColor="#0D131F"
+        android:strokeWidth="1.0"
+        android:fillColor="#00000000"
+        android:pathData="M52,50 L56,56 M56,50 L52,56 M52,60 L56,66 M56,60 L52,66" />
+
+    <!-- Apex Radiating Energy Beacon -->
+    <path
+        android:fillColor="#00E5FF"
+        android:pathData="M54,43 m-3.5,0 a3.5,3.5 0 1,0 7,0 a3.5,3.5 0 1,0 -7,0" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,43 m-1.8,0 a1.8,1.8 0 1,0 3.6,0 a1.8,1.8 0 1,0 -3.6,0" />
+
+    <!-- Lightning / DSP Energy Spark at Top -->
+    <path
+        android:fillColor="#FFD600"
+        android:pathData="M54.5,23 L51.5,31 L55,31 L53,39 L57.5,29.5 L54,29.5 Z" />
+
+</vector>

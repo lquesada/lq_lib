@@ -1,0 +1,92 @@
+plugins {
+    id 'com.android.application'
+}
+
+def versionFile = rootProject.file('VERSION')
+def codeVersionFile = rootProject.file('CODE_VERSION')
+def appVersion = versionFile.exists() ? versionFile.text.trim() : "0.1"
+def codeVersion = codeVersionFile.exists() ? codeVersionFile.text.trim() : "1"
+
+android {
+    namespace 'com.qft8.lq'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId "com.qft8.lq"
+        minSdk 24
+        targetSdk 36
+        versionCode codeVersion.toInteger()
+        versionName appVersion
+
+        resConfigs "en"
+
+        buildConfigField "String", "APP_VERSION", "\"${appVersion}\""
+
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++20"
+                arguments "-DANDROID_STL=c++_static", "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON"
+            }
+        }
+        ndk {
+            abiFilters "arm64-v8a", "x86_64", "armeabi-v7a", "x86"
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path file('src/main/cpp/CMakeLists.txt')
+            version '3.22.1'
+        }
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    signingConfigs {
+        release {
+            def keystoreProperties = new Properties()
+            def keystorePropertiesFile = rootProject.file('local.properties')
+            if (keystorePropertiesFile.exists()) {
+                keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+            }
+
+            storeFile = keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+            storePassword = keystoreProperties['storePassword']
+            keyAlias = keystoreProperties['keyAlias']
+            keyPassword = keystoreProperties['keyPassword']
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            if (signingConfigs.release.storeFile != null) {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+}
+
+// Configure Toolchain to use JDK 25
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core:1.15.0'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    testImplementation 'junit:junit:4.13.2'
+}

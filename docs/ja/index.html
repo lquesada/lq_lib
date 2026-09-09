@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The LQ8 Digital Mode</title>
-  <meta name="description" content="The next-generation amateur radio digital mode family (LQ8, LQ4, LQ2, LQ16). Full 4-step contacts in 60s with complete grid &amp; report exchange (vs 75–90s in FT8), >2.3× pileup speed (160 vs ~69 QSOs/h) with 0.0 dB power penalty, and -21.0 dB SNR sensitivity via variable-length prefix coding. Native support in qFT8 for Android.">
+  <title>デジタル通信モード LQ8</title>
+  <meta name="description" content="次世代アマチュア無線デジタルモード（LQ8、LQ4、LQ2、LQ16）。60秒での完全7ステップQSO（FT8の75–90秒に対し）、パイルアップ速度>2.3×（160 vs ~69 QSOs/h）、0.0 dB電力ペナルティ、-21.0 dB SNR感度。AndroidアプリqFT8でネイティブ対応。">
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://lq8.org/">
-  <meta property="og:title" content="The LQ8 Digital Mode">
-  <meta property="og:description" content="Full 4-step contacts in 60s with complete grid &amp; report exchange (vs 75–90s in FT8), >2.3× pileup throughput (160 vs ~69 QSOs/h) with 0.0 dB power penalty. Continuous-phase 8-GFSK with variable-length prefix coding. Native support in qFT8 for Android.">
+  <meta property="og:url" content="https://lq8.org/ja/">
+  <meta property="og:title" content="デジタル通信モード LQ8">
+  <meta property="og:description" content="60秒での完全7ステップQSO（FT8の75–90秒に対し）、パイルアップスループット>2.3×（160 vs ~69 QSOs/h）、0.0 dB電力ペナルティ。AndroidアプリqFT8でネイティブ対応。">
   <meta property="og:image" content="https://lq8.org/img/og_banner.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://lq8.org/">
-  <meta name="twitter:title" content="The LQ8 Digital Mode">
-  <meta name="twitter:description" content="Full 4-step contacts in 60s with complete grid &amp; report exchange (vs 75–90s in FT8), >2.3× pileup throughput (160 vs ~69 QSOs/h) with 0.0 dB power penalty. Continuous-phase 8-GFSK with variable-length prefix coding. Native support in qFT8 for Android.">
+  <meta name="twitter:url" content="https://lq8.org/ja/">
+  <meta name="twitter:title" content="デジタル通信モード LQ8">
+  <meta name="twitter:description" content="60秒での完全7ステップQSO（FT8の75–90秒に対し）、パイルアップスループット>2.3×（160 vs ~69 QSOs/h）、0.0 dB電力ペナルティ。AndroidアプリqFT8でネイティブ対応。">
   <!-- SEO Canonical & Hreflang Tags -->
-  <link rel="canonical" href="https://lq8.org/">
+  <link rel="canonical" href="https://lq8.org/ja/">
   <link rel="alternate" hreflang="x-default" href="https://lq8.org/">
   <link rel="alternate" hreflang="en" href="https://lq8.org/">
   <link rel="alternate" hreflang="es" href="https://lq8.org/es/">
@@ -111,46 +111,10 @@
             window.location.href = isFile ? rootPrefix + lang + '/index.html' : rootPrefix + lang + '/';
           }
         }
-    
-        // Auto-redirect block for root English page
-        (function() {
-          try {
-            const urlParams = new URLSearchParams(window.location.search);
-            const queryLang = urlParams.get('lang');
-            const isFile = window.location.protocol === 'file:';
-
-            if (queryLang && supportedLanguages.includes(queryLang)) {
-              try { localStorage.setItem('lq_user_lang', queryLang); } catch (e) {}
-              if (queryLang !== 'en') {
-                const target = isFile ? queryLang + '/index.html' : queryLang + '/';
-                window.location.replace(target);
-                return;
-              }
-            }
-
-            if (isFile || sessionStorage.getItem('lq_redirected')) return;
-
-            const savedLang = localStorage.getItem('lq_user_lang');
-            if (savedLang && savedLang !== 'en' && supportedLanguages.includes(savedLang)) {
-              sessionStorage.setItem('lq_redirected', '1');
-              window.location.replace(savedLang + '/');
-              return;
-            }
-
-            if (!savedLang) {
-              const browserLang = (navigator.language || navigator.userLanguage || '').split('-')[0].toLowerCase();
-              if (browserLang && browserLang !== 'en' && supportedLanguages.includes(browserLang)) {
-                sessionStorage.setItem('lq_redirected', '1');
-                window.location.replace(browserLang + '/');
-                return;
-              }
-            }
-          } catch (e) {}
-        })();
-          </script>
+      </script>
   <!-- End Language Switcher & Redirection -->
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -1441,12 +1405,12 @@
       <a href="#" class="brand-logo"><span class="gradient-text">LQ8</span></a>
 
       <ul class="nav-links">
-        <li><a href="#overview" data-i18n="NAV_OVERVIEW">Overview</a></li>
-        <li><a href="#operation" data-i18n="NAV_OPERATION">Operation</a></li>
-        <li><a href="#speedup" data-i18n="NAV_SPEEDUP">Speed-Up</a></li>
-        <li><a href="#roadmap" data-i18n="NAV_ROADMAP">Roadmap</a></li>
-        <li><a href="#technical" data-i18n="NAV_TECH_SPECS">Specs</a></li>
-        <li><a href="#community" data-i18n="NAV_COMMUNITY">Community</a></li>
+        <li><a href="#overview" data-i18n="NAV_OVERVIEW">概要</a></li>
+        <li><a href="#operation" data-i18n="NAV_OPERATION">運用方法</a></li>
+        <li><a href="#speedup" data-i18n="NAV_SPEEDUP">速度</a></li>
+        <li><a href="#roadmap" data-i18n="NAV_ROADMAP">ロードマップ</a></li>
+        <li><a href="#technical" data-i18n="NAV_TECH_SPECS">技術仕様</a></li>
+        <li><a href="#community" data-i18n="NAV_COMMUNITY">コミュニティ＆お問い合わせ</a></li>
       </ul>
 
       <div class="nav-actions">
@@ -1458,13 +1422,13 @@
             <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
             <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
           </svg>
-          <span data-i18n="NAV_SHARE">Share</span>
+          <span data-i18n="NAV_SHARE">共有</span>
         </button>
 
         <div class="lang-selector-wrapper">
           <span class="lang-icon" aria-hidden="true">🌐</span>
           <select id="lang-select" class="lang-dropdown" onchange="onLanguageChange(this.value)" aria-label="Select Language">
-            <option value="en" selected>English</option>
+            <option value="en">English</option>
             <option value="es">Español</option>
             <option value="pt">Português</option>
             <option value="fr">Français</option>
@@ -1472,7 +1436,7 @@
             <option value="de">Deutsch</option>
             <option value="ru">Русский</option>
             <option value="zh">中文</option>
-            <option value="ja">日本語</option>
+            <option value="ja" selected>日本語</option>
             <option value="ko">한국어</option>
             <option value="ar">العربية</option>
             <option value="hi">हिन्दी</option>
@@ -1539,16 +1503,16 @@
       <div class="container">
         <!-- Hero Mode Header -->
         <div class="hero-mode-header">
-          <div class="hero-mode-title" data-i18n="HERO_MODE_TITLE">The LQ8 Digital Mode</div>
+          <div class="hero-mode-title" data-i18n="HERO_MODE_TITLE">デジタル通信モード LQ8</div>
         </div>
 
         <h1>
-          <span data-i18n="HERO_TITLE_1">Full 4-Step Contacts in 60 Seconds</span><br>
-          <span data-i18n="HERO_TITLE_2">>2.3× Pileup Speed (160 vs ~69 QSOs/h)</span><br>
-          <span data-i18n="HERO_TITLE_3">0.0 dB Power Penalty</span>
+          <span data-i18n="HERO_TITLE_1">60秒で完了する完全7ステップQSO</span><br>
+          <span data-i18n="HERO_TITLE_2">>2.3× パイルアップ速度 (160 vs ~69 QSOs/h)</span><br>
+          <span data-i18n="HERO_TITLE_3">0.0 dB 電力ペナルティ</span>
         </h1>
 
-        <p class="hero-sub" style="margin-top: 18px;" data-i18n="HERO_SUBTITLE"><strong>LQ8</strong> is a next-generation amateur radio weak-signal protocol that re-engineers message packing using variable-length prefix codes over the exact, battle-tested <strong>FT8 physical transport layer</strong> (8-GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). Complete full contacts with bidirectional grid, report, and 73 confirmation in <strong>4 transmissions (60s vs 75–90s)</strong> and achieve <strong>160 QSOs/h in pileups (>2.3× over dual-stream FT8 Fox &amp; Hound)</strong> with 0.0 dB RF power penalty (scaling to <strong>320 QSOs/h</strong> dual-carrier).</p>
+        <p class="hero-sub" style="margin-top: 18px;" data-i18n="HERO_SUBTITLE"><strong>LQ8</strong>は、実戦で検証された<strong>FT8物理層</strong>（8-GFSK、50&nbsp;Hz、&minus;21.0&nbsp;dB SNR）上で可変長プレフィックスコードを採用した次世代アマチュア無線プロトコルです。グリッド・レポート・73を含む完全な交信を<strong>4回の送信（60秒 vs 75–90秒）</strong>で完了し、電力ペナルティなしにパイルアップで<strong>160 QSOs/h（FT8 Fox &amp; Hound比 >2.3×）</strong>を達成（デュアルキャリアで<strong>320 QSOs/h</strong>に拡張可能）。</p>
 
         <div style="display: flex; gap: 14px; justify-content: center; align-items: center; margin-top: 24px; flex-wrap: wrap;">
           <a href="#operation" class="btn btn-primary" data-i18n="HERO_BTN_DISCOVER">Discover LQ8 &rarr;</a>
@@ -1559,64 +1523,64 @@
         <div class="pitch-grid">
           <!-- Card 1 -->
           <div class="pitch-card">
-            <div class="pitch-card-badge badge-speedup" data-i18n="PITCH_CARD_1_BADGE">60s QSO Speedup</div>
-            <h3 data-i18n="PITCH_CARD_1_TITLE">1-on-1 Contacts</h3>
+            <div class="pitch-card-badge badge-speedup" data-i18n="PITCH_CARD_1_BADGE">60秒 QSO 高速化</div>
+            <h3 data-i18n="PITCH_CARD_1_TITLE">1対1 交信</h3>
             <div class="pitch-stat">
               <span class="stat-main" data-i18n="PITCH_CARD_1_STAT_MAIN">60s</span>
-              <span class="stat-sub" data-i18n="PITCH_CARD_1_STAT_SUB">/ 4-Step (60 QSO/h)</span>
+              <span class="stat-sub" data-i18n="PITCH_CARD_1_STAT_SUB">/ 7ステップ (60 QSO/h)</span>
             </div>
-            <p class="pitch-desc" data-i18n="PITCH_CARD_1_DESC">Completes full contacts in 4 transmissions (60s vs 90s canonical or 75s with RR73 in FT8) via an optimal 4-step exchange (CQ &rarr; CALL &rarr; REPORT+73 &rarr; 73) at full reference sensitivity.</p>
+            <p class="pitch-desc" data-i18n="PITCH_CARD_1_DESC">最適な7ステップ交換 (CQ &rarr; CALL &rarr; REPORT+73 &rarr; 73) により、4回の送信 (60秒 vs FT8の75–90秒) で完全な交信を完了します。</p>
             <ul class="pitch-list">
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_1_LI_1">4 transmissions vs 5–6 in FT8</span></li>
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_1_LI_2">60 contacts/hour (vs 40–48 in FT8)</span></li>
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_1_LI_3">0.0 dB power penalty</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_1_LI_1">4回送信 (FT8の5〜6回と比較)</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_1_LI_2">60交信/時間 (FT8の40〜48と比較)</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_1_LI_3">0.0 dB 電力ペナルティ</span></li>
             </ul>
           </div>
 
           <!-- Card 2 -->
           <div class="pitch-card">
-            <div class="pitch-card-badge badge-pileup" data-i18n="PITCH_CARD_2_BADGE">>2.3× Pileup Speed</div>
-            <h3 data-i18n="PITCH_CARD_2_TITLE">High-Density Pileups</h3>
+            <div class="pitch-card-badge badge-pileup" data-i18n="PITCH_CARD_2_BADGE">>2.3× パイルアップ速度</div>
+            <h3 data-i18n="PITCH_CARD_2_TITLE">高密度パイルアップ</h3>
             <div class="pitch-stat">
               <span class="stat-main" data-i18n="PITCH_CARD_2_STAT_MAIN">2.33×</span>
               <span class="stat-sub" data-i18n="PITCH_CARD_2_STAT_SUB">vs FT8 Fox & Hound</span>
             </div>
-            <p class="pitch-desc" data-i18n="PITCH_CARD_2_DESC">In continuous pileup operation, 3 directed steps (vs 7 in FT8 Fox & Hound) with 2 callers confirmed per frame achieves <strong>160 QSOs/h (2.33×)</strong> on a single carrier with 0.0 dB power penalty, scaling to <strong>320 QSOs/h (4.67×)</strong> with dual carriers!</p>
+            <p class="pitch-desc" data-i18n="PITCH_CARD_2_DESC">継続的パイルアップ運用において、3ステップ (FT8 Fox & Houndの7ステップに対し) でフレームあたり2局を確認し、0.0 dB 電力ペナルティで <strong>160 QSOs/h (2.33×)</strong> を達成。デュアルキャリアでは <strong>320 QSOs/h (4.67×)</strong> まで拡張！</p>
             <ul class="pitch-list">
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_1">160 QSOs/h (1 carrier, 50 Hz)</span></li>
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_2">320 QSOs/h (2 carriers, 100 Hz)</span></li>
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_3">0.0 dB power penalty</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_1">160 QSOs/h (1キャリア, 50 Hz)</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_2">320 QSOs/h (2キャリア, 100 Hz)</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_3">0.0 dB 電力ペナルティ</span></li>
             </ul>
           </div>
 
           <!-- Card 3 -->
           <div class="pitch-card">
-            <div class="pitch-card-badge badge-phy" data-i18n="PITCH_CARD_3_BADGE">Battle-Tested PHY</div>
-            <h3 data-i18n="PITCH_CARD_3_TITLE">100% Proven Physical Layer</h3>
+            <div class="pitch-card-badge badge-phy" data-i18n="PITCH_CARD_3_BADGE">実績ある物理層</div>
+            <h3 data-i18n="PITCH_CARD_3_TITLE">100%実証済みの物理層</h3>
             <div class="pitch-stat">
               <span class="stat-main" data-i18n="PITCH_CARD_3_STAT_MAIN">&minus;21.0 dB</span>
-              <span class="stat-sub" data-i18n="PITCH_CARD_3_STAT_SUB">Sensitivity (8-GFSK 50 Hz)</span>
+              <span class="stat-sub" data-i18n="PITCH_CARD_3_STAT_SUB">受信感度 (8-GFSK 50 Hz)</span>
             </div>
-            <p class="pitch-desc" data-i18n="PITCH_CARD_3_DESC">Identical 8-GFSK modulation and LDPC(174,91) channel coding as FT8. Zero changes required to radios, soundcards, or antennas.</p>
+            <p class="pitch-desc" data-i18n="PITCH_CARD_3_DESC">FT8と同一の8-GFSK変調およびLDPC(174,91)符号化を採用。無線機、サウンドカード、アンテナの変更は不要です。</p>
             <ul class="pitch-list">
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_3_LI_1">Exact 8-GFSK 50.0 Hz physical transport</span></li>
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_3_LI_2">Standard &amp; 13-char extended callsigns</span></li>
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_3_LI_3">Unique Costas sync for protocol isolation</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_3_LI_1">正確な8-GFSK 50.0 Hz物理トランスポート</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_3_LI_2">標準および最大13文字の複合コールサイン対応</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_3_LI_3">プロトコル分離のための独自Costas同期</span></li>
             </ul>
           </div>
 
           <!-- Card 4 -->
           <div class="pitch-card">
-            <div class="pitch-card-badge badge-speedup" data-i18n="PITCH_CARD_4_BADGE">Multi-Rate Modes</div>
-            <h3 data-i18n="PITCH_CARD_4_TITLE">LQ Family (LQ4, LQ2, LQ16)</h3>
+            <div class="pitch-card-badge badge-speedup" data-i18n="PITCH_CARD_4_BADGE">マルチレートモード</div>
+            <h3 data-i18n="PITCH_CARD_4_TITLE">マルチレート適応性</h3>
             <div class="pitch-stat">
               <span class="stat-main" data-i18n="PITCH_CARD_4_STAT_MAIN">30s / 15s</span>
-              <span class="stat-sub" data-i18n="PITCH_CARD_4_STAT_SUB">Fast QSO (LQ4 / LQ2)</span>
+              <span class="stat-sub" data-i18n="PITCH_CARD_4_STAT_SUB">高速QSO (LQ4 / LQ2)</span>
             </div>
-            <p class="pitch-desc" data-i18n="PITCH_CARD_4_DESC">Seamlessly adapts to high-speed VHF/contesting (LQ4: 30s QSO), ultra-fast bursts (LQ2: 15s QSO), and extreme deep-signal DX (LQ16: &minus;24.0 dB SNR).</p>
+            <p class="pitch-desc" data-i18n="PITCH_CARD_4_DESC">高速VHF/コンテスト (LQ4: 30s QSO)、超高速バースト (LQ2: 15s QSO)、深層微弱信号DX (LQ16: &minus;24.0 dB SNR) にシームレスに対応。</p>
             <ul class="pitch-list">
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_4_LI_1">LQ4: 30s 4-step QSO (83.3 Hz)</span></li>
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_4_LI_2">LQ2: 15s 4-step QSO (166.7 Hz)</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_4_LI_1">LQ4: 30秒 7ステップ交信 (83.3 Hz)</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_4_LI_2">LQ2: 15秒 7ステップ交信 (166.7 Hz)</span></li>
               <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_4_LI_3">LQ16: &minus;24.0 dB DX (25.0 Hz)</span></li>
             </ul>
           </div>
@@ -1639,15 +1603,15 @@
                     <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.458c.538-.196 1.006.128.832.943z"/>
                   </svg>
                 </div>
-                <h4 data-i18n="COMMUNITY_TELEGRAM_TITLE">Telegram Group</h4>
+                <h4 data-i18n="COMMUNITY_TELEGRAM_TITLE">Telegram グループ</h4>
               </div>
-              <p class="community-cta-body" data-i18n="COMMUNITY_TELEGRAM_DESC">Join the live Telegram group for real-time discussion, on-air testing coordination, and direct support.</p>
+              <p class="community-cta-body" data-i18n="COMMUNITY_TELEGRAM_DESC">リアルタイムの議論、交信実験の調整、直接サポートのための公式 Telegram グループに参加しましょう。</p>
             </div>
             <a href="https://t.me/lq8mode" target="_blank" rel="noopener noreferrer" id="btn-telegram-lq" class="community-cta-btn btn-telegram" aria-label="Join LQ8 Telegram Group">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.458c.538-.196 1.006.128.832.943z"/>
               </svg>
-              <span data-i18n="COMMUNITY_TELEGRAM_BTN">Join Telegram</span>
+              <span data-i18n="COMMUNITY_TELEGRAM_BTN">Telegram に参加</span>
             </a>
           </div>
 
@@ -1660,15 +1624,15 @@
                     <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.703zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.197-2.512-.73a.326.326 0 0 0-.232-.095z"/>
                   </svg>
                 </div>
-                <h4 data-i18n="COMMUNITY_REDDIT_TITLE">r/LQ8 Subreddit</h4>
+                <h4 data-i18n="COMMUNITY_REDDIT_TITLE">r/LQ8 サブレディット</h4>
               </div>
-              <p class="community-cta-body" data-i18n="COMMUNITY_REDDIT_DESC">Connect with operators, discuss antenna and radio setups, and share your first on-air decoding reports.</p>
+              <p class="community-cta-body" data-i18n="COMMUNITY_REDDIT_DESC">世界中の運用者と交流し、アンテナや無線機の設定を議論し、受信レポートを共有しましょう。</p>
             </div>
             <a href="https://www.reddit.com/r/LQ8" target="_blank" rel="noopener noreferrer" id="btn-reddit-lq" class="community-cta-btn btn-reddit" aria-label="Join r/LQ8 on Reddit">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.703zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.197-2.512-.73a.326.326 0 0 0-.232-.095z"/>
               </svg>
-              <span data-i18n="COMMUNITY_REDDIT_BTN">Join r/LQ8</span>
+              <span data-i18n="COMMUNITY_REDDIT_BTN">r/LQ8 に参加</span>
             </a>
           </div>
 
@@ -1682,23 +1646,23 @@
                     <polyline points="22,6 12,13 2,6"></polyline>
                   </svg>
                 </div>
-                <h4 data-i18n="COMMUNITY_MAIL_TITLE">LQ8 News Mailing List</h4>
+                <h4 data-i18n="COMMUNITY_MAIL_TITLE">LQ8 ニュース メーリングリスト</h4>
               </div>
-              <p class="community-cta-body" data-i18n="COMMUNITY_MAIL_DESC">Read the public message archives and subscribe to official releases, announcements, and developer updates.</p>
+              <p class="community-cta-body" data-i18n="COMMUNITY_MAIL_DESC">公開アーカイブを閲覧し、公式リリースや開発ニュースレターを購読できます。</p>
             </div>
             <a href="https://groups.google.com/g/lq8-news" target="_blank" rel="noopener noreferrer" id="btn-mail-lq" class="community-cta-btn btn-mail" aria-label="Join LQ8 News Mailing List on Google Groups">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                 <polyline points="22,6 12,13 2,6"></polyline>
               </svg>
-              <span data-i18n="COMMUNITY_MAIL_BTN">Join Mailing List</span>
+              <span data-i18n="COMMUNITY_MAIL_BTN">メーリングリストに参加</span>
             </a>
           </div>
         </div>
 
         <div class="section-header">
-          <h2 data-i18n="SECTION_OPERATION_TITLE">Operation &amp; Ecosystem</h2>
-          <p data-i18n="SECTION_OPERATION_SUBTITLE">Get on the air with native mobile software, dedicated band plans, and seamless electronic logging compatibility.</p>
+          <h2 data-i18n="SECTION_OPERATION_TITLE">運用とエコシステム</h2>
+          <p data-i18n="SECTION_OPERATION_SUBTITLE">専用アプリ、周波数プラン、電子ログ互換性を活用して今すぐ交信を開始できます。</p>
         </div>
 
         <!-- Featured App Card (qFT8) -->
@@ -1706,21 +1670,19 @@
           <div class="qft8-featured-card">
             <div class="qft8-content">
               <h3 data-i18n="QFT8_TITLE">qFT8</h3>
-              <div class="qft8-tagline" data-i18n="QFT8_TAGLINE">Portable Amateur Radio for Android</div>
-              <p class="qft8-desc" data-i18n="QFT8_DESC">
-                Native mobile transceiver application supporting <strong>LQ8</strong> alongside other existing digital modes. Operate weak-signal digital modes anywhere from your Android device.
-              </p>
+              <div class="qft8-tagline" data-i18n="QFT8_TAGLINE">Android向けポータブル・アマチュア無線アプリ</div>
+              <p class="qft8-desc" data-i18n="QFT8_DESC">既存のデジタルモードに加え <strong>LQ8</strong> をネイティブサポートするモバイルトランシーバーアプリ。Android端末からどこでも微弱信号デジタルモードを運用できます。</p>
               <div class="qft8-features">
-                <div class="qft8-feat-item"><span><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="QFT8_FEAT_1">Plug and Play for 50+ Radios</span></div>
-                <div class="qft8-feat-item"><span><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="QFT8_FEAT_2">Integration with QRZ and LoTW</span></div>
-                <div class="qft8-feat-item"><span><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="QFT8_FEAT_3">Manual and Automated Operation</span></div>
-                <div class="qft8-feat-item"><span><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="QFT8_FEAT_4">Optimized for SOTA and POTA</span></div>
+                <div class="qft8-feat-item"><span><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="QFT8_FEAT_1">50機種以上の無線機にプラグ＆プレイ対応</span></div>
+                <div class="qft8-feat-item"><span><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="QFT8_FEAT_2">QRZおよびLoTWとの直接連携</span></div>
+                <div class="qft8-feat-item"><span><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="QFT8_FEAT_3">手動および完全自動運用モード</span></div>
+                <div class="qft8-feat-item"><span><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="QFT8_FEAT_4">SOTAおよびPOTA運用に最適化</span></div>
               </div>
-              <a href="https://qft8.com" rel="noopener noreferrer" class="btn btn-primary" data-i18n="QFT8_BTN">Visit qft8.com & Download &rarr;</a>
+              <a href="https://qft8.com" rel="noopener noreferrer" class="btn btn-primary" data-i18n="QFT8_BTN">qft8.com を訪問してダウンロード &rarr;</a>
             </div>
             <div class="qft8-preview-wrap">
               <a href="https://qft8.com" rel="noopener noreferrer" class="qft8-preview-link" title="Visit qFT8 Website (qft8.com)">
-                <img src="qft8.jpg" alt="qFT8 Android Application" data-i18n="QFT8_IMG_ALT" class="qft8-preview-img" loading="lazy">
+                <img src="../qft8.jpg" alt="qFT8 Android アプリケーション" data-i18n="QFT8_IMG_ALT" class="qft8-preview-img" loading="lazy">
               </a>
             </div>
           </div>
@@ -1729,31 +1691,27 @@
         <!-- Recommended Operating Frequencies & Band Plan -->
         <div id="frequencies" style="margin-bottom: 48px;">
           <div class="section-header" style="margin-bottom: 20px;">
-            <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800;" data-i18n="FREQUENCIES_TITLE">Proposed Operating Frequencies (Limited Experimental Mode)</h3>
-            <p data-i18n="FREQUENCIES_SUBTITLE">Dedicated 3.0&nbsp;kHz channel sub-allocations for <strong>LQ8</strong> in limited experimental mode exclusively on these bands to ensure clean, interference-free weak-signal evaluation.</p>
+            <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800;" data-i18n="FREQUENCIES_TITLE">推奨運用周波数（限定実験モード）</h3>
+            <p data-i18n="FREQUENCIES_SUBTITLE">クリーンで混信のない微弱信号評価を確保するため、限定実験モードにおいてこれらのバンド専用に <strong>LQ8</strong> の 3.0&nbsp;kHz チャネルサブアロケーションを設定しています。</p>
           </div>
 
           <div class="mode-compare-box frequencies-box" style="margin-bottom: 20px; border-left-color: var(--cyan); background: rgba(56, 189, 248, 0.06); padding: 18px 22px;">
             <div style="font-weight: 700; color: var(--cyan); margin-bottom: 6px; font-size: 0.98rem; display: flex; align-items: center; gap: 8px;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-              <span data-i18n="FREQUENCIES_BOX_TITLE">Limited Experimental Mode: 30m, 15m, and 10m Allocations</span>
+              <span data-i18n="FREQUENCIES_BOX_TITLE">限定実験モード：30m・15m・10m バンド割り当て</span>
             </div>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 6px;" data-i18n="FREQUENCIES_BOX_P1">
-              To evaluate weak-signal performance in clean RF spectrum without interference, initial on-air operations are conducted in <strong>limited experimental mode exclusively on 30m, 15m, and 10m</strong>. Each dial frequency represents the base carrier frequency of a standard <strong>3.0&nbsp;kHz Upper Sideband (USB) channel</strong> (e.g., <code>10.146&nbsp;MHz</code> spans audio offsets from <code>10.1460</code> to <code>10.1490&nbsp;MHz</code>). Multiple stations operate simultaneously within each 3.0&nbsp;kHz window on separate audio subcarrier offsets.
-            </p>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 0;" data-i18n="FREQUENCIES_BOX_P2">
-              These selected bands provide optimal, noise-free propagation environments: <strong>30m</strong> is a dedicated WARC band with no voice phone operation allowed by international law; <strong>15m</strong> and <strong>10m</strong> offer expansive, quiet digital allocations well below their respective voice phone segments.
-            </p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 6px;" data-i18n="FREQUENCIES_BOX_P1">干渉のないクリーンなRFスペクトル環境で微弱信号復調性能を検証するため、初期運用は<strong>30m、15m、10mの3バンド限定の実験モード</strong>で実施されます。各ダイヤル周波数は標準的な <strong>3.0&nbsp;kHz 上側波帯（USB）チャネル</strong>のベースキャリア周波数を表します（例：<code>10.146&nbsp;MHz</code> は <code>10.1460</code>〜<code>10.1490&nbsp;MHz</code> のオーディオオフセット）。複数の局が個別のオーディオ副搬送波オフセットを用いて同一の 3.0&nbsp;kHz ウィンドウ内で同時に運用可能です。</p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 0;" data-i18n="FREQUENCIES_BOX_P2">選定されたバンドはノイズが極めて少なく最適な電波伝搬環境を提供します：<strong>30m</strong> は国際協定により音声通話が一切禁止された専用WARCバンドです。<strong>15m</strong> および <strong>10m</strong> は音声通信セグメントよりはるか下に位置し、広大で静寂なデジタル通信領域を確保しています。</p>
           </div>
 
           <div class="table-container frequencies-table-container">
             <table class="spec-table">
               <thead>
                 <tr>
-                  <th data-i18n="FREQUENCIES_TH_BAND">Band</th>
+                  <th data-i18n="FREQUENCIES_TH_BAND">バンド</th>
                   <th class="th-lq" data-i18n="FREQUENCIES_TH_LQ8">LQ8 (3 kHz USB)</th>
-                  <th class="th-existing" data-i18n="FREQUENCIES_TH_FT8">FT8 (Ref)</th>
-                  <th class="th-existing" data-i18n="FREQUENCIES_TH_FT4">FT4 (Ref)</th>
+                  <th class="th-existing" data-i18n="FREQUENCIES_TH_FT8">FT8 (参考)</th>
+                  <th class="th-existing" data-i18n="FREQUENCIES_TH_FT4">FT4 (参考)</th>
                 </tr>
               </thead>
               <tbody>
@@ -1777,17 +1735,15 @@
                 </tr>
               </tbody>
             </table>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 14px; margin-bottom: 0; padding: 0 14px 14px 14px; line-height: 1.5;" data-i18n="FREQUENCIES_FUTURE_BANDS_NOTE">
-              <em>Note:</em> LQ8 is currently active in limited experimental mode only on 30m, 15m, and 10m. Additional allocations (including 40m, 20m, 12m, 17m, 80m, and 160m) will be officially assigned in upcoming phases as coordinated with international band plans.
-            </p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 14px; margin-bottom: 0; padding: 0 14px 14px 14px; line-height: 1.5;" data-i18n="FREQUENCIES_FUTURE_BANDS_NOTE"><em>注：</em> LQ8 は現在、30m、15m、10m のみに限定した実験モードで運用されています。追加バンド（40m、20m、12m、17m、80m、160mなど）は今後のフェーズで国際バンドプランと調整の上、正式に割り当てられます。</p>
           </div>
         </div>
 
         <!-- ADIF Electronic Logging Standard -->
         <div id="adif">
           <div class="section-header" style="margin-bottom: 20px;">
-            <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800;" data-i18n="ADIF_TITLE">ADIF Electronic Logging &amp; Award Compatibility</h3>
-            <p data-i18n="ADIF_SUBTITLE">Standardized electronic logging format for LoTW, QRZ.com, eQSL, ClubLog, and amateur radio software suites.</p>
+            <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800;" data-i18n="ADIF_TITLE">ADIF 電子ログ & アワード互換性</h3>
+            <p data-i18n="ADIF_SUBTITLE">LoTW、QRZ.com、eQSL、ClubLog、ログ管理ソフト向けの標準フォーマット。</p>
           </div>
 
           <div style="background: var(--surface-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 32px; margin-bottom: 24px;">
@@ -1797,38 +1753,26 @@
               <div style="display: flex; align-items: flex-start; gap: 16px;">
                 <div style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: rgba(16, 185, 129, 0.2); flex-shrink: 0; color: var(--emerald);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
                 <div>
-                  <h4 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: var(--text-primary); margin-bottom: 6px;" data-i18n="ADIF_CALLOUT_TITLE">
-                    Logging and Submitting LQ8 QSOs: Practical Guidelines
-                  </h4>
-                  <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 8px;" data-i18n="ADIF_CALLOUT_P1">
-                    Under the <strong>ADIF 3.x specification</strong>, exporting contacts using standard mode <code class="radio-val">&lt;MODE:4&gt;DATA</code> or <code class="radio-val">&lt;MODE:4&gt;MFSK</code> with <code class="radio-val badge-lq">&lt;SUBMODE:3&gt;LQ8</code> allows electronic loggers and signing tools to record and process contacts without mode-rejection issues.
-                  </p>
-                  <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 8px;" data-i18n="ADIF_CALLOUT_P2">
-                    When submitting logs to <strong>QRZ.com Logbook</strong>, <strong>ARRL Logbook of the World (LoTW)</strong>, <strong>eQSL.cc</strong>, and <strong>Club Log</strong>, contacts logged under <strong><code>DATA</code></strong> or <strong><code>MFSK</code></strong> are recognized under standard digital categories for <strong>DXCC, WAS, VUCC, WAC, and WPX award credits</strong> (using local software mode mapping if needed).
-                  </p>
-                  <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;" data-i18n="ADIF_CALLOUT_P3">
-                    Formal submission to the ADIF Working Group is underway to establish dedicated native enum tokens and drop-down menu support across all logging applications.
-                  </p>
+                  <h4 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: var(--text-primary); margin-bottom: 6px;" data-i18n="ADIF_CALLOUT_TITLE">LQ8 の交信を記録・申請できますか？ <span style="color: var(--emerald);">100% 可能です！</span></h4>
+                  <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 8px;" data-i18n="ADIF_CALLOUT_P1">公式 <strong>ADIF 3.x 規格</strong> において親モード <code class="radio-val">&lt;MODE:4&gt;DATA</code> は広く認知されており、<code class="radio-val">&lt;SUBMODE&gt;</code> フィールドは<strong>完全オープンかつ拡張可能</strong>です。今すぐ <code class="radio-val badge-lq">&lt;SUBMODE:3&gt;LQ8</code> または <code class="radio-val badge-lq">&lt;SUBMODE:3&gt;LQ4</code> を使用できます。</p>
+                  <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 8px;" data-i18n="ADIF_CALLOUT_P2"><strong>QRZ.com</strong>、<strong>LoTW</strong>、<strong>eQSL.cc</strong>、<strong>Club Log</strong> にアップロードすると、エラーなく承認され <strong><code>DATA</code> / <code>DIGITAL</code></strong> カテゴリとして <strong>DXCC、WAS、VUCC、WAC、WPX アワード</strong> の対象となります。</p>
+                  <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;" data-i18n="ADIF_CALLOUT_P3">ADIF委員会による正式承認後は、コンテストソフト等のプルダウンメニューにネイティブ追加されます。</p>
                 </div>
               </div>
             </div>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 28px;">
               <div>
-                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: var(--cyan);" data-i18n="ADIF_CARD_1_TITLE">Standard ADIF Specification</h4>
-                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;" data-i18n="ADIF_CARD_1_TEXT">
-                  All protocols in the LQ digital mode family follow the <strong>Amateur Data Interchange Format (ADIF 3.x)</strong> guidelines under mode <code>DATA</code> or <code>MFSK</code> with protocol submode identifiers.
-                </p>
+                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: var(--cyan);" data-i18n="ADIF_CARD_1_TITLE">標準 ADIF 規格準拠</h4>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;" data-i18n="ADIF_CARD_1_TEXT">すべての LQ プロトコルは <strong>ADIF 3.x</strong> 仕様に準拠し、親モード <code>DATA</code> および <code>SUBMODE</code> で識別されます。</p>
               </div>
               <div>
-                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: var(--emerald);" data-i18n="ADIF_CARD_2_TITLE">Instant Platform &amp; Award Compatibility</h4>
-                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;" data-i18n="ADIF_CARD_2_TEXT">
-                  Online logbooks accept contacts under digital mode categories for digital awards with standard submode tracking.
-                </p>
+                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: var(--emerald);" data-i18n="ADIF_CARD_2_TITLE">即時アワード申請互換</h4>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;" data-i18n="ADIF_CARD_2_TEXT"><strong>LoTW</strong>、<strong>QRZ.com</strong>、<strong>eQSL.cc</strong>、<strong>Club Log</strong> は事前審査なしで自動的に <code>DATA</code> を <strong><code>DATA</code></strong> に割り当てます。</p>
               </div>
             </div>
 
-            <h4 style="font-family: var(--font-heading); font-size: 1.05rem; font-weight: 700; margin-bottom: 12px; color: var(--text-primary);" data-i18n="ADIF_TABLE_HEADING">Standard Mode &amp; Submode Tags Reference:</h4>
+            <h4 style="font-family: var(--font-heading); font-size: 1.05rem; font-weight: 700; margin-bottom: 12px; color: var(--text-primary);" data-i18n="ADIF_TABLE_HEADING">標準モード・サブモードタグ対照表：</h4>
 
             <!-- Hidden for now because there is only one mode:
             <div class="adif-tabs" style="display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap;">
@@ -1843,10 +1787,10 @@
               <table class="spec-table">
                 <thead>
                   <tr>
-                    <th data-i18n="ADIF_TH_PROTOCOL">Protocol</th>
-                    <th data-i18n="ADIF_TH_MODE">ADIF Mode Tag</th>
-                    <th data-i18n="ADIF_TH_SUBMODE">ADIF Submode Tag</th>
-                    <th data-i18n="ADIF_TH_COMMENT">Standard Comment Tag</th>
+                    <th data-i18n="ADIF_TH_PROTOCOL">プロトコル</th>
+                    <th data-i18n="ADIF_TH_MODE">ADIF Mode タグ</th>
+                    <th data-i18n="ADIF_TH_SUBMODE">ADIF Submode タグ</th>
+                    <th data-i18n="ADIF_TH_COMMENT">標準 Comment タグ</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -1860,7 +1804,7 @@
               </table>
             </div>
 
-            <h4 style="font-family: var(--font-heading); font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);" data-i18n="ADIF_EXAMPLE_HEADING">Example Standard ADIF QSO Record (<code>.adi</code>):</h4>
+            <h4 style="font-family: var(--font-heading); font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);" data-i18n="ADIF_EXAMPLE_HEADING">標準 ADIF QSO レコード例 (<code>.adi</code>)：</h4>
             <pre style="background: rgba(3, 7, 18, 0.7); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 16px 20px; color: var(--cyan); font-family: var(--font-mono); font-size: 0.88rem; line-height: 1.5; overflow-x: auto;"><code id="adifExampleCode">&lt;STATION_CALLSIGN:6&gt;HB9IPH
 &lt;MY_GRIDSQUARE:4&gt;JN47
 &lt;CALL:5&gt;TU2TU
@@ -1884,15 +1828,15 @@
     <section id="speedup" class="section">
       <div class="container">
         <div class="section-header">
-          <h2 data-i18n="SPEEDUP_TITLE">How is the 60-Second QSO &amp; Pileup Speed-Up Achieved?</h2>
-          <p data-i18n="SPEEDUP_SUBTITLE">By replacing repetitive rigid exchanges with variable-length prefix codes, 24-bit/16-bit collision-resistant hashing, and multi-station response frames, while guaranteeing full mutual exchange: both Maidenhead locators and signal reports are conveyed, with reciprocal 73 acknowledgments confirming reception.</p>
+          <h2 data-i18n="SPEEDUP_TITLE">60秒QSOとパイルアップ高速化はどのように達成されるか？</h2>
+          <p data-i18n="SPEEDUP_SUBTITLE">固定的な交換手順を可変長ハフマン符号、24/14ビット耐衝突ハッシュ、複数局一括応答フレームに置き換えることで実現。ロケーターとシグナルレポートの交換（超長コールサインのCQ時を除く）および相互の受信確認としての73交換という2つの基本原則を満たします。</p>
         </div>
 
         <div class="speedup-quad-grid">
           <!-- 1. FT8 Standard -->
           <div class="flow-card flow-card-ft8">
             <div class="flow-card-header">
-              <h4 data-i18n="SPEEDUP_CARD_STD_FT8_TITLE">FT8 Standard</h4>
+              <h4 data-i18n="SPEEDUP_CARD_STD_FT8_TITLE">FT8 標準</h4>
             </div>
             <div class="flow-steps">
               <div class="flow-step">
@@ -1920,15 +1864,13 @@
                 <div class="flow-step-msg">HB9IPH TU2TU 73</div>
               </div>
             </div>
-            <div class="flow-summary summary-slow" data-i18n="SPEEDUP_STD_FT8_SUMMARY">
-              <strong>Total QSO Time:</strong> 90 seconds (6 slots, or 75s with RR73)
-            </div>
+            <div class="flow-summary summary-slow" data-i18n="SPEEDUP_STD_FT8_SUMMARY"><strong>総QSO時間:</strong> 90秒 (6スロット、またはRR73で75秒)</div>
           </div>
 
           <!-- 2. LQ8 Standard -->
           <div class="flow-card flow-card-highlight">
             <div class="flow-card-header">
-              <h4 data-i18n="SPEEDUP_CARD_STD_LQ8_TITLE">LQ8 Standard</h4>
+              <h4 data-i18n="SPEEDUP_CARD_STD_LQ8_TITLE">LQ8 標準</h4>
             </div>
             <div class="flow-steps">
               <div class="flow-step">
@@ -1948,19 +1890,15 @@
                 <div class="flow-step-msg msg-lq">HB9IPH TU2TU 73</div>
               </div>
             </div>
-            <div class="flow-summary summary-fast" data-i18n="SPEEDUP_STD_LQ8_SUMMARY">
-              <strong>Total QSO Time:</strong> 60 seconds (4 slots) &mdash; <span style="color: var(--cyan); font-weight: 700;">1.50× vs 6-slot / 1.25× vs RR73</span>
-            </div>
+            <div class="flow-summary summary-fast" data-i18n="SPEEDUP_STD_LQ8_SUMMARY"><strong>総QSO時間:</strong> 60秒 (4スロット) &mdash; <span style="color: var(--cyan); font-weight: 700;">1.50× (6スロット比) / 1.25× (RR73比)</span></div>
           </div>
 
           <!-- 3. FT8 Pileup -->
           <div class="flow-card flow-card-ft8">
             <div class="flow-card-header">
-              <h4 data-i18n="SPEEDUP_CARD_PL_FT8_TITLE">FT8 Pileup</h4>
+              <h4 data-i18n="SPEEDUP_CARD_PL_FT8_TITLE">FT8 パイルアップ</h4>
             </div>
-            <div class="flow-card-context-note" data-i18n="SPEEDUP_NOTE_ASSUMING_CQ">
-              (continuous pipelined pileup, no repeated CQ)
-            </div>
+            <div class="flow-card-context-note" data-i18n="SPEEDUP_NOTE_ASSUMING_CQ">（CQ送信を想定）</div>
             <div class="flow-steps">
               <div class="flow-step">
                 <div class="flow-step-num">1</div>
@@ -1991,19 +1929,15 @@
                 <div class="flow-step-msg">HB9IPH YO1YO 73</div>
               </div>
             </div>
-            <div class="flow-summary summary-slow" data-i18n="SPEEDUP_PL_FT8_SUMMARY">
-              <strong>Directed Exchange:</strong> 105 seconds (7 slots for 2 QSOs) &mdash; ~69 QSOs/h (pipelined F/H, &minus;3.0 dB power split)
-            </div>
+            <div class="flow-summary summary-slow" data-i18n="SPEEDUP_PL_FT8_SUMMARY"><strong>個別交信時間:</strong> 105 秒 (7スロット &times; 2局) &mdash; ~69 QSOs/h (&minus;3.0 dB 電力分割)</div>
           </div>
 
           <!-- 4. LQ8 Pileup -->
           <div class="flow-card flow-card-ultra">
             <div class="flow-card-header">
-              <h4 data-i18n="SPEEDUP_CARD_PL_LQ8_TITLE">LQ8 Pileup</h4>
+              <h4 data-i18n="SPEEDUP_CARD_PL_LQ8_TITLE">LQ8 パイルアップ</h4>
             </div>
-            <div class="flow-card-context-note" data-i18n="SPEEDUP_NOTE_ASSUMING_CQ">
-              (continuous pipelined pileup, no repeated CQ)
-            </div>
+            <div class="flow-card-context-note" data-i18n="SPEEDUP_NOTE_ASSUMING_CQ">（CQ送信を想定）</div>
             <div class="flow-steps">
               <div class="flow-step">
                 <div class="flow-step-num">1</div>
@@ -2018,9 +1952,7 @@
                 <div class="flow-step-msg msg-lq">HB9IPH TU2TU 73 / HB9IPH YO1YO 73</div>
               </div>
             </div>
-            <div class="flow-summary summary-ultra" data-i18n="SPEEDUP_PL_LQ8_SUMMARY">
-              <strong>Directed Exchange:</strong> 45 seconds (3 slots for 2 QSOs) &mdash; <span style="color: var(--emerald); font-weight: 700;">160 QSOs/h (2.33× speedup) with 0.0 dB power penalty</span>
-            </div>
+            <div class="flow-summary summary-ultra" data-i18n="SPEEDUP_PL_LQ8_SUMMARY"><strong>個別交信時間:</strong> 45秒 (3スロット &times; 2局) &mdash; <span style="color: var(--emerald); font-weight: 700;">160 QSOs/h (2.33× 高速化) 0.0 dB 電力分割</span></div>
           </div>
         </div>
       </div>
@@ -2030,54 +1962,48 @@
     <section id="roadmap" class="section">
       <div class="container">
         <div class="section-header">
-          <h2 data-i18n="ROADMAP_TITLE">Strategic Roadmap &amp; Ecosystem Milestones</h2>
-          <p data-i18n="ROADMAP_SUBTITLE">Our clear trajectory toward global amateur radio standardization, multi-platform applications, reverse beacon reporting, and electronic logbook integration.</p>
+          <h2 data-i18n="ROADMAP_TITLE">戦略ロードマップ & 主要マイルストーン</h2>
+          <p data-i18n="ROADMAP_SUBTITLE">国際標準化、マルチプラットフォーム、ログ連携への確実なロードマップ。</p>
         </div>
 
         <div class="roadmap-list">
           <div class="roadmap-item">
             <div class="roadmap-status-icon status-done"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
             <div class="roadmap-content">
-              <h4><span data-i18n="ROADMAP_P1_TITLE">Phase 1: Mathematical Specification &amp; Reference Library</span> <span class="pill pill-emerald" data-i18n="ROADMAP_P1_STATUS">Completed</span></h4>
-              <p data-i18n="ROADMAP_P1_TEXT">Full definition of the variable-length Huffman prefix trees, 104-character Varicode, CRC-14/CRC-24Q algorithms, and the open-source C++20 reference library (<code>lq_lib</code>) with verified test coverage and exhaustive cross-platform validation.</p>
+              <h4><span data-i18n="ROADMAP_P1_TITLE">フェーズ 1：数学的仕様 & 参照ライブラリ</span> <span class="pill pill-emerald" data-i18n="ROADMAP_P1_STATUS">完了</span></h4>
+              <p data-i18n="ROADMAP_P1_TEXT">可変長ハフマン前置木、61文字Varicode、CRC-14/CRC-24Qアルゴリズムの策定と、テスト網羅率100%のオープンソースC++20ライブラリ（<code>lq_lib</code>）の開発完了。</p>
             </div>
           </div>
 
           <div class="roadmap-item">
             <div class="roadmap-status-icon status-active"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
             <div class="roadmap-content">
-              <h4><span data-i18n="ROADMAP_P2_TITLE">Phase 2: Native Mobile Applications &amp; Field Validation</span> <span class="pill pill-cyan" data-i18n="ROADMAP_P2_STATUS">Active / Current</span></h4>
-              <p data-i18n="ROADMAP_P2_TEXT">
-                Comprehensive over-the-air field validation. Native mobile implementation in <strong>qFT8 for Android</strong> (<a href="https://qft8.com" target="_blank">qft8.com</a>) and development of native <strong>iPhone / iPad (iOS) transceiver applications</strong> for portable and field-day operation.
-              </p>
+              <h4><span data-i18n="ROADMAP_P2_TITLE">フェーズ 2：ネイティブモバイルアプリ & 実電波検証</span> <span class="pill pill-cyan" data-i18n="ROADMAP_P2_STATUS">進行中</span></h4>
+              <p data-i18n="ROADMAP_P2_TEXT">実電波での包括的交信テスト。<strong>Android版 qFT8</strong>（<a href="https://qft8.com" target="_blank">qft8.com</a>）での実装と、ポータブル運用向け <strong>iPhone / iPad (iOS) ネイティブアプリ</strong> の開発。</p>
             </div>
           </div>
 
           <div class="roadmap-item">
             <div class="roadmap-status-icon status-active"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
             <div class="roadmap-content">
-              <h4><span data-i18n="ROADMAP_P3_TITLE">Phase 3: Adoption by Wide Applications &amp; Spotting Networks</span> <span class="pill pill-cyan" data-i18n="ROADMAP_P3_STATUS">Active / In Progress</span></h4>
-              <p data-i18n="ROADMAP_P3_TEXT">
-                Adoption by wide applications such as <strong>WSJT-X</strong>, <strong>JTDX</strong>, <strong>N1MM+</strong>, <strong>Ham Radio Deluxe</strong>, and <strong>Log4OM</strong>, as well as live reporting through the <strong>PSKReporter service</strong>, <strong>Reverse Beacon Network (RBN)</strong>, and <strong>HamSpots</strong>.
-              </p>
+              <h4><span data-i18n="ROADMAP_P3_TITLE">フェーズ 3：主要アプリ採用 & 受信網連携</span> <span class="pill pill-cyan" data-i18n="ROADMAP_P3_STATUS">推進中</span></h4>
+              <p data-i18n="ROADMAP_P3_TEXT"><strong>WSJT-X</strong>、<strong>JTDX</strong>、<strong>N1MM+</strong>、<strong>Log4OM</strong> への採用推進と、<strong>PSKReporter</strong>、<strong>RBN</strong>、<strong>HamSpots</strong> へのリアルタイムレポート連携。</p>
             </div>
           </div>
 
           <div class="roadmap-item">
             <div class="roadmap-status-icon status-upcoming"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
             <div class="roadmap-content">
-              <h4><span data-i18n="ROADMAP_P4_TITLE">Phase 4: Formal ADIF Standardization &amp; Dedicated Logging Ecosystem</span> <span class="pill pill-amber" data-i18n="ROADMAP_P4_STATUS">In Progress</span></h4>
-              <p data-i18n="ROADMAP_P4_TEXT">
-                Formal submission of <code>LQ8</code> enum token to the <strong>Amateur Data Interchange Format (ADIF)</strong> Working Group (complementing existing 100% compliant <code>&lt;MODE:4&gt;DATA</code> + <code>&lt;SUBMODE&gt;</code> export). Dedicated native drop-downs and 1-click cloud sync integration across third-party logging suites, <strong>QRZ.com Logbook API</strong>, <strong>ARRL Logbook of the World (LoTW / TQSL)</strong>, <strong>eQSL.cc</strong>, and <strong>Club Log</strong>.
-              </p>
+              <h4><span data-i18n="ROADMAP_P4_TITLE">フェーズ 4：ADIF 正式標準化 & ログエコシステム</span> <span class="pill pill-amber" data-i18n="ROADMAP_P4_STATUS">進行中</span></h4>
+              <p data-i18n="ROADMAP_P4_TEXT"><strong>ADIF 作業部会</strong> への <code>LQ8</code> および <code>LQ4</code> の正式提出。<strong>QRZ.com</strong>、<strong>LoTW</strong>、<strong>eQSL.cc</strong>、<strong>Club Log</strong> とのワンクリック同期。</p>
             </div>
           </div>
 
           <div class="roadmap-item">
             <div class="roadmap-status-icon status-upcoming"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4.5c1.62-1.63 5-2.5 5-2.5"/><path d="M15 15v5s3.03-.55 4.5-2c1.63-1.62 2.5-5 2.5-5"/></svg></div>
             <div class="roadmap-content">
-              <h4><span data-i18n="ROADMAP_P5_TITLE">Phase 5: Introduction of LQ4 (High-Speed Profile) &amp; Protocol Expansion</span> <span class="pill pill-amber" data-i18n="ROADMAP_P5_STATUS">Future Roadmap</span></h4>
-              <p data-i18n="ROADMAP_P5_TEXT">Following broad operational adoption of LQ8, introduction of <strong>LQ4</strong> — a high-speed contest and VHF/UHF extension that delivers double the QSO throughput at double the bandwidth (4-GFSK, 83.33&nbsp;Hz bandwidth, 5.04&nbsp;s transmission in 7.5&nbsp;s UTC slots). LQ4 is to LQ8 what FT4 is to FT8: by combining the 4-GFSK 7.5-second physical transport layer with LQ's 4-step Huffman prefix exchange, LQ4 completes full confirmed QSOs in just 30&nbsp;seconds (versus 45&nbsp;seconds in FT4) with zero SNR penalty relative to FT4. Phase 5 also encompasses coordinated expansion to additional amateur bands (including 160m, 80m, and 60m) as well as extended speed profiles (LQ16, LQ2).</p>
+              <h4><span data-i18n="ROADMAP_P5_TITLE">フェーズ 5：LQ4（高速モード）の導入と拡張</span> <span class="pill pill-amber" data-i18n="ROADMAP_P5_STATUS">将来計画</span></h4>
+              <p data-i18n="ROADMAP_P5_TEXT">4-GFSK層とLQの7ステップ交換の組み合わせ：LQ4はわずか30秒でQSOを完了。</p>
             </div>
           </div>
         </div>
@@ -2088,8 +2014,8 @@
     <section id="technical" class="section">
       <div class="container">
         <div class="section-header">
-          <h2 data-i18n="TECH_TITLE">Technical Specifications &amp; Library</h2>
-          <p data-i18n="TECH_SUBTITLE">Formal academic specification, open-source reference implementations, interactive physical layer explorer, and bit-level message inspection tools.</p>
+          <h2 data-i18n="TECH_TITLE">技術仕様 & ライブラリ</h2>
+          <p data-i18n="TECH_SUBTITLE">学術論文仕様、オープンソース実装、物理層エクスプローラー、ビットレベル検証ツール。</p>
         </div>
 
         <div class="tech-details-container">
@@ -2097,12 +2023,12 @@
           <div class="tech-sub-section">
             <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: var(--radius-md); padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;">
               <div>
-                <h4 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; margin-bottom: 4px;" data-i18n="PAPER_BANNER_TITLE">Formal Specification Paper</h4>
-                <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0;" data-i18n="PAPER_BANNER_TEXT">Comprehensive paper covering physical layer modulation, variable-length Huffman prefix codes, Varicode, and protocol state machines.</p>
+                <h4 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; margin-bottom: 4px;" data-i18n="PAPER_BANNER_TITLE">公式仕様論文</h4>
+                <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0;" data-i18n="PAPER_BANNER_TEXT">涵盖物理层调制、变长霍夫曼前缀编码、Varicode 编码体系及协议有限状态机的全面技术论文。</p>
               </div>
               <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
                 <!-- NOTE: The web portal intentionally links only to arXiv (never to a local doc or PDF). The URL points to https://arxiv.org/ temporarily while preprint submission and arXiv ID assignment are pending (tracked Action Item). -->
-                <a href="https://arxiv.org/" target="_blank" class="btn btn-primary" data-i18n="PAPER_BANNER_BTN">Read Paper on arXiv &rarr;</a>
+                <a href="https://arxiv.org/" target="_blank" class="btn btn-primary" data-i18n="PAPER_BANNER_BTN">arXivで論文を読む &rarr;</a>
               </div>
             </div>
           </div>
@@ -2111,59 +2037,58 @@
           <div id="library" class="tech-sub-section">
             <div class="library-card">
               <div class="library-content">
-                <h3 data-i18n="LIBRARY_TITLE">Open-Source Reference Library (<code>lq_lib</code>) — C++20 &amp; Pure C API</h3>
-                <p data-i18n="LIBRARY_DESC">
-                  High-performance, zero-allocation C++20 and pure C99/C11 reference implementation supporting all LQ message encodings, GFSK continuous-phase audio synthesis, 2D STFT waterfall Costas synchronization, LDPC(174,91) Normalized Min-Sum codec with &gt;95% automated test coverage and parallel multi-candidate demodulation.</p>
+                <h3 data-i18n="LIBRARY_TITLE">オープンソース参照ライブラリ (lq_lib) — C++20 & C API</h3>
+                <p data-i18n="LIBRARY_DESC">動的メモリ割り当てゼロの高性能C++20および純粋C99参照実装。全LQメッセージ符号化、GFSK連続位相合成、2D STFT Costas同期、LDPC(174,91)デコーダー、テスト網羅率95%以上。</p>
                 <div class="library-badges">
                   <span class="pill pill-emerald" data-i18n="LIBRARY_BADGE_1">C++20 &amp; Pure C99 API</span>
-                  <span class="pill pill-cyan" data-i18n="LIBRARY_BADGE_2">&gt;95% Test Coverage</span>
-                  <span class="pill pill-purple" data-i18n="LIBRARY_BADGE_3">Multi-Threaded / Parallel DSP</span>
-                  <span class="pill pill-amber" data-i18n="LIBRARY_BADGE_4">MIT License</span>
+                  <span class="pill pill-cyan" data-i18n="LIBRARY_BADGE_2">&gt;95% テスト網羅率</span>
+                  <span class="pill pill-purple" data-i18n="LIBRARY_BADGE_3">マルチスレッド / 並列 DSP</span>
+                  <span class="pill pill-amber" data-i18n="LIBRARY_BADGE_4">MIT ライセンス</span>
                 </div>
               </div>
               <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <a href="https://github.com/lquesada/lq_lib" target="_blank" class="btn btn-primary" data-i18n="LIBRARY_BTN">View on GitHub &rarr;</a>
-                <a href="https://github.com/lquesada/lq_lib/issues" target="_blank" class="btn btn-secondary" data-i18n="LIBRARY_ISSUES_BTN">Report an Issue &rarr;</a>
+                <a href="https://github.com/lquesada/lq_lib" target="_blank" class="btn btn-primary" data-i18n="LIBRARY_BTN">GitHubで確認 &rarr;</a>
+                <a href="https://github.com/lquesada/lq_lib/issues" target="_blank" class="btn btn-secondary" data-i18n="LIBRARY_ISSUES_BTN">問題を報告 &rarr;</a>
               </div>
             </div>
           </div>
 
           <!-- Interactive Physical Mode Comparison -->
           <div id="comparison" class="tech-sub-section">
-            <h3 data-i18n="MODE_COMPARE_TITLE">Interactive Physical Mode Comparison</h3>
-            <p style="color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 16px;" data-i18n="MODE_COMPARE_SUBTITLE">Explore the primary weak-signal standard (<strong>LQ8</strong>) and extended modes (<strong>LQ4</strong>, <strong>LQ2</strong>, <strong>LQ16</strong>).</p>
+            <h3 data-i18n="MODE_COMPARE_TITLE">物理モードのインタラクティブ比較</h3>
+            <p style="color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 16px;" data-i18n="MODE_COMPARE_SUBTITLE">微弱信号標準（<strong>LQ8</strong>）と対話チャット（<strong>LQ4</strong>）の特性を比較。</p>
 
             <div class="mode-tabs">
-              <button class="mode-tab-btn active" id="tab_lq8" onclick="setMode('lq8')" data-i18n="TAB_LQ8"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: -1px; margin-right: 5px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>LQ8 (Standard HF · 50 Hz)</button>
-              <button class="mode-tab-btn" id="tab_lq4" onclick="setMode('lq4')" data-i18n="TAB_LQ4"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: -1px; margin-right: 5px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>LQ4 (High-Speed · 83.3 Hz)</button>
-              <button class="mode-tab-btn" id="tab_lq2" onclick="setMode('lq2')" data-i18n="TAB_LQ2"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: -1px; margin-right: 5px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>LQ2 (Ultra-Fast · 166.7 Hz)</button>
-              <button class="mode-tab-btn" id="tab_lq16" onclick="setMode('lq16')" data-i18n="TAB_LQ16"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: -1px; margin-right: 5px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>LQ16 (Slow · 25 Hz)</button>
+              <button class="mode-tab-btn active" id="tab_lq8" onclick="setMode('lq8')" data-i18n="TAB_LQ8">LQ8 (高速 QSO デジタルモード)</button>
+              <button class="mode-tab-btn" id="tab_lq4" onclick="setMode('lq4')" data-i18n="TAB_LQ4">LQ4 (High-Speed · 83.3 Hz)</button>
+              <button class="mode-tab-btn" id="tab_lq2" onclick="setMode('lq2')" data-i18n="TAB_LQ2">LQ2 (Ultra-Fast · 166.7 Hz)</button>
+              <button class="mode-tab-btn" id="tab_lq16" onclick="setMode('lq16')" data-i18n="TAB_LQ16">LQ16 (低速 · 25 Hz)</button>
             </div>
 
             <div class="mode-details-card">
               <div class="mode-specs-grid">
                 <div class="spec-box">
-                  <div class="spec-label" data-i18n="SPEC_MODULATION">Modulation</div>
+                  <div class="spec-label" data-i18n="SPEC_MODULATION">変調方式</div>
                   <div class="spec-value" id="modeMod">8-GFSK</div>
                 </div>
                 <div class="spec-box">
-                  <div class="spec-label" data-i18n="SPEC_BANDWIDTH">Bandwidth</div>
+                  <div class="spec-label" data-i18n="SPEC_BANDWIDTH">占有帯域幅</div>
                   <div class="spec-value" id="modeBw">50.0 Hz</div>
                 </div>
                 <div class="spec-box">
-                  <div class="spec-label" data-i18n="SPEC_TX_DURATION">TX Duration</div>
+                  <div class="spec-label" data-i18n="SPEC_TX_DURATION">送信時間</div>
                   <div class="spec-value" id="modeTx">12.64 s</div>
                 </div>
                 <div class="spec-box">
-                  <div class="spec-label" data-i18n="SPEC_TIME_SLOT">Time Slot</div>
+                  <div class="spec-label" data-i18n="SPEC_TIME_SLOT">タイムスロット</div>
                   <div class="spec-value" id="modeSlot">15.0 s</div>
                 </div>
                 <div class="spec-box">
-                  <div class="spec-label" data-i18n="SPEC_SENSITIVITY">Sensitivity (SNR)</div>
+                  <div class="spec-label" data-i18n="SPEC_SENSITIVITY">感度 (SNR)</div>
                   <div class="spec-value highlight" id="modeSnr">-21.0 dB</div>
                 </div>
                 <div class="spec-box">
-                  <div class="spec-label" data-i18n="SPEC_MAX_RATE">Max Contact Rate</div>
+                  <div class="spec-label" data-i18n="SPEC_MAX_RATE">最大交信レート</div>
                   <div class="spec-value highlight" id="modeRate">1.00 QSO/min</div>
                 </div>
               </div>
@@ -2183,66 +2108,66 @@
 
           <!-- Complete Bit-Level Serialization Inspector -->
           <div class="tech-sub-section">
-            <h3 data-i18n="INSPECTOR_TITLE">Complete Bit-Level Serialization Inspector (All 13 Message Types)</h3>
-            <p data-i18n="INSPECTOR_SUBTITLE">Select any structured message type to inspect its binary bitfield, packed hex, and computed CRC-14 parity.</p>
+            <h3 data-i18n="INSPECTOR_TITLE">完全ビットレベルシリアライゼーションインスペクター (全13メッセージタイプ)</h3>
+            <p data-i18n="INSPECTOR_SUBTITLE">構造化メッセージタイプを選択して、ビットフィールド、パックドHEX、CRC-14パリティを検証します。</p>
             
             <div class="inspector-card">
-              <div class="presets-category-title" data-i18n="PRESET_CAT_1">CQ Initiating Formats:</div>
+              <div class="presets-category-title" data-i18n="PRESET_CAT_1">CQ 開始フォーマット：</div>
               <div class="presets-bar">
-                <button class="preset-btn active" id="btn_p1" onclick="loadPreset(1)" data-i18n="PRESET_BTN_P1">CQ Std (Type 1)</button>
-                <button class="preset-btn" id="btn_p2" onclick="loadPreset(2)" data-i18n="PRESET_BTN_P2">CQ Non-Std 9c+Loc (Type 2)</button>
-                <button class="preset-btn" id="btn_p3" onclick="loadPreset(3)" data-i18n="PRESET_BTN_P3">CQ Non-Std 9c+Mod (Type 3)</button>
-                <button class="preset-btn" id="btn_p4" onclick="loadPreset(4)" data-i18n="PRESET_BTN_P4">CQ Non-Std 13c (Type 4)</button>
+                <button class="preset-btn active" id="btn_p1" onclick="loadPreset(1)" data-i18n="PRESET_BTN_P1">CQ 標準 (タイプ 1)</button>
+                <button class="preset-btn" id="btn_p2" onclick="loadPreset(2)" data-i18n="PRESET_BTN_P2">CQ 非標準 9文字+位置 (タイプ 2)</button>
+                <button class="preset-btn" id="btn_p3" onclick="loadPreset(3)" data-i18n="PRESET_BTN_P3">CQ 非標準 9文字+修飾 (タイプ 3)</button>
+                <button class="preset-btn" id="btn_p4" onclick="loadPreset(4)" data-i18n="PRESET_BTN_P4">CQ 非標準 13文字 (タイプ 4)</button>
               </div>
 
-              <div class="presets-category-title" data-i18n="PRESET_CAT_2">CALL Answering Formats:</div>
+              <div class="presets-category-title" data-i18n="PRESET_CAT_2">CALL 応答フォーマット：</div>
               <div class="presets-bar">
-                <button class="preset-btn" id="btn_p5" onclick="loadPreset(5)" data-i18n="PRESET_BTN_P5">CALL Std (Type 5)</button>
-                <button class="preset-btn" id="btn_p6" onclick="loadPreset(6)" data-i18n="PRESET_BTN_P6">CALL Std+Suf (Type 6)</button>
-                <button class="preset-btn" id="btn_p7" onclick="loadPreset(7)" data-i18n="PRESET_BTN_P7">CALL Non-Std (Type 7)</button>
+                <button class="preset-btn" id="btn_p5" onclick="loadPreset(5)" data-i18n="PRESET_BTN_P5">CALL 標準 (タイプ 5)</button>
+                <button class="preset-btn" id="btn_p6" onclick="loadPreset(6)" data-i18n="PRESET_BTN_P6">CALL ダブルサフィックス (タイプ 6)</button>
+                <button class="preset-btn" id="btn_p7" onclick="loadPreset(7)" data-i18n="PRESET_BTN_P7">CALL 非標準 (タイプ 7)</button>
               </div>
 
-              <div class="presets-category-title" data-i18n="PRESET_CAT_3">REPORT+73 &amp; 73 Formats:</div>
+              <div class="presets-category-title" data-i18n="PRESET_CAT_3">REPORT+73 および 73 完了フォーマット:</div>
               <div class="presets-bar">
-                <button class="preset-btn" id="btn_p8" onclick="loadPreset(8)" data-i18n="PRESET_BTN_P8">REPORT+73 Std (Type 8)</button>
-                <button class="preset-btn" id="btn_p9" onclick="loadPreset(9)" data-i18n="PRESET_BTN_P9">73 Std (Type 9)</button>
-                <button class="preset-btn" id="btn_p10" onclick="loadPreset(10)" data-i18n="PRESET_BTN_P10">73 Non-Std (Type 10)</button>
+                <button class="preset-btn" id="btn_p8" onclick="loadPreset(8)" data-i18n="PRESET_BTN_P8">REPORT+73 標準 (タイプ 8)</button>
+                <button class="preset-btn" id="btn_p9" onclick="loadPreset(9)" data-i18n="PRESET_BTN_P9">73 標準 (タイプ 9)</button>
+                <button class="preset-btn" id="btn_p10" onclick="loadPreset(10)" data-i18n="PRESET_BTN_P10">73 非標準 (タイプ 10)</button>
               </div>
 
-              <div class="presets-category-title" data-i18n="PRESET_CAT_4">High-Rate Pileup Formats:</div>
+              <div class="presets-category-title" data-i18n="PRESET_CAT_4">高速パイルアップフォーマット:</div>
               <div class="presets-bar">
-                <button class="preset-btn" id="btn_p11" onclick="loadPreset(11)" data-i18n="PRESET_BTN_P11">MULTI-REPORT+73 (Type 11)</button>
-                <button class="preset-btn" id="btn_p12" onclick="loadPreset(12)" data-i18n="PRESET_BTN_P12">MULTI-73 (Type 12)</button>
+                <button class="preset-btn" id="btn_p11" onclick="loadPreset(11)" data-i18n="PRESET_BTN_P11">MULTI-REPORT+73 (タイプ 11)</button>
+                <button class="preset-btn" id="btn_p12" onclick="loadPreset(12)" data-i18n="PRESET_BTN_P12">MULTI-73 (タイプ 12)</button>
               </div>
 
-              <div class="presets-category-title" data-i18n="PRESET_CAT_5">Free Text &amp; Protocol Expansion:</div>
+              <div class="presets-category-title" data-i18n="PRESET_CAT_5">フリーテキスト & プロトコル拡張:</div>
               <div class="presets-bar">
-                <button class="preset-btn" id="btn_p13" onclick="loadPreset(13)" data-i18n="PRESET_BTN_P13">Free Text (Type 13)</button>
+                <button class="preset-btn" id="btn_p13" onclick="loadPreset(13)" data-i18n="PRESET_BTN_P13">フリーテキスト (タイプ 13)</button>
               </div>
 
               <div class="inspector-display">
                 <div class="display-row">
-                  <span class="display-label" data-i18n="INSP_LBL_MSG">Message String:</span>
+                  <span class="display-label" data-i18n="INSP_LBL_MSG">メッセージ文字列：</span>
                   <span class="display-val radio-val" id="inspText">CQ DX HB9IPH JN47</span>
                 </div>
                 <div class="display-row">
-                  <span class="display-label" data-i18n="INSP_LBL_FORMAT">Format Type:</span>
+                  <span class="display-label" data-i18n="INSP_LBL_FORMAT">フォーマット形式：</span>
                   <span class="display-val" id="inspType">CQ Std (Type 1 — Standard ITU Callsign + Suffix + Modifier + Locator)</span>
                 </div>
                 <div class="display-row">
-                  <span class="display-label" data-i18n="INSP_LBL_PREFIX">Huffman Prefix:</span>
+                  <span class="display-label" data-i18n="INSP_LBL_PREFIX">ハフマン接頭辞：</span>
                   <span class="display-val radio-val" id="inspPrefix">0000000000 (10 bits)</span>
                 </div>
                 <div class="display-row">
-                  <span class="display-label" data-i18n="INSP_LBL_FIELDS">Field Breakdown:</span>
+                  <span class="display-label" data-i18n="INSP_LBL_FIELDS">フィールド構成：</span>
                   <span class="display-val" id="inspFields">Callsign HB9IPH: 28b (129,895,118) · Suffix: 1b (0) · Modifier DX: 20b (156,648) · Locator JN47: 15b (17,547) · Zero Pad: 3b</span>
                 </div>
                 <div class="display-row">
-                  <span class="display-label" data-i18n="INSP_LBL_HEX">Packed Hex (77b):</span>
+                  <span class="display-label" data-i18n="INSP_LBL_HEX">格納 Hex (77bit)：</span>
                   <span class="display-val hex radio-val" id="inspHex">00 1E F8 2B 38 4C 7D 11 22 C0</span>
                 </div>
                 <div class="display-row">
-                  <span class="display-label" data-i18n="INSP_LBL_CRC">CRC-14 Parity (0x2757):</span>
+                  <span class="display-label" data-i18n="INSP_LBL_CRC">CRC-14 パリティ：</span>
                   <span class="display-val crc radio-val" id="inspCrc">0x1606</span>
                 </div>
               </div>
@@ -2251,10 +2176,10 @@
 
           <!-- Modulation & Waterfall Spectrogram -->
           <div class="tech-sub-section">
-            <h3 data-i18n="WATERFALL_TITLE">Physical Channel Tone Modulation</h3>
-            <p data-i18n="WATERFALL_TEXT">Continuous-phase 8-GFSK frame structure with Costas synchronization arrays and LDPC(174,91) coded data symbols in 50.0&nbsp;Hz bandwidth.</p>
+            <h3 data-i18n="WATERFALL_TITLE">物理チャネルのトーン変調</h3>
+            <p data-i18n="WATERFALL_TEXT">50.0&nbsp;Hz帯域内のCostas同期アレイとLDPC(174,91)符号化データシンボルを含む連続位相8-GFSKフレーム構造。</p>
             <div class="waterfall-img-wrap">
-              <img src="tones_waterfall_lq8.png" alt="LQ8 Physical Frame Waterfall Spectrogram" data-i18n="WATERFALL_IMG_ALT" loading="lazy">
+              <img src="../tones_waterfall_lq8.png" alt="LQ8 物理フレーム ウォーターフォール スペクトログラム" data-i18n="WATERFALL_IMG_ALT" loading="lazy">
             </div>
           </div>
         </div>
@@ -2265,8 +2190,8 @@
     <section id="community" class="section">
       <div class="container">
         <div class="section-header">
-          <h2 data-i18n="COMMUNITY_TITLE">Community Support, Clubs &amp; DXpeditions</h2>
-          <p data-i18n="COMMUNITY_SUBTITLE">Recognized and supported by amateur radio clubs, DXpeditions, awards programs, and operators worldwide.</p>
+          <h2 data-i18n="COMMUNITY_TITLE">コミュニティ支援・クラブ・DXペディション</h2>
+          <p data-i18n="COMMUNITY_SUBTITLE">世界中のアマチュア無線クラブ、DXペディション、アワードプログラム、運用者に認知・支持されています。</p>
         </div>
         <div style="background: var(--surface-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 36px 32px; margin-bottom: 24px;">
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 32px;">
@@ -2277,18 +2202,16 @@
                 <div style="width: 36px; height: 36px; border-radius: 50%; background: rgba(56, 189, 248, 0.15); display: flex; align-items: center; justify-content: center; color: var(--cyan); flex-shrink: 0;">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                 </div>
-                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin: 0;" data-i18n="COMMUNITY_CLUBS_TITLE">Clubs &amp; Organizations</h4>
+                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin: 0;" data-i18n="COMMUNITY_CLUBS_TITLE">クラブ・各種団体</h4>
               </div>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 0 0 16px 0;" data-i18n="COMMUNITY_CLUBS_DESC">
-                Radio clubs, contesting groups, and emergency communications teams experimenting with and adopting LQ digital modes.
-              </p>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 0 0 16px 0;" data-i18n="COMMUNITY_CLUBS_DESC">LQデジタルモードの実験と導入を進める無線クラブ、コンテストグループ、非常通信チーム。</p>
               <!-- Clubs Directory List -->
               <div style="margin-top: auto; background: rgba(0, 0, 0, 0.25); border: 1px dashed rgba(56, 189, 248, 0.25); border-radius: var(--radius-sm); padding: 14px 16px;">
                 <ul id="community-clubs-list" style="list-style: none; padding: 0; margin: 0; font-size: 0.88rem;">
                   <!-- Add club entries here: <li style="padding: 4px 0;"><a href="..." target="_blank" style="color: var(--text-primary); font-weight: 600;">Club Name</a> (Callsign) — Description</li> -->
                   <li style="color: var(--text-tertiary); font-style: italic; display: flex; align-items: center; gap: 8px;">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity: 0.7; flex-shrink: 0;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                    <span data-i18n="COMMUNITY_EMPTY_NOTE">No entries listed yet — submit yours below!</span>
+                    <span data-i18n="COMMUNITY_EMPTY_NOTE">掲載エントリーはまだありません — 下記フォームよりご登録ください！</span>
                   </li>
                 </ul>
               </div>
@@ -2300,18 +2223,16 @@
                 <div style="width: 36px; height: 36px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); display: flex; align-items: center; justify-content: center; color: var(--emerald); flex-shrink: 0;">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
                 </div>
-                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin: 0;" data-i18n="COMMUNITY_DX_TITLE">DXpeditions &amp; Activations</h4>
+                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin: 0;" data-i18n="COMMUNITY_DX_TITLE">DXペディション・移動運用</h4>
               </div>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 0 0 16px 0;" data-i18n="COMMUNITY_DX_DESC">
-                DXpeditions, IOTA, SOTA, and POTA operators leveraging high-throughput multi-station response frames to clear pileups rapidly.
-              </p>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 0 0 16px 0;" data-i18n="COMMUNITY_DX_DESC">パイルアップを迅速に捌くマルチ局応答フレームを活用するDXペディション、IOTA、SOTA、POTA運用者。</p>
               <!-- DXpeditions Directory List -->
               <div style="margin-top: auto; background: rgba(0, 0, 0, 0.25); border: 1px dashed rgba(16, 185, 129, 0.25); border-radius: var(--radius-sm); padding: 14px 16px;">
                 <ul id="community-dx-list" style="list-style: none; padding: 0; margin: 0; font-size: 0.88rem;">
                   <!-- Add DXpedition entries here: <li style="padding: 4px 0;"><a href="..." target="_blank" style="color: var(--text-primary); font-weight: 600;">DXpedition / Activation</a> — Callsign, Grid/Location</li> -->
                   <li style="color: var(--text-tertiary); font-style: italic; display: flex; align-items: center; gap: 8px;">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity: 0.7; flex-shrink: 0;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                    <span data-i18n="COMMUNITY_EMPTY_NOTE">No entries listed yet — submit yours below!</span>
+                    <span data-i18n="COMMUNITY_EMPTY_NOTE">掲載エントリーはまだありません — 下記フォームよりご登録ください！</span>
                   </li>
                 </ul>
               </div>
@@ -2323,18 +2244,16 @@
                 <div style="width: 36px; height: 36px; border-radius: 50%; background: rgba(168, 85, 247, 0.15); display: flex; align-items: center; justify-content: center; color: #c084fc; flex-shrink: 0;">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
                 </div>
-                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin: 0;" data-i18n="COMMUNITY_AWARDS_TITLE">Operators, QRZ &amp; Awards</h4>
+                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin: 0;" data-i18n="COMMUNITY_AWARDS_TITLE">運用局・QRZ・アワード</h4>
               </div>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 0 0 16px 0;" data-i18n="COMMUNITY_AWARDS_DESC">
-                Individual radio amateurs featuring LQ8 on their QRZ.com profiles, club rosters, and participating in award tracking.
-              </p>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 0 0 16px 0;" data-i18n="COMMUNITY_AWARDS_DESC">QRZ.comプロフィールにLQ8を掲載しているアマチュア無線家、クラブ名簿、アワード参加者。</p>
               <!-- Operators Directory List -->
               <div style="margin-top: auto; background: rgba(0, 0, 0, 0.25); border: 1px dashed rgba(168, 85, 247, 0.25); border-radius: var(--radius-sm); padding: 14px 16px;">
                 <ul id="community-awards-list" style="list-style: none; padding: 0; margin: 0; font-size: 0.88rem;">
                   <!-- Add operator/award entries here: <li style="padding: 4px 0;"><a href="..." target="_blank" style="color: var(--text-primary); font-weight: 600;">Callsign</a> — Name, Country / Program</li> -->
                   <li style="color: var(--text-tertiary); font-style: italic; display: flex; align-items: center; gap: 8px;">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity: 0.7; flex-shrink: 0;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                    <span data-i18n="COMMUNITY_EMPTY_NOTE">No entries listed yet — submit yours below!</span>
+                    <span data-i18n="COMMUNITY_EMPTY_NOTE">掲載エントリーはまだありません — 下記フォームよりご登録ください！</span>
                   </li>
                 </ul>
               </div>
@@ -2345,22 +2264,12 @@
           <!-- Contact / Get Listed Banner -->
           <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12) 0%, rgba(168, 85, 247, 0.1) 100%); border: 1px solid rgba(56, 189, 248, 0.35); border-radius: var(--radius-md); padding: 24px 28px; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;">
             <div style="max-width: 650px;">
-              <h4 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 800; color: var(--text-primary); margin-bottom: 6px;" data-i18n="COMMUNITY_FORM_TITLE">
-                Get Listed or Contact Us
-              </h4>
-              <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin: 0;" data-i18n="COMMUNITY_FORM_DESC">
-                Are you a club, DXpedition organizer, software developer, award manager, or ham who includes LQ in your QRZ bio? Reach out via our contact form to be featured here or to get in touch with the project team. To report bugs or submit feature requests, visit our GitHub Issues tracker.
-              </p>
+              <h4 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 800; color: var(--text-primary); margin-bottom: 6px;" data-i18n="COMMUNITY_FORM_TITLE">掲載希望・お問い合わせ</h4>
+              <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin: 0;" data-i18n="COMMUNITY_FORM_DESC">クラブ、DXペディション主催者、QRZにLQを掲載している運用者の皆様はコンタクトフォームからご連絡ください。不具合の報告や要望はGitHub Issuesまで。</p>
             </div>
             <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
-              <a href="https://forms.gle/nFJ6mLHqiqie2cMbA" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; white-space: nowrap;" data-i18n="COMMUNITY_FORM_BTN">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                <span>Contact / Submit Info &rarr;</span>
-              </a>
-              <a href="https://github.com/lquesada/lq_lib/issues" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; white-space: nowrap;" data-i18n="COMMUNITY_ISSUES_BTN">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                <span>Report an Issue (GitHub) &rarr;</span>
-              </a>
+              <a href="https://forms.gle/nFJ6mLHqiqie2cMbA" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; white-space: nowrap;" data-i18n="COMMUNITY_FORM_BTN">お問い合わせ / 情報送信 &rarr;</a>
+              <a href="https://github.com/lquesada/lq_lib/issues" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; white-space: nowrap;" data-i18n="COMMUNITY_ISSUES_BTN">問題を報告 (GitHub) &rarr;</a>
             </div>
           </div>
 
@@ -2374,42 +2283,38 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col">
-          <h5 data-i18n="FOOTER_ABOUT_TITLE">The LQ Digital Mode Family</h5>
-          <p style="font-size: 0.86rem; color: var(--text-secondary); line-height: 1.55;" data-i18n="FOOTER_ABOUT_TEXT">
-            Next-generation weak-signal digital mode family designed for high-efficiency amateur radio communication on HF, VHF, and UHF.
-          </p>
+          <h5 data-i18n="FOOTER_ABOUT_TITLE">LQ デジタル通信モードファミリー</h5>
+          <p style="font-size: 0.86rem; color: var(--text-secondary); line-height: 1.55;" data-i18n="FOOTER_ABOUT_TEXT">HF、VHF、UHF帯での高効率微弱信号アマチュア無線通信のために設計された次世代デジタルモードファミリー。</p>
         </div>
 
         <div class="footer-col">
-          <h5 data-i18n="FOOTER_ECOSYSTEM_TITLE">Ecosystem & Software</h5>
+          <h5 data-i18n="FOOTER_ECOSYSTEM_TITLE">エコシステム & ソフトウェア</h5>
           <ul>
-            <li><a href="https://qft8.com" target="_blank" data-i18n="FOOTER_LINK_QFT8">qFT8 for Android</a></li>
-            <li><a href="https://t.me/lq8mode" target="_blank" data-i18n="FOOTER_LINK_TELEGRAM">Telegram Group</a></li>
-            <li><a href="https://www.reddit.com/r/LQ8" target="_blank" data-i18n="FOOTER_LINK_REDDIT">r/LQ8 Subreddit</a></li>
-            <li><a href="https://groups.google.com/g/lq8-news" target="_blank" data-i18n="FOOTER_LINK_MAILING">LQ8 News (Mailing List)</a></li>
-            <li><a href="#adif" data-i18n="FOOTER_LINK_ADIF">ADIF Log Standard</a></li>
-            <li><a href="https://github.com/lquesada/lq_lib" target="_blank" data-i18n="FOOTER_LINK_GITHUB">lq_lib GitHub Repository</a></li>
-            <li><a href="https://github.com/lquesada/lq_lib/issues" target="_blank" data-i18n="FOOTER_LINK_ISSUES">Report an Issue (GitHub Issues)</a></li>
+            <li><a href="https://qft8.com" target="_blank" data-i18n="FOOTER_LINK_QFT8">Android向け qFT8</a></li>
+            <li><a href="https://t.me/lq8mode" target="_blank" data-i18n="FOOTER_LINK_TELEGRAM">Telegram グループ</a></li>
+            <li><a href="https://www.reddit.com/r/LQ8" target="_blank" data-i18n="FOOTER_LINK_REDDIT">r/LQ8 サブレディット</a></li>
+            <li><a href="https://groups.google.com/g/lq8-news" target="_blank" data-i18n="FOOTER_LINK_MAILING">LQ8 ニュース（メーリングリスト）</a></li>
+            <li><a href="#adif" data-i18n="FOOTER_LINK_ADIF">ADIF ログ規格</a></li>
+            <li><a href="https://github.com/lquesada/lq_lib" target="_blank" data-i18n="FOOTER_LINK_GITHUB">lq_lib GitHub リポジトリ</a></li>
+            <li><a href="https://github.com/lquesada/lq_lib/issues" target="_blank" data-i18n="FOOTER_LINK_ISSUES">問題を報告 (GitHub Issues)</a></li>
             <!-- NOTE: The web portal intentionally links only to arXiv (never to a local doc or PDF). The URL points to https://arxiv.org/ temporarily while preprint submission and arXiv ID assignment are pending (tracked Action Item). -->
-            <li><a href="https://arxiv.org/" target="_blank" data-i18n="FOOTER_LINK_PAPER">Specification Paper (arXiv)</a></li>
+            <li><a href="https://arxiv.org/" target="_blank" data-i18n="FOOTER_LINK_PAPER">仕様論文 (arXiv)</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
-          <h5 data-i18n="FOOTER_AUTHOR_TITLE">Author & Contact</h5>
+          <h5 data-i18n="FOOTER_AUTHOR_TITLE">開発者 & 連絡先</h5>
           <ul>
             <li><a href="https://luisquesada.com" target="_blank" data-i18n="FOOTER_LINK_AUTHOR">Luis Quesada (HB9IPH)</a></li>
-            <li><a href="https://www.linkedin.com/in/luisquesadatorres/" target="_blank" data-i18n="FOOTER_LINK_LINKEDIN">LinkedIn Profile</a></li>
+            <li><a href="https://www.linkedin.com/in/luisquesadatorres/" target="_blank" data-i18n="FOOTER_LINK_LINKEDIN">LinkedIn プロフィール</a></li>
             <li><a href="https://www.qrz.com/db/HB9IPH" target="_blank" data-i18n="FOOTER_LINK_QRZ">QRZ: HB9IPH</a></li>
-            <li><a href="https://forms.gle/nFJ6mLHqiqie2cMbA" target="_blank" data-i18n="FOOTER_LINK_CONTACT">Contact Form &amp; Community Listing</a></li>
+            <li><a href="https://forms.gle/nFJ6mLHqiqie2cMbA" target="_blank" data-i18n="FOOTER_LINK_CONTACT">お問い合わせフォーム＆コミュニティ一覧</a></li>
           </ul>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <div data-i18n="FOOTER_COPYRIGHT">
-          &copy; 2026 Luis Quesada (HB9IPH) · Released under the open-source MIT License.
-        </div>
+        <div data-i18n="FOOTER_COPYRIGHT">&copy; 2026 Luis Quesada (HB9IPH) &middot; オープンソース MIT ライセンスの下で公開。</div>
         <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
           <button onclick="shareLQModes()" class="footer-share-btn" aria-label="Share lq8.org">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -2419,11 +2324,9 @@
               <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
               <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
             </svg>
-            <span data-i18n="COMMUNITY_SHARE_BTN">Share lq8.org</span>
+            <span data-i18n="COMMUNITY_SHARE_BTN">lq8.org を共有する</span>
           </button>
-          <div data-i18n="FOOTER_PORTAL">
-            Official Portal: <a href="https://lq8.org">lq8.org</a>
-          </div>
+          <div data-i18n="FOOTER_PORTAL">公式ポータル: <a href="https://lq8.org">lq8.org</a></div>
         </div>
       </div>
     </div>
@@ -2437,10 +2340,8 @@
           <polyline points="20 6 9 17 4 12"/>
         </svg>
       </div>
-      <h3 id="share-modal-title" class="share-modal-title" data-i18n="MODAL_SHARE_TITLE">Link Copied to Clipboard!</h3>
-      <p class="share-modal-desc" data-i18n="MODAL_SHARE_DESC">
-        The link has been copied to your clipboard. Paste and share it with fellow radio amateurs, developer groups, and on forums!
-      </p>
+      <h3 id="share-modal-title" class="share-modal-title" data-i18n="MODAL_SHARE_TITLE">リンクをクリップボードにコピーしました！</h3>
+      <p class="share-modal-desc" data-i18n="MODAL_SHARE_DESC">リンクがコピーされました。アマチュア無線の仲間やフォーラムで共有してください！</p>
       <div class="share-modal-link-box">
         <span id="share-modal-url">https://lq8.org</span>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; opacity:0.8;">

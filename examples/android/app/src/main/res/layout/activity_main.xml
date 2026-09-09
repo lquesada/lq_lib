@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="@color/bg_dark"
+    android:padding="8dp">
+
+    <!-- Real-Time Spectrum & Peak Meter View -->
+    <com.qft8.lq.SpectrumPeaksView
+        android:id="@+id/spectrumPeaksView"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginBottom="2dp" />
+
+    <!-- Scrolling Waterfall Spectrogram View -->
+    <com.qft8.lq.WaterfallView
+        android:id="@+id/waterfallView"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Mode Selector Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="8dp">
+
+        <Button
+            android:id="@+id/btnModeLq8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/mode_lq8"
+            android:textSize="12sp"
+            android:textColor="@color/text_primary"
+            android:textStyle="bold"
+            android:backgroundTint="@color/primary"
+            android:layout_marginEnd="4dp" />
+
+        <Button
+            android:id="@+id/btnModeLq4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/mode_lq4"
+            android:textSize="12sp"
+            android:textColor="@color/text_primary"
+            android:textStyle="bold"
+            android:backgroundTint="@color/surface_dark"
+            android:layout_marginEnd="4dp" />
+
+        <Button
+            android:id="@+id/btnModeLq2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/mode_lq2"
+            android:textSize="12sp"
+            android:textColor="@color/text_primary"
+            android:textStyle="bold"
+            android:backgroundTint="@color/surface_dark"
+            android:layout_marginEnd="4dp" />
+
+        <Button
+            android:id="@+id/btnModeLq16"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/mode_lq16"
+            android:textSize="12sp"
+            android:textColor="@color/text_primary"
+            android:textStyle="bold"
+            android:backgroundTint="@color/surface_dark" />
+    </LinearLayout>
+
+
+    <!-- Station Controls & Action Buttons Row (2-Column Layout) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="6dp">
+
+        <!-- Left Column: Callsign/Grid, Target Call -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="8dp">
+
+            <!-- My Callsign & Grid Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <EditText
+                    android:id="@+id/editMyCall"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_weight="1"
+                    android:hint="My Call (e.g. HB9IPH)"
+                    android:inputType="textCapCharacters"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_secondary"
+                    android:textSize="14sp"
+                    android:layout_marginEnd="4dp" />
+
+                <EditText
+                    android:id="@+id/editMyGrid"
+                    android:layout_width="76dp"
+                    android:layout_height="52dp"
+                    android:hint="Grid"
+                    android:inputType="textCapCharacters"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_secondary"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- Target DX Callsign Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/editTargetCall"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:hint="Target DX Call (e.g. YO1YO)"
+                    android:inputType="textCapCharacters"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_secondary"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Right Column: Vertically Aligned Actions (CQ, CALL, AUTO ON) -->
+        <LinearLayout
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical">
+
+            <Button
+                android:id="@+id/btnCallCq"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="68dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="CQ"
+                android:textSize="15sp"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:backgroundTint="@color/cq_red"
+                android:layout_marginBottom="8dp" />
+
+            <Button
+                android:id="@+id/btnCallTarget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="68dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="CALL"
+                android:textSize="15sp"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:backgroundTint="@color/call_blue"
+                android:layout_marginBottom="8dp" />
+
+            <Button
+                android:id="@+id/btnToggleAuto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="68dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="AUTO: ON"
+                android:textSize="14sp"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:backgroundTint="@color/rx_color" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Status Text -->
+    <TextView
+        android:id="@+id/txtStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/status_listening"
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Decoded Activity Log -->
+    <ScrollView
+        android:id="@+id/scrollViewLog"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/surface_dark"
+        android:padding="6dp">
+
+        <TextView
+            android:id="@+id/txtLog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_primary"
+            android:fontFamily="monospace"
+            android:textSize="14sp"
+            android:lineSpacingExtra="3dp"
+            android:text="" />
+    </ScrollView>
+
+</LinearLayout>

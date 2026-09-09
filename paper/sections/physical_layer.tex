@@ -1,0 +1,114 @@
+% =============================================================================
+% The LQ Digital Mode Family — Reference Implementation (lq_lib)
+%
+% Author:  Luis Quesada (HB9IPH)
+% Web:     https://luisquesada.com
+% Portal:  https://lquesada.github.io/lq_lib/
+% GitHub:  https://github.com/lquesada/lq_lib
+% App:     qFT8 — Portable Amateur Radio for Android (https://qft8.com)
+%
+% License: MIT License (https://github.com/lquesada/lq_lib/blob/main/LICENSE)
+%
+% Copyright (c) 2026 Luis Quesada (HB9IPH)
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in
+% all copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+% =============================================================================
+
+% ===========================================================================
+%  Section V: Physical Layer (ALLOCATION: PAGE 6)
+%  Must fit entirely on Page 6 along with Figure 1 (Waterfall) & Table 5 (CRC-14).
+%  Terminates with \newpage.
+% ===========================================================================
+
+\section{Physical Layer}
+\label{sec:phy}
+
+To ensure equal weak-signal sensitivity ($-21.0$\,dB SNR in 2500\,Hz bandwidth) and transceiver compatibility, \LQ8 deliberately adopts the core physical-layer modulation and error-correction coding of the FT8 protocol~\cite{ft8}, engineered by Steve Franke (K9AN) and Joe Taylor (K1JT).
+
+\subsection{Channel Coding: CRC-14 and Systematic LDPC(174,91)}
+\label{sec:crc14}
+\label{sec:ldpc}
+
+Link-layer encapsulation preserves FT8's channel-coding structure~\cite{ft8}:
+(1)~\textbf{77-Bit Payload} from the application layer;
+(2)~\textbf{14-Bit CRC Checksum} ($G_{\text{CRC14}}(x)$, Table~\ref{tab:crc14_params}) evaluated by shifting the 77-bit payload MSB-first into a 14-bit LFSR using FT8's generator polynomial \texttt{0x2757} followed by 14 trailing zeros, appending remainder ($d_{77}\dots d_{90}$) to form a 91-bit systematic block ($P_{\text{false}} \le 2^{-14} \approx 6.1\times 10^{-5}$); 5 zero bits pad to a 12-byte boundary; and
+(3)~\textbf{Systematic LDPC(174,91) FEC} utilizing the identical Gallager generator matrix $G_{83\times 91}$ (Table~\ref{tab:ldpc_g})~\cite{ft8,gallager} producing 83 parity bits ($R \approx 0.523$, 174 codeword bits).
+
+Systematic codeword $\mathbf{c} \in \mathbb{F}_2^{174}$ sets $c_j = d_j$ for $0 \le j < 91$. Parity bits are:
+\begin{equation}
+  c_{91+i} = \bigoplus_{j=0}^{90} G_{i, j} \cdot d_j, \quad 0 \le i < 83,
+\end{equation}
+where $G_{83 \times 91}$ is the Gallager matrix in Table~\ref{tab:ldpc_g} (23 hex digits/row, 91 MSB-aligned bits; bit 0 of digit 23 is zero pad). CRC-14 parameters are listed in Table~\ref{tab:crc14_params}.
+
+\begin{table}[htbp]
+\centering
+\vspace{-3pt}
+\caption{CRC-14 channel coding parameter specification.}
+\label{tab:crc14_params}
+\resizebox{\columnwidth}{!}{%
+\renewcommand{\arraystretch}{0.92}%
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Parameter} & \textbf{Value / Specification} \\
+\midrule
+Generator Polynomial $G_{\text{CRC14}}(x)$ & $x^{14} + x^{13} + x^{10} + x^9 + x^8 + x^6 + x^4 + x^2 + x + 1$ \\
+Hex / LFSR Representation & \texttt{0x2757} (14-bit: \texttt{10011101010111}$_2$; 15-bit monic: \texttt{0x6757}) \\
+Initial State / Final XOR & \texttt{0x0000} (14 zeros) / \texttt{0x0000} (uninverted) \\
+Input / Output Reflection & \texttt{False} / \texttt{False} (MSB-first evaluation \& output) \\
+Bit Framing \& Padding & 77 payload bits + 14 CRC bits = 91 systematic bits ($+5$ pad $\to 96$) \\
+Undetected Error Probability & $P_{\text{false}} \le 2^{-14} \approx 6.10 \times 10^{-5}$ \\
+Invalid Checksum Sentinel & Remainder \texttt{0x0000} rejected as corrupt \\
+Target FEC Input Block & Feeds LDPC$(174,91)$ generator $G_{83\times 91}$ \\
+\bottomrule
+\end{tabular}%
+}
+\vspace{-3pt}
+\end{table}
+
+\subsection{LQ8 Physical Transport \& UTC Slot Framing}
+\label{sec:transport_profiles}
+\label{sec:utc_sequence}
+
+\LQ8 adopts FT8's continuous-phase 8-GFSK transport parameters~\cite{ft8}: 79 symbols in 12.64\,s within 15.0\,s UTC slots ($R_s = 6.25$\,Bd, $\Delta f = 6.25$\,Hz, 50.0\,Hz footprint, $-21.0$\,dB SNR sensitivity, Figure~\ref{fig:waterfall_lq8}). Transmissions occupy 3.0\,kHz USB segments with multiple concurrent subcarrier offsets.
+
+For timestamp $t_{\text{UTC}}$, slot index and parity $s \in \{0, 1\}$ evaluate as $k = \lfloor t_{\text{UTC}} / T_{\text{slot}} \rfloor$ and $s = k \bmod 2$ (Even :00/:30 vs.\ Odd :15/:45). Guard interval $T_{\text{guard}} = T_{\text{slot}} - T_{\text{tx}}$ (2.36\,s in \LQ8, 2.46\,s in \LQ4) provides propagation and T/R turnaround margin; stations alternate parity across cycles.
+
+\subsection{Modulation Mapping \& Continuous-Phase Synthesis}
+
+The 3-bit Gray code maps channel bit triplets to tones: \texttt{000}$\to$0, \texttt{001}$\to$1, \texttt{011}$\to$2, \texttt{010}$\to$3, \texttt{110}$\to$4, \texttt{100}$\to$5, \texttt{101}$\to$6, and \texttt{111}$\to$7. Continuous-phase audio synthesis $s(t) = A(t) \cos(\phi(t))$ at $f_s = 12{,}000$\,Hz employs half-symbol raised-cosine envelope shaping ($T_{\text{ramp}} = T_s / 2 = 80.0$\,ms in \LQ8, $160.0$\,ms in \LQ16) and Gaussian frequency trajectories ($BT = 2.0$):
+{\setlength{\abovedisplayskip}{2pt plus 1.5pt minus 1.0pt}\setlength{\belowdisplayskip}{2pt plus 1.5pt minus 1.0pt}
+\begin{equation}
+  \phi(t) = \phi_0 + 2\pi \int_0^t \left( f_0 + \sum_{k=0}^{N_{\text{sym}}-1} a_k \cdot \Delta f \cdot g(\tau - k T_s) \right) d\tau,
+\end{equation}
+where tone index $a_k \in \{0, 1, \dots, M-1\}$ is uncentered with tone 0 at base subcarrier $f_0$ ($\Delta f = 6.25$\,Hz in \LQ8). Frequency pulse $g(t)$ is truncated to duration $L = 3 T_s$ ($t \in [-1.5 T_s, +1.5 T_s]$):
+\begin{equation}
+  g(t) = \frac{1}{2 T_s} \left[ \operatorname{erf}\left( 2\pi B \frac{t + T_s/2}{\sqrt{2 \ln 2}} \right) - \operatorname{erf}\left( 2\pi B \frac{t - T_s/2}{\sqrt{2 \ln 2}} \right) \right].
+\end{equation}
+}
+
+\subsection{Costas Synchronization \& DSP Pipeline}
+\label{sec:dsp_pipeline}
+
+While \LQ8 shares FT8's modulation, CRC-14, and LDPC codes, it deliberately departs in its synchronization structure to achieve physical cross-protocol isolation. Rather than FT8's sync sequence ($[3, 1, 4, 0, 6, 5, 2]$), 8-GFSK modes (\LQ8 and \LQ16) synchronize via three 7-symbol Costas arrays~\cite{costas} ($C_7 = [2, 5, 6, 1, 3, 0, 4]$) at symbols $0\text{--}6$, $36\text{--}42$, and $72\text{--}78$. The 174-bit systematic LDPC codeword is partitioned without bit interleaving into two 87-bit data blocks: Data Block~1 (symbols $7\text{--}35$, $29 \times 3 = 87$ bits) carries codeword bits $c_0\dots c_{86}$, while Data Block~2 (symbols $43\text{--}71$) carries $c_{87}\dots c_{173}$. Each symbol maps 3 consecutive bits MSB-first via the 3-bit Gray code. Preambles exhibit ideal autocorrelation with peak sidelobe $\le 1$ and $\le 1$ coincidence hit against FT8, preventing false decodes.
+
+Receiver DSP executes the multi-pass decoding paradigm from WSJT-X~\cite{ft8,wsjtx}: sliding STFT (Hann window, 4-hop oversampling) generating spectral density $S[t_i, f_j]$, 2D matched filter detection across $\pm 0.5$\,s timing windows, 3-point parabolic frequency refinement ($|\Delta f_{\text{err}}| < 0.1$\,Hz), soft LLR extraction, log-domain LDPC belief-propagation decoding (up to 25 passes, terminating early upon $\mathbf{H}\cdot\hat{\mathbf{c}}^T = \mathbf{0}$ and CRC-14 verification), and time-frequency candidate subtraction to decode weaker signals.
+
+\input{tables/ldpc_table}
+
+\pagebreak

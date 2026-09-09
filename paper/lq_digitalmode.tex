@@ -1,0 +1,258 @@
+% =============================================================================
+% The LQ Digital Mode Family — Reference Implementation (lq_lib)
+%
+% Author:  Luis Quesada (HB9IPH)
+% Web:     https://luisquesada.com
+% Portal:  https://lquesada.github.io/lq_lib/
+% GitHub:  https://github.com/lquesada/lq_lib
+% App:     qFT8 — Portable Amateur Radio for Android (https://qft8.com)
+%
+% License: MIT License (https://github.com/lquesada/lq_lib/blob/main/LICENSE)
+%
+% Copyright (c) 2026 Luis Quesada (HB9IPH)
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in
+% all copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+% =============================================================================
+
+% ===========================================================================
+%  The LQ Digital Mode Family — Reference Implementation (lq_lib)
+%  Amateur Radio Digital Mode Specification v1.0
+%
+%  Main document — IEEE Conference Proceedings Style (Two-Column)
+% ===========================================================================
+\documentclass[10pt,twocolumn]{article}
+
+% ---- Typography & Fonts ---------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}                   % Classic Times Roman (IEEE Style)
+\usepackage[scaled=0.92]{helvet}        % Clean Helvetica for sans
+\usepackage{courier}                    % Fixed-width Courier
+\usepackage{microtype}                  % Optimal kerning and character protrusion
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{trees,positioning,arrows.meta,calc}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf,skip=5pt}
+\captionsetup[table]{skip=5pt}
+\captionsetup[figure]{skip=5pt}
+\usepackage{geometry}
+\geometry{a4paper, margin=1.8cm, top=2.0cm, bottom=2.0cm, headheight=18pt, columnsep=0.65cm}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{dblfloatfix}                 % Proper bottom/top placement of double-column floats
+\usepackage{environ}
+\usepackage{cuted}
+\usepackage{accsupp}                   % Anti-bot PDF text layer obfuscation
+\usepackage{balance}                   % Balanced two-column bibliography on final page
+
+% ---- IEEE Conference Spacing & Indentation --------------------------------
+\setlength{\parindent}{1.0em}
+\setlength{\parskip}{0pt plus 2.5pt minus 1.0pt}
+\setlist{topsep=2.5pt plus 1.5pt minus 1.0pt, itemsep=1.5pt plus 1.2pt minus 0.8pt, partopsep=0pt, parsep=0pt, leftmargin=1.2em}
+\AtBeginDocument{%
+  \setlength{\abovedisplayskip}{3.5pt plus 2.5pt minus 1.5pt}%
+  \setlength{\belowdisplayskip}{3.5pt plus 2.5pt minus 1.5pt}%
+  \setlength{\abovedisplayshortskip}{1.5pt plus 1.5pt minus 1.0pt}%
+  \setlength{\belowdisplayshortskip}{2.5pt plus 1.5pt minus 1.0pt}%
+}
+
+% ---- Color Palette --------------------------------------------------------
+\definecolor{paperdark}{HTML}{111827}
+\definecolor{papergray}{HTML}{4B5563}
+\definecolor{paperlight}{HTML}{F9FAFB}
+\definecolor{codeborder}{HTML}{E5E7EB}
+\definecolor{codegreen}{HTML}{15803D}
+\definecolor{codegray}{HTML}{6B7280}
+\definecolor{codered}{HTML}{B91C1C}
+
+\colorlet{paperblue}{paperdark}
+\colorlet{lqblue}{paperdark}
+\colorlet{lqdark}{paperdark}
+\colorlet{lqgray}{papergray}
+\definecolor{lqlight}{HTML}{F3F4F6}
+
+\usepackage{xurl}
+% ---- hyperref --------------------------------------------------------------
+\usepackage[hidelinks,colorlinks=true,
+            linkcolor=paperdark,
+            urlcolor=paperdark,
+            citecolor=paperdark]{hyperref}
+
+
+% ---- Listings Style -------------------------------------------------------
+\lstset{
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{paperdark}\bfseries,
+  commentstyle=\color{codegray}\itshape,
+  stringstyle=\color{codegreen},
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{codeborder},
+  backgroundcolor=\color{paperlight},
+  numbers=none,
+  xleftmargin=2pt,
+  xrightmargin=2pt,
+  aboveskip=4pt,
+  belowskip=4pt,
+}
+
+% ---- IEEE Conference Section Titles (Centered Roman Small-Caps) -----------
+\renewcommand{\thesection}{\Roman{section}}
+\renewcommand{\thesubsection}{\thesection-\Alph{subsection}}
+\titleformat{\section}
+  {\normalsize\scshape\bfseries\color{paperdark}\centering}{\Roman{section}.}{0.5em}{}
+\titleformat{\subsection}
+  {\small\bfseries\color{paperdark}}{\Alph{subsection}.}{0.5em}{}
+\titleformat{\subsubsection}
+  {\small\itshape\color{papergray}}{\arabic{subsubsection})}{0.5em}{}
+
+\titlespacing*{\section}{0pt}{8pt plus 4pt minus 2pt}{3pt plus 2pt minus 1pt}
+\titlespacing*{\subsection}{0pt}{6pt plus 3pt minus 2pt}{2.5pt plus 1.5pt minus 1pt}
+\titlespacing*{\subsubsection}{0pt}{4pt plus 2pt minus 1pt}{2pt plus 1pt minus 0.5pt}
+
+% ---- Header & Footer (Clean IEEE Style) -----------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\scriptsize\color{papergray}\textsc{The LQ Digital Mode Family}}
+\fancyhead[R]{\scriptsize\color{papergray}Luis Quesada (HB9IPH)}
+\fancyfoot[C]{\scriptsize\color{papergray}\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{codeborder}\leaders\hrule height \headrulewidth\hfill}}
+
+% ---- Float Placement Parameters (Dense packing without deferral) -----------
+\renewcommand{\topfraction}{0.95}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\floatpagefraction}{0.8}
+\renewcommand{\dbltopfraction}{0.95}
+\renewcommand{\dblfloatpagefraction}{0.8}
+\setcounter{topnumber}{4}
+\setcounter{bottomnumber}{3}
+\setcounter{totalnumber}{6}
+\setcounter{dbltopnumber}{4}
+
+% ---- Float Spacing (Rubber lengths for vertical elasticity) ---------------
+\setlength{\textfloatsep}{7pt plus 3pt minus 2pt}
+\setlength{\dbltextfloatsep}{7pt plus 3pt minus 2pt}
+\setlength{\floatsep}{6pt plus 2pt minus 2pt}
+\setlength{\dblfloatsep}{6pt plus 2pt minus 2pt}
+\setlength{\intextsep}{6pt plus 2pt minus 2pt}
+
+\flushbottom
+\vbadness=1000
+\hbadness=1000
+
+% ---- IEEE Abstract Environment --------------------------------------------
+\renewenvironment{abstract}
+  {\small\noindent\textbf{\textit{Abstract}}---\ignorespaces}
+  {\par\vspace{6pt}}
+
+% ---- Custom protocol commands ---------------------------------------------
+\newcommand{\bitfield}[1]{\texttt{#1}}
+\newcommand{\msgtype}[1]{\textsc{#1}}
+\newcommand{\callsign}[1]{\texttt{#1}}
+\newcommand{\LQ}{LQ}
+
+\newcommand{\szero}{\leavevmode\hbox{\tikz[baseline=-0.55ex]{%
+  \node[inner sep=0pt,outer sep=0pt] (n) {\texttt{0}};%
+  \draw[line width=0.38pt] ([shift={(-0.11em,-0.19em)}]n.center) -- ([shift={(0.11em,0.19em)}]n.center);%
+}}}
+\newcommand{\bzero}{\szero}
+
+\DeclareRobustCommand{\lightning}{\leavevmode\hbox{\tikz[baseline=-0.35ex,scale=0.75,line join=round,line cap=round]{%
+  \fill (0.06em,0.52em) -- (-0.16em,0.06em) -- (0.02em,0.06em) -- (-0.08em,-0.50em) -- (0.18em,-0.02em) -- (0.00em,-0.02em) -- (0.14em,0.52em) -- cycle;%
+}}}
+\DeclareUnicodeCharacter{2301}{\ensuremath{\lightning}}
+\DeclareUnicodeCharacter{26A1}{\ensuremath{\lightning}}
+\DeclareUnicodeCharacter{21AF}{\ensuremath{\lightning}}
+\DeclareUnicodeCharacter{2404}{\texttt{[EOM]}}
+
+% ---- document --------------------------------------------------------------
+\begin{document}
+
+\begin{strip}
+% ---- IEEE Title Block ------------------------------------------------------
+\begin{center}
+  \vspace*{-12pt}
+  {\LARGE\bfseries\color{paperdark}
+    The LQ Digital Mode Family:\\[3pt]
+    Protocol Architecture and Reference Specification\\[3pt]
+    for Weak-Signal Communications\par}
+  \vspace{10pt}
+  {\large Luis Quesada (HB9IPH) --- Independent Researcher\par}
+  \vspace{3pt}
+  {\small\texttt{\BeginAccSupp{ActualText={l-u-i-s [at] l-q-8 [dot] o-r-g}}luis@lq8.org\EndAccSupp{}}\par}
+  \vspace{8pt}
+\end{center}
+
+\begingroup
+  \let\origclearpage\clearpage
+  \renewcommand{\clearpage}{\par\vspace{4pt}}
+  \input{sections/executive_summary}
+\endgroup
+\vspace{-6pt}
+\end{strip}
+
+% ==============================================================================
+% MANDATORY 1-TO-1 PAGE-TO-SECTION ARCHITECTURAL LAYOUT SPECIFICATION
+%
+% This paper is strictly engineered to maintain an exact 8-page budget with a
+% 1-to-1 mapping between pages and major specification sections. Future edits
+% MUST PRESERVE this exact page-to-section mapping:
+%
+%   Page 1: Title block, Abstract, Section I (Introduction)
+%   Page 2: Section II (QSO Protocol) + Table 1 (Standard & Pileup QSO Sequences)
+%   Page 3: Section III (Message Architecture & Types)
+%   Page 4: Dedicated Full-Page Tables:
+%           - Table 2 (Message Categories)
+%           - Table 3 (Message Catalogue & Huffman Prefix Codes)
+%           - Table 4 (Varicode Character Assignments)
+%   Page 5: Section IV (Field Encodings: Callsigns, Hashes, Grid, Modifiers, Varicode)
+%   Page 6: Section V (Physical Layer) + Figure 1 (Waterfall) + Table 5 (CRC-14)
+%   Page 7: Table 6 (Gallager LDPC Matrix) + Section VI (Extended Modes: LQ16, LQ4, LQ2)
+%   Page 8: Table 7 (Multi-Mode Parameter Comparison) [Top]
+%           Left Column:  Section VII (Conclusion) + Acknowledgment
+%           Right Column: References [1]–[13]
+%
+% Each section file ends with an explicit page break (\newpage or \clearpage)
+% to guarantee strict isolation. Do not allow sections to spill across pages!
+% ==============================================================================
+
+% ---- body (each section in its own file) -----------------------------------
+\input{sections/introduction}
+\input{sections/qso_protocol}
+\input{sections/message_types}
+\input{sections/field_encodings}
+\input{sections/physical_layer}
+\input{sections/extended_modes}
+\input{sections/conclusion}
+
+\end{document}
+

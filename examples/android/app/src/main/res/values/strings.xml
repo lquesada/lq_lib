@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">LQ Transceiver</string>
+    <string name="callsign_hint">My Callsign (e.g. HB9IPH)</string>
+    <string name="grid_hint">Grid (e.g. JN47)</string>
+    <string name="target_call_hint">Target Callsign (e.g. YO1YO)</string>
+    <string name="message_hint">Free Text Message (e.g. 73 DE HB9IP)</string>
+    <string name="btn_call_cq">Call CQ</string>
+    <string name="btn_answer_cq">Answer CQ</string>
+    <string name="btn_send_text">Send Text</string>
+    <string name="btn_simulate_qso">Simulate 3-Step QSO</string>
+    <string name="mode_lq8">LQ8 (15s)</string>
+    <string name="mode_lq4">LQ4 (7.5s)</string>
+    <string name="mode_lq2">LQ2 (3.75s)</string>
+    <string name="mode_lq16">LQ16 (30s)</string>
+    <string name="status_listening">Listening (Sliding Decoder Active)...</string>
+</resources>
+

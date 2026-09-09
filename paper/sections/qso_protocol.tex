@@ -1,0 +1,110 @@
+% =============================================================================
+% The LQ Digital Mode Family — Reference Implementation (lq_lib)
+%
+% Author:  Luis Quesada (HB9IPH)
+% Web:     https://luisquesada.com
+% Portal:  https://lquesada.github.io/lq_lib/
+% GitHub:  https://github.com/lquesada/lq_lib
+% App:     qFT8 — Portable Amateur Radio for Android (https://qft8.com)
+%
+% License: MIT License (https://github.com/lquesada/lq_lib/blob/main/LICENSE)
+%
+% Copyright (c) 2026 Luis Quesada (HB9IPH)
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in
+% all copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+% =============================================================================
+
+% ===========================================================================
+%  Section II: QSO Protocol & Sequence (ALLOCATION: PAGE 2)
+%  Must fit entirely on Page 2 along with Table 1 (QSO Sequence).
+%  Terminates with \newpage.
+% ===========================================================================
+
+\section{QSO Protocol}
+\label{sec:qso}
+
+The \LQ{} protocol establishes deterministic state transitions, transmission slot timing, and multi-station arbitration to achieve confirmed bilateral contacts across low-SNR channels.
+
+\subsection{Standard Four-Message Exchange}
+\label{sec:qso:standard}
+
+The \LQ{} QSO protocol is built upon two core principles: bidirectional exchange of Maidenhead grid locators and signal reports (measured SNR in dB), coupled with mutual confirmation (Table~\ref{tab:ft8qso}). Following weak-signal convention, \LQ{} establishes an operational termination criterion: each station must hear an explicit confirmation after delivering its own signal report before considering the contact complete. Station~A considers the contact complete upon receiving Station~B's concluding \msgtype{73} in T4, while Station~B considers it complete upon decoding Station~A's report in T3 and transmitting its final \msgtype{73}.
+
+\begin{table}[htbp]
+\centering
+\caption{QSO sequence comparison between conventional protocols (FT8) and the \LQ8 4-slot protocol.}
+\label{tab:ft8qso}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{@{}cl|cl@{}}
+\toprule
+\textbf{Seq} & \textbf{Conventional Protocols (FT8)} & \textbf{Seq} & \textbf{\LQ8 Protocol} \\
+\midrule
+1 & \texttt{CQ YO1YO JN47}                     & 1   & \texttt{CQ YO1YO JN47} \\
+2 & \texttt{YO1YO TU2TU KL22}                  & 2   & \texttt{YO1YO TU2TU KL22 -03} \\
+3 & \texttt{TU2TU YO1YO +05}                   & 3   & \texttt{TU2TU YO1YO R+05} \\
+4 & \texttt{YO1YO TU2TU R-03}                  & 4   & \texttt{YO1YO TU2TU 73} \emph{[Confirmed]} \\
+5 & \texttt{TU2TU YO1YO RR73} (or \texttt{RRR})& --- & --- \\
+6 & \texttt{YO1YO TU2TU 73} (optional if \texttt{RR73}) & --- & --- \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+As summarized in Table~\ref{tab:ft8qso}, \LQ8 completes a contact in 4 time slots (60\,s vs.\ 5--6 messages / 75--90\,s in conventional exchanges ending in \texttt{RR73} or \texttt{RRR}/73), delivering full bidirectional callsigns, Maidenhead locators, and signal reports with mutual verification:
+\begin{enumerate}[leftmargin=1.4em, itemsep=0.8pt plus 1.0pt minus 0.4pt, topsep=1.5pt plus 1.0pt minus 0.5pt, parsep=0pt]
+  \item \textbf{T1 (Slot 1, Even):} Station~A transmits a \msgtype{CQ} broadcast (catalogued in Section~\ref{sec:msg_arch}, Types~1--4) containing its callsign, optional portable suffix, grid locator, or CQ modifier.
+  \item \textbf{T2 (Slot 2, Odd):} Station~B transmits a directed \msgtype{CALL} reply (Types~5--7) packing Station~A's target address, caller callsign, measured SNR report, and grid locator into a single frame.
+  \item \textbf{T3 (Slot 3, Even):} Station~A acknowledges with \msgtype{REPORT+73} (Type~8 for standard callsigns, or multi-station Type~11), delivering its measured SNR report for Station~B.
+  \item \textbf{T4 (Slot 4, Odd):} Station~B transmits a final \msgtype{73} acknowledgment (Types~9, 10, or 12), completing the confirmed bidirectional contact.
+\end{enumerate}
+
+\subsection{Retransmission, Error Recovery and Logging Semantics}
+\label{sec:qso:retx}
+
+To ensure session progress over lossy channels, \LQ{} formalizes timeout recovery and logging rules.
+
+\paragraph{Retransmission and Repeat Calls.}
+If Station~B misses \msgtype{REPORT+73} in T3 (due to QSB or interference), it repeats \msgtype{CALL} in the next odd slot. Receiving this repeat informs Station~A that its report was lost, prompting Station~A to resend \msgtype{REPORT+73}. Similarly, if Station~A misses the final \msgtype{73} in T4, it retransmits \msgtype{REPORT+73}; Station~B re-acknowledges with \msgtype{73} without duplicate logging.
+
+\paragraph{QSO Logging Semantics.}
+Contacts are logged once callsigns, locators, reports, and acknowledgments are exchanged: Station~A logs upon decoding the final \msgtype{73} in T4 (or transmitting \msgtype{REPORT+73} in Fox pileup mode); Station~B logs upon transmitting \msgtype{73} in T4 (having decoded Station~A's report in T3). In ADIF logging (LoTW, QRZ.com, Club Log), contacts map to mode \texttt{DATA} with submode \texttt{LQ8} (\texttt{LQ4}, \texttt{LQ2}, \texttt{LQ16}). A watchdog aborts after three unacknowledged attempts (45\,s in \LQ8, 22.5\,s in \LQ4), returning to idle monitoring.
+
+\subsection{DXpedition Fox and Hound Multi-Station Pileup Operation}
+\label{sec:qso:pileup}
+
+During DXpedition pileups or contest operations in Fox and Hound (F/H) mode, Station~A (Fox) activates the \msgtype{MULTI-REPORT+73} protocol (Type~11) to confirm up to two answering Hound stations simultaneously on a single carrier:
+\begin{enumerate}[leftmargin=1.4em, itemsep=0.8pt plus 1.0pt minus 0.4pt, topsep=1.5pt plus 1.0pt minus 0.5pt, parsep=0pt]
+  \item \textbf{Slot 1 (Fox):} Fox broadcasts directed \msgtype{CQ} on its primary run frequency (e.g., \texttt{CQ DX <FOX>}).
+  \item \textbf{Slot 2 (Hounds):} Remote Hounds call simultaneously on split audio frequencies via directed \msgtype{CALL} (e.g., \texttt{<FOX> <HOUND1> FN42 -08}).
+  \item \textbf{Slot 3 (Fox):} Fox confirms both Hounds simultaneously on the run frequency via \msgtype{MULTI-REPORT+73} (\texttt{<HOUND1> R+05 <HOUND2> R-02 <FOX>}).
+  \item \textbf{Slot 4 (Hounds):} Both Hounds respond with concluding \msgtype{73} acknowledgments on their split frequencies (\texttt{<FOX> <HOUND1> 73}).
+\end{enumerate}
+When confirming a single Hound in Fox mode, standard callers are confirmed using Type~8 (\msgtype{REPORT+73 std+suf}). Single-target Type~11 (or Type~12 for final acknowledgments) is used when confirming non-standard callers or when operating under strict split-frequency F/H scheduling; in this case, Target~2 duplicates Target~1 (identical hash and SNR), which decoders process as a single-station transmission.
+
+\paragraph{Throughput Multiplier Analysis.}
+In continuous pileup operation, each QSO cycle completes in 3 slots (45\,s vs.\ 60\,s conventional). Confirming two answering Hounds simultaneously in Step~3 delivers a peak capacity of 160\,QSOs/h on a single 50.0\,Hz carrier with \textbf{0.0\,dB power-splitting penalty}, avoiding the $-3.0$\,dB RF loss of multi-carrier FT8 F/H mode. Under dual-carrier \LQ8 (100\,Hz bandwidth), capacity reaches 320\,QSOs/h while halving exposure to fading.
+
+\subsection{Multi-Caller Contention and Pileup Queuing}
+\label{sec:qso:contention}
+
+When multiple stations answer the same CQ simultaneously in 1-on-1 mode, Station~A selects one caller and transmits \msgtype{REPORT+73} addressed to that station; other callers retry in the next alternating time slot. Frames are disambiguated via uniform 24-bit callsign hashes ($2^{24} \approx 16.78\times 10^6$ bins, Section~\ref{sec:hash}) and canonical precedence (\mbox{Section~\ref{sec:msg:limitations}}).
+
+To optimize pileup resolution, transceivers implement opportunistic candidate queuing (up to 16 stations). Priority aging balances throughput with fairness, preventing high-SNR arrivals from starving marginal callers. Upon decoding \msgtype{73} in T4, Station~A immediately directs \msgtype{REPORT+73} to the highest-priority queued station without an intermediate \msgtype{CQ}, accelerating turnover. If the queue is full, lowest-SNR entries below decode threshold are evicted first; entries expire after four unacknowledged cycles (60\,s in \LQ8, 30\,s in \LQ4).
+
+\pagebreak

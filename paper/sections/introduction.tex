@@ -1,0 +1,73 @@
+% =============================================================================
+% The LQ Digital Mode Family — Reference Implementation (lq_lib)
+%
+% Author:  Luis Quesada (HB9IPH)
+% Web:     https://luisquesada.com
+% Portal:  https://lquesada.github.io/lq_lib/
+% GitHub:  https://github.com/lquesada/lq_lib
+% App:     qFT8 — Portable Amateur Radio for Android (https://qft8.com)
+%
+% License: MIT License (https://github.com/lquesada/lq_lib/blob/main/LICENSE)
+%
+% Copyright (c) 2026 Luis Quesada (HB9IPH)
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in
+% all copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+% =============================================================================
+
+% ===========================================================================
+%  Section I: Introduction (ALLOCATION: PAGE 1)
+%  Must fit entirely on Page 1 along with the Title Block & Abstract.
+%  Terminates with \newpage.
+% ===========================================================================
+
+\section{Introduction}
+\label{sec:intro}
+
+The FT8 digital mode~\cite{ft8}, designed by Steve Franke (K9AN) and Joe Taylor (K1JT), has transformed amateur radio since its
+introduction in 2017 in the WSJT-X software suite~\cite{wsjtx}, enabling reliable contacts at signal-to-noise ratios
+as low as $-21.0$\,dB in a 2500\,Hz bandwidth.  Its 77-bit message payload,
+combined with a low-density parity-check (LDPC) forward error correction
+code~\cite{gallager} and 8-tone Gaussian frequency-shift keying (8-GFSK), provides a
+robust physical layer that is now well-proven across millions of contacts
+worldwide.
+
+In conventional weak-signal protocols (e.g., FT8), a structured two-way contact canonically requires six sequential transmissions across 15-second time slots (90 seconds total), or five transmissions (75 seconds) when using shortened \texttt{RR73} confirmations (\msgtype{CQ} $\to$ \msgtype{CALL} $\to$ \msgtype{REPORT} $\to$ \msgtype{RREPORT} $\to$ \msgtype{RR73}). Under a 77-bit payload budget, encoding two 28-bit standard callsigns, a 15-bit Maidenhead grid locator, and a 5-bit signal report requires 76 information bits ($28+28+15+5=76$). Uniform fixed-width type headers (typically 3 or 4 bits) exceed the remaining 1-bit margin, preventing the simultaneous transmission of locator and report in a single transmission.
+
+\textbf{LQ8} resolves this constraint by employing \textbf{variable-length prefix codes}~\cite{huffman} tailored to physical-layer bit budgets. By allocating a 1-bit prefix to the dominant response message format, \LQ8 preserves 76 bits for payload data, packing both the answering station's grid locator and measured signal report into a single frame. This completes confirmed contacts in 4 transmissions (60 seconds) with full mutual verification, while retaining the proven continuous-phase 8-GFSK and LDPC$(174,91)$ physical layer ($-21.0$\,dB SNR sensitivity). Furthermore, for high-rate DXpedition Fox and Hound (F/H) pileups, \LQ8 introduces the \msgtype{MULTI-REPORT+73} protocol to confirm two answering Hound stations simultaneously within a single-carrier transmission without RF power-splitting penalties. Cross-isolated Costas synchronization arrays ($C_7 = [2, 5, 6, 1, 3, 0, 4]$, exhibiting $\le 1$ coincidence hit) isolate traffic from legacy decoders. Physical layer, CRC-14, and LDPC parameters are presented in Section~\ref{sec:phy}.
+
+Building upon \LQ8, the protocol family defines three complementary profiles (\LQ16, \LQ4, and \LQ2) tailored for ultra-weak fading channels, rapid contesting, and fast burst links.
+
+\subsection{Architectural Philosophy \& Design Principles}
+\label{sec:advantages}
+
+The \LQ{} family is engineered around four core design tenets:
+\begin{itemize}[leftmargin=1.5em, itemsep=1.5pt plus 1.0pt minus 0.5pt, topsep=2.0pt plus 1.0pt minus 0.5pt]
+  \item \textbf{Payload-Matched Prefix Allocation:} Replacing uniform headers with variable-length prefix codes frees capacity for simultaneous locator and report transmission, shortening 1-on-1 contacts to 4 slots (60\,s) and reducing vulnerability to ionospheric fading (QSB) and transient interference.
+  \item \textbf{Coexistence and Spectrum Preservation:} All modes maintain continuous-phase GFSK and LDPC$(174,91)$ channel coding while employing low-cross-coincidence Costas sync arrays to prevent cross-protocol false decodes.
+  \item \textbf{Robust Special-Case Support:} Non-standard callsigns (up to 13 characters), dedicated 1-bit portable suffixes (\texttt{0}=\emph{none}, \texttt{1}=\texttt{/P}), 24/20-bit collision-resistant callsign hashes, and a 104-character free-text Varicode provide seamless support for contesting, portable activations (POTA/SOTA), and DXpeditions.
+  \item \textbf{Clear-Text Station Identification:} Transmitting stations convey their callsigns in clear text across all 1-on-1 exchanges (including non-standard caller replies via 48-bit Base-38 encoding), reserving compact hashes strictly for target addressing and multi-station pileup frames.
+\end{itemize}
+
+\subsection{Implementations \& Reference Software}
+\label{sec:implementations}
+
+The complete suite is implemented in the open-source C++ reference library (\texttt{lq\_lib})~\cite{lqlib} (MIT License), featuring an automated verification harness and golden vector test suites across all four modulation profiles. Web demonstrations and interactive protocol resources are published on the official project portal~\cite{lqportal}. Native portable operation is provided by \textbf{qFT8} for Android~\cite{qft8}, deploying \LQ8 alongside live testbeds for \LQ16, \LQ4, and \LQ2.
+
+\pagebreak
+

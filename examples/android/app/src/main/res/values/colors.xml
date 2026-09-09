@@ -1,0 +1,14 @@
+<resources>
+    <color name="primary">#1A5276</color>
+    <color name="primary_dark">#154360</color>
+    <color name="accent">#2980B9</color>
+    <color name="bg_dark">#121212</color>
+    <color name="surface_dark">#1E1E1E</color>
+    <color name="border_dark">#37474F</color>
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#B0BEC5</color>
+    <color name="tx_color">#F39C12</color>
+    <color name="rx_color">#2ECC71</color>
+    <color name="cq_red">#D32F2F</color>
+    <color name="call_blue">#1A5276</color>
+</resources>

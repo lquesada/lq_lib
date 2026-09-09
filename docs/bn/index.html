@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The LQ8 Digital Mode</title>
+  <title>LQ8 डिजिटल मोड</title>
   <meta name="description" content="The next-generation amateur radio digital mode family (LQ8, LQ4, LQ2, LQ16). Full 4-step contacts in 60s with complete grid &amp; report exchange (vs 75–90s in FT8), >2.3× pileup speed (160 vs ~69 QSOs/h) with 0.0 dB power penalty, and -21.0 dB SNR sensitivity via variable-length prefix coding. Native support in qFT8 for Android.">
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://lq8.org/">
-  <meta property="og:title" content="The LQ8 Digital Mode">
+  <meta property="og:url" content="https://lq8.org/bn/">
+  <meta property="og:title" content="LQ8 डिजिटल मोड">
   <meta property="og:description" content="Full 4-step contacts in 60s with complete grid &amp; report exchange (vs 75–90s in FT8), >2.3× pileup throughput (160 vs ~69 QSOs/h) with 0.0 dB power penalty. Continuous-phase 8-GFSK with variable-length prefix coding. Native support in qFT8 for Android.">
   <meta property="og:image" content="https://lq8.org/img/og_banner.png">
   <meta property="og:image:width" content="1200">
@@ -17,11 +17,11 @@
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://lq8.org/">
-  <meta name="twitter:title" content="The LQ8 Digital Mode">
+  <meta name="twitter:url" content="https://lq8.org/bn/">
+  <meta name="twitter:title" content="LQ8 डिजिटल मोड">
   <meta name="twitter:description" content="Full 4-step contacts in 60s with complete grid &amp; report exchange (vs 75–90s in FT8), >2.3× pileup throughput (160 vs ~69 QSOs/h) with 0.0 dB power penalty. Continuous-phase 8-GFSK with variable-length prefix coding. Native support in qFT8 for Android.">
   <!-- SEO Canonical & Hreflang Tags -->
-  <link rel="canonical" href="https://lq8.org/">
+  <link rel="canonical" href="https://lq8.org/bn/">
   <link rel="alternate" hreflang="x-default" href="https://lq8.org/">
   <link rel="alternate" hreflang="en" href="https://lq8.org/">
   <link rel="alternate" hreflang="es" href="https://lq8.org/es/">
@@ -111,46 +111,10 @@
             window.location.href = isFile ? rootPrefix + lang + '/index.html' : rootPrefix + lang + '/';
           }
         }
-    
-        // Auto-redirect block for root English page
-        (function() {
-          try {
-            const urlParams = new URLSearchParams(window.location.search);
-            const queryLang = urlParams.get('lang');
-            const isFile = window.location.protocol === 'file:';
-
-            if (queryLang && supportedLanguages.includes(queryLang)) {
-              try { localStorage.setItem('lq_user_lang', queryLang); } catch (e) {}
-              if (queryLang !== 'en') {
-                const target = isFile ? queryLang + '/index.html' : queryLang + '/';
-                window.location.replace(target);
-                return;
-              }
-            }
-
-            if (isFile || sessionStorage.getItem('lq_redirected')) return;
-
-            const savedLang = localStorage.getItem('lq_user_lang');
-            if (savedLang && savedLang !== 'en' && supportedLanguages.includes(savedLang)) {
-              sessionStorage.setItem('lq_redirected', '1');
-              window.location.replace(savedLang + '/');
-              return;
-            }
-
-            if (!savedLang) {
-              const browserLang = (navigator.language || navigator.userLanguage || '').split('-')[0].toLowerCase();
-              if (browserLang && browserLang !== 'en' && supportedLanguages.includes(browserLang)) {
-                sessionStorage.setItem('lq_redirected', '1');
-                window.location.replace(browserLang + '/');
-                return;
-              }
-            }
-          } catch (e) {}
-        })();
-          </script>
+      </script>
   <!-- End Language Switcher & Redirection -->
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -1441,12 +1405,12 @@
       <a href="#" class="brand-logo"><span class="gradient-text">LQ8</span></a>
 
       <ul class="nav-links">
-        <li><a href="#overview" data-i18n="NAV_OVERVIEW">Overview</a></li>
-        <li><a href="#operation" data-i18n="NAV_OPERATION">Operation</a></li>
+        <li><a href="#overview" data-i18n="NAV_OVERVIEW">সংক্ষিপ্ত বিবরণ</a></li>
+        <li><a href="#operation" data-i18n="NAV_OPERATION">ব্যবহার</a></li>
         <li><a href="#speedup" data-i18n="NAV_SPEEDUP">Speed-Up</a></li>
-        <li><a href="#roadmap" data-i18n="NAV_ROADMAP">Roadmap</a></li>
-        <li><a href="#technical" data-i18n="NAV_TECH_SPECS">Specs</a></li>
-        <li><a href="#community" data-i18n="NAV_COMMUNITY">Community</a></li>
+        <li><a href="#roadmap" data-i18n="NAV_ROADMAP">রোডম্যাপ</a></li>
+        <li><a href="#technical" data-i18n="NAV_TECH_SPECS">প্রযুক্তিগত বৈশিষ্ট্য ও লাইব্রেরি</a></li>
+        <li><a href="#community" data-i18n="NAV_COMMUNITY">কমিউনিটি ও যোগাযোগ</a></li>
       </ul>
 
       <div class="nav-actions">
@@ -1458,13 +1422,13 @@
             <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
             <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
           </svg>
-          <span data-i18n="NAV_SHARE">Share</span>
+          <span data-i18n="NAV_SHARE">শেয়ার</span>
         </button>
 
         <div class="lang-selector-wrapper">
           <span class="lang-icon" aria-hidden="true">🌐</span>
           <select id="lang-select" class="lang-dropdown" onchange="onLanguageChange(this.value)" aria-label="Select Language">
-            <option value="en" selected>English</option>
+            <option value="en">English</option>
             <option value="es">Español</option>
             <option value="pt">Português</option>
             <option value="fr">Français</option>
@@ -1476,7 +1440,7 @@
             <option value="ko">한국어</option>
             <option value="ar">العربية</option>
             <option value="hi">हिन्दी</option>
-            <option value="bn">বাংলা</option>
+            <option value="bn" selected>বাংলা</option>
             <option value="ur">اردو</option>
             <option value="tr">Türkçe</option>
             <option value="vi">Tiếng Việt</option>
@@ -1539,7 +1503,7 @@
       <div class="container">
         <!-- Hero Mode Header -->
         <div class="hero-mode-header">
-          <div class="hero-mode-title" data-i18n="HERO_MODE_TITLE">The LQ8 Digital Mode</div>
+          <div class="hero-mode-title" data-i18n="HERO_MODE_TITLE">LQ8 डिजिटल मोड</div>
         </div>
 
         <h1>
@@ -1592,7 +1556,7 @@
           <!-- Card 3 -->
           <div class="pitch-card">
             <div class="pitch-card-badge badge-phy" data-i18n="PITCH_CARD_3_BADGE">Battle-Tested PHY</div>
-            <h3 data-i18n="PITCH_CARD_3_TITLE">100% Proven Physical Layer</h3>
+            <h3 data-i18n="PITCH_CARD_3_TITLE">100% परीक्षित भौतिक परत</h3>
             <div class="pitch-stat">
               <span class="stat-main" data-i18n="PITCH_CARD_3_STAT_MAIN">&minus;21.0 dB</span>
               <span class="stat-sub" data-i18n="PITCH_CARD_3_STAT_SUB">Sensitivity (8-GFSK 50 Hz)</span>
@@ -1639,15 +1603,15 @@
                     <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.458c.538-.196 1.006.128.832.943z"/>
                   </svg>
                 </div>
-                <h4 data-i18n="COMMUNITY_TELEGRAM_TITLE">Telegram Group</h4>
+                <h4 data-i18n="COMMUNITY_TELEGRAM_TITLE">Telegram গ্রুপ</h4>
               </div>
-              <p class="community-cta-body" data-i18n="COMMUNITY_TELEGRAM_DESC">Join the live Telegram group for real-time discussion, on-air testing coordination, and direct support.</p>
+              <p class="community-cta-body" data-i18n="COMMUNITY_TELEGRAM_DESC">রিয়েল-টাইম আলোচনা, অন-এয়ার পরীক্ষা সমন্বয় এবং সরাসরি সহায়তার জন্য Telegram গ্রুপে যোগ দিন।</p>
             </div>
             <a href="https://t.me/lq8mode" target="_blank" rel="noopener noreferrer" id="btn-telegram-lq" class="community-cta-btn btn-telegram" aria-label="Join LQ8 Telegram Group">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.458c.538-.196 1.006.128.832.943z"/>
               </svg>
-              <span data-i18n="COMMUNITY_TELEGRAM_BTN">Join Telegram</span>
+              <span data-i18n="COMMUNITY_TELEGRAM_BTN">Telegram-এ যোগ দিন</span>
             </a>
           </div>
 
@@ -1660,7 +1624,7 @@
                     <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.703zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.197-2.512-.73a.326.326 0 0 0-.232-.095z"/>
                   </svg>
                 </div>
-                <h4 data-i18n="COMMUNITY_REDDIT_TITLE">r/LQ8 Subreddit</h4>
+                <h4 data-i18n="COMMUNITY_REDDIT_TITLE">r/LQ8 सबरेडिट</h4>
               </div>
               <p class="community-cta-body" data-i18n="COMMUNITY_REDDIT_DESC">Connect with operators, discuss antenna and radio setups, and share your first on-air decoding reports.</p>
             </div>
@@ -1668,7 +1632,7 @@
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.703zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.197-2.512-.73a.326.326 0 0 0-.232-.095z"/>
               </svg>
-              <span data-i18n="COMMUNITY_REDDIT_BTN">Join r/LQ8</span>
+              <span data-i18n="COMMUNITY_REDDIT_BTN">r/LQ8 से जुड़ें</span>
             </a>
           </div>
 
@@ -1682,7 +1646,7 @@
                     <polyline points="22,6 12,13 2,6"></polyline>
                   </svg>
                 </div>
-                <h4 data-i18n="COMMUNITY_MAIL_TITLE">LQ8 News Mailing List</h4>
+                <h4 data-i18n="COMMUNITY_MAIL_TITLE">LQ8 समाचार मेलिंग सूची</h4>
               </div>
               <p class="community-cta-body" data-i18n="COMMUNITY_MAIL_DESC">Read the public message archives and subscribe to official releases, announcements, and developer updates.</p>
             </div>
@@ -1691,13 +1655,13 @@
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                 <polyline points="22,6 12,13 2,6"></polyline>
               </svg>
-              <span data-i18n="COMMUNITY_MAIL_BTN">Join Mailing List</span>
+              <span data-i18n="COMMUNITY_MAIL_BTN">मेलिंग सूची से जुड़ें</span>
             </a>
           </div>
         </div>
 
         <div class="section-header">
-          <h2 data-i18n="SECTION_OPERATION_TITLE">Operation &amp; Ecosystem</h2>
+          <h2 data-i18n="SECTION_OPERATION_TITLE">संचालन और पारिस्थितिकी तंत्र</h2>
           <p data-i18n="SECTION_OPERATION_SUBTITLE">Get on the air with native mobile software, dedicated band plans, and seamless electronic logging compatibility.</p>
         </div>
 
@@ -1706,21 +1670,19 @@
           <div class="qft8-featured-card">
             <div class="qft8-content">
               <h3 data-i18n="QFT8_TITLE">qFT8</h3>
-              <div class="qft8-tagline" data-i18n="QFT8_TAGLINE">Portable Amateur Radio for Android</div>
-              <p class="qft8-desc" data-i18n="QFT8_DESC">
-                Native mobile transceiver application supporting <strong>LQ8</strong> alongside other existing digital modes. Operate weak-signal digital modes anywhere from your Android device.
-              </p>
+              <div class="qft8-tagline" data-i18n="QFT8_TAGLINE">Android के लिए पोर्टेबल एमेच्योर रेडियो</div>
+              <p class="qft8-desc" data-i18n="QFT8_DESC">বিদ্যমান ডিজিটাল মোডগুলির পাশাপাশি <strong>LQ8</strong> সমর্থনকারী স্থানীয় মোবাইল ট্রানসিভার অ্যাপ্লিকেশন। আপনার Android ডিভাইস থেকে যেকোনো জায়গায় দুর্বল সংকেতের ডিজিটাল মোড পরিচালনা করুন।</p>
               <div class="qft8-features">
                 <div class="qft8-feat-item"><span><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="QFT8_FEAT_1">Plug and Play for 50+ Radios</span></div>
                 <div class="qft8-feat-item"><span><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="QFT8_FEAT_2">Integration with QRZ and LoTW</span></div>
                 <div class="qft8-feat-item"><span><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="QFT8_FEAT_3">Manual and Automated Operation</span></div>
                 <div class="qft8-feat-item"><span><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="QFT8_FEAT_4">Optimized for SOTA and POTA</span></div>
               </div>
-              <a href="https://qft8.com" rel="noopener noreferrer" class="btn btn-primary" data-i18n="QFT8_BTN">Visit qft8.com & Download &rarr;</a>
+              <a href="https://qft8.com" rel="noopener noreferrer" class="btn btn-primary" data-i18n="QFT8_BTN">Visit qft8.com &amp; Download &rarr;</a>
             </div>
             <div class="qft8-preview-wrap">
               <a href="https://qft8.com" rel="noopener noreferrer" class="qft8-preview-link" title="Visit qFT8 Website (qft8.com)">
-                <img src="qft8.jpg" alt="qFT8 Android Application" data-i18n="QFT8_IMG_ALT" class="qft8-preview-img" loading="lazy">
+                <img src="../qft8.jpg" alt="qFT8 Android Application" data-i18n="QFT8_IMG_ALT" class="qft8-preview-img" loading="lazy">
               </a>
             </div>
           </div>
@@ -1729,21 +1691,17 @@
         <!-- Recommended Operating Frequencies & Band Plan -->
         <div id="frequencies" style="margin-bottom: 48px;">
           <div class="section-header" style="margin-bottom: 20px;">
-            <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800;" data-i18n="FREQUENCIES_TITLE">Proposed Operating Frequencies (Limited Experimental Mode)</h3>
-            <p data-i18n="FREQUENCIES_SUBTITLE">Dedicated 3.0&nbsp;kHz channel sub-allocations for <strong>LQ8</strong> in limited experimental mode exclusively on these bands to ensure clean, interference-free weak-signal evaluation.</p>
+            <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800;" data-i18n="FREQUENCIES_TITLE">প্রস্তাবিত অপারেটিং ফ্রিকোয়েন্সি (সীমাবদ্ধ পরীক্ষামূলক মোড)</h3>
+            <p data-i18n="FREQUENCIES_SUBTITLE">পরিচ্ছন্ন ও হস্তক্ষেপমুক্ত দুর্বল-সংকেত মূল্যায়নের জন্য শুধুমাত্র এই ব্যান্ডগুলিতে <strong>LQ8</strong>-এর জন্য ডেডিকেটেড 3.0&nbsp;kHz চ্যানেল বরাদ্দ।</p>
           </div>
 
           <div class="mode-compare-box frequencies-box" style="margin-bottom: 20px; border-left-color: var(--cyan); background: rgba(56, 189, 248, 0.06); padding: 18px 22px;">
             <div style="font-weight: 700; color: var(--cyan); margin-bottom: 6px; font-size: 0.98rem; display: flex; align-items: center; gap: 8px;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-              <span data-i18n="FREQUENCIES_BOX_TITLE">Limited Experimental Mode: 30m, 15m, and 10m Allocations</span>
+              <span data-i18n="FREQUENCIES_BOX_TITLE">সীমাবদ্ধ পরীক্ষামূলক মোড: 30m, 15m এবং 10m বরাদ্দ</span>
             </div>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 6px;" data-i18n="FREQUENCIES_BOX_P1">
-              To evaluate weak-signal performance in clean RF spectrum without interference, initial on-air operations are conducted in <strong>limited experimental mode exclusively on 30m, 15m, and 10m</strong>. Each dial frequency represents the base carrier frequency of a standard <strong>3.0&nbsp;kHz Upper Sideband (USB) channel</strong> (e.g., <code>10.146&nbsp;MHz</code> spans audio offsets from <code>10.1460</code> to <code>10.1490&nbsp;MHz</code>). Multiple stations operate simultaneously within each 3.0&nbsp;kHz window on separate audio subcarrier offsets.
-            </p>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 0;" data-i18n="FREQUENCIES_BOX_P2">
-              These selected bands provide optimal, noise-free propagation environments: <strong>30m</strong> is a dedicated WARC band with no voice phone operation allowed by international law; <strong>15m</strong> and <strong>10m</strong> offer expansive, quiet digital allocations well below their respective voice phone segments.
-            </p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 6px;" data-i18n="FREQUENCIES_BOX_P1">হস্তক্ষেপহীন পরিচ্ছন্ন আরএফ স্পেকট্রামে দুর্বল-সংকেত কর্মক্ষমতা পরীক্ষা করার জন্য প্রাথমিক অন-এয়ার অপারেশন <strong>শুধুমাত্র 30m, 15m এবং 10m-এ সীমাবদ্ধ পরীক্ষামূলক মোডে</strong> পরিচালিত হচ্ছে। প্রতিটি ডায়াল ফ্রিকোয়েন্সি একটি স্ট্যান্ডার্ড <strong>3.0&nbsp;kHz আপার সাইডব্যান্ড (USB) চ্যানেলের</strong> বেস ক্যারিয়ার ফ্রিকোয়েন্সি নির্দেশ করে (যেমন <code>10.146&nbsp;MHz</code> অডিও অফসেট <code>10.1460</code> থেকে <code>10.1490&nbsp;MHz</code> কভার করে)। একাধিক স্টেশন একই 3.0&nbsp;kHz উইন্ডোর মধ্যে পৃথক অডিও সাবক্যারিয়ার অফসেটে কাজ করতে পারে।</p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 0;" data-i18n="FREQUENCIES_BOX_P2">এই নির্বাচিত ব্যান্ডগুলি শব্দহীন ও সর্বোত্তম প্রোপাগেশন পরিবেশ নিশ্চিত করে: <strong>30m</strong> একটি ডেডিকেটেড WARC ব্যান্ড যেখানে আন্তর্জাতিক আইনে ভয়েস ফোন সম্পূর্ণ নিষিদ্ধ; <strong>15m</strong> এবং <strong>10m</strong> তাদের নিজ নিজ ভয়েস ফোন বিভাগের অনেক নিচে শান্ত ডিজিটাল সেগমেন্ট অফার করে।</p>
           </div>
 
           <div class="table-container frequencies-table-container">
@@ -1777,16 +1735,14 @@
                 </tr>
               </tbody>
             </table>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 14px; margin-bottom: 0; padding: 0 14px 14px 14px; line-height: 1.5;" data-i18n="FREQUENCIES_FUTURE_BANDS_NOTE">
-              <em>Note:</em> LQ8 is currently active in limited experimental mode only on 30m, 15m, and 10m. Additional allocations (including 40m, 20m, 12m, 17m, 80m, and 160m) will be officially assigned in upcoming phases as coordinated with international band plans.
-            </p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 14px; margin-bottom: 0; padding: 0 14px 14px 14px; line-height: 1.5;" data-i18n="FREQUENCIES_FUTURE_BANDS_NOTE"><em>দ্রষ্টব্য:</em> LQ8 বর্তমানে শুধুমাত্র 30m, 15m এবং 10m ব্যান্ডে সীমাবদ্ধ পরীক্ষামূলক মোডে সক্রিয় রয়েছে। আন্তর্জাতিক ব্যান্ড পরিকল্পনার সাথে সমন্বয় করে পরবর্তী পর্যায়ে অতিরিক্ত ব্যান্ডগুলি (40m, 20m, 12m, 17m, 80m এবং 160m সহ) আনুষ্ঠানিকভাবে বরাদ্দ করা হবে।</p>
           </div>
         </div>
 
         <!-- ADIF Electronic Logging Standard -->
         <div id="adif">
           <div class="section-header" style="margin-bottom: 20px;">
-            <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800;" data-i18n="ADIF_TITLE">ADIF Electronic Logging &amp; Award Compatibility</h3>
+            <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800;" data-i18n="ADIF_TITLE">ADIF इलेक्ट्रॉनिक लॉगिंग और पुरस्कार अनुकूलता</h3>
             <p data-i18n="ADIF_SUBTITLE">Standardized electronic logging format for LoTW, QRZ.com, eQSL, ClubLog, and amateur radio software suites.</p>
           </div>
 
@@ -1797,18 +1753,10 @@
               <div style="display: flex; align-items: flex-start; gap: 16px;">
                 <div style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: rgba(16, 185, 129, 0.2); flex-shrink: 0; color: var(--emerald);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
                 <div>
-                  <h4 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: var(--text-primary); margin-bottom: 6px;" data-i18n="ADIF_CALLOUT_TITLE">
-                    Logging and Submitting LQ8 QSOs: Practical Guidelines
-                  </h4>
-                  <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 8px;" data-i18n="ADIF_CALLOUT_P1">
-                    Under the <strong>ADIF 3.x specification</strong>, exporting contacts using standard mode <code class="radio-val">&lt;MODE:4&gt;DATA</code> or <code class="radio-val">&lt;MODE:4&gt;MFSK</code> with <code class="radio-val badge-lq">&lt;SUBMODE:3&gt;LQ8</code> allows electronic loggers and signing tools to record and process contacts without mode-rejection issues.
-                  </p>
-                  <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 8px;" data-i18n="ADIF_CALLOUT_P2">
-                    When submitting logs to <strong>QRZ.com Logbook</strong>, <strong>ARRL Logbook of the World (LoTW)</strong>, <strong>eQSL.cc</strong>, and <strong>Club Log</strong>, contacts logged under <strong><code>DATA</code></strong> or <strong><code>MFSK</code></strong> are recognized under standard digital categories for <strong>DXCC, WAS, VUCC, WAC, and WPX award credits</strong> (using local software mode mapping if needed).
-                  </p>
-                  <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;" data-i18n="ADIF_CALLOUT_P3">
-                    Formal submission to the ADIF Working Group is underway to establish dedicated native enum tokens and drop-down menu support across all logging applications.
-                  </p>
+                  <h4 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: var(--text-primary); margin-bottom: 6px;" data-i18n="ADIF_CALLOUT_TITLE">Logging and Submitting LQ8 QSOs: Practical Guidelines</h4>
+                  <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 8px;" data-i18n="ADIF_CALLOUT_P1">Under the <strong>ADIF 3.x specification</strong>, exporting contacts using standard mode <code class="radio-val">&lt;MODE:4&gt;DATA</code> or <code class="radio-val">&lt;MODE:4&gt;MFSK</code> with <code class="radio-val badge-lq">&lt;SUBMODE:3&gt;LQ8</code> allows electronic loggers and signing tools to record and process contacts without mode-rejection issues.</p>
+                  <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 8px;" data-i18n="ADIF_CALLOUT_P2">When submitting logs to <strong>QRZ.com Logbook</strong>, <strong>ARRL Logbook of the World (LoTW)</strong>, <strong>eQSL.cc</strong>, and <strong>Club Log</strong>, contacts logged under <strong><code>DATA</code></strong> or <strong><code>MFSK</code></strong> are recognized under standard digital categories for <strong>DXCC, WAS, VUCC, WAC, and WPX award credits</strong> (using local software mode mapping if needed).</p>
+                  <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;" data-i18n="ADIF_CALLOUT_P3">Formal submission to the ADIF Working Group is underway to establish dedicated native enum tokens and drop-down menu support across all logging applications.</p>
                 </div>
               </div>
             </div>
@@ -1816,15 +1764,11 @@
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 28px;">
               <div>
                 <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: var(--cyan);" data-i18n="ADIF_CARD_1_TITLE">Standard ADIF Specification</h4>
-                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;" data-i18n="ADIF_CARD_1_TEXT">
-                  All protocols in the LQ digital mode family follow the <strong>Amateur Data Interchange Format (ADIF 3.x)</strong> guidelines under mode <code>DATA</code> or <code>MFSK</code> with protocol submode identifiers.
-                </p>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;" data-i18n="ADIF_CARD_1_TEXT">All protocols in the LQ digital mode family follow the <strong>Amateur Data Interchange Format (ADIF 3.x)</strong> guidelines under mode <code>DATA</code> or <code>MFSK</code> with protocol submode identifiers.</p>
               </div>
               <div>
                 <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: var(--emerald);" data-i18n="ADIF_CARD_2_TITLE">Instant Platform &amp; Award Compatibility</h4>
-                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;" data-i18n="ADIF_CARD_2_TEXT">
-                  Online logbooks accept contacts under digital mode categories for digital awards with standard submode tracking.
-                </p>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;" data-i18n="ADIF_CARD_2_TEXT">Online logbooks accept contacts under digital mode categories for digital awards with standard submode tracking.</p>
               </div>
             </div>
 
@@ -1884,8 +1828,8 @@
     <section id="speedup" class="section">
       <div class="container">
         <div class="section-header">
-          <h2 data-i18n="SPEEDUP_TITLE">How is the 60-Second QSO &amp; Pileup Speed-Up Achieved?</h2>
-          <p data-i18n="SPEEDUP_SUBTITLE">By replacing repetitive rigid exchanges with variable-length prefix codes, 24-bit/16-bit collision-resistant hashing, and multi-station response frames, while guaranteeing full mutual exchange: both Maidenhead locators and signal reports are conveyed, with reciprocal 73 acknowledgments confirming reception.</p>
+          <h2 data-i18n="SPEEDUP_TITLE">How 60s QSO Speed and Pileup Speedup Are Achieved</h2>
+          <p data-i18n="SPEEDUP_SUBTITLE">By replacing rigid, repetitive exchanges with variable-length prefix codes, 24/16-bit collision-resistant hashing, and multi-response frames, full mutual exchange is guaranteed: both Maidenhead locator and signal reports are exchanged with reciprocal 73 confirmations.</p>
         </div>
 
         <div class="speedup-quad-grid">
@@ -1920,9 +1864,7 @@
                 <div class="flow-step-msg">HB9IPH TU2TU 73</div>
               </div>
             </div>
-            <div class="flow-summary summary-slow" data-i18n="SPEEDUP_STD_FT8_SUMMARY">
-              <strong>Total QSO Time:</strong> 90 seconds (6 slots, or 75s with RR73)
-            </div>
+            <div class="flow-summary summary-slow" data-i18n="SPEEDUP_STD_FT8_SUMMARY"><strong>Total QSO Time:</strong> 90 seconds (6 slots, or 75s with RR73)</div>
           </div>
 
           <!-- 2. LQ8 Standard -->
@@ -1948,9 +1890,7 @@
                 <div class="flow-step-msg msg-lq">HB9IPH TU2TU 73</div>
               </div>
             </div>
-            <div class="flow-summary summary-fast" data-i18n="SPEEDUP_STD_LQ8_SUMMARY">
-              <strong>Total QSO Time:</strong> 60 seconds (4 slots) &mdash; <span style="color: var(--cyan); font-weight: 700;">1.50× vs 6-slot / 1.25× vs RR73</span>
-            </div>
+            <div class="flow-summary summary-fast" data-i18n="SPEEDUP_STD_LQ8_SUMMARY"><strong>Total QSO Time:</strong> 60 seconds (4 slots) &mdash; <span style="color: var(--cyan); font-weight: 700;">1.50× vs 6-slot / 1.25× vs RR73</span></div>
           </div>
 
           <!-- 3. FT8 Pileup -->
@@ -1958,9 +1898,7 @@
             <div class="flow-card-header">
               <h4 data-i18n="SPEEDUP_CARD_PL_FT8_TITLE">FT8 Pileup</h4>
             </div>
-            <div class="flow-card-context-note" data-i18n="SPEEDUP_NOTE_ASSUMING_CQ">
-              (continuous pipelined pileup, no repeated CQ)
-            </div>
+            <div class="flow-card-context-note" data-i18n="SPEEDUP_NOTE_ASSUMING_CQ">(continuous pipelined pileup, no repeated CQ)</div>
             <div class="flow-steps">
               <div class="flow-step">
                 <div class="flow-step-num">1</div>
@@ -1991,9 +1929,7 @@
                 <div class="flow-step-msg">HB9IPH YO1YO 73</div>
               </div>
             </div>
-            <div class="flow-summary summary-slow" data-i18n="SPEEDUP_PL_FT8_SUMMARY">
-              <strong>Directed Exchange:</strong> 105 seconds (7 slots for 2 QSOs) &mdash; ~69 QSOs/h (pipelined F/H, &minus;3.0 dB power split)
-            </div>
+            <div class="flow-summary summary-slow" data-i18n="SPEEDUP_PL_FT8_SUMMARY"><strong>Directed Exchange:</strong> 105 seconds (7 slots &times; 2 QSOs) &mdash; ~69 QSOs/h (&minus;3.0 dB power split)</div>
           </div>
 
           <!-- 4. LQ8 Pileup -->
@@ -2001,9 +1937,7 @@
             <div class="flow-card-header">
               <h4 data-i18n="SPEEDUP_CARD_PL_LQ8_TITLE">LQ8 Pileup</h4>
             </div>
-            <div class="flow-card-context-note" data-i18n="SPEEDUP_NOTE_ASSUMING_CQ">
-              (continuous pipelined pileup, no repeated CQ)
-            </div>
+            <div class="flow-card-context-note" data-i18n="SPEEDUP_NOTE_ASSUMING_CQ">(continuous pipelined pileup, no repeated CQ)</div>
             <div class="flow-steps">
               <div class="flow-step">
                 <div class="flow-step-num">1</div>
@@ -2018,9 +1952,7 @@
                 <div class="flow-step-msg msg-lq">HB9IPH TU2TU 73 / HB9IPH YO1YO 73</div>
               </div>
             </div>
-            <div class="flow-summary summary-ultra" data-i18n="SPEEDUP_PL_LQ8_SUMMARY">
-              <strong>Directed Exchange:</strong> 45 seconds (3 slots for 2 QSOs) &mdash; <span style="color: var(--emerald); font-weight: 700;">160 QSOs/h (2.33× speedup) with 0.0 dB power penalty</span>
-            </div>
+            <div class="flow-summary summary-ultra" data-i18n="SPEEDUP_PL_LQ8_SUMMARY"><strong>Directed Exchange:</strong> 45 seconds (3 slots &times; 2 QSOs) &mdash; <span style="color: var(--emerald); font-weight: 700;">160 QSOs/h (2.33× speedup) with 0.0 dB power penalty</span></div>
           </div>
         </div>
       </div>
@@ -2030,7 +1962,7 @@
     <section id="roadmap" class="section">
       <div class="container">
         <div class="section-header">
-          <h2 data-i18n="ROADMAP_TITLE">Strategic Roadmap &amp; Ecosystem Milestones</h2>
+          <h2 data-i18n="ROADMAP_TITLE">रणनीतिक रोडमैप</h2>
           <p data-i18n="ROADMAP_SUBTITLE">Our clear trajectory toward global amateur radio standardization, multi-platform applications, reverse beacon reporting, and electronic logbook integration.</p>
         </div>
 
@@ -2047,9 +1979,7 @@
             <div class="roadmap-status-icon status-active"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
             <div class="roadmap-content">
               <h4><span data-i18n="ROADMAP_P2_TITLE">Phase 2: Native Mobile Applications &amp; Field Validation</span> <span class="pill pill-cyan" data-i18n="ROADMAP_P2_STATUS">Active / Current</span></h4>
-              <p data-i18n="ROADMAP_P2_TEXT">
-                Comprehensive over-the-air field validation. Native mobile implementation in <strong>qFT8 for Android</strong> (<a href="https://qft8.com" target="_blank">qft8.com</a>) and development of native <strong>iPhone / iPad (iOS) transceiver applications</strong> for portable and field-day operation.
-              </p>
+              <p data-i18n="ROADMAP_P2_TEXT">Comprehensive over-the-air field validation. Native mobile implementation in <strong>qFT8 for Android</strong> (<a href="https://qft8.com" target="_blank">qft8.com</a>) and development of native <strong>iPhone / iPad (iOS) transceiver applications</strong> for portable and field-day operation.</p>
             </div>
           </div>
 
@@ -2057,9 +1987,7 @@
             <div class="roadmap-status-icon status-active"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
             <div class="roadmap-content">
               <h4><span data-i18n="ROADMAP_P3_TITLE">Phase 3: Adoption by Wide Applications &amp; Spotting Networks</span> <span class="pill pill-cyan" data-i18n="ROADMAP_P3_STATUS">Active / In Progress</span></h4>
-              <p data-i18n="ROADMAP_P3_TEXT">
-                Adoption by wide applications such as <strong>WSJT-X</strong>, <strong>JTDX</strong>, <strong>N1MM+</strong>, <strong>Ham Radio Deluxe</strong>, and <strong>Log4OM</strong>, as well as live reporting through the <strong>PSKReporter service</strong>, <strong>Reverse Beacon Network (RBN)</strong>, and <strong>HamSpots</strong>.
-              </p>
+              <p data-i18n="ROADMAP_P3_TEXT">Adoption by wide applications such as <strong>WSJT-X</strong>, <strong>JTDX</strong>, <strong>N1MM+</strong>, <strong>Ham Radio Deluxe</strong>, and <strong>Log4OM</strong>, as well as live reporting through the <strong>PSKReporter service</strong>, <strong>Reverse Beacon Network (RBN)</strong>, and <strong>HamSpots</strong>.</p>
             </div>
           </div>
 
@@ -2067,9 +1995,7 @@
             <div class="roadmap-status-icon status-upcoming"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
             <div class="roadmap-content">
               <h4><span data-i18n="ROADMAP_P4_TITLE">Phase 4: Formal ADIF Standardization &amp; Dedicated Logging Ecosystem</span> <span class="pill pill-amber" data-i18n="ROADMAP_P4_STATUS">In Progress</span></h4>
-              <p data-i18n="ROADMAP_P4_TEXT">
-                Formal submission of <code>LQ8</code> enum token to the <strong>Amateur Data Interchange Format (ADIF)</strong> Working Group (complementing existing 100% compliant <code>&lt;MODE:4&gt;DATA</code> + <code>&lt;SUBMODE&gt;</code> export). Dedicated native drop-downs and 1-click cloud sync integration across third-party logging suites, <strong>QRZ.com Logbook API</strong>, <strong>ARRL Logbook of the World (LoTW / TQSL)</strong>, <strong>eQSL.cc</strong>, and <strong>Club Log</strong>.
-              </p>
+              <p data-i18n="ROADMAP_P4_TEXT">Formal submission of <code>LQ8</code> enum token to the <strong>Amateur Data Interchange Format (ADIF)</strong> Working Group (complementing existing 100% compliant <code>&lt;MODE:4&gt;DATA</code> + <code>&lt;SUBMODE&gt;</code> export). Dedicated native drop-downs and 1-click cloud sync integration across third-party logging suites, <strong>QRZ.com Logbook API</strong>, <strong>ARRL Logbook of the World (LoTW / TQSL)</strong>, <strong>eQSL.cc</strong>, and <strong>Club Log</strong>.</p>
             </div>
           </div>
 
@@ -2088,7 +2014,7 @@
     <section id="technical" class="section">
       <div class="container">
         <div class="section-header">
-          <h2 data-i18n="TECH_TITLE">Technical Specifications &amp; Library</h2>
+          <h2 data-i18n="TECH_TITLE">तकनीकी विवरण और लाइब्रेरी</h2>
           <p data-i18n="TECH_SUBTITLE">Formal academic specification, open-source reference implementations, interactive physical layer explorer, and bit-level message inspection tools.</p>
         </div>
 
@@ -2097,12 +2023,12 @@
           <div class="tech-sub-section">
             <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: var(--radius-md); padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;">
               <div>
-                <h4 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; margin-bottom: 4px;" data-i18n="PAPER_BANNER_TITLE">Formal Specification Paper</h4>
+                <h4 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; margin-bottom: 4px;" data-i18n="PAPER_BANNER_TITLE">औपचारिक विनिर्देश पत्र</h4>
                 <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0;" data-i18n="PAPER_BANNER_TEXT">Comprehensive paper covering physical layer modulation, variable-length Huffman prefix codes, Varicode, and protocol state machines.</p>
               </div>
               <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
                 <!-- NOTE: The web portal intentionally links only to arXiv (never to a local doc or PDF). The URL points to https://arxiv.org/ temporarily while preprint submission and arXiv ID assignment are pending (tracked Action Item). -->
-                <a href="https://arxiv.org/" target="_blank" class="btn btn-primary" data-i18n="PAPER_BANNER_BTN">Read Paper on arXiv &rarr;</a>
+                <a href="https://arxiv.org/" target="_blank" class="btn btn-primary" data-i18n="PAPER_BANNER_BTN">arXiv पर पढ़ें &rarr;</a>
               </div>
             </div>
           </div>
@@ -2111,9 +2037,8 @@
           <div id="library" class="tech-sub-section">
             <div class="library-card">
               <div class="library-content">
-                <h3 data-i18n="LIBRARY_TITLE">Open-Source Reference Library (<code>lq_lib</code>) — C++20 &amp; Pure C API</h3>
-                <p data-i18n="LIBRARY_DESC">
-                  High-performance, zero-allocation C++20 and pure C99/C11 reference implementation supporting all LQ message encodings, GFSK continuous-phase audio synthesis, 2D STFT waterfall Costas synchronization, LDPC(174,91) Normalized Min-Sum codec with &gt;95% automated test coverage and parallel multi-candidate demodulation.</p>
+                <h3 data-i18n="LIBRARY_TITLE">ओपन-सोर्स संदर्भ लाइब्रेरी (lq_lib) — C++20 और C API</h3>
+                <p data-i18n="LIBRARY_DESC">High-performance, zero-allocation C++20 and pure C99/C11 reference implementation supporting all LQ message encodings, GFSK continuous-phase audio synthesis, 2D STFT waterfall Costas synchronization, LDPC(174,91) Normalized Min-Sum codec with &gt;95% automated test coverage and parallel multi-candidate demodulation.</p>
                 <div class="library-badges">
                   <span class="pill pill-emerald" data-i18n="LIBRARY_BADGE_1">C++20 &amp; Pure C99 API</span>
                   <span class="pill pill-cyan" data-i18n="LIBRARY_BADGE_2">&gt;95% Test Coverage</span>
@@ -2122,22 +2047,22 @@
                 </div>
               </div>
               <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <a href="https://github.com/lquesada/lq_lib" target="_blank" class="btn btn-primary" data-i18n="LIBRARY_BTN">View on GitHub &rarr;</a>
-                <a href="https://github.com/lquesada/lq_lib/issues" target="_blank" class="btn btn-secondary" data-i18n="LIBRARY_ISSUES_BTN">Report an Issue &rarr;</a>
+                <a href="https://github.com/lquesada/lq_lib" target="_blank" class="btn btn-primary" data-i18n="LIBRARY_BTN">GitHub पर देखें &rarr;</a>
+                <a href="https://github.com/lquesada/lq_lib/issues" target="_blank" class="btn btn-secondary" data-i18n="LIBRARY_ISSUES_BTN">সমস্যার প্রতিবেদন করুন &rarr;</a>
               </div>
             </div>
           </div>
 
           <!-- Interactive Physical Mode Comparison -->
           <div id="comparison" class="tech-sub-section">
-            <h3 data-i18n="MODE_COMPARE_TITLE">Interactive Physical Mode Comparison</h3>
+            <h3 data-i18n="MODE_COMPARE_TITLE">भौतिक मोड की इंटरैक्टिव तुलना</h3>
             <p style="color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 16px;" data-i18n="MODE_COMPARE_SUBTITLE">Explore the primary weak-signal standard (<strong>LQ8</strong>) and extended modes (<strong>LQ4</strong>, <strong>LQ2</strong>, <strong>LQ16</strong>).</p>
 
             <div class="mode-tabs">
-              <button class="mode-tab-btn active" id="tab_lq8" onclick="setMode('lq8')" data-i18n="TAB_LQ8"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: -1px; margin-right: 5px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>LQ8 (Standard HF · 50 Hz)</button>
-              <button class="mode-tab-btn" id="tab_lq4" onclick="setMode('lq4')" data-i18n="TAB_LQ4"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: -1px; margin-right: 5px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>LQ4 (High-Speed · 83.3 Hz)</button>
-              <button class="mode-tab-btn" id="tab_lq2" onclick="setMode('lq2')" data-i18n="TAB_LQ2"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: -1px; margin-right: 5px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>LQ2 (Ultra-Fast · 166.7 Hz)</button>
-              <button class="mode-tab-btn" id="tab_lq16" onclick="setMode('lq16')" data-i18n="TAB_LQ16"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: -1px; margin-right: 5px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>LQ16 (Slow · 25 Hz)</button>
+              <button class="mode-tab-btn active" id="tab_lq8" onclick="setMode('lq8')" data-i18n="TAB_LQ8">LQ8 (HF Standard · 50 Hz)</button>
+              <button class="mode-tab-btn" id="tab_lq4" onclick="setMode('lq4')" data-i18n="TAB_LQ4">LQ4 (High-Speed · 83.3 Hz)</button>
+              <button class="mode-tab-btn" id="tab_lq2" onclick="setMode('lq2')" data-i18n="TAB_LQ2">LQ2 (Ultra-Fast · 166.7 Hz)</button>
+              <button class="mode-tab-btn" id="tab_lq16" onclick="setMode('lq16')" data-i18n="TAB_LQ16">LQ16 (ধীর · 25 Hz)</button>
             </div>
 
             <div class="mode-details-card">
@@ -2242,7 +2167,7 @@
                   <span class="display-val hex radio-val" id="inspHex">00 1E F8 2B 38 4C 7D 11 22 C0</span>
                 </div>
                 <div class="display-row">
-                  <span class="display-label" data-i18n="INSP_LBL_CRC">CRC-14 Parity (0x2757):</span>
+                  <span class="display-label" data-i18n="INSP_LBL_CRC">CRC-14 Parity:</span>
                   <span class="display-val crc radio-val" id="inspCrc">0x1606</span>
                 </div>
               </div>
@@ -2251,10 +2176,10 @@
 
           <!-- Modulation & Waterfall Spectrogram -->
           <div class="tech-sub-section">
-            <h3 data-i18n="WATERFALL_TITLE">Physical Channel Tone Modulation</h3>
+            <h3 data-i18n="WATERFALL_TITLE">भौतिक चैनल टोन मॉडुलन</h3>
             <p data-i18n="WATERFALL_TEXT">Continuous-phase 8-GFSK frame structure with Costas synchronization arrays and LDPC(174,91) coded data symbols in 50.0&nbsp;Hz bandwidth.</p>
             <div class="waterfall-img-wrap">
-              <img src="tones_waterfall_lq8.png" alt="LQ8 Physical Frame Waterfall Spectrogram" data-i18n="WATERFALL_IMG_ALT" loading="lazy">
+              <img src="../tones_waterfall_lq8.png" alt="LQ8 Physical Frame Waterfall Spectrogram" data-i18n="WATERFALL_IMG_ALT" loading="lazy">
             </div>
           </div>
         </div>
@@ -2265,8 +2190,8 @@
     <section id="community" class="section">
       <div class="container">
         <div class="section-header">
-          <h2 data-i18n="COMMUNITY_TITLE">Community Support, Clubs &amp; DXpeditions</h2>
-          <p data-i18n="COMMUNITY_SUBTITLE">Recognized and supported by amateur radio clubs, DXpeditions, awards programs, and operators worldwide.</p>
+          <h2 data-i18n="COMMUNITY_TITLE">কমিউনিটি সমর্থন, ক্লাব এবং DX অভিযান</h2>
+          <p data-i18n="COMMUNITY_SUBTITLE">বিশ্বজুড়ে অপেশাদার রেডিও ক্লাব, DX অভিযান, পুরস্কার প্রোগ্রাম এবং অপারেটরদের দ্বারা স্বীকৃত এবং সমর্থিত।</p>
         </div>
         <div style="background: var(--surface-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 36px 32px; margin-bottom: 24px;">
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 32px;">
@@ -2277,18 +2202,16 @@
                 <div style="width: 36px; height: 36px; border-radius: 50%; background: rgba(56, 189, 248, 0.15); display: flex; align-items: center; justify-content: center; color: var(--cyan); flex-shrink: 0;">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                 </div>
-                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin: 0;" data-i18n="COMMUNITY_CLUBS_TITLE">Clubs &amp; Organizations</h4>
+                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin: 0;" data-i18n="COMMUNITY_CLUBS_TITLE">ক্লাব এবং সংস্থাসমূহ</h4>
               </div>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 0 0 16px 0;" data-i18n="COMMUNITY_CLUBS_DESC">
-                Radio clubs, contesting groups, and emergency communications teams experimenting with and adopting LQ digital modes.
-              </p>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 0 0 16px 0;" data-i18n="COMMUNITY_CLUBS_DESC">রেডিও ক্লাব, প্রতিযোগিতা দল এবং জরুরি যোগাযোগ দল যারা LQ ডিজিটাল মোড পরীক্ষা ও ব্যবহার করছে।</p>
               <!-- Clubs Directory List -->
               <div style="margin-top: auto; background: rgba(0, 0, 0, 0.25); border: 1px dashed rgba(56, 189, 248, 0.25); border-radius: var(--radius-sm); padding: 14px 16px;">
                 <ul id="community-clubs-list" style="list-style: none; padding: 0; margin: 0; font-size: 0.88rem;">
                   <!-- Add club entries here: <li style="padding: 4px 0;"><a href="..." target="_blank" style="color: var(--text-primary); font-weight: 600;">Club Name</a> (Callsign) — Description</li> -->
                   <li style="color: var(--text-tertiary); font-style: italic; display: flex; align-items: center; gap: 8px;">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity: 0.7; flex-shrink: 0;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                    <span data-i18n="COMMUNITY_EMPTY_NOTE">No entries listed yet — submit yours below!</span>
+                    <span data-i18n="COMMUNITY_EMPTY_NOTE">এখনও কোনো এন্ট্রি নেই — নিচে আপনারটি জমা দিন!</span>
                   </li>
                 </ul>
               </div>
@@ -2300,18 +2223,16 @@
                 <div style="width: 36px; height: 36px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); display: flex; align-items: center; justify-content: center; color: var(--emerald); flex-shrink: 0;">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
                 </div>
-                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin: 0;" data-i18n="COMMUNITY_DX_TITLE">DXpeditions &amp; Activations</h4>
+                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin: 0;" data-i18n="COMMUNITY_DX_TITLE">DX অভিযান ও অ্যাক্টিভেশন</h4>
               </div>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 0 0 16px 0;" data-i18n="COMMUNITY_DX_DESC">
-                DXpeditions, IOTA, SOTA, and POTA operators leveraging high-throughput multi-station response frames to clear pileups rapidly.
-              </p>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 0 0 16px 0;" data-i18n="COMMUNITY_DX_DESC">DX অভিযান, IOTA, SOTA এবং POTA অপারেটর যারা দ্রুত পাইলআপ সম্পন্ন করতে মাল্টি-স্টেশন ফ্রেম ব্যবহার করে।</p>
               <!-- DXpeditions Directory List -->
               <div style="margin-top: auto; background: rgba(0, 0, 0, 0.25); border: 1px dashed rgba(16, 185, 129, 0.25); border-radius: var(--radius-sm); padding: 14px 16px;">
                 <ul id="community-dx-list" style="list-style: none; padding: 0; margin: 0; font-size: 0.88rem;">
                   <!-- Add DXpedition entries here: <li style="padding: 4px 0;"><a href="..." target="_blank" style="color: var(--text-primary); font-weight: 600;">DXpedition / Activation</a> — Callsign, Grid/Location</li> -->
                   <li style="color: var(--text-tertiary); font-style: italic; display: flex; align-items: center; gap: 8px;">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity: 0.7; flex-shrink: 0;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                    <span data-i18n="COMMUNITY_EMPTY_NOTE">No entries listed yet — submit yours below!</span>
+                    <span data-i18n="COMMUNITY_EMPTY_NOTE">এখনও কোনো এন্ট্রি নেই — নিচে আপনারটি জমা দিন!</span>
                   </li>
                 </ul>
               </div>
@@ -2323,18 +2244,16 @@
                 <div style="width: 36px; height: 36px; border-radius: 50%; background: rgba(168, 85, 247, 0.15); display: flex; align-items: center; justify-content: center; color: #c084fc; flex-shrink: 0;">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
                 </div>
-                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin: 0;" data-i18n="COMMUNITY_AWARDS_TITLE">Operators, QRZ &amp; Awards</h4>
+                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin: 0;" data-i18n="COMMUNITY_AWARDS_TITLE">অপারেটর, QRZ এবং পুরস্কার</h4>
               </div>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 0 0 16px 0;" data-i18n="COMMUNITY_AWARDS_DESC">
-                Individual radio amateurs featuring LQ8 on their QRZ.com profiles, club rosters, and participating in award tracking.
-              </p>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 0 0 16px 0;" data-i18n="COMMUNITY_AWARDS_DESC">রেডিও অপেশাদার যারা তাদের QRZ.com প্রোফাইল এবং ক্লাবের তালিকায় LQ8 অন্তর্ভুক্ত করে।</p>
               <!-- Operators Directory List -->
               <div style="margin-top: auto; background: rgba(0, 0, 0, 0.25); border: 1px dashed rgba(168, 85, 247, 0.25); border-radius: var(--radius-sm); padding: 14px 16px;">
                 <ul id="community-awards-list" style="list-style: none; padding: 0; margin: 0; font-size: 0.88rem;">
                   <!-- Add operator/award entries here: <li style="padding: 4px 0;"><a href="..." target="_blank" style="color: var(--text-primary); font-weight: 600;">Callsign</a> — Name, Country / Program</li> -->
                   <li style="color: var(--text-tertiary); font-style: italic; display: flex; align-items: center; gap: 8px;">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity: 0.7; flex-shrink: 0;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                    <span data-i18n="COMMUNITY_EMPTY_NOTE">No entries listed yet — submit yours below!</span>
+                    <span data-i18n="COMMUNITY_EMPTY_NOTE">এখনও কোনো এন্ট্রি নেই — নিচে আপনারটি জমা দিন!</span>
                   </li>
                 </ul>
               </div>
@@ -2345,22 +2264,12 @@
           <!-- Contact / Get Listed Banner -->
           <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12) 0%, rgba(168, 85, 247, 0.1) 100%); border: 1px solid rgba(56, 189, 248, 0.35); border-radius: var(--radius-md); padding: 24px 28px; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;">
             <div style="max-width: 650px;">
-              <h4 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 800; color: var(--text-primary); margin-bottom: 6px;" data-i18n="COMMUNITY_FORM_TITLE">
-                Get Listed or Contact Us
-              </h4>
-              <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin: 0;" data-i18n="COMMUNITY_FORM_DESC">
-                Are you a club, DXpedition organizer, software developer, award manager, or ham who includes LQ in your QRZ bio? Reach out via our contact form to be featured here or to get in touch with the project team. To report bugs or submit feature requests, visit our GitHub Issues tracker.
-              </p>
+              <h4 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 800; color: var(--text-primary); margin-bottom: 6px;" data-i18n="COMMUNITY_FORM_TITLE">তালিকায় অন্তর্ভুক্ত হতে বা যোগাযোগ করুন</h4>
+              <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin: 0;" data-i18n="COMMUNITY_FORM_DESC">আপনি কি কোনো ক্লাব, ডিএক্স অভিযান সংগঠক বা হ্যাম যার কিউআরজেড-এ এলকিউ রয়েছে? ফর্মের মাধ্যমে যোগাযোগ করুন। বাগ রিপোর্ট করতে GitHub Issues দেখুন।</p>
             </div>
             <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
-              <a href="https://forms.gle/nFJ6mLHqiqie2cMbA" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; white-space: nowrap;" data-i18n="COMMUNITY_FORM_BTN">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                <span>Contact / Submit Info &rarr;</span>
-              </a>
-              <a href="https://github.com/lquesada/lq_lib/issues" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; white-space: nowrap;" data-i18n="COMMUNITY_ISSUES_BTN">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                <span>Report an Issue (GitHub) &rarr;</span>
-              </a>
+              <a href="https://forms.gle/nFJ6mLHqiqie2cMbA" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; white-space: nowrap;" data-i18n="COMMUNITY_FORM_BTN">যোগাযোগ / তথ্য জমা দিন &rarr;</a>
+              <a href="https://github.com/lquesada/lq_lib/issues" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; white-space: nowrap;" data-i18n="COMMUNITY_ISSUES_BTN">সমস্যার প্রতিবেদন করুন (GitHub) &rarr;</a>
             </div>
           </div>
 
@@ -2374,42 +2283,38 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col">
-          <h5 data-i18n="FOOTER_ABOUT_TITLE">The LQ Digital Mode Family</h5>
-          <p style="font-size: 0.86rem; color: var(--text-secondary); line-height: 1.55;" data-i18n="FOOTER_ABOUT_TEXT">
-            Next-generation weak-signal digital mode family designed for high-efficiency amateur radio communication on HF, VHF, and UHF.
-          </p>
+          <h5 data-i18n="FOOTER_ABOUT_TITLE">LQ डिजिटल मोड परिवार</h5>
+          <p style="font-size: 0.86rem; color: var(--text-secondary); line-height: 1.55;" data-i18n="FOOTER_ABOUT_TEXT">Next-generation weak-signal digital mode family designed for high-efficiency amateur radio communication on HF, VHF, and UHF.</p>
         </div>
 
         <div class="footer-col">
-          <h5 data-i18n="FOOTER_ECOSYSTEM_TITLE">Ecosystem & Software</h5>
+          <h5 data-i18n="FOOTER_ECOSYSTEM_TITLE">पारिस्थितिकी तंत्र और सॉफ्टवेयर</h5>
           <ul>
             <li><a href="https://qft8.com" target="_blank" data-i18n="FOOTER_LINK_QFT8">qFT8 for Android</a></li>
-            <li><a href="https://t.me/lq8mode" target="_blank" data-i18n="FOOTER_LINK_TELEGRAM">Telegram Group</a></li>
+            <li><a href="https://t.me/lq8mode" target="_blank" data-i18n="FOOTER_LINK_TELEGRAM">Telegram গ্রুপ</a></li>
             <li><a href="https://www.reddit.com/r/LQ8" target="_blank" data-i18n="FOOTER_LINK_REDDIT">r/LQ8 Subreddit</a></li>
             <li><a href="https://groups.google.com/g/lq8-news" target="_blank" data-i18n="FOOTER_LINK_MAILING">LQ8 News (Mailing List)</a></li>
             <li><a href="#adif" data-i18n="FOOTER_LINK_ADIF">ADIF Log Standard</a></li>
             <li><a href="https://github.com/lquesada/lq_lib" target="_blank" data-i18n="FOOTER_LINK_GITHUB">lq_lib GitHub Repository</a></li>
-            <li><a href="https://github.com/lquesada/lq_lib/issues" target="_blank" data-i18n="FOOTER_LINK_ISSUES">Report an Issue (GitHub Issues)</a></li>
+            <li><a href="https://github.com/lquesada/lq_lib/issues" target="_blank" data-i18n="FOOTER_LINK_ISSUES">সমস্যা জানান (GitHub Issues)</a></li>
             <!-- NOTE: The web portal intentionally links only to arXiv (never to a local doc or PDF). The URL points to https://arxiv.org/ temporarily while preprint submission and arXiv ID assignment are pending (tracked Action Item). -->
             <li><a href="https://arxiv.org/" target="_blank" data-i18n="FOOTER_LINK_PAPER">Specification Paper (arXiv)</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
-          <h5 data-i18n="FOOTER_AUTHOR_TITLE">Author & Contact</h5>
+          <h5 data-i18n="FOOTER_AUTHOR_TITLE">लेखक और संपर्क</h5>
           <ul>
             <li><a href="https://luisquesada.com" target="_blank" data-i18n="FOOTER_LINK_AUTHOR">Luis Quesada (HB9IPH)</a></li>
             <li><a href="https://www.linkedin.com/in/luisquesadatorres/" target="_blank" data-i18n="FOOTER_LINK_LINKEDIN">LinkedIn Profile</a></li>
             <li><a href="https://www.qrz.com/db/HB9IPH" target="_blank" data-i18n="FOOTER_LINK_QRZ">QRZ: HB9IPH</a></li>
-            <li><a href="https://forms.gle/nFJ6mLHqiqie2cMbA" target="_blank" data-i18n="FOOTER_LINK_CONTACT">Contact Form &amp; Community Listing</a></li>
+            <li><a href="https://forms.gle/nFJ6mLHqiqie2cMbA" target="_blank" data-i18n="FOOTER_LINK_CONTACT">যোগাযোগ ফর্ম এবং কমিউনিটি তালিকা</a></li>
           </ul>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <div data-i18n="FOOTER_COPYRIGHT">
-          &copy; 2026 Luis Quesada (HB9IPH) · Released under the open-source MIT License.
-        </div>
+        <div data-i18n="FOOTER_COPYRIGHT">&copy; 2026 Luis Quesada (HB9IPH) &middot; Released under the open-source MIT License.</div>
         <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
           <button onclick="shareLQModes()" class="footer-share-btn" aria-label="Share lq8.org">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -2419,11 +2324,9 @@
               <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
               <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
             </svg>
-            <span data-i18n="COMMUNITY_SHARE_BTN">Share lq8.org</span>
+            <span data-i18n="COMMUNITY_SHARE_BTN">lq8.org साझा करें</span>
           </button>
-          <div data-i18n="FOOTER_PORTAL">
-            Official Portal: <a href="https://lq8.org">lq8.org</a>
-          </div>
+          <div data-i18n="FOOTER_PORTAL">Official Portal: <a href="https://lq8.org">lq8.org</a></div>
         </div>
       </div>
     </div>
@@ -2437,10 +2340,8 @@
           <polyline points="20 6 9 17 4 12"/>
         </svg>
       </div>
-      <h3 id="share-modal-title" class="share-modal-title" data-i18n="MODAL_SHARE_TITLE">Link Copied to Clipboard!</h3>
-      <p class="share-modal-desc" data-i18n="MODAL_SHARE_DESC">
-        The link has been copied to your clipboard. Paste and share it with fellow radio amateurs, developer groups, and on forums!
-      </p>
+      <h3 id="share-modal-title" class="share-modal-title" data-i18n="MODAL_SHARE_TITLE">लिंक क्लिपबोर्ड पर कॉपी हो गया!</h3>
+      <p class="share-modal-desc" data-i18n="MODAL_SHARE_DESC">लिंक कॉपी हो गया है। इसे रेडियो मित्रों और मंचों पर साझा करें!</p>
       <div class="share-modal-link-box">
         <span id="share-modal-url">https://lq8.org</span>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; opacity:0.8;">
@@ -2449,7 +2350,7 @@
         </svg>
       </div>
       <div class="share-modal-actions">
-        <button id="btn-share-modal-ok" class="btn-modal-ok" onclick="closeShareModal()" autofocus data-i18n="MODAL_SHARE_OK">OK</button>
+        <button id="btn-share-modal-ok" class="btn-modal-ok" onclick="closeShareModal()" autofocus data-i18n="MODAL_SHARE_OK">ठीक है</button>
       </div>
     </div>
   </div>

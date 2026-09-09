@@ -1,0 +1,76 @@
+% =============================================================================
+% The LQ Digital Mode Family — Reference Implementation (lq_lib)
+%
+% Author:  Luis Quesada (HB9IPH)
+% Web:     https://luisquesada.com
+% Portal:  https://lquesada.github.io/lq_lib/
+% GitHub:  https://github.com/lquesada/lq_lib
+% App:     qFT8 — Portable Amateur Radio for Android (https://qft8.com)
+%
+% License: MIT License (https://github.com/lquesada/lq_lib/blob/main/LICENSE)
+%
+% Copyright (c) 2026 Luis Quesada (HB9IPH)
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in
+% all copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+% =============================================================================
+
+\begin{table*}[t]
+\centering
+\small
+\vspace{-4pt}
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{0.95}
+\caption{The complete Gallager $\text{LDPC}(174, 91)$ generator matrix $G_{83 \times 91}$ (83 rows $\times$ 23 hex digits). Each row represents 92 bits MSB-aligned; bit 0 of the 23rd hex digit is an unused zero padding bit.}
+\label{tab:ldpc_g}
+\vspace{-2pt}
+\begin{tabular}{@{}cl | cl | cl@{}}
+\toprule
+\textbf{Row} & \textbf{Generator Vector (23 Hex Digits)} & \textbf{Row} & \textbf{Generator Vector (23 Hex Digits)} & \textbf{Row} & \textbf{Generator Vector (23 Hex Digits)} \\
+\midrule
+00 & \texttt{8329ce11bf31eaf509f27fc} & 28 & \texttt{8eba1a13db3390bd6718cec} & 56 & \texttt{7ee18230c583cccc57d4b08} \\
+01 & \texttt{761c264e25c259335493132} & 29 & \texttt{753844673a27782cc42012e} & 57 & \texttt{a066cb2fedafc9f52664126} \\
+02 & \texttt{dc265902fb277c6410a1bdc} & 30 & \texttt{06ff83a145c37035a5c1268} & 58 & \texttt{bb23725abc47cc5f4cc4cd2} \\
+03 & \texttt{1b3f417858cd2dd33ec7f62} & 31 & \texttt{3b37417858cc2dd33ec3f62} & 59 & \texttt{ded9dba3bee40c59b5609b4} \\
+04 & \texttt{09fda4fee04195fd034783a} & 32 & \texttt{9a4a5a28ee17ca9c324842c} & 60 & \texttt{d9a7016ac653e6decdc9036} \\
+05 & \texttt{077cccc11b8873ed5c3d48a} & 33 & \texttt{bc29f465309c977e89610a4} & 61 & \texttt{9ad46aed5f707f280ab5fc4} \\
+06 & \texttt{29b62afe3ca036f4fe1a9da} & 34 & \texttt{2663ae6ddf8b5ce2bb29488} & 62 & \texttt{e5921c77822587316d7d3c2} \\
+07 & \texttt{6054faf5f35d96d3b0c8c3e} & 35 & \texttt{46f231efe457034c1814418} & 63 & \texttt{4f14da8242a8b86dca73352} \\
+08 & \texttt{e20798e4310eed27884ae90} & 36 & \texttt{3fb2ce85abe9b0c72e06fbe} & 64 & \texttt{8b8b507ad467d4441df770e} \\
+09 & \texttt{775c9c08e80e26ddae56318} & 37 & \texttt{de87481f282c153971a0a2e} & 65 & \texttt{22831c9cf1169467ad04b68} \\
+10 & \texttt{b0b811028c2bf997213487c} & 38 & \texttt{fcd7ccf23c69fa99bba1412} & 66 & \texttt{213b838fe2ae54c38ee7180} \\
+11 & \texttt{18a0c9231fc60adf5c5ea32} & 39 & \texttt{f0261447e9490ca8e474cec} & 67 & \texttt{5d926b6dd71f085181a4e12} \\
+12 & \texttt{76471e8302a0721e01b12b8} & 40 & \texttt{4410115818196f95cdd7012} & 68 & \texttt{66ab79d4b29ee6e69509e56} \\
+13 & \texttt{ffbccb80ca8341fafb47b2e} & 41 & \texttt{088fc31df4bfbde2a4eafb4} & 69 & \texttt{958148682d748a38dd68baa} \\
+14 & \texttt{66a72a158f9325a2bf67170} & 42 & \texttt{b8fef1b6307729fb0a078c0} & 70 & \texttt{b8ce020cf069c32a723ab14} \\
+15 & \texttt{c4243689fe85b1c51363a18} & 43 & \texttt{5afea7acccb77bbc9d99a90} & 71 & \texttt{f4331d6d461607e95752746} \\
+16 & \texttt{0dff739414d1a1b34b1c270} & 44 & \texttt{49a7016ac653f65ecdc9076} & 72 & \texttt{6da23ba424b9596133cf9c8} \\
+17 & \texttt{15b48830636c8b99894972e} & 45 & \texttt{1944d085be4e7da8d6cc7d0} & 73 & \texttt{a636bcbc7b30c5fbeae67fe} \\
+18 & \texttt{29a89c0d3de81d665489b0e} & 46 & \texttt{251f62adc4032f0ee714002} & 74 & \texttt{5cb0d86a07df654a9089a20} \\
+19 & \texttt{4f126f37fa51cbe61bd6b94} & 47 & \texttt{56471f8702a0721e00b12b8} & 75 & \texttt{f11f106848780fc9ecdd80a} \\
+20 & \texttt{99c47239d0d97d3c84e0940} & 48 & \texttt{2b8e4923f2dd51e2d537fa0} & 76 & \texttt{1fbb5364fb8d2c9d730d5ba} \\
+21 & \texttt{1919b75119765621bb4f1e8} & 49 & \texttt{6b550a40a66f4755de95c26} & 77 & \texttt{fcb86bc70a50c9d02a5d034} \\
+22 & \texttt{09db12d731faee0b86df6b8} & 50 & \texttt{a18ad28d4e27fe92a4f6c84} & 78 & \texttt{a534433029eac15f322e34c} \\
+23 & \texttt{488fc33df43fbdeea4eafb4} & 51 & \texttt{10c2e586388cb82a3d80758} & 79 & \texttt{c989d9c7c3d3b8c55d75130} \\
+24 & \texttt{827423ee40b675f756eb5fe} & 52 & \texttt{ef34a41817ee02133db2eb0} & 80 & \texttt{7bb38b2f0186d46643ae962} \\
+25 & \texttt{abe197c484cb74757144a9a} & 53 & \texttt{7e9c0c54325a9c15836e000} & 81 & \texttt{2644ebadeb44b9467d1f42c} \\
+26 & \texttt{2b500e4bc0ec5a6d2bdbdd0} & 54 & \texttt{3693e572d1fde4cdf079e86} & 82 & \texttt{608cc857594bfbb55d69600} \\
+27 & \texttt{c474aa53d70218761669360} & 55 & \texttt{bfb2cec5abe1b0c72e07fbe} &    & \\
+\bottomrule
+\end{tabular}
+\end{table*}
