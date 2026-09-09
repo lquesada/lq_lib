@@ -5,6 +5,7 @@
 [![Web Portal](https://img.shields.io/badge/Web%20Portal-lq8.org-cyan)](https://lq8.org)
 [![Native Support](https://img.shields.io/badge/Supported%20By-qFT8-success)](https://qft8.com)
 [![Paper](https://img.shields.io/badge/Specification-PDF-red)](paper/lq_digitalmode.pdf)
+[![arXiv](https://img.shields.io/badge/arXiv-2609.06427-b31b1b.svg)](http://arxiv.org/abs/2609.06427)
 
 **LQ** is a family of next-generation amateur radio digital modes designed for high-efficiency weak-signal communication across HF, VHF, and UHF bands.
 
@@ -13,6 +14,7 @@
 * **Open-Source Repository:** [https://github.com/lquesada/lq_lib](https://github.com/lquesada/lq_lib)
 * **Native Android Application:** [qFT8](https://qft8.com)
 * **Specification Document:** [`paper/lq_digitalmode.pdf`](paper/lq_digitalmode.pdf)
+* **arXiv Preprint:** [http://arxiv.org/abs/2609.06427](http://arxiv.org/abs/2609.06427)
 * **Strategic Roadmap:** [`TODO.md`](TODO.md)
 
 ---
@@ -788,6 +790,7 @@ cd paper
 The resulting PDF document (`paper/lq_digitalmode.pdf`) provides the complete mathematical and protocol architecture specification for software and SDR developers:
 * **Title:** *The LQ Digital Mode Family: Protocol Architecture and Reference Specification for Weak-Signal Communications*
 * **Author:** Luis Quesada (HB9IPH)
+* **arXiv Preprint:** [http://arxiv.org/abs/2609.06427](http://arxiv.org/abs/2609.06427)
 
 ---
 
@@ -814,6 +817,8 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 ## 🔗 Links & References
 
 * **Official Web Portal:** [https://lq8.org](https://lq8.org)
+* **Academic Paper (arXiv):** [http://arxiv.org/abs/2609.06427](http://arxiv.org/abs/2609.06427)
+* **Specification Document (PDF):** [`paper/lq_digitalmode.pdf`](paper/lq_digitalmode.pdf)
 * **Community Subreddit:** [https://www.reddit.com/r/LQ8](https://www.reddit.com/r/LQ8)
 * **News & Updates (Mailing List):** [https://groups.google.com/g/lq8-news](https://groups.google.com/g/lq8-news)
 * **Author Website:** [https://luisquesada.com](https://luisquesada.com)
