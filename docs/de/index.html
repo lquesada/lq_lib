@@ -1515,8 +1515,8 @@
         <p class="hero-sub" style="margin-top: 18px;" data-i18n="HERO_SUBTITLE"><strong>LQ8</strong> ist ein Amateurfunk-Schwachsignalprotokoll der nächsten Generation, das variable Präfixcodes über der <strong>bewährten FT8-Bitübertragungsschicht</strong> (8-GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR) nutzt. Vollständige QSOs in <strong>4 Durchgängen (60s vs. 75–90s)</strong> und <strong>160 QSOs/h in Pileups (>2.3× über FT8 Fox &amp; Hound)</strong> mit 0.0 dB HF-Leistungsteilung (skalierend auf <strong>320 QSOs/h</strong> bei Doppelträger).</p>
 
         <div style="display: flex; gap: 14px; justify-content: center; align-items: center; margin-top: 24px; flex-wrap: wrap;">
-          <a href="#operation" class="btn btn-primary" data-i18n="HERO_BTN_DISCOVER">Discover LQ8 &rarr;</a>
-          <a href="http://arxiv.org/abs/2609.06427" target="_blank" class="btn btn-secondary" data-i18n="HERO_BTN_PAPER">Read Paper &amp; Specs (PDF)</a>
+          <a href="#operation" class="btn btn-primary" data-i18n="HERO_BTN_DISCOVER">LQ8 entdecken &rarr;</a>
+          <a href="http://arxiv.org/abs/2609.06427" target="_blank" class="btn btn-secondary" data-i18n="HERO_BTN_PAPER">Artikel und Spezifikationen lesen (PDF)</a>
         </div>
 
         <!-- 4 Pitch Cards Grid -->
@@ -1543,7 +1543,7 @@
             <h3 data-i18n="PITCH_CARD_2_TITLE">Pileups mit hoher Dichte</h3>
             <div class="pitch-stat">
               <span class="stat-main" data-i18n="PITCH_CARD_2_STAT_MAIN">2.33×</span>
-              <span class="stat-sub" data-i18n="PITCH_CARD_2_STAT_SUB">vs. FT8 Fox & Hound</span>
+              <span class="stat-sub" data-i18n="PITCH_CARD_2_STAT_SUB">vs. FT8 Fox &amp; Hound</span>
             </div>
             <p class="pitch-desc" data-i18n="PITCH_CARD_2_DESC">Im kontinuierlichen Pileup-Betrieb erzielen 3 gerichtete Schritte (vs. 7 in FT8 Fox & Hound) mit 2 bestätigten Anrufern pro Frame <strong>160 QSOs/h (2.33×)</strong> mit 0.0 dB Leistungsverlust, skalierend auf <strong>320 QSOs/h (4.67×)</strong> mit Dualton!</p>
             <ul class="pitch-list">
@@ -1581,7 +1581,7 @@
             <ul class="pitch-list">
               <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_4_LI_1">LQ4: 30s 4-Schritt-QSO (83.3 Hz)</span></li>
               <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_4_LI_2">LQ2: 15s 4-Schritt-QSO (166.7 Hz)</span></li>
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_4_LI_3">LQ16: &minus;24.0 dB DX (25.0 Hz)</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_4_LI_3">120–240 Kontakte/Stunde</span></li>
             </ul>
           </div>
         </div>
@@ -1788,8 +1788,8 @@
                 <thead>
                   <tr>
                     <th data-i18n="ADIF_TH_PROTOCOL">Protokoll</th>
-                    <th data-i18n="ADIF_TH_MODE">ADIF Mode Tag</th>
-                    <th data-i18n="ADIF_TH_SUBMODE">ADIF Submode Tag</th>
+                    <th data-i18n="ADIF_TH_MODE">ADIF-Modus-Tag</th>
+                    <th data-i18n="ADIF_TH_SUBMODE">ADIF-Submodus-Tag</th>
                     <th data-i18n="ADIF_TH_COMMENT">Standard-Kommentarfeld</th>
                   </tr>
                 </thead>
@@ -2043,7 +2043,7 @@
                   <span class="pill pill-emerald" data-i18n="LIBRARY_BADGE_1">C++20 & Reine C99 API</span>
                   <span class="pill pill-cyan" data-i18n="LIBRARY_BADGE_2">&gt;95% Testabdeckung</span>
                   <span class="pill pill-purple" data-i18n="LIBRARY_BADGE_3">Multi-Threaded / Paralleles DSP</span>
-                  <span class="pill pill-amber" data-i18n="LIBRARY_BADGE_4">MIT-Lizenz</span>
+                  <span class="pill pill-amber" data-i18n="LIBRARY_BADGE_4">MIT License</span>
                 </div>
               </div>
               <div style="display: flex; gap: 10px; flex-wrap: wrap;">
@@ -2060,8 +2060,8 @@
 
             <div class="mode-tabs">
               <button class="mode-tab-btn active" id="tab_lq8" onclick="setMode('lq8')" data-i18n="TAB_LQ8">LQ8 (Schneller QSO-Digitalmodus)</button>
-              <button class="mode-tab-btn" id="tab_lq4" onclick="setMode('lq4')" data-i18n="TAB_LQ4">LQ4 (High-Speed · 83.3 Hz)</button>
-              <button class="mode-tab-btn" id="tab_lq2" onclick="setMode('lq2')" data-i18n="TAB_LQ2">LQ2 (Ultra-Fast · 166.7 Hz)</button>
+              <button class="mode-tab-btn" id="tab_lq4" onclick="setMode('lq4')" data-i18n="TAB_LQ4">LQ4 (Hochgeschwindigkeit · 83,3 Hz)</button>
+              <button class="mode-tab-btn" id="tab_lq2" onclick="setMode('lq2')" data-i18n="TAB_LQ2">LQ2 (Ultraschnell · 166,7 Hz)</button>
               <button class="mode-tab-btn" id="tab_lq16" onclick="setMode('lq16')" data-i18n="TAB_LQ16">LQ16 (Langsam · 25 Hz)</button>
             </div>
 
@@ -2088,7 +2088,7 @@
                   <div class="spec-value highlight" id="modeSnr">-21.0 dB</div>
                 </div>
                 <div class="spec-box">
-                  <div class="spec-label" data-i18n="SPEC_MAX_RATE">Max. Verbindungsrate</div>
+                  <div class="spec-label" data-i18n="SPEC_MAX_RATE">Max. Kontaktrate</div>
                   <div class="spec-value highlight" id="modeRate">1.00 QSO/min</div>
                 </div>
               </div>
@@ -2295,7 +2295,7 @@
             <li><a href="https://www.reddit.com/r/LQ8" target="_blank" data-i18n="FOOTER_LINK_REDDIT">r/LQ8 Subreddit</a></li>
             <li><a href="https://groups.google.com/g/lq8-news" target="_blank" data-i18n="FOOTER_LINK_MAILING">LQ8 News (Mailingliste)</a></li>
             <li><a href="#adif" data-i18n="FOOTER_LINK_ADIF">ADIF Log-Standard</a></li>
-            <li><a href="https://github.com/lquesada/lq_lib" target="_blank" data-i18n="FOOTER_LINK_GITHUB">lq_lib GitHub Repository</a></li>
+            <li><a href="https://github.com/lquesada/lq_lib" target="_blank" data-i18n="FOOTER_LINK_GITHUB">lq_lib GitHub-Repository</a></li>
             <li><a href="https://github.com/lquesada/lq_lib/issues" target="_blank" data-i18n="FOOTER_LINK_ISSUES">Fehler Melden (GitHub Issues)</a></li>
             <!-- Official arXiv preprint link: http://arxiv.org/abs/2609.06427 -->
             <li><a href="http://arxiv.org/abs/2609.06427" target="_blank" data-i18n="FOOTER_LINK_PAPER">Spezifikationsarbeit (arXiv)</a></li>
