@@ -1,0 +1,175 @@
+# =============================================================================
+# LQ8 / qFT8 Root .gitignore
+# =============================================================================
+
+# --- Android & Gradle Build Artifacts ---
+.gradle/
+build/
+*/build/
+app/build/
+bin/
+src_test_env/
+.cxx/
+*/.cxx/
+app/.cxx/
+.externalNativeBuild/
+*/.externalNativeBuild/
+captures/
+output.json
+
+# APKs, AARs, and App Bundles
+*.apk
+*.aab
+*.ap_
+*.dex
+*.aar
+*.class
+*.jar
+!**/gradle/wrapper/*.jar
+lint/
+lint-results*
+
+# Android Studio & Local Config
+local.properties
+*.iml
+.idea/
+.vscode/
+.clangd/
+.cache/
+
+# Signing keys & secrets
+*.jks
+*.keystore
+google-services.json
+
+# Android Logs & Emulators
+crash.log
+emulator_log.txt
+emulator_stable.log
+*.log
+
+# --- C++ & CMake Build Artifacts ---
+.deps_cache/
+build/
+*/build/
+build_*/
+build_coverage/
+coverage/
+coverage_html/
+*.info
+CMakeUserPresets.json
+cmake-build-*/
+_deps/
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.so.*
+*.dylib
+*.dll
+*.exe
+*.gcov
+*.gcda
+*.gcno
+
+# Binaries
+lq_demo
+lq_transceiver
+lq_matrix
+lq_tutorial
+lq_c_api_demo
+verify_paper_examples
+verify_golden_vectors
+generate_golden_vectors
+generate_test_battery
+benchmark_suite
+export_tones
+test_ft8_compat
+tones_data.json
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+compile_commands.json
+CTestTestfile.cmake
+Testing/
+
+# --- Python Cache & Bytecode ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.venv/
+venv/
+env/
+ENV/
+.coverage
+.coverage.*
+.mypy_cache/
+.ruff_cache/
+
+# --- Audio and Media Outputs ---
+*.wav
+*.raw
+*.pcm
+
+# --- LaTeX Build & Preview Outputs ---
+paper/build/*
+!paper/build/lq_digitalmode.pdf
+!paper/lq_digitalmode.pdf
+paper/table.*
+paper/preview/
+preview/
+paper/page-*.png
+paper/page_*.png
+paper/*.png
+paper/figures/*.png
+page-*.png
+page_*.png
+exampledocs/
+*.aux
+*.out
+*.toc
+*.lot
+*.lof
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.run.xml
+*-blx.bib
+
+# --- External Test Libraries & Fixtures ---
+tests/test_ft8_lib/build/
+tests/test_ft8_lib/ft8_lib/.git/
+tests/test_ft8_lib/ft8_lib/test/
+tests/test_ft8_lib/ft8_lib/build/
+
+# --- OS and Editor Temporary Files ---
+.DS_Store
+._*
+Thumbs.db
+*.swp
+.*.swp
+*.swo
+.*.swo
+*~
+*.bak
+*.tmp
+*.orig
+*.rej
+temp/
+scratch/
+test_lightning.*
+
+# --- Agent Guidelines & Workspaces ---
+AGENTS
+AGENTS*
+.agents/
+.agents
+
