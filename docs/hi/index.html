@@ -1698,10 +1698,10 @@
           <div class="mode-compare-box frequencies-box" style="margin-bottom: 20px; border-left-color: var(--cyan); background: rgba(56, 189, 248, 0.06); padding: 18px 22px;">
             <div style="font-weight: 700; color: var(--cyan); margin-bottom: 6px; font-size: 0.98rem; display: flex; align-items: center; gap: 8px;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-              <span data-i18n="FREQUENCIES_BOX_TITLE">सीमित प्रायोगिक मोड: 30m, 15m और 10m आवंटन</span>
+              <span data-i18n="FREQUENCIES_BOX_TITLE">सीमित प्रायोगिक मोड: 40m, 30m, 20m, 17m, 15m, 12m और 10m आवंटन</span>
             </div>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 6px;" data-i18n="FREQUENCIES_BOX_P1">बिना किसी हस्तक्षेप के स्वच्छ आरएफ स्पेक्ट्रम में कमजोर-सिग्नल प्रदर्शन का परीक्षण करने के लिए, प्रारंभिक ऑन-एयर संचालन <strong>विशेष रूप से 30m, 15m और 10m पर सीमित प्रायोगिक मोड</strong> में आयोजित किया जा रहा है। प्रत्येक डायल आवृत्ति एक मानक <strong>3.0&nbsp;kHz अपर साइडबैंड (USB) चैनल</strong> की आधार वाहक आवृत्ति का प्रतिनिधित्व करती है (उदा. <code>10.146&nbsp;MHz</code> ऑडियो ऑफसेट <code>10.1460</code> से <code>10.1490&nbsp;MHz</code> तक)। प्रत्येक 3.0&nbsp;kHz विंडो में कई स्टेशन अलग-अलग ऑडियो उप-वाहकों पर एक साथ काम कर सकते हैं।</p>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 0;" data-i18n="FREQUENCIES_BOX_P2">ये चयनित बैंड इष्टतम, शोर-मुक्त प्रसार वातावरण प्रदान करते हैं: <strong>30m</strong> एक समर्पित WARC बैंड है जहाँ अंतरराष्ट्रीय कानून द्वारा वॉयस फोन संचालन की अनुमति नहीं है; <strong>15m</strong> और <strong>10m</strong> अपने संबंधित वॉयस फोन सेगमेंट से काफी नीचे शांत डिजिटल स्पेक्ट्रम प्रदान करते हैं।</p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 6px;" data-i18n="FREQUENCIES_BOX_P1">बिना किसी हस्तक्षेप के स्वच्छ आरएफ स्पेक्ट्रम में कमजोर-सिग्नल प्रदर्शन का परीक्षण करने के लिए, प्रारंभिक ऑन-एयर संचालन <strong>विशेष रूप से 40m, 30m, 20m, 17m, 15m, 12m और 10m पर सीमित प्रायोगिक मोड</strong> में आयोजित किया जा रहा है। प्रत्येक डायल आवृत्ति एक मानक <strong>3.0&nbsp;kHz अपर साइडबैंड (USB) चैनल</strong> की आधार वाहक आवृत्ति का प्रतिनिधित्व करती है (उदा. <code>10.146&nbsp;MHz</code> ऑडियो ऑफसेट <code>10.1460</code> से <code>10.1490&nbsp;MHz</code> तक)। प्रत्येक 3.0&nbsp;kHz विंडो में कई स्टेशन अलग-अलग ऑडियो उप-वाहकों पर एक साथ काम कर सकते हैं।</p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 0;" data-i18n="FREQUENCIES_BOX_P2">ये चयनित बैंड इष्टतम, शोर-मुक्त प्रसार वातावरण प्रदान करते हैं: <strong>30m, 17m और 12m</strong> एक समर्पित WARC बैंड है जहाँ अंतरराष्ट्रीय कानून द्वारा वॉयस फोन संचालन की अनुमति नहीं है; <strong>40m, 20m, 15m और 10m</strong> अपने संबंधित वॉयस फोन सेगमेंट से काफी नीचे शांत डिजिटल स्पेक्ट्रम प्रदान करते हैं।</p>
           </div>
 
           <div class="table-container frequencies-table-container">
@@ -1716,16 +1716,40 @@
               </thead>
               <tbody>
                 <tr>
+                  <td><strong>40m</strong> (7.0 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">7.084 MHz</td>
+                  <td class="radio-val td-existing">7.074 MHz</td>
+                  <td class="radio-val td-existing">7.0475 MHz</td>
+                </tr>
+                <tr>
                   <td><strong>30m</strong> (10.1 MHz)</td>
                   <td class="radio-val badge-lq td-lq">10.146 MHz</td>
                   <td class="radio-val td-existing">10.136 MHz</td>
                   <td class="radio-val td-existing">10.140 MHz</td>
                 </tr>
                 <tr>
+                  <td><strong>20m</strong> (14.0 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">14.084 MHz</td>
+                  <td class="radio-val td-existing">14.074 MHz</td>
+                  <td class="radio-val td-existing">14.080 MHz</td>
+                </tr>
+                <tr>
+                  <td><strong>17m</strong> (18.1 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">18.106 MHz</td>
+                  <td class="radio-val td-existing">18.100 MHz</td>
+                  <td class="radio-val td-existing">18.104 MHz</td>
+                </tr>
+                <tr>
                   <td><strong>15m</strong> (21.0 MHz)</td>
                   <td class="radio-val badge-lq td-lq">21.084 MHz</td>
                   <td class="radio-val td-existing">21.074 MHz</td>
                   <td class="radio-val td-existing">21.140 MHz</td>
+                </tr>
+                <tr>
+                  <td><strong>12m</strong> (24.9 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">24.925 MHz</td>
+                  <td class="radio-val td-existing">24.915 MHz</td>
+                  <td class="radio-val td-existing">24.919 MHz</td>
                 </tr>
                 <tr>
                   <td><strong>10m</strong> (28.0 MHz)</td>
@@ -1735,7 +1759,7 @@
                 </tr>
               </tbody>
             </table>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 14px; margin-bottom: 0; padding: 0 14px 14px 14px; line-height: 1.5;" data-i18n="FREQUENCIES_FUTURE_BANDS_NOTE"><em>नोट:</em> LQ8 वर्तमान में केवल 30m, 15m और 10m पर सीमित प्रायोगिक मोड में सक्रिय है। अतिरिक्त बैंड (40m, 20m, 12m, 17m, 80m और 160m सहित) को अंतरराष्ट्रीय बैंड योजनाओं के समन्वय से आगामी चरणों में आधिकारिक तौर पर सौंपा जाएगा।</p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 14px; margin-bottom: 0; padding: 0 14px 14px 14px; line-height: 1.5;" data-i18n="FREQUENCIES_FUTURE_BANDS_NOTE"><em>नोट:</em> LQ8 वर्तमान में केवल 40m, 30m, 20m, 17m, 15m, 12m और 10m पर सीमित प्रायोगिक मोड में सक्रिय है। अतिरिक्त बैंड (80m, 160m, 60m और VHF/UHF बैंड सहित) को अंतरराष्ट्रीय बैंड योजनाओं के समन्वय से आगामी चरणों में आधिकारिक तौर पर सौंपा जाएगा।</p>
           </div>
         </div>
 

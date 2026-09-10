@@ -1,4 +1,20 @@
 cmake_minimum_required(VERSION 3.20)
+
+# Auto-fix/safeguard: Check if CMakeCache was created in another path or moved
+if(EXISTS "${CMAKE_BINARY_DIR}/CMakeCache.txt")
+    get_filename_component(CURRENT_BIN_REAL "${CMAKE_BINARY_DIR}" REALPATH)
+    file(STRINGS "${CMAKE_BINARY_DIR}/CMakeCache.txt" CACHE_DIR_LINE REGEX "^CMAKE_CACHEFILE_DIR:INTERNAL=")
+    if(CACHE_DIR_LINE)
+        string(REPLACE "CMAKE_CACHEFILE_DIR:INTERNAL=" "" CACHED_DIR "${CACHE_DIR_LINE}")
+        get_filename_component(CACHED_DIR_REAL "${CACHED_DIR}" REALPATH)
+        if(NOT "${CURRENT_BIN_REAL}" STREQUAL "${CACHED_DIR_REAL}")
+            message(WARNING "Detected moved or renamed build directory (was ${CACHED_DIR}, now ${CMAKE_BINARY_DIR}). Purging stale cache...")
+            file(REMOVE "${CMAKE_BINARY_DIR}/CMakeCache.txt")
+            file(REMOVE_RECURSE "${CMAKE_BINARY_DIR}/CMakeFiles")
+        endif()
+    endif()
+endif()
+
 project(lq VERSION 0.1.0 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)

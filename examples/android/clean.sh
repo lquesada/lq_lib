@@ -42,6 +42,9 @@ rm -rf .gradle
 rm -rf src_test_env
 rm -rf app/.cxx
 
+find . -name "CMakeCache.txt" -delete 2>/dev/null || true
+find . -type d -name "CMakeFiles" -exec rm -rf {} + 2>/dev/null || true
+
 rm -f crash.log
 rm -f emulator_log.txt
 rm -f emulator_stable.log

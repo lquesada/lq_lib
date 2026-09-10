@@ -1698,10 +1698,10 @@
           <div class="mode-compare-box frequencies-box" style="margin-bottom: 20px; border-left-color: var(--cyan); background: rgba(56, 189, 248, 0.06); padding: 18px 22px;">
             <div style="font-weight: 700; color: var(--cyan); margin-bottom: 6px; font-size: 0.98rem; display: flex; align-items: center; gap: 8px;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-              <span data-i18n="FREQUENCIES_BOX_TITLE">Obmedzený Experimentálny Režim: Pridelenia pre 30m, 15m a 10m</span>
+              <span data-i18n="FREQUENCIES_BOX_TITLE">Obmedzený Experimentálny Režim: Pridelenia pre 40m, 30m, 20m, 17m, 15m, 12m a 10m</span>
             </div>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 6px;" data-i18n="FREQUENCIES_BOX_P1">Na posúdenie dekódovania slabých signálov v čistom RF spektre bez rušenia prebieha počiatočná prevádzka v <strong>obmedzenom experimentálnom režime výhradne na 30m, 15m a 10m</strong>. Každý naladený kmitočet predstavuje základnú nosnú štandardného <strong>kanála horného postranného pásma (USB) so šírkou 3.0&nbsp;kHz</strong> (napr. <code>10.146&nbsp;MHz</code> pokrýva zvukové posuny od <code>10.1460</code> do <code>10.1490&nbsp;MHz</code>). Viacero staníc pracuje súčasne v rámci každého okna 3.0&nbsp;kHz na samostatných zvukových subnosných.</p>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 0;" data-i18n="FREQUENCIES_BOX_P2">Vybrané pásma ponúkajú optimálne a bezšumové podmienky šírenia: <strong>30m</strong> je špeciálne pásmo WARC, kde je hlasová prevádzka medzinárodne zakázaná; <strong>15m</strong> a <strong>10m</strong> poskytujú široké a pokojné digitálne úseky hlboko pod hlasovými segmentmi.</p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 6px;" data-i18n="FREQUENCIES_BOX_P1">Na posúdenie dekódovania slabých signálov v čistom RF spektre bez rušenia prebieha počiatočná prevádzka v <strong>obmedzenom experimentálnom režime výhradne na 40m, 30m, 20m, 17m, 15m, 12m a 10m</strong>. Každý naladený kmitočet predstavuje základnú nosnú štandardného <strong>kanála horného postranného pásma (USB) so šírkou 3.0&nbsp;kHz</strong> (napr. <code>10.146&nbsp;MHz</code> pokrýva zvukové posuny od <code>10.1460</code> do <code>10.1490&nbsp;MHz</code>). Viacero staníc pracuje súčasne v rámci každého okna 3.0&nbsp;kHz na samostatných zvukových subnosných.</p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 0;" data-i18n="FREQUENCIES_BOX_P2">Vybrané pásma ponúkajú optimálne a bezšumové podmienky šírenia: <strong>30m, 17m a 12m</strong> je špeciálne pásmo WARC, kde je hlasová prevádzka medzinárodne zakázaná; <strong>40m, 20m, 15m a 10m</strong> poskytujú široké a pokojné digitálne úseky hlboko pod hlasovými segmentmi.</p>
           </div>
 
           <div class="table-container frequencies-table-container">
@@ -1716,16 +1716,40 @@
               </thead>
               <tbody>
                 <tr>
+                  <td><strong>40m</strong> (7.0 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">7.084 MHz</td>
+                  <td class="radio-val td-existing">7.074 MHz</td>
+                  <td class="radio-val td-existing">7.0475 MHz</td>
+                </tr>
+                <tr>
                   <td><strong>30m</strong> (10.1 MHz)</td>
                   <td class="radio-val badge-lq td-lq">10.146 MHz</td>
                   <td class="radio-val td-existing">10.136 MHz</td>
                   <td class="radio-val td-existing">10.140 MHz</td>
                 </tr>
                 <tr>
+                  <td><strong>20m</strong> (14.0 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">14.084 MHz</td>
+                  <td class="radio-val td-existing">14.074 MHz</td>
+                  <td class="radio-val td-existing">14.080 MHz</td>
+                </tr>
+                <tr>
+                  <td><strong>17m</strong> (18.1 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">18.106 MHz</td>
+                  <td class="radio-val td-existing">18.100 MHz</td>
+                  <td class="radio-val td-existing">18.104 MHz</td>
+                </tr>
+                <tr>
                   <td><strong>15m</strong> (21.0 MHz)</td>
                   <td class="radio-val badge-lq td-lq">21.084 MHz</td>
                   <td class="radio-val td-existing">21.074 MHz</td>
                   <td class="radio-val td-existing">21.140 MHz</td>
+                </tr>
+                <tr>
+                  <td><strong>12m</strong> (24.9 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">24.925 MHz</td>
+                  <td class="radio-val td-existing">24.915 MHz</td>
+                  <td class="radio-val td-existing">24.919 MHz</td>
                 </tr>
                 <tr>
                   <td><strong>10m</strong> (28.0 MHz)</td>
@@ -1735,7 +1759,7 @@
                 </tr>
               </tbody>
             </table>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 14px; margin-bottom: 0; padding: 0 14px 14px 14px; line-height: 1.5;" data-i18n="FREQUENCIES_FUTURE_BANDS_NOTE"><em>Poznámka:</em> LQ8 je v súčasnosti aktívny v obmedzenom experimentálnom režime iba na 30m, 15m a 10m. Ďalšie pásma (vrátane 40m, 20m, 12m, 17m, 80m a 160m) budú oficiálne pridelené v nadchádzajúcich fázach v súlade s medzinárodnými plánmi pásiem.</p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 14px; margin-bottom: 0; padding: 0 14px 14px 14px; line-height: 1.5;" data-i18n="FREQUENCIES_FUTURE_BANDS_NOTE"><em>Poznámka:</em> LQ8 je v súčasnosti aktívny v obmedzenom experimentálnom režime iba na 40m, 30m, 20m, 17m, 15m, 12m a 10m. Ďalšie pásma (vrátane 80m, 160m, 60m a pásma VHF/UHF) budú oficiálne pridelené v nadchádzajúcich fázach v súlade s medzinárodnými plánmi pásiem.</p>
           </div>
         </div>
 

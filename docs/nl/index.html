@@ -1698,10 +1698,10 @@
           <div class="mode-compare-box frequencies-box" style="margin-bottom: 20px; border-left-color: var(--cyan); background: rgba(56, 189, 248, 0.06); padding: 18px 22px;">
             <div style="font-weight: 700; color: var(--cyan); margin-bottom: 6px; font-size: 0.98rem; display: flex; align-items: center; gap: 8px;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-              <span data-i18n="FREQUENCIES_BOX_TITLE">Beperkte Experimentele Modus: 30m, 15m en 10m Toewijzingen</span>
+              <span data-i18n="FREQUENCIES_BOX_TITLE">Beperkte Experimentele Modus: 40m, 30m, 20m, 17m, 15m, 12m en 10m Toewijzingen</span>
             </div>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 6px;" data-i18n="FREQUENCIES_BOX_P1">Om de prestaties bij zwakke signalen in een schoon RF-spectrum zonder interferentie te evalueren, worden de eerste on-air verbindingen uitgevoerd in <strong>beperkte experimentele modus uitsluitend op 30m, 15m en 10m</strong>. Elke afstemfrequentie vertegenwoordigt de basisdraaggolffrequentie van een standaard <strong>3.0&nbsp;kHz Enkelzijband (USB) kanaal</strong> (bijv. <code>10.146&nbsp;MHz</code> beslaat audio-offsets van <code>10.1460</code> tot <code>10.1490&nbsp;MHz</code>). Meerdere stations werken gelijktijdig binnen elk 3.0&nbsp;kHz venster op verschillende audio-subdraaggolf-offsets.</p>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 0;" data-i18n="FREQUENCIES_BOX_P2">Deze geselecteerde banden bieden optimale, storingsvrije propagatieomstandigheden: <strong>30m</strong> is een speciale WARC-band waar spraaktelefonie volgens internationale wetgeving verboden is; <strong>15m</strong> en <strong>10m</strong> bieden ruime, rustige digitale segmenten ver onder hun respectieve spraaksegmenten.</p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 6px;" data-i18n="FREQUENCIES_BOX_P1">Om de prestaties bij zwakke signalen in een schoon RF-spectrum zonder interferentie te evalueren, worden de eerste on-air verbindingen uitgevoerd in <strong>beperkte experimentele modus uitsluitend op 40m, 30m, 20m, 17m, 15m, 12m en 10m</strong>. Elke afstemfrequentie vertegenwoordigt de basisdraaggolffrequentie van een standaard <strong>3.0&nbsp;kHz Enkelzijband (USB) kanaal</strong> (bijv. <code>10.146&nbsp;MHz</code> beslaat audio-offsets van <code>10.1460</code> tot <code>10.1490&nbsp;MHz</code>). Meerdere stations werken gelijktijdig binnen elk 3.0&nbsp;kHz venster op verschillende audio-subdraaggolf-offsets.</p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 0;" data-i18n="FREQUENCIES_BOX_P2">Deze geselecteerde banden bieden optimale, storingsvrije propagatieomstandigheden: <strong>30m, 17m en 12m</strong> is een speciale WARC-band waar spraaktelefonie volgens internationale wetgeving verboden is; <strong>40m, 20m, 15m en 10m</strong> bieden ruime, rustige digitale segmenten ver onder hun respectieve spraaksegmenten.</p>
           </div>
 
           <div class="table-container frequencies-table-container">
@@ -1716,16 +1716,40 @@
               </thead>
               <tbody>
                 <tr>
+                  <td><strong>40m</strong> (7.0 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">7.084 MHz</td>
+                  <td class="radio-val td-existing">7.074 MHz</td>
+                  <td class="radio-val td-existing">7.0475 MHz</td>
+                </tr>
+                <tr>
                   <td><strong>30m</strong> (10.1 MHz)</td>
                   <td class="radio-val badge-lq td-lq">10.146 MHz</td>
                   <td class="radio-val td-existing">10.136 MHz</td>
                   <td class="radio-val td-existing">10.140 MHz</td>
                 </tr>
                 <tr>
+                  <td><strong>20m</strong> (14.0 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">14.084 MHz</td>
+                  <td class="radio-val td-existing">14.074 MHz</td>
+                  <td class="radio-val td-existing">14.080 MHz</td>
+                </tr>
+                <tr>
+                  <td><strong>17m</strong> (18.1 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">18.106 MHz</td>
+                  <td class="radio-val td-existing">18.100 MHz</td>
+                  <td class="radio-val td-existing">18.104 MHz</td>
+                </tr>
+                <tr>
                   <td><strong>15m</strong> (21.0 MHz)</td>
                   <td class="radio-val badge-lq td-lq">21.084 MHz</td>
                   <td class="radio-val td-existing">21.074 MHz</td>
                   <td class="radio-val td-existing">21.140 MHz</td>
+                </tr>
+                <tr>
+                  <td><strong>12m</strong> (24.9 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">24.925 MHz</td>
+                  <td class="radio-val td-existing">24.915 MHz</td>
+                  <td class="radio-val td-existing">24.919 MHz</td>
                 </tr>
                 <tr>
                   <td><strong>10m</strong> (28.0 MHz)</td>
@@ -1735,7 +1759,7 @@
                 </tr>
               </tbody>
             </table>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 14px; margin-bottom: 0; padding: 0 14px 14px 14px; line-height: 1.5;" data-i18n="FREQUENCIES_FUTURE_BANDS_NOTE"><em>Opmerking:</em> LQ8 is momenteel alleen actief in beperkte experimentele modus op 30m, 15m en 10m. Aanvullende toewijzingen (waaronder 40m, 20m, 12m, 17m, 80m en 160m) worden in komende fasen officieel toegewezen in coördinatie met internationale bandplannen.</p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 14px; margin-bottom: 0; padding: 0 14px 14px 14px; line-height: 1.5;" data-i18n="FREQUENCIES_FUTURE_BANDS_NOTE"><em>Opmerking:</em> LQ8 is momenteel alleen actief in beperkte experimentele modus op 40m, 30m, 20m, 17m, 15m, 12m en 10m. Aanvullende toewijzingen (waaronder 80m, 160m, 60m en VHF/UHF-banden) worden in komende fasen officieel toegewezen in coördinatie met internationale bandplannen.</p>
           </div>
         </div>
 

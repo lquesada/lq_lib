@@ -1698,10 +1698,10 @@
           <div class="mode-compare-box frequencies-box" style="margin-bottom: 20px; border-left-color: var(--cyan); background: rgba(56, 189, 248, 0.06); padding: 18px 22px;">
             <div style="font-weight: 700; color: var(--cyan); margin-bottom: 6px; font-size: 0.98rem; display: flex; align-items: center; gap: 8px;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-              <span data-i18n="FREQUENCIES_BOX_TITLE">有限实验模式：30m、15m 跟 10m 频段分配</span>
+              <span data-i18n="FREQUENCIES_BOX_TITLE">有限实验模式：40m、30m、20m、17m、15m、12m 跟 10m 频段分配</span>
             </div>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 6px;" data-i18n="FREQUENCIES_BOX_P1">为勒评估弱信号性能，初期通联<strong>仅仅勒 30m、15m 跟 10m 开展有限实验模式</strong>。每个刻度频率代表标准 <strong>3.0&nbsp;kHz 上边带（USB）信道</strong>基准载波频率（例如 <code>10.146&nbsp;MHz</code> 覆盖 <code>10.1460</code> 到 <code>10.1490&nbsp;MHz</code>）。多个电台好勒同一个 3.0&nbsp;kHz 窗口里向同时通联。</p>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 0;" data-i18n="FREQUENCIES_BOX_P2">箇星选定频段传播条件好、噪声低：<strong>30m</strong> 是 WARC 专用频段，国际法规严禁语音通话；<strong>15m</strong> 跟 <strong>10m</strong> 数字段宽广安静，远低过语音段。</p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 6px;" data-i18n="FREQUENCIES_BOX_P1">为勒评估弱信号性能，初期通联<strong>仅仅勒 40m、30m、20m、17m、15m、12m 跟 10m 开展有限实验模式</strong>。每个刻度频率代表标准 <strong>3.0&nbsp;kHz 上边带（USB）信道</strong>基准载波频率（例如 <code>10.146&nbsp;MHz</code> 覆盖 <code>10.1460</code> 到 <code>10.1490&nbsp;MHz</code>）。多个电台好勒同一个 3.0&nbsp;kHz 窗口里向同时通联。</p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 0;" data-i18n="FREQUENCIES_BOX_P2">箇星选定频段传播条件好、噪声低：<strong>30m、17m 跟 12m</strong> 是 WARC 专用频段，国际法规严禁语音通话；<strong>40m、20m、15m 跟 10m</strong> 数字段宽广安静，远低过语音段。</p>
           </div>
 
           <div class="table-container frequencies-table-container">
@@ -1716,16 +1716,40 @@
               </thead>
               <tbody>
                 <tr>
+                  <td><strong>40m</strong> (7.0 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">7.084 MHz</td>
+                  <td class="radio-val td-existing">7.074 MHz</td>
+                  <td class="radio-val td-existing">7.0475 MHz</td>
+                </tr>
+                <tr>
                   <td><strong>30m</strong> (10.1 MHz)</td>
                   <td class="radio-val badge-lq td-lq">10.146 MHz</td>
                   <td class="radio-val td-existing">10.136 MHz</td>
                   <td class="radio-val td-existing">10.140 MHz</td>
                 </tr>
                 <tr>
+                  <td><strong>20m</strong> (14.0 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">14.084 MHz</td>
+                  <td class="radio-val td-existing">14.074 MHz</td>
+                  <td class="radio-val td-existing">14.080 MHz</td>
+                </tr>
+                <tr>
+                  <td><strong>17m</strong> (18.1 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">18.106 MHz</td>
+                  <td class="radio-val td-existing">18.100 MHz</td>
+                  <td class="radio-val td-existing">18.104 MHz</td>
+                </tr>
+                <tr>
                   <td><strong>15m</strong> (21.0 MHz)</td>
                   <td class="radio-val badge-lq td-lq">21.084 MHz</td>
                   <td class="radio-val td-existing">21.074 MHz</td>
                   <td class="radio-val td-existing">21.140 MHz</td>
+                </tr>
+                <tr>
+                  <td><strong>12m</strong> (24.9 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">24.925 MHz</td>
+                  <td class="radio-val td-existing">24.915 MHz</td>
+                  <td class="radio-val td-existing">24.919 MHz</td>
                 </tr>
                 <tr>
                   <td><strong>10m</strong> (28.0 MHz)</td>
@@ -1735,7 +1759,7 @@
                 </tr>
               </tbody>
             </table>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 14px; margin-bottom: 0; padding: 0 14px 14px 14px; line-height: 1.5;" data-i18n="FREQUENCIES_FUTURE_BANDS_NOTE"><em>注：</em> LQ8 目前单单勒 30m、15m 跟 10m 处勒有限实验模式。其他频段（包括 40m、20m、12m、17m、80m 跟 160m）后续会根据国际规划正式分配。</p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 14px; margin-bottom: 0; padding: 0 14px 14px 14px; line-height: 1.5;" data-i18n="FREQUENCIES_FUTURE_BANDS_NOTE"><em>注：</em> LQ8 目前单单勒 40m、30m、20m、17m、15m、12m 跟 10m 处勒有限实验模式。其他频段（包括 80m、160m、60m 跟 VHF/UHF 频段）后续会根据国际规划正式分配。</p>
           </div>
         </div>
 

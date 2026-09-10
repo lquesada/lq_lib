@@ -1698,10 +1698,10 @@
           <div class="mode-compare-box frequencies-box" style="margin-bottom: 20px; border-left-color: var(--cyan); background: rgba(56, 189, 248, 0.06); padding: 18px 22px;">
             <div style="font-weight: 700; color: var(--cyan); margin-bottom: 6px; font-size: 0.98rem; display: flex; align-items: center; gap: 8px;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-              <span data-i18n="FREQUENCIES_BOX_TITLE">Rajoitettu Kokeellinen Tila: 30m, 15m ja 10m Taajuudet</span>
+              <span data-i18n="FREQUENCIES_BOX_TITLE">Rajoitettu Kokeellinen Tila: 40m, 30m, 20m, 17m, 15m, 12m ja 10m Taajuudet</span>
             </div>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 6px;" data-i18n="FREQUENCIES_BOX_P1">Heikkojen signaalien suorituskyvyn arvioimiseksi puhtaassa RF-spektrissä ilman häiriöitä alkutoiminta suoritetaan <strong>rajoitetussa kokeellisessa tilassa yksinomaan 30m, 15m ja 10m bandeilla</strong>. Jokainen asteikkotaajuus edustaa standardin <strong>3.0&nbsp;kHz yläsivunauhan (USB)</strong> peruskantoaaltoa (esim. <code>10.146&nbsp;MHz</code> kattaa äänitaajuudet <code>10.1460</code> - <code>10.1490&nbsp;MHz</code>). Useat asemat voivat toimia samanaikaisesti kussakin 3.0&nbsp;kHz ikkunassa eri äänitaajuussiirroilla.</p>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 0;" data-i18n="FREQUENCIES_BOX_P2">Valitut bandit tarjoavat optimaaliset ja kohinattomat etenemisolosuhteet: <strong>30m</strong> on WARC-alue, jolla puheliikenne on kansainvälisesti kielletty; <strong>15m</strong> ja <strong>10m</strong> tarjoavat laajat ja hiljaiset digitaalialueet selvästi puhealueiden alapuolella.</p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 6px;" data-i18n="FREQUENCIES_BOX_P1">Heikkojen signaalien suorituskyvyn arvioimiseksi puhtaassa RF-spektrissä ilman häiriöitä alkutoiminta suoritetaan <strong>rajoitetussa kokeellisessa tilassa yksinomaan 40m, 30m, 20m, 17m, 15m, 12m ja 10m bandeilla</strong>. Jokainen asteikkotaajuus edustaa standardin <strong>3.0&nbsp;kHz yläsivunauhan (USB)</strong> peruskantoaaltoa (esim. <code>10.146&nbsp;MHz</code> kattaa äänitaajuudet <code>10.1460</code> - <code>10.1490&nbsp;MHz</code>). Useat asemat voivat toimia samanaikaisesti kussakin 3.0&nbsp;kHz ikkunassa eri äänitaajuussiirroilla.</p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 0;" data-i18n="FREQUENCIES_BOX_P2">Valitut bandit tarjoavat optimaaliset ja kohinattomat etenemisolosuhteet: <strong>30m, 17m ja 12m</strong> on WARC-alue, jolla puheliikenne on kansainvälisesti kielletty; <strong>40m, 20m, 15m ja 10m</strong> tarjoavat laajat ja hiljaiset digitaalialueet selvästi puhealueiden alapuolella.</p>
           </div>
 
           <div class="table-container frequencies-table-container">
@@ -1716,16 +1716,40 @@
               </thead>
               <tbody>
                 <tr>
+                  <td><strong>40m</strong> (7.0 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">7.084 MHz</td>
+                  <td class="radio-val td-existing">7.074 MHz</td>
+                  <td class="radio-val td-existing">7.0475 MHz</td>
+                </tr>
+                <tr>
                   <td><strong>30m</strong> (10.1 MHz)</td>
                   <td class="radio-val badge-lq td-lq">10.146 MHz</td>
                   <td class="radio-val td-existing">10.136 MHz</td>
                   <td class="radio-val td-existing">10.140 MHz</td>
                 </tr>
                 <tr>
+                  <td><strong>20m</strong> (14.0 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">14.084 MHz</td>
+                  <td class="radio-val td-existing">14.074 MHz</td>
+                  <td class="radio-val td-existing">14.080 MHz</td>
+                </tr>
+                <tr>
+                  <td><strong>17m</strong> (18.1 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">18.106 MHz</td>
+                  <td class="radio-val td-existing">18.100 MHz</td>
+                  <td class="radio-val td-existing">18.104 MHz</td>
+                </tr>
+                <tr>
                   <td><strong>15m</strong> (21.0 MHz)</td>
                   <td class="radio-val badge-lq td-lq">21.084 MHz</td>
                   <td class="radio-val td-existing">21.074 MHz</td>
                   <td class="radio-val td-existing">21.140 MHz</td>
+                </tr>
+                <tr>
+                  <td><strong>12m</strong> (24.9 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">24.925 MHz</td>
+                  <td class="radio-val td-existing">24.915 MHz</td>
+                  <td class="radio-val td-existing">24.919 MHz</td>
                 </tr>
                 <tr>
                   <td><strong>10m</strong> (28.0 MHz)</td>
@@ -1735,7 +1759,7 @@
                 </tr>
               </tbody>
             </table>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 14px; margin-bottom: 0; padding: 0 14px 14px 14px; line-height: 1.5;" data-i18n="FREQUENCIES_FUTURE_BANDS_NOTE"><em>Huomautus:</em> LQ8 on tällä hetkellä aktiivinen rajoitetussa kokeellisessa tilassa vain 30m, 15m ja 10m bandeilla. Lisäalueita (kuten 40m, 20m, 12m, 17m, 80m ja 160m) määritetään virallisesti tulevissa vaiheissa kansainvälisten taajuussuunnitelmien mukaisesti.</p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 14px; margin-bottom: 0; padding: 0 14px 14px 14px; line-height: 1.5;" data-i18n="FREQUENCIES_FUTURE_BANDS_NOTE"><em>Huomautus:</em> LQ8 on tällä hetkellä aktiivinen rajoitetussa kokeellisessa tilassa vain 40m, 30m, 20m, 17m, 15m, 12m ja 10m bandeilla. Lisäalueita (kuten 80m, 160m, 60m sekä VHF/UHF-alueet) määritetään virallisesti tulevissa vaiheissa kansainvälisten taajuussuunnitelmien mukaisesti.</p>
           </div>
         </div>
 

@@ -1698,10 +1698,10 @@
           <div class="mode-compare-box frequencies-box" style="margin-bottom: 20px; border-left-color: var(--cyan); background: rgba(56, 189, 248, 0.06); padding: 18px 22px;">
             <div style="font-weight: 700; color: var(--cyan); margin-bottom: 6px; font-size: 0.98rem; display: flex; align-items: center; gap: 8px;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-              <span data-i18n="FREQUENCIES_BOX_TITLE">Обмежений експериментальний режим: діапазони 30м, 15м та 10м</span>
+              <span data-i18n="FREQUENCIES_BOX_TITLE">Обмежений експериментальний режим: діапазони 40м, 30м, 20м, 17м, 15м, 12м та 10м</span>
             </div>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 6px;" data-i18n="FREQUENCIES_BOX_P1">Для оцінки роботи зі слабкими сигналами в чистому радіочастотному спектрі без завад початкова робота в ефірі проводиться в <strong>обмеженому експериментальному режимі виключно на 30м, 15м та 10м</strong>. Кожна частота налаштування є базовою несучою стандартного <strong>каналу верхньої бічної смуги (USB) шириною 3.0&nbsp;кГц</strong> (наприклад, <code>10.146&nbsp;МГц</code> охоплює аудіозсуви від <code>10.1460</code> до <code>10.1490&nbsp;МГц</code>). Кілька станцій працюють одночасно в межах кожного вікна 3.0&nbsp;кГц на окремих аудіопіднесучих.</p>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 0;" data-i18n="FREQUENCIES_BOX_P2">Обрані діапазони забезпечують оптимальні умови проходження без шумів: <strong>30м</strong> — це виділений діапазон WARC, де телефонний зв'язок заборонений міжнародним регламентом; <strong>15м</strong> та <strong>10м</strong> надають широкі та спокійні цифрові ділянки значно нижче голосових сегментів.</p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 6px;" data-i18n="FREQUENCIES_BOX_P1">Для оцінки роботи зі слабкими сигналами в чистому радіочастотному спектрі без завад початкова робота в ефірі проводиться в <strong>обмеженому експериментальному режимі виключно на 40м, 30м, 20м, 17м, 15м, 12м та 10м</strong>. Кожна частота налаштування є базовою несучою стандартного <strong>каналу верхньої бічної смуги (USB) шириною 3.0&nbsp;кГц</strong> (наприклад, <code>10.146&nbsp;МГц</code> охоплює аудіозсуви від <code>10.1460</code> до <code>10.1490&nbsp;МГц</code>). Кілька станцій працюють одночасно в межах кожного вікна 3.0&nbsp;кГц на окремих аудіопіднесучих.</p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 0;" data-i18n="FREQUENCIES_BOX_P2">Обрані діапазони забезпечують оптимальні умови проходження без шумів: <strong>30м, 17м та 12м</strong> — це виділений діапазон WARC, де телефонний зв'язок заборонений міжнародним регламентом; <strong>40м, 20м, 15м та 10м</strong> надають широкі та спокійні цифрові ділянки значно нижче голосових сегментів.</p>
           </div>
 
           <div class="table-container frequencies-table-container">
@@ -1716,16 +1716,40 @@
               </thead>
               <tbody>
                 <tr>
+                  <td><strong>40m</strong> (7.0 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">7.084 MHz</td>
+                  <td class="radio-val td-existing">7.074 MHz</td>
+                  <td class="radio-val td-existing">7.0475 MHz</td>
+                </tr>
+                <tr>
                   <td><strong>30m</strong> (10.1 MHz)</td>
                   <td class="radio-val badge-lq td-lq">10.146 MHz</td>
                   <td class="radio-val td-existing">10.136 MHz</td>
                   <td class="radio-val td-existing">10.140 MHz</td>
                 </tr>
                 <tr>
+                  <td><strong>20m</strong> (14.0 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">14.084 MHz</td>
+                  <td class="radio-val td-existing">14.074 MHz</td>
+                  <td class="radio-val td-existing">14.080 MHz</td>
+                </tr>
+                <tr>
+                  <td><strong>17m</strong> (18.1 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">18.106 MHz</td>
+                  <td class="radio-val td-existing">18.100 MHz</td>
+                  <td class="radio-val td-existing">18.104 MHz</td>
+                </tr>
+                <tr>
                   <td><strong>15m</strong> (21.0 MHz)</td>
                   <td class="radio-val badge-lq td-lq">21.084 MHz</td>
                   <td class="radio-val td-existing">21.074 MHz</td>
                   <td class="radio-val td-existing">21.140 MHz</td>
+                </tr>
+                <tr>
+                  <td><strong>12m</strong> (24.9 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">24.925 MHz</td>
+                  <td class="radio-val td-existing">24.915 MHz</td>
+                  <td class="radio-val td-existing">24.919 MHz</td>
                 </tr>
                 <tr>
                   <td><strong>10m</strong> (28.0 MHz)</td>
@@ -1735,7 +1759,7 @@
                 </tr>
               </tbody>
             </table>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 14px; margin-bottom: 0; padding: 0 14px 14px 14px; line-height: 1.5;" data-i18n="FREQUENCIES_FUTURE_BANDS_NOTE"><em>Примітка:</em> Протокол LQ8 наразі активний в обмеженому експериментальному режимі лише на 30м, 15м та 10м. Додаткові діапазони (включаючи 40м, 20м, 12м, 17м, 80м та 160м) будуть офіційно призначені на наступних етапах за узгодженням з міжнародними частотними планами.</p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 14px; margin-bottom: 0; padding: 0 14px 14px 14px; line-height: 1.5;" data-i18n="FREQUENCIES_FUTURE_BANDS_NOTE"><em>Примітка:</em> Протокол LQ8 наразі активний в обмеженому експериментальному режимі лише на 40м, 30м, 20м, 17м, 15м, 12м та 10м. Додаткові діапазони (включаючи 80м, 160м, 60м та діапазони УКХ (VHF/UHF)) будуть офіційно призначені на наступних етапах за узгодженням з міжнародними частотними планами.</p>
           </div>
         </div>
 

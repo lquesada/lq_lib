@@ -1698,10 +1698,10 @@
           <div class="mode-compare-box frequencies-box" style="margin-bottom: 20px; border-left-color: var(--cyan); background: rgba(56, 189, 248, 0.06); padding: 18px 22px;">
             <div style="font-weight: 700; color: var(--cyan); margin-bottom: 6px; font-size: 0.98rem; display: flex; align-items: center; gap: 8px;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-              <span data-i18n="FREQUENCIES_BOX_TITLE">الوضع التجريبي المحدود: تخصيصات نطاقات 30 و15 و10 متر</span>
+              <span data-i18n="FREQUENCIES_BOX_TITLE">الوضع التجريبي المحدود: تخصيصات نطاقات 40 و30 و20 و17 و15 و12 و10 متر</span>
             </div>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 6px;" data-i18n="FREQUENCIES_BOX_P1">لتقييم أداء الإشارات الضعيفة في طيف لاسلكي نظيف وخالٍ من التداخل، تُجرى العمليات الأولية على الهواء في <strong>الوضع التجريبي المحدود حصرياً على نطاقات 30 متراً و15 متراً و10 أمتار</strong>. يمثل كل تردد مؤشر التردد الحامل الأساسي لقناة قياسية في <strong>النطاق الجانبي العلوي (USB) بعرض 3.0&nbsp;كيلوهرتز</strong> (على سبيل المثال، يغطي <code>10.146&nbsp;ميجاهرتز</code> إزاحات الصوت من <code>10.1460</code> إلى <code>10.1490&nbsp;ميجاهرتز</code>). تعمل محطات متعددة في وقت واحد داخل كل نافذة 3.0&nbsp;كيلوهرتز على إزاحات حاملات فرعية صوتية منفصلة.</p>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 0;" data-i18n="FREQUENCIES_BOX_P2">توفر هذه النطاقات المختارة بيئات انتشار مثالية وخالية من الضوضاء: يعتبر نطاق <strong>30 متراً</strong> نطاق WARC مخصصاً يُحظر فيه تشغيل الصوت الهاتفي بموجب القانون الدولي؛ ويوفر نطاقا <strong>15 متراً</strong> و<strong>10 أمتار</strong> تخصيصات رقمية هادئة وواسعة تقع أسفل قطاعات الصوت الهاتفي المقابلة لها بكثير.</p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 6px;" data-i18n="FREQUENCIES_BOX_P1">لتقييم أداء الإشارات الضعيفة في طيف لاسلكي نظيف وخالٍ من التداخل، تُجرى العمليات الأولية على الهواء في <strong>الوضع التجريبي المحدود حصرياً على نطاقات 40 و30 و20 و17 و15 و12 و10 متر</strong>. يمثل كل تردد مؤشر التردد الحامل الأساسي لقناة قياسية في <strong>النطاق الجانبي العلوي (USB) بعرض 3.0&nbsp;كيلوهرتز</strong> (على سبيل المثال، يغطي <code>10.146&nbsp;ميجاهرتز</code> إزاحات الصوت من <code>10.1460</code> إلى <code>10.1490&nbsp;ميجاهرتز</code>). تعمل محطات متعددة في وقت واحد داخل كل نافذة 3.0&nbsp;كيلوهرتز على إزاحات حاملات فرعية صوتية منفصلة.</p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 0;" data-i18n="FREQUENCIES_BOX_P2">توفر هذه النطاقات المختارة بيئات انتشار مثالية وخالية من الضوضاء: يعتبر نطاق <strong>30 و17 و12 متر</strong> نطاق WARC مخصصاً يُحظر فيه تشغيل الصوت الهاتفي بموجب القانون الدولي؛ ويوفر نطاقا <strong>40 و20 و15 و10 متر</strong> تخصيصات رقمية هادئة وواسعة تقع أسفل قطاعات الصوت الهاتفي المقابلة لها بكثير.</p>
           </div>
 
           <div class="table-container frequencies-table-container">
@@ -1716,16 +1716,40 @@
               </thead>
               <tbody>
                 <tr>
+                  <td><strong>40m</strong> (7.0 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">7.084 MHz</td>
+                  <td class="radio-val td-existing">7.074 MHz</td>
+                  <td class="radio-val td-existing">7.0475 MHz</td>
+                </tr>
+                <tr>
                   <td><strong>30m</strong> (10.1 MHz)</td>
                   <td class="radio-val badge-lq td-lq">10.146 MHz</td>
                   <td class="radio-val td-existing">10.136 MHz</td>
                   <td class="radio-val td-existing">10.140 MHz</td>
                 </tr>
                 <tr>
+                  <td><strong>20m</strong> (14.0 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">14.084 MHz</td>
+                  <td class="radio-val td-existing">14.074 MHz</td>
+                  <td class="radio-val td-existing">14.080 MHz</td>
+                </tr>
+                <tr>
+                  <td><strong>17m</strong> (18.1 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">18.106 MHz</td>
+                  <td class="radio-val td-existing">18.100 MHz</td>
+                  <td class="radio-val td-existing">18.104 MHz</td>
+                </tr>
+                <tr>
                   <td><strong>15m</strong> (21.0 MHz)</td>
                   <td class="radio-val badge-lq td-lq">21.084 MHz</td>
                   <td class="radio-val td-existing">21.074 MHz</td>
                   <td class="radio-val td-existing">21.140 MHz</td>
+                </tr>
+                <tr>
+                  <td><strong>12m</strong> (24.9 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">24.925 MHz</td>
+                  <td class="radio-val td-existing">24.915 MHz</td>
+                  <td class="radio-val td-existing">24.919 MHz</td>
                 </tr>
                 <tr>
                   <td><strong>10m</strong> (28.0 MHz)</td>
@@ -1735,7 +1759,7 @@
                 </tr>
               </tbody>
             </table>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 14px; margin-bottom: 0; padding: 0 14px 14px 14px; line-height: 1.5;" data-i18n="FREQUENCIES_FUTURE_BANDS_NOTE"><em>ملاحظة:</em> وضع LQ8 نشط حالياً في الوضع التجريبي المحدود فقط على 30 متراً و15 متراً و10 أمتار. سيتم تعيين نطاقات إضافية (بما في ذلك 40 متراً و20 متراً و12 متراً و17 متراً و80 متراً و160 متراً) رسمياً في المراحل القادمة بالتنسيق مع خطط النطاقات الدولية.</p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 14px; margin-bottom: 0; padding: 0 14px 14px 14px; line-height: 1.5;" data-i18n="FREQUENCIES_FUTURE_BANDS_NOTE"><em>ملاحظة:</em> وضع LQ8 نشط حالياً في الوضع التجريبي المحدود فقط على 40 و30 و20 و17 و15 و12 و10 متر. سيتم تعيين نطاقات إضافية (بما في ذلك 80 و160 و60 متر ونطاقات VHF/UHF) رسمياً في المراحل القادمة بالتنسيق مع خطط النطاقات الدولية.</p>
           </div>
         </div>
 

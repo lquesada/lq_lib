@@ -1698,10 +1698,10 @@
           <div class="mode-compare-box frequencies-box" style="margin-bottom: 20px; border-left-color: var(--cyan); background: rgba(56, 189, 248, 0.06); padding: 18px 22px;">
             <div style="font-weight: 700; color: var(--cyan); margin-bottom: 6px; font-size: 0.98rem; display: flex; align-items: center; gap: 8px;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-              <span data-i18n="FREQUENCIES_BOX_TITLE">Limitadong Pang-eksperimentong Mode: Mga Alokasyon sa 30m, 15m, at 10m</span>
+              <span data-i18n="FREQUENCIES_BOX_TITLE">Limitadong Pang-eksperimentong Mode: Mga Alokasyon sa 40m, 30m, 20m, 17m, 15m, 12m, at 10m</span>
             </div>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 6px;" data-i18n="FREQUENCIES_BOX_P1">Upang suriin ang pagganap ng mahinang signal sa malinis na RF spectrum nang walang interference, ang mga paunang operasyon sa ere ay isinasagawa sa <strong>limitadong pang-eksperimentong mode eksklusibo sa 30m, 15m, at 10m</strong>. Ang bawat dial frequency ay kumakatawan sa base carrier frequency ng isang karaniwang <strong>3.0&nbsp;kHz Upper Sideband (USB) channel</strong> (hal., ang <code>10.146&nbsp;MHz</code> ay sumasaklaw sa audio offsets mula <code>10.1460</code> hanggang <code>10.1490&nbsp;MHz</code>). Maraming istasyon ang maaaring sabay-sabay na magpatakbo sa loob ng bawat 3.0&nbsp;kHz window sa magkakahiwalay na audio subcarrier.</p>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 0;" data-i18n="FREQUENCIES_BOX_P2">Ang mga napiling bandang ito ay nagbibigay ng maayos at walang ingay na kapaligiran sa pagpapalaganap: ang <strong>30m</strong> ay isang nakalaang WARC band kung saan ipinagbabawal ang boses ng internasyonal na batas; ang <strong>15m</strong> at <strong>10m</strong> ay nag-aalok ng malalawak at tahimik na digital segment sa ilalim ng kani-kanilang voice phone segment.</p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 6px;" data-i18n="FREQUENCIES_BOX_P1">Upang suriin ang pagganap ng mahinang signal sa malinis na RF spectrum nang walang interference, ang mga paunang operasyon sa ere ay isinasagawa sa <strong>limitadong pang-eksperimentong mode eksklusibo sa 40m, 30m, 20m, 17m, 15m, 12m, at 10m</strong>. Ang bawat dial frequency ay kumakatawan sa base carrier frequency ng isang karaniwang <strong>3.0&nbsp;kHz Upper Sideband (USB) channel</strong> (hal., ang <code>10.146&nbsp;MHz</code> ay sumasaklaw sa audio offsets mula <code>10.1460</code> hanggang <code>10.1490&nbsp;MHz</code>). Maraming istasyon ang maaaring sabay-sabay na magpatakbo sa loob ng bawat 3.0&nbsp;kHz window sa magkakahiwalay na audio subcarrier.</p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 0;" data-i18n="FREQUENCIES_BOX_P2">Ang mga napiling bandang ito ay nagbibigay ng maayos at walang ingay na kapaligiran sa pagpapalaganap: ang <strong>30m, 17m, at 12m</strong> ay isang nakalaang WARC band kung saan ipinagbabawal ang boses ng internasyonal na batas; ang <strong>40m, 20m, 15m, at 10m</strong> ay nag-aalok ng malalawak at tahimik na digital segment sa ilalim ng kani-kanilang voice phone segment.</p>
           </div>
 
           <div class="table-container frequencies-table-container">
@@ -1716,16 +1716,40 @@
               </thead>
               <tbody>
                 <tr>
+                  <td><strong>40m</strong> (7.0 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">7.084 MHz</td>
+                  <td class="radio-val td-existing">7.074 MHz</td>
+                  <td class="radio-val td-existing">7.0475 MHz</td>
+                </tr>
+                <tr>
                   <td><strong>30m</strong> (10.1 MHz)</td>
                   <td class="radio-val badge-lq td-lq">10.146 MHz</td>
                   <td class="radio-val td-existing">10.136 MHz</td>
                   <td class="radio-val td-existing">10.140 MHz</td>
                 </tr>
                 <tr>
+                  <td><strong>20m</strong> (14.0 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">14.084 MHz</td>
+                  <td class="radio-val td-existing">14.074 MHz</td>
+                  <td class="radio-val td-existing">14.080 MHz</td>
+                </tr>
+                <tr>
+                  <td><strong>17m</strong> (18.1 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">18.106 MHz</td>
+                  <td class="radio-val td-existing">18.100 MHz</td>
+                  <td class="radio-val td-existing">18.104 MHz</td>
+                </tr>
+                <tr>
                   <td><strong>15m</strong> (21.0 MHz)</td>
                   <td class="radio-val badge-lq td-lq">21.084 MHz</td>
                   <td class="radio-val td-existing">21.074 MHz</td>
                   <td class="radio-val td-existing">21.140 MHz</td>
+                </tr>
+                <tr>
+                  <td><strong>12m</strong> (24.9 MHz)</td>
+                  <td class="radio-val badge-lq td-lq">24.925 MHz</td>
+                  <td class="radio-val td-existing">24.915 MHz</td>
+                  <td class="radio-val td-existing">24.919 MHz</td>
                 </tr>
                 <tr>
                   <td><strong>10m</strong> (28.0 MHz)</td>
@@ -1735,7 +1759,7 @@
                 </tr>
               </tbody>
             </table>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 14px; margin-bottom: 0; padding: 0 14px 14px 14px; line-height: 1.5;" data-i18n="FREQUENCIES_FUTURE_BANDS_NOTE"><em>Tala:</em> Ang LQ8 ay kasalukuyang aktibo sa limitadong pang-eksperimentong mode sa 30m, 15m, at 10m lamang. Ang mga karagdagang banda (kabilang ang 40m, 20m, 12m, 17m, 80m, at 160m) ay opisyal na itatalaga sa mga darating na yugto alinsunod sa mga internasyonal na band plan.</p>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 14px; margin-bottom: 0; padding: 0 14px 14px 14px; line-height: 1.5;" data-i18n="FREQUENCIES_FUTURE_BANDS_NOTE"><em>Tala:</em> Ang LQ8 ay kasalukuyang aktibo sa limitadong pang-eksperimentong mode sa 40m, 30m, 20m, 17m, 15m, 12m, at 10m lamang. Ang mga karagdagang banda (kabilang ang 80m, 160m, 60m, at mga VHF/UHF band) ay opisyal na itatalaga sa mga darating na yugto alinsunod sa mga internasyonal na band plan.</p>
           </div>
         </div>
 

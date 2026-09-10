@@ -47,16 +47,28 @@ echo ""
 echo ">>> [1/5] Building library, tools, and complete test suite..."
 
 if [ -f "build/CMakeCache.txt" ]; then
-    CACHED_SRC="$(grep -m 1 "^CMAKE_HOME_DIRECTORY:INTERNAL=" build/CMakeCache.txt 2>/dev/null | cut -d'=' -f2 || true)"
-    CACHED_BUILD="$(grep -m 1 "^# For build in directory:" build/CMakeCache.txt 2>/dev/null | sed 's/# For build in directory: //' || true)"
+    CACHED_SRC="$(grep -m 1 "^CMAKE_HOME_DIRECTORY:INTERNAL=" build/CMakeCache.txt 2>/dev/null | cut -d'=' -f2- || true)"
+    CACHED_BUILD="$(grep -m 1 "^CMAKE_CACHEFILE_DIR:INTERNAL=" build/CMakeCache.txt 2>/dev/null | cut -d'=' -f2- || true)"
+    if [ -z "$CACHED_BUILD" ]; then
+        CACHED_BUILD="$(grep -m 1 "^# For build in directory:" build/CMakeCache.txt 2>/dev/null | sed 's/# For build in directory: //' || true)"
+    fi
     STALE=false
-    if [ -n "$CACHED_SRC" ] && { [ ! -e "$CACHED_SRC" ] || [ ! "$CACHED_SRC" -ef "$SCRIPT_DIR" ]; }; then
-        STALE=true
-    elif [ -n "$CACHED_BUILD" ] && { [ ! -e "$CACHED_BUILD" ] || [ ! "$CACHED_BUILD" -ef "$SCRIPT_DIR/build" ]; }; then
-        STALE=true
+    if [ -n "$CACHED_SRC" ]; then
+        CACHED_SRC_REAL="$(realpath "$CACHED_SRC" 2>/dev/null || echo "$CACHED_SRC")"
+        SCRIPT_REAL="$(realpath "$SCRIPT_DIR" 2>/dev/null || echo "$SCRIPT_DIR")"
+        if [ "$CACHED_SRC_REAL" != "$SCRIPT_REAL" ]; then
+            STALE=true
+        fi
+    fi
+    if [ -n "$CACHED_BUILD" ]; then
+        CACHED_BUILD_REAL="$(realpath "$CACHED_BUILD" 2>/dev/null || echo "$CACHED_BUILD")"
+        BUILD_REAL="$(realpath "$SCRIPT_DIR/build" 2>/dev/null || echo "$SCRIPT_DIR/build")"
+        if [ "$CACHED_BUILD_REAL" != "$BUILD_REAL" ]; then
+            STALE=true
+        fi
     fi
     if [ "$STALE" = true ]; then
-        echo " -> Detected CMake cache from another directory. Clearing stale cache..."
+        echo " -> Detected CMake cache from another directory/system (was $CACHED_BUILD). Clearing stale cache..."
         rm -rf build/CMakeCache.txt build/CMakeFiles
     fi
 fi

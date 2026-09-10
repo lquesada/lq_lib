@@ -90,3 +90,59 @@ dependencies {
     implementation 'com.google.android.material:material:1.12.0'
     testImplementation 'junit:junit:4.13.2'
 }
+
+// Auto-fix stale CMakeCache.txt if project was moved, symlinked, or cloned
+def cleanStaleCMakeCaches = {
+    def cxxDir = file("${projectDir}/.cxx")
+    if (cxxDir.exists()) {
+        cxxDir.eachFileRecurse { f ->
+            if (f.name == "CMakeCache.txt") {
+                try {
+                    def lines = f.readLines()
+                    def cacheDirLine = lines.find { it.startsWith("CMAKE_CACHEFILE_DIR:INTERNAL=") }
+                    def homeDirLine = lines.find { it.startsWith("CMAKE_HOME_DIRECTORY:INTERNAL=") }
+                    boolean stale = false
+                    if (cacheDirLine != null) {
+                        def cachedDir = cacheDirLine.substring("CMAKE_CACHEFILE_DIR:INTERNAL=".length()).trim()
+                        def curAbs = f.parentFile.absolutePath
+                        def curCanon = f.parentFile.canonicalPath
+                        def cachedCanon = new File(cachedDir).canonicalPath
+                        if (cachedDir != curAbs && cachedCanon != curCanon) {
+                            stale = true
+                        }
+                    }
+                    if (homeDirLine != null) {
+                        def cachedHome = homeDirLine.substring("CMAKE_HOME_DIRECTORY:INTERNAL=".length()).trim()
+                        def cppFile = file("src/main/cpp")
+                        def cppAbs = cppFile.absolutePath
+                        def cppCanon = cppFile.canonicalPath
+                        def cachedHomeCanon = new File(cachedHome).canonicalPath
+                        if (cachedHome != cppAbs && cachedHomeCanon != cppCanon) {
+                            stale = true
+                        }
+                    }
+                    if (stale) {
+                        println(">>> Stale CMakeCache.txt detected in ${f.parentFile.name}. Auto-removing to prevent CMake error...")
+                        f.delete()
+                        def cmakeFiles = new File(f.parentFile, "CMakeFiles")
+                        if (cmakeFiles.exists()) {
+                            cmakeFiles.deleteDir()
+                        }
+                    }
+                } catch (Exception ignored) {
+                    f.delete()
+                }
+            }
+        }
+    }
+}
+
+cleanStaleCMakeCaches()
+
+tasks.configureEach { task ->
+    if (task.name.startsWith("configureCMake") || task.name.startsWith("buildCMake")) {
+        task.doFirst {
+            cleanStaleCMakeCaches()
+        }
+    }
+}
