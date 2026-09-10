@@ -85,6 +85,78 @@ void IntentEngine::add_known_callsigns(const std::vector<std::string>& calls) {
     }
 }
 
+void IntentEngine::add_called_station(std::string_view call) {
+    if (call.empty()) return;
+    std::string s(call);
+    add_known_callsign(s);
+    called_stations_time_[s] = get_now();
+    if (called_stations_set_.find(s) == called_stations_set_.end()) {
+        called_stations_set_.insert(s);
+        called_stations_list_.push_back(s);
+        uint32_t h16 = hash_callsign_16(s);
+        called_h16_map_[h16] = s;
+    }
+}
+
+void IntentEngine::remove_called_station(std::string_view call) {
+    if (call.empty()) return;
+    std::string s(call);
+    auto it = called_stations_set_.find(s);
+    if (it != called_stations_set_.end()) {
+        called_stations_set_.erase(it);
+        called_stations_list_.erase(
+            std::remove(called_stations_list_.begin(), called_stations_list_.end(), s),
+            called_stations_list_.end()
+        );
+        called_stations_time_.erase(s);
+        uint32_t h16 = hash_callsign_16(s);
+        called_h16_map_.erase(h16);
+        for (const auto& remaining : called_stations_list_) {
+            if (hash_callsign_16(remaining) == h16) {
+                called_h16_map_[h16] = remaining;
+                break;
+            }
+        }
+    }
+}
+
+void IntentEngine::clear_called_stations() {
+    called_stations_set_.clear();
+    called_stations_list_.clear();
+    called_h16_map_.clear();
+    called_stations_time_.clear();
+}
+
+bool IntentEngine::has_called_station(std::string_view call) const {
+    auto it = called_stations_time_.find(std::string(call));
+    if (it == called_stations_time_.end()) return false;
+    if (called_station_ttl_sec_ > 0) {
+        auto now = get_now();
+        auto elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(now - it->second).count();
+        if (elapsed_ms >= static_cast<int64_t>(called_station_ttl_sec_) * 1000) return false;
+    }
+    return true;
+}
+
+void IntentEngine::prune_expired_called_stations() {
+    prune_expired_called_stations(get_now());
+}
+
+void IntentEngine::prune_expired_called_stations(std::chrono::steady_clock::time_point now) {
+    if (called_station_ttl_sec_ == 0) return;
+    std::vector<std::string> expired;
+    int64_t ttl_ms = static_cast<int64_t>(called_station_ttl_sec_) * 1000;
+    for (const auto& pair : called_stations_time_) {
+        auto elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(now - pair.second).count();
+        if (elapsed_ms >= ttl_ms) {
+            expired.push_back(pair.first);
+        }
+    }
+    for (const auto& call : expired) {
+        remove_called_station(call);
+    }
+}
+
 int IntentEngine::find_measured_snr(const std::vector<ReceivedFrame>& rx_frames,
                                     std::string_view target_call,
                                     int fallback_rst) const {
@@ -134,15 +206,36 @@ void IntentEngine::check_incoming_qso_completions(const std::vector<ReceivedFram
                     // DX replied to us!
                     std::string dx_station = m.call_1;
                     if ((dx_station.empty() || dx_station.front() == '<') && m.hash_1 != 0) {
-                        auto it16 = h16_map_.find(m.hash_1);
-                        if (it16 != h16_map_.end()) {
-                            dx_station = it16->second;
+                        // Scoped 16-bit DX Dehashing:
+                        // Restrict 16-bit DX hash resolution to stations actively called by this transceiver.
+                        // If no called stations are registered, fallback to the general heard cache.
+                        if (!called_stations_set_.empty()) {
+                            auto it16 = called_h16_map_.find(m.hash_1);
+                            if (it16 != called_h16_map_.end()) {
+                                dx_station = it16->second;
+                            } else {
+                                // 16-bit hash does not match any station we called -> reject as collision
+                                break;
+                            }
+                        } else {
+                            auto it16 = h16_map_.find(m.hash_1);
+                            if (it16 != h16_map_.end()) {
+                                dx_station = it16->second;
+                            }
+                        }
+                    } else if (!m.call_1.empty() && m.call_1.front() != '<') {
+                        // If DX station was cleartext or already resolved, verify against called stations if active
+                        if (!called_stations_set_.empty() && called_stations_set_.find(m.call_1) == called_stations_set_.end()) {
+                            break;
                         }
                     }
-                    if (!dx_station.empty() && completed_qsos_set_.find(dx_station) == completed_qsos_set_.end()) {
+                    if (!dx_station.empty() && dx_station.front() != '<' && completed_qsos_set_.find(dx_station) == completed_qsos_set_.end()) {
                         completed_qsos_set_.insert(dx_station);
                         completed_qsos_list_.push_back(dx_station);
                         out_completed.push_back(dx_station);
+                    }
+                    if (!dx_station.empty() && dx_station.front() != '<') {
+                        remove_called_station(dx_station);
                     }
                     break;
                 }
@@ -177,10 +270,13 @@ void IntentEngine::check_incoming_qso_completions(const std::vector<ReceivedFram
                         remote_station = it24->second;
                     }
                 }
-                if (!remote_station.empty() && completed_qsos_set_.find(remote_station) == completed_qsos_set_.end()) {
+                if (!remote_station.empty() && remote_station.front() != '<' && completed_qsos_set_.find(remote_station) == completed_qsos_set_.end()) {
                     completed_qsos_set_.insert(remote_station);
                     completed_qsos_list_.push_back(remote_station);
                     out_completed.push_back(remote_station);
+                }
+                if (!remote_station.empty() && remote_station.front() != '<') {
+                    remove_called_station(remote_station);
                 }
             }
         }
@@ -191,6 +287,9 @@ void IntentEngine::check_incoming_qso_completions(const std::vector<ReceivedFram
 DecisionResult IntentEngine::process_slot(const std::vector<ReceivedFrame>& rx_frames,
                                           const UserIntent& intent) {
     DecisionResult result;
+
+    // 0. Prune expired called stations based on TTL
+    prune_expired_called_stations();
 
     // 1. Ingest any callsigns present in received frames into our known calls database
     for (const auto& f : rx_frames) {
@@ -231,7 +330,7 @@ DecisionResult IntentEngine::process_slot(const std::vector<ReceivedFrame>& rx_f
                 result.status_note = "Error: target_call_1 required for CALL_STATION";
                 return result;
             }
-            add_known_callsign(intent.target_call_1);
+            add_called_station(intent.target_call_1);
 
             int rst = (intent.custom_rst_1 != 999) ? intent.custom_rst_1
                                                    : find_measured_snr(rx_frames, intent.target_call_1, -5);
@@ -278,6 +377,7 @@ DecisionResult IntentEngine::process_slot(const std::vector<ReceivedFrame>& rx_f
                         completed_qsos_list_.push_back(intent.target_call_1);
                         result.qso_completed_with.push_back(intent.target_call_1);
                     }
+                    remove_called_station(intent.target_call_1);
                 }
             } else {
                 // Two stations reply -> MULTI-REPORT+73 dual confirmation
@@ -306,6 +406,7 @@ DecisionResult IntentEngine::process_slot(const std::vector<ReceivedFrame>& rx_f
                             completed_qsos_list_.push_back(c);
                             result.qso_completed_with.push_back(c);
                         }
+                        remove_called_station(c);
                     }
                 }
             }

@@ -41,9 +41,12 @@
 #include "lq/crc.h"
 #include "lq/ldpc.h"
 #include "lq/transport.h"
+#include "lq/intent.h"
 #include <vector>
 #include <string>
 #include <map>
+#include <chrono>
+#include <thread>
 #include <cmath>
 
 using namespace lq;
@@ -438,6 +441,428 @@ TEST(CallReplyCombinationsTest, RSTAndLocatorBoundarySweep_Types6_7_8_11) {
             ASSERT_FALSE(dec->multi_targets.empty());
             EXPECT_EQ(dec->multi_targets[0].hash, hash_callsign_24(nonstd1));
             EXPECT_EQ(dec->multi_targets[0].rst_db, rst);
+        }
+    }
+}
+
+// =============================================================================
+// 6. Canonical Precedence & Target Dehashing in Type 6 (CALL_STD_SUF)
+// =============================================================================
+
+TEST(CallReplyCombinationsTest, CanonicalPrecedence_Type6_TargetStandardOrNonStd) {
+    // If I have a standard callsign without suffix (e.g. "HB9IPH"), but the CALLER is
+    // suffixed or non-standard, the caller was required to use Type 6.
+    // Therefore, my standard callsign MUST be resolved from hash_1 in Type 6.
+    // Only if BOTH caller and candidate target are standard without suffix is the match skipped.
+
+    const std::vector<std::string> std_targets = {"HB9IPH", "W1AW", "YO1YO", "K1ABC"};
+    const std::vector<std::string> std_p_callers = {"HB9IPH/P", "W1AW/P", "YO1YO/P", "K1ABC/P"};
+    const std::vector<std::string> nonstd_callers = {"3B9/HB9IP/P", "EA8/YO1YO", "3DA0RU", "GB100BBC"};
+    const std::vector<std::string> std_nosuf_callers = {"DL1ABC", "ZS6BKW", "JA1ABC"};
+
+    for (const auto& my_target : std_targets) {
+        uint32_t my_h24 = hash_callsign_24(my_target);
+        std::vector<std::string_view> known = {my_target, "UNRELATED"};
+
+        // Subcase A: Caller has /P suffix -> Target is standard without suffix -> MUST RESOLVE
+        for (const auto& caller : std_p_callers) {
+            Message m;
+            m.type = MessageType::CALL_STD_SUF;
+            m.hash_1 = my_h24;
+            m.call_2 = caller;
+            m.suffix_2 = 1;
+            m.locator = "JN47";
+            m.rst_db = -5;
+
+            bool res = resolve_callsigns(m, known.data(), known.size());
+            EXPECT_TRUE(res) << "Failed to resolve standard target " << my_target << " when called by suffixed " << caller;
+            EXPECT_EQ(m.call_1, my_target);
+        }
+
+        // Subcase B: Caller is Non-Standard -> Target is standard without suffix -> MUST RESOLVE
+        for (const auto& caller : nonstd_callers) {
+            Message m;
+            m.type = MessageType::CALL_STD_SUF;
+            m.hash_1 = my_h24;
+            m.call_2 = caller;
+            m.locator = "JN47";
+            m.rst_db = -10;
+
+            bool res = resolve_callsigns(m, known.data(), known.size());
+            EXPECT_TRUE(res) << "Failed to resolve standard target " << my_target << " when called by nonstandard " << caller;
+            EXPECT_EQ(m.call_1, my_target);
+        }
+
+        // Subcase C: Caller is Standard without suffix -> Target is standard without suffix -> MUST BE SKIPPED (collision)
+        for (const auto& caller : std_nosuf_callers) {
+            Message m;
+            m.type = MessageType::CALL_STD_SUF;
+            m.hash_1 = my_h24;
+            m.call_2 = caller;
+            m.suffix_2 = 0;
+            m.locator = "JN47";
+            m.rst_db = 0;
+
+            bool res = resolve_callsigns(m, known.data(), known.size());
+            EXPECT_FALSE(res) << "Accidental collision should be rejected for Type 6 when both caller " << caller << " and target " << my_target << " are standard without suffix";
+            EXPECT_TRUE(m.call_1.empty() || m.call_1.front() == '<');
+        }
+
+        // Subcase D: Target has /P suffix (e.g. "HB9IPH/P") -> Caller is Standard without suffix -> MUST RESOLVE
+        std::string my_target_p = my_target + "/P";
+        uint32_t my_p_h24 = hash_callsign_24(my_target_p);
+        std::vector<std::string_view> known_p = {my_target_p, "OTHER"};
+        for (const auto& caller : std_nosuf_callers) {
+            Message m;
+            m.type = MessageType::CALL_STD_SUF;
+            m.hash_1 = my_p_h24;
+            m.call_2 = caller;
+            m.suffix_2 = 0;
+            m.locator = "JN47";
+            m.rst_db = +3;
+
+            bool res = resolve_callsigns(m, known_p.data(), known_p.size());
+            EXPECT_TRUE(res) << "Target with /P " << my_target_p << " must resolve even if caller " << caller << " is standard without suffix";
+            EXPECT_EQ(m.call_1, my_target_p);
+        }
+    }
+}
+
+// =============================================================================
+// 7. Canonical Precedence & Target Dehashing in Type 7 (CALL_NONSTD)
+// =============================================================================
+
+TEST(CallReplyCombinationsTest, CanonicalPrecedence_Type7_TargetHash_ExhaustiveMatrix) {
+    const std::vector<std::string> all_target_categories = {
+        "HB9IPH", "W1AW",
+        "HB9IPH/P", "W1AW/P",
+        "3B9/HB9IP", "EA8/YO1YO",
+        "3B9/HB9IP/P", "TF/F6ABC/P"
+    };
+
+    const std::vector<std::string> nonstd_callers = {
+        "EA8/HB9IP", "3DA0RU", "GB100BBC", "HB9/K1ABC", "VI100AIR"
+    };
+
+    for (const auto& tgt : all_target_categories) {
+        uint32_t h20 = hash_callsign_20(tgt);
+        std::vector<std::string_view> known = {tgt, "K1ABC", "DL1ABC"};
+
+        for (const auto& caller : nonstd_callers) {
+            Message m;
+            m.type = MessageType::CALL_NONSTD;
+            m.hash_1 = h20;
+            m.call_2 = caller;
+            m.rst_db = -8;
+
+            bool res = resolve_callsigns(m, known.data(), known.size());
+            EXPECT_TRUE(res) << "Target " << tgt << " failed to resolve from H20 in Type 7 with caller " << caller;
+            EXPECT_EQ(m.call_1, tgt);
+        }
+    }
+}
+
+// =============================================================================
+// 8. Canonical Precedence & Collision Rejection in Type 10 (M73_NONSTD)
+// =============================================================================
+
+TEST(CallReplyCombinationsTest, CanonicalPrecedence_Type10_CollisionRejection_AllCombos) {
+    const std::vector<std::string> std_calls = {"HB9IPH", "W1AW", "YO1YO", "TU2TU"};
+    const std::vector<std::string> std_p_calls = {"HB9IPH/P", "W1AW/P", "YO1YO/P"};
+    const std::vector<std::string> nonstd_calls = {"EA8/HB9IP", "3DA0RU", "3B9/HB9IP/P", "GB100BBC"};
+
+    // Case 1: Standard Me + Standard Remote -> REJECT Type 10
+    for (const auto& my_call : std_calls) {
+        IntentEngine engine(my_call, "JN47");
+        uint32_t my_h24 = hash_callsign_24(my_call);
+
+        for (const auto& remote : std_calls) {
+            ReceivedFrame rf;
+            rf.msg.type = MessageType::M73_NONSTD;
+            rf.msg.call_2 = remote;
+            rf.msg.hash_1 = my_h24;
+
+            auto res = engine.process_slot({rf}, UserIntent{IntentAction::IDLE});
+            EXPECT_TRUE(res.qso_completed_with.empty()) << "Type 10 false acceptance between std " << my_call << " and std " << remote;
+            EXPECT_FALSE(engine.is_qso_completed(remote));
+        }
+    }
+
+    // Case 2: Standard Me + Standard/P Remote -> REJECT Type 10 (fits in Type 9)
+    for (const auto& my_call : std_calls) {
+        IntentEngine engine(my_call, "JN47");
+        uint32_t my_h24 = hash_callsign_24(my_call);
+
+        for (const auto& remote_p : std_p_calls) {
+            ReceivedFrame rf;
+            rf.msg.type = MessageType::M73_NONSTD;
+            rf.msg.call_2 = remote_p;
+            rf.msg.hash_1 = my_h24;
+
+            auto res = engine.process_slot({rf}, UserIntent{IntentAction::IDLE});
+            EXPECT_TRUE(res.qso_completed_with.empty()) << "Type 10 false acceptance between std " << my_call << " and std/p " << remote_p;
+            EXPECT_FALSE(engine.is_qso_completed(remote_p));
+        }
+    }
+
+    // Case 3: Standard Me + Non-Standard Remote -> ACCEPT Type 10
+    for (const auto& my_call : std_calls) {
+        IntentEngine engine(my_call, "JN47");
+        uint32_t my_h24 = hash_callsign_24(my_call);
+
+        for (const auto& remote_nonstd : nonstd_calls) {
+            ReceivedFrame rf;
+            rf.msg.type = MessageType::M73_NONSTD;
+            rf.msg.call_2 = remote_nonstd;
+            rf.msg.hash_1 = my_h24;
+
+            auto res = engine.process_slot({rf}, UserIntent{IntentAction::IDLE});
+            EXPECT_EQ(res.qso_completed_with.size(), 1u) << "Type 10 rejected valid nonstd remote " << remote_nonstd << " for std " << my_call;
+            EXPECT_TRUE(engine.is_qso_completed(remote_nonstd));
+        }
+    }
+
+    // Case 4: Non-Standard Me + Standard Remote -> ACCEPT Type 10
+    for (const auto& my_nonstd : nonstd_calls) {
+        IntentEngine engine(my_nonstd, "JN47");
+        uint32_t my_h24 = hash_callsign_24(my_nonstd);
+
+        for (const auto& remote_std : std_calls) {
+            ReceivedFrame rf;
+            rf.msg.type = MessageType::M73_NONSTD;
+            rf.msg.call_2 = remote_std;
+            rf.msg.hash_1 = my_h24;
+
+            auto res = engine.process_slot({rf}, UserIntent{IntentAction::IDLE});
+            EXPECT_EQ(res.qso_completed_with.size(), 1u) << "Type 10 rejected valid nonstd target " << my_nonstd << " for remote " << remote_std;
+            EXPECT_TRUE(engine.is_qso_completed(remote_std));
+        }
+    }
+
+    // Case 5: Non-Standard Me + Non-Standard Remote -> ACCEPT Type 10
+    for (const auto& my_nonstd : nonstd_calls) {
+        IntentEngine engine(my_nonstd, "JN47");
+        uint32_t my_h24 = hash_callsign_24(my_nonstd);
+
+        for (const auto& remote_nonstd : nonstd_calls) {
+            if (my_nonstd == remote_nonstd) continue;
+            ReceivedFrame rf;
+            rf.msg.type = MessageType::M73_NONSTD;
+            rf.msg.call_2 = remote_nonstd;
+            rf.msg.hash_1 = my_h24;
+
+            auto res = engine.process_slot({rf}, UserIntent{IntentAction::IDLE});
+            EXPECT_EQ(res.qso_completed_with.size(), 1u) << "Type 10 rejected valid dual-nonstd QSO between " << my_nonstd << " and " << remote_nonstd;
+            EXPECT_TRUE(engine.is_qso_completed(remote_nonstd));
+        }
+    }
+}
+
+// =============================================================================
+// 9. Scoped 16-Bit DX Dehashing and Contact History States in Types 11 & 12
+// =============================================================================
+
+TEST(CallReplyCombinationsTest, ScopedDehashing_Type11_Type12_ContactHistoryStates) {
+    const std::vector<std::string> my_test_calls = {"HB9IPH", "EA8/HB9IP", "3B9/HB9IP/P"};
+    const std::vector<std::string> dx_test_calls = {"W1AW", "EA8/YO1YO", "3DA0RU", "TF/F6ABC/P"};
+
+    for (const auto& my_call : my_test_calls) {
+        uint32_t my_h24 = hash_callsign_24(my_call);
+
+        for (const auto& dx_call : dx_test_calls) {
+            uint32_t dx_h16 = hash_callsign_16(dx_call);
+
+            for (MessageType mtype : {MessageType::MULTI_REPORT73, MessageType::MULTI_73}) {
+                ReceivedFrame rf_reply;
+                rf_reply.msg.type = mtype;
+                rf_reply.msg.call_1 = "<" + payload_to_hex(reinterpret_cast<const uint8_t*>(&dx_h16)).substr(0, 4) + ">";
+                rf_reply.msg.hash_1 = dx_h16;
+                MultiTarget mt;
+                mt.hash = my_h24;
+                mt.call = my_call;
+                mt.rst_db = +1;
+                rf_reply.msg.multi_targets.push_back(mt);
+
+                // --- State 1: Actively called DX before (Fresh within TTL) ---
+                {
+                    IntentEngine engine(my_call, "JN47");
+                    engine.add_called_station(dx_call);
+                    EXPECT_TRUE(engine.has_called_station(dx_call));
+
+                    auto dec = engine.process_slot({rf_reply}, UserIntent{IntentAction::IDLE});
+                    EXPECT_EQ(dec.qso_completed_with.size(), 1u);
+                    EXPECT_EQ(dec.qso_completed_with[0], dx_call);
+                    EXPECT_TRUE(engine.is_qso_completed(dx_call));
+                    // Automatic eviction upon QSO completion
+                    EXPECT_FALSE(engine.has_called_station(dx_call));
+                    EXPECT_TRUE(engine.get_called_stations().empty());
+                }
+
+                // --- State 2: Actively called DX, but TTL expired ---
+                {
+                    IntentEngine engine(my_call, "JN47");
+                    engine.set_called_station_ttl_seconds(60);
+                    auto t0 = std::chrono::steady_clock::now();
+                    engine.set_simulated_time(t0);
+                    engine.add_called_station(dx_call);
+
+                    // Advance simulated time by 40s and add station Z (so Z has 30s remaining at t0+70s)
+                    engine.set_simulated_time(t0 + std::chrono::seconds(40));
+                    engine.add_called_station("Z3ABC");
+
+                    // Simulate time advance past TTL for dx_call (t0 + 70s)
+                    engine.set_simulated_time(t0 + std::chrono::seconds(70));
+                    engine.prune_expired_called_stations();
+                    EXPECT_FALSE(engine.has_called_station(dx_call));
+                    EXPECT_TRUE(engine.has_called_station("Z3ABC"));
+
+                    // Frame from dx_call arrives -> must be rejected because dx_call expired
+                    // and active called station is Z3ABC
+                    auto dec = engine.process_slot({rf_reply}, UserIntent{IntentAction::IDLE});
+                    EXPECT_TRUE(dec.qso_completed_with.empty());
+                    EXPECT_FALSE(engine.is_qso_completed(dx_call));
+                }
+
+                // --- State 3: Uncalled DX Collision Rejection ---
+                // We actively called station X ("K1ABC"). DX station transmits Type 11 matching my_h24.
+                // Because DX was never called, must be rejected.
+                {
+                    IntentEngine engine(my_call, "JN47");
+                    engine.add_called_station("K1ABC");
+                    engine.add_known_callsign(dx_call); // present in heard cache, but NOT called
+
+                    auto dec = engine.process_slot({rf_reply}, UserIntent{IntentAction::IDLE});
+                    EXPECT_TRUE(dec.qso_completed_with.empty());
+                    EXPECT_FALSE(engine.is_qso_completed(dx_call));
+                }
+
+                // --- State 4: Passive Monitor Mode (Empty called stations list) ---
+                // In monitor mode, station in heard cache resolves for display/logging
+                {
+                    IntentEngine engine(my_call, "JN47");
+                    EXPECT_TRUE(engine.get_called_stations().empty());
+                    engine.add_known_callsign(dx_call);
+
+                    auto dec = engine.process_slot({rf_reply}, UserIntent{IntentAction::IDLE});
+                    EXPECT_EQ(dec.qso_completed_with.size(), 1u);
+                    EXPECT_EQ(dec.qso_completed_with[0], dx_call);
+                    EXPECT_TRUE(engine.is_qso_completed(dx_call));
+                }
+
+                // --- State 5: Unheard DX station in Monitor Mode ---
+                // Neither called nor heard -> DX cannot be resolved by callsign
+                {
+                    IntentEngine engine(my_call, "JN47");
+                    EXPECT_TRUE(engine.get_called_stations().empty());
+
+                    auto dec = engine.process_slot({rf_reply}, UserIntent{IntentAction::IDLE});
+                    EXPECT_TRUE(dec.qso_completed_with.empty());
+                    EXPECT_FALSE(engine.is_qso_completed(dx_call));
+                }
+            }
+        }
+    }
+}
+
+// =============================================================================
+// 10. Exhaustive Combinatorial Matrix: All Message Types & All Callsign Pairs
+// =============================================================================
+
+TEST(CallReplyCombinationsTest, FullCombinatorialMatrix_AllTypes_AllCallPairs_DehashingAndIntent) {
+    const std::vector<std::pair<std::string, std::string>> test_actor_pairs = {
+        // Std x Std
+        {"HB9IPH", "W1AW"},
+        {"YO1YO", "TU2TU"},
+        // Std x Std/P
+        {"HB9IPH", "W1AW/P"},
+        {"W1AW/P", "HB9IPH"},
+        // Std x NonStd Short
+        {"HB9IPH", "EA8/HB9IP"},
+        {"EA8/HB9IP", "HB9IPH"},
+        // Std x NonStd Complex
+        {"HB9IPH", "3B9/HB9IP/P"},
+        {"3B9/HB9IP/P", "HB9IPH"},
+        // Std/P x Std/P
+        {"HB9IPH/P", "W1AW/P"},
+        // Std/P x NonStd Short
+        {"HB9IPH/P", "3DA0RU"},
+        {"3DA0RU", "HB9IPH/P"},
+        // Std/P x NonStd Complex
+        {"HB9IPH/P", "TF/F6ABC/P"},
+        // NonStd Short x NonStd Short
+        {"EA8/HB9IP", "3DA0RU"},
+        {"GB100BBC", "HB9/K1ABC"},
+        // NonStd Short x NonStd Complex
+        {"EA8/HB9IP", "3B9/HB9IP/P"},
+        // NonStd Complex x NonStd Complex
+        {"3B9/HB9IP/P", "TF/F6ABC/P"},
+        {"EA8/YO1YO", "DL/ON4XYZ"}
+    };
+
+    for (const auto& [my_call, remote_call] : test_actor_pairs) {
+        // 1. Test CALL initiation (CALL_STATION intent)
+        {
+            IntentEngine engine(my_call, "JN47");
+            UserIntent call_intent;
+            call_intent.action = IntentAction::CALL_STATION;
+            call_intent.target_call_1 = remote_call;
+            call_intent.custom_rst_1 = -7;
+
+            auto dec = engine.process_slot({}, call_intent);
+            EXPECT_TRUE(dec.success) << "Failed CALL_STATION from " << my_call << " to " << remote_call;
+            EXPECT_TRUE(engine.has_called_station(remote_call));
+            EXPECT_FALSE(dec.tx_hex.empty());
+            EXPECT_FALSE(dec.tx_binary.empty());
+
+            // Check that transmitted message unpacks cleanly
+            uint8_t payload[PAYLOAD_BYTES] = {0};
+            ASSERT_TRUE(hex_to_payload(dec.tx_hex, payload));
+            Message dec_msg;
+            ASSERT_TRUE(decode_message(payload, dec_msg));
+        }
+
+        // 2. Test REPORT+73 generation (REPLY_TO_STATIONS intent)
+        {
+            IntentEngine engine(my_call, "JN47");
+            UserIntent reply_intent;
+            reply_intent.action = IntentAction::REPLY_TO_STATIONS;
+            reply_intent.target_call_1 = remote_call;
+            reply_intent.custom_rst_1 = +2;
+
+            auto dec = engine.process_slot({}, reply_intent);
+            EXPECT_TRUE(dec.success) << "Failed REPLY_TO_STATIONS from " << my_call << " to " << remote_call;
+            EXPECT_TRUE(engine.is_qso_completed(remote_call));
+            EXPECT_FALSE(engine.has_called_station(remote_call)); // evicted
+        }
+
+        // 3. Test MULTI-REPORT+73 dual target reply
+        {
+            IntentEngine engine(my_call, "JN47");
+            UserIntent multi_intent;
+            multi_intent.action = IntentAction::REPLY_TO_STATIONS;
+            multi_intent.target_call_1 = remote_call;
+            multi_intent.target_call_2 = "K1ABC";
+            multi_intent.custom_rst_1 = 0;
+            multi_intent.custom_rst_2 = -12;
+
+            auto dec = engine.process_slot({}, multi_intent);
+            EXPECT_TRUE(dec.success);
+            EXPECT_TRUE(engine.is_qso_completed(remote_call));
+            EXPECT_TRUE(engine.is_qso_completed("K1ABC"));
+        }
+
+        // 4. Test format_message round-trip on direct calls
+        {
+            Message m = make_call(remote_call, my_call, "FN31", -15);
+            auto payload = pack(m);
+            ASSERT_TRUE(payload.has_value());
+            auto unpacked = unpack(*payload);
+            ASSERT_TRUE(unpacked.has_value());
+
+            std::vector<std::string_view> known = {my_call, remote_call};
+            resolve_callsigns(*unpacked, known.data(), known.size());
+            std::string text = format_message(*unpacked);
+            EXPECT_FALSE(text.empty());
         }
     }
 }

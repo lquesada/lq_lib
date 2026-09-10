@@ -37,6 +37,8 @@
 #include <sstream>
 #include <cstdio>
 #include <fstream>
+#include <chrono>
+#include <thread>
 #include "lq/lq.h"
 
 using namespace lq;
@@ -2563,6 +2565,228 @@ TEST(CoverageEdgeCases, FullCoverageSaturation) {
         EXPECT_FALSE(res_multi.empty());
     }
 }
+
+// ============================================================================
+// 15. Scoped 16-bit DX Dehashing & Collision Prevention Tests
+// ============================================================================
+
+TEST(CoverageEdgeCases, IntentEngineScopedDehashingAndCollisionRejection) {
+    IntentEngine engine("HB9IPH", "JN47");
+
+    // 1. Basic API coverage for called stations tracking
+    EXPECT_TRUE(engine.get_called_stations().empty());
+    engine.add_called_station("");
+    EXPECT_TRUE(engine.get_called_stations().empty());
+
+    engine.add_called_station("3B9/HB9IP/P");
+    EXPECT_TRUE(engine.has_called_station("3B9/HB9IP/P"));
+    EXPECT_FALSE(engine.has_called_station("W1AW"));
+    EXPECT_EQ(engine.get_called_stations().size(), 1u);
+    EXPECT_EQ(engine.get_called_stations()[0], "3B9/HB9IP/P");
+
+    // Re-adding same station is idempotent
+    engine.add_called_station("3B9/HB9IP/P");
+    EXPECT_EQ(engine.get_called_stations().size(), 1u);
+
+    engine.clear_called_stations();
+    EXPECT_FALSE(engine.has_called_station("3B9/HB9IP/P"));
+    EXPECT_TRUE(engine.get_called_stations().empty());
+
+    // 2. Positive Case: Station A calls Fox -> receives MULTI_REPORT73 with 16-bit DX hash
+    UserIntent call_intent;
+    call_intent.action = IntentAction::CALL_STATION;
+    call_intent.target_call_1 = "3B9/HB9IP/P";
+    auto call_dec = engine.process_slot({}, call_intent);
+    EXPECT_TRUE(call_dec.success);
+    EXPECT_TRUE(engine.has_called_station("3B9/HB9IP/P"));
+
+    // Fox replies with MULTI_REPORT73: DX hash (16-bit), Target hash (24-bit for HB9IPH)
+    ReceivedFrame rf_reply;
+    rf_reply.msg.type = MessageType::MULTI_REPORT73;
+    rf_reply.msg.call_1 = "<7A8B>";
+    rf_reply.msg.hash_1 = hash_callsign_16("3B9/HB9IP/P");
+    MultiTarget mt;
+    mt.hash = hash_callsign_24("HB9IPH");
+    mt.call = "HB9IPH";
+    mt.rst_db = +5;
+    rf_reply.msg.multi_targets.push_back(mt);
+
+    UserIntent idle_intent;
+    idle_intent.action = IntentAction::IDLE;
+    auto reply_dec = engine.process_slot({rf_reply}, idle_intent);
+    EXPECT_TRUE(reply_dec.success);
+    EXPECT_EQ(reply_dec.qso_completed_with.size(), 1u);
+    EXPECT_EQ(reply_dec.qso_completed_with[0], "3B9/HB9IP/P");
+    EXPECT_TRUE(engine.is_qso_completed("3B9/HB9IP/P"));
+    EXPECT_FALSE(engine.has_called_station("3B9/HB9IP/P")); // Evicted upon QSO completion
+
+    // 3. Negative Case: Uncalled Fox Collision Rejection
+    // An uncalled Fox ("EA8/HB9IP") transmits MULTI_REPORT73 matching HB9IPH's 24-bit hash.
+    // Because HB9IPH only called 3B9/HB9IP/P, this frame must be rejected.
+    IntentEngine engine_strict("HB9IPH", "JN47");
+    UserIntent call_fox1;
+    call_fox1.action = IntentAction::CALL_STATION;
+    call_fox1.target_call_1 = "K1ABC";
+    engine_strict.process_slot({}, call_fox1);
+    EXPECT_TRUE(engine_strict.has_called_station("K1ABC"));
+
+    // Add uncalled station to general heard cache
+    engine_strict.add_known_callsign("EA8/HB9IP");
+
+    ReceivedFrame rf_uncalled_fox;
+    rf_uncalled_fox.msg.type = MessageType::MULTI_REPORT73;
+    rf_uncalled_fox.msg.call_1 = "<1234>";
+    rf_uncalled_fox.msg.hash_1 = hash_callsign_16("EA8/HB9IP"); // Uncalled Fox
+    MultiTarget mt_coll;
+    mt_coll.hash = hash_callsign_24("HB9IPH"); // Accidental target collision
+    mt_coll.rst_db = -2;
+    rf_uncalled_fox.msg.multi_targets.push_back(mt_coll);
+
+    auto uncalled_dec = engine_strict.process_slot({rf_uncalled_fox}, idle_intent);
+    EXPECT_TRUE(uncalled_dec.qso_completed_with.empty());
+    EXPECT_FALSE(engine_strict.is_qso_completed("EA8/HB9IP"));
+
+    // 4. Negative Case: Cleartext uncalled DX station rejection when called stations active
+    ReceivedFrame rf_clear_uncalled;
+    rf_clear_uncalled.msg.type = MessageType::MULTI_REPORT73;
+    rf_clear_uncalled.msg.call_1 = "EA8/HB9IP"; // Cleartext uncalled station
+    rf_clear_uncalled.msg.hash_1 = hash_callsign_16("EA8/HB9IP");
+    rf_clear_uncalled.msg.multi_targets.push_back(mt_coll);
+
+    auto clear_uncalled_dec = engine_strict.process_slot({rf_clear_uncalled}, idle_intent);
+    EXPECT_TRUE(clear_uncalled_dec.qso_completed_with.empty());
+    EXPECT_FALSE(engine_strict.is_qso_completed("EA8/HB9IP"));
+
+    // 5. Positive Case: Matching legitimate called Fox among multiple candidates
+    engine_strict.add_called_station("EA8/HB9IP");
+    EXPECT_TRUE(engine_strict.has_called_station("EA8/HB9IP"));
+    auto valid_called_dec = engine_strict.process_slot({rf_uncalled_fox}, idle_intent);
+    EXPECT_EQ(valid_called_dec.qso_completed_with.size(), 1u);
+    EXPECT_EQ(valid_called_dec.qso_completed_with[0], "EA8/HB9IP");
+    EXPECT_TRUE(engine_strict.is_qso_completed("EA8/HB9IP"));
+    EXPECT_FALSE(engine_strict.has_called_station("EA8/HB9IP")); // Evicted upon QSO completion
+}
+
+TEST(CoverageEdgeCases, IntentEngineCalledStationExpirationAndEviction) {
+    IntentEngine engine("HB9IPH", "JN47");
+
+    // 1. Manual removal API tests
+    engine.add_called_station("W1AW");
+    engine.add_called_station("K1ABC");
+    EXPECT_TRUE(engine.has_called_station("W1AW"));
+    EXPECT_TRUE(engine.has_called_station("K1ABC"));
+    EXPECT_EQ(engine.get_called_stations().size(), 2u);
+
+    // Remove empty callsign is a no-op
+    engine.remove_called_station("");
+    EXPECT_EQ(engine.get_called_stations().size(), 2u);
+
+    // Remove non-tracked callsign is a no-op
+    engine.remove_called_station("NOTRACK");
+    EXPECT_EQ(engine.get_called_stations().size(), 2u);
+
+    // Remove W1AW
+    engine.remove_called_station("W1AW");
+    EXPECT_FALSE(engine.has_called_station("W1AW"));
+    EXPECT_TRUE(engine.has_called_station("K1ABC"));
+    EXPECT_EQ(engine.get_called_stations().size(), 1u);
+    EXPECT_EQ(engine.get_called_stations()[0], "K1ABC");
+
+    // 2. Hash retention when removing one station
+    engine.clear_called_stations();
+    EXPECT_TRUE(engine.get_called_stations().empty());
+
+    // 3. TTL Configuration and Expiration
+    EXPECT_EQ(engine.get_called_station_ttl_seconds(), 1800u);
+    engine.set_called_station_ttl_seconds(300); // 5 minutes
+    EXPECT_EQ(engine.get_called_station_ttl_seconds(), 300u);
+
+    auto t0 = std::chrono::steady_clock::now();
+    engine.add_called_station("EA8/HB9IP");
+    EXPECT_TRUE(engine.has_called_station("EA8/HB9IP"));
+
+    // Prune with time not yet expired
+    engine.prune_expired_called_stations(t0 + std::chrono::seconds(100));
+    EXPECT_TRUE(engine.has_called_station("EA8/HB9IP"));
+    EXPECT_EQ(engine.get_called_stations().size(), 1u);
+
+    // Refresh timestamp by re-calling station
+    engine.add_called_station("EA8/HB9IP");
+
+    // Prune with time > 300s from original t0, but < 300s from refreshed call
+    engine.prune_expired_called_stations(t0 + std::chrono::seconds(250));
+    EXPECT_TRUE(engine.has_called_station("EA8/HB9IP"));
+
+    // Advance 301 seconds past refresh
+    auto t_expired = t0 + std::chrono::seconds(250 + 301);
+    engine.prune_expired_called_stations(t_expired);
+    EXPECT_FALSE(engine.has_called_station("EA8/HB9IP"));
+    EXPECT_TRUE(engine.get_called_stations().empty());
+
+    // Test default prune_expired_called_stations() call (no args)
+    engine.add_called_station("JA1ABC");
+    engine.prune_expired_called_stations(); // with current time (not expired)
+    EXPECT_TRUE(engine.has_called_station("JA1ABC"));
+
+    // Test TTL = 0 disables expiration
+    engine.set_called_station_ttl_seconds(0);
+    EXPECT_EQ(engine.get_called_station_ttl_seconds(), 0u);
+    engine.prune_expired_called_stations(t0 + std::chrono::hours(1000));
+    EXPECT_TRUE(engine.has_called_station("JA1ABC"));
+    EXPECT_EQ(engine.get_called_stations().size(), 1u);
+
+    // 4. Automatic slot pruning during process_slot
+    engine.set_called_station_ttl_seconds(1);
+    engine.add_called_station("DL1ABC");
+    EXPECT_TRUE(engine.has_called_station("DL1ABC"));
+    std::this_thread::sleep_for(std::chrono::milliseconds(1050));
+    // has_called_station returns false due to elapsed time
+    EXPECT_FALSE(engine.has_called_station("DL1ABC"));
+    // process_slot prunes it from the list
+    UserIntent idle;
+    idle.action = IntentAction::IDLE;
+    engine.process_slot({}, idle);
+    EXPECT_TRUE(engine.get_called_stations().empty());
+
+    // 5. Automatic eviction on single-station incoming REPORT+73
+    engine.set_called_station_ttl_seconds(1800);
+    engine.add_called_station("G4ABC");
+    EXPECT_TRUE(engine.has_called_station("G4ABC"));
+
+    ReceivedFrame rf_single_rep;
+    rf_single_rep.msg.type = MessageType::REPORT73_STD;
+    rf_single_rep.msg.call_1 = "HB9IPH";
+    rf_single_rep.msg.call_2 = "G4ABC";
+    rf_single_rep.msg.rst_db = -12;
+    auto dec_rep = engine.process_slot({rf_single_rep}, idle);
+    EXPECT_TRUE(engine.is_qso_completed("G4ABC"));
+    EXPECT_FALSE(engine.has_called_station("G4ABC"));
+
+    // 6. Automatic eviction when replying via REPLY_TO_STATIONS (single & multi)
+    engine.add_called_station("VE3ABC");
+    EXPECT_TRUE(engine.has_called_station("VE3ABC"));
+    UserIntent reply_single;
+    reply_single.action = IntentAction::REPLY_TO_STATIONS;
+    reply_single.target_call_1 = "VE3ABC";
+    engine.process_slot({}, reply_single);
+    EXPECT_TRUE(engine.is_qso_completed("VE3ABC"));
+    EXPECT_FALSE(engine.has_called_station("VE3ABC"));
+
+    engine.add_called_station("VK2ABC");
+    engine.add_called_station("ZL1ABC");
+    EXPECT_TRUE(engine.has_called_station("VK2ABC"));
+    EXPECT_TRUE(engine.has_called_station("ZL1ABC"));
+    UserIntent reply_multi;
+    reply_multi.action = IntentAction::REPLY_TO_STATIONS;
+    reply_multi.target_call_1 = "VK2ABC";
+    reply_multi.target_call_2 = "ZL1ABC";
+    engine.process_slot({}, reply_multi);
+    EXPECT_TRUE(engine.is_qso_completed("VK2ABC"));
+    EXPECT_TRUE(engine.is_qso_completed("ZL1ABC"));
+    EXPECT_FALSE(engine.has_called_station("VK2ABC"));
+    EXPECT_FALSE(engine.has_called_station("ZL1ABC"));
+}
+
 
 
 

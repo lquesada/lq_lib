@@ -71,7 +71,7 @@ As summarized in Table~\ref{tab:ft8qso}, \LQ8 completes a contact in 4 time slot
   \item \textbf{T1 (Slot 1, Even):} Station~A transmits a \msgtype{CQ} broadcast (catalogued in Section~\ref{sec:msg_arch}, Types~1--4) containing its callsign, optional portable suffix, grid locator, or CQ modifier.
   \item \textbf{T2 (Slot 2, Odd):} Station~B transmits a directed \msgtype{CALL} reply (Types~5--7) packing Station~A's target address, caller callsign, measured SNR report, and grid locator into a single frame.
   \item \textbf{T3 (Slot 3, Even):} Station~A acknowledges with \msgtype{REPORT+73} (Type~8 for standard callsigns, or multi-station Type~11), delivering its measured SNR report for Station~B.
-  \item \textbf{T4 (Slot 4, Odd):} Station~B transmits a final \msgtype{73} acknowledgment (Types~9, 10, or 12), completing the confirmed bidirectional contact.
+  \item \textbf{T4 (Slot 4, Odd):} Station~B transmits a final \msgtype{73} acknowledgment (Types~9 or 10), completing the confirmed bidirectional contact.
 \end{enumerate}
 
 \subsection{Retransmission, Error Recovery and Logging Semantics}
@@ -90,12 +90,12 @@ Contacts are logged once callsigns, locators, reports, and acknowledgments are e
 
 During DXpedition pileups or contest operations in Fox and Hound (F/H) mode, Station~A (Fox) activates the \msgtype{MULTI-REPORT+73} protocol (Type~11) to confirm up to two answering Hound stations simultaneously on a single carrier:
 \begin{enumerate}[leftmargin=1.4em, itemsep=0.8pt plus 1.0pt minus 0.4pt, topsep=1.5pt plus 1.0pt minus 0.5pt, parsep=0pt]
-  \item \textbf{Slot 1 (Fox):} Fox broadcasts directed \msgtype{CQ} on its primary run frequency (e.g., \texttt{CQ DX <FOX>}).
+  \item \textbf{Slot 1 (Fox):} Fox broadcasts directed \msgtype{CQ} on its primary run frequency (e.g., \texttt{CQ DX FOX}).
   \item \textbf{Slot 2 (Hounds):} Remote Hounds call simultaneously on split audio frequencies via directed \msgtype{CALL} (e.g., \texttt{<FOX> <HOUND1> FN42 -08}).
   \item \textbf{Slot 3 (Fox):} Fox confirms both Hounds simultaneously on the run frequency via \msgtype{MULTI-REPORT+73} (\texttt{<HOUND1> R+05 <HOUND2> R-02 <FOX>}).
   \item \textbf{Slot 4 (Hounds):} Both Hounds respond with concluding \msgtype{73} acknowledgments on their split frequencies (\texttt{<FOX> <HOUND1> 73}).
 \end{enumerate}
-When confirming a single Hound in Fox mode, standard callers are confirmed using Type~8 (\msgtype{REPORT+73 std+suf}). Single-target Type~11 (or Type~12 for final acknowledgments) is used when confirming non-standard callers or when operating under strict split-frequency F/H scheduling; in this case, Target~2 duplicates Target~1 (identical hash and SNR), which decoders process as a single-station transmission.
+When confirming a single Hound in Fox mode, standard callers are confirmed using Type~8 (\msgtype{REPORT+73 std+suf}). Single-target Type~11 (or Type~12 for final acknowledgments) is used when confirming non-standard callers or when operating under strict split-frequency F/H scheduling; in this case, Target~2 duplicates Target~1 (identical hash, and identical SNR in Type~11), which decoders process as a single-station transmission.
 
 \paragraph{Throughput Multiplier Analysis.}
 In continuous pileup operation, each QSO cycle completes in 3 slots (45\,s vs.\ 60\,s conventional). Confirming two answering Hounds simultaneously in Step~3 delivers a peak capacity of 160\,QSOs/h on a single 50.0\,Hz carrier with \textbf{0.0\,dB power-splitting penalty}, avoiding the $-3.0$\,dB RF loss of multi-carrier FT8 F/H mode. Under dual-carrier \LQ8 (100\,Hz bandwidth), capacity reaches 320\,QSOs/h while halving exposure to fading.

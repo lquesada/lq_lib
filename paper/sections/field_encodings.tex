@@ -50,7 +50,7 @@ To maintain compatibility, \LQ{} adopts core field structures from FT8~\cite{ft8
 
 Adopted from FT8~\cite{ft8,wsjtx}, standard ITU amateur callsigns canonicalize to 6 characters anchored around decimal digit $d$ at position~3: $c_1 c_2 d s_1 s_2 s_3$. Prefix ($c_1, c_2$) right-aligns with space padding in $c_1$ if 1 character; suffix ($s_1, s_2, s_3$) left-aligns with spaces. Callsigns matching $c_1 c_2 d s_1 s_2 s_3$ without slashes are standard; all others are non-standard (Section~\ref{sec:nonstd_call}).
 
-Symbol index mappings: $c_1 \in \{\text{\textvisiblespace}, \text{0--9}, \text{A--Z}\}$ (radix 37: space $\to 0$, \texttt{0--9} $\to 1\dots 10$, \texttt{A--Z} $\to 11\dots 36$); $c_2 \in \{\text{0--9}, \text{A--Z}\}$ (radix 36: \texttt{0--9} $\to 0\dots 9$, \texttt{A--Z} $\to 10\dots 35$); $d \in \{\text{0--9}\}$ (radix 10); and $s_1, s_2, s_3 \in \{\text{\textvisiblespace}, \text{A--Z}\}$ (radix 27: space $\to 0$, \texttt{A--Z} $\to 1\dots 26$). With indices $(n_1, \dots, n_6)$, mixed-radix serialization packs into 28-bit integer $N_{28}$:
+Index mappings: $c_1 \in \{\text{\textvisiblespace}, \text{0--9}, \text{A--Z}\}$ (radix 37: space $\to 0$, \texttt{0--9} $\to 1\dots 10$, \texttt{A--Z} $\to 11\dots 36$); $c_2 \in \{\text{0--9}, \text{A--Z}\}$ (radix 36: \texttt{0--9} $\to 0\dots 9$, \texttt{A--Z} $\to 10\dots 35$); $d \in \{\text{0--9}\}$ (radix 10); and $s_1, s_2, s_3 \in \{\text{\textvisiblespace}, \text{A--Z}\}$ (radix 27: space $\to 0$, \texttt{A--Z} $\to 1\dots 26$). With indices $(n_1, \dots, n_6)$, mixed-radix serialization packs into 28-bit integer $N_{28}$:
 \begin{equation}
   N_{28} = (n_1 \cdot 36 \cdot 10 + n_2 \cdot 10 + n_3) \cdot 27^3 + n_4 \cdot 27^2 + n_5 \cdot 27 + n_6.
 \label{eq:call28}
@@ -86,7 +86,7 @@ Non-standard stations addressed in directed frames are identified via collision-
 \begin{equation}
   H_{16}(\text{call}) = \lfloor (\textstyle\sum_{i=0}^{10} v_i \cdot 38^{10-i} \cdot 47055833459) / 2^{48} \rfloor \bmod 2^{16},
 \end{equation}
-yielding 65,536 states (e.g., $H_{16}(\text{\callsign{HB9IPH}}) = \texttt{0x7A8B}$).
+yielding 65,536 states (e.g., $H_{16}(\text{\callsign{HB9IPH}}) = \texttt{0x7A8B}$); to prevent collisions, decoders restrict $H_{16}$ dehashing to actively called stations (evicted upon QSO completion or timeout).
 
 \textbf{UI Resolution:} Resolved hashes display bracketed by callsign (e.g., \texttt{<HB9IPH>}); unresolved hashes display in hex (e.g., \texttt{<01A4F2>}, \texttt{<01A4F>}, or \texttt{<7A8B>}).
 

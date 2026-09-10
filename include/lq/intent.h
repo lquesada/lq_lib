@@ -38,6 +38,8 @@
 #include <vector>
 #include <unordered_set>
 #include <unordered_map>
+#include <chrono>
+#include <algorithm>
 #include <optional>
 #include <cstdint>
 #include "lq/types.h"
@@ -137,6 +139,57 @@ public:
     const std::vector<std::string>& get_all_completed_qsos() const { return completed_qsos_list_; }
 
     /**
+     * Track a station that has been called by this transceiver.
+     * Restricts 16-bit DX dehashing in multi-station frames to prevent accidental hash collisions.
+     * Automatically updates the last-called timestamp for TTL tracking.
+     */
+    void add_called_station(std::string_view call);
+
+    /**
+     * Remove an actively called station (e.g. upon QSO completion or cancellation).
+     */
+    void remove_called_station(std::string_view call);
+
+    /**
+     * Clear all actively called stations.
+     */
+    void clear_called_stations();
+
+    /**
+     * Get list of currently tracked called stations.
+     */
+    const std::vector<std::string>& get_called_stations() const { return called_stations_list_; }
+
+    /**
+     * Check whether a callsign is in the active called stations list and not expired.
+     */
+    bool has_called_station(std::string_view call) const;
+
+    /**
+     * Configure Time-to-Live (TTL) in seconds for called stations tracking (default: 1800s / 30m).
+     * Set to 0 to disable TTL expiration.
+     */
+    void set_called_station_ttl_seconds(uint32_t ttl_sec) { called_station_ttl_sec_ = ttl_sec; }
+    uint32_t get_called_station_ttl_seconds() const { return called_station_ttl_sec_; }
+
+    /**
+     * Set an optional simulated time point for deterministic testing of TTL and slot processing.
+     * Pass std::nullopt (default) to use real steady_clock.
+     */
+    void set_simulated_time(std::optional<std::chrono::steady_clock::time_point> sim_time = std::nullopt) {
+        simulated_time_ = sim_time;
+    }
+    std::optional<std::chrono::steady_clock::time_point> get_simulated_time() const {
+        return simulated_time_;
+    }
+
+    /**
+     * Evict called stations whose elapsed time since last call exceeds TTL.
+     */
+    void prune_expired_called_stations();
+    void prune_expired_called_stations(std::chrono::steady_clock::time_point now);
+
+    /**
      * Reset completed QSOs history.
      */
     void reset_completed_qsos();
@@ -150,8 +203,18 @@ private:
     std::unordered_set<std::string> known_calls_set_;
     std::unordered_map<uint32_t, std::string> h24_map_;
     std::unordered_map<uint32_t, std::string> h16_map_;
+    std::vector<std::string> called_stations_list_;
+    std::unordered_set<std::string> called_stations_set_;
+    std::unordered_map<uint32_t, std::string> called_h16_map_;
+    std::unordered_map<std::string, std::chrono::steady_clock::time_point> called_stations_time_;
+    uint32_t called_station_ttl_sec_ = 1800;
+    std::optional<std::chrono::steady_clock::time_point> simulated_time_;
     std::unordered_set<std::string> completed_qsos_set_;
     std::vector<std::string> completed_qsos_list_;
+
+    std::chrono::steady_clock::time_point get_now() const {
+        return simulated_time_.value_or(std::chrono::steady_clock::now());
+    }
 
     // Find measured SNR for a specific station from the received frames
     int find_measured_snr(const std::vector<ReceivedFrame>& rx_frames,
