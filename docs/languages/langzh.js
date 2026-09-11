@@ -107,7 +107,7 @@ const langData = {
     "FREQUENCIES_SUBTITLE": "在有限实验模式下仅针对这些频段为 <strong>LQ8</strong> 提供专用的 3.0&nbsp;kHz 信道子分配，以确保干净、无干扰的微弱信号评估。",
     "FREQUENCIES_BOX_TITLE": "有限实验模式：40m、30m、20m、17m、15m、12m 和 10m 频段分配",
     "FREQUENCIES_BOX_P1": "为了在干净无干扰的无线电频谱中评估微弱信号性能，初期通联在<strong>仅限于 40m、30m、20m、17m、15m、12m 和 10m 的有限实验模式</strong>下开展。所列的每个刻度频率代表一个标准 <strong>3.0&nbsp;kHz 上边带（USB）信道</strong>的基准载波频率（例如 <code>10.146&nbsp;MHz</code> 覆盖 <code>10.1460</code> 至 <code>10.1490&nbsp;MHz</code> 的音频偏移）。多个电台在同一个 3.0&nbsp;kHz 窗口内通过不同音频副载波频偏并发通联。",
-    "FREQUENCIES_BOX_P2": "这些选定频段提供了优质、无噪的传播环境：<strong>30m、17m 和 12m</strong> 是专用 WARC 频段，国际法规严格禁止话音通联；<strong>40m、20m、15m 和 10m</strong> 拥有宽广、宁静的数字模式分配区间，远低于各自的话音通信频段。",
+    "FREQUENCIES_BOX_P2": "这些选定频段提供了优质、无噪的传播环境：<strong>30m</strong> 是窄带 WARC 分配频段，国际法规严格禁止话音通信；<strong>17m 和 12m</strong> 提供无竞赛干扰的 WARC 频谱，而 <strong>40m、20m、15m 和 10m</strong> 则拥有宽广、宁静且与各自话音区段明确分离的数字模式分配区间。",
     "FREQUENCIES_TH_BAND": "频段",
     "FREQUENCIES_TH_LQ8": "LQ8 (3 kHz USB)",
     "FREQUENCIES_TH_LQ4": "LQ4 (3 kHz USB)",

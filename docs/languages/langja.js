@@ -107,7 +107,7 @@ const langData = {
     "FREQUENCIES_SUBTITLE": "クリーンで混信のない微弱信号評価を確保するため、限定実験モードにおいてこれらのバンド専用に <strong>LQ8</strong> の 3.0&nbsp;kHz チャネルサブアロケーションを設定しています。",
     "FREQUENCIES_BOX_TITLE": "限定実験モード：40m・30m・20m・17m・15m・12m・10m バンド割り当て",
     "FREQUENCIES_BOX_P1": "干渉のないクリーンなRFスペクトル環境で微弱信号復調性能を検証するため、初期運用は<strong>40m・30m・20m・17m・15m・12m・10mの7バンド限定の実験モード</strong>で実施されます。各ダイヤル周波数は標準的な <strong>3.0&nbsp;kHz 上側波帯（USB）チャネル</strong>のベースキャリア周波数を表します（例：<code>10.146&nbsp;MHz</code> は <code>10.1460</code>〜<code>10.1490&nbsp;MHz</code> のオーディオオフセット）。複数の局が個別のオーディオ副搬送波オフセットを用いて同一の 3.0&nbsp;kHz ウィンドウ内で同時に運用可能です。",
-    "FREQUENCIES_BOX_P2": "選定されたバンドはノイズが極めて少なく最適な電波伝搬環境を提供します：<strong>30m、17m、12m</strong> は国際協定により音声通話が一切禁止された専用WARCバンドです。<strong>40m、20m、15m、10m</strong> は音声通信セグメントよりはるか下に位置し、広大で静寂なデジタル通信領域を確保しています。",
+    "FREQUENCIES_BOX_P2": "選定されたバンドはノイズが極めて少なく最適な電波伝搬環境を提供します：<strong>30m</strong> は国際規則により音声通話が禁止された狭帯域専用WARCバンドです。<strong>17m、12m</strong> はコンテストのない静穏なWARCスペクトラムを提供し、<strong>40m、20m、15m、10m</strong> は音声通信セグメントから明確に分離された広大で静寂なデジタル通信帯域を確保しています。",
     "FREQUENCIES_TH_BAND": "バンド",
     "FREQUENCIES_TH_LQ8": "LQ8 (3 kHz USB)",
     "FREQUENCIES_TH_LQ4": "LQ4 (3 kHz USB)",

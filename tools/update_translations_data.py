@@ -45,6 +45,14 @@ import re
 import subprocess
 import sys
 
+try:
+    from tools.update_frequencies_p2 import P2_TRANSLATIONS
+except ImportError:
+    try:
+        from update_frequencies_p2 import P2_TRANSLATIONS
+    except ImportError:
+        P2_TRANSLATIONS = {}
+
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 LANG_DIR = os.path.join(BASE_DIR, "docs", "languages")
 
@@ -470,15 +478,9 @@ def update_language_file(lang_code):
     content = re.sub(r'\"FREQUENCIES_BOX_P1\":\s*\"[^\"]+\"', repl_box_p1, content)
 
     # 3. Update FREQUENCIES_BOX_P2
-    def repl_box_p2(m):
-        full_line = m.group(0)
-        pattern_warc = r'<strong>(30m|30м|30\s*متراً|30\s*متر)</strong>'
-        pattern_classic = r'<strong>(15m|15м|15\s*متراً|15\s*متر)</strong>.*?<strong>(10m|10м|10\s*أمتار|10\s*متر)</strong>'
-        new_line = re.sub(pattern_warc, f"<strong>{warc}</strong>", full_line)
-        new_line = re.sub(pattern_classic, f"<strong>{classic}</strong>", new_line)
-        return new_line
-
-    content = re.sub(r'\"FREQUENCIES_BOX_P2\":\s*\"[^\"]+\"', repl_box_p2, content)
+    if lang_code in P2_TRANSLATIONS:
+        esc = P2_TRANSLATIONS[lang_code].replace('\\', '\\\\').replace('"', '\\"')
+        content = re.sub(r'\"FREQUENCIES_BOX_P2\":\s*\"[^\"]+\"', f'\"FREQUENCIES_BOX_P2\": \"{esc}\"', content)
 
     # 4. Update FREQUENCIES_FUTURE_BANDS_NOTE
     def repl_note(m):

@@ -107,7 +107,7 @@ const langData = {
     "FREQUENCIES_SUBTITLE": "Keɓaɓɓen rarraba tashoshi na 3.0&nbsp;kHz don <strong>LQ8</strong> a yanayin gwaji mai iyaka a waɗannan zangon zalla don tabbatar da gwajin sigina mai rauni ba tare da tsangwama ba.",
     "FREQUENCIES_BOX_TITLE": "Yanayin Gwaji Mai Iyaka: Rarraba 40m, 30m, 20m, 17m, 15m, 12m da 10m",
     "FREQUENCIES_BOX_P1": "Don gwada aikin sigina mai rauni a cikin ingantaccen zangon RF ba tare da tsangwama ba, ana gudanar da ayyukan farko a <strong>yanayin gwaji mai iyaka a 40m, 30m, 20m, 17m, 15m, 12m da 10m kaɗai</strong>. Kowane mita yana wakiltar ainihin tashar <strong>3.0&nbsp;kHz Upper Sideband (USB)</strong> (misali <code>10.146&nbsp;MHz</code> yana rufe sauti daga <code>10.1460</code> zuwa <code>10.1490&nbsp;MHz</code>). Tashoshi da dama suna aiki a lokaci guda a cikin taga 3.0&nbsp;kHz akan sautuka daban-daban.",
-    "FREQUENCIES_BOX_P2": "Waɗannan zaɓaɓɓun zangon suna ba da yanayin watsawa mai kyau ba tare da surutu ba: <strong>30m, 17m da 12m</strong> zangon WARC ne na musamman wanda dokokin ƙasa da ƙasa suka haramta magana ta murya; <strong>40m, 20m, 15m da 10m</strong> suna ba da faffadan sassan dijital masu natsuwa nesa da sassan murya.",
+    "FREQUENCIES_BOX_P2": "Waɗannan zaɓaɓɓun zangon suna ba da yanayin watsawa mai kyau ba tare da surutu ba: <strong>30m</strong> zangon WARC ne mai kunkuntar zango wanda dokokin ƙasa da ƙasa suka haramta magana ta murya; <strong>17m da 12m</strong> suna ba da zangon WARC ba tare da gasa ba, yayin da <strong>40m, 20m, 15m da 10m</strong> ke ba da faffadan sassan dijital masu natsuwa nesa da sassan murya.",
     "FREQUENCIES_TH_BAND": "Band",
     "FREQUENCIES_TH_LQ8": "LQ8 (3 kHz USB)",
     "FREQUENCIES_TH_LQ4": "LQ4 (3 kHz USB)",

@@ -107,7 +107,7 @@ const langData = {
     "FREQUENCIES_SUBTITLE": "ንጹህና ከጣልቃ ገብነት የጸዳ ደካማ ሲግናል ግምገማን ለማረጋገጥ በነዚህ ባንዶች ላይ ብቻ ለ <strong>LQ8</strong> የተመደበ 3.0&nbsp;kHz የቻናል ክፍፍል።",
     "FREQUENCIES_BOX_TITLE": "የተገደበ የሙከራ ሁነታ፡ የ 30m፣ 15m እና 10m ምደባዎች",
     "FREQUENCIES_BOX_P1": "ደካማ ሲግናልን ያለ ምንም ጣልቃ ገብነት ለመገምገም የመጀመሪያዎቹ የአየር ላይ ስራዎች <strong>በ 30m፣ 15m እና 10m ላይ ብቻ በተገደበ የሙከራ ሁነታ</strong> ይከናወናሉ። እያንዳንዱ መደወያ ድግግሞሽ መደበኛውን <strong>3.0&nbsp;kHz Upper Sideband (USB) ቻናል</strong> ይወክላል (ለምሳሌ፡ <code>10.146&nbsp;MHz</code> ከ <code>10.1460</code> እስከ <code>10.1490&nbsp;MHz</code> የድምጽ ልዩነቶችን ያካትታል)። በርካታ ጣቢያዎች በአንድ የ 3.0&nbsp;kHz መስኮት ውስጥ በተለያዩ ድምጾች በአንድ ጊዜ መስራት ይችላሉ።",
-    "FREQUENCIES_BOX_P2": "እነዚህ የተመረጡ ባንዶች ከጩኸት የጸዳ ምቹ የስርጭት ሁኔታ ይሰጣሉ፡ <strong>30m፣ 17m እና 12m</strong> በአለም አቀፍ ህግ የድምጽ ግንኙነት የተከለከለበት ልዩ የ WARC ባንድ ነው፤ <strong>40m፣ 20m፣ 15m እና 10m</strong> ከድምጽ ክፍሎቹ በታች ሰፊና ጸጥ ያለ የዲጂታል ቦታ ይሰጣሉ።",
+    "FREQUENCIES_BOX_P2": "እነዚህ የተመረጡ ባንዶች የተረጋጋ እና ድምፅ-አልባ የሞገድ ሥርጭት ሁኔታዎችን ይሰጣሉ: <strong>30m</strong> በዓለም አቀፍ ሕግ የድምፅ ግንኙነት የተከለከለበት ጠባብ የWARC ባንድ ነው፤ <strong>17m እና 12m</strong> ውድድር-አልባ የWARC ባንድ የሚያቀርቡ ሲሆን <strong>40m፣ 20m፣ 15m እና 10m</strong> ከድምፅ ክፍሎች በደንብ የተለዩ ሰፊ እና ጸጥ ያሉ የዲጂታል ክፍሎችን ያቀርባሉ።",
     "FREQUENCIES_TH_BAND": "ባንድ",
     "FREQUENCIES_TH_LQ8": "LQ8 (3 kHz USB)",
     "FREQUENCIES_TH_LQ4": "LQ4 (3 kHz USB)",

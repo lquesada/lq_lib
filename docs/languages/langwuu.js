@@ -107,7 +107,7 @@ const langData = {
     "FREQUENCIES_SUBTITLE": "勒有限实验模式下专门为 <strong>LQ8</strong> 提供 3.0&nbsp;kHz 信道分配，确保干净、呒没干扰个弱信号评估。",
     "FREQUENCIES_BOX_TITLE": "有限实验模式：40m、30m、20m、17m、15m、12m 跟 10m 频段分配",
     "FREQUENCIES_BOX_P1": "为勒评估弱信号性能，初期通联<strong>仅仅勒 40m、30m、20m、17m、15m、12m 跟 10m 开展有限实验模式</strong>。每个刻度频率代表标准 <strong>3.0&nbsp;kHz 上边带（USB）信道</strong>基准载波频率（例如 <code>10.146&nbsp;MHz</code> 覆盖 <code>10.1460</code> 到 <code>10.1490&nbsp;MHz</code>）。多个电台好勒同一个 3.0&nbsp;kHz 窗口里向同时通联。",
-    "FREQUENCIES_BOX_P2": "箇星选定频段传播条件好、噪声低：<strong>30m、17m 跟 12m</strong> 是 WARC 专用频段，国际法规严禁语音通话；<strong>40m、20m、15m 跟 10m</strong> 数字段宽广安静，远低过语音段。",
+    "FREQUENCIES_BOX_P2": "箇星选定频段传播条件好、噪声低：<strong>30m</strong> 是窄带 WARC 分配频段，国际法规严禁语音通话；<strong>17m 跟 12m</strong> 提供无竞赛干扰个 WARC 频谱，而 <strong>40m、20m、15m 跟 10m</strong> 数字段宽广安静，与各自话音段明确分开。",
     "FREQUENCIES_TH_BAND": "频段",
     "FREQUENCIES_TH_LQ8": "LQ8 (3 kHz USB)",
     "FREQUENCIES_TH_LQ4": "LQ4 (3 kHz USB)",

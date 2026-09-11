@@ -107,7 +107,7 @@ const langData = {
     "FREQUENCIES_SUBTITLE": "Ipin ikanni 3.0&nbsp;kHz pataki fun <strong>LQ8</strong> ni ipo idanwo to ni opin lori awọn ẹgbẹ wọnyi nikan lati rii daju iṣiro ifihan agbara alailera to mọ laisi idilọwọ.",
     "FREQUENCIES_BOX_TITLE": "Ipo Idanwo To Ni Opin: Awọn Ipin 40m, 30m, 20m, 17m, 15m, 12m ati 10m",
     "FREQUENCIES_BOX_P1": "Lati ṣe iṣiro iṣẹ ifihan agbara alailera ni igbohunsafẹfẹ RF to mọ laisi idilọwọ, awọn iṣẹ lori afẹfẹ akọkọ ni a nṣe ni <strong>ipo idanwo to ni opin nikan lori 40m, 30m, 20m, 17m, 15m, 12m ati 10m</strong>. Igbohunsafẹfẹ ipe kọọkan n ṣe aṣoju ikanni <strong>3.0&nbsp;kHz Upper Sideband (USB)</strong> deede (fun apẹẹrẹ <code>10.146&nbsp;MHz</code> ni awọn iṣipopada ohun lati <code>10.1460</code> si <code>10.1490&nbsp;MHz</code>). Awọn ibudo pupọ le ṣiṣẹ ni akoko kanna laarin window 3.0&nbsp;kHz kọọkan.",
-    "FREQUENCIES_BOX_P2": "Awọn ẹgbẹ ti a yan wọnyi pese agbegbe to dara fun gbigbe ifihan agbara laisi ariwo: <strong>30m, 17m ati 12m</strong> jẹ ẹgbẹ WARC pataki ti ofin agbaye ko gba laaye ipe ohun; <strong>40m, 20m, 15m ati 10m</strong> n pese awọn agbegbe oni-nọmba to dakẹ jinna si awọn apakan ohun.",
+    "FREQUENCIES_BOX_P2": "Awọn ẹgbẹ ti a yan wọnyi pese agbegbe to dara fun gbigbe ifihan agbara laisi ariwo: <strong>30m</strong> jẹ ipin WARC ti o kere nibiti ofin agbaye ko gba laaye ipe ohun; <strong>17m ati 12m</strong> n pese igbohunsafẹfẹ WARC laisi idije, lakoko ti <strong>40m, 20m, 15m ati 10m</strong> n pese awọn agbegbe oni-nọmba to dakẹ ti o yapa daradara kuro ninu awọn apakan ohun.",
     "FREQUENCIES_TH_BAND": "Ẹgbẹ",
     "FREQUENCIES_TH_LQ8": "LQ8 (3 kHz USB)",
     "FREQUENCIES_TH_LQ4": "LQ4 (3 kHz USB)",

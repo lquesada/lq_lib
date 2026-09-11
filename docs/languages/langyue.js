@@ -107,7 +107,7 @@ const langData = {
     "FREQUENCIES_SUBTITLE": "喺有限實驗模式下僅針對呢啲頻段為 <strong>LQ8</strong> 提供專用嘅 3.0&nbsp;kHz 信道子分配，以確保乾淨、無干擾嘅微弱信號評估。",
     "FREQUENCIES_BOX_TITLE": "有限實驗模式：40m、30m、20m、17m、15m、12m 同 10m 頻段分配",
     "FREQUENCIES_BOX_P1": "為咗喺乾淨無干擾嘅無線電頻譜中評估微弱信號表現，初期通聯喺<strong>僅限於 40m、30m、20m、17m、15m、12m 同 10m 嘅有限實驗模式</strong>下進行。所列嘅每個刻度頻率代表一個標準 <strong>3.0&nbsp;kHz 上邊帶（USB）信道</strong>嘅基準載波頻率（例如 <code>10.146&nbsp;MHz</code> 覆蓋 <code>10.1460</code> 至 <code>10.1490&nbsp;MHz</code> 嘅音頻偏移）。多個電台喺同一個 3.0&nbsp;kHz 窗口內通過唔同音頻副載波頻偏併發通聯。",
-    "FREQUENCIES_BOX_P2": "呢啲選定頻段提供咗優質、無噪嘅傳播環境：<strong>30m、17m 同 12m</strong> 係專用 WARC 頻段，國際法規嚴格禁止話音通聯；<strong>40m、20m、15m 同 10m</strong> 擁有寬廣、寧靜嘅數字模式分配區間，遠低於各自嘅話音通信頻段。",
+    "FREQUENCIES_BOX_P2": "呢啲選定頻段提供咗優質、無噪嘅傳播環境：<strong>30m</strong> 係窄頻 WARC 分配頻段，國際法規嚴格禁止話音通聯；<strong>17m 同 12m</strong> 提供無競賽干擾嘅 WARC 頻譜，而 <strong>40m、20m、15m 同 10m</strong> 擁有寬廣、寧靜且同各自話音區段明確分開嘅數字模式分配區間。",
     "FREQUENCIES_TH_BAND": "频段",
     "FREQUENCIES_TH_LQ8": "LQ8 (3 kHz USB)",
     "FREQUENCIES_TH_LQ4": "LQ4 (3 kHz USB)",

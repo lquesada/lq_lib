@@ -107,7 +107,7 @@ const langData = {
     "FREQUENCIES_SUBTITLE": "Vyhrazená dílčí pásma kanálu 3.0&nbsp;kHz pro <strong>LQ8</strong> v omezeném experimentálním režimu výhradně na těchto pásmech pro zajištění čistého a nerušeného vyhodnocení slabých signálů.",
     "FREQUENCIES_BOX_TITLE": "Omezený Experimentální Režim: Přidělení pro 40m, 30m, 20m, 17m, 15m, 12m a 10m",
     "FREQUENCIES_BOX_P1": "Pro ověření dekódování slabých signálů v čistém RF spektru bez vzájemného rušení probíhá počáteční provoz v <strong>omezeném experimentálním režimu výhradně na 40m, 30m, 20m, 17m, 15m, 12m a 10m</strong>. Každý kmitočet na stupnici představuje základní nosný kmitočet standardního <strong>kanálu horního postranního pásma (USB) o šířce 3.0&nbsp;kHz</strong> (např. <code>10.146&nbsp;MHz</code> pokrývá zvukové posuny od <code>10.1460</code> do <code>10.1490&nbsp;MHz</code>). V rámci jednoho okna 3.0&nbsp;kHz může pracovat více stanic současně na různých zvukových subnosných.",
-    "FREQUENCIES_BOX_P2": "Tato vybraná pásma poskytují optimální šíření bez rušení: <strong>30m, 17m a 12m</strong> je vyhrazené pásmo WARC, kde je provoz fonií mezinárodně zakázán; <strong>40m, 20m, 15m a 10m</strong> nabízejí prostorné a tiché digitální úseky hluboko pod fonickými segmenty.",
+    "FREQUENCIES_BOX_P2": "Tato vybraná pásma poskytují optimální šíření bez rušení: <strong>30m</strong> je úzkopásmové pásmo WARC, kde je provoz fonií mezinárodně zakázán; <strong>17m a 12m</strong> nabízejí spektrum WARC bez radioamatérských závodů, zatímco <strong>40m, 20m, 15m a 10m</strong> nabízejí prostorné a tiché digitální úseky dobře oddělené od fonických segmentů.",
     "FREQUENCIES_TH_BAND": "Диапазон",
     "FREQUENCIES_TH_LQ8": "LQ8 (3 kHz USB)",
     "FREQUENCIES_TH_LQ4": "LQ4 (3 kHz USB)",
