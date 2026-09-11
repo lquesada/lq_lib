@@ -244,6 +244,8 @@ const langData = {
     "COMMUNITY_FORM_BTN": "సంప్రదించండి / సమాచారం సమర్పించండి &rarr;",
     "COMMUNITY_ISSUES_BTN": "సమస్యను నివేదించండి (GitHub) &rarr;",
     "COMMUNITY_EMPTY_NOTE": "ఇంకా ఎంట్రీలు లేవు — మీ వివరాలను క్రింద సమర్పించండి!",
+    "COMMUNITY_AWARD_LABEL": "అవార్డు",
+    "COMMUNITY_FIRST_QSO_USING": "LQ8 ని ఉపయోగించి మొదటి QSO",
     "MODAL_SHARE_TITLE": "இணைப்பு கிளிப்போர்டில் நகலெடுக்கப்பட்டது!",
     "MODAL_SHARE_DESC": "இணைப்பு நகலெடுக்கப்பட்டது. உங்கள் நண்பர்களுடன் பகிரவும்!",
     "MODAL_SHARE_OK": "OK"

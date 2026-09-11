@@ -244,6 +244,8 @@ const langData = {
     "COMMUNITY_FORM_BTN": "ਸੰਪਰਕ ਕਰੋ / ਜਾਣਕਾਰੀ ਭੇਜੋ &rarr;",
     "COMMUNITY_ISSUES_BTN": "ਸਮੱਸਿਆ ਦੀ ਰਿਪੋਰਟ ਕਰੋ (GitHub) &rarr;",
     "COMMUNITY_EMPTY_NOTE": "ਅਜੇ ਤੱਕ ਕੋਈ ਐਂਟਰੀ ਨਹੀਂ ਹੈ — ਹੇਠਾਂ ਆਪਣੀ ਜਮ੍ਹਾਂ ਕਰੋ!",
+    "COMMUNITY_AWARD_LABEL": "ਅਵਾਰਡ",
+    "COMMUNITY_FIRST_QSO_USING": "LQ8 ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਪਹਿਲਾ QSO",
     "MODAL_SHARE_TITLE": "ਲਿੰਕ ਕਲਿੱਪਬੋਰਡ 'ਤੇ ਕਾਪੀ ਕੀਤਾ ਗਿਆ!",
     "MODAL_SHARE_DESC": "ਲਿੰਕ ਨੂੰ ਤੁਹਾਡੇ ਕਲਿੱਪਬੋਰਡ 'ਤੇ ਕਾਪੀ ਕੀਤਾ ਗਿਆ ਹੈ। ਪੇਸਟ ਕਰੋ ਅਤੇ ਇਸਨੂੰ ਸਾਥੀ ਰੇਡੀਓ ਸ਼ੌਕੀਨਾਂ, ਵਿਕਾਸਕਾਰ ਸਮੂਹਾਂ ਅਤੇ ਫੋਰਮਾਂ 'ਤੇ ਸਾਂਝਾ ਕਰੋ!",
     "MODAL_SHARE_OK": "OK"

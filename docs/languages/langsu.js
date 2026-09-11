@@ -244,6 +244,8 @@ const langData = {
     "COMMUNITY_FORM_BTN": "Kontak / Kirim Inpormasi &rarr;",
     "COMMUNITY_ISSUES_BTN": "Laporkeun Masalah (GitHub) &rarr;",
     "COMMUNITY_EMPTY_NOTE": "Teu acan aya éntri anu kadaptar — kirimkeun anjeun di handap!",
+    "COMMUNITY_AWARD_LABEL": "panghargaan",
+    "COMMUNITY_FIRST_QSO_USING": "QSO munggaran ngagunakeun LQ8",
     "MODAL_SHARE_TITLE": "Link Disalin ka Clipboard!",
     "MODAL_SHARE_DESC": "Tautan parantos ditiron kana clipboard anjeun. Tempelkeun sareng bagikeun ka sasama radio amatir, grup pamekar, sareng dina forum!",
     "MODAL_SHARE_OK": "OK"

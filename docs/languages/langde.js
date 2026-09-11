@@ -244,6 +244,8 @@ const langData = {
     "COMMUNITY_FORM_BTN": "Kontakt / Info einreichen &rarr;",
     "COMMUNITY_ISSUES_BTN": "Problem Melden (GitHub) &rarr;",
     "COMMUNITY_EMPTY_NOTE": "Noch keine Einträge vorhanden — reichen Sie Ihren unten ein!",
+    "COMMUNITY_AWARD_LABEL": "Diplom",
+    "COMMUNITY_FIRST_QSO_USING": "Erstes QSO mit LQ8",
     "MODAL_SHARE_TITLE": "Link in die Zwischenablage kopiert!",
     "MODAL_SHARE_DESC": "Der Link wurde in Ihre Zwischenablage kopiert. Teilen Sie ihn mit Funkfreunden und in Foren!",
     "MODAL_SHARE_OK": "OK"

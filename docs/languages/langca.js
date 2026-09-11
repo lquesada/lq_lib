@@ -244,6 +244,8 @@ const langData = {
     "COMMUNITY_FORM_BTN": "Contactar / Enviar informació &rarr;",
     "COMMUNITY_ISSUES_BTN": "Informar d'un problema (GitHub) &rarr;",
     "COMMUNITY_EMPTY_NOTE": "Encara no hi ha entrades llistades — envia la teva a continuació!",
+    "COMMUNITY_AWARD_LABEL": "diploma",
+    "COMMUNITY_FIRST_QSO_USING": "Primer QSO usant LQ8",
     "MODAL_SHARE_TITLE": "Enllaç copiat al porta-retalls!",
     "MODAL_SHARE_DESC": "L'enllaç s'ha copiat al vostre porta-retalls. Enganxeu-lo i compartiu-lo amb altres companys radioaficionats!",
     "MODAL_SHARE_OK": "OK"

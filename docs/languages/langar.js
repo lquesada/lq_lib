@@ -244,6 +244,8 @@ const langData = {
     "COMMUNITY_FORM_BTN": "تواصل / إرسال المعلومات &rarr;",
     "COMMUNITY_ISSUES_BTN": "الإبلاغ عن مشكلة (GitHub) &rarr;",
     "COMMUNITY_EMPTY_NOTE": "لا توجد مشاركات مدرجة بعد — أرسل مشاركتك أدناه!",
+    "COMMUNITY_AWARD_LABEL": "جائزة",
+    "COMMUNITY_FIRST_QSO_USING": "أول اتصال QSO باستخدام LQ8",
     "MODAL_SHARE_TITLE": "تم نسخ الرابط إلى الحافظة!",
     "MODAL_SHARE_DESC": "تم نسخ الرابط. شاركه مع زملائك هواة اللاسلكي وفي المنتديات!",
     "MODAL_SHARE_OK": "OK"

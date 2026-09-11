@@ -244,6 +244,8 @@ const langData = {
     "COMMUNITY_FORM_BTN": "Bog'lanish / Ma'lumot Yuborish &rarr;",
     "COMMUNITY_ISSUES_BTN": "Muammo haqida xabar berish (GitHub) &rarr;",
     "COMMUNITY_EMPTY_NOTE": "Hozircha hech qanday yozuv yo'q — o'zingiznikini quyida yuboring!",
+    "COMMUNITY_AWARD_LABEL": "diplom",
+    "COMMUNITY_FIRST_QSO_USING": "LQ8 yordamida birinchi QSO",
     "MODAL_SHARE_TITLE": "Bağlantı Panoya Kopyalandı!",
     "MODAL_SHARE_DESC": "Bağlantı kopyalandı. Telsizci arkadaşlarınızla ve forumlarda paylaşın!",
     "MODAL_SHARE_OK": "OK"

@@ -244,6 +244,8 @@ const langData = {
     "COMMUNITY_FORM_BTN": "Contact / Trimite Informații &rarr;",
     "COMMUNITY_ISSUES_BTN": "Raportează o Problemă (GitHub) &rarr;",
     "COMMUNITY_EMPTY_NOTE": "Nicio înregistrare încă — trimiteți-o pe a dvs. mai jos!",
+    "COMMUNITY_AWARD_LABEL": "diplomă",
+    "COMMUNITY_FIRST_QSO_USING": "Primul QSO utilizând LQ8",
     "MODAL_SHARE_TITLE": "Link copiat în clipboard!",
     "MODAL_SHARE_DESC": "Linkul a fost copiat în clipboard. Trimite-l colegilor radioamatori și pe forumuri!",
     "MODAL_SHARE_OK": "OK"

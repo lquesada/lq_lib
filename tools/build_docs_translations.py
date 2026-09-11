@@ -700,6 +700,7 @@ def main():
         page_html = page_html.replace('href="lq_digitalmode.pdf"', 'href="../lq_digitalmode.pdf"')
         page_html = page_html.replace('src="qft8.jpg"', 'src="../qft8.jpg"')
         page_html = page_html.replace('src="tones_waterfall_lq8.png"', 'src="../tones_waterfall_lq8.png"')
+        page_html = page_html.replace('href="awards/', 'href="../awards/')
 
         # Apply translations across all data-i18n elements and meta tags
         page_html = apply_translations_to_html(page_html, lang, translations)

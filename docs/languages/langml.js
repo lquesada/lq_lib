@@ -244,6 +244,8 @@ const langData = {
     "COMMUNITY_FORM_BTN": "ബന്ധപ്പെടുക / വിവരങ്ങൾ അയക്കുക &rarr;",
     "COMMUNITY_ISSUES_BTN": "പ്രശ്നം റിപ്പോർട്ട് ചെയ്യുക (GitHub) &rarr;",
     "COMMUNITY_EMPTY_NOTE": "ഇതുവരെ എൻട്രികളൊന്നുമില്ല — നിങ്ങളുടേത് താഴെ സമർപ്പിക്കുക!",
+    "COMMUNITY_AWARD_LABEL": "അവാർഡ്",
+    "COMMUNITY_FIRST_QSO_USING": "LQ8 ഉപയോഗിച്ചുള്ള ആദ്യ QSO",
     "MODAL_SHARE_TITLE": "இணைப்பு கிளிப்போர்டில் நகலெடுக்கப்பட்டது!",
     "MODAL_SHARE_DESC": "இணைப்பு நகலெடுக்கப்பட்டது. உங்கள் நண்பர்களுடன் பகிரவும்!",
     "MODAL_SHARE_OK": "OK"

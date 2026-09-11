@@ -244,6 +244,8 @@ const langData = {
     "COMMUNITY_FORM_BTN": "Ota Yhteyttä / Lähetä Tiedot &rarr;",
     "COMMUNITY_ISSUES_BTN": "Ilmoita Ongelmasta (GitHub) &rarr;",
     "COMMUNITY_EMPTY_NOTE": "Ei vielä merkintöjä — lähetä omasi alla!",
+    "COMMUNITY_AWARD_LABEL": "awardi",
+    "COMMUNITY_FIRST_QSO_USING": "Ensimmäinen QSO LQ8:lla",
     "MODAL_SHARE_TITLE": "Linkki kopioitu leikepöydälle!",
     "MODAL_SHARE_DESC": "Linkki kopioitiin leikepöydälle. Jaa se radioamatööriystävillesi ja foorumeilla!",
     "MODAL_SHARE_OK": "OK"

@@ -244,6 +244,8 @@ const langData = {
     "COMMUNITY_FORM_BTN": "Kontakt / Indsend Info &rarr;",
     "COMMUNITY_ISSUES_BTN": "Rapportér et Problem (GitHub) &rarr;",
     "COMMUNITY_EMPTY_NOTE": "Ingen registreringer endnu — indsend din nedenfor!",
+    "COMMUNITY_AWARD_LABEL": "diplom",
+    "COMMUNITY_FIRST_QSO_USING": "Første QSO med LQ8",
     "MODAL_SHARE_TITLE": "Link kopieret til udklipsholder!",
     "MODAL_SHARE_DESC": "Linket er kopieret til din udklipsholder. Del det med andre radioamatører og på fora!",
     "MODAL_SHARE_OK": "OK"

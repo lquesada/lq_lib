@@ -244,6 +244,8 @@ const langData = {
     "COMMUNITY_FORM_BTN": "Kontaktovat / Odeslat Informace &rarr;",
     "COMMUNITY_ISSUES_BTN": "Nahlásit Problém (GitHub) &rarr;",
     "COMMUNITY_EMPTY_NOTE": "Zatím žádné záznamy — odešlete svůj níže!",
+    "COMMUNITY_AWARD_LABEL": "diplom",
+    "COMMUNITY_FIRST_QSO_USING": "První QSO pomocí LQ8",
     "MODAL_SHARE_TITLE": "Odkaz byl zkopírován do schránky!",
     "MODAL_SHARE_DESC": "Odkaz byl zkopírován. Sdílejte jej s radioamatéry a na fórech!",
     "MODAL_SHARE_OK": "OK"

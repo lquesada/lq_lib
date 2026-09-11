@@ -244,6 +244,8 @@ const langData = {
     "COMMUNITY_FORM_BTN": "Makipag-ugnayan / Isumite &rarr;",
     "COMMUNITY_ISSUES_BTN": "Mag-ulat ng Problema (GitHub) &rarr;",
     "COMMUNITY_EMPTY_NOTE": "Wala pang nakatalang entry — isumite ang sa iyo sa ibaba!",
+    "COMMUNITY_AWARD_LABEL": "parangal",
+    "COMMUNITY_FIRST_QSO_USING": "Unang QSO gamit ang LQ8",
     "MODAL_SHARE_TITLE": "Nakopya ang Link sa Clipboard!",
     "MODAL_SHARE_DESC": "Ang link ay nakopya sa iyong clipboard. I-paste at ibahagi ito sa mga kapwa radio amateurs, developer group, at sa mga forum!",
     "MODAL_SHARE_OK": "OK"

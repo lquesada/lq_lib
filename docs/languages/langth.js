@@ -244,6 +244,8 @@ const langData = {
     "COMMUNITY_FORM_BTN": "ติดต่อ / ส่งข้อมูล &rarr;",
     "COMMUNITY_ISSUES_BTN": "รายงานปัญหา (GitHub) &rarr;",
     "COMMUNITY_EMPTY_NOTE": "ยังไม่มีรายการที่แสดง — ส่งข้อมูลของคุณด้านล่าง!",
+    "COMMUNITY_AWARD_LABEL": "รางวัล",
+    "COMMUNITY_FIRST_QSO_USING": "QSO แรกโดยใช้ LQ8",
     "MODAL_SHARE_TITLE": "คัดลอกลิงก์ไปยังคลิปบอร์ดแล้ว!",
     "MODAL_SHARE_DESC": "คัดลอกลิงก์เรียบร้อยแล้ว แชร์ให้กับเพื่อนนักวิทยุสมัครเล่นและบนฟอรัมได้เลย!",
     "MODAL_SHARE_OK": "OK"

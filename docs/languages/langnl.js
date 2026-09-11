@@ -244,6 +244,8 @@ const langData = {
     "COMMUNITY_FORM_BTN": "Contact / Gegevens Indienen &rarr;",
     "COMMUNITY_ISSUES_BTN": "Meld een Probleem (GitHub) &rarr;",
     "COMMUNITY_EMPTY_NOTE": "Nog geen vermeldingen — dien de uwe hieronder in!",
+    "COMMUNITY_AWARD_LABEL": "diploma",
+    "COMMUNITY_FIRST_QSO_USING": "Eerste QSO met behulp van LQ8",
     "MODAL_SHARE_TITLE": "Link gekopieerd naar klembord!",
     "MODAL_SHARE_DESC": "De link is gekopieerd. Deel hem met collega-zendamateurs en op fora!",
     "MODAL_SHARE_OK": "OK"

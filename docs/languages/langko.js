@@ -244,6 +244,8 @@ const langData = {
     "COMMUNITY_FORM_BTN": "문의하기 / 정보 제출 &rarr;",
     "COMMUNITY_ISSUES_BTN": "이슈 보고하기 (GitHub) &rarr;",
     "COMMUNITY_EMPTY_NOTE": "아직 등록된 항목이 없습니다 — 아래 양식으로 제출해 주세요!",
+    "COMMUNITY_AWARD_LABEL": "어워드",
+    "COMMUNITY_FIRST_QSO_USING": "LQ8을 사용한 첫 QSO",
     "MODAL_SHARE_TITLE": "링크가 클립보드에 복사되었습니다!",
     "MODAL_SHARE_DESC": "링크가 복사되었습니다. 무선 동호인 및 포럼에 공유하세요!",
     "MODAL_SHARE_OK": "OK"

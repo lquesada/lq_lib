@@ -244,6 +244,8 @@ const langData = {
     "COMMUNITY_FORM_BTN": "Wasiliana / Tuma Maelezo &rarr;",
     "COMMUNITY_ISSUES_BTN": "Ripoti Tatizo (GitHub) &rarr;",
     "COMMUNITY_EMPTY_NOTE": "Bado hakuna maingizo — wasilisha yako hapa chini!",
+    "COMMUNITY_AWARD_LABEL": "tuzo",
+    "COMMUNITY_FIRST_QSO_USING": "QSO ya kwanza kwa kutumia LQ8",
     "MODAL_SHARE_TITLE": "Kiungo kimenakiliwa kwenye ubao wa kunakili!",
     "MODAL_SHARE_DESC": "Kiungo kimenakiliwa. Shiriki na wenzako kwenye redio na majukwaa!",
     "MODAL_SHARE_OK": "OK"

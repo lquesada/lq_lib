@@ -2218,7 +2218,14 @@
           <p data-i18n="COMMUNITY_SUBTITLE">دنیا بھر کے شوقیہ ریڈیو کلبوں، DX مہمات، ایوارڈ پروگراموں اور آپریٹرز کی طرف سے تسلیم شدہ اور تعاون یافتہ۔</p>
         </div>
         <div style="background: var(--surface-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 36px 32px; margin-bottom: 24px;">
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 32px;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 32px;" class="community-cards-grid">
+            <style>
+              @media (min-width: 992px) {
+                .community-cards-grid {
+                  grid-template-columns: 0.9fr 0.9fr 1.2fr !important;
+                }
+              }
+            </style>
             
             <!-- 1. Clubs & Organizations -->
             <div style="background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: var(--radius-md); padding: 22px 24px; display: flex; flex-direction: column;">
@@ -2274,10 +2281,15 @@
               <!-- Operators Directory List -->
               <div style="margin-top: auto; background: rgba(0, 0, 0, 0.25); border: 1px dashed rgba(168, 85, 247, 0.25); border-radius: var(--radius-sm); padding: 14px 16px;">
                 <ul id="community-awards-list" style="list-style: none; padding: 0; margin: 0; font-size: 0.88rem;">
-                  <!-- Add operator/award entries here: <li style="padding: 4px 0;"><a href="..." target="_blank" style="color: var(--text-primary); font-weight: 600;">Callsign</a> — Name, Country / Program</li> -->
-                  <li style="color: var(--text-tertiary); font-style: italic; display: flex; align-items: center; gap: 8px;">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity: 0.7; flex-shrink: 0;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                    <span data-i18n="COMMUNITY_EMPTY_NOTE">ابھی تک کوئی اندراج نہیں ہے — اپنا اندراج نیچے جمع کرائیں!</span>
+                  <li style="padding: 4px 0;">
+                    <a href="https://www.qrz.com/db/EA3ISA" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); font-weight: 600; text-decoration: underline;">EA3ISA</a>
+                    [<a href="../awards/firstqso-ea3isa-20260911.html" target="_blank" style="color: var(--gold-light, #fef08a); font-weight: 600; text-decoration: underline;" data-i18n="COMMUNITY_AWARD_LABEL">ایوارڈ</a>]
+                    &mdash; <span data-i18n="COMMUNITY_FIRST_QSO_USING">LQ8 کا استعمال کرتے ہوئے پہلا QSO</span>
+                  </li>
+                  <li style="padding: 4px 0;">
+                    <a href="https://www.qrz.com/db/DB5BO" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); font-weight: 600; text-decoration: underline;">DB5BO</a>
+                    [<a href="../awards/firstqso-db5bo-20260911.html" target="_blank" style="color: var(--gold-light, #fef08a); font-weight: 600; text-decoration: underline;" data-i18n="COMMUNITY_AWARD_LABEL">ایوارڈ</a>]
+                    &mdash; <span data-i18n="COMMUNITY_FIRST_QSO_USING">LQ8 کا استعمال کرتے ہوئے پہلا QSO</span>
                   </li>
                 </ul>
               </div>

@@ -244,6 +244,8 @@ const langData = {
     "COMMUNITY_FORM_BTN": "Kapcsolat / Adatok Beküldése &rarr;",
     "COMMUNITY_ISSUES_BTN": "Hiba Bejelentése (GitHub) &rarr;",
     "COMMUNITY_EMPTY_NOTE": "Még nincsenek bejegyzések — küldje be a sajátját alább!",
+    "COMMUNITY_AWARD_LABEL": "oklevél",
+    "COMMUNITY_FIRST_QSO_USING": "Első QSO LQ8 használatával",
     "MODAL_SHARE_TITLE": "A hivatkozás a vágólapra másolva!",
     "MODAL_SHARE_DESC": "A link a vágólapra került. Oszd meg rádióamatőr társaiddal és a fórumokon!",
     "MODAL_SHARE_OK": "OK"

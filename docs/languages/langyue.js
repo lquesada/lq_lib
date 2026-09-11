@@ -244,6 +244,8 @@ const langData = {
     "COMMUNITY_FORM_BTN": "聯絡 / 提交資料 &rarr;",
     "COMMUNITY_ISSUES_BTN": "反饋問題 (GitHub) &rarr;",
     "COMMUNITY_EMPTY_NOTE": "暫無列出項目 — 歡迎喺下方提交您嘅資訊！",
+    "COMMUNITY_AWARD_LABEL": "獎狀",
+    "COMMUNITY_FIRST_QSO_USING": "首次使用 LQ8 嘅 QSO",
     "MODAL_SHARE_TITLE": "链接已复制到剪贴板！",
     "MODAL_SHARE_DESC": "网址已成功复制。欢迎分享给无线电爱好者同仁、开发者群体及各大技术论坛！",
     "MODAL_SHARE_OK": "OK"

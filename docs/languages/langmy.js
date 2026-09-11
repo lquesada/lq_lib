@@ -244,6 +244,8 @@ const langData = {
     "COMMUNITY_FORM_BTN": "ဆက်သွယ်ရန် / အချက်အလက်ပေးပို့ရန် &rarr;",
     "COMMUNITY_ISSUES_BTN": "ပြဿနာတင်ပြရန် (GitHub) &rarr;",
     "COMMUNITY_EMPTY_NOTE": "စာရင်းဝင်မရှိသေးပါ — သင့်အချက်အလက်များကို အောက်တွင် ပေးပို့ပါ!",
+    "COMMUNITY_AWARD_LABEL": "ဆုတံဆိပ်",
+    "COMMUNITY_FIRST_QSO_USING": "LQ8 အသုံးပြု၍ ပထမဆုံး QSO",
     "MODAL_SHARE_TITLE": "လင့်ခ်ကို ကလစ်ဘုတ်သို့ ကူးယူထားသည်။",
     "MODAL_SHARE_DESC": "လင့်ခ်ကို သင့်ကလစ်ဘုတ်သို့ ကူးယူလိုက်ပါပြီ။ ၎င်းကို အပျော်တမ်း ရေဒီယိုဖော်၊ ဆော့ဖ်ဝဲရေးသားသူအဖွဲ့များနှင့် ဖိုရမ်များတွင် ကူးထည့်ပါ။",
     "MODAL_SHARE_OK": "OK"
