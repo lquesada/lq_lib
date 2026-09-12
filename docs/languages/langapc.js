@@ -246,6 +246,7 @@ const langData = {
     "COMMUNITY_EMPTY_NOTE": "ما في مشاركات مدرجة بعد — أرسل مشاركتك تحت!",
     "COMMUNITY_AWARD_LABEL": "جائزة",
     "COMMUNITY_FIRST_QSO_USING": "أول اتصال QSO باستخدام LQ8",
+    "COMMUNITY_FIRST_POTA_QSO_USING": "أول اتصال POTA QSO باستخدام LQ8",
     "MODAL_SHARE_TITLE": "تم نسخ الرابط إلى الحافظة!",
     "MODAL_SHARE_DESC": "تم نسخ الرابط. شاركه مع زملائك هواة اللاسلكي وفي المنتديات!",
     "MODAL_SHARE_OK": "OK"

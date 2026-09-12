@@ -246,6 +246,7 @@ const langData = {
     "COMMUNITY_EMPTY_NOTE": "Babu shigarwar da aka lissafa tukuna — ƙaddamar da naka a ƙasa!",
     "COMMUNITY_AWARD_LABEL": "lambar yabo",
     "COMMUNITY_FIRST_QSO_USING": "QSO na farko ta amfani da LQ8",
+    "COMMUNITY_FIRST_POTA_QSO_USING": "QSO na POTA na farko ta amfani da LQ8",
     "MODAL_SHARE_TITLE": "An Kwafi hanyar haɗi zuwa Clipboard!",
     "MODAL_SHARE_DESC": "An kwafi hanyar haɗin zuwa allon allo. Manna kuma raba shi tare da abokan aikin rediyo, ƙungiyoyin haɓakawa, da kuma kan dandalin tattaunawa!",
     "MODAL_SHARE_OK": "OK"

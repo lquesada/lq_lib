@@ -246,6 +246,7 @@ const langData = {
     "COMMUNITY_EMPTY_NOTE": "هنوز موردی ثبت نشده است — مورد خود را در زیر ارسال کنید!",
     "COMMUNITY_AWARD_LABEL": "جایزه",
     "COMMUNITY_FIRST_QSO_USING": "اولین QSO با استفاده از LQ8",
+    "COMMUNITY_FIRST_POTA_QSO_USING": "اولین POTA QSO با استفاده از LQ8",
     "MODAL_SHARE_TITLE": "لینک در کلیپ‌بورد کپی شد!",
     "MODAL_SHARE_DESC": "لینک کپی شد. آن را با دوستان رادیو آماتور و در انجمن‌ها به اشتراک بگذارید!",
     "MODAL_SHARE_OK": "OK"

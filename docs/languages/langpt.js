@@ -246,6 +246,7 @@ const langData = {
     "COMMUNITY_EMPTY_NOTE": "Nenhuma entrada listada ainda — envie a sua abaixo!",
     "COMMUNITY_AWARD_LABEL": "diploma",
     "COMMUNITY_FIRST_QSO_USING": "Primeiro QSO usando LQ8",
+    "COMMUNITY_FIRST_POTA_QSO_USING": "Primeiro QSO POTA usando LQ8",
     "MODAL_SHARE_TITLE": "Link copiado para a área de transferência!",
     "MODAL_SHARE_DESC": "O link foi copiado. Cole e compartilhe com colegas radioamadores e em fóruns!",
     "MODAL_SHARE_OK": "OK"

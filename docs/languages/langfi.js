@@ -246,6 +246,7 @@ const langData = {
     "COMMUNITY_EMPTY_NOTE": "Ei vielä merkintöjä — lähetä omasi alla!",
     "COMMUNITY_AWARD_LABEL": "awardi",
     "COMMUNITY_FIRST_QSO_USING": "Ensimmäinen QSO LQ8:lla",
+    "COMMUNITY_FIRST_POTA_QSO_USING": "Ensimmäinen POTA-QSO LQ8:lla",
     "MODAL_SHARE_TITLE": "Linkki kopioitu leikepöydälle!",
     "MODAL_SHARE_DESC": "Linkki kopioitiin leikepöydälle. Jaa se radioamatööriystävillesi ja foorumeilla!",
     "MODAL_SHARE_OK": "OK"

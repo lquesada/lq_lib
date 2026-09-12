@@ -246,6 +246,7 @@ const langData = {
     "COMMUNITY_EMPTY_NOTE": "אין עדיין רשומות — שלחו את שלכם למטה!",
     "COMMUNITY_AWARD_LABEL": "תעודה",
     "COMMUNITY_FIRST_QSO_USING": "QSO ראשון באמצעות LQ8",
+    "COMMUNITY_FIRST_POTA_QSO_USING": "QSO של POTA ראשון באמצעות LQ8",
     "MODAL_SHARE_TITLE": "הקישור הועתק ללוח!",
     "MODAL_SHARE_DESC": "הקישור הועתק ללוח. שתפו אותו עם חובבי רדיו ובפורומים!",
     "MODAL_SHARE_OK": "OK"

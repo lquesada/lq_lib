@@ -246,6 +246,7 @@ const langData = {
     "COMMUNITY_EMPTY_NOTE": "Hozircha hech qanday yozuv yo'q — o'zingiznikini quyida yuboring!",
     "COMMUNITY_AWARD_LABEL": "diplom",
     "COMMUNITY_FIRST_QSO_USING": "LQ8 yordamida birinchi QSO",
+    "COMMUNITY_FIRST_POTA_QSO_USING": "LQ8 yordamida birinchi POTA QSO",
     "MODAL_SHARE_TITLE": "Bağlantı Panoya Kopyalandı!",
     "MODAL_SHARE_DESC": "Bağlantı kopyalandı. Telsizci arkadaşlarınızla ve forumlarda paylaşın!",
     "MODAL_SHARE_OK": "OK"

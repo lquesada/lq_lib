@@ -246,6 +246,7 @@ const langData = {
     "COMMUNITY_EMPTY_NOTE": "Nicio înregistrare încă — trimiteți-o pe a dvs. mai jos!",
     "COMMUNITY_AWARD_LABEL": "diplomă",
     "COMMUNITY_FIRST_QSO_USING": "Primul QSO utilizând LQ8",
+    "COMMUNITY_FIRST_POTA_QSO_USING": "Primul QSO POTA utilizând LQ8",
     "MODAL_SHARE_TITLE": "Link copiat în clipboard!",
     "MODAL_SHARE_DESC": "Linkul a fost copiat în clipboard. Trimite-l colegilor radioamatori și pe forumuri!",
     "MODAL_SHARE_OK": "OK"

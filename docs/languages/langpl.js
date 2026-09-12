@@ -246,6 +246,7 @@ const langData = {
     "COMMUNITY_EMPTY_NOTE": "Brak wpisów — prześlij swoje zgłoszenie poniżej!",
     "COMMUNITY_AWARD_LABEL": "dyplom",
     "COMMUNITY_FIRST_QSO_USING": "Pierwsze QSO przy użyciu LQ8",
+    "COMMUNITY_FIRST_POTA_QSO_USING": "Pierwsze QSO POTA przy użyciu LQ8",
     "MODAL_SHARE_TITLE": "Link skopiowany do schowka!",
     "MODAL_SHARE_DESC": "Link został skopiowany. Podziel się nim z krótkofalowcami i na forach!",
     "MODAL_SHARE_OK": "OK"

@@ -246,6 +246,7 @@ const langData = {
     "COMMUNITY_EMPTY_NOTE": "Durung ana entri sing kadhaptar — kirimake duweke sampeyan ing ngisor!",
     "COMMUNITY_AWARD_LABEL": "penghargaan",
     "COMMUNITY_FIRST_QSO_USING": "QSO pisanan nggunakake LQ8",
+    "COMMUNITY_FIRST_POTA_QSO_USING": "QSO POTA pisanan nggunakake LQ8",
     "MODAL_SHARE_TITLE": "Link Disalin menyang Clipboard!",
     "MODAL_SHARE_DESC": "Link wis disalin menyang clipboard sampeyan. Tempel lan enggo bareng karo kanca radio amatir, grup pangembang, lan ing forum!",
     "MODAL_SHARE_OK": "OK"

@@ -246,6 +246,7 @@ const langData = {
     "COMMUNITY_EMPTY_NOTE": "Chưa có mục nào được liệt kê — hãy gửi thông tin của bạn bên dưới!",
     "COMMUNITY_AWARD_LABEL": "giải thưởng",
     "COMMUNITY_FIRST_QSO_USING": "QSO đầu tiên sử dụng LQ8",
+    "COMMUNITY_FIRST_POTA_QSO_USING": "POTA QSO đầu tiên sử dụng LQ8",
     "MODAL_SHARE_TITLE": "Đã sao chép liên kết vào bộ nhớ tạm!",
     "MODAL_SHARE_DESC": "Liên kết đã được sao chép. Hãy chia sẻ với bạn bè vô tuyến và trên các diễn đàn!",
     "MODAL_SHARE_OK": "OK"

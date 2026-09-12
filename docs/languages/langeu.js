@@ -246,6 +246,7 @@ const langData = {
     "COMMUNITY_EMPTY_NOTE": "Oraindik ez dago sarrerarik — bidali zurea behean!",
     "COMMUNITY_AWARD_LABEL": "saria",
     "COMMUNITY_FIRST_QSO_USING": "Lehen QSOa LQ8 erabiliz",
+    "COMMUNITY_FIRST_POTA_QSO_USING": "Lehen POTA QSOa LQ8 erabiliz",
     "MODAL_SHARE_TITLE": "Esteka arbelera kopiatu da!",
     "MODAL_SHARE_DESC": "Esteka kopiatu da. Partekatu irrati-zaleekin eta foroetan!",
     "MODAL_SHARE_OK": "OK"

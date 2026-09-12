@@ -246,6 +246,7 @@ const langData = {
     "COMMUNITY_EMPTY_NOTE": "Belum ada entri yang terdaftar — kirimkan milik Anda di bawah!",
     "COMMUNITY_AWARD_LABEL": "penghargaan",
     "COMMUNITY_FIRST_QSO_USING": "QSO pertama menggunakan LQ8",
+    "COMMUNITY_FIRST_POTA_QSO_USING": "QSO POTA pertama menggunakan LQ8",
     "MODAL_SHARE_TITLE": "Tautan Disalin ke Papan Klip!",
     "MODAL_SHARE_DESC": "Tautan telah disalin. Bagikan kepada sesama amatir radio dan di forum!",
     "MODAL_SHARE_OK": "OK"

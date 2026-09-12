@@ -246,6 +246,7 @@ const langData = {
     "COMMUNITY_EMPTY_NOTE": "Поки що немає записів — надішліть вашу заявку нижче!",
     "COMMUNITY_AWARD_LABEL": "диплом",
     "COMMUNITY_FIRST_QSO_USING": "Перше QSO з використанням LQ8",
+    "COMMUNITY_FIRST_POTA_QSO_USING": "Перше POTA QSO з використанням LQ8",
     "MODAL_SHARE_TITLE": "Посилання скопійовано в буфер обміну!",
     "MODAL_SHARE_DESC": "Посилання скопійовано. Поділіться ним з колегами-радіоаматорами та на форумах!",
     "MODAL_SHARE_OK": "OK"

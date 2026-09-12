@@ -246,6 +246,7 @@ const langData = {
     "COMMUNITY_EMPTY_NOTE": "अझू ले कवनो प्रविष्टि नइखे — नीचे आपन भेजीं!",
     "COMMUNITY_AWARD_LABEL": "पुरस्कार",
     "COMMUNITY_FIRST_QSO_USING": "LQ8 के इस्तेमाल से पहिला QSO",
+    "COMMUNITY_FIRST_POTA_QSO_USING": "LQ8 के इस्तेमाल से पहिला POTA QSO",
     "MODAL_SHARE_TITLE": "लिंक क्लिपबोर्ड पर कॉपी हो गया!",
     "MODAL_SHARE_DESC": "लिंक कॉपी हो गया है। इसे रेडियो मित्रों और मंचों पर साझा करें!",
     "MODAL_SHARE_OK": "OK"

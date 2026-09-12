@@ -246,6 +246,7 @@ const langData = {
     "COMMUNITY_EMPTY_NOTE": "Δεν υπάρχουν ακόμη καταχωρίσεις — υποβάλετε τη δική σας παρακάτω!",
     "COMMUNITY_AWARD_LABEL": "βραβείο",
     "COMMUNITY_FIRST_QSO_USING": "Πρώτο QSO με χρήση LQ8",
+    "COMMUNITY_FIRST_POTA_QSO_USING": "Πρώτο POTA QSO με χρήση LQ8",
     "MODAL_SHARE_TITLE": "Ο σύνδεσμος αντιγράφηκε!",
     "MODAL_SHARE_DESC": "Ο σύνδεσμος αντιγράφηκε στο πρόχειρο. Κοινοποιήστε τον σε συναδέλφους ραδιοερασιτέχνες!",
     "MODAL_SHARE_OK": "OK"

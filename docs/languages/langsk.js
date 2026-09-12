@@ -246,6 +246,7 @@ const langData = {
     "COMMUNITY_EMPTY_NOTE": "Zatiaľ žiadne záznamy — odošlite svoj nižšie!",
     "COMMUNITY_AWARD_LABEL": "diplom",
     "COMMUNITY_FIRST_QSO_USING": "Prvé QSO pomocou LQ8",
+    "COMMUNITY_FIRST_POTA_QSO_USING": "Prvé QSO POTA pomocou LQ8",
     "MODAL_SHARE_TITLE": "Odkaz byl zkopírován do schránky!",
     "MODAL_SHARE_DESC": "Odkaz byl zkopírován. Sdílejte jej s radioamatéry a na fórech!",
     "MODAL_SHARE_OK": "OK"

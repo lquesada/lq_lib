@@ -246,6 +246,7 @@ const langData = {
     "COMMUNITY_EMPTY_NOTE": "இன்னும் பதிவுகள் இல்லை — கீழே உங்களுடையதைச் சமர்ப்பிக்கவும்!",
     "COMMUNITY_AWARD_LABEL": "விருது",
     "COMMUNITY_FIRST_QSO_USING": "LQ8 ஐப் பயன்படுத்தி முதல் QSO",
+    "COMMUNITY_FIRST_POTA_QSO_USING": "LQ8 ஐப் பயன்படுத்தி முதல் POTA QSO",
     "MODAL_SHARE_TITLE": "இணைப்பு கிளிப்போர்டில் நகலெடுக்கப்பட்டது!",
     "MODAL_SHARE_DESC": "இணைப்பு நகலெடுக்கப்பட்டது. உங்கள் நண்பர்களுடன் பகிரவும்!",
     "MODAL_SHARE_OK": "OK"

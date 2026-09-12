@@ -246,6 +246,7 @@ const langData = {
     "COMMUNITY_EMPTY_NOTE": "暂无列出条目 — 欢迎在下方提交您的信息！",
     "COMMUNITY_AWARD_LABEL": "奖状",
     "COMMUNITY_FIRST_QSO_USING": "首次使用 LQ8 的 QSO",
+    "COMMUNITY_FIRST_POTA_QSO_USING": "首次使用 LQ8 的 POTA QSO",
     "MODAL_SHARE_TITLE": "链接已复制到剪贴板！",
     "MODAL_SHARE_DESC": "网址已成功复制。欢迎分享给无线电爱好者同仁、开发者群体及各大技术论坛！",
     "MODAL_SHARE_OK": "OK"

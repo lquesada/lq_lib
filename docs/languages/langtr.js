@@ -246,6 +246,7 @@ const langData = {
     "COMMUNITY_EMPTY_NOTE": "Henüz kayıt bulunmuyor — kendinizinkini aşağıdan gönderin!",
     "COMMUNITY_AWARD_LABEL": "ödül",
     "COMMUNITY_FIRST_QSO_USING": "LQ8 kullanılarak yapılan ilk QSO",
+    "COMMUNITY_FIRST_POTA_QSO_USING": "LQ8 kullanılarak yapılan ilk POTA QSO",
     "MODAL_SHARE_TITLE": "Bağlantı Panoya Kopyalandı!",
     "MODAL_SHARE_DESC": "Bağlantı kopyalandı. Telsizci arkadaşlarınızla ve forumlarda paylaşın!",
     "MODAL_SHARE_OK": "OK"

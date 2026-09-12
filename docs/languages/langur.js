@@ -246,6 +246,7 @@ const langData = {
     "COMMUNITY_EMPTY_NOTE": "ابھی تک کوئی اندراج نہیں ہے — اپنا اندراج نیچے جمع کرائیں!",
     "COMMUNITY_AWARD_LABEL": "ایوارڈ",
     "COMMUNITY_FIRST_QSO_USING": "LQ8 کا استعمال کرتے ہوئے پہلا QSO",
+    "COMMUNITY_FIRST_POTA_QSO_USING": "LQ8 کا استعمال کرتے ہوئے پہلا POTA QSO",
     "MODAL_SHARE_TITLE": "لینک در کلیپ‌بورد کپی شد!",
     "MODAL_SHARE_DESC": "لینک کپی شد. آن را با دوستان رادیو آماتور و در انجمن‌ها به اشتراک بگذارید!",
     "MODAL_SHARE_OK": "OK"

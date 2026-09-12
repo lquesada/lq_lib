@@ -246,6 +246,7 @@ const langData = {
     "COMMUNITY_EMPTY_NOTE": "Bado hakuna maingizo — wasilisha yako hapa chini!",
     "COMMUNITY_AWARD_LABEL": "tuzo",
     "COMMUNITY_FIRST_QSO_USING": "QSO ya kwanza kwa kutumia LQ8",
+    "COMMUNITY_FIRST_POTA_QSO_USING": "QSO ya kwanza ya POTA kwa kutumia LQ8",
     "MODAL_SHARE_TITLE": "Kiungo kimenakiliwa kwenye ubao wa kunakili!",
     "MODAL_SHARE_DESC": "Kiungo kimenakiliwa. Shiriki na wenzako kwenye redio na majukwaa!",
     "MODAL_SHARE_OK": "OK"

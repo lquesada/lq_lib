@@ -246,6 +246,7 @@ const langData = {
     "COMMUNITY_EMPTY_NOTE": "掲載エントリーはまだありません — 下記フォームよりご登録ください！",
     "COMMUNITY_AWARD_LABEL": "アワード",
     "COMMUNITY_FIRST_QSO_USING": "LQ8を使用した初QSO",
+    "COMMUNITY_FIRST_POTA_QSO_USING": "LQ8を使用した初のPOTA QSO",
     "MODAL_SHARE_TITLE": "リンクをクリップボードにコピーしました！",
     "MODAL_SHARE_DESC": "リンクがコピーされました。アマチュア無線の仲間やフォーラムで共有してください！",
     "MODAL_SHARE_OK": "OK"
