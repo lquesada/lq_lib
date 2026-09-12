@@ -658,44 +658,6 @@
       filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.4));
     }
 
-    /* Reddit Card */
-    .reddit-cta-card {
-      background: linear-gradient(135deg, rgba(16, 23, 38, 0.95), rgba(255, 69, 0, 0.16));
-      border: 1px solid rgba(255, 69, 0, 0.38);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 24px rgba(255, 69, 0, 0.12);
-    }
-    .reddit-cta-card:hover {
-      border-color: rgba(255, 69, 0, 0.65);
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 69, 0, 0.25);
-    }
-    .reddit-cta-card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255, 69, 0, 0.08) 0%, transparent 60%);
-      pointer-events: none;
-    }
-    .reddit-cta-icon {
-      background: rgba(255, 69, 0, 0.15);
-      border: 1px solid rgba(255, 69, 0, 0.35);
-      color: #ff4500;
-      filter: drop-shadow(0 0 10px rgba(255, 69, 0, 0.4));
-    }
-    .btn-reddit {
-      background: linear-gradient(135deg, #ff4500, #ea3a00);
-      color: #ffffff;
-      border: 1px solid rgba(255, 120, 70, 0.4);
-      box-shadow: 0 4px 14px rgba(255, 69, 0, 0.35);
-      transition: transform var(--transition), box-shadow var(--transition);
-    }
-    .btn-reddit:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(255, 69, 0, 0.55);
-      color: #ffffff;
-    }
 
     /* Mail Card */
     .mail-cta-card {
@@ -763,16 +725,16 @@
       }
     }
     @media (max-width: 768px) {
-      .telegram-cta-card, .share-cta-card, .reddit-cta-card, .mail-cta-card {
+      .telegram-cta-card, .share-cta-card, .mail-cta-card {
         flex-direction: column;
         text-align: center;
         padding: 20px;
       }
-      .telegram-cta-content, .share-cta-content, .reddit-cta-content, .mail-cta-content {
+      .telegram-cta-content, .share-cta-content, .mail-cta-content {
         flex-direction: column;
         gap: 10px;
       }
-      .btn-telegram, .btn-share, .btn-reddit, .btn-mail {
+      .btn-telegram, .btn-share, .btn-mail {
         width: 100%;
         justify-content: center;
       }
@@ -1592,7 +1554,7 @@
     <section id="operation" class="section">
       <div class="container">
 
-        <!-- Three-Pane Community, Share & News Section -->
+        <!-- Community & News Section -->
         <div class="community-share-grid">
           <!-- Card 1: Telegram Group -->
           <div class="community-cta-card telegram-cta-card">
@@ -1615,28 +1577,7 @@
             </a>
           </div>
 
-          <!-- Card 2: Reddit Community -->
-          <div class="community-cta-card reddit-cta-card">
-            <div>
-              <div class="community-cta-header">
-                <div class="community-cta-icon reddit-cta-icon">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.703zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.197-2.512-.73a.326.326 0 0 0-.232-.095z"/>
-                  </svg>
-                </div>
-                <h4 data-i18n="COMMUNITY_REDDIT_TITLE">r/LQ8 Subreddit</h4>
-              </div>
-              <p class="community-cta-body" data-i18n="COMMUNITY_REDDIT_DESC">ऑपरेटरन से जुड़ीं, एंटीना आ रेडियो सेटअप पर चर्चा करीं आ आपन पहिला ऑन एयर डिकोडिंग रिपोर्ट साझा करीं.</p>
-            </div>
-            <a href="https://www.reddit.com/r/LQ8" target="_blank" rel="noopener noreferrer" id="btn-reddit-lq" class="community-cta-btn btn-reddit" aria-label="Join r/LQ8 on Reddit">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.703zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.197-2.512-.73a.326.326 0 0 0-.232-.095z"/>
-              </svg>
-              <span data-i18n="COMMUNITY_REDDIT_BTN">r/LQ8 से जुड़ें</span>
-            </a>
-          </div>
-
-          <!-- Card 3: Mailing List (News & Updates) -->
+          <!-- Card 2: Mailing List (News & Updates) -->
           <div class="community-cta-card mail-cta-card">
             <div>
               <div class="community-cta-header">
@@ -2338,7 +2279,6 @@
           <ul>
             <li><a href="https://qft8.com" target="_blank" data-i18n="FOOTER_LINK_QFT8">एंड्रॉयड खातिर qFT8 बा</a></li>
             <li><a href="https://t.me/lq8mode" target="_blank" data-i18n="FOOTER_LINK_TELEGRAM">Telegram ग्रुप</a></li>
-            <li><a href="https://www.reddit.com/r/LQ8" target="_blank" data-i18n="FOOTER_LINK_REDDIT">r/LQ8 Subreddit</a></li>
             <li><a href="https://groups.google.com/g/lq8-news" target="_blank" data-i18n="FOOTER_LINK_MAILING">एलक्यू8 न्यूज (मेलिंग लिस्ट) के बा।</a></li>
             <li><a href="#adif" data-i18n="FOOTER_LINK_ADIF">एडीआईएफ लॉग मानक के बा</a></li>
             <li><a href="https://github.com/lquesada/lq_lib" target="_blank" data-i18n="FOOTER_LINK_GITHUB">lq_lib गिटहब रिपोजिटरी के बा</a></li>
