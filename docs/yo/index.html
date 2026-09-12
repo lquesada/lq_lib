@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Awọn LQ8 Digital Ipo</title>
-  <meta name="description" content="Idile ipo oni nọmba redio magbowo-iran atẹle (LQ8, LQ4, LQ2, LQ16). Awọn olubasọrọ 4-igbesẹ ni kikun ni awọn ọdun 60 pẹlu akoj pipe & paṣipaarọ ijabọ (vs 75 – 90s ni FT8),> 2.3 × iyara pileup (160 vs ~ 69 QSOs / h) pẹlu ijiya agbara 0.0 dB, ati -21.0 dB SNR ifamọ nipasẹ ifaworanhan ipari-ipari iyipada. Atilẹyin abinibi ni qFT8 fun Android.">
+  <meta name="description" content="Idile ipo oni nọmba redio magbowo-iran atẹle (LQ8, LQ4, LQ2, LQ16). Awọn olubasọrọ 4-igbesẹ ni kikun ni awọn ọdun 60 pẹlu akoj pipe & paṣipaarọ ijabọ (vs 75 – 90s ni FT8),iyara pileup 4× pẹlu olugbeja kan (240 vs 60 QSOs/h) pẹlu ijiya agbara 0.0 dB, ati -21.0 dB SNR ifamọ nipasẹ ifaworanhan ipari-ipari iyipada. Atilẹyin abinibi ni qFT8 fun Android.">
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://lq8.org/yo/">
   <meta property="og:title" content="Awọn LQ8 Digital Ipo">
-  <meta property="og:description" content="Awọn olubasọrọ 4-igbesẹ ni kikun ni awọn ọdun 60 pẹlu akoj pipe & paṣipaarọ ijabọ (vs 75 – 90s ni FT8),> 2.3× pileup throughput (160 vs ~ 69 QSOs/h) pẹlu 0.0 dB ijiya agbara. Ipele itesiwaju 8-GFSK pẹlu ifaminsi ipari-ipari oniyipada. Atilẹyin abinibi ni qFT8 fun Android.">
+  <meta property="og:description" content="Awọn olubasọrọ 4-igbesẹ ni kikun ni awọn ọdun 60 pẹlu akoj pipe & paṣipaarọ ijabọ (vs 75 – 90s ni FT8),iyara pileup 4× pẹlu olugbeja kan (240 vs 60 QSOs/h) pẹlu 0.0 dB ijiya agbara. Ipele itesiwaju 8-GFSK pẹlu ifaminsi ipari-ipari oniyipada. Atilẹyin abinibi ni qFT8 fun Android.">
   <meta property="og:image" content="https://lq8.org/img/og_banner.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -19,7 +19,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://lq8.org/yo/">
   <meta name="twitter:title" content="Awọn LQ8 Digital Ipo">
-  <meta name="twitter:description" content="Awọn olubasọrọ 4-igbesẹ ni kikun ni awọn ọdun 60 pẹlu akoj pipe & paṣipaarọ ijabọ (vs 75 – 90s ni FT8),> 2.3× pileup throughput (160 vs ~ 69 QSOs/h) pẹlu 0.0 dB ijiya agbara. Ipele itesiwaju 8-GFSK pẹlu ifaminsi ipari-ipari oniyipada. Atilẹyin abinibi ni qFT8 fun Android.">
+  <meta name="twitter:description" content="Awọn olubasọrọ 4-igbesẹ ni kikun ni awọn ọdun 60 pẹlu akoj pipe & paṣipaarọ ijabọ (vs 75 – 90s ni FT8),iyara pileup 4× pẹlu olugbeja kan (240 vs 60 QSOs/h) pẹlu 0.0 dB ijiya agbara. Ipele itesiwaju 8-GFSK pẹlu ifaminsi ipari-ipari oniyipada. Atilẹyin abinibi ni qFT8 fun Android.">
   <!-- SEO Canonical & Hreflang Tags -->
   <link rel="canonical" href="https://lq8.org/yo/">
   <link rel="alternate" hreflang="x-default" href="https://lq8.org/">
@@ -410,6 +410,21 @@
       letter-spacing: -0.03em;
       margin-bottom: 0;
       color: #f1f5f9;
+    }
+    .hero h1 span[data-i18n="HERO_TITLE_2"],
+    .hero-title-subline {
+      display: inline-block;
+      font-size: clamp(1.15rem, 2.35vw, 2.15rem);
+      font-weight: 750;
+      letter-spacing: -0.015em;
+      line-height: 1.25;
+      margin: 3px 0;
+    }
+    @media (min-width: 680px) {
+      .hero h1 span[data-i18n="HERO_TITLE_2"],
+      .hero-title-subline {
+        white-space: nowrap;
+      }
     }
     .hero-sub {
       font-size: clamp(1rem, 1.6vw, 1.15rem);
@@ -1470,11 +1485,11 @@
 
         <h1>
           <span data-i18n="HERO_TITLE_1">Awọn olubasọrọ ni kikun 4-Igbese ni 60 Aaya</span><br>
-          <span data-i18n="HERO_TITLE_2">> 2.3× Pileup Iyara (160 vs ~ 69 QSOs/h)</span><br>
+          <span class="hero-title-subline" data-i18n="HERO_TITLE_2">Iyara Pileup 4× Pẹlu Olugbeja Kan (240 vs 60 QSOs/h)</span><br>
           <span data-i18n="HERO_TITLE_3">0,0 dB Power Ifiyaje</span>
         </h1>
 
-        <p class="hero-sub" style="margin-top: 18px;" data-i18n="HERO_SUBTITLE"><strong>LQ8</strong>jẹ ilana ilana ifihan agbara&minus;alailagbara redio ti iran ti nbọ ti o tun&minus;ṣe iṣakojọpọ ifiranṣẹ ẹlẹrọ nipa lilo awọn koodu ìpele gigun&minus;ipari lori deede, idanwo&minus;ogun<strong>FT8 Layer irinna ti ara</strong>(8&minus;GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). Pari awọn olubasọrọ ti o ni kikun pẹlu grid bidirectional, ijabọ, ati idaniloju 73 ni<strong>4 awọn gbigbe (60s vs 75&minus;90s)</strong>ati ki o ṣe aṣeyọri <strong>160 QSOs / h ni pileups (> 2.3 × over dual&minus;stream FT8 Fox & Hound)</strong>pẹlu laisi ijiya agbara RF (0.0 dB), n pọ si <strong>320 QSOs/wákàtí</strong> pẹlu olutọju meji.</p>
+        <p class="hero-sub" style="margin-top: 18px;" data-i18n="HERO_SUBTITLE"><strong>LQ8</strong>jẹ ilana ilana ifihan agbara&minus;alailagbara redio ti iran ti nbọ ti o tun&minus;ṣe iṣakojọpọ ifiranṣẹ ẹlẹrọ nipa lilo awọn koodu ìpele gigun&minus;ipari lori deede, idanwo&minus;ogun<strong>FT8 Layer irinna ti ara</strong>(8&minus;GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). Pari awọn olubasọrọ ti o ni kikun pẹlu grid bidirectional, ijabọ, ati idaniloju 73 ni<strong>4 awọn gbigbe (60s vs 75&minus;90s)</strong>ati ki o ṣe aṣeyọri <strong>160 QSOs / h ni pileups (> 2.3 × over dual&minus;stream FT8 Fox & Hound)</strong>pẹlu laisi ijiya agbara RF (0.0 dB), n pọ si <strong>480 QSOs/wákàtí</strong> pẹlu olutọju meji.</p>
 
         <div style="display: flex; gap: 14px; justify-content: center; align-items: center; margin-top: 24px; flex-wrap: wrap;">
           <a href="#operation" class="btn btn-primary" data-i18n="HERO_BTN_DISCOVER">Ṣawari LQ8 &rarr;</a>
@@ -1501,16 +1516,16 @@
 
           <!-- Card 2 -->
           <div class="pitch-card">
-            <div class="pitch-card-badge badge-pileup" data-i18n="PITCH_CARD_2_BADGE">> 2.3× Pileup Iyara</div>
+            <div class="pitch-card-badge badge-pileup" data-i18n="PITCH_CARD_2_BADGE">Iyara Pileup 4×</div>
             <h3 data-i18n="PITCH_CARD_2_TITLE">Giga-iwuwo Pileups</h3>
             <div class="pitch-stat">
-              <span class="stat-main" data-i18n="PITCH_CARD_2_STAT_MAIN">2.33×</span>
-              <span class="stat-sub" data-i18n="PITCH_CARD_2_STAT_SUB">ní ìfiwéra pẹ̀lú FT8 Fox &amp; Hound</span>
+              <span class="stat-main" data-i18n="PITCH_CARD_2_STAT_MAIN">4.0×</span>
+              <span class="stat-sub" data-i18n="PITCH_CARD_2_STAT_SUB">Olugbeja Kan (240 vs 60/h)</span>
             </div>
-            <p class="pitch-desc" data-i18n="PITCH_CARD_2_DESC">Ni iṣẹ pileup ti o tẹsiwaju, awọn igbesẹ itọsọna 3 (vs 7 ni FT8 Fox & Hound) pẹlu awọn olupe 2 ti a fọwọsi fun awọn aṣeyọri fireemu <strong>160 QSOs / h (2.33 ×)</strong>lori ọkọ ayọkẹlẹ kan pẹlu ijiya agbara 0.0 dB, ti iwọn si <strong>320 QSOs / h (4.67) pẹlu awọn ọkọ ayọkẹlẹ .</p>
+            <p class="pitch-desc" data-i18n="PITCH_CARD_2_DESC">Ninu pileup lemọlemọ, aaye 3 n bori pẹlu awọn olupe titun lori awọn igbohunsafẹfẹ pinpin, ti n pari <strong>QSO 2 ni gbogbo iṣẹju-aaya 30 (240 QSOs/h, 4× lori FT8 olugbeja kan)</strong> lori olugbeja kan laisi ijiya agbara 0.0 dB (vs 60–120 QSOs/h ninu FT8 Fox &amp; Hound pẹlu pipin agbara), ti n de <strong>480 QSOs/h</strong> pẹlu olugbeja meji!</p>
             <ul class="pitch-list">
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_1">160 QSOs/h (agbeegbe 1, 50 Hz)</span></li>
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_2">320 QSOs/wakati (awọn agbateru 2, 100 Hz)</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_1">240 QSOs/h (olugbeja 1, 50 Hz, 0 dB)</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_2">480 QSOs/h (olugbeja 2, 100 Hz)</span></li>
               <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_3">0,0 dB agbara gbamabinu</span></li>
             </ul>
           </div>
@@ -1894,7 +1909,7 @@
                 <div class="flow-step-msg">HB9IPH YO1YO 73</div>
               </div>
             </div>
-            <div class="flow-summary summary-slow" data-i18n="SPEEDUP_PL_FT8_SUMMARY"><strong>Paṣipaarọ Itọsọna:</strong> Awọn aaya 105 (awọn aaye 7 fun awọn QSO 2) &minus; ~ 69 QSOs/h (pipelined F/H, &minus;3.0 dB agbara pipin)</div>
+            <div class="flow-summary summary-slow" data-i18n="SPEEDUP_PL_FT8_SUMMARY"><strong>Paṣipaarọ Taara:</strong> Iṣẹju-aaya 105 (awọn aaye 7 fun QSO 2) &mdash; ~69 QSOs/h. Ninu pileup lemọlemọ nibiti ifiranṣẹ 7 ti n bori pẹlu awọn ipe titun, yiyi jẹ 90s (awọn aaye 6) = 80 QSOs/h (to 120 QSOs/h pẹlu awọn ṣiṣan 2; 60 QSOs/h lori olugbeja kan). Iṣiṣẹpọ ṣiṣan pupọ ni Fox &amp; Hound n fa awọn adanu pipin agbara nla (&minus;3.0 si &minus;7.0 dB) ati idinku agbara amugbooro, ti n ba ifihan agbara ailera jẹ.</div>
           </div>
 
           <!-- 4. LQ8 Pileup -->
@@ -1917,7 +1932,7 @@
                 <div class="flow-step-msg msg-lq">HB9IPH TU2TU 73 / HB9IPH YO1YO 73</div>
               </div>
             </div>
-            <div class="flow-summary summary-ultra" data-i18n="SPEEDUP_PL_LQ8_SUMMARY"><strong>Paṣipaarọ Itọsọna:</strong> Awọn aaya 45 (awọn aaye 3 fun awọn QSO 2) — <span style="color: var(--emerald); font-weight: 700;">160 QSOs/h (2.33× speedup) pẹlu 0.0 dB agbara ijiya</span></div>
+            <div class="flow-summary summary-ultra" data-i18n="SPEEDUP_PL_LQ8_SUMMARY"><strong>Paṣipaarọ Taara:</strong> Iṣẹju-aaya 45 (awọn aaye 3 fun QSO 2) &mdash; 160 QSOs/h. <span style="color: var(--emerald); font-weight: 700;">Ninu pileup lemọlemọ nibiti ifiranṣẹ 3 ti n bori pẹlu awọn ipe titun: QSO 2 ni gbogbo iṣẹju-aaya 30 = 240 QSOs/h (4× lori FT8 olugbeja kan) pẹlu ijiya agbara 0.0 dB!</span></div>
           </div>
         </div>
       </div>
@@ -2059,9 +2074,9 @@
               </div>
               <div class="mode-compare-box" id="modeDesc">
                 <div class="mode-compare-title"><strong>LQ8 Profile:</strong> Standard HF Weak-Signal Digital Mode</div>
-                <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 160 QSOs/h in pileups (2.33× over FT8 Fox &amp; Hound, up to 320 QSOs/h dual-carrier).</p>
+                <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 240 QSOs/h in continuous pileups (4× over single-carrier FT8, 2 QSOs every 30s, up to 480 QSOs/h dual-carrier).</p>
                 <ul class="mode-compare-list">
-                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 160 vs ~69 QSOs/h in pileups) with complete grid and report delivery.</span></li>
+                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 240 vs 60 QSOs/h in continuous single-carrier pileups) with complete grid and report delivery.</span></li>
                   <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>Zero SNR Penalty:</strong> Exact -21.0 dB sensitivity in 50.0 Hz bandwidth (+3.5 dB over FT4).</span></li>
                   <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>24-bit Hashes:</strong> Full CRC-24/Q (16.7M bins) preventing collisions.</span></li>
                   <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>13-char Callsigns:</strong> Extended compound callsign support (vs 11 chars in FT8).</span></li>
@@ -2352,9 +2367,9 @@
         snr: "-21.0 dB",
         rate: "1.00 QSO/min",
         desc: `<div class="mode-compare-title"><strong>LQ8 Profile:</strong> Standard HF Weak-Signal Digital Mode</div>
-               <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 160 QSOs/h in pileups (2.33× over FT8 Fox &amp; Hound, up to 320 QSOs/h dual-carrier).</p>
+               <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 240 QSOs/h in continuous pileups (4× over single-carrier FT8, 2 QSOs every 30s, up to 480 QSOs/h dual-carrier).</p>
                <ul class="mode-compare-list">
-                 <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 160 vs ~69 QSOs/h in pileups) with complete grid and report delivery.</span></li>
+                 <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 240 vs 60 QSOs/h in continuous single-carrier pileups) with complete grid and report delivery.</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>Zero SNR Penalty:</strong> Exact -21.0 dB sensitivity in 50.0 Hz bandwidth (+3.5 dB over FT4).</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>24-bit Hashes:</strong> Full CRC-24/Q (16.7M bins) preventing hash collisions.</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>13-char Callsigns:</strong> Extended compound callsign support (vs 11 chars in FT8).</span></li>
@@ -2580,7 +2595,7 @@
       const shareUrl = 'https://lq8.org';
       const shareData = {
         title: 'The LQ8 Digital Mode Family — High-Efficiency Amateur Radio Protocols',
-        text: 'Discover The LQ8 Digital Mode: Full 4-step contacts in 60s (grid + reports), >2.3× pileup throughput (160 vs ~69 QSOs/h), 0.0 dB power penalty, and multi-rate family (LQ8, LQ4, LQ2, LQ16)!',
+        text: 'Discover The LQ8 Digital Mode: Full 4-step contacts in 60s (grid + reports), 4× pileup speed with single-carrier (240 vs 60 QSOs/h), 0.0 dB power penalty, and multi-rate family (LQ8, LQ4, LQ2, LQ16)!',
         url: shareUrl
       };
 

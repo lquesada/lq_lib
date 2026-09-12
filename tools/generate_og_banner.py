@@ -111,11 +111,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   <div class="hero-mode-title">The LQ8 Digital Mode</div>
   <h1>
     Full 4-Step Contacts in 60 Seconds<br>
-    >2.3× Pileup Speed (160 vs ~69 QSOs/h)<br>
+    4× Pileup Speed with Single-Carrier (240 vs 60 QSOs/h)<br>
     0.0 dB Power Penalty
   </h1>
   <p>
-    <strong>LQ8</strong> is a next-generation amateur radio weak-signal protocol that re-engineers message packing using variable-length prefix codes over the exact, battle-tested <strong>FT8 physical transport layer</strong> (8-GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). Complete full contacts with bidirectional grid, report, and 73 confirmation in <strong>4 transmissions (60s vs 75–90s)</strong> and achieve <strong>160 QSOs/h in pileups (>2.3× over dual-stream FT8 Fox &amp; Hound)</strong> with 0.0 dB RF power penalty (scaling to <strong>320 QSOs/h</strong> dual-carrier).
+    <strong>LQ8</strong> is a next-generation amateur radio weak-signal protocol that re-engineers message packing using variable-length prefix codes over the exact, battle-tested <strong>FT8 physical transport layer</strong> (8-GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). Complete full contacts with bidirectional grid, report, and 73 confirmation in <strong>4 transmissions (60s vs 75–90s)</strong> and achieve <strong>240 QSOs/h in pileups (4× over single-carrier FT8, 2 QSOs every 30s)</strong> with 0.0 dB RF power penalty (scaling to <strong>480 QSOs/h</strong> dual-carrier).
   </p>
 </body>
 </html>

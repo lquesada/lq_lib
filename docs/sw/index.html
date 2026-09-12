@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Njia ya Kidijitali ya LQ8</title>
-  <meta name="description" content="Familia ya kizazi kijacho ya hali ya dijiti ya amateur (LQ8, LQ4, LQ2, LQ16). Anwani kamili za hatua 4 katika miaka ya 60 zenye gridi kamili na ubadilishanaji wa ripoti (vs 75–90s katika FT8), > kasi ya 2.3× ya mlundikano (160 vs ~ 69 QSOs/h) yenye adhabu ya nguvu ya 0.0 dB, na unyeti -21.0 dB SNR kupitia usimbaji wa kiambishi awali cha urefu tofauti. Usaidizi wa asili katika qFT8 kwa Android.">
+  <meta name="description" content="Familia ya kizazi kijacho ya hali ya dijiti ya amateur (LQ8, LQ4, LQ2, LQ16). Anwani kamili za hatua 4 katika miaka ya 60 zenye gridi kamili na ubadilishanaji wa ripoti (vs 75–90s katika FT8), > kasi yakasi ya pileup ya 4× kwa kibeberu kimoja (240 dhidi ya 60 QSOs/h) yenye adhabu ya nguvu ya 0.0 dB, na unyeti -21.0 dB SNR kupitia usimbaji wa kiambishi awali cha urefu tofauti. Usaidizi wa asili katika qFT8 kwa Android.">
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://lq8.org/sw/">
   <meta property="og:title" content="Njia ya Kidijitali ya LQ8">
-  <meta property="og:description" content="Anwani kamili za hatua 4 katika miaka ya 60 zenye gridi kamili na ubadilishanaji wa ripoti (vs 75–90s katika FT8), > 2.3× mrundikano wa matokeo (160 vs ~ 69 QSOs/h) na adhabu ya nguvu ya 0.0 dB. Awamu-endelevu ya 8-GFSK yenye usimbaji wa kiambishi awali cha urefu tofauti. Usaidizi wa asili katika qFT8 kwa Android.">
+  <meta property="og:description" content="Anwani kamili za hatua 4 katika miaka ya 60 zenye gridi kamili na ubadilishanaji wa ripoti (vs 75–90s katika FT8), kasi ya pileup ya 4× kwa kibeberu kimoja (240 dhidi ya 60 QSOs/h) na adhabu ya nguvu ya 0.0 dB. Awamu-endelevu ya 8-GFSK yenye usimbaji wa kiambishi awali cha urefu tofauti. Usaidizi wa asili katika qFT8 kwa Android.">
   <meta property="og:image" content="https://lq8.org/img/og_banner.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -19,7 +19,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://lq8.org/sw/">
   <meta name="twitter:title" content="Njia ya Kidijitali ya LQ8">
-  <meta name="twitter:description" content="Anwani kamili za hatua 4 katika miaka ya 60 zenye gridi kamili na ubadilishanaji wa ripoti (vs 75–90s katika FT8), > 2.3× mrundikano wa matokeo (160 vs ~ 69 QSOs/h) na adhabu ya nguvu ya 0.0 dB. Awamu-endelevu ya 8-GFSK yenye usimbaji wa kiambishi awali cha urefu tofauti. Usaidizi wa asili katika qFT8 kwa Android.">
+  <meta name="twitter:description" content="Anwani kamili za hatua 4 katika miaka ya 60 zenye gridi kamili na ubadilishanaji wa ripoti (vs 75–90s katika FT8), kasi ya pileup ya 4× kwa kibeberu kimoja (240 dhidi ya 60 QSOs/h) na adhabu ya nguvu ya 0.0 dB. Awamu-endelevu ya 8-GFSK yenye usimbaji wa kiambishi awali cha urefu tofauti. Usaidizi wa asili katika qFT8 kwa Android.">
   <!-- SEO Canonical & Hreflang Tags -->
   <link rel="canonical" href="https://lq8.org/sw/">
   <link rel="alternate" hreflang="x-default" href="https://lq8.org/">
@@ -410,6 +410,21 @@
       letter-spacing: -0.03em;
       margin-bottom: 0;
       color: #f1f5f9;
+    }
+    .hero h1 span[data-i18n="HERO_TITLE_2"],
+    .hero-title-subline {
+      display: inline-block;
+      font-size: clamp(1.15rem, 2.35vw, 2.15rem);
+      font-weight: 750;
+      letter-spacing: -0.015em;
+      line-height: 1.25;
+      margin: 3px 0;
+    }
+    @media (min-width: 680px) {
+      .hero h1 span[data-i18n="HERO_TITLE_2"],
+      .hero-title-subline {
+        white-space: nowrap;
+      }
     }
     .hero-sub {
       font-size: clamp(1rem, 1.6vw, 1.15rem);
@@ -1470,11 +1485,11 @@
 
         <h1>
           <span data-i18n="HERO_TITLE_1">Anwani Kamili za Hatua 4 ndani ya Sekunde 60</span><br>
-          <span data-i18n="HERO_TITLE_2">>2.3× Kasi ya Mlundikano (160 vs ~ 69 QSOs/h)</span><br>
+          <span class="hero-title-subline" data-i18n="HERO_TITLE_2">Kasi ya Pileup ya 4× kwa Kibeberu Kimoja (240 dhidi ya 60 QSOs/h)</span><br>
           <span data-i18n="HERO_TITLE_3">0.0 dB Adhabu ya Nguvu</span>
         </h1>
 
-        <p class="hero-sub" style="margin-top: 18px;" data-i18n="HERO_SUBTITLE"><strong>LQ8</strong> ni itifaki ya kizazi kijacho ya mawimbi hafifu ya redio ambayo wahandisi hutuma ujumbe kwenye upakiaji kwa kutumia misimbo ya kiambishi awali ya urefu tofauti juu ya safu halisi ya usafiri halisi iliyojaribiwa <strong>FT8</strong> (8&minus;GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). Kamilisha anwani kamili ukitumia gridi ya maelekezo mawili, ripoti na uthibitishaji 73 katika <strong>utumaji 4 (miaka ya 60 dhidi ya 75–90)</strong> na ufikie <strong>QSOs 160 kwa saa katika mirundiko (>2.3× kupitia mkondo&minus;mbili wa FT8 Fox & Hound)</strong> na bila adhabu ya nguvu ya RF (0.0 dB), ikiongezeka hadi <strong>QSO 320/saa</strong> kwa vibeba viwili.</p>
+        <p class="hero-sub" style="margin-top: 18px;" data-i18n="HERO_SUBTITLE"><strong>LQ8</strong> ni itifaki ya kizazi kijacho ya mawimbi hafifu ya redio ambayo wahandisi hutuma ujumbe kwenye upakiaji kwa kutumia misimbo ya kiambishi awali ya urefu tofauti juu ya safu halisi ya usafiri halisi iliyojaribiwa <strong>FT8</strong> (8&minus;GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). Kamilisha anwani kamili ukitumia gridi ya maelekezo mawili, ripoti na uthibitishaji 73 katika <strong>utumaji 4 (miaka ya 60 dhidi ya 75–90)</strong> na ufikie <strong>QSOs 160 kwa saa katika mirundiko (>2.3× kupitia mkondo&minus;mbili wa FT8 Fox & Hound)</strong> na bila adhabu ya nguvu ya RF (0.0 dB), ikiongezeka hadi <strong>QSO 480/saa</strong> kwa vibeba viwili.</p>
 
         <div style="display: flex; gap: 14px; justify-content: center; align-items: center; margin-top: 24px; flex-wrap: wrap;">
           <a href="#operation" class="btn btn-primary" data-i18n="HERO_BTN_DISCOVER">Gundua LQ8 &rarr;</a>
@@ -1501,16 +1516,16 @@
 
           <!-- Card 2 -->
           <div class="pitch-card">
-            <div class="pitch-card-badge badge-pileup" data-i18n="PITCH_CARD_2_BADGE">>2.3× Kasi ya Mlundikano</div>
+            <div class="pitch-card-badge badge-pileup" data-i18n="PITCH_CARD_2_BADGE">Kasi ya Pileup ya 4×</div>
             <h3 data-i18n="PITCH_CARD_2_TITLE">Mlundikano wa Msongamano wa Juu</h3>
             <div class="pitch-stat">
-              <span class="stat-main" data-i18n="PITCH_CARD_2_STAT_MAIN">2.33×</span>
-              <span class="stat-sub" data-i18n="PITCH_CARD_2_STAT_SUB">dhidi ya FT8 Fox & Hound</span>
+              <span class="stat-main" data-i18n="PITCH_CARD_2_STAT_MAIN">4.0×</span>
+              <span class="stat-sub" data-i18n="PITCH_CARD_2_STAT_SUB">Kibeberu Kimoja (240 dhidi ya 60/h)</span>
             </div>
-            <p class="pitch-desc" data-i18n="PITCH_CARD_2_DESC">Katika operesheni inayoendelea ya kurundika, hatua 3 zilizoelekezwa (vs 7 katika FT8 Fox & Hound) na wapigaji 2 waliothibitishwa kwa kila fremu hufikia <strong>QSOs 160/h (2.33×)</strong> kwenye mtoa huduma mmoja kwa adhabu ya nguvu ya 0.0 dB, kuongeza kasi hadi <strong>320 QSOs/h (4.67 x mtoa huduma!)</p>
+            <p class="pitch-desc" data-i18n="PITCH_CARD_2_DESC">Katika pileup endelevu, nafasi ya 3 huingiliana na wapigaji simu wapya kwenye masafa yaliyogawanyika, ikikamilisha <strong>QSO 2 kila sekunde 30 (QSO 240/h, mara 4× ya FT8 ya kibeberu kimoja)</strong> kwenye kibeberu kimoja bila adhabu ya nguvu ya 0.0 dB (dhidi ya QSO 60–120/h katika FT8 Fox &amp; Hound yenye mgawanyo wa nguvu), ikifikia <strong>QSO 480/h</strong> kwa vibeberu viwili!</p>
             <ul class="pitch-list">
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_1">QSO 160 kwa saa (mtoa huduma 1, Hz 50)</span></li>
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_2">320 QSOs/h (wabebaji 2, 100 Hz)</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_1">QSO 240/h (kibeberu 1, 50 Hz, 0 dB)</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_2">QSO 480/h (vibeberu 2, 100 Hz)</span></li>
               <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_3">0.0 dB adhabu ya nguvu</span></li>
             </ul>
           </div>
@@ -1894,7 +1909,7 @@
                 <div class="flow-step-msg">HB9IPH YO1YO 73</div>
               </div>
             </div>
-            <div class="flow-summary summary-slow" data-i18n="SPEEDUP_PL_FT8_SUMMARY"><strong>Directed Exchange:</strong> 105 seconds (7 slots &times; 2 QSOs) &mdash; ~69 QSOs/h (&minus;3.0 dB power split)</div>
+            <div class="flow-summary summary-slow" data-i18n="SPEEDUP_PL_FT8_SUMMARY"><strong>Mabadilishano Yaliyoelekezwa:</strong> Sekunde 105 (nafasi 7 kwa QSO 2) &mdash; ~69 QSOs/h. Katika pileup endelevu ambapo ujumbe wa 7 huingiliana na simu mpya, mzunguko ni 90s (nafasi 6) = 80 QSOs/h (hadi 120 QSOs/h kwa njia 2 zilizounganishwa; 60 QSOs/h kibeberu kimoja). Utendaji wa njia nyingi katika Fox &amp; Hound unaleta hasara kubwa za mgawanyo wa nguvu (&minus;3.0 hadi &minus;7.0 dB) na kupunguza nguvu ya kikuza sauti (back-off), na kuharibu upokeaji wa mawimbi dhaifu.</div>
           </div>
 
           <!-- 4. LQ8 Pileup -->
@@ -1917,7 +1932,7 @@
                 <div class="flow-step-msg msg-lq">HB9IPH TU2TU 73 / HB9IPH YO1YO 73</div>
               </div>
             </div>
-            <div class="flow-summary summary-ultra" data-i18n="SPEEDUP_PL_LQ8_SUMMARY"><strong>Directed Exchange:</strong> 45 seconds (3 slots &times; 2 QSOs) &mdash; <span style="color: var(--emerald); font-weight: 700;">160 QSOs/h (2.33× speedup) with 0.0 dB power penalty</span></div>
+            <div class="flow-summary summary-ultra" data-i18n="SPEEDUP_PL_LQ8_SUMMARY"><strong>Mabadilishano Yaliyoelekezwa:</strong> Sekunde 45 (nafasi 3 kwa QSO 2) &mdash; 160 QSOs/h. <span style="color: var(--emerald); font-weight: 700;">Katika pileup endelevu ambapo ujumbe wa 3 huingiliana na simu mpya: QSO 2 kila sekunde 30 = QSO 240/h (mara 4× ya FT8 ya kibeberu kimoja) bila adhabu ya nguvu ya 0.0 dB!</span></div>
           </div>
         </div>
       </div>
@@ -2059,9 +2074,9 @@
               </div>
               <div class="mode-compare-box" id="modeDesc">
                 <div class="mode-compare-title"><strong>LQ8 Profile:</strong> Standard HF Weak-Signal Digital Mode</div>
-                <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 160 QSOs/h in pileups (2.33× over FT8 Fox &amp; Hound, up to 320 QSOs/h dual-carrier).</p>
+                <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 240 QSOs/h in continuous pileups (4× over single-carrier FT8, 2 QSOs every 30s, up to 480 QSOs/h dual-carrier).</p>
                 <ul class="mode-compare-list">
-                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 160 vs ~69 QSOs/h in pileups) with complete grid and report delivery.</span></li>
+                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 240 vs 60 QSOs/h in continuous single-carrier pileups) with complete grid and report delivery.</span></li>
                   <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>Zero SNR Penalty:</strong> Exact -21.0 dB sensitivity in 50.0 Hz bandwidth (+3.5 dB over FT4).</span></li>
                   <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>24-bit Hashes:</strong> Full CRC-24/Q (16.7M bins) preventing collisions.</span></li>
                   <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>13-char Callsigns:</strong> Extended compound callsign support (vs 11 chars in FT8).</span></li>
@@ -2352,9 +2367,9 @@
         snr: "-21.0 dB",
         rate: "1.00 QSO/min",
         desc: `<div class="mode-compare-title"><strong>LQ8 Profile:</strong> Standard HF Weak-Signal Digital Mode</div>
-               <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 160 QSOs/h in pileups (2.33× over FT8 Fox &amp; Hound, up to 320 QSOs/h dual-carrier).</p>
+               <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 240 QSOs/h in continuous pileups (4× over single-carrier FT8, 2 QSOs every 30s, up to 480 QSOs/h dual-carrier).</p>
                <ul class="mode-compare-list">
-                 <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 160 vs ~69 QSOs/h in pileups) with complete grid and report delivery.</span></li>
+                 <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 240 vs 60 QSOs/h in continuous single-carrier pileups) with complete grid and report delivery.</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>Zero SNR Penalty:</strong> Exact -21.0 dB sensitivity in 50.0 Hz bandwidth (+3.5 dB over FT4).</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>24-bit Hashes:</strong> Full CRC-24/Q (16.7M bins) preventing hash collisions.</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>13-char Callsigns:</strong> Extended compound callsign support (vs 11 chars in FT8).</span></li>
@@ -2580,7 +2595,7 @@
       const shareUrl = 'https://lq8.org';
       const shareData = {
         title: 'The LQ8 Digital Mode Family — High-Efficiency Amateur Radio Protocols',
-        text: 'Discover The LQ8 Digital Mode: Full 4-step contacts in 60s (grid + reports), >2.3× pileup throughput (160 vs ~69 QSOs/h), 0.0 dB power penalty, and multi-rate family (LQ8, LQ4, LQ2, LQ16)!',
+        text: 'Discover The LQ8 Digital Mode: Full 4-step contacts in 60s (grid + reports), 4× pileup speed with single-carrier (240 vs 60 QSOs/h), 0.0 dB power penalty, and multi-rate family (LQ8, LQ4, LQ2, LQ16)!',
         url: shareUrl
       };
 

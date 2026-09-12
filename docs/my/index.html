@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LQ8 ဒစ်ဂျစ်တယ်မုဒ်</title>
-  <meta name="description" content="မျိုးဆက်သစ် အပျော်တမ်း ရေဒီယို ဒစ်ဂျစ်တယ်မုဒ် မိသားစု (LQ8၊ LQ4၊ LQ2၊ LQ16)။ ပြီးပြည့်စုံသော ဇယားကွက်နှင့် အစီရင်ခံစာဖလှယ်ခြင်း (FT8 တွင် 75–90s နှင့် 75–90s)၊ 60s အတွင်း အဆင့် 4 ဆင့်ရှိသော အဆက်အသွယ်များ အပြည့်အစုံ (160 နှင့် ~ 69 QSOs/h) 0.0 dB ပါဝါပြစ်ဒဏ်၊ နှင့် -21.0 dB SNR အာရုံခံနိုင်မှုတို့ဖြင့် ပြောင်းလဲနိုင်သော ရှေ့ဆက်တွဲဆက်ခြင်းမှတစ်ဆင့် 2.3× pileup speed (160 vs ~69 QSOs/h) Android အတွက် qFT8 တွင် မူရင်းပံ့ပိုးမှု။">
+  <meta name="description" content="မျိုးဆက်သစ် အပျော်တမ်း ရေဒီယို ဒစ်ဂျစ်တယ်မုဒ် မိသားစု (LQ8၊ LQ4၊ LQ2၊ LQ16)။ ပြီးပြည့်စုံသော ဇယားကွက်နှင့် အစီရင်ခံစာဖလှယ်ခြင်း (FT8 တွင် 75–90s နှင့် 75–90s)၊ 60s အတွင်း အဆင့် 4 ဆင့်ရှိသော အဆက်အသွယ်များ အပြည့်အစုံ (160 နှင့် ~ 69 QSOs/h) 0.0 dB ပါဝါပြစ်ဒဏ်၊ နှင့် -21.0 dB SNR အာရုံခံနိုင်မှုတို့ဖြင့် ပြောင်းလဲနိုင်သော ရှေ့ဆက်တွဲဆက်ခြင်းမှတစ်ဆင့်single-carrier ဖြင့် 4× pileup အမြန်နှုန်း (240 vs 60 QSOs/h) Android အတွက် qFT8 တွင် မူရင်းပံ့ပိုးမှု။">
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
@@ -410,6 +410,21 @@
       letter-spacing: -0.03em;
       margin-bottom: 0;
       color: #f1f5f9;
+    }
+    .hero h1 span[data-i18n="HERO_TITLE_2"],
+    .hero-title-subline {
+      display: inline-block;
+      font-size: clamp(1.15rem, 2.35vw, 2.15rem);
+      font-weight: 750;
+      letter-spacing: -0.015em;
+      line-height: 1.25;
+      margin: 3px 0;
+    }
+    @media (min-width: 680px) {
+      .hero h1 span[data-i18n="HERO_TITLE_2"],
+      .hero-title-subline {
+        white-space: nowrap;
+      }
     }
     .hero-sub {
       font-size: clamp(1rem, 1.6vw, 1.15rem);
@@ -1470,11 +1485,11 @@
 
         <h1>
           <span data-i18n="HERO_TITLE_1">စက္ကန့် 60 အတွင်း 4 အဆင့် အဆက်အသွယ်များ အပြည့်အစုံ</span><br>
-          <span data-i18n="HERO_TITLE_2">>2.3× Pileup မြန်နှုန်း (160 vs ~69 QSOs/h)</span><br>
+          <span class="hero-title-subline" data-i18n="HERO_TITLE_2">single-carrier ဖြင့် 4× pileup အမြန်နှုန်း (240 vs 60 QSOs/h)</span><br>
           <span data-i18n="HERO_TITLE_3">0.0 dB ပါဝါပြစ်ဒဏ်</span>
         </h1>
 
-        <p class="hero-sub" style="margin-top: 18px;" data-i18n="HERO_SUBTITLE"><strong>LQ8</strong> သည် အတိအကျ၊ တိုက်ပွဲ&minus;စမ်းသပ်ထားသော <strong>FT8 ရုပ်ပိုင်းဆိုင်ရာသယ်ယူပို့ဆောင်ရေးအလွှာ</strong> (8&minus;GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR) ကို အသုံးပြု၍ အင်ဂျင်နီယာများထံ မက်ဆေ့ချ်ထုပ်ပိုးသည့် မျိုးဆက်သစ် အပျော်တမ်းရေဒီယို အားနည်း&minus;အချက်ပြပရိုတိုကော။ <strong>ထုတ်လွှင့်မှု 4 ခု (60s နှင့် 75–90s) တွင် အတည်ပြုချက် 73 ခုဖြင့် အဆက်အသွယ်များကို အပြည့်အစုံဖြည့်ပြီး <strong>160 QSOs/h (160 QSOs/h) (>2.3× dual&minus;stream FT8 Fox & Hound ကျော်)</strong> RF ပါဝါ ဆုံးရှုံးမှု မရှိဘဲ (0.0 dB) (dual-carrier ဖြင့် <strong>320 QSOs/h</strong> အထိ တိုးချဲ့နိုင်သည်)။</p>
+        <p class="hero-sub" style="margin-top: 18px;" data-i18n="HERO_SUBTITLE"><strong>LQ8</strong> သည် အတိအကျ၊ တိုက်ပွဲ&minus;စမ်းသပ်ထားသော <strong>FT8 ရုပ်ပိုင်းဆိုင်ရာသယ်ယူပို့ဆောင်ရေးအလွှာ</strong> (8&minus;GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR) ကို အသုံးပြု၍ အင်ဂျင်နီယာများထံ မက်ဆေ့ချ်ထုပ်ပိုးသည့် မျိုးဆက်သစ် အပျော်တမ်းရေဒီယို အားနည်း&minus;အချက်ပြပရိုတိုကော။ <strong>ထုတ်လွှင့်မှု 4 ခု (60s နှင့် 75–90s) တွင် အတည်ပြုချက် 73 ခုဖြင့် အဆက်အသွယ်များကို အပြည့်အစုံဖြည့်ပြီး <strong>240 QSOs/h (single-carrier ဖြင့် 4× pileup အမြန်နှုန်း (240 vs 60 QSOs/h)) (>2.3× dual&minus;stream FT8 Fox & Hound ကျော်)</strong> RF ပါဝါ ဆုံးရှုံးမှု မရှိဘဲ (0.0 dB) (dual-carrier ဖြင့် <strong>480 QSOs/h</strong> အထိ တိုးချဲ့နိုင်သည်)။</p>
 
         <div style="display: flex; gap: 14px; justify-content: center; align-items: center; margin-top: 24px; flex-wrap: wrap;">
           <a href="#operation" class="btn btn-primary" data-i18n="HERO_BTN_DISCOVER">LQ8 &rarr; ရှာဖွေပါ။</a>
@@ -1501,16 +1516,16 @@
 
           <!-- Card 2 -->
           <div class="pitch-card">
-            <div class="pitch-card-badge badge-pileup" data-i18n="PITCH_CARD_2_BADGE">၂.၃၃ ဆ ပိုမြန်သော Pileup</div>
+            <div class="pitch-card-badge badge-pileup" data-i18n="PITCH_CARD_2_BADGE">4× Pileup အမြန်နှုန်း</div>
             <h3 data-i18n="PITCH_CARD_2_TITLE">High-density Pileups</h3>
             <div class="pitch-stat">
-              <span class="stat-main" data-i18n="PITCH_CARD_2_STAT_MAIN">2.33×</span>
-              <span class="stat-sub" data-i18n="PITCH_CARD_2_STAT_SUB">FT8 Fox &amp; Hound နှင့် နှိုင်းယှဉ်ချက်</span>
+              <span class="stat-main" data-i18n="PITCH_CARD_2_STAT_MAIN">4.0×</span>
+              <span class="stat-sub" data-i18n="PITCH_CARD_2_STAT_SUB">Single-Carrier (240 vs 60/h)</span>
             </div>
-            <p class="pitch-desc" data-i18n="PITCH_CARD_2_DESC">ဆက်တိုက်လုပ်ဆောင်မှုတွင်၊ FT8 Fox & Hound တွင် အတည်ပြုထားသော ခေါ်ဆိုသူ 2 ဦးဖြင့် ညွှန်ကြားထားသည့် အဆင့် 3 ဆင့်သည် ဖရိန်တစ်ခုလျှင် <strong>160 QSOs/h (2.33×)</strong> ကို 0.0 dB ပါဝါဒါဏ်ပါသည့် ဝန်ဆောင်မှုပေးသူတစ်ခုတည်းတွင် <strong>320 QSOs/h (4.67×) အထိ ချဲ့ထွင်ခြင်းဖြင့် carrier တစ်ခုတွင် <strong>320 QSOs/h (4.67×l) သို့ တိုးမြှင့်သည်</p>
+            <p class="pitch-desc" data-i18n="PITCH_CARD_2_DESC">ဆက်တိုက် pileup တွင် slot 3 သည် split frequencies ပေါ်ရှိ ခေါ်ဆိုသူအသစ်များနှင့် ထပ်တူကျပြီး 0.0 dB power penalty ဖြင့် single carrier ပေါ်တွင် <strong>စက္ကန့် ၃၀ တိုင်း QSO ၂ ခု (240 QSOs/h၊ single-carrier FT8 ထက် ၄ ဆ)</strong> ပြီးမြောက်စေသည် (power split ဖြင့် FT8 Fox &amp; Hound ၏ 60–120 QSOs/h နှင့် နှိုင်းယှဉ်ပါက)၊ dual-carrier ဖြင့် <strong>480 QSOs/h</strong> အထိ တိုးမြှင့်နိုင်သည်!</p>
             <ul class="pitch-list">
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_1">160 QSOs/h (ကယ်ရီယာ 1 ခု၊ 50 Hz)</span></li>
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_2">320 QSOs/h (ဝန်ဆောင်မှုပေးသူ 2 ခု၊ 100 Hz)</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_1">240 QSOs/h (carrier ၁ ခု၊ 50 Hz၊ 0 dB)</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_2">480 QSOs/h (carrier ၂ ခု၊ 100 Hz)</span></li>
               <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_3">0.0 dB ပါဝါဒါဏ်</span></li>
             </ul>
           </div>
@@ -1894,7 +1909,7 @@
                 <div class="flow-step-msg">HB9IPH YO1YO 73</div>
               </div>
             </div>
-            <div class="flow-summary summary-slow" data-i18n="SPEEDUP_PL_FT8_SUMMARY"><strong>Directed Exchange&minus;</strong> 105 စက္ကန့် (QSO 2 ခုအတွက် 7 slots) — ~69 QSO/h (ပိုက်လိုင်းတပ်ထားသော F/H၊ &minus;3.0 dB ပါဝါခွဲခြမ်း)</div>
+            <div class="flow-summary summary-slow" data-i18n="SPEEDUP_PL_FT8_SUMMARY"><strong>လမ်းညွှန်ချက် ဖလှယ်မှု:</strong> ၁၀၅ စက္ကန့် (QSO ၂ ခုအတွက် slot ၇ ခု) &mdash; ~69 QSOs/h။ မက်ဆေ့ချ် ၇ သည် ခေါ်ဆိုမှုအသစ်များနှင့် ထပ်တူကျသည့် ဆက်တိုက် pileup တွင် စက်ဝန်းသည် 90s (slot ၆ ခု) = 80 QSOs/h ဖြစ်သည် (2-stream ဖြင့် 120 QSOs/h အထိ၊ single-carrier တွင် 60 QSOs/h)။ Fox &amp; Hound ရှိ multi-stream သည် ပြင်းထန်သော power-splitting ဆုံးရှုံးမှုများ (&minus;3.0 မှ &minus;7.0 dB) နှင့် amplifier back-off ကို ဖြစ်ပေါ်စေပြီး အားနည်းသော အချက်ပြမှုများကို ထိခိုက်စေသည်။</div>
           </div>
 
           <!-- 4. LQ8 Pileup -->
@@ -1917,7 +1932,7 @@
                 <div class="flow-step-msg msg-lq">HB9IPH TU2TU 73 / HB9IPH YO1YO 73</div>
               </div>
             </div>
-            <div class="flow-summary summary-ultra" data-i18n="SPEEDUP_PL_LQ8_SUMMARY"><strong>Directed Exchange-</strong> 45 စက္ကန့် (QSO 2 ခုအတွက် 3 slots) — <span style="color: var(--emerald); font-weight: 700;">160 QSOs/h (2.33× အရှိန်မြှင့်) 0.0 dB ပါဝါဒါဏ်ဖြင့် 0.0 dB</span></div>
+            <div class="flow-summary summary-ultra" data-i18n="SPEEDUP_PL_LQ8_SUMMARY"><strong>လမ်းညွှန်ချက် ဖလှယ်မှု:</strong> ၄၅ စက္ကန့် (QSO ၂ ခုအတွက် slot ၃ ခု) &mdash; 160 QSOs/h။ <span style="color: var(--emerald); font-weight: 700;">မက်ဆေ့ချ် ၃ သည် ခေါ်ဆိုမှုအသစ်များနှင့် ထပ်တူကျသည့် ဆက်တိုက် pileup တွင်: စက္ကန့် ၃၀ တိုင်း QSO ၂ ခု = 240 QSOs/h (single-carrier FT8 ထက် ၄ ဆ) 0.0 dB power penalty ဖြင့်!</span></div>
           </div>
         </div>
       </div>
@@ -2059,9 +2074,9 @@
               </div>
               <div class="mode-compare-box" id="modeDesc">
                 <div class="mode-compare-title"><strong>LQ8 Profile:</strong> Standard HF Weak-Signal Digital Mode</div>
-                <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 160 QSOs/h in pileups (2.33× over FT8 Fox &amp; Hound, up to 320 QSOs/h dual-carrier).</p>
+                <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 240 QSOs/h in continuous pileups (4× over single-carrier FT8, 2 QSOs every 30s, up to 480 QSOs/h dual-carrier).</p>
                 <ul class="mode-compare-list">
-                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 160 vs ~69 QSOs/h in pileups) with complete grid and report delivery.</span></li>
+                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 240 vs 60 QSOs/h in continuous single-carrier pileups) with complete grid and report delivery.</span></li>
                   <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>Zero SNR Penalty:</strong> Exact -21.0 dB sensitivity in 50.0 Hz bandwidth (+3.5 dB over FT4).</span></li>
                   <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>24-bit Hashes:</strong> Full CRC-24/Q (16.7M bins) preventing collisions.</span></li>
                   <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>13-char Callsigns:</strong> Extended compound callsign support (vs 11 chars in FT8).</span></li>
@@ -2352,9 +2367,9 @@
         snr: "-21.0 dB",
         rate: "1.00 QSO/min",
         desc: `<div class="mode-compare-title"><strong>LQ8 Profile:</strong> Standard HF Weak-Signal Digital Mode</div>
-               <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 160 QSOs/h in pileups (2.33× over FT8 Fox &amp; Hound, up to 320 QSOs/h dual-carrier).</p>
+               <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 240 QSOs/h in continuous pileups (4× over single-carrier FT8, 2 QSOs every 30s, up to 480 QSOs/h dual-carrier).</p>
                <ul class="mode-compare-list">
-                 <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 160 vs ~69 QSOs/h in pileups) with complete grid and report delivery.</span></li>
+                 <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 240 vs 60 QSOs/h in continuous single-carrier pileups) with complete grid and report delivery.</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>Zero SNR Penalty:</strong> Exact -21.0 dB sensitivity in 50.0 Hz bandwidth (+3.5 dB over FT4).</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>24-bit Hashes:</strong> Full CRC-24/Q (16.7M bins) preventing hash collisions.</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>13-char Callsigns:</strong> Extended compound callsign support (vs 11 chars in FT8).</span></li>
@@ -2580,7 +2595,7 @@
       const shareUrl = 'https://lq8.org';
       const shareData = {
         title: 'The LQ8 Digital Mode Family — High-Efficiency Amateur Radio Protocols',
-        text: 'Discover The LQ8 Digital Mode: Full 4-step contacts in 60s (grid + reports), >2.3× pileup throughput (160 vs ~69 QSOs/h), 0.0 dB power penalty, and multi-rate family (LQ8, LQ4, LQ2, LQ16)!',
+        text: 'Discover The LQ8 Digital Mode: Full 4-step contacts in 60s (grid + reports), 4× pileup speed with single-carrier (240 vs 60 QSOs/h), 0.0 dB power penalty, and multi-rate family (LQ8, LQ4, LQ2, LQ16)!',
         url: shareUrl
       };
 

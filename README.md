@@ -43,10 +43,10 @@ By assigning a **1-bit codeword (`1`)** to the most data-dense `CALL std` messag
 For contest and DXpedition pileups where multiple stations answer simultaneously, LQ introduces **`MULTI-REPORT+73` (Type 11)**:
 * **Single Transmission:** The DX station confirms **up to 2 stations simultaneously** in a single 15-second transmission ($3\text{b prefix} + 16\text{b DX hash} + 2 \times [24\text{b Target Hash} + 5\text{b SNR}] = 77\text{ bits}$).
 * **Throughput Multiplier Analysis:**
-  * **$\mathbf{2.33\times}$ over FT8 Fox & Hound:** Completing 2 QSOs in 3 slots (45s) vs 7 slots (105s) in pipelined dual-stream FT8 Fox & Hound yields a $\frac{105}{45} = \mathbf{2.33\times}$ speedup (>2.3× throughput, 160 vs ~69 QSOs/h).
+  * **$\mathbf{4\times}$ over Single-Carrier FT8:** In continuous pileup operation where message 3 overlaps with incoming calls on split frequencies, LQ8 completes 2 QSOs every 30 seconds ($\mathbf{240\text{ QSOs/h}}$ vs $60\text{ QSOs/h}$ in single-carrier FT8, or $80\text{--}120\text{ QSOs/h}$ in FT8 Fox & Hound). In isolated 3-slot exchanges, LQ8 achieves $160\text{ QSOs/h}$ vs $\sim 69\text{ QSOs/h}$ ($2.33\times$).
   * **0.0 dB Power Penalty:** LQ8 operates as a single-carrier constant-envelope 50.0 Hz transmission (0.0 dB power splitting penalty, 0 IMD splatter), whereas FT8 multi-streaming splits power by $-3.0\text{ dB}$ (2 streams) to $-7.0\text{ dB}$ (5 streams) and requires PA backoff.
   * **Full 60s QSO Speedup:** Completes full 1-on-1 contacts in 4 transmissions (60s vs 75–90s in FT8: $\mathbf{1.50\times}$ over canonical 6-slot / $\mathbf{1.25\times}$ over 5-step RR73) with zero SNR penalty.
-  * **Dual-Carrier Scalability:** Under dual-carrier operation (100 Hz bandwidth), pileup capacity scales to $\mathbf{320\text{ QSOs/h}}$ ($4.67\times$ over dual-stream FT8 Fox & Hound).
+  * **Dual-Carrier Scalability:** Under dual-carrier operation (100 Hz bandwidth), pileup capacity scales to $\mathbf{480\text{ QSOs/h}}$ ($4\times$ over typical dual-stream FT8 Fox & Hound).
 * **Full 24-bit Target Hashes:** 24-bit CRC-24 hashes with 16.78M bins prevent hash collisions.
 * **Single-Station Duplication:** When replying to 1 station, Target 2 duplicates Target 1 (processed by decoders as a single station).
 

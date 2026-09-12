@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yanayin Dijital LQ8</title>
-  <meta name="description" content="Iyalin yanayin dijital na zamani mai son radiyo (LQ8, LQ4, LQ2, LQ16). Cikakken lambobi 4-mataki a cikin 60s tare da cikakken grid & musayar rahoto (vs 75-90s a cikin FT8),> 2.3 × gudun pileup (160 vs ~ 69 QSOs / h) tare da hukuncin wutar lantarki 0.0 dB, da -21.0 dB SNR hankali ta hanyar coding prefix mai tsayi. Taimako na asali a cikin qFT8 don Android.">
+  <meta name="description" content="Iyalin yanayin dijital na zamani mai son radiyo (LQ8, LQ4, LQ2, LQ16). Cikakken lambobi 4-mataki a cikin 60s tare da cikakken grid & musayar rahoto (vs 75-90s a cikin FT8),saurin pileup sau 4 tare da mai daukar hoto daya (240 vs 60 QSOs/h) tare da hukuncin wutar lantarki 0.0 dB, da -21.0 dB SNR hankali ta hanyar coding prefix mai tsayi. Taimako na asali a cikin qFT8 don Android.">
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://lq8.org/ha/">
   <meta property="og:title" content="Yanayin Dijital LQ8">
-  <meta property="og:description" content="Cikakkun lambobi 4-mataki a cikin 60s tare da cikakken grid & musayar rahoto (vs 75-90s a cikin FT8),> 2.3 × kayan aikin tarawa (160 vs ~ 69 QSOs / h) tare da hukuncin wuta na 0.0 dB. Ci gaba-lokaci 8-GFSK tare da madaidaicin tsayin prefix. Taimako na asali a cikin qFT8 don Android.">
+  <meta property="og:description" content="Cikakkun lambobi 4-mataki a cikin 60s tare da cikakken grid & musayar rahoto (vs 75-90s a cikin FT8),saurin pileup sau 4 tare da mai daukar hoto daya (240 vs 60 QSOs/h) tare da hukuncin wuta na 0.0 dB. Ci gaba-lokaci 8-GFSK tare da madaidaicin tsayin prefix. Taimako na asali a cikin qFT8 don Android.">
   <meta property="og:image" content="https://lq8.org/img/og_banner.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -19,7 +19,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://lq8.org/ha/">
   <meta name="twitter:title" content="Yanayin Dijital LQ8">
-  <meta name="twitter:description" content="Cikakkun lambobi 4-mataki a cikin 60s tare da cikakken grid & musayar rahoto (vs 75-90s a cikin FT8),> 2.3 × kayan aikin tarawa (160 vs ~ 69 QSOs / h) tare da hukuncin wuta na 0.0 dB. Ci gaba-lokaci 8-GFSK tare da madaidaicin tsayin prefix. Taimako na asali a cikin qFT8 don Android.">
+  <meta name="twitter:description" content="Cikakkun lambobi 4-mataki a cikin 60s tare da cikakken grid & musayar rahoto (vs 75-90s a cikin FT8),saurin pileup sau 4 tare da mai daukar hoto daya (240 vs 60 QSOs/h) tare da hukuncin wuta na 0.0 dB. Ci gaba-lokaci 8-GFSK tare da madaidaicin tsayin prefix. Taimako na asali a cikin qFT8 don Android.">
   <!-- SEO Canonical & Hreflang Tags -->
   <link rel="canonical" href="https://lq8.org/ha/">
   <link rel="alternate" hreflang="x-default" href="https://lq8.org/">
@@ -410,6 +410,21 @@
       letter-spacing: -0.03em;
       margin-bottom: 0;
       color: #f1f5f9;
+    }
+    .hero h1 span[data-i18n="HERO_TITLE_2"],
+    .hero-title-subline {
+      display: inline-block;
+      font-size: clamp(1.15rem, 2.35vw, 2.15rem);
+      font-weight: 750;
+      letter-spacing: -0.015em;
+      line-height: 1.25;
+      margin: 3px 0;
+    }
+    @media (min-width: 680px) {
+      .hero h1 span[data-i18n="HERO_TITLE_2"],
+      .hero-title-subline {
+        white-space: nowrap;
+      }
     }
     .hero-sub {
       font-size: clamp(1rem, 1.6vw, 1.15rem);
@@ -1470,11 +1485,11 @@
 
         <h1>
           <span data-i18n="HERO_TITLE_1">Cikakkun lambobi 4-Mataki a cikin daƙiƙa 60</span><br>
-          <span data-i18n="HERO_TITLE_2">> 2.3× Gudun Pileup (160 vs ~ 69 QSOs/h)</span><br>
+          <span class="hero-title-subline" data-i18n="HERO_TITLE_2">Saurin Pileup Sau 4 Tare da Mai Daukar Hoto Daya (240 vs 60 QSOs/h)</span><br>
           <span data-i18n="HERO_TITLE_3">0.0 dB Hukuncin Wuta</span>
         </h1>
 
-        <p class="hero-sub" style="margin-top: 18px;" data-i18n="HERO_SUBTITLE"><strong>LQ8</strong> ƙa'idar siginar rauni ce ta mai son ta gaba wacce ke sake sabunta saƙon injiniyoyi ta amfani da lambobin prefix masu tsayi&minus;tsawon daidai, gwajin yaƙi<strong>FT8 Layer sufuri na zahiri</strong>(8&minus;GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). Cikakken cikakkun lambobin sadarwa tare da grid bidirectional, rahoto, da tabbatarwa na 73 a cikin <strong>4 watsawa (60s vs 75&minus;90s)</strong>da kuma cimma <strong>160 QSOs / h a cikin pileups (> 2.3 × a kan dual&minus;rafi FT8 Fox & Hound)</strong>tare da ba tare da asarar ƙarfin RF ba (0.0 dB), yana iya hawa zuwa <strong>320 QSOs/h</strong> tare da dako biyu.</p>
+        <p class="hero-sub" style="margin-top: 18px;" data-i18n="HERO_SUBTITLE"><strong>LQ8</strong> ƙa'idar siginar rauni ce ta mai son ta gaba wacce ke sake sabunta saƙon injiniyoyi ta amfani da lambobin prefix masu tsayi&minus;tsawon daidai, gwajin yaƙi<strong>FT8 Layer sufuri na zahiri</strong>(8&minus;GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). Cikakken cikakkun lambobin sadarwa tare da grid bidirectional, rahoto, da tabbatarwa na 73 a cikin <strong>4 watsawa (60s vs 75&minus;90s)</strong>da kuma cimma <strong>160 QSOs / h a cikin pileups (> 2.3 × a kan dual&minus;rafi FT8 Fox & Hound)</strong>tare da ba tare da asarar ƙarfin RF ba (0.0 dB), yana iya hawa zuwa <strong>480 QSOs/h</strong> tare da dako biyu.</p>
 
         <div style="display: flex; gap: 14px; justify-content: center; align-items: center; margin-top: 24px; flex-wrap: wrap;">
           <a href="#operation" class="btn btn-primary" data-i18n="HERO_BTN_DISCOVER">Gano LQ8 &rarr;</a>
@@ -1501,16 +1516,16 @@
 
           <!-- Card 2 -->
           <div class="pitch-card">
-            <div class="pitch-card-badge badge-pileup" data-i18n="PITCH_CARD_2_BADGE">> 2.3× Gudun Tari</div>
+            <div class="pitch-card-badge badge-pileup" data-i18n="PITCH_CARD_2_BADGE">Saurin Pileup Sau 4</div>
             <h3 data-i18n="PITCH_CARD_2_TITLE">Maɗaukakin Maɗaukaki</h3>
             <div class="pitch-stat">
-              <span class="stat-main" data-i18n="PITCH_CARD_2_STAT_MAIN">2.33×</span>
-              <span class="stat-sub" data-i18n="PITCH_CARD_2_STAT_SUB">akan FT8 Fox &amp; Hound</span>
+              <span class="stat-main" data-i18n="PITCH_CARD_2_STAT_MAIN">4.0×</span>
+              <span class="stat-sub" data-i18n="PITCH_CARD_2_STAT_SUB">Mai Dauka Daya (240 vs 60/h)</span>
             </div>
-            <p class="pitch-desc" data-i18n="PITCH_CARD_2_DESC">A cikin ci gaba da aikin tarawa, matakan da aka ba da umarni 3 (vs 7 a cikin FT8 Fox & Hound) tare da masu kira na 2 da aka tabbatar da kowane firam sun cimma <strong>160 QSOs / h (2.33 ×)</strong>a kan mai ɗaukar kaya guda ɗaya tare da hukuncin wutar lantarki na 0.0 dB, ƙaddamarwa zuwa <strong>320 QSOs / h (4.67!)</p>
+            <p class="pitch-desc" data-i18n="PITCH_CARD_2_DESC">A cikin ci gaba da pileup, ramin 3 yana haɗuwa da sababbin masu kira a kan mitoci masu rarraba, yana kammala <strong>QSO 2 a kowane daƙiƙa 30 (240 QSOs/h, sau 4 fiye da FT8 mai dauka daya)</strong> a kan mai dauka daya ba tare da asarar ƙarfi ta 0.0 dB ba (sabanin 60–120 QSOs/h a cikin FT8 Fox &amp; Hound tare da raba ƙarfi), yana haura zuwa <strong>480 QSOs/h</strong> tare da masu dauka biyu!</p>
             <ul class="pitch-list">
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_1">160 QSOs/h (mai ɗaukar kaya 1, 50 Hz)</span></li>
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_2">320 QSOs/h (mai ɗaukar kaya 2, 100 Hz)</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_1">240 QSOs/h (mai dauka 1, 50 Hz, 0 dB)</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_2">480 QSOs/h (masu dauka 2, 100 Hz)</span></li>
               <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_3">Hukuncin wutar lantarki 0.0 dB</span></li>
             </ul>
           </div>
@@ -1894,7 +1909,7 @@
                 <div class="flow-step-msg">HB9IPH YO1YO 73</div>
               </div>
             </div>
-            <div class="flow-summary summary-slow" data-i18n="SPEEDUP_PL_FT8_SUMMARY"><strong>Musanya Directed:</strong> 105 seconds (7 ramummuka don 2 QSOs) &minus; ~ 69 QSOs/h (filin F/H, &minus;3.0 dB ikon raba)</div>
+            <div class="flow-summary summary-slow" data-i18n="SPEEDUP_PL_FT8_SUMMARY"><strong>Musayar da Aka Nufa:</strong> Daƙiƙa 105 (ramummuka 7 don QSO 2) &mdash; ~69 QSOs/h. A cikin pileup inda saƙo na 7 ke haɗuwa da sababbin kira, zagayen shine 90s (ramummuka 6) = 80 QSOs/h (har zuwa 120 QSOs/h tare da hanyoyi 2; 60 QSOs/h ga mai dauka daya). Ayyukan hanyoyi da yawa a Fox &amp; Hound yana haifar da asarar raba ƙarfi mai yawa (&minus;3.0 zuwa &minus;7.0 dB) da raguwar ƙarfin amfilifaya, wanda ke lalata isar raunin sigina.</div>
           </div>
 
           <!-- 4. LQ8 Pileup -->
@@ -1917,7 +1932,7 @@
                 <div class="flow-step-msg msg-lq">HB9IPH TU2TU 73 / HB9IPH YO1YO 73</div>
               </div>
             </div>
-            <div class="flow-summary summary-ultra" data-i18n="SPEEDUP_PL_LQ8_SUMMARY"><strong>Musanya Directed:</strong> 45 seconds (3 ramummuka don 2 QSOs) — <span style="color: var(--emerald); font-weight: 700;">160 QSOs/h (2.33× speedup) tare da 0.0 dB wuta hukum</span></div>
+            <div class="flow-summary summary-ultra" data-i18n="SPEEDUP_PL_LQ8_SUMMARY"><strong>Musayar da Aka Nufa:</strong> Daƙiƙa 45 (ramummuka 3 don QSO 2) &mdash; 160 QSOs/h. <span style="color: var(--emerald); font-weight: 700;">A cikin pileup inda saƙo na 3 ke haɗuwa da sababbin kira: QSO 2 kowane daƙiƙa 30 = 240 QSOs/h (sau 4 fiye da FT8 mai dauka daya) ba tare da asarar ƙarfi ta 0.0 dB ba!</span></div>
           </div>
         </div>
       </div>
@@ -2059,9 +2074,9 @@
               </div>
               <div class="mode-compare-box" id="modeDesc">
                 <div class="mode-compare-title"><strong>LQ8 Profile:</strong> Standard HF Weak-Signal Digital Mode</div>
-                <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 160 QSOs/h in pileups (2.33× over FT8 Fox &amp; Hound, up to 320 QSOs/h dual-carrier).</p>
+                <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 240 QSOs/h in continuous pileups (4× over single-carrier FT8, 2 QSOs every 30s, up to 480 QSOs/h dual-carrier).</p>
                 <ul class="mode-compare-list">
-                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 160 vs ~69 QSOs/h in pileups) with complete grid and report delivery.</span></li>
+                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 240 vs 60 QSOs/h in continuous single-carrier pileups) with complete grid and report delivery.</span></li>
                   <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>Zero SNR Penalty:</strong> Exact -21.0 dB sensitivity in 50.0 Hz bandwidth (+3.5 dB over FT4).</span></li>
                   <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>24-bit Hashes:</strong> Full CRC-24/Q (16.7M bins) preventing collisions.</span></li>
                   <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>13-char Callsigns:</strong> Extended compound callsign support (vs 11 chars in FT8).</span></li>
@@ -2352,9 +2367,9 @@
         snr: "-21.0 dB",
         rate: "1.00 QSO/min",
         desc: `<div class="mode-compare-title"><strong>LQ8 Profile:</strong> Standard HF Weak-Signal Digital Mode</div>
-               <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 160 QSOs/h in pileups (2.33× over FT8 Fox &amp; Hound, up to 320 QSOs/h dual-carrier).</p>
+               <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 240 QSOs/h in continuous pileups (4× over single-carrier FT8, 2 QSOs every 30s, up to 480 QSOs/h dual-carrier).</p>
                <ul class="mode-compare-list">
-                 <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 160 vs ~69 QSOs/h in pileups) with complete grid and report delivery.</span></li>
+                 <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 240 vs 60 QSOs/h in continuous single-carrier pileups) with complete grid and report delivery.</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>Zero SNR Penalty:</strong> Exact -21.0 dB sensitivity in 50.0 Hz bandwidth (+3.5 dB over FT4).</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>24-bit Hashes:</strong> Full CRC-24/Q (16.7M bins) preventing hash collisions.</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>13-char Callsigns:</strong> Extended compound callsign support (vs 11 chars in FT8).</span></li>
@@ -2580,7 +2595,7 @@
       const shareUrl = 'https://lq8.org';
       const shareData = {
         title: 'The LQ8 Digital Mode Family — High-Efficiency Amateur Radio Protocols',
-        text: 'Discover The LQ8 Digital Mode: Full 4-step contacts in 60s (grid + reports), >2.3× pileup throughput (160 vs ~69 QSOs/h), 0.0 dB power penalty, and multi-rate family (LQ8, LQ4, LQ2, LQ16)!',
+        text: 'Discover The LQ8 Digital Mode: Full 4-step contacts in 60s (grid + reports), 4× pileup speed with single-carrier (240 vs 60 QSOs/h), 0.0 dB power penalty, and multi-rate family (LQ8, LQ4, LQ2, LQ16)!',
         url: shareUrl
       };
 

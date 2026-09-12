@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LQ8 Dijital Modu</title>
-  <meta name="description" content="Keyingi avlod havaskor radio raqamli rejimlar oilasi (LQ8, LQ4, LQ2, LQ16). 60-yillarda toʻliq tarmoq va hisobot almashinuvi (FT8da 75–90-larga nisbatan), >2,3× yigʻish tezligi (160 va ~69 QSOs/soat) 0,0 dB quvvat jazosi va oʻzgaruvchan uzunlikdagi prefiks kodlash orqali -21.0 dB SNR sezgirligi bilan 60-yillarda toʻliq 4 bosqichli kontaktlar. Android uchun qFT8-da mahalliy qo'llab-quvvatlash.">
+  <meta name="description" content="Keyingi avlod havaskor radio raqamli rejimlar oilasi (LQ8, LQ4, LQ2, LQ16). 60-yillarda toʻliq tarmoq va hisobot almashinuvi (FT8da 75–90-larga nisbatan), yagona tashuvchi bilan 4× pileup tezligi (240 vs 60 QSOs/soat) 0,0 dB quvvat jazosi va oʻzgaruvchan uzunlikdagi prefiks kodlash orqali -21.0 dB SNR sezgirligi bilan 60-yillarda toʻliq 4 bosqichli kontaktlar. Android uchun qFT8-da mahalliy qo'llab-quvvatlash.">
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://lq8.org/uz/">
   <meta property="og:title" content="LQ8 Dijital Modu">
-  <meta property="og:description" content="60-yillarda toʻliq 4 bosqichli kontaktlar va toʻliq tarmoq va hisobot almashinuvi (FT8da 75–90-larga nisbatan), >2,3 × yigʻish oʻtkazuvchanligi (160 va ~69 QSOs/soat), 0,0 dB quvvat jazosi bilan. O'zgaruvchan uzunlikdagi prefiks kodlash bilan uzluksiz fazali 8-GFSK. Android uchun qFT8-da mahalliy qo'llab-quvvatlash.">
+  <meta property="og:description" content="60-yillarda toʻliq 4 bosqichli kontaktlar va toʻliq tarmoq va hisobot almashinuvi (FT8da 75–90-larga nisbatan), yagona tashuvchi bilan 4× pileup tezligi (240 vs 60 QSOs/soat), 0,0 dB quvvat jazosi bilan. O'zgaruvchan uzunlikdagi prefiks kodlash bilan uzluksiz fazali 8-GFSK. Android uchun qFT8-da mahalliy qo'llab-quvvatlash.">
   <meta property="og:image" content="https://lq8.org/img/og_banner.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -19,7 +19,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://lq8.org/uz/">
   <meta name="twitter:title" content="LQ8 Dijital Modu">
-  <meta name="twitter:description" content="60-yillarda toʻliq 4 bosqichli kontaktlar va toʻliq tarmoq va hisobot almashinuvi (FT8da 75–90-larga nisbatan), >2,3 × yigʻish oʻtkazuvchanligi (160 va ~69 QSOs/soat), 0,0 dB quvvat jazosi bilan. O'zgaruvchan uzunlikdagi prefiks kodlash bilan uzluksiz fazali 8-GFSK. Android uchun qFT8-da mahalliy qo'llab-quvvatlash.">
+  <meta name="twitter:description" content="60-yillarda toʻliq 4 bosqichli kontaktlar va toʻliq tarmoq va hisobot almashinuvi (FT8da 75–90-larga nisbatan), yagona tashuvchi bilan 4× pileup tezligi (240 vs 60 QSOs/soat), 0,0 dB quvvat jazosi bilan. O'zgaruvchan uzunlikdagi prefiks kodlash bilan uzluksiz fazali 8-GFSK. Android uchun qFT8-da mahalliy qo'llab-quvvatlash.">
   <!-- SEO Canonical & Hreflang Tags -->
   <link rel="canonical" href="https://lq8.org/uz/">
   <link rel="alternate" hreflang="x-default" href="https://lq8.org/">
@@ -410,6 +410,21 @@
       letter-spacing: -0.03em;
       margin-bottom: 0;
       color: #f1f5f9;
+    }
+    .hero h1 span[data-i18n="HERO_TITLE_2"],
+    .hero-title-subline {
+      display: inline-block;
+      font-size: clamp(1.15rem, 2.35vw, 2.15rem);
+      font-weight: 750;
+      letter-spacing: -0.015em;
+      line-height: 1.25;
+      margin: 3px 0;
+    }
+    @media (min-width: 680px) {
+      .hero h1 span[data-i18n="HERO_TITLE_2"],
+      .hero-title-subline {
+        white-space: nowrap;
+      }
     }
     .hero-sub {
       font-size: clamp(1rem, 1.6vw, 1.15rem);
@@ -1470,7 +1485,7 @@
 
         <h1>
           <span data-i18n="HERO_TITLE_1">60 soniyada to'liq 4 bosqichli kontaktlar</span><br>
-          <span data-i18n="HERO_TITLE_2">>2,3× yig‘ish tezligi (160 va ~69 QSOs/soat)</span><br>
+          <span class="hero-title-subline" data-i18n="HERO_TITLE_2">Yagona tashuvchi bilan 4× Pileup tezligi (240 vs 60 QSOs/soat)</span><br>
           <span data-i18n="HERO_TITLE_3">0,0 dB quvvat jazosi</span>
         </h1>
 
@@ -1501,16 +1516,16 @@
 
           <!-- Card 2 -->
           <div class="pitch-card">
-            <div class="pitch-card-badge badge-pileup" data-i18n="PITCH_CARD_2_BADGE">>2,3 × yig'ish tezligi</div>
+            <div class="pitch-card-badge badge-pileup" data-i18n="PITCH_CARD_2_BADGE">4× Pileup tezligi</div>
             <h3 data-i18n="PITCH_CARD_2_TITLE">Yuqori zichlikdagi qoziqlar</h3>
             <div class="pitch-stat">
-              <span class="stat-main" data-i18n="PITCH_CARD_2_STAT_MAIN">2.33×</span>
-              <span class="stat-sub" data-i18n="PITCH_CARD_2_STAT_SUB">FT8 Fox & Houndga qarshi</span>
+              <span class="stat-main" data-i18n="PITCH_CARD_2_STAT_MAIN">4.0×</span>
+              <span class="stat-sub" data-i18n="PITCH_CARD_2_STAT_SUB">Yagona tashuvchi (240 vs 60/soat)</span>
             </div>
-            <p class="pitch-desc" data-i18n="PITCH_CARD_2_DESC">Uzluksiz yig‘ish jarayonida 3 ta yo‘naltirilgan qadam (FT8 Fox & Hound da 7 ga qarshi) har bir kadrda tasdiqlangan 2 chaqiruvchi bilan bitta tashuvchida <strong>160 QSOs/soat (2,33×)</strong>ga erishadi va 0,0 dB quvvat jarimasiga ega bo‘lib, duxalli avtomobil bilan <strong>320 QSOs/soat</strong>ga ko‘tariladi (4,6)</p>
+            <p class="pitch-desc" data-i18n="PITCH_CARD_2_DESC">Uzluksiz pileup rejimida 3-slot split chastotalardagi yangi chaqiruvchilar bilan ustma-ust tushadi va 0.0 dB quvvat yo'qotmasdan yagona tashuvchida <strong>har 30 soniyada 2 ta QSO (240 QSO/soat, yagona tashuvchili FT8 dan 4× tezroq)</strong> ni yakunlaydi (quvvat taqsimoti bo'lgan FT8 Fox &amp; Hound dagi 60–120 QSO/soatga nisbatan), ikkita tashuvchida <strong>480 QSO/soat</strong> ga yetadi!</p>
             <ul class="pitch-list">
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_1">160 QSOs/soat (1 tashuvchi, 50 Gts)</span></li>
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_2">320 QSOs/soat (2 tashuvchi, 100 Gts)</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_1">240 QSO/soat (1 tashuvchi, 50 Hz, 0 dB)</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_2">480 QSO/soat (2 tashuvchi, 100 Hz)</span></li>
               <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_3">0,0 dB quvvat jarimasi</span></li>
             </ul>
           </div>
@@ -1894,7 +1909,7 @@
                 <div class="flow-step-msg">HB9IPH YO1YO 73</div>
               </div>
             </div>
-            <div class="flow-summary summary-slow" data-i18n="SPEEDUP_PL_FT8_SUMMARY"><strong>Directed Exchange:</strong> 105 seconds (7 slots &times; 2 QSOs) &mdash; ~69 QSOs/h (&minus;3.0 dB power split)</div>
+            <div class="flow-summary summary-slow" data-i18n="SPEEDUP_PL_FT8_SUMMARY"><strong>Yo'naltirilgan almashinuv:</strong> 105 soniya (2 QSO uchun 7 slot) &mdash; ~69 QSO/soat. 7-xabar yangi chaqiruvlar bilan ustma-ust tushadigan uzluksiz pileupda tsikl 90s (6 slot) = 80 QSO/soat (2 oqimli ketma-ketlikda 120 QSO/soatgacha; yagona tashuvchida 60 QSO/soat). Fox &amp; Hound dagi ko'p oqimli parallellashtirish jiddiy quvvat taqsimoti yo'qotishlariga (&minus;3.0 dan &minus;7.0 dB gacha) va kuchaytirgich quvvatini pasaytirishga (back-off) olib keladi, bu esa zaif signallar qabuliga salbiy ta'sir qiladi.</div>
           </div>
 
           <!-- 4. LQ8 Pileup -->
@@ -1917,7 +1932,7 @@
                 <div class="flow-step-msg msg-lq">HB9IPH TU2TU 73 / HB9IPH YO1YO 73</div>
               </div>
             </div>
-            <div class="flow-summary summary-ultra" data-i18n="SPEEDUP_PL_LQ8_SUMMARY"><strong>Directed Exchange:</strong> 45 seconds (3 slots &times; 2 QSOs) &mdash; <span style="color: var(--emerald); font-weight: 700;">160 QSOs/h (2.33× speedup) with 0.0 dB power penalty</span></div>
+            <div class="flow-summary summary-ultra" data-i18n="SPEEDUP_PL_LQ8_SUMMARY"><strong>Yo'naltirilgan almashinuv:</strong> 45 soniya (2 QSO uchun 3 slot) &mdash; 160 QSO/soat. <span style="color: var(--emerald); font-weight: 700;">3-xabar yangi chaqiruvlar bilan ustma-ust tushadigan uzluksiz pileupda: har 30 soniyada 2 QSO = 240 QSO/soat (yagona tashuvchili FT8 dan 4× tezroq) 0.0 dB quvvat yo'qotishsiz!</span></div>
           </div>
         </div>
       </div>
@@ -2059,9 +2074,9 @@
               </div>
               <div class="mode-compare-box" id="modeDesc">
                 <div class="mode-compare-title"><strong>LQ8 Profile:</strong> Standard HF Weak-Signal Digital Mode</div>
-                <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 160 QSOs/h in pileups (2.33× over FT8 Fox &amp; Hound, up to 320 QSOs/h dual-carrier).</p>
+                <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 240 QSOs/h in continuous pileups (4× over single-carrier FT8, 2 QSOs every 30s, up to 480 QSOs/h dual-carrier).</p>
                 <ul class="mode-compare-list">
-                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 160 vs ~69 QSOs/h in pileups) with complete grid and report delivery.</span></li>
+                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 240 vs 60 QSOs/h in continuous single-carrier pileups) with complete grid and report delivery.</span></li>
                   <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>Zero SNR Penalty:</strong> Exact -21.0 dB sensitivity in 50.0 Hz bandwidth (+3.5 dB over FT4).</span></li>
                   <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>24-bit Hashes:</strong> Full CRC-24/Q (16.7M bins) preventing collisions.</span></li>
                   <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>13-char Callsigns:</strong> Extended compound callsign support (vs 11 chars in FT8).</span></li>
@@ -2352,9 +2367,9 @@
         snr: "-21.0 dB",
         rate: "1.00 QSO/min",
         desc: `<div class="mode-compare-title"><strong>LQ8 Profile:</strong> Standard HF Weak-Signal Digital Mode</div>
-               <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 160 QSOs/h in pileups (2.33× over FT8 Fox &amp; Hound, up to 320 QSOs/h dual-carrier).</p>
+               <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 240 QSOs/h in continuous pileups (4× over single-carrier FT8, 2 QSOs every 30s, up to 480 QSOs/h dual-carrier).</p>
                <ul class="mode-compare-list">
-                 <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 160 vs ~69 QSOs/h in pileups) with complete grid and report delivery.</span></li>
+                 <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 240 vs 60 QSOs/h in continuous single-carrier pileups) with complete grid and report delivery.</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>Zero SNR Penalty:</strong> Exact -21.0 dB sensitivity in 50.0 Hz bandwidth (+3.5 dB over FT4).</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>24-bit Hashes:</strong> Full CRC-24/Q (16.7M bins) preventing hash collisions.</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>13-char Callsigns:</strong> Extended compound callsign support (vs 11 chars in FT8).</span></li>
@@ -2580,7 +2595,7 @@
       const shareUrl = 'https://lq8.org';
       const shareData = {
         title: 'The LQ8 Digital Mode Family — High-Efficiency Amateur Radio Protocols',
-        text: 'Discover The LQ8 Digital Mode: Full 4-step contacts in 60s (grid + reports), >2.3× pileup throughput (160 vs ~69 QSOs/h), 0.0 dB power penalty, and multi-rate family (LQ8, LQ4, LQ2, LQ16)!',
+        text: 'Discover The LQ8 Digital Mode: Full 4-step contacts in 60s (grid + reports), 4× pileup speed with single-carrier (240 vs 60 QSOs/h), 0.0 dB power penalty, and multi-rate family (LQ8, LQ4, LQ2, LQ16)!',
         url: shareUrl
       };
 

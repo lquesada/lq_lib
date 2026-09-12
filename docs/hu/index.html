@@ -10,7 +10,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://lq8.org/hu/">
   <meta property="og:title" content="Az LQ8 digitális üzemmód">
-  <meta property="og:description" content="Teljes 4-lépcsős érintkezők 60 másodpercen belül teljes grid- és jelentéscserével (75–90 másodperccel az FT8-ban), >2,3× pileup áteresztőképesség (160 vs. ~69 QSO/h) 0,0 dB teljesítménybüntetéssel. Folyamatos fázisú 8-GFSK változó hosszúságú előtag kódolással. Natív támogatás a qFT8-ban Androidra.">
+  <meta property="og:description" content="Teljes 4-lépcsős érintkezők 60 másodpercen belül teljes grid- és jelentéscserével (75–90 másodperccel az FT8-ban), 4× felhalmozódási sebesség egyetlen vivővel (240 vs 60 QSOs/h) 0,0 dB teljesítménybüntetéssel. Folyamatos fázisú 8-GFSK változó hosszúságú előtag kódolással. Natív támogatás a qFT8-ban Androidra.">
   <meta property="og:image" content="https://lq8.org/img/og_banner.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -19,7 +19,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://lq8.org/hu/">
   <meta name="twitter:title" content="Az LQ8 digitális üzemmód">
-  <meta name="twitter:description" content="Teljes 4-lépcsős érintkezők 60 másodpercen belül teljes grid- és jelentéscserével (75–90 másodperccel az FT8-ban), >2,3× pileup áteresztőképesség (160 vs. ~69 QSO/h) 0,0 dB teljesítménybüntetéssel. Folyamatos fázisú 8-GFSK változó hosszúságú előtag kódolással. Natív támogatás a qFT8-ban Androidra.">
+  <meta name="twitter:description" content="Teljes 4-lépcsős érintkezők 60 másodpercen belül teljes grid- és jelentéscserével (75–90 másodperccel az FT8-ban), 4× felhalmozódási sebesség egyetlen vivővel (240 vs 60 QSOs/h) 0,0 dB teljesítménybüntetéssel. Folyamatos fázisú 8-GFSK változó hosszúságú előtag kódolással. Natív támogatás a qFT8-ban Androidra.">
   <!-- SEO Canonical & Hreflang Tags -->
   <link rel="canonical" href="https://lq8.org/hu/">
   <link rel="alternate" hreflang="x-default" href="https://lq8.org/">
@@ -410,6 +410,21 @@
       letter-spacing: -0.03em;
       margin-bottom: 0;
       color: #f1f5f9;
+    }
+    .hero h1 span[data-i18n="HERO_TITLE_2"],
+    .hero-title-subline {
+      display: inline-block;
+      font-size: clamp(1.15rem, 2.35vw, 2.15rem);
+      font-weight: 750;
+      letter-spacing: -0.015em;
+      line-height: 1.25;
+      margin: 3px 0;
+    }
+    @media (min-width: 680px) {
+      .hero h1 span[data-i18n="HERO_TITLE_2"],
+      .hero-title-subline {
+        white-space: nowrap;
+      }
     }
     .hero-sub {
       font-size: clamp(1rem, 1.6vw, 1.15rem);
@@ -1470,11 +1485,11 @@
 
         <h1>
           <span data-i18n="HERO_TITLE_1">Teljes 4 lépéses kapcsolatfelvétel 60 másodperc alatt</span><br>
-          <span data-i18n="HERO_TITLE_2">>2,3× felhalmozódási sebesség (160 vs ~69 QSO/h)</span><br>
+          <span class="hero-title-subline" data-i18n="HERO_TITLE_2">4× Felhalmozódási sebesség egyetlen vivővel (240 vs 60 QSOs/h)</span><br>
           <span data-i18n="HERO_TITLE_3">0,0 dB teljesítménybüntetés</span>
         </h1>
 
-        <p class="hero-sub" style="margin-top: 18px;" data-i18n="HERO_SUBTITLE">Az <strong>LQ8</strong> egy következő generációs rádióamatőr gyenge jelű protokoll, amely változó hosszúságú előtagkódokkal újratervezi az üzenetcsomagolást a pontos, csatában tesztelt <strong>FT8 fizikai átviteli rétegen</strong> (8&minus;GFSK, 50 Hz, &minus;21,0 dB SNR). Teljes kapcsolattartás a kétirányú ráccsal, jelentéssel és 73&minus;as megerősítéssel <strong>4 adásban (60 mp vs 75–90 mp)</strong>, és érj el <strong>160 QSO/h pileup&minus;ban (>2,3&minus;szoros kétfolyamos FT8 Fox & Hound felett)</strong> 0,0 dB 0,0 dB rádiófrekvenciás teljesítményveszteséggel (két vivővel <strong>320 QSO/óra</strong> sebességig skálázva).</p>
+        <p class="hero-sub" style="margin-top: 18px;" data-i18n="HERO_SUBTITLE">Az <strong>LQ8</strong> egy következő generációs rádióamatőr gyenge jelű protokoll, amely változó hosszúságú előtagkódokkal újratervezi az üzenetcsomagolást a pontos, csatában tesztelt <strong>FT8 fizikai átviteli rétegen</strong> (8&minus;GFSK, 50 Hz, &minus;21,0 dB SNR). Teljes kapcsolattartás a kétirányú ráccsal, jelentéssel és 73&minus;as megerősítéssel <strong>4 adásban (60 mp vs 75–90 mp)</strong>, és érj el <strong>240 QSOs/h (4× Felhalmozódási sebesség egyetlen vivővel (240 vs 60 QSOs/h))</strong> 0,0 dB 0,0 dB rádiófrekvenciás teljesítményveszteséggel (két vivővel <strong>480 QSO/óra</strong> sebességig skálázva).</p>
 
         <div style="display: flex; gap: 14px; justify-content: center; align-items: center; margin-top: 24px; flex-wrap: wrap;">
           <a href="#operation" class="btn btn-primary" data-i18n="HERO_BTN_DISCOVER">Fedezze fel az LQ8-at &rarr;</a>
@@ -1501,16 +1516,16 @@
 
           <!-- Card 2 -->
           <div class="pitch-card">
-            <div class="pitch-card-badge badge-pileup" data-i18n="PITCH_CARD_2_BADGE">>2,3× felhalmozódási sebesség</div>
+            <div class="pitch-card-badge badge-pileup" data-i18n="PITCH_CARD_2_BADGE">4× Felhalmozódási sebesség</div>
             <h3 data-i18n="PITCH_CARD_2_TITLE">Nagy sűrűségű pileupok</h3>
             <div class="pitch-stat">
-              <span class="stat-main" data-i18n="PITCH_CARD_2_STAT_MAIN">2.33×</span>
-              <span class="stat-sub" data-i18n="PITCH_CARD_2_STAT_SUB">vs FT8 Fox & Hound</span>
+              <span class="stat-main" data-i18n="PITCH_CARD_2_STAT_MAIN">4.0×</span>
+              <span class="stat-sub" data-i18n="PITCH_CARD_2_STAT_SUB">Egyetlen vivő (240 vs 60/h)</span>
             </div>
-            <p class="pitch-desc" data-i18n="PITCH_CARD_2_DESC">Folyamatos pileup üzemmódban 3 irányított lépés (7-tel szemben az FT8 Fox & Hound esetén) 2 megerősített hívóval keretenként <strong>160 QSO/h (2,33×)</strong> egyetlen vivőn 0,0 dB teljesítménybüntetéssel, <strong>320 QSO/h-ra (4,67×)</strong> skálázva, két vivővel!</p>
+            <p class="pitch-desc" data-i18n="PITCH_CARD_2_DESC">Folyamatos pileupban a 3. időszelet átfedésbe kerül az új hívókkal split frekvenciákon, így 0.0 dB teljesítményveszteség nélkül egyetlen vivőn <strong>2 QSO-t teljesít 30 másodpercenként (240 QSO/h, 4× az egyvivős FT8-hoz képest)</strong> (szemben az FT8 Fox &amp; Hound teljesítményosztásos 60–120 QSO/h értékével), kettős vivővel <strong>480 QSO/h</strong>-ra skálázódva!</p>
             <ul class="pitch-list">
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_1">160 QSO/h (1 vivő, 50 Hz)</span></li>
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_2">320 QSO/h (2 vivő, 100 Hz)</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_1">240 QSO/h (1 vivő, 50 Hz, 0 dB)</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_2">480 QSO/h (2 vivő, 100 Hz)</span></li>
               <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_3">0,0 dB teljesítménybüntetés</span></li>
             </ul>
           </div>
@@ -1894,7 +1909,7 @@
                 <div class="flow-step-msg">HB9IPH YO1YO 73</div>
               </div>
             </div>
-            <div class="flow-summary summary-slow" data-i18n="SPEEDUP_PL_FT8_SUMMARY"><strong>Directed Exchange:</strong> 105 seconds (7 slots &times; 2 QSOs) &mdash; ~69 QSOs/h (&minus;3.0 dB power split)</div>
+            <div class="flow-summary summary-slow" data-i18n="SPEEDUP_PL_FT8_SUMMARY"><strong>Irányított csere:</strong> 105 másodperc (7 időszelet 2 QSO-hoz) &mdash; ~69 QSO/h. Folyamatos pileupban, ahol a 7. üzenet átfedésben van az új hívásokkal, a ciklus 90s (6 időszelet) = 80 QSO/h (akár 120 QSO/h 2 adatfolyamos összefűzéssel; 60 QSO/h egyetlen vivővel). A Fox &amp; Hound többszálas párhuzamosítása súlyos teljesítményosztási veszteségekkel jár (&minus;3.0 ... &minus;7.0 dB) és erősítő visszavételt (back-off) igényel, ami lerontja a gyenge jelek terjedését.</div>
           </div>
 
           <!-- 4. LQ8 Pileup -->
@@ -1917,7 +1932,7 @@
                 <div class="flow-step-msg msg-lq">HB9IPH TU2TU 73 / HB9IPH YO1YO 73</div>
               </div>
             </div>
-            <div class="flow-summary summary-ultra" data-i18n="SPEEDUP_PL_LQ8_SUMMARY"><strong>Directed Exchange:</strong> 45 seconds (3 slots &times; 2 QSOs) &mdash; <span style="color: var(--emerald); font-weight: 700;">160 QSOs/h (2.33× speedup) with 0.0 dB power penalty</span></div>
+            <div class="flow-summary summary-ultra" data-i18n="SPEEDUP_PL_LQ8_SUMMARY"><strong>Irányított csere:</strong> 45 másodperc (3 időszelet 2 QSO-hoz) &mdash; 160 QSO/h. <span style="color: var(--emerald); font-weight: 700;">Folyamatos pileupban, ahol a 3. üzenet átfedésben van az új hívásokkal: 2 QSO 30 másodpercenként = 240 QSO/h (4× az egyvivős FT8-hoz képest) 0.0 dB teljesítményveszteséggel!</span></div>
           </div>
         </div>
       </div>
@@ -2059,9 +2074,9 @@
               </div>
               <div class="mode-compare-box" id="modeDesc">
                 <div class="mode-compare-title"><strong>LQ8 Profile:</strong> Standard HF Weak-Signal Digital Mode</div>
-                <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 160 QSOs/h in pileups (2.33× over FT8 Fox &amp; Hound, up to 320 QSOs/h dual-carrier).</p>
+                <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 240 QSOs/h in continuous pileups (4× over single-carrier FT8, 2 QSOs every 30s, up to 480 QSOs/h dual-carrier).</p>
                 <ul class="mode-compare-list">
-                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 160 vs ~69 QSOs/h in pileups) with complete grid and report delivery.</span></li>
+                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 240 vs 60 QSOs/h in continuous single-carrier pileups) with complete grid and report delivery.</span></li>
                   <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>Zero SNR Penalty:</strong> Exact -21.0 dB sensitivity in 50.0 Hz bandwidth (+3.5 dB over FT4).</span></li>
                   <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>24-bit Hashes:</strong> Full CRC-24/Q (16.7M bins) preventing collisions.</span></li>
                   <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>13-char Callsigns:</strong> Extended compound callsign support (vs 11 chars in FT8).</span></li>
@@ -2352,9 +2367,9 @@
         snr: "-21.0 dB",
         rate: "1.00 QSO/min",
         desc: `<div class="mode-compare-title"><strong>LQ8 Profile:</strong> Standard HF Weak-Signal Digital Mode</div>
-               <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 160 QSOs/h in pileups (2.33× over FT8 Fox &amp; Hound, up to 320 QSOs/h dual-carrier).</p>
+               <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 240 QSOs/h in continuous pileups (4× over single-carrier FT8, 2 QSOs every 30s, up to 480 QSOs/h dual-carrier).</p>
                <ul class="mode-compare-list">
-                 <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 160 vs ~69 QSOs/h in pileups) with complete grid and report delivery.</span></li>
+                 <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 240 vs 60 QSOs/h in continuous single-carrier pileups) with complete grid and report delivery.</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>Zero SNR Penalty:</strong> Exact -21.0 dB sensitivity in 50.0 Hz bandwidth (+3.5 dB over FT4).</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>24-bit Hashes:</strong> Full CRC-24/Q (16.7M bins) preventing hash collisions.</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>13-char Callsigns:</strong> Extended compound callsign support (vs 11 chars in FT8).</span></li>
@@ -2580,7 +2595,7 @@
       const shareUrl = 'https://lq8.org';
       const shareData = {
         title: 'The LQ8 Digital Mode Family — High-Efficiency Amateur Radio Protocols',
-        text: 'Discover The LQ8 Digital Mode: Full 4-step contacts in 60s (grid + reports), >2.3× pileup throughput (160 vs ~69 QSOs/h), 0.0 dB power penalty, and multi-rate family (LQ8, LQ4, LQ2, LQ16)!',
+        text: 'Discover The LQ8 Digital Mode: Full 4-step contacts in 60s (grid + reports), 4× pileup speed with single-carrier (240 vs 60 QSOs/h), 0.0 dB power penalty, and multi-rate family (LQ8, LQ4, LQ2, LQ16)!',
         url: shareUrl
       };
 

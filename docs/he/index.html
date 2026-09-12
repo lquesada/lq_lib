@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>המצב הדיגיטלי LQ8</title>
-  <meta name="description" content="משפחת המצבים הדיגיטליים לרדיו חובבים מהדור הבא (LQ8, LQ4, LQ2, LQ16). מגעים מלאים של 4 שלבים בשנות ה-60 עם חילופי רשת ודיווחים מלאים (לעומת 75-90 שניות ב-FT8), מהירות הערמה של>2.3× (160 לעומת ~69 QSOs/h) עם עונש של 0.0 dB בכוח, ורגישות -21.0 dB SNR באמצעות קידוד קידומת באורך משתנה. תמיכה מקורית ב-qFT8 עבור אנדרואיד.">
+  <meta name="description" content="משפחת המצבים הדיגיטליים לרדיו חובבים מהדור הבא (LQ8, LQ4, LQ2, LQ16). מגעים מלאים של 4 שלבים בשנות ה-60 עם חילופי רשת ודיווחים מלאים (לעומת 75-90 שניות ב-FT8), מהירות הערמה שלמהירות פיילאפ פי 4 עם גל נושא יחיד (240 לעומת 60 QSOs/h) עם עונש של 0.0 dB בכוח, ורגישות -21.0 dB SNR באמצעות קידוד קידומת באורך משתנה. תמיכה מקורית ב-qFT8 עבור אנדרואיד.">
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://lq8.org/he/">
   <meta property="og:title" content="המצב הדיגיטלי LQ8">
-  <meta property="og:description" content="אנשי קשר מלאים של 4 שלבים בשנות ה-60 עם החלפת רשת ודוחות מלאה (לעומת 75-90 שניות ב-FT8), תפוקה של יותר מ-2.3× (160 לעומת ~69 QSOs/h) עם עונש של 0.0 dB בכוח. 8-GFSK בפאזה מתמשכת עם קידוד קידומת באורך משתנה. תמיכה מקורית ב-qFT8 עבור אנדרואיד.">
+  <meta property="og:description" content="אנשי קשר מלאים של 4 שלבים בשנות ה-60 עם החלפת רשת ודוחות מלאה (לעומת 75-90 שניות ב-FT8), תפוקה של יותר מ-מהירות פיילאפ פי 4 עם גל נושא יחיד (240 לעומת 60 QSOs/h) עם עונש של 0.0 dB בכוח. 8-GFSK בפאזה מתמשכת עם קידוד קידומת באורך משתנה. תמיכה מקורית ב-qFT8 עבור אנדרואיד.">
   <meta property="og:image" content="https://lq8.org/img/og_banner.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -19,7 +19,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://lq8.org/he/">
   <meta name="twitter:title" content="המצב הדיגיטלי LQ8">
-  <meta name="twitter:description" content="אנשי קשר מלאים של 4 שלבים בשנות ה-60 עם החלפת רשת ודוחות מלאה (לעומת 75-90 שניות ב-FT8), תפוקה של יותר מ-2.3× (160 לעומת ~69 QSOs/h) עם עונש של 0.0 dB בכוח. 8-GFSK בפאזה מתמשכת עם קידוד קידומת באורך משתנה. תמיכה מקורית ב-qFT8 עבור אנדרואיד.">
+  <meta name="twitter:description" content="אנשי קשר מלאים של 4 שלבים בשנות ה-60 עם החלפת רשת ודוחות מלאה (לעומת 75-90 שניות ב-FT8), תפוקה של יותר מ-מהירות פיילאפ פי 4 עם גל נושא יחיד (240 לעומת 60 QSOs/h) עם עונש של 0.0 dB בכוח. 8-GFSK בפאזה מתמשכת עם קידוד קידומת באורך משתנה. תמיכה מקורית ב-qFT8 עבור אנדרואיד.">
   <!-- SEO Canonical & Hreflang Tags -->
   <link rel="canonical" href="https://lq8.org/he/">
   <link rel="alternate" hreflang="x-default" href="https://lq8.org/">
@@ -410,6 +410,21 @@
       letter-spacing: -0.03em;
       margin-bottom: 0;
       color: #f1f5f9;
+    }
+    .hero h1 span[data-i18n="HERO_TITLE_2"],
+    .hero-title-subline {
+      display: inline-block;
+      font-size: clamp(1.15rem, 2.35vw, 2.15rem);
+      font-weight: 750;
+      letter-spacing: -0.015em;
+      line-height: 1.25;
+      margin: 3px 0;
+    }
+    @media (min-width: 680px) {
+      .hero h1 span[data-i18n="HERO_TITLE_2"],
+      .hero-title-subline {
+        white-space: nowrap;
+      }
     }
     .hero-sub {
       font-size: clamp(1rem, 1.6vw, 1.15rem);
@@ -1470,11 +1485,11 @@
 
         <h1>
           <span data-i18n="HERO_TITLE_1">אנשי קשר מלאים ב-4 שלבים תוך 60 שניות</span><br>
-          <span data-i18n="HERO_TITLE_2">>2.3× מהירות גיבוי (160 לעומת ~69 QSOs/h)</span><br>
+          <span class="hero-title-subline" data-i18n="HERO_TITLE_2">מהירות פיילאפ פי 4 עם גל נושא יחיד (240 לעומת 60 QSOs/h)</span><br>
           <span data-i18n="HERO_TITLE_3">0.0 dB עונש כוח</span>
         </h1>
 
-        <p class="hero-sub" style="margin-top: 18px;" data-i18n="HERO_SUBTITLE"><strong>LQ8</strong> הוא הדור הבא של פרוטוקול רדיו חלש חובבני, המהנדס מחדש אריזת הודעות באמצעות קודי קידומת באורך משתנה על פני <strong>שכבת התחבורה הפיזית FT8</strong> המדויקת שנבדקה בקרב (8&minus;GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). השלם מגעים מלאים עם רשת דו&minus;כיוונית, דיווח ואישור 73 ב<strong>4 שידורים (60 שניות לעומת 75&minus;90)</strong> והשיג <strong>160 QSOs/h ב&minus;pileups (>2.3× מעל FT8 Fox & Hound כפול&minus;זרם)</strong> עם ללא כל הפסד עוצמת שידור (0.0 dB), עם הרחבה לעד <strong>320 קשרי רדיו/שעה</strong> באמצעות שני גלים נושאים.</p>
+        <p class="hero-sub" style="margin-top: 18px;" data-i18n="HERO_SUBTITLE"><strong>LQ8</strong> הוא הדור הבא של פרוטוקול רדיו חלש חובבני, המהנדס מחדש אריזת הודעות באמצעות קודי קידומת באורך משתנה על פני <strong>שכבת התחבורה הפיזית FT8</strong> המדויקת שנבדקה בקרב (8&minus;GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). השלם מגעים מלאים עם רשת דו&minus;כיוונית, דיווח ואישור 73 ב<strong>4 שידורים (60 שניות לעומת 75&minus;90)</strong> והשיג <strong>240 QSOs/h (מהירות פיילאפ פי 4 עם גל נושא יחיד (240 לעומת 60 QSOs/h))</strong> עם ללא כל הפסד עוצמת שידור (0.0 dB), עם הרחבה לעד <strong>480 קשרי רדיו/שעה</strong> באמצעות שני גלים נושאים.</p>
 
         <div style="display: flex; gap: 14px; justify-content: center; align-items: center; margin-top: 24px; flex-wrap: wrap;">
           <a href="#operation" class="btn btn-primary" data-i18n="HERO_BTN_DISCOVER">גלה את LQ8 &rarr;</a>
@@ -1501,16 +1516,16 @@
 
           <!-- Card 2 -->
           <div class="pitch-card">
-            <div class="pitch-card-badge badge-pileup" data-i18n="PITCH_CARD_2_BADGE">> 2.3× מהירות פילאפ</div>
+            <div class="pitch-card-badge badge-pileup" data-i18n="PITCH_CARD_2_BADGE">מהירות פיילאפ פי 4</div>
             <h3 data-i18n="PITCH_CARD_2_TITLE">פילאפים בצפיפות גבוהה</h3>
             <div class="pitch-stat">
-              <span class="stat-main" data-i18n="PITCH_CARD_2_STAT_MAIN">2.33×</span>
-              <span class="stat-sub" data-i18n="PITCH_CARD_2_STAT_SUB">לעומת FT8 Fox & Hound</span>
+              <span class="stat-main" data-i18n="PITCH_CARD_2_STAT_MAIN">4.0×</span>
+              <span class="stat-sub" data-i18n="PITCH_CARD_2_STAT_SUB">גל נושא יחיד (240 לעומת 60/שעה)</span>
             </div>
-            <p class="pitch-desc" data-i18n="PITCH_CARD_2_DESC">בפעולה מתמשכת, 3 שלבים מכוונים (לעומת 7 ב-FT8 Fox & Hound) עם 2 מתקשרים מאושרים בכל פריים משיגים <strong>160 QSOs/h (2.33×)</strong> בספק יחיד עם עונש של 0.0 dB, בקנה מידה ל-<strong>320 QSOs/h!</p>
+            <p class="pitch-desc" data-i18n="PITCH_CARD_2_DESC">בפיילאפ רציף, חריץ 3 חופף לתחנות קוראות חדשות בתדרים מפוצלים, ומשלים <strong>2 קשרי QSO כל 30 שניות (240 QSO/שעה, פי 4 מ-FT8 בעל גל נושא יחיד)</strong> על גל נושא יחיד ללא אובדן הספק של 0.0 dB (לעומת 60–120 ב-FT8 Fox &amp; Hound עם חלוקת הספק), ומגיע ל-<strong>480 QSO/שעה</strong> בגל נושא כפול!</p>
             <ul class="pitch-list">
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_1">160 QSOs/h (ספק אחד, 50 הרץ)</span></li>
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_2">320 QSOs/h (2 ספקים, 100 הרץ)</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_1">240 QSO/שעה (גל נושא 1, 50 הרץ, 0 dB)</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_2">480 QSO/שעה (2 גלי נושא, 100 הרץ)</span></li>
               <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_2_LI_3">עונש של 0.0 dB</span></li>
             </ul>
           </div>
@@ -1894,7 +1909,7 @@
                 <div class="flow-step-msg">HB9IPH YO1YO 73</div>
               </div>
             </div>
-            <div class="flow-summary summary-slow" data-i18n="SPEEDUP_PL_FT8_SUMMARY"><strong>Directed Exchange:</strong> 105 seconds (7 slots &times; 2 QSOs) &mdash; ~69 QSOs/h (&minus;3.0 dB power split)</div>
+            <div class="flow-summary summary-slow" data-i18n="SPEEDUP_PL_FT8_SUMMARY"><strong>החלפה ישירה:</strong> 105 שניות (7 חריצים עבור 2 קשרי QSO) &mdash; כ-69 QSO/שעה. בפיילאפ רציף שבו הודעה 7 חופפת לקריאות חדשות, המחזור הוא 90 שניות (6 חריצים) = 80 QSO/שעה (עד 120 QSO/שעה בשזירת 2 זרמים; 60 בגל נושא יחיד). הפעלה מרובת זרמים ב-Fox &amp; Hound גורמת להפסדי הספק ניכרים (&minus;3.0 עד &minus;7.0 dB) ול-back-off במגבר, דבר הפוגע בקליטת אותות חלשים.</div>
           </div>
 
           <!-- 4. LQ8 Pileup -->
@@ -1917,7 +1932,7 @@
                 <div class="flow-step-msg msg-lq">HB9IPH TU2TU 73 / HB9IPH YO1YO 73</div>
               </div>
             </div>
-            <div class="flow-summary summary-ultra" data-i18n="SPEEDUP_PL_LQ8_SUMMARY"><strong>Directed Exchange:</strong> 45 seconds (3 slots &times; 2 QSOs) &mdash; <span style="color: var(--emerald); font-weight: 700;">160 QSOs/h (2.33× speedup) with 0.0 dB power penalty</span></div>
+            <div class="flow-summary summary-ultra" data-i18n="SPEEDUP_PL_LQ8_SUMMARY"><strong>החלפה ישירה:</strong> 45 שניות (3 חריצים עבור 2 קשרי QSO) &mdash; 160 QSO/שעה. <span style="color: var(--emerald); font-weight: 700;">בפיילאפ רציף שבו הודעה 3 חופפת לקריאות חדשות: 2 קשרי QSO כל 30 שניות = 240 QSO/שעה (פי 4 מ-FT8 בגל נושא יחיד) ללא הפסד הספק של 0.0 dB!</span></div>
           </div>
         </div>
       </div>
@@ -2059,9 +2074,9 @@
               </div>
               <div class="mode-compare-box" id="modeDesc">
                 <div class="mode-compare-title"><strong>LQ8 Profile:</strong> Standard HF Weak-Signal Digital Mode</div>
-                <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 160 QSOs/h in pileups (2.33× over FT8 Fox &amp; Hound, up to 320 QSOs/h dual-carrier).</p>
+                <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 240 QSOs/h in continuous pileups (4× over single-carrier FT8, 2 QSOs every 30s, up to 480 QSOs/h dual-carrier).</p>
                 <ul class="mode-compare-list">
-                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 160 vs ~69 QSOs/h in pileups) with complete grid and report delivery.</span></li>
+                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 240 vs 60 QSOs/h in continuous single-carrier pileups) with complete grid and report delivery.</span></li>
                   <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>Zero SNR Penalty:</strong> Exact -21.0 dB sensitivity in 50.0 Hz bandwidth (+3.5 dB over FT4).</span></li>
                   <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>24-bit Hashes:</strong> Full CRC-24/Q (16.7M bins) preventing collisions.</span></li>
                   <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>13-char Callsigns:</strong> Extended compound callsign support (vs 11 chars in FT8).</span></li>
@@ -2352,9 +2367,9 @@
         snr: "-21.0 dB",
         rate: "1.00 QSO/min",
         desc: `<div class="mode-compare-title"><strong>LQ8 Profile:</strong> Standard HF Weak-Signal Digital Mode</div>
-               <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 160 QSOs/h in pileups (2.33× over FT8 Fox &amp; Hound, up to 320 QSOs/h dual-carrier).</p>
+               <p>Completes full 1-on-1 contacts in 4 transmissions (60s vs 90s in canonical 6-slot FT8 [1.50×] or 75s with RR73 [1.25×]) at full reference sensitivity (-21.0 dB SNR) in identical 50.0 Hz bandwidth, and scales to 240 QSOs/h in continuous pileups (4× over single-carrier FT8, 2 QSOs every 30s, up to 480 QSOs/h dual-carrier).</p>
                <ul class="mode-compare-list">
-                 <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 160 vs ~69 QSOs/h in pileups) with complete grid and report delivery.</span></li>
+                 <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>4-Step Full Exchange:</strong> 60s vs 75–90s in FT8 (and 240 vs 60 QSOs/h in continuous single-carrier pileups) with complete grid and report delivery.</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>Zero SNR Penalty:</strong> Exact -21.0 dB sensitivity in 50.0 Hz bandwidth (+3.5 dB over FT4).</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>24-bit Hashes:</strong> Full CRC-24/Q (16.7M bins) preventing hash collisions.</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>13-char Callsigns:</strong> Extended compound callsign support (vs 11 chars in FT8).</span></li>
@@ -2580,7 +2595,7 @@
       const shareUrl = 'https://lq8.org';
       const shareData = {
         title: 'The LQ8 Digital Mode Family — High-Efficiency Amateur Radio Protocols',
-        text: 'Discover The LQ8 Digital Mode: Full 4-step contacts in 60s (grid + reports), >2.3× pileup throughput (160 vs ~69 QSOs/h), 0.0 dB power penalty, and multi-rate family (LQ8, LQ4, LQ2, LQ16)!',
+        text: 'Discover The LQ8 Digital Mode: Full 4-step contacts in 60s (grid + reports), 4× pileup speed with single-carrier (240 vs 60 QSOs/h), 0.0 dB power penalty, and multi-rate family (LQ8, LQ4, LQ2, LQ16)!',
         url: shareUrl
       };
 
