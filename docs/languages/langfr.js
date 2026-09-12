@@ -128,6 +128,7 @@ const langData = {
     "ADIF_TH_COMMENT": "Balise Commentaire Standard",
     "ADIF_ROW_LQ8": "<strong>LQ8</strong>",
     "ADIF_EXAMPLE_HEADING": "Exemple d'Enregistrement QSO ADIF (<code>.adi</code>) :",
+    "ADIF_POTA_EXCEPTION": "<strong>Exception POTA :</strong> Lors de l'exportation des journaux pour l'application <strong>Parks on the Air (POTA)</strong>, les contacts doivent être définis sur le mode <code class=\"radio-val\">&lt;MODE:4&gt;MFSK</code> sans étiquette de sous-mode, car POTA exige <code>MFSK</code> pour l'acceptation du journal.",
     "SPEEDUP_TITLE": "Comment le QSO en 60 secondes et l'accélération en pileup sont-ils atteints ?",
     "SPEEDUP_SUBTITLE": "En remplaçant les échanges rigides par des codes préfixes de Huffman de longueur variable, du hachage résistant aux collisions de 24/14 bits et des trames de réponse multi-stations, tout en respectant deux principes clés : le localisateur et les rapports de signal sont échangés (sauf en CQ pour les indicatifs très longs), et les 73 sont échangés pour confirmer la réception du localisateur et du rapport de signal de l'autre station.",
     "SPEEDUP_CARD_STD_FT8_TITLE": "FT8 Standard",

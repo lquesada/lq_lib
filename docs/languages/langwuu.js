@@ -128,6 +128,7 @@ const langData = {
     "ADIF_TH_COMMENT": "标准 Comment 标签",
     "ADIF_ROW_LQ8": "<strong>LQ8</strong>",
     "ADIF_EXAMPLE_HEADING": "标准 ADIF 通联记录示例 (<code>.adi</code>)：",
+    "ADIF_POTA_EXCEPTION": "<strong>POTA 例外：</strong>导出 <strong>Parks on the Air (POTA)</strong> 应用程序日志个辰光，联系人必须设置成模式 <code class=\"radio-val\">&lt;MODE:4&gt;MFSK</code> 且弗带子模式标签，因为 POTA 需要 <code>MFSK</code> 才能接受日志。",
     "SPEEDUP_TITLE": "如何实现 60 秒 QSO 与堆叠提速？",
     "SPEEDUP_SUBTITLE": "通过变长霍夫曼前缀编码、24位/14位抗碰撞哈希以及多槽响应帧替代传统僵化重复流程，同时满足两大核心原则：双方交换网格定位与信号报告（极长呼号发射 CQ 时除外），并互换 73 确认收到对方的定位与信号报告。",
     "SPEEDUP_CARD_STD_FT8_TITLE": "FT8 Standard",

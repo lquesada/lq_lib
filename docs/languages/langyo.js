@@ -128,6 +128,7 @@ const langData = {
     "ADIF_TH_COMMENT": "Àlàyé",
     "ADIF_ROW_LQ8": "<strong>LQ8</strong>",
     "ADIF_EXAMPLE_HEADING": "Apeere Standard ADIF QSO Igbasilẹ (<code>.adi</code>):",
+    "ADIF_POTA_EXCEPTION": "<strong>Àbùdá POTA:</strong> Nígbà tí o bá ń gbé àwọn àkọsílẹ̀ jáde fún àpù <strong>Parks on the Air (POTA)</strong>, a gbọ́dọ̀ ṣètò àwọn ìbánisọ̀rọ̀ sí ipò <code class=\"radio-val\">&lt;MODE:4&gt;MFSK</code> láìsí àmì ipò kékeré, nítorí POTA nílò <code>MFSK</code> fún gbígbà àkọsílẹ̀.",
     "SPEEDUP_TITLE": "Bawo ni Iyara QSO 60s ati Pileup Speedup Ṣe aṣeyọri",
     "SPEEDUP_SUBTITLE": "Nipa rirọpo kosemi, awọn paṣipaarọ atunwi pẹlu awọn koodu asọtẹlẹ gigun-iyipada, hashing-sooro ijamba 24/16-bit, ati awọn fireemu idahun-pupọ, paṣipaarọ pipe ni iṣeduro: wiwa Maidenhead mejeeji ati awọn ijabọ ifihan jẹ paarọ pẹlu awọn ifẹsẹmulẹ 73 isọdọtun.",
     "SPEEDUP_CARD_STD_FT8_TITLE": "FT8 Standard",

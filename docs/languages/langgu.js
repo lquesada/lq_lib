@@ -128,6 +128,7 @@ const langData = {
     "ADIF_TH_COMMENT": "માનક ટિપ્પણી ટેગ",
     "ADIF_ROW_LQ8": "<strong>LQ8</strong>",
     "ADIF_EXAMPLE_HEADING": "ઉદાહરણ માનક ADIF QSO રેકોર્ડ (<code>.adi</code>):",
+    "ADIF_POTA_EXCEPTION": "<strong>POTA અપવાદ:</strong> <strong>Parks on the Air (POTA)</strong> એપ્લિકેશન માટે લોગ નિકાસ કરતી વખતે, સંપર્કો સબમોડ ટેગ વિના મોડ <code class=\"radio-val\">&lt;MODE:4&gt;MFSK</code> પર સેટ કરેલા હોવા જોઈએ, કારણ કે POTA ને લોગ સ્વીકૃતિ માટે <code>MFSK</code> ની જરૂર છે.",
     "SPEEDUP_TITLE": "60s QSO સ્પીડ અને પાઈલઅપ સ્પીડઅપ કેવી રીતે પ્રાપ્ત થાય છે",
     "SPEEDUP_SUBTITLE": "ચલ-લંબાઈના ઉપસર્ગ કોડ્સ, 24/16-બીટ અથડામણ-પ્રતિરોધક હેશિંગ અને મલ્ટિ-રિસ્પોન્સ ફ્રેમ્સ સાથે સખત, પુનરાવર્તિત એક્સચેન્જોને બદલીને, સંપૂર્ણ પરસ્પર વિનિમયની ખાતરી આપવામાં આવે છે: મેઇડનહેડ લોકેટર અને સિગ્નલ રિપોર્ટ્સ બંને પારસ્પરિક 73 પુષ્ટિ સાથે વિનિમય કરવામાં આવે છે.",
     "SPEEDUP_CARD_STD_FT8_TITLE": "FT8 Standard",

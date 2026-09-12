@@ -128,6 +128,7 @@ const langData = {
     "ADIF_TH_COMMENT": "Тег комментария ADIF",
     "ADIF_ROW_LQ8": "<strong>LQ8</strong>",
     "ADIF_EXAMPLE_HEADING": "Пример записи QSO в формате ADIF (<code>.adi</code>):",
+    "ADIF_POTA_EXCEPTION": "<strong>Wyjątek POTA:</strong> Podczas eksportowania dzienników do aplikacji <strong>Parks on the Air (POTA)</strong> kontakty muszą być ustawione w trybie <code class=\"radio-val\">&lt;MODE:4&gt;MFSK</code> bez znacznika podtrybu, ponieważ POTA wymaga <code>MFSK</code> do zaakceptowania dziennika.",
     "SPEEDUP_TITLE": "Jak osiągana jest prędkość QSO i przyspieszenie pileupu w latach 60-tych",
     "SPEEDUP_SUBTITLE": "Zastępując sztywne, powtarzalne wymiany kodami prefiksów o zmiennej długości, 24/16-bitowym hashowaniem odpornym na kolizje i ramkami z wieloma odpowiedziami, gwarantowana jest pełna wzajemna wymiana: zarówno lokalizator Maidenhead, jak i raporty sygnałów są wymieniane z wzajemnymi potwierdzeniami 73.",
     "SPEEDUP_CARD_STD_FT8_TITLE": "FT8 Standard",

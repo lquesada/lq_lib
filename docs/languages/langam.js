@@ -128,6 +128,7 @@ const langData = {
     "ADIF_TH_COMMENT": "መደበኛ አስተያየት መለያ",
     "ADIF_ROW_LQ8": "<strong>LQ8</strong>",
     "ADIF_EXAMPLE_HEADING": "ምሳሌ መደበኛ ADIF QSO መዝገብ (<code>.adi</code>)፦",
+    "ADIF_POTA_EXCEPTION": "<strong>የPOTA ልዩ ሁኔታ፡</strong> ለ<strong>Parks on the Air (POTA)</strong> መተግበሪያ ምዝግቦችን ወደ ውጭ በሚልኩበት ጊዜ POTA ለመዝገብ ተቀባይነት <code>MFSK</code> ስለሚፈልግ እውቂያዎች ያለ ንዑስ ሁነታ መለያ ወደ <code class=\"radio-val\">&lt;MODE:4&gt;MFSK</code> መዋቀር አለባቸው።",
     "SPEEDUP_TITLE": "የ60ዎቹ የQSO ፍጥነት እና የፓይሊፕ ፍጥነት እንዴት እንደሚገኙ",
     "SPEEDUP_SUBTITLE": "ግትር፣ ተደጋጋሚ ልውውጦችን በተለዋዋጭ ርዝመት ቅድመ ቅጥያ ኮዶች፣ 24/16-ቢት ግጭትን የሚቋቋም ሃሽ እና ባለብዙ ምላሽ ፍሬሞችን በመተካት ሙሉ የጋራ መለዋወጫ ይረጋገጣል፡ ሁለቱም የ Maidenhead አመልካች እና የምልክት ሪፖርቶች በተገላቢጦሽ 73 ማረጋገጫዎች ይለዋወጣሉ።",
     "SPEEDUP_CARD_STD_FT8_TITLE": "FT8 Standard",

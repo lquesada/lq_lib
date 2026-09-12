@@ -128,6 +128,7 @@ const langData = {
     "ADIF_TH_COMMENT": "Etichetă de comentariu standard",
     "ADIF_ROW_LQ8": "<strong>LQ8</strong>",
     "ADIF_EXAMPLE_HEADING": "Exemplu de înregistrare ADIF QSO standard (<code>.adi</code>):",
+    "ADIF_POTA_EXCEPTION": "<strong>Excepție POTA:</strong> La exportul jurnalelor pentru aplicația <strong>Parks on the Air (POTA)</strong>, contactele trebuie setate pe modul <code class=\"radio-val\">&lt;MODE:4&gt;MFSK</code> fără etichetă de submod, deoarece POTA necesită <code>MFSK</code> pentru acceptarea jurnalului.",
     "SPEEDUP_TITLE": "Cum sunt atinse viteza QSO din anii 60 și accelerarea pileupului",
     "SPEEDUP_SUBTITLE": "Prin înlocuirea schimburilor rigide și repetitive cu coduri de prefix de lungime variabilă, hashing rezistent la coliziune pe 24/16 biți și cadre cu răspunsuri multiple, este garantat schimbul reciproc complet: atât locatorul Maidenhead, cât și rapoartele de semnal sunt schimbate cu confirmări reciproce de 73.",
     "SPEEDUP_CARD_STD_FT8_TITLE": "FT8 Standard",

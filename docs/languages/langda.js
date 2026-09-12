@@ -128,6 +128,7 @@ const langData = {
     "ADIF_TH_COMMENT": "Standard-Kommentarfeld",
     "ADIF_ROW_LQ8": "<strong>LQ8</strong>",
     "ADIF_EXAMPLE_HEADING": "Beispiel eines ADIF-QSO-Datensatzes (<code>.adi</code>):",
+    "ADIF_POTA_EXCEPTION": "<strong>POTA-undtagelse:</strong> Ved eksport af logfiler til <strong>Parks on the Air (POTA)</strong>-appen skal kontakter indstilles til tilstand <code class=\"radio-val\">&lt;MODE:4&gt;MFSK</code> uden undertilstandsmærke, da POTA kræver <code>MFSK</code> for logaccept.",
     "SPEEDUP_TITLE": "Hvordan 60'er QSO Speed og Pileup Speedup opnås",
     "SPEEDUP_SUBTITLE": "Ved at erstatte stive, gentagne udvekslinger med præfikskoder med variabel længde, 24/16-bit kollisionsbestandig hashing og multi-respons frames, garanteres fuld gensidig udveksling: både Maidenhead locator og signalrapporter udveksles med gensidige 73 bekræftelser.",
     "SPEEDUP_CARD_STD_FT8_TITLE": "FT8 Standard",

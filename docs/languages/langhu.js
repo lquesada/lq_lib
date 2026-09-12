@@ -128,6 +128,7 @@ const langData = {
     "ADIF_TH_COMMENT": "Szabványos megjegyzéscímke",
     "ADIF_ROW_LQ8": "<strong>LQ8</strong>",
     "ADIF_EXAMPLE_HEADING": "Példa szabványos ADIF QSO rekordra (<code>.adi</code>):",
+    "ADIF_POTA_EXCEPTION": "<strong>POTA kivétel:</strong> A <strong>Parks on the Air (POTA)</strong> alkalmazás naplóinak exportálásakor a kapcsolatokat <code class=\"radio-val\">&lt;MODE:4&gt;MFSK</code> módba kell állítani alüzemmódcímke nélkül, mivel a POTA a <code>MFSK</code>-t igényli a napló elfogadásához.",
     "SPEEDUP_TITLE": "Hogyan érhető el a 60-as évek QSO sebessége és pileup gyorsulása?",
     "SPEEDUP_SUBTITLE": "A merev, ismétlődő adatcseréket változó hosszúságú előtagkódokkal, 24/16 bites ütközésálló kivonatokkal és többválaszos keretekkel helyettesítve a teljes kölcsönös csere garantált: mind a Maidenhead helymeghatározó, mind a jeljelentések cseréje kölcsönös 73 visszaigazolással történik.",
     "SPEEDUP_CARD_STD_FT8_TITLE": "FT8 Standard",

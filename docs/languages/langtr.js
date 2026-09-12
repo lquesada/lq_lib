@@ -128,6 +128,7 @@ const langData = {
     "ADIF_TH_COMMENT": "Standart Yorum Etiketi",
     "ADIF_ROW_LQ8": "<strong>LQ8</strong>",
     "ADIF_EXAMPLE_HEADING": "Örnek Standart ADIF QSO Kaydı (<code>.adi</code>):",
+    "ADIF_POTA_EXCEPTION": "<strong>POTA İstisnası:</strong> <strong>Parks on the Air (POTA)</strong> uygulaması için günlükleri dışa aktarırken, POTA günlük kabulü için <code>MFSK</code> gerektirdiğinden, kişiler alt mod etiketi olmadan <code class=\"radio-val\">&lt;MODE:4&gt;MFSK</code> moduna ayarlanmalıdır.",
     "SPEEDUP_TITLE": "60'ların QSO Hızı ve Yığılma Hızı Nasıl Elde Ediliyor?",
     "SPEEDUP_SUBTITLE": "Katı, tekrarlayan değişimlerin değişken uzunluklu önek kodları, 24/16 bit çarpışmaya dayanıklı karma ve çok yanıtlı çerçevelerle değiştirilmesiyle, tam karşılıklı değişim garanti edilir: hem Maidenhead konumlayıcı hem de sinyal raporları karşılıklı 73 onayla değiştirilir.",
     "SPEEDUP_CARD_STD_FT8_TITLE": "FT8 Standard",

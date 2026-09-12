@@ -128,6 +128,7 @@ const langData = {
     "ADIF_TH_COMMENT": "Тег комментария ADIF",
     "ADIF_ROW_LQ8": "<strong>LQ8</strong>",
     "ADIF_EXAMPLE_HEADING": "Пример записи QSO в формате ADIF (<code>.adi</code>):",
+    "ADIF_POTA_EXCEPTION": "<strong>Исключение POTA:</strong> При экспорте журналов для приложения <strong>Parks on the Air (POTA)</strong> контакты должны быть настроены на режим <code class=\"radio-val\">&lt;MODE:4&gt;MFSK</code> без тега подрежима, поскольку POTA требует <code>MFSK</code> для принятия журнала.",
     "SPEEDUP_TITLE": "Как достигается QSO за 60 секунд и ускорение в пайлапе?",
     "SPEEDUP_SUBTITLE": "Заменой жестких последовательностей на префиксные коды Хаффмана переменной длины, 24/14-битное хеширование и мультиответные кадры, при соблюдении двух ключевых принципов: обмен локатором и отчетами о сигнале (кроме CQ для длинных позывных) и обмен 73 для подтверждения приема локатора и отчета корреспондента.",
     "SPEEDUP_CARD_STD_FT8_TITLE": "FT8 Standard",

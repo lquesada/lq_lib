@@ -128,6 +128,7 @@ const langData = {
     "ADIF_TH_COMMENT": "علامة التعليق القياسية",
     "ADIF_ROW_LQ8": "<strong>LQ8</strong>",
     "ADIF_EXAMPLE_HEADING": "مثال على سجل ADIF QSO القياسي (<code>.adi</code>):",
+    "ADIF_POTA_EXCEPTION": "<strong>استثناء POTA:</strong> ملي كتصدر السجلات لتطبيق <strong>Parks on the Air (POTA)</strong>، خاص جهات الاتصال تكون على الوضع <code class=\"radio-val\">&lt;MODE:4&gt;MFSK</code> بلا علامة وضع فرعي، حينت POTA كيحتاج <code>MFSK</code> باش يقبل السجل.",
     "SPEEDUP_TITLE": "كيف يتم تحقيق سرعة QSO في الستينيات وتسريع Pileup",
     "SPEEDUP_SUBTITLE": "من خلال استبدال التبادلات الصارمة والمتكررة برموز بادئة متغيرة الطول، وتجزئة مقاومة للتصادم 24/16 بت، وإطارات متعددة الاستجابة، يتم ضمان التبادل المتبادل الكامل: يتم تبادل كل من محدد موقع Maidenhead وتقارير الإشارة مع 73 تأكيدًا متبادلًا.",
     "SPEEDUP_CARD_STD_FT8_TITLE": "FT8 Standard",

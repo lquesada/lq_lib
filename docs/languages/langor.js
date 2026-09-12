@@ -128,6 +128,7 @@ const langData = {
     "ADIF_TH_COMMENT": "ମାନକ ମନ୍ତବ୍ୟ ଟ୍ୟାଗ୍ |",
     "ADIF_ROW_LQ8": "<strong>LQ8</strong>",
     "ADIF_EXAMPLE_HEADING": "ଉଦାହରଣ ମାନକ ADIF QSO ରେକର୍ଡ (<code> .adi </code>):",
+    "ADIF_POTA_EXCEPTION": "<strong>POTA ବ୍ୟତିକ୍ରମ:</strong> <strong>Parks on the Air (POTA)</strong> ଆପ୍ ପାଇଁ ଲଗ୍ ରପ୍ତାନି କରିବା ସମୟରେ, କୌଣସି ସବମୋଡ୍ ଟ୍ୟାଗ୍ ବିନା ସମ୍ପର୍କଗୁଡ଼ିକୁ <code class=\"radio-val\">&lt;MODE:4&gt;MFSK</code> ମୋଡ୍ ରେ ସେଟ୍ କରାଯିବା ଆବଶ୍ୟକ, କାରଣ POTA ଲଗ୍ ଗ୍ରହଣ ପାଇଁ <code>MFSK</code> ଆବଶ୍ୟକ କରେ।",
     "SPEEDUP_TITLE": "60s QSO ଗତି ଏବଂ ପାଇଲପ୍ ସ୍ପିଡ୍ କିପରି ପ୍ରାପ୍ତ ହୁଏ |",
     "SPEEDUP_SUBTITLE": "ଭେରିଏବଲ୍-ଲମ୍ବ ପ୍ରିଫିକ୍ସ କୋଡ୍, 24/16-ବିଟ୍ ଧକ୍କା-ପ୍ରତିରୋଧୀ ହ୍ୟାସିଂ ଏବଂ ମଲ୍ଟି-ରେସପନ୍ସ ଫ୍ରେମ୍ ସହିତ କଠିନ, ପୁନରାବୃତ୍ତି ବିନିମୟକୁ ବଦଳାଇ, ସମ୍ପୂର୍ଣ୍ଣ ପାରସ୍ପରିକ ବିନିମୟ ନିଶ୍ଚିତ ହୋଇଛି: ଉଭୟ ମେଡେନହେଡ୍ ଲୋକେଟର ଏବଂ ସିଗନାଲ୍ ରିପୋର୍ଟଗୁଡିକ ପାରସ୍ପରିକ 73 ନିଶ୍ଚିତକରଣ ସହିତ ବିନିମୟ ହୋଇଛି |",
     "SPEEDUP_CARD_STD_FT8_TITLE": "FT8 Standard",

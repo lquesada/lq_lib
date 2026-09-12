@@ -128,6 +128,7 @@ const langData = {
     "ADIF_TH_COMMENT": "Standard Comment Code",
     "ADIF_ROW_LQ8": "<strong>LQ8</strong>",
     "ADIF_EXAMPLE_HEADING": "Standard ADIF Record Example (<code>.adi</code>):",
+    "ADIF_POTA_EXCEPTION": "<strong>POTA Exception:</strong> Wen you dey export logs for <strong>Parks on the Air (POTA)</strong> app, contacts must dey set to mode <code class=\"radio-val\">&lt;MODE:4&gt;MFSK</code> without any submode tag, bikos POTA need <code>MFSK</code> to accept di log.",
     "SPEEDUP_TITLE": "Detailed Speedup Analysis",
     "SPEEDUP_SUBTITLE": "By replacing stiff, repetitive exchange wit variable-length prefix codes, 24/16-bit collision-resistant hashing, and multi-response frames, full mutual exchange dey guaranteed: both Maidenhead locator and signal reports dey exchanged wit reciprocal 73 confirmations.",
     "SPEEDUP_CARD_STD_FT8_TITLE": "FT8 Standard",

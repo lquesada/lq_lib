@@ -128,6 +128,7 @@ const langData = {
     "ADIF_TH_COMMENT": "Lebo ya Maoni ya Kawaida",
     "ADIF_ROW_LQ8": "<strong>LQ8</strong>",
     "ADIF_EXAMPLE_HEADING": "Mfano Rekodi ya Kawaida ya ADIF QSO (<code>.adi</code>):",
+    "ADIF_POTA_EXCEPTION": "<strong>Ubaguzi wa POTA:</strong> Wakati wa kusafirisha kumbukumbu kwa programu ya <strong>Parks on the Air (POTA)</strong>, anwani lazima ziwekwe kwenye modi ya <code class=\"radio-val\">&lt;MODE:4&gt;MFSK</code> bila lebo ya modi ndogo, kwani POTA inahitaji <code>MFSK</code> kwa ukubalifu wa kumbukumbu.",
     "SPEEDUP_TITLE": "Jinsi 60s QSO Speed na Pileup Speedup Inafikiwa",
     "SPEEDUP_SUBTITLE": "Kwa kuchukua nafasi ya ubadilishanaji thabiti, unaorudiwa na misimbo ya kiambishi awali ya urefu tofauti, hashing 24/16-bit inayostahimili mgongano, na fremu zenye majibu mengi, ubadilishanaji kamili wa pande zote umehakikishwa: kitafutaji cha Maidenhead na ripoti za mawimbi hubadilishwa na uthibitishaji 73 unaofanana.",
     "SPEEDUP_CARD_STD_FT8_TITLE": "FT8 Standard",

@@ -1735,7 +1735,7 @@
                 <div>
                   <h4 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: var(--text-primary); margin-bottom: 6px;" data-i18n="ADIF_CALLOUT_TITLE">Guía práctica de rexistro e envío de QSOs en LQ8</h4>
                   <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 8px;" data-i18n="ADIF_CALLOUT_P1">Baixo a <strong>especificación ADIF 3.x</strong>, exportar contactos mediante o modo estándar <code class="radio-val">&lt;MODE:4&gt;DATA</code> ou <code class="radio-val">&lt;MODE:4&gt;MFSK</code> con <code class="radio-val badge-lq">&lt;SUBMODE:3&gt;LQ8</code> permite que os libros de rexistro electrónicos e ferramentas de sinatura procesen os contactos sen problemas de rexeitamento de modo.</p>
-                  <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 8px;" data-i18n="ADIF_CALLOUT_P2">Ao enviar rexistros a <strong>QRZ.com Logbook</strong>, <strong>ARRL Logbook of the World (LoTW)</strong>, <strong>eQSL.cc</strong> e <strong>Club Log</strong>, os contactos rexistrados baixo <strong><code>DATA</code></strong> ou <strong><code>MFSK</code></strong> son recoñecidos dentro das categorías dixitais estándar para <strong>créditos de diplomas DXCC, WAS, VUCC, WAC e WPX</strong> (empregando a correspondencia de modo do software local se cómpre).</p>
+                  <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 8px;" data-i18n="ADIF_CALLOUT_P2">Ao enviar rexistros a <strong>QRZ.com Logbook</strong>, <strong>ARRL Logbook of the World (LoTW)</strong>, <strong>eQSL.cc</strong> e <strong>Club Log</strong>, os contactos rexistrados baixo <strong><code>DATA</code></strong>  son recoñecidos dentro das categorías dixitais estándar para <strong>créditos de diplomas DXCC, WAS, VUCC, WAC e WPX</strong> (empregando a correspondencia de modo do software local se cómpre).</p>
                   <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;" data-i18n="ADIF_CALLOUT_P3">Estase a tramitar a solicitude formal ante o Grupo de Traballo ADIF para establecer etiquetas enum nativas dedicadas e compatibilidade directa en menús despregables en todas as aplicacións de rexistro.</p>
                 </div>
               </div>
@@ -1744,7 +1744,7 @@
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 28px;">
               <div>
                 <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: var(--cyan);" data-i18n="ADIF_CARD_1_TITLE">Especificación ADIF Estándar</h4>
-                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;" data-i18n="ADIF_CARD_1_TEXT">Todos os protocolos da familia de modos dixitais LQ seguen as directrices do <strong>Amateur Data Interchange Format (ADIF 3.x)</strong> baixo o modo <code>DATA</code> ou <code>MFSK</code> con identificadores de submodo de protocolo.</p>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;" data-i18n="ADIF_CARD_1_TEXT">Todos os protocolos da familia de modos dixitais LQ seguen as directrices do <strong>Amateur Data Interchange Format (ADIF 3.x)</strong> baixo o modo <code>DATA</code>  con identificadores de submodo de protocolo.</p>
               </div>
               <div>
                 <h4 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: var(--emerald);" data-i18n="ADIF_CARD_2_TITLE">Compatibilidade Inmediata con Plataformas e Diplomas</h4>
@@ -1778,7 +1778,7 @@
                     <td><strong id="adifProto">LQ8</strong></td>
                     <td><code class="radio-val" id="adifMode">&lt;MODE:4&gt;DATA</code></td>
                     <td><code class="radio-val badge-lq" id="adifSubmode">&lt;SUBMODE:3&gt;LQ8</code></td>
-                    <td><code class="radio-val" id="adifComment">&lt;COMMENT:40&gt;LQ Digital Mode Family - https://lq8.org</code></td>
+                    <td><code class="radio-val" id="adifComment">&lt;COMMENT:34&gt;LQ8 digital mode - https://lq8.org</code></td>
                   </tr>
                 </tbody>
               </table>
@@ -1797,8 +1797,9 @@
 &lt;SUBMODE:3&gt;LQ8
 &lt;RST_SENT:3&gt;-03
 &lt;RST_RCVD:3&gt;+05
-&lt;COMMENT:40&gt;LQ Digital Mode Family - https://lq8.org
+&lt;COMMENT:34&gt;LQ8 digital mode - https://lq8.org
 &lt;EOR&gt;</code></pre>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 14px; margin-bottom: 0; line-height: 1.6;" data-i18n="ADIF_POTA_EXCEPTION"><strong>Excepción POTA:</strong> Ao exportar rexistros para a aplicación <strong>Parks on the Air (POTA)</strong>, os contactos deben configurarse no modo <code class="radio-val">&lt;MODE:4&gt;MFSK</code> sen etiqueta de submodo, xa que POTA require <code>MFSK</code> para a aceptación do rexistro.</p>
           </div>
         </div>
       </div>
@@ -2441,10 +2442,10 @@
     }
 
     const ADIF_MODES = {
-      LQ8: { proto: "LQ8", mode: "<MODE:4>DATA", submode: "<SUBMODE:3>LQ8", comment: "<COMMENT:40>LQ Digital Mode Family - https://lq8.org", freq: "10.146000", band: "30M" },
-      LQ4: { proto: "LQ4", mode: "<MODE:4>DATA", submode: "<SUBMODE:3>LQ4", comment: "<COMMENT:40>LQ Digital Mode Family - https://lq8.org", freq: "14.088000", band: "20M" },
-      LQ2: { proto: "LQ2", mode: "<MODE:4>DATA", submode: "<SUBMODE:3>LQ2", comment: "<COMMENT:40>LQ Digital Mode Family - https://lq8.org", freq: "14.092000", band: "20M" },
-      LQ16: { proto: "LQ16", mode: "<MODE:4>DATA", submode: "<SUBMODE:4>LQ16", comment: "<COMMENT:40>LQ Digital Mode Family - https://lq8.org", freq: "14.090000", band: "20M" }
+      LQ8: { proto: "LQ8", mode: "<MODE:4>DATA", submode: "<SUBMODE:3>LQ8", comment: "<COMMENT:34>LQ8 digital mode - https://lq8.org", freq: "10.146000", band: "30M" },
+      LQ4: { proto: "LQ4", mode: "<MODE:4>DATA", submode: "<SUBMODE:3>LQ4", comment: "<COMMENT:34>LQ4 digital mode - https://lq8.org", freq: "14.088000", band: "20M" },
+      LQ2: { proto: "LQ2", mode: "<MODE:4>DATA", submode: "<SUBMODE:3>LQ2", comment: "<COMMENT:34>LQ2 digital mode - https://lq8.org", freq: "14.092000", band: "20M" },
+      LQ16: { proto: "LQ16", mode: "<MODE:4>DATA", submode: "<SUBMODE:4>LQ16", comment: "<COMMENT:35>LQ16 digital mode - https://lq8.org", freq: "14.090000", band: "20M" }
     };
 
     function setAdifMode(mKey) {
@@ -2457,7 +2458,7 @@
       document.getElementById('adifMode').innerText = info.mode;
       document.getElementById('adifSubmode').innerText = info.submode;
       document.getElementById('adifComment').innerText = info.comment;
-      document.getElementById('adifExampleCode').innerText = `<STATION_CALLSIGN:6>HB9IPH\n<MY_GRIDSQUARE:4>JN47\n<CALL:5>TU2TU\n<GRIDSQUARE:4>KL22\n<QSO_DATE:8>20260815\n<TIME_ON:6>002500\n<BAND:3>${info.band}\n<FREQ:9>${info.freq}\n<MODE:4>DATA\n${info.submode}\n<RST_SENT:3>-03\n<RST_RCVD:3>+05\n<COMMENT:40>LQ Digital Mode Family - https://lq8.org\n<EOR>`;
+      document.getElementById('adifExampleCode').innerText = `<STATION_CALLSIGN:6>HB9IPH\n<MY_GRIDSQUARE:4>JN47\n<CALL:5>TU2TU\n<GRIDSQUARE:4>KL22\n<QSO_DATE:8>20260815\n<TIME_ON:6>002500\n<BAND:3>${info.band}\n<FREQ:9>${info.freq}\n${info.mode}\n${info.submode}\n<RST_SENT:3>-03\n<RST_RCVD:3>+05\n${info.comment}\n<EOR>`;
     }
 
     const PRESETS = {

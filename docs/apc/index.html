@@ -1778,7 +1778,7 @@
                     <td><strong id="adifProto">LQ8</strong></td>
                     <td><code class="radio-val" id="adifMode">&lt;MODE:4&gt;DATA</code></td>
                     <td><code class="radio-val badge-lq" id="adifSubmode">&lt;SUBMODE:3&gt;LQ8</code></td>
-                    <td><code class="radio-val" id="adifComment">&lt;COMMENT:40&gt;LQ Digital Mode Family - https://lq8.org</code></td>
+                    <td><code class="radio-val" id="adifComment">&lt;COMMENT:34&gt;LQ8 digital mode - https://lq8.org</code></td>
                   </tr>
                 </tbody>
               </table>
@@ -1797,8 +1797,9 @@
 &lt;SUBMODE:3&gt;LQ8
 &lt;RST_SENT:3&gt;-03
 &lt;RST_RCVD:3&gt;+05
-&lt;COMMENT:40&gt;LQ Digital Mode Family - https://lq8.org
+&lt;COMMENT:34&gt;LQ8 digital mode - https://lq8.org
 &lt;EOR&gt;</code></pre>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 14px; margin-bottom: 0; line-height: 1.6;" data-i18n="ADIF_POTA_EXCEPTION"><strong>استثناء POTA:</strong> عند تصدير السجلات لتطبيق <strong>Parks on the Air (POTA)</strong>، لازم تنحط جهات الاتصال على الوضع <code class="radio-val">&lt;MODE:4&gt;MFSK</code> بدون وسم وضع فرعي، لأنو POTA بيتطلب <code>MFSK</code> لقبول السجل.</p>
           </div>
         </div>
       </div>
@@ -2441,10 +2442,10 @@
     }
 
     const ADIF_MODES = {
-      LQ8: { proto: "LQ8", mode: "<MODE:4>DATA", submode: "<SUBMODE:3>LQ8", comment: "<COMMENT:40>LQ Digital Mode Family - https://lq8.org", freq: "10.146000", band: "30M" },
-      LQ4: { proto: "LQ4", mode: "<MODE:4>DATA", submode: "<SUBMODE:3>LQ4", comment: "<COMMENT:40>LQ Digital Mode Family - https://lq8.org", freq: "14.088000", band: "20M" },
-      LQ2: { proto: "LQ2", mode: "<MODE:4>DATA", submode: "<SUBMODE:3>LQ2", comment: "<COMMENT:40>LQ Digital Mode Family - https://lq8.org", freq: "14.092000", band: "20M" },
-      LQ16: { proto: "LQ16", mode: "<MODE:4>DATA", submode: "<SUBMODE:4>LQ16", comment: "<COMMENT:40>LQ Digital Mode Family - https://lq8.org", freq: "14.090000", band: "20M" }
+      LQ8: { proto: "LQ8", mode: "<MODE:4>DATA", submode: "<SUBMODE:3>LQ8", comment: "<COMMENT:34>LQ8 digital mode - https://lq8.org", freq: "10.146000", band: "30M" },
+      LQ4: { proto: "LQ4", mode: "<MODE:4>DATA", submode: "<SUBMODE:3>LQ4", comment: "<COMMENT:34>LQ4 digital mode - https://lq8.org", freq: "14.088000", band: "20M" },
+      LQ2: { proto: "LQ2", mode: "<MODE:4>DATA", submode: "<SUBMODE:3>LQ2", comment: "<COMMENT:34>LQ2 digital mode - https://lq8.org", freq: "14.092000", band: "20M" },
+      LQ16: { proto: "LQ16", mode: "<MODE:4>DATA", submode: "<SUBMODE:4>LQ16", comment: "<COMMENT:35>LQ16 digital mode - https://lq8.org", freq: "14.090000", band: "20M" }
     };
 
     function setAdifMode(mKey) {
@@ -2457,7 +2458,7 @@
       document.getElementById('adifMode').innerText = info.mode;
       document.getElementById('adifSubmode').innerText = info.submode;
       document.getElementById('adifComment').innerText = info.comment;
-      document.getElementById('adifExampleCode').innerText = `<STATION_CALLSIGN:6>HB9IPH\n<MY_GRIDSQUARE:4>JN47\n<CALL:5>TU2TU\n<GRIDSQUARE:4>KL22\n<QSO_DATE:8>20260815\n<TIME_ON:6>002500\n<BAND:3>${info.band}\n<FREQ:9>${info.freq}\n<MODE:4>DATA\n${info.submode}\n<RST_SENT:3>-03\n<RST_RCVD:3>+05\n<COMMENT:40>LQ Digital Mode Family - https://lq8.org\n<EOR>`;
+      document.getElementById('adifExampleCode').innerText = `<STATION_CALLSIGN:6>HB9IPH\n<MY_GRIDSQUARE:4>JN47\n<CALL:5>TU2TU\n<GRIDSQUARE:4>KL22\n<QSO_DATE:8>20260815\n<TIME_ON:6>002500\n<BAND:3>${info.band}\n<FREQ:9>${info.freq}\n${info.mode}\n${info.submode}\n<RST_SENT:3>-03\n<RST_RCVD:3>+05\n${info.comment}\n<EOR>`;
     }
 
     const PRESETS = {

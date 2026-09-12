@@ -128,6 +128,7 @@ const langData = {
     "ADIF_TH_COMMENT": "ਸਟੈਂਡਰਡ ਟਿੱਪਣੀ ਟੈਗ",
     "ADIF_ROW_LQ8": "<strong>LQ8</strong>",
     "ADIF_EXAMPLE_HEADING": "ਉਦਾਹਰਨ ਸਟੈਂਡਰਡ ADIF QSO ਰਿਕਾਰਡ (<code>.adi</code>):",
+    "ADIF_POTA_EXCEPTION": "<strong>POTA ਅਪਵਾਦ:</strong> <strong>Parks on the Air (POTA)</strong> ਐਪ ਲਈ ਲੌਗ ਨਿਰਯਾਤ ਕਰਦੇ ਸਮੇਂ, ਬਿਨਾਂ ਕਿਸੇ ਸਬਮੋਡ ਟੈਗ ਦੇ ਸੰਪਰਕਾਂ ਨੂੰ ਮੋਡ <code class=\"radio-val\">&lt;MODE:4&gt;MFSK</code> 'ਤੇ ਸੈੱਟ ਕੀਤਾ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ, ਕਿਉਂਕਿ POTA ਨੂੰ ਲੌਗ ਸਵੀਕ੍ਰਿਤੀ ਲਈ <code>MFSK</code> ਦੀ ਲੋੜ ਹੁੰਦੀ ਹੈ।",
     "SPEEDUP_TITLE": "60s QSO ਸਪੀਡ ਅਤੇ ਪਾਈਲਅਪ ਸਪੀਡਅਪ ਕਿਵੇਂ ਪ੍ਰਾਪਤ ਕੀਤੇ ਜਾਂਦੇ ਹਨ",
     "SPEEDUP_SUBTITLE": "ਵੇਰੀਏਬਲ-ਲੰਬਾਈ ਅਗੇਤਰ ਕੋਡਾਂ, 24/16-ਬਿੱਟ ਟੱਕਰ-ਰੋਧਕ ਹੈਸ਼ਿੰਗ, ਅਤੇ ਮਲਟੀ-ਰਿਪੌਂਸ ਫਰੇਮਾਂ ਨਾਲ ਸਖ਼ਤ, ਦੁਹਰਾਉਣ ਵਾਲੇ ਐਕਸਚੇਂਜਾਂ ਨੂੰ ਬਦਲ ਕੇ, ਪੂਰੀ ਆਪਸੀ ਐਕਸਚੇਂਜ ਦੀ ਗਾਰੰਟੀ ਦਿੱਤੀ ਜਾਂਦੀ ਹੈ: ਮੇਡਨਹੈੱਡ ਲੋਕੇਟਰ ਅਤੇ ਸਿਗਨਲ ਰਿਪੋਰਟਾਂ ਦੋਵਾਂ ਨੂੰ ਪਰਸਪਰ 73 ਪੁਸ਼ਟੀਕਰਣਾਂ ਨਾਲ ਬਦਲਿਆ ਜਾਂਦਾ ਹੈ।",
     "SPEEDUP_CARD_STD_FT8_TITLE": "FT8 Standard",

@@ -128,6 +128,7 @@ const langData = {
     "ADIF_TH_COMMENT": "Tag Koméntar Standar",
     "ADIF_ROW_LQ8": "<strong>LQ8</strong>",
     "ADIF_EXAMPLE_HEADING": "Conto Rékam ADIF QSO Standar (<code>.adi</code>):",
+    "ADIF_POTA_EXCEPTION": "<strong>Pangecualian POTA:</strong> Nalika ngékspor log pikeun aplikasi <strong>Parks on the Air (POTA)</strong>, kontak kedah disetel kana mode <code class=\"radio-val\">&lt;MODE:4&gt;MFSK</code> tanpa tag submode, sabab POTA merlukeun <code>MFSK</code> pikeun nampa log.",
     "SPEEDUP_TITLE": "Kumaha 60s QSO Speed na Pileup Speedup Dupi kahontal",
     "SPEEDUP_SUBTITLE": "Ku ngaganti kaku, bursa repetitive kalawan kode awalan variabel-panjangna, 24/16-bit hashing-tahan tabrakan, sarta pigura multi-réspon, bursa silih pinuh dijamin: duanana locator Maidenhead jeung sinyal laporan anu disilihtukeurkeun kalawan timbal balik 73 confirmations.",
     "SPEEDUP_CARD_STD_FT8_TITLE": "FT8 Standard",

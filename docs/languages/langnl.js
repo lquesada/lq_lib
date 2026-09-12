@@ -128,6 +128,7 @@ const langData = {
     "ADIF_TH_COMMENT": "Standard-Kommentarfeld",
     "ADIF_ROW_LQ8": "<strong>LQ8</strong>",
     "ADIF_EXAMPLE_HEADING": "Beispiel eines ADIF-QSO-Datensatzes (<code>.adi</code>):",
+    "ADIF_POTA_EXCEPTION": "<strong>POTA-uitzondering:</strong> Bij het exporteren van logs voor de <strong>Parks on the Air (POTA)</strong>-app moeten contacten worden ingesteld op modus <code class=\"radio-val\">&lt;MODE:4&gt;MFSK</code> zonder submodustag, aangezien POTA <code>MFSK</code> vereist voor logacceptatie.",
     "SPEEDUP_TITLE": "Hoe QSO-snelheid en Pileup-versnelling uit de jaren 60 worden bereikt",
     "SPEEDUP_SUBTITLE": "Door rigide, repetitieve uitwisselingen te vervangen door prefixcodes van variabele lengte, 24/16-bit botsingsbestendige hashing en multi-response frames, wordt volledige wederzijdse uitwisseling gegarandeerd: zowel Maidenhead-locator- als signaalrapporten worden uitgewisseld met wederzijdse bevestigingen.",
     "SPEEDUP_CARD_STD_FT8_TITLE": "FT8 Standard",

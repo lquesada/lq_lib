@@ -128,6 +128,7 @@ const langData = {
     "ADIF_TH_COMMENT": "Тег комментария ADIF",
     "ADIF_ROW_LQ8": "<strong>LQ8</strong>",
     "ADIF_EXAMPLE_HEADING": "Пример записи QSO в формате ADIF (<code>.adi</code>):",
+    "ADIF_POTA_EXCEPTION": "<strong>Виняток POTA:</strong> Під час експорту журналів для програми <strong>Parks on the Air (POTA)</strong> контакти мають бути налаштовані на режим <code class=\"radio-val\">&lt;MODE:4&gt;MFSK</code> без тегу підрежиму, оскільки POTA вимагає <code>MFSK</code> для прийняття журналу.",
     "SPEEDUP_TITLE": "Как достигается QSO за 60 секунд и ускорение в пайлапе?",
     "SPEEDUP_SUBTITLE": "Кількісний аналіз пропускної здатності: порівняння тривалості зв'язку та продуктивності LQ8 і FT8.",
     "SPEEDUP_CARD_STD_FT8_TITLE": "FT8 Standard",

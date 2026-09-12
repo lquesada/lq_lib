@@ -128,6 +128,7 @@ const langData = {
     "ADIF_TH_COMMENT": "標準 Comment タグ",
     "ADIF_ROW_LQ8": "<strong>LQ8</strong>",
     "ADIF_EXAMPLE_HEADING": "標準 ADIF QSO レコード例 (<code>.adi</code>)：",
+    "ADIF_POTA_EXCEPTION": "<strong>POTA の例外：</strong><strong>Parks on the Air (POTA)</strong> アプリ用にログをエクスポートする場合、POTA ではログの受け入れに <code>MFSK</code> が必要なため、交信はサブモードタグなしのモード <code class=\"radio-val\">&lt;MODE:4&gt;MFSK</code> に設定する必要があります。",
     "SPEEDUP_TITLE": "60秒QSOとパイルアップ高速化はどのように達成されるか？",
     "SPEEDUP_SUBTITLE": "固定的な交換手順を可変長ハフマン符号、24/14ビット耐衝突ハッシュ、複数局一括応答フレームに置き換えることで実現。ロケーターとシグナルレポートの交換（超長コールサインのCQ時を除く）および相互の受信確認としての73交換という2つの基本原則を満たします。",
     "SPEEDUP_CARD_STD_FT8_TITLE": "FT8 Standard",

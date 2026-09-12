@@ -128,6 +128,7 @@ const langData = {
     "ADIF_TH_COMMENT": "Etiqueta Comentario Estándar",
     "ADIF_ROW_LQ8": "<strong>LQ8</strong>",
     "ADIF_EXAMPLE_HEADING": "Ejemplo de Registro QSO en Formato ADIF Estándar (<code>.adi</code>):",
+    "ADIF_POTA_EXCEPTION": "<strong>Excepción POTA:</strong> Al exportar registros para la app de <strong>Parks on the Air (POTA)</strong>, los contactos deben configurarse en modo <code class=\"radio-val\">&lt;MODE:4&gt;MFSK</code> sin etiqueta de submodo, ya que POTA requiere <code>MFSK</code> para la aceptación del registro.",
     "SPEEDUP_TITLE": "¿Cómo se logra el contacto en 60 segundos y la aceleración en pileup?",
     "SPEEDUP_SUBTITLE": "Reemplazando los intercambios rígidos y repetitivos por códigos prefijo de longitud variable, hashing resistente a colisiones de 24/16 bits y tramas multirrespuesta, garantizando un intercambio mutuo completo: se transmiten tanto el localizador Maidenhead como los reportes de señal, con confirmaciones recíprocas 73.",
     "SPEEDUP_CARD_STD_FT8_TITLE": "FT8 Estándar",

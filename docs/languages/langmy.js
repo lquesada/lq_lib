@@ -128,6 +128,7 @@ const langData = {
     "ADIF_TH_COMMENT": "စံမှတ်ချက် Tag",
     "ADIF_ROW_LQ8": "<strong>LQ8</strong>",
     "ADIF_EXAMPLE_HEADING": "ဥပမာ Standard ADIF QSO Record (<code>.adi</code>):",
+    "ADIF_POTA_EXCEPTION": "<strong>POTA ချွင်းချက်-</strong> <strong>Parks on the Air (POTA)</strong> အက်ပ်အတွက် မှတ်တမ်းများကို တင်ပို့သည့်အခါ POTA သည် မှတ်တမ်းလက်ခံမှုအတွက် <code>MFSK</code> လိုအပ်သောကြောင့် အဆက်အသွယ်များကို မုဒ်ခွဲတဂ်မပါဘဲ မုဒ် <code class=\"radio-val\">&lt;MODE:4&gt;MFSK</code> သို့ သတ်မှတ်ရပါမည်။",
     "SPEEDUP_TITLE": "60s QSO Speed နှင့် Pileup Speedup ကို မည်သို့အောင်မြင်နိုင်သနည်း။",
     "SPEEDUP_SUBTITLE": "တောင့်တင်းသော၊ ထပ်ခါတလဲလဲ လဲလှယ်မှုများကို ပြောင်းလဲနိုင်သော အလျားအနံ ရှေ့နောက်ကုဒ်များ၊ 24/16-ဘစ် တိုက်မှုဒဏ်ခံနိုင်ရည်ရှိသော hashing နှင့် တုံ့ပြန်မှုမျိုးစုံဘောင်များကို အစားထိုးခြင်းဖြင့်၊ အပြန်အလှန်ဖလှယ်မှု အပြည့်အစုံကို အာမခံပါသည်- Maidenhead ရှာဖွေသူနှင့် အချက်ပြအစီရင်ခံစာများကို အပြန်အလှန်အားဖြင့် အတည်ပြုချက် 73 ခုနှင့် ဖလှယ်ထားသည်။",
     "SPEEDUP_CARD_STD_FT8_TITLE": "FT8 Standard",

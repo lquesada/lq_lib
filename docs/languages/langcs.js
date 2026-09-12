@@ -128,6 +128,7 @@ const langData = {
     "ADIF_TH_COMMENT": "Тег комментария ADIF",
     "ADIF_ROW_LQ8": "<strong>LQ8</strong>",
     "ADIF_EXAMPLE_HEADING": "Пример записи QSO в формате ADIF (<code>.adi</code>):",
+    "ADIF_POTA_EXCEPTION": "<strong>Výjimka POTA:</strong> Při exportu deníků pro aplikaci <strong>Parks on the Air (POTA)</strong> musí být kontakty nastaveny na režim <code class=\"radio-val\">&lt;MODE:4&gt;MFSK</code> bez značky podrežimu, protože POTA vyžaduje <code>MFSK</code> pro přijetí deníku.",
     "SPEEDUP_TITLE": "Jak se dosahuje rychlosti 60. QSO a zrychlení pileupu",
     "SPEEDUP_SUBTITLE": "Nahrazením rigidních výměn předponovými kódy s proměnnou délkou a vícenásobnými odezvami je zaručena úplná vzájemná výměna lokátoru i reportu.",
     "SPEEDUP_CARD_STD_FT8_TITLE": "FT8 Standard",

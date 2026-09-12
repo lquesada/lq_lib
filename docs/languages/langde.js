@@ -128,6 +128,7 @@ const langData = {
     "ADIF_TH_COMMENT": "Standard-Kommentarfeld",
     "ADIF_ROW_LQ8": "<strong>LQ8</strong>",
     "ADIF_EXAMPLE_HEADING": "Beispiel eines ADIF-QSO-Datensatzes (<code>.adi</code>):",
+    "ADIF_POTA_EXCEPTION": "<strong>POTA-Ausnahme:</strong> Beim Exportieren von Logs für die <strong>Parks on the Air (POTA)</strong>-App müssen Kontakte auf die Betriebsart <code class=\"radio-val\">&lt;MODE:4&gt;MFSK</code> ohne Submodus-Tag gesetzt werden, da POTA für die Log-Akzeptanz <code>MFSK</code> verlangt.",
     "SPEEDUP_TITLE": "Wie wird das 60-Sekunden-QSO und die Pileup-Beschleunigung erreicht?",
     "SPEEDUP_SUBTITLE": "Durch den Ersatz starrer Abläufe durch Huffman-Präfixcodes variabler Länge, 24/14-Bit kollisionsresistente Hashes und Multistations-Antwortframes, unter Einhaltung zweier Schlüsselprinzipien: Locator und Signalrapporte werden ausgetauscht (außer bei CQ für sehr lange Rufzeichen), und 73-Bestätigungen werden ausgetauscht, um den Empfang von Locator und Signalrapport der Gegenstation zu bestätigen.",
     "SPEEDUP_CARD_STD_FT8_TITLE": "FT8 Standard",
