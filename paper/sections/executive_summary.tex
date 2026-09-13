@@ -38,7 +38,7 @@
 \noindent
 This paper introduces \LQ8, an open-source weak-signal digital mode for amateur radio that completes structured two-way contacts in 4 transmissions (60\,s), achieving a $1.50\times$ speedup over canonical 6-transmission exchanges (90\,s) and $1.25\times$ over 5-transmission \texttt{RR73} exchanges (75\,s) while preserving complete bidirectional exchange of Maidenhead grid locators, signal reports, and mutual acknowledgments.
 By replacing fixed-width message-type headers with variable-length prefix codes matched to physical-layer bit budgets, \LQ8 packs the answering station's grid locator and measured signal report into a single 77-bit reply.
-In multi-station pileup operations, \LQ8 confirms up to two answering stations simultaneously within a single-carrier, constant-envelope 50.0\,Hz transmission with a 0.0\,dB RF power-splitting penalty, enabling a theoretical peak rate of up to 160\,QSOs/h (scaling to 320\,QSOs/h in dual-carrier operation) while retaining the $-21.0$\,dB SNR sensitivity of continuous-phase 8-GFSK transport.
+In multi-station pileup operations, \LQ8 confirms up to two answering stations simultaneously within a single-carrier 50.0\,Hz transmission with a 0.0\,dB RF power-splitting penalty, achieving a peak rate of 240\,QSOs/h in continuous pileup ($4\times$ over single-carrier FT8; 480\,QSOs/h dual-carrier) while retaining $-21.0$\,dB SNR sensitivity.
 The protocol family also defines three extended profiles (\LQ16, \LQ4, and \LQ2) tailored for extreme sensitivity, VHF/UHF contesting, and fast-burst channels.
 \end{abstract}
 

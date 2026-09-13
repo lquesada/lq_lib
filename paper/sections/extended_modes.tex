@@ -42,8 +42,8 @@
 While \textbf{LQ8} is the primary mode for 15-second scheduled weak-signal communications, the 77-bit variable-length architecture scales across three complementary physical profiles (Table~\ref{tab:comparison}):
 \begin{itemize}[leftmargin=1.2em, topsep=1.5pt plus 1.5pt minus 0.5pt, itemsep=0.8pt plus 1.2pt minus 0.4pt, parsep=0pt]
   \item \textbf{LQ16 (Slow / Ultra Weak):} 8-GFSK mode for severe weak-signal conditions ($-24.0$\,dB SNR threshold in 2500\,Hz) with 320\,ms symbol period (25.0\,Hz bandwidth, $BT = 2.0$, 25.28\,s duration) for extreme weak-signal and EME paths.
-  \item \textbf{LQ4 (Fast / Contest):} 4-GFSK mode for rapid contesting and pileups (30.0\,s contact, $120$\,QSOs/h standard, $320$\,QSOs/h Fox/Hound) with 48\,ms symbol period, 83.3\,Hz bandwidth, and 5.04\,s transmission in 7.5\,s UTC slots.
-  \item \textbf{LQ2 (Turbo Burst):} 4-GFSK high-throughput profile for dynamic burst channels (15.0\,s full contact, $240$\,QSOs/h standard, $640$\,QSOs/h Fox/Hound) with 24\,ms symbol period, 166.7\,Hz bandwidth, and 2.52\,s transmission in 3.75\,s slots for meteor scatter.
+  \item \textbf{LQ4 (Fast / Contest):} 4-GFSK mode for rapid contesting and pileups (30.0\,s contact, $120$\,QSOs/h standard, $480$\,QSOs/h Fox/Hound) with 48\,ms symbol period, 83.3\,Hz bandwidth, and 5.04\,s transmission in 7.5\,s UTC slots.
+  \item \textbf{LQ2 (Turbo Burst):} 4-GFSK high-throughput profile for dynamic burst channels (15.0\,s full contact, $240$\,QSOs/h standard, $960$\,QSOs/h Fox/Hound) with 24\,ms symbol period, 166.7\,Hz bandwidth, and 2.52\,s transmission in 3.75\,s slots for meteor scatter.
 \end{itemize}
 
 \subsection{4-GFSK Frame Structure \& Modulation}
@@ -89,8 +89,8 @@ Type coding           & Fixed    & Fixed    & Huffman  & Huffman  & Huffman  & H
 QSO messages          & 5--6     & 5--6     & 4        & 4        & 4        & 4 \\
 QSO duration          & 75.0--90.0\,s & 37.5--45.0\,s & 60.0\,s & 120.0\,s & 30.0\,s & 15.0\,s \\
 Standard QSO Rate$^*$ & 40--48/h & 80--96/h & 60/h     & 30/h     & 120/h    & 240/h \\
-Pileup Rate (1-carrier)$^*$& 60/h & 120/h   & 160/h    & 80/h     & 320/h    & 640/h \\
-Pileup Rate (2-carrier)$^*$& 120/h& 240/h   & 320/h    & 160/h    & 640/h    & 1280/h \\
+Pileup Rate (1-carrier)$^*$& 60/h & 120/h   & 240/h    & 120/h    & 480/h    & 960/h \\
+Pileup Rate (2-carrier)$^*$& 120/h& 240/h   & 480/h    & 240/h    & 960/h    & 1920/h \\
 \midrule
 Standard Suffixes     & /P, /R   & /P, /R   & /P       & /P       & /P       & /P       \\
 Max non-std callsign  & 11 chars & 11 chars & 13 + std suffix & 13 + std suffix & 13 + std suffix & 13 + std suffix \\
@@ -98,7 +98,7 @@ Callsign hash length  & 10/12/22-b& 10/12/22-b& 24/20/16-b& 24/20/16-b& 24/20/16
 Free-text alphabet    & 42 chars & 42 chars & 104 chars & 104 chars & 104 chars & 104 chars \\
 Free-text capacity    & 71 bits ($\sim$13 c) & 71 bits ($\sim$13 c) & 73 bits ($\sim$17 c) & 73 bits ($\sim$17 c) & 73 bits ($\sim$17 c) & 73 bits ($\sim$17 c) \\
 \bottomrule
-\multicolumn{7}{@{}p{\textwidth}@{}}{\footnotesize $^*$FT8/FT4 contacts require 5--6 messages (75--90\,s / 37.5--45\,s) using \texttt{RR73} or \texttt{RRR}/73; \LQ{} completes full contacts in 4 messages (60\,s in \LQ8). Peak rates assume continuous zero-loss operation. Pileup rates reflect Fox and Hound mode confirming 1 station/slot in FT8/FT4 vs.\ 2 stations/slot in \LQ{} (Type~11).}\end{tabular*}
+\multicolumn{7}{@{}p{\textwidth}@{}}{\footnotesize $^*$FT8/FT4 contacts require 5--6 messages (75--90\,s / 37.5--45\,s) using \texttt{RR73} or \texttt{RRR}/73; \LQ{} completes contacts in 4 messages (60\,s in \LQ8). Peak rates assume continuous zero-loss operation. Pipelined pileup rates reflect F/H mode confirming 1 station/cycle in FT8/FT4 vs.\ 2 in \LQ{} (Type~11).}\end{tabular*}
 \end{table*}
 
 \pagebreak

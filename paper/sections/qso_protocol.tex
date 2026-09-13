@@ -98,7 +98,7 @@ During DXpedition pileups or contest operations in Fox and Hound (F/H) mode, Sta
 When confirming a single Hound in Fox mode, standard callers are confirmed using Type~8 (\msgtype{REPORT+73 std+suf}). Single-target Type~11 (or Type~12 for final acknowledgments) is used when confirming non-standard callers or when operating under strict split-frequency F/H scheduling; in this case, Target~2 duplicates Target~1 (identical hash, and identical SNR in Type~11), which decoders process as a single-station transmission.
 
 \paragraph{Throughput Multiplier Analysis.}
-In continuous pileup operation, each QSO cycle completes in 3 slots (45\,s vs.\ 60\,s conventional). Confirming two answering Hounds simultaneously in Step~3 delivers a peak capacity of 160\,QSOs/h on a single 50.0\,Hz carrier with \textbf{0.0\,dB power-splitting penalty}, avoiding the $-3.0$\,dB RF loss of multi-carrier FT8 F/H mode. Under dual-carrier \LQ8 (100\,Hz bandwidth), capacity reaches 320\,QSOs/h while halving exposure to fading.
+In continuous pileups where Step~3 overlaps with incoming calls, completing 2 QSOs every 2 slots (30\,s) delivers a peak rate of 240\,QSOs/h ($4\times$ over single-carrier FT8; 480\,QSOs/h dual-carrier; 160\,QSOs/h in isolated 3-slot exchanges) with \textbf{0.0\,dB power penalty}, avoiding the $-3.0$\,dB RF loss of multi-carrier FT8 while halving fading exposure.
 
 \subsection{Multi-Caller Contention and Pileup Queuing}
 \label{sec:qso:contention}
