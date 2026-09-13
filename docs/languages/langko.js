@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "LQ 디지털 모드를 실험하고 도입하는 무선 클럽, 콘테스트 팀 및 비상 통신 그룹.",
     "COMMUNITY_DX_TITLE": "DX 원정 및 이동 운용",
     "COMMUNITY_DX_DESC": "다중국 응답 프레임을 활용하여 파일업을 신속히 정리하는 DX 원정, IOTA, SOTA 및 POTA 운용자.",
-    "COMMUNITY_AWARDS_TITLE": "운용자, QRZ 및 어워드",
+    "COMMUNITY_AWARDS_TITLE": "운용자",
     "COMMUNITY_AWARDS_DESC": "QRZ.com 프로필에 LQ8을 기재하고 클럽 명부에 참여하는 아마추어 무선사.",
     "COMMUNITY_FORM_TITLE": "목록 등재 신청 또는 문의하기",
     "COMMUNITY_FORM_DESC": "클럽, DX 원정 주최자 또는 QRZ에 LQ를 기재한 무선사이신가요? 문의 양식을 통해 연락해 주세요. 버그 보고는 GitHub Issues를 이용해 주세요.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "어워드",
     "COMMUNITY_FIRST_QSO_USING": "LQ8을 사용한 첫 QSO",
     "COMMUNITY_FIRST_POTA_QSO_USING": "LQ8을 사용한 첫 POTA QSO",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "LQ8을 사용한 첫 SOTA QSO",
     "MODAL_SHARE_TITLE": "링크가 클립보드에 복사되었습니다!",
     "MODAL_SHARE_DESC": "링크가 복사되었습니다. 무선 동호인 및 포럼에 공유하세요!",
     "MODAL_SHARE_OK": "OK"

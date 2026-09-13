@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "探索并采用 LQ 数字模式的无线电俱乐部、竞赛团队和应急通信组织。",
     "COMMUNITY_DX_TITLE": "DX 远征与野外通联",
     "COMMUNITY_DX_DESC": "DX 远征、IOTA、SOTA 及 POTA 爱好者利用多通联应答帧快速清理堆叠堆。",
-    "COMMUNITY_AWARDS_TITLE": "业余无线电爱好者、QRZ 与奖状",
+    "COMMUNITY_AWARDS_TITLE": "业余无线电爱好者",
     "COMMUNITY_AWARDS_DESC": "在 QRZ.com 个人主页标注 LQ8、加入俱乐部及参与奖状追踪的爱好者。",
     "COMMUNITY_FORM_TITLE": "加入展示名单或联系我们",
     "COMMUNITY_FORM_DESC": "如果您是俱乐部、远征组织者或在 QRZ 中标注了 LQ 的火腿，请通过联系表单与我们取得联系。如需报告缺陷或提出功能建议，请访问 GitHub Issues。",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "奖状",
     "COMMUNITY_FIRST_QSO_USING": "首次使用 LQ8 的 QSO",
     "COMMUNITY_FIRST_POTA_QSO_USING": "首次使用 LQ8 的 POTA QSO",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "首次使用 LQ8 的 SOTA QSO",
     "MODAL_SHARE_TITLE": "链接已复制到剪贴板！",
     "MODAL_SHARE_DESC": "网址已成功复制。欢迎分享给无线电爱好者同仁、开发者群体及各大技术论坛！",
     "MODAL_SHARE_OK": "OK"

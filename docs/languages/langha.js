@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "Ƙungiyoyin rediyo da ƙungiyoyin sadarwar gaggawa da ke gwaji da amfani da hanyoyin dijital na LQ.",
     "COMMUNITY_DX_TITLE": "Balaguron DX &amp; Ayyukan Filin",
     "COMMUNITY_DX_DESC": "Masu aikin DXpedition, IOTA, SOTA, da POTA da ke amfani da tsarin amsa tashoshi da yawa.",
-    "COMMUNITY_AWARDS_TITLE": "Masu Aiki, QRZ &amp; Lambobin Yabo",
+    "COMMUNITY_AWARDS_TITLE": "Masu Aiki",
     "COMMUNITY_AWARDS_DESC": "Masu son rediyo da suka haɗa da LQ8 a cikin bayanan martaba na QRZ.com da jerin ƙungiyoyi.",
     "COMMUNITY_FORM_TITLE": "Shiga Cikin Jerin ko Tuntube Mu",
     "COMMUNITY_FORM_DESC": "Shin kai ƙungiya ce, mai shirya DXpedition ko mai son rediyo da ke da LQ a QRZ? Tuntube mu ta fom. Don ba da rahoton kurakurai, ziyarci GitHub Issues.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "lambar yabo",
     "COMMUNITY_FIRST_QSO_USING": "QSO na farko ta amfani da LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "QSO na POTA na farko ta amfani da LQ8",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "QSO na SOTA na farko ta amfani da LQ8",
     "MODAL_SHARE_TITLE": "An Kwafi hanyar haɗi zuwa Clipboard!",
     "MODAL_SHARE_DESC": "An kwafi hanyar haɗin zuwa allon allo. Manna kuma raba shi tare da abokan aikin rediyo, ƙungiyoyin haɓakawa, da kuma kan dandalin tattaunawa!",
     "MODAL_SHARE_OK": "OK"

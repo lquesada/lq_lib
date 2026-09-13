@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "Radiokerhot, kilpailutiimit ja turvaverkkoryhmät, jotka kokeilevat ja ottavat käyttöön LQ-digitaalitiloja.",
     "COMMUNITY_DX_TITLE": "DX-peditiot ja Aktivoinnit",
     "COMMUNITY_DX_DESC": "DX-peditio-, IOTA-, SOTA- ja POTA-operaattorit, jotka purkavat pileupeja moniasemakehysten avulla.",
-    "COMMUNITY_AWARDS_TITLE": "Operaattorit, QRZ ja Awardit",
+    "COMMUNITY_AWARDS_TITLE": "Operaattorit",
     "COMMUNITY_AWARDS_DESC": "Radioamatöörit, jotka mainitsevat LQ8:n QRZ.com-profiileissaan ja kerholistoilla.",
     "COMMUNITY_FORM_TITLE": "Liity Listalle tai Ota Yhteyttä",
     "COMMUNITY_FORM_DESC": "Oletko kerho, DX-pedition järjestäjä tai radioamatööri, jolla on LQ QRZ:ssa? Ota yhteyttä lomakkeella. Vikailmoituksia varten käy GitHub Issues -sivulla.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "awardi",
     "COMMUNITY_FIRST_QSO_USING": "Ensimmäinen QSO LQ8:lla",
     "COMMUNITY_FIRST_POTA_QSO_USING": "Ensimmäinen POTA-QSO LQ8:lla",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "Ensimmäinen SOTA-QSO LQ8:lla",
     "MODAL_SHARE_TITLE": "Linkki kopioitu leikepöydälle!",
     "MODAL_SHARE_DESC": "Linkki kopioitiin leikepöydälle. Jaa se radioamatööriystävillesi ja foorumeilla!",
     "MODAL_SHARE_OK": "OK"

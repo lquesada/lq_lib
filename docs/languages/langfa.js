@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "باشگاه‌های رادیویی و تیم‌های ارتباطات اضطراری که مدهای دیجیتال LQ را آزمایش و پیاده‌سازی می‌کنند.",
     "COMMUNITY_DX_TITLE": "سفرهای DX و فعالیت‌های میدانی",
     "COMMUNITY_DX_DESC": "اپراتورهای سفرهای DX، IOTA، SOTA و POTA که از فریم‌های پاسخ چند ایستگاهی برای پاسخگویی سریع بهره می‌برند.",
-    "COMMUNITY_AWARDS_TITLE": "اپراتورها، QRZ و جوایز",
+    "COMMUNITY_AWARDS_TITLE": "اپراتورها",
     "COMMUNITY_AWARDS_DESC": "رادیوآماتورهایی که LQ8 را در پروفایل QRZ.com و لیست باشگاه‌های خود درج می‌کنند.",
     "COMMUNITY_FORM_TITLE": "ثبت در لیست یا تماس با ما",
     "COMMUNITY_FORM_DESC": "آیا باشگاه، برگزارکننده سفر DX یا رادیوآماتوری با LQ در QRZ هستید؟ از طریق فرم با ما در تماس باشید. برای گزارش باگ‌ها به GitHub Issues مراجعه کنید.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "جایزه",
     "COMMUNITY_FIRST_QSO_USING": "اولین QSO با استفاده از LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "اولین POTA QSO با استفاده از LQ8",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "اولین SOTA QSO با استفاده از LQ8",
     "MODAL_SHARE_TITLE": "لینک در کلیپ‌بورد کپی شد!",
     "MODAL_SHARE_DESC": "لینک کپی شد. آن را با دوستان رادیو آماتور و در انجمن‌ها به اشتراک بگذارید!",
     "MODAL_SHARE_OK": "OK"

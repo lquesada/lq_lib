@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "Klub radio, grup kontes, dan tim komunikasi darurat yang bereksperimen dan mengadopsi mode digital LQ.",
     "COMMUNITY_DX_TITLE": "Ekspedisi DX &amp; Aktivasi",
     "COMMUNITY_DX_DESC": "Operator DXpedition, IOTA, SOTA, dan POTA yang memanfaatkan frame multi-respons untuk mengurai pileup dengan cepat.",
-    "COMMUNITY_AWARDS_TITLE": "Operator, QRZ &amp; Penghargaan",
+    "COMMUNITY_AWARDS_TITLE": "Operator",
     "COMMUNITY_AWARDS_DESC": "Amatir radio perorangan yang mencantumkan LQ8 di profil QRZ.com dan mengikuti pelacakan award.",
     "COMMUNITY_FORM_TITLE": "Daftarkan Diri atau Hubungi Kami",
     "COMMUNITY_FORM_DESC": "Apakah Anda klub, penyelenggara DXpedition, atau amatir radio dengan LQ di QRZ? Hubungi kami melalui formulir. Untuk melaporkan bug, kunjungi GitHub Issues.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "penghargaan",
     "COMMUNITY_FIRST_QSO_USING": "QSO pertama menggunakan LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "QSO POTA pertama menggunakan LQ8",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "QSO SOTA pertama menggunakan LQ8",
     "MODAL_SHARE_TITLE": "Tautan Disalin ke Papan Klip!",
     "MODAL_SHARE_DESC": "Tautan telah disalin. Bagikan kepada sesama amatir radio dan di forum!",
     "MODAL_SHARE_OK": "OK"

@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "Radiokluby, contestové týmy a záchranné složky zkoušející a nasazující digitální módy LQ.",
     "COMMUNITY_DX_TITLE": "DXpedice a Aktivace",
     "COMMUNITY_DX_DESC": "Operátoři DXpedic, IOTA, SOTA a POTA využívající vícestanicové odpovědní rámce pro rychlé odbavování pileupů.",
-    "COMMUNITY_AWARDS_TITLE": "Operátoři, QRZ a Diplomy",
+    "COMMUNITY_AWARDS_TITLE": "Operátoři",
     "COMMUNITY_AWARDS_DESC": "Radioamatéři uvádějící LQ8 ve svých profilech QRZ.com, klubových seznamech a diplomových programech.",
     "COMMUNITY_FORM_TITLE": "Zápis do Seznamu nebo Kontakt",
     "COMMUNITY_FORM_DESC": "Jste klub, organizátor DXpedice nebo radioamatér s LQ na QRZ? Napište nám prostřednictvím formuláře. Pro hlášení chyb navštivte GitHub Issues.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "diplom",
     "COMMUNITY_FIRST_QSO_USING": "První QSO pomocí LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "První QSO POTA pomocí LQ8",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "První QSO SOTA pomocí LQ8",
     "MODAL_SHARE_TITLE": "Odkaz byl zkopírován do schránky!",
     "MODAL_SHARE_DESC": "Odkaz byl zkopírován. Sdílejte jej s radioamatéry a na fórech!",
     "MODAL_SHARE_OK": "OK"

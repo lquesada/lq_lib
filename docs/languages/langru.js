@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "Радиоклубы, контест-группы и аварийные службы, тестирующие и внедряющие цифровые режимы LQ.",
     "COMMUNITY_DX_TITLE": "DX-экспедиции и активации",
     "COMMUNITY_DX_DESC": "Операторы DX-экспедиций, IOTA, SOTA и POTA, использующие многостанционные ответы для быстрой работы в пайлапах.",
-    "COMMUNITY_AWARDS_TITLE": "Операторы, QRZ и дипломы",
+    "COMMUNITY_AWARDS_TITLE": "Операторы",
     "COMMUNITY_AWARDS_DESC": "Радиолюбители, указывающие LQ8 в своих профилях QRZ.com, списках клубов и дипломных программах.",
     "COMMUNITY_FORM_TITLE": "Добавиться в список или связаться",
     "COMMUNITY_FORM_DESC": "Вы клуб, организатор DX-экспедиции или радиолюбитель с LQ в профиле QRZ? Напишите нам через форму обратной связи. Для отчетов об ошибках посетите GitHub Issues.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "диплом",
     "COMMUNITY_FIRST_QSO_USING": "Первое QSO с использованием LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "Первое POTA QSO с использованием LQ8",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "Первое SOTA QSO с использованием LQ8",
     "MODAL_SHARE_TITLE": "Ссылка скопирована в буфер обмена!",
     "MODAL_SHARE_DESC": "Ссылка скопирована. Отправьте ее коллегам-радиолюбителям и опубликуйте на форумах!",
     "MODAL_SHARE_OK": "OK"

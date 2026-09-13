@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "ชมรมวิทยุ กลุ่มการแข่งขัน และทีมสื่อสารฉุกเฉินที่ทดลองและใช้งานโหมดดิจิทัล LQ",
     "COMMUNITY_DX_TITLE": "การสำรวจ DX และกิจกรรมภาคสนาม",
     "COMMUNITY_DX_DESC": "นักวิทยุ DXpedition, IOTA, SOTA และ POTA ที่ใช้เฟรมตอบรับหลายสถานีเพื่อเคลียร์ไพล์อัพอย่างรวดเร็ว",
-    "COMMUNITY_AWARDS_TITLE": "นักวิทยุ QRZ และรางวัล",
+    "COMMUNITY_AWARDS_TITLE": "นักวิทยุ",
     "COMMUNITY_AWARDS_DESC": "นักวิทยุสมัครเล่นที่ระบุ LQ8 บนโปรไฟล์ QRZ.com บัญชีรายชื่อชมรม และการสะสมรางวัล",
     "COMMUNITY_FORM_TITLE": "ขอลงทะเบียนในรายชื่อหรือติดต่อเรา",
     "COMMUNITY_FORM_DESC": "คุณเป็นชมรม ผู้จัด DXpedition หรือนักวิทยุที่มี LQ ใน QRZ หรือไม่? ติดต่อเราผ่านแบบฟอร์ม หากต้องการรายงานข้อผิดพลาด โปรดไปที่ GitHub Issues",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "รางวัล",
     "COMMUNITY_FIRST_QSO_USING": "QSO แรกโดยใช้ LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "QSO POTA แรกโดยใช้ LQ8",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "QSO SOTA แรกโดยใช้ LQ8",
     "MODAL_SHARE_TITLE": "คัดลอกลิงก์ไปยังคลิปบอร์ดแล้ว!",
     "MODAL_SHARE_DESC": "คัดลอกลิงก์เรียบร้อยแล้ว แชร์ให้กับเพื่อนนักวิทยุสมัครเล่นและบนฟอรัมได้เลย!",
     "MODAL_SHARE_OK": "OK"

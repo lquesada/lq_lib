@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "نوادي اللاسلكي وفرق المسابقات لي راهم يجربو ويعتمدو أنماط LQ الرقمية.",
     "COMMUNITY_DX_TITLE": "رحلات DX والتنشيطات",
     "COMMUNITY_DX_DESC": "مشغلو رحلات DX و IOTA و SOTA و POTA لي يستعملو إطارات الاستجابة المتعددة لتفريغ البايلاب بالخف.",
-    "COMMUNITY_AWARDS_TITLE": "المشغلين و QRZ والجوائز",
+    "COMMUNITY_AWARDS_TITLE": "المشغلين",
     "COMMUNITY_AWARDS_DESC": "هواة اللاسلكي لي يزيدو LQ8 فـ QRZ.com وقوائم النوادي وتتبع الجوائز.",
     "COMMUNITY_FORM_TITLE": "التسجيل فالقائمة أو اتصل بنا",
     "COMMUNITY_FORM_DESC": "إلى كنت نادي، منظم رحلات DX أو هاوي عندك LQ فـ QRZ، اتصل بينا عبر الاستمارة. وللتبليغ عن المشاكل زور GitHub Issues.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "جائزة",
     "COMMUNITY_FIRST_QSO_USING": "أول اتصال QSO باستخدام LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "أول اتصال POTA QSO باستخدام LQ8",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "أول اتصال SOTA QSO باستخدام LQ8",
     "MODAL_SHARE_TITLE": "تم نسخ الرابط إلى الحافظة!",
     "MODAL_SHARE_DESC": "تم نسخ الرابط. شاركه مع زملائك هواة اللاسلكي وفي المنتديات!",
     "MODAL_SHARE_OK": "OK"

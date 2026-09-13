@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "LQ raqamli rejimlarini sinovdan o'tkazayotgan va joriy qilayotgan radio klublar hamda favqulodda aloqa guruhlari.",
     "COMMUNITY_DX_TITLE": "DX Ekspeditsiyalari va Faollashtirishlar",
     "COMMUNITY_DX_DESC": "Paylaplarni tezkor boshqarish uchun ko'p stansiyali javob freymlaridan foydalanuvchi DXpedition, IOTA, SOTA va POTA operatorlari.",
-    "COMMUNITY_AWARDS_TITLE": "Operatorlar, QRZ va Diplomlar",
+    "COMMUNITY_AWARDS_TITLE": "Operatorlar",
     "COMMUNITY_AWARDS_DESC": "QRZ.com profillarida LQ8 ni ko'rsatgan havaskor radio operatorlari.",
     "COMMUNITY_FORM_TITLE": "Ro'yxatga Qo'shilish yoki Bog'lanish",
     "COMMUNITY_FORM_DESC": "Siz klub, DX ekspeditsiyasi tashkilotchisi yoki QRZ profilida LQ bo'lgan radiohavaskormisiz? Aloqa formasi orqali bog'laning. Xatolar haqida xabar berish uchun GitHub Issues sahifasiga tashrif buyuring.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "diplom",
     "COMMUNITY_FIRST_QSO_USING": "LQ8 yordamida birinchi QSO",
     "COMMUNITY_FIRST_POTA_QSO_USING": "LQ8 yordamida birinchi POTA QSO",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "LQ8 yordamida birinchi SOTA QSO",
     "MODAL_SHARE_TITLE": "Bağlantı Panoya Kopyalandı!",
     "MODAL_SHARE_DESC": "Bağlantı kopyalandı. Telsizci arkadaşlarınızla ve forumlarda paylaşın!",
     "MODAL_SHARE_OK": "OK"

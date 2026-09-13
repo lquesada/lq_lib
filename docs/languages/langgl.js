@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "Clubs de radio, grupos de concursos e equipos de comunicacións de emerxencia que están explorando ou apoiando operativamente LQ8.",
     "COMMUNITY_DX_TITLE": "Expedicións DX e Activacións",
     "COMMUNITY_DX_DESC": "Expedicións DX, activadores de IOTA, SOTA e POTA que aproveitan as altas taxas de contacto de LQ8 para acumulacións masivas de estacións.",
-    "COMMUNITY_AWARDS_TITLE": "Operadores, QRZ e Diplomas",
+    "COMMUNITY_AWARDS_TITLE": "Operadores",
     "COMMUNITY_AWARDS_DESC": "Radioafeccionados que destacan LQ8 nos seus perfís de QRZ.com, patrocinadores de diplomas e libros de garda que apoian o modo.",
     "COMMUNITY_FORM_TITLE": "Rexistra o teu Club ou Contáctanos",
     "COMMUNITY_FORM_DESC": "Es un club, organizador de expedicións DX, desenvolvedor de software ou patrocinador de diplomas que apoia LQ8? Fáinolo saber!",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "diploma",
     "COMMUNITY_FIRST_QSO_USING": "Primeiro QSO usando LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "Primeiro QSO POTA usando LQ8",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "Primeiro QSO SOTA usando LQ8",
     "MODAL_SHARE_TITLE": "Ligazón copiada ao portapapeis!",
     "MODAL_SHARE_DESC": "A ligazón copiouse ao teu portapapeis. Pégaa e compártea con outros compañeiros radioafeccionados!",
     "MODAL_SHARE_OK": "OK"

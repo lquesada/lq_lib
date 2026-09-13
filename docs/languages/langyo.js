@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "Awọn ẹgbẹ redio ati awọn ẹgbẹ ibaraẹnisọrọ pajawiri ti n ṣe idanwo ati gbigba awọn ipo oni-nọmba LQ.",
     "COMMUNITY_DX_TITLE": "Awọn irin-ajo DX &amp; Awọn iṣẹ aaye",
     "COMMUNITY_DX_DESC": "Awọn oniṣẹ DXpedition, IOTA, SOTA, ati POTA ti nlo awọn fireemu idahun ibudo pupọ.",
-    "COMMUNITY_AWARDS_TITLE": "Awọn oniṣẹ, QRZ &amp; Awọn ami-ẹri",
+    "COMMUNITY_AWARDS_TITLE": "Awọn oniṣẹ",
     "COMMUNITY_AWARDS_DESC": "Awọn ololufẹ redio ti o pẹlu LQ8 ninu awọn profaili QRZ.com wọn.",
     "COMMUNITY_FORM_TITLE": "Gba Akojọ tabi Kan si Wa",
     "COMMUNITY_FORM_DESC": "Ṣe o jẹ ẹgbẹ kan, oluṣeto DXpedition tabi ham pẹlu LQ lori QRZ? Kan si wa nipasẹ fọọmu naa. Lati jabo awọn id پاک, ṣabẹwo si GitHub Issues.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "àmi-ẹ̀yẹ",
     "COMMUNITY_FIRST_QSO_USING": "QSO akọkọ nipa lilo LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "QSO POTA akọkọ nipa lilo LQ8",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "QSO SOTA akọkọ nipa lilo LQ8",
     "MODAL_SHARE_TITLE": "A daakọ ọna asopọ si Agekuru!",
     "MODAL_SHARE_DESC": "Ọna asopọ naa ti daakọ si agekuru agekuru rẹ. Lẹẹmọ ki o pin pẹlu awọn ope redio ẹlẹgbẹ, awọn ẹgbẹ idagbasoke, ati lori awọn apejọ!",
     "MODAL_SHARE_OK": "OK"

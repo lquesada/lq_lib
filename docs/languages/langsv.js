@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "Radioklubbar, contestgrupper och sambandsteam som experimenterar med och använder LQ-digitala moder.",
     "COMMUNITY_DX_TITLE": "DXpeditioner &amp; Aktiveringar",
     "COMMUNITY_DX_DESC": "DXpeditions-, IOTA-, SOTA- och POTA-operatörer som använder flerstationssvarsramar för att snabbt avverka pileups.",
-    "COMMUNITY_AWARDS_TITLE": "Operatörer, QRZ &amp; Diplom",
+    "COMMUNITY_AWARDS_TITLE": "Operatörer",
     "COMMUNITY_AWARDS_DESC": "Radioamatörer som listar LQ8 på sina QRZ.com-profiler, klubblistor och deltar i diplomprogram.",
     "COMMUNITY_FORM_TITLE": "Bli Listad eller Kontakta Oss",
     "COMMUNITY_FORM_DESC": "Är du en klubb, DXpeditionsarrangör, utvecklare eller radioamatör med LQ på QRZ? Kontakta oss via formuläret. För felrapporter, besök GitHub Issues.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "diplom",
     "COMMUNITY_FIRST_QSO_USING": "Första QSO med LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "Första POTA-QSO med LQ8",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "Första SOTA-QSO med LQ8",
     "MODAL_SHARE_TITLE": "Link kopieret til udklipsholder!",
     "MODAL_SHARE_DESC": "Linket er kopieret til din udklipsholder. Del det med andre radioamatører og på fora!",
     "MODAL_SHARE_OK": "OK"

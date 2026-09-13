@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "Kluby radiowe, grupy contestowe i zespoły łączności kryzysowej testujące i wdrażające emisje cyfrowe LQ.",
     "COMMUNITY_DX_TITLE": "DX-pedycje i Aktywacje",
     "COMMUNITY_DX_DESC": "Operatorzy ekspedycji DX, IOTA, SOTA i POTA wykorzystujący ramki wielostacyjne do szybkiej obsługi pileupów.",
-    "COMMUNITY_AWARDS_TITLE": "Operatorzy, QRZ i Dyplomy",
+    "COMMUNITY_AWARDS_TITLE": "Operatorzy",
     "COMMUNITY_AWARDS_DESC": "Krótkofalowcy umieszczający LQ8 w swoich profilach QRZ.com, spisach klubowych i programach dyplomowych.",
     "COMMUNITY_FORM_TITLE": "Dołącz do Listy lub Skontaktuj Się",
     "COMMUNITY_FORM_DESC": "Jesteś klubem, organizatorem DX-pedycji lub krótkofalowcem z LQ na QRZ? Skontaktuj się przez formularz. Aby zgłosić błędy, odwiedź GitHub Issues.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "dyplom",
     "COMMUNITY_FIRST_QSO_USING": "Pierwsze QSO przy użyciu LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "Pierwsze QSO POTA przy użyciu LQ8",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "Pierwsze QSO SOTA przy użyciu LQ8",
     "MODAL_SHARE_TITLE": "Link skopiowany do schowka!",
     "MODAL_SHARE_DESC": "Link został skopiowany. Podziel się nim z krótkofalowcami i na forach!",
     "MODAL_SHARE_OK": "OK"

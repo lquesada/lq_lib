@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "Radio clubs, contesting groups, and emergency communications teams experimenting with and adopting LQ digital modes.",
     "COMMUNITY_DX_TITLE": "DXpeditions &amp; Activations",
     "COMMUNITY_DX_DESC": "DXpeditions, IOTA, SOTA, and POTA operators leveraging high-throughput multi-station response frames to clear pileups rapidly.",
-    "COMMUNITY_AWARDS_TITLE": "Operators, QRZ &amp; Awards",
+    "COMMUNITY_AWARDS_TITLE": "Operators",
     "COMMUNITY_AWARDS_DESC": "Individual radio amateurs featuring LQ8 on their QRZ.com profiles, club rosters, and participating in award tracking.",
     "COMMUNITY_FORM_TITLE": "Get Listed or Contact Us",
     "COMMUNITY_FORM_DESC": "Are you a club, DXpedition organizer, software developer, award manager, or ham who includes LQ in your QRZ bio? Reach out via our contact form to be featured here or to get in touch with the project team. To report bugs or submit feature requests, visit our GitHub Issues tracker.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "award",
     "COMMUNITY_FIRST_QSO_USING": "First QSO using LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "First POTA QSO using LQ8",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "First SOTA QSO using LQ8",
     "MODAL_SHARE_TITLE": "Link Copied to Clipboard!",
     "MODAL_SHARE_DESC": "The link has been copied to your clipboard. Paste and share it with fellow radio amateurs, developer groups, and on forums!",
     "MODAL_SHARE_OK": "OK"

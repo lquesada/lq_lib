@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "LQ டிஜிட்டல் முறைகளைப் பரிசோதித்து பயன்படுத்தும் ரேடியோ கிளப்புகள் மற்றும் அவசர தொடர்பு குழுக்கள்.",
     "COMMUNITY_DX_TITLE": "DX பயணங்கள் மற்றும் செயல்பாடுகள்",
     "COMMUNITY_DX_DESC": "DX பயணங்கள், IOTA, SOTA மற்றும் POTA ஆபரேட்டர்கள் விரைவான தொடர்புகளுக்கு பல-நிலைய சட்டகங்களைப் பயன்படுத்துகின்றனர்.",
-    "COMMUNITY_AWARDS_TITLE": "ஆபரேட்டர்கள், QRZ மற்றும் விருதுகள்",
+    "COMMUNITY_AWARDS_TITLE": "ஆபரேட்டர்கள்",
     "COMMUNITY_AWARDS_DESC": "தங்கள் QRZ.com சுயவிவரங்கள் மற்றும் கிளப் பட்டியல்களில் LQ8-ஐ சேர்க்கும் அமெச்சூர் ரேடியோ அன்பர்கள்.",
     "COMMUNITY_FORM_TITLE": "பட்டியலில் சேர அல்லது எங்களை தொடர்பு கொள்ள",
     "COMMUNITY_FORM_DESC": "நீங்கள் ஒரு கிளப், DX ஏற்பாட்டாளர் அல்லது QRZ-ல் LQ உள்ளவரா? படிவத்தின் மூலம் எங்களை தொடர்பு கொள்ளவும். பிழைகளைப் புகாரளிக்க GitHub Issues-ஐப் பார்வையிடவும்.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "விருது",
     "COMMUNITY_FIRST_QSO_USING": "LQ8 ஐப் பயன்படுத்தி முதல் QSO",
     "COMMUNITY_FIRST_POTA_QSO_USING": "LQ8 ஐப் பயன்படுத்தி முதல் POTA QSO",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "LQ8 ஐப் பயன்படுத்தி முதல் SOTA QSO",
     "MODAL_SHARE_TITLE": "இணைப்பு கிளிப்போர்டில் நகலெடுக்கப்பட்டது!",
     "MODAL_SHARE_DESC": "இணைப்பு நகலெடுக்கப்பட்டது. உங்கள் நண்பர்களுடன் பகிரவும்!",
     "MODAL_SHARE_OK": "OK"

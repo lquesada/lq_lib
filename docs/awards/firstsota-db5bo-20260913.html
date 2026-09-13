@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <title>First POTA QSO - LQ8 Digital Mode Award</title>
+  <title>First SOTA QSO - DB5BO - LQ8 Digital Mode Award</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=Orbitron:wght@700;800;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
@@ -159,7 +159,6 @@
       }
     }
 
-    /* Ultra-compact bar for phones held in landscape */
     @media screen and (max-height: 500px) and (orientation: landscape) {
       body {
         padding: 8px 12px 20px;
@@ -306,7 +305,6 @@
       justify-self: center;
     }
 
-    /* LQ8 Logo with border removed and 5% background fade */
     .logo-lq8-img {
       width: 100%;
       height: 100%;
@@ -315,7 +313,6 @@
       filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.45)) drop-shadow(0 0 16px var(--cyan-glow));
     }
 
-    /* qFT8 Circular Logo enlarged */
     .logo-qft8-img {
       width: 100%;
       height: 100%;
@@ -520,7 +517,7 @@
       color: var(--gold-light);
     }
 
-    /* Bottom Section: Grouped Footer and Website URLs */
+    /* Bottom Section */
     .bottom-section-wrap {
       width: 100%;
       display: flex;
@@ -549,42 +546,23 @@
       flex-shrink: 0;
     }
 
-    .gold-seal-vector svg {
-      width: 100%;
-      height: 100%;
-      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.65));
-    }
-
     .seal-text-desc {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 3px;
     }
 
     .seal-text-title {
-      font-family: 'Cinzel', serif;
-      font-size: 15.5px;
+      font-size: 13px;
       font-weight: 800;
-      color: #ffffff;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold-light);
     }
 
     .seal-text-sub {
-      font-size: 12.5px;
-      color: var(--cyan-primary);
-      font-weight: 700;
-    }
-
-    /* Bottom Centered Website URL (At bottom centered in small grey letters) */
-    .bottom-web-links {
-      text-align: center;
-      font-size: 11px;
-      color: #768da6;
-      letter-spacing: 0.16em;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 600;
-      margin-top: 2px;
-      margin-bottom: 0;
+      font-size: 11.5px;
+      color: var(--text-silver);
     }
 
     .signature-group {
@@ -592,11 +570,10 @@
       flex-direction: column;
       align-items: flex-end;
       text-align: right;
-      justify-self: flex-end;
     }
 
     .sign-prompt {
-      font-size: 11.5px;
+      font-size: 10px;
       font-weight: 800;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -637,6 +614,16 @@
       font-size: 12.5px;
       color: var(--text-silver);
       margin-top: 1px;
+    }
+
+    .bottom-web-links {
+      text-align: center;
+      font-size: 10.5px;
+      letter-spacing: 0.22em;
+      color: var(--text-muted);
+      opacity: 0.85;
+      text-transform: uppercase;
+      margin-top: 2px;
     }
 
     /* Print Rules */
@@ -745,7 +732,7 @@
     <div class="diploma-wrapper" id="diplomaWrapper">
       <div class="diploma-sheet">
 
-      <!-- Background Watermark Vectors (Concentric & Wave, No Center Split Line) -->
+      <!-- Background Watermark Vectors -->
       <svg class="watermark-layer" viewBox="0 0 297 210" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="148.5" cy="105" r="45" stroke="#38bdf8" stroke-width="0.3" stroke-dasharray="1.5 1.5" />
         <circle cx="148.5" cy="105" r="75" stroke="#38bdf8" stroke-width="0.3" stroke-dasharray="2 2" />
@@ -782,7 +769,7 @@
 
         <!-- Top Header with Enlarged Prominent Logos -->
         <header class="header-block">
-          <!-- LQ8 Logo (Left, enlarged, transparent) -->
+          <!-- LQ8 Logo -->
           <div class="logo-container" title="LQ8 Digital Protocol">
             <img src="lq8.png" alt="LQ8 Protocol Emblem" class="logo-lq8-img">
           </div>
@@ -790,11 +777,11 @@
           <!-- Central Title Cluster -->
           <div class="header-center">
             <div class="top-badge">Amateur Radio Award</div>
-            <h1 class="main-heading">First POTA QSO</h1>
+            <h1 class="main-heading">First SOTA QSO</h1>
             <h2 class="sub-heading">LQ8 Digital Mode</h2>
           </div>
 
-          <!-- qFT8 Logo (Right, enlarged circular badge) -->
+          <!-- qFT8 Logo -->
           <div class="logo-container" title="qFT8 Software Suite">
             <img src="qft8.png" alt="qFT8 Software Emblem" class="logo-qft8-img">
           </div>
@@ -802,27 +789,25 @@
 
         <!-- Preamble Proclamation -->
         <p class="proclamation-text">
-          Awarded to commemorate the historic first Parks on the Air (POTA) two-way radio contact (QSO) successfully established and decoded using the <span class="mode-tag">LQ8</span> digital protocol and the <strong>qFT8</strong> software suite.
+          Awarded to commemorate the historic first Summits on the Air (SOTA) two-way radio contact (QSO) successfully established and decoded using the <span class="mode-tag">LQ8</span> digital protocol and the <strong>qFT8</strong> software suite.
         </p>
 
         <!-- Two Stations (Callsigns as Heroes) -->
         <section class="stations-showcase">
 
-          <!-- Station 1: AD5MO (United States) - Activator -->
+          <!-- Station 1: DB5BO (Germany) - Hunter -->
           <div class="station-card">
             <div class="station-location">
-              <span>United States</span>
-              <span>🇺🇸</span>
+              <span>Germany</span>
+              <span>🇩🇪</span>
             </div>
-            <div class="callsign-text">AD5MO</div>
+            <div class="callsign-text">DB5BO</div>
             <div class="station-specs-pill">
-              <span>POTA Activator</span>
-              <span class="separator">·</span>
-              <span>US-0309 (Elbow Slough WMA)</span>
+              <span>SOTA Hunter</span>
             </div>
           </div>
 
-          <!-- Center RF Wave Link (Centered, No redundant text) -->
+          <!-- Center RF Wave Link -->
           <div class="center-link">
             <svg class="rf-wave-svg" viewBox="0 0 140 36" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M 6 18 L 18 10 M 6 18 L 18 26 M 6 18 L 134 18 M 134 18 L 122 10 M 134 18 L 122 26" stroke="var(--cyan-primary)" stroke-width="2" stroke-linecap="round"/>
@@ -830,37 +815,39 @@
             </svg>
           </div>
 
-          <!-- Station 2: VA3VBE (Canada) - Hunter -->
+          <!-- Station 2: EA3ISA (Spain) - Activator -->
           <div class="station-card">
             <div class="station-location">
-              <span>Canada</span>
-              <span>🇨🇦</span>
+              <span>Spain</span>
+              <span>🇪🇸</span>
             </div>
-            <div class="callsign-text">VA3VBE</div>
+            <div class="callsign-text">EA3ISA</div>
             <div class="station-specs-pill">
-              <span>POTA Hunter</span>
+              <span>SOTA Activator</span>
+              <span class="separator">·</span>
+              <span>EA5/CS-020 (Campanilles)</span>
             </div>
           </div>
 
         </section>
 
-        <!-- Consolidated Telemetry Row (All Contact Data in One Clear Place) -->
+        <!-- Consolidated Telemetry Row -->
         <div class="qso-telemetry-banner">
           <div class="telemetry-item">
             <span class="tel-label">Date</span>
-            <span class="tel-value gold">2026-09-11</span>
+            <span class="tel-value gold">2026-09-13</span>
           </div>
           <div class="telemetry-item">
             <span class="tel-label">Time</span>
-            <span class="tel-value gold">23:12 UTC</span>
+            <span class="tel-value gold">09:46 UTC</span>
           </div>
           <div class="telemetry-item">
             <span class="tel-label">Band</span>
-            <span class="tel-value">30 Meters</span>
+            <span class="tel-value">20 Meters</span>
           </div>
           <div class="telemetry-item">
             <span class="tel-label">Frequency</span>
-            <span class="tel-value gold">10,147 kHz</span>
+            <span class="tel-value gold">14,080 kHz</span>
           </div>
           <div class="telemetry-item">
             <span class="tel-label">Digital Mode</span>
@@ -883,7 +870,7 @@
                   <circle cx="50" cy="50" r="46" stroke="url(#goldGrad)" stroke-width="2.2" stroke-dasharray="3.5 2" />
                   <circle cx="50" cy="50" r="41" fill="#0d243c" stroke="url(#goldGrad)" stroke-width="2"/>
                   <path d="M50 24 L52.4 31.5 L60 31.5 L53.8 36 L56.2 43.5 L50 39 L43.8 43.5 L46.2 36 L40 31.5 L47.6 31.5 Z" fill="url(#goldGrad)" />
-                  <text x="50" y="53" text-anchor="middle" font-family="'Cinzel', serif" font-size="7" font-weight="900" fill="#fef08a" letter-spacing="0.6">FIRST POTA</text>
+                  <text x="50" y="53" text-anchor="middle" font-family="'Cinzel', serif" font-size="7" font-weight="900" fill="#fef08a" letter-spacing="0.6">FIRST SOTA</text>
                   <text x="50" y="62" text-anchor="middle" font-family="'Cinzel', serif" font-size="8.5" font-weight="900" fill="#ffffff" letter-spacing="1">LQ8 QSO</text>
                   <defs>
                     <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -896,7 +883,7 @@
               </div>
               <div class="seal-text-desc">
                 <span class="seal-text-title">Official Historic Record</span>
-                <span class="seal-text-sub">Authenticated First POTA Contact</span>
+                <span class="seal-text-sub">Authenticated First SOTA Contact</span>
               </div>
             </div>
 
@@ -913,7 +900,7 @@
 
           </footer>
 
-          <!-- Bottom Website URLs Centered in Small Grey Letters -->
+          <!-- Bottom Website URLs -->
           <div class="bottom-web-links">
             lq8.org / qFT8.com
           </div>

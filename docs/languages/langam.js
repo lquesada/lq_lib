@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "የLQ ዲጂታል ሞዶችን የሚሞክሩ እና የሚጠቀሙ የሬዲዮ ክለቦች እና የአደጋ ጊዜ ግንኙነት ቡድኖች።",
     "COMMUNITY_DX_TITLE": "የDX ጉዞዎች እና የመስክ ስራዎች",
     "COMMUNITY_DX_DESC": "የDXpedition፣ IOTA፣ SOTA እና POTA ኦፕሬተሮች ፈጣን ግንኙነት ለማድረግ ባለብዙ ጣቢያ ምላሾችን ይጠቀማሉ።",
-    "COMMUNITY_AWARDS_TITLE": "ኦፕሬተሮች፣ QRZ እና ሽልማቶች",
+    "COMMUNITY_AWARDS_TITLE": "ኦፕሬተሮች",
     "COMMUNITY_AWARDS_DESC": "በQRZ.com መገለጫቸው ላይ LQ8ን የሚያካትቱ አማተር ሬዲዮ ተጠቃሚዎች።",
     "COMMUNITY_FORM_TITLE": "በዝርዝሩ ውስጥ ይካተቱ ወይም ያግኙን",
     "COMMUNITY_FORM_DESC": "ክለብ፣ የDX ጉዞ አዘጋጅ ወይም በQRZ ላይ LQ ያለዎት ተጠቃሚ ነዎት? በቅጹ በኩል ያግኙን። ሳንካዎችን ሪፖርት ለማድረግ የ GitHub Issues ገጽን ይጎብኙ።",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "ሽልማት",
     "COMMUNITY_FIRST_QSO_USING": "በLQ8 የመጀመሪያው የQSO ግንኙነት",
     "COMMUNITY_FIRST_POTA_QSO_USING": "በLQ8 የመጀመሪያው የPOTA QSO ግንኙነት",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "በLQ8 የመጀመሪያው የSOTA QSO ግንኙነት",
     "MODAL_SHARE_TITLE": "አገናኝ ወደ ቅንጥብ ሰሌዳ ተቀድቷል!",
     "MODAL_SHARE_DESC": "አገናኙ ወደ ቅንጥብ ሰሌዳዎ ተቀድቷል። ለጥፍ እና ከሌሎች የሬዲዮ አማተሮች፣ ገንቢ ቡድኖች እና መድረኮች ላይ ያካፍሉት!",
     "MODAL_SHARE_OK": "OK"

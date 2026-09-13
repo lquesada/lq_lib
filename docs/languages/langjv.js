@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "Klub radio, grup kontes, lan tim darurat sing nyoba lan nggunakake mode digital LQ.",
     "COMMUNITY_DX_TITLE": "DXpeditions & Aktivasi",
     "COMMUNITY_DX_DESC": "Operator DXpedition, IOTA, SOTA, lan POTA sing nggunakake frame multi-respon kanggo ngrampungake pileup kanthi cepet.",
-    "COMMUNITY_AWARDS_TITLE": "Operator, QRZ & Penghargaan",
+    "COMMUNITY_AWARDS_TITLE": "Operator",
     "COMMUNITY_AWARDS_DESC": "Amatir radio sing nyantumake LQ8 ing profil QRZ.com lan melu program penghargaan.",
     "COMMUNITY_FORM_TITLE": "Ndaftar utawa Hubungi Kita",
     "COMMUNITY_FORM_DESC": "Apa sampeyan klub, panitia DXpedition, utawa amatir radio kanthi LQ ing QRZ? Hubungi liwat formulir. Kanggo nglaporake bug, bukak GitHub Issues.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "penghargaan",
     "COMMUNITY_FIRST_QSO_USING": "QSO pisanan nggunakake LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "QSO POTA pisanan nggunakake LQ8",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "QSO SOTA pisanan nggunakake LQ8",
     "MODAL_SHARE_TITLE": "Link Disalin menyang Clipboard!",
     "MODAL_SHARE_DESC": "Link wis disalin menyang clipboard sampeyan. Tempel lan enggo bareng karo kanca radio amatir, grup pangembang, lan ing forum!",
     "MODAL_SHARE_OK": "OK"

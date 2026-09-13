@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "રેડિયો ક્લબો, સ્પર્ધા જૂથો અને કટોકટી સંચાર ટીમો જે LQ ડિજિટલ મોડ્સનો પ્રયોગ કરી રહી છે.",
     "COMMUNITY_DX_TITLE": "DX અભિયાનો અને ક્ષેત્ર સક્રિયકરણ",
     "COMMUNITY_DX_DESC": "DX અભિયાનો, IOTA, SOTA અને POTA ઓપરેટરો જે પાઇલઅપ્સ ઝડપથી સાફ કરવા માટે મલ્ટી-સ્ટેશન ફ્રેમ્સનો ઉપયોગ કરે છે.",
-    "COMMUNITY_AWARDS_TITLE": "ઓપરેટરો, QRZ અને એવોર્ડ્સ",
+    "COMMUNITY_AWARDS_TITLE": "ઓપરેટરો",
     "COMMUNITY_AWARDS_DESC": "કલાપ્રેમી રેડિયો ઓપરેટરો જે તેમની QRZ.com પ્રોફાઇલ્સમાં LQ8 શામેલ કરે છે.",
     "COMMUNITY_FORM_TITLE": "યાદીમાં સામેલ થાઓ અથવા સંપર્ક કરો",
     "COMMUNITY_FORM_DESC": "શું તમે ક્લબ, DX અભિયાન આયોજક અથવા હેમ છો જેમના QRZ માં LQ સામેલ છે? ફોર્મ દ્વારા અમારો સંપર્ક કરો। બગ્સની જાણ કરવા માટે GitHub Issues ની મુલાકાત લો.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "એવોર્ડ",
     "COMMUNITY_FIRST_QSO_USING": "LQ8 નો ઉપયોગ કરીને પ્રથમ QSO",
     "COMMUNITY_FIRST_POTA_QSO_USING": "LQ8 નો ઉપયોગ કરીને પ્રથમ POTA QSO",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "LQ8 નો ઉપયોગ કરીને પ્રથમ SOTA QSO",
     "MODAL_SHARE_TITLE": "लिंक क्लिपबोर्ड पर कॉपी हो गया!",
     "MODAL_SHARE_DESC": "लिंक कॉपी हो गया है। इसे रेडियो मित्रों और मंचों पर साझा करें!",
     "MODAL_SHARE_OK": "OK"

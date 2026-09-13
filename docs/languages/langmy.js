@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "LQ ဒစ်ဂျစ်တယ်မုဒ်များကို စမ်းသပ်အသုံးပြုနေကြသော ရေဒီယိုကလပ်များနှင့် အရေးပေါ်ဆက်သွယ်ရေးအဖွဲ့များ။",
     "COMMUNITY_DX_TITLE": "DX စူးစမ်းလေ့လာရေးနှင့် ကွင်းဆင်းဆောင်ရွက်မှုများ",
     "COMMUNITY_DX_DESC": "Pileups များကို လျင်မြန်စွာရှင်းလင်းရန် နေရာပေါင်းစုံတုံ့ပြန်မှုဘောင်များကို အသုံးချနေသော DXpedition၊ IOTA၊ SOTA နှင့် POTA အော်ပရေတာများ။",
-    "COMMUNITY_AWARDS_TITLE": "အော်ပရေတာများ၊ QRZ နှင့် ဆုတံဆိပ်များ",
+    "COMMUNITY_AWARDS_TITLE": "အော်ပရေတာများ",
     "COMMUNITY_AWARDS_DESC": "QRZ.com ပရိုဖိုင်များတွင် LQ8 ကို ထည့်သွင်းဖော်ပြထားသော အပျော်တမ်းရေဒီယိုအော်ပရေတာများ။",
     "COMMUNITY_FORM_TITLE": "စာရင်းသွင်းရန် သို့မဟုတ် ဆက်သွယ်ရန်",
     "COMMUNITY_FORM_DESC": "သင်သည် ကလပ်တစ်ခု၊ DXpedition စီစဉ်သူ သို့မဟုတ် QRZ တွင် LQ ထည့်ထားသူလား။ ဆက်သွယ်ရန်ဖောင်မှတစ်ဆင့် ဆက်သွယ်ပါ။ ချို့ယွင်းချက်များတင်ပြရန် GitHub Issues သို့ ဝင်ရောက်ပါ။",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "ဆုတံဆိပ်",
     "COMMUNITY_FIRST_QSO_USING": "LQ8 အသုံးပြု၍ ပထမဆုံး QSO",
     "COMMUNITY_FIRST_POTA_QSO_USING": "LQ8 အသုံးပြု၍ ပထမဆုံး POTA QSO",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "LQ8 အသုံးပြု၍ ပထမဆုံး SOTA QSO",
     "MODAL_SHARE_TITLE": "လင့်ခ်ကို ကလစ်ဘုတ်သို့ ကူးယူထားသည်။",
     "MODAL_SHARE_DESC": "လင့်ခ်ကို သင့်ကလစ်ဘုတ်သို့ ကူးယူလိုက်ပါပြီ။ ၎င်းကို အပျော်တမ်း ရေဒီယိုဖော်၊ ဆော့ဖ်ဝဲရေးသားသူအဖွဲ့များနှင့် ဖိုရမ်များတွင် ကူးထည့်ပါ။",
     "MODAL_SHARE_OK": "OK"

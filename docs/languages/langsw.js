@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "Vilabu vya redio, vikundi vya mashindano na timu za mawasiliano ya dharura zinazojaribu na kutumia njia za kidijitali za LQ.",
     "COMMUNITY_DX_TITLE": "Misafara ya DX na Uanzishaji",
     "COMMUNITY_DX_DESC": "Waendeshaji wa DXpedition, IOTA, SOTA, na POTA wanaotumia mifumo ya majibu ya vituo vingi kumaliza pileups haraka.",
-    "COMMUNITY_AWARDS_TITLE": "Waendeshaji, QRZ na Tuzo",
+    "COMMUNITY_AWARDS_TITLE": "Waendeshaji",
     "COMMUNITY_AWARDS_DESC": "Wapenzi wa redio wanaojumuisha LQ8 katika wasifu wao wa QRZ.com na orodha za vilabu.",
     "COMMUNITY_FORM_TITLE": "Orodheshwa au Wasiliana Nasi",
     "COMMUNITY_FORM_DESC": "Je, wewe ni klabu, mratibu wa DXpedition au ham mwenye LQ kwenye QRZ? Wasiliana nasi kupitia fomu. Kuripoti hitilafu, tembelea GitHub Issues.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "tuzo",
     "COMMUNITY_FIRST_QSO_USING": "QSO ya kwanza kwa kutumia LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "QSO ya kwanza ya POTA kwa kutumia LQ8",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "QSO ya kwanza ya SOTA kwa kutumia LQ8",
     "MODAL_SHARE_TITLE": "Kiungo kimenakiliwa kwenye ubao wa kunakili!",
     "MODAL_SHARE_DESC": "Kiungo kimenakiliwa. Shiriki na wenzako kwenye redio na majukwaa!",
     "MODAL_SHARE_OK": "OK"

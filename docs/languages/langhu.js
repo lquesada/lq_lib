@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "Rádióklubok, versenycsapatok és vészhelyzeti rádiós egységek, amelyek LQ digitális módokat tesztelnek és használnak.",
     "COMMUNITY_DX_TITLE": "DX-expedíciók és Kitelepülések",
     "COMMUNITY_DX_DESC": "DX-expedíciók, IOTA, SOTA és POTA állomások, amelyek többállomásos válaszkeretekkel gyorsan feldolgozzák a pileupokat.",
-    "COMMUNITY_AWARDS_TITLE": "Operátorok, QRZ és Oklevelek",
+    "COMMUNITY_AWARDS_TITLE": "Operátorok",
     "COMMUNITY_AWARDS_DESC": "Egyéni rádióamatőrök, akik feltüntetik az LQ8-at QRZ.com profiljukban és részt vesznek az oklevélgyűjtésben.",
     "COMMUNITY_FORM_TITLE": "Csatlakozás a Listához vagy Kapcsolatfelvétel",
     "COMMUNITY_FORM_DESC": "Klub, DX-expedíció szervezője vagy rádióamatőr vagy LQ megjelöléssel a QRZ-n? Lépj kapcsolatba velünk az űrlapon. Hibabejelentéshez keresd fel a GitHub Issues felületét.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "oklevél",
     "COMMUNITY_FIRST_QSO_USING": "Első QSO LQ8 használatával",
     "COMMUNITY_FIRST_POTA_QSO_USING": "Első POTA QSO LQ8 használatával",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "Első SOTA QSO LQ8 használatával",
     "MODAL_SHARE_TITLE": "A hivatkozás a vágólapra másolva!",
     "MODAL_SHARE_DESC": "A link a vágólapra került. Oszd meg rádióamatőr társaiddal és a fórumokon!",
     "MODAL_SHARE_OK": "OK"

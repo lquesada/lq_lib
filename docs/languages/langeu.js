@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "LQ modu digitalak esperimentatzen eta erabiltzen dituzten irrati-klubak eta lehiaketa-taldeak.",
     "COMMUNITY_DX_TITLE": "DXpedizioak eta Aktibazioak",
     "COMMUNITY_DX_DESC": "DXpedizioetako, IOTA, SOTA eta POTA operadoreak pileupak azkar kudeatzeko erantzun anitzeko markoak erabiliz.",
-    "COMMUNITY_AWARDS_TITLE": "Operadoreak, QRZ eta Sariak",
+    "COMMUNITY_AWARDS_TITLE": "Operadoreak",
     "COMMUNITY_AWARDS_DESC": "QRZ.com profiletan LQ8 aipatzen duten irrati-zaleak eta sari-programetan parte hartzen dutenak.",
     "COMMUNITY_FORM_TITLE": "Zerrendan sartu edo Jarri Harremanetan",
     "COMMUNITY_FORM_DESC": "Kluba, DXpedizio antolatzailea, garatzailea edo QRZ-n LQ duzun irrati-zalea zara? Jarri gurekin harremanetan formularioaren bidez. Akatsak jakinarazteko, bisitatu GitHub Issues.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "saria",
     "COMMUNITY_FIRST_QSO_USING": "Lehen QSOa LQ8 erabiliz",
     "COMMUNITY_FIRST_POTA_QSO_USING": "Lehen POTA QSOa LQ8 erabiliz",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "Lehen SOTA QSOa LQ8 erabiliz",
     "MODAL_SHARE_TITLE": "Esteka arbelera kopiatu da!",
     "MODAL_SHARE_DESC": "Esteka kopiatu da. Partekatu irrati-zaleekin eta foroetan!",
     "MODAL_SHARE_OK": "OK"

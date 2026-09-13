@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "Mga radio club, contest group, at emergency communications team na sumusubok at gumagamit ng mga LQ digital mode.",
     "COMMUNITY_DX_TITLE": "Mga DXpedition at Aktibasyon",
     "COMMUNITY_DX_DESC": "Mga operator ng DXpedition, IOTA, SOTA, at POTA na gumagamit ng mga multi-station response frame upang mabilis na maresolba ang mga pileup.",
-    "COMMUNITY_AWARDS_TITLE": "Mga Operator, QRZ at Parangal",
+    "COMMUNITY_AWARDS_TITLE": "Mga Operator",
     "COMMUNITY_AWARDS_DESC": "Mga indibidwal na radio amateur na nagsasama ng LQ8 sa kanilang QRZ.com profile at mga talaan ng parangal.",
     "COMMUNITY_FORM_TITLE": "Mapasama sa Listahan o Makipag-ugnayan",
     "COMMUNITY_FORM_DESC": "Ikaw ba ay isang club, tagapag-organisa ng DXpedition, o ham na may LQ sa QRZ? Makipag-ugnayan gamit ang contact form. Para mag-ulat ng bug, bisitahin ang GitHub Issues.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "parangal",
     "COMMUNITY_FIRST_QSO_USING": "Unang QSO gamit ang LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "Unang POTA QSO gamit ang LQ8",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "Unang SOTA QSO gamit ang LQ8",
     "MODAL_SHARE_TITLE": "Nakopya ang Link sa Clipboard!",
     "MODAL_SHARE_DESC": "Ang link ay nakopya sa iyong clipboard. I-paste at ibahagi ito sa mga kapwa radio amateurs, developer group, at sa mga forum!",
     "MODAL_SHARE_OK": "OK"

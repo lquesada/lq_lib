@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "Radio-clubs, groupes de contest et équipes de secours expérimentant et adoptant les modes numériques LQ.",
     "COMMUNITY_DX_TITLE": "Expéditions DX &amp; Activations",
     "COMMUNITY_DX_DESC": "Opérateurs de DXpeditions, IOTA, SOTA et POTA tirant parti des trames multi-réponses pour absorber rapidement les pileups.",
-    "COMMUNITY_AWARDS_TITLE": "Opérateurs, QRZ &amp; Diplômes",
+    "COMMUNITY_AWARDS_TITLE": "Opérateurs",
     "COMMUNITY_AWARDS_DESC": "Radioamateurs mentionnant LQ8 sur leur profil QRZ.com, registres de club et suivi des diplômes.",
     "COMMUNITY_FORM_TITLE": "Être Référencé ou Nous Contacter",
     "COMMUNITY_FORM_DESC": "Vous êtes un club, un organisateur d'expédition DX, un développeur, un gestionnaire de diplômes ou un OM mentionnant LQ sur QRZ ? Contactez-nous via le formulaire. Pour signaler un bug ou proposer une fonctionnalité, consultez GitHub Issues.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "diplôme",
     "COMMUNITY_FIRST_QSO_USING": "Premier QSO avec LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "Premier QSO POTA avec LQ8",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "Premier QSO SOTA avec LQ8",
     "MODAL_SHARE_TITLE": "Lien copié dans le presse-papier !",
     "MODAL_SHARE_DESC": "Le lien a été copié dans votre presse-papier. Partagez-le avec vos collègues radioamateurs et sur les forums !",
     "MODAL_SHARE_OK": "OK"

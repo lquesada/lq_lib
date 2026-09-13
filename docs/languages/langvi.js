@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "Các câu lạc bộ vô tuyến, nhóm thi đấu và đội cứu nạn đang thử nghiệm và áp dụng các chế độ kỹ thuật số LQ.",
     "COMMUNITY_DX_TITLE": "Thám hiểm DX &amp; Hoạt động dã ngoại",
     "COMMUNITY_DX_DESC": "Các nhà khai thác DXpedition, IOTA, SOTA và POTA tận dụng khung phản hồi đa trạm để giải quyết pileup nhanh chóng.",
-    "COMMUNITY_AWARDS_TITLE": "Nhà khai thác, QRZ &amp; Giải thưởng",
+    "COMMUNITY_AWARDS_TITLE": "Người vận hành",
     "COMMUNITY_AWARDS_DESC": "Các cá nhân vô tuyến nghiệp dư giới thiệu LQ8 trên hồ sơ QRZ.com và theo dõi giải thưởng.",
     "COMMUNITY_FORM_TITLE": "Đăng ký Danh sách hoặc Liên hệ",
     "COMMUNITY_FORM_DESC": "Bạn là câu lạc bộ, nhà tổ chức DXpedition hay ham có LQ trên QRZ? Hãy liên hệ qua biểu mẫu. Để báo cáo lỗi, hãy truy cập GitHub Issues.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "giải thưởng",
     "COMMUNITY_FIRST_QSO_USING": "QSO đầu tiên sử dụng LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "POTA QSO đầu tiên sử dụng LQ8",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "SOTA QSO đầu tiên sử dụng LQ8",
     "MODAL_SHARE_TITLE": "Đã sao chép liên kết vào bộ nhớ tạm!",
     "MODAL_SHARE_DESC": "Liên kết đã được sao chép. Hãy chia sẻ với bạn bè vô tuyến và trên các diễn đàn!",
     "MODAL_SHARE_OK": "OK"

@@ -130,6 +130,7 @@ def main():
         award_val = json.dumps(t['award'], ensure_ascii=False)
         first_qso_val = json.dumps(t['first_qso'], ensure_ascii=False)
         first_pota_qso_val = json.dumps(t['first_pota_qso'], ensure_ascii=False)
+        first_sota_qso_val = json.dumps(t.get('first_sota_qso', t['first_pota_qso'].replace('POTA', 'SOTA')), ensure_ascii=False)
 
         # Check if already has COMMUNITY_AWARD_LABEL
         if '"COMMUNITY_AWARD_LABEL"' in content:
@@ -158,6 +159,20 @@ def main():
                         f'\n    "COMMUNITY_FIRST_POTA_QSO_USING": {first_pota_qso_val},' +
                         content[match.end():]
                     )
+            if '"COMMUNITY_FIRST_SOTA_QSO_USING"' in content:
+                content = re.sub(
+                    r'"COMMUNITY_FIRST_SOTA_QSO_USING":\s*"[^"]*",?',
+                    f'"COMMUNITY_FIRST_SOTA_QSO_USING": {first_sota_qso_val},',
+                    content
+                )
+            else:
+                match = re.search(r'("COMMUNITY_FIRST_POTA_QSO_USING":\s*"[^"]*",)', content)
+                if match:
+                    content = (
+                        content[:match.end()] +
+                        f'\n    "COMMUNITY_FIRST_SOTA_QSO_USING": {first_sota_qso_val},' +
+                        content[match.end():]
+                    )
         else:
             # Insert after COMMUNITY_EMPTY_NOTE
             note_match = re.search(r'("COMMUNITY_EMPTY_NOTE":\s*"[^"]*",)', content)
@@ -166,7 +181,8 @@ def main():
                     f'{note_match.group(1)}\n'
                     f'    "COMMUNITY_AWARD_LABEL": {award_val},\n'
                     f'    "COMMUNITY_FIRST_QSO_USING": {first_qso_val},\n'
-                    f'    "COMMUNITY_FIRST_POTA_QSO_USING": {first_pota_qso_val},'
+                    f'    "COMMUNITY_FIRST_POTA_QSO_USING": {first_pota_qso_val},\n'
+                    f'    "COMMUNITY_FIRST_SOTA_QSO_USING": {first_sota_qso_val},'
                 )
                 content = content[:note_match.start()] + insertion + content[note_match.end():]
             else:

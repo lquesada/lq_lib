@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "Ραδιολέσχες, ομάδες διαγωνισμών και ομάδες έκτακτης ανάγκης που δοκιμάζουν και υιοθετούν ψηφιακές διαμορφώσεις LQ.",
     "COMMUNITY_DX_TITLE": "DXpeditions &amp; Ενεργοποιήσεις",
     "COMMUNITY_DX_DESC": "Χειριστές DXpeditions, IOTA, SOTA και POTA που αξιοποιούν πλαίσια πολλαπλών απαντήσεων για ταχεία εκκαθάριση pileup.",
-    "COMMUNITY_AWARDS_TITLE": "Χειριστές, QRZ &amp; Βραβεία",
+    "COMMUNITY_AWARDS_TITLE": "Χειριστές",
     "COMMUNITY_AWARDS_DESC": "Ραδιοερασιτέχνες που περιλαμβάνουν το LQ8 στο προφίλ τους στο QRZ.com, λίστες συλλόγων και συμμετοχή σε βραβεία.",
     "COMMUNITY_FORM_TITLE": "Καταχώριση στη Λίστα ή Επικοινωνία",
     "COMMUNITY_FORM_DESC": "Είστε σύλλογος, διοργανωτής DXpedition ή ραδιοερασιτέχνης με LQ στο QRZ; Επικοινωνήστε μαζί μας μέσω της φόρμας. Για αναφορά σφαλμάτων, επισκεφθείτε το GitHub Issues.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "βραβείο",
     "COMMUNITY_FIRST_QSO_USING": "Πρώτο QSO με χρήση LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "Πρώτο POTA QSO με χρήση LQ8",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "Πρώτο SOTA QSO με χρήση LQ8",
     "MODAL_SHARE_TITLE": "Ο σύνδεσμος αντιγράφηκε!",
     "MODAL_SHARE_DESC": "Ο σύνδεσμος αντιγράφηκε στο πρόχειρο. Κοινοποιήστε τον σε συναδέλφους ραδιοερασιτέχνες!",
     "MODAL_SHARE_OK": "OK"

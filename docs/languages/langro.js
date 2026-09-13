@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "Radiocluburi, grupuri de concurs și echipe de comunicații de urgență care experimentează modurile digitale LQ.",
     "COMMUNITY_DX_TITLE": "DXpediții și Activări",
     "COMMUNITY_DX_DESC": "Operatori de DXpediții, IOTA, SOTA și POTA care utilizează cadre cu răspuns multiplu pentru a procesa rapid pileup-urile.",
-    "COMMUNITY_AWARDS_TITLE": "Operatori, QRZ și Diplome",
+    "COMMUNITY_AWARDS_TITLE": "Operatori",
     "COMMUNITY_AWARDS_DESC": "Radioamatori care includ LQ8 în profilul QRZ.com, registre de club și urmărirea diplomelor.",
     "COMMUNITY_FORM_TITLE": "Înscriere pe Listă sau Contact",
     "COMMUNITY_FORM_DESC": "Sunteți un club, organizator de DXpediție sau radioamator cu LQ pe QRZ? Contactați-ne prin formular. Pentru raportarea problemelor, accesați GitHub Issues.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "diplomă",
     "COMMUNITY_FIRST_QSO_USING": "Primul QSO utilizând LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "Primul QSO POTA utilizând LQ8",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "Primul QSO SOTA utilizând LQ8",
     "MODAL_SHARE_TITLE": "Link copiat în clipboard!",
     "MODAL_SHARE_DESC": "Linkul a fost copiat în clipboard. Trimite-l colegilor radioamatori și pe forumuri!",
     "MODAL_SHARE_OK": "OK"

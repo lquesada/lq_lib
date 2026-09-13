@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "Radiaj kluboj, konkuraj grupoj kaj krizokomunikaj teamoj eksperimentantaj kaj adoptantaj LQ-ciferecajn modojn.",
     "COMMUNITY_DX_TITLE": "DXpedicioj &amp; Aktivadoj",
     "COMMUNITY_DX_DESC": "Operatoroj de DXpedicioj, IOTA, SOTA kaj POTA uzantaj plur-staciajn respondkadrojn por rapide solvi amasvokojn.",
-    "COMMUNITY_AWARDS_TITLE": "Operatoroj, QRZ &amp; Diplomoj",
+    "COMMUNITY_AWARDS_TITLE": "Operatoroj",
     "COMMUNITY_AWARDS_DESC": "Amatoraj radiistoj menciantaj LQ8 en siaj QRZ.com-profiloj kaj klubaj listoj.",
     "COMMUNITY_FORM_TITLE": "Enlistiĝi aŭ Kontakti Nin",
     "COMMUNITY_FORM_DESC": "Ĉu vi estas klubo, organizanto de DXpedicio aŭ radiamatoro kun LQ en QRZ? Kontaktu nin per la formularo. Por raporti cimojn, vizitu GitHub Issues.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "diplomo",
     "COMMUNITY_FIRST_QSO_USING": "Unua QSO uzante LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "Unua POTA-QSO uzante LQ8",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "Unua SOTA-QSO uzante LQ8",
     "MODAL_SHARE_TITLE": "Ligilo kopiita al la tondejo!",
     "MODAL_SHARE_DESC": "La ligilo estas kopiita. Konigu ĝin al viaj radioamatoraj amikoj kaj en forumoj!",
     "MODAL_SHARE_OK": "OK"

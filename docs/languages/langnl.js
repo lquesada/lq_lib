@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "Radioclubs, contestgroepen en noodcommunicatieteams die experimenteren met en overstappen op LQ digitale modi.",
     "COMMUNITY_DX_TITLE": "DXpedities &amp; Activaties",
     "COMMUNITY_DX_DESC": "DXpeditie-, IOTA-, SOTA- en POTA-operators die meervoudige responsframes benutten om pileups snel te verwerken.",
-    "COMMUNITY_AWARDS_TITLE": "Zendamateurs, QRZ &amp; Onderscheidingen",
+    "COMMUNITY_AWARDS_TITLE": "Zendamateurs",
     "COMMUNITY_AWARDS_DESC": "Zendamateurs die LQ8 vermelden op hun QRZ.com-profiel, clublijsten en awardprogramma's.",
     "COMMUNITY_FORM_TITLE": "Vermelding Aanvragen of Contact Opnemen",
     "COMMUNITY_FORM_DESC": "Bent u een club, DXpeditie-organisator, ontwikkelaar of zendamateur met LQ op QRZ? Neem contact op via het formulier. Voor bugrapporten bezoekt u GitHub Issues.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "diploma",
     "COMMUNITY_FIRST_QSO_USING": "Eerste QSO met behulp van LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "Eerste POTA-QSO met behulp van LQ8",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "Eerste SOTA-QSO met behulp van LQ8",
     "MODAL_SHARE_TITLE": "Link gekopieerd naar klembord!",
     "MODAL_SHARE_DESC": "De link is gekopieerd. Deel hem met collega-zendamateurs en op fora!",
     "MODAL_SHARE_OK": "OK"

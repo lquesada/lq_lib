@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "Funkclubs, Contest-Gruppen und Notfunkteams, die LQ-Digitalmodi erproben und einsetzen.",
     "COMMUNITY_DX_TITLE": "DXpeditionen &amp; Aktivierungen",
     "COMMUNITY_DX_DESC": "DXpeditions-, IOTA-, SOTA- und POTA-Operatoren, die Multi-Station-Antwortrahmen nutzen, um Pileups schnell abzuarbeiten.",
-    "COMMUNITY_AWARDS_TITLE": "Funkamateure, QRZ &amp; Diplome",
+    "COMMUNITY_AWARDS_TITLE": "Operatoren",
     "COMMUNITY_AWARDS_DESC": "Funkamateure, die LQ8 in ihren QRZ.com-Profilen erwähnen, Clubmitglieder und Teilnehmer an Diplomprogrammen.",
     "COMMUNITY_FORM_TITLE": "Eintragen lassen oder Kontakt aufnehmen",
     "COMMUNITY_FORM_DESC": "Sind Sie ein Club, DXpeditions-Organisator, Entwickler oder Funkamateur mit LQ im QRZ-Profil? Kontaktieren Sie uns über das Formular. Für Fehlerberichte oder Funktionsanfragen besuchen Sie bitte GitHub Issues.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "Diplom",
     "COMMUNITY_FIRST_QSO_USING": "Erstes QSO mit LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "Erstes POTA-QSO mit LQ8",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "Erstes SOTA-QSO mit LQ8",
     "MODAL_SHARE_TITLE": "Link in die Zwischenablage kopiert!",
     "MODAL_SHARE_DESC": "Der Link wurde in Ihre Zwischenablage kopiert. Teilen Sie ihn mit Funkfreunden und in Foren!",
     "MODAL_SHARE_OK": "OK"

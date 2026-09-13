@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "מועדוני רדיו, קבוצות תחרויות וצוותי חירום הבודקים ומאמצים את הפרוטוקולים הדיגיטליים של LQ.",
     "COMMUNITY_DX_TITLE": "משלחות DX והפעלות שטח",
     "COMMUNITY_DX_DESC": "מפעילי משלחות DX, IOTA, SOTA ו-POTA המנצלים מסגרות תגובה מרובות תחנות לפריצת פיילאפים במהירות.",
-    "COMMUNITY_AWARDS_TITLE": "מפעילים, QRZ ותעודות",
+    "COMMUNITY_AWARDS_TITLE": "מפעילים",
     "COMMUNITY_AWARDS_DESC": "חובבי רדיו המציינים את LQ8 בפרופיל ה-QRZ.com שלהם ומשתתפים במעקב תעודות.",
     "COMMUNITY_FORM_TITLE": "הצטרפות לרשימה או יצירת קשר",
     "COMMUNITY_FORM_DESC": "האם אתם מועדון, מארגני משלחת DX או חובבי רדיו עם LQ ב-QRZ? פנו אלינו באמצעות הטופס. לדיווח על תקלות, בקרו ב-GitHub Issues.",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "תעודה",
     "COMMUNITY_FIRST_QSO_USING": "QSO ראשון באמצעות LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "QSO של POTA ראשון באמצעות LQ8",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "QSO של SOTA ראשון באמצעות LQ8",
     "MODAL_SHARE_TITLE": "הקישור הועתק ללוח!",
     "MODAL_SHARE_DESC": "הקישור הועתק ללוח. שתפו אותו עם חובבי רדיו ובפורומים!",
     "MODAL_SHARE_OK": "OK"

@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "LQデジタルモードの実験と導入を進める無線クラブ、コンテストグループ、非常通信チーム。",
     "COMMUNITY_DX_TITLE": "DXペディション・移動運用",
     "COMMUNITY_DX_DESC": "パイルアップを迅速に捌くマルチ局応答フレームを活用するDXペディション、IOTA、SOTA、POTA運用者。",
-    "COMMUNITY_AWARDS_TITLE": "運用局・QRZ・アワード",
+    "COMMUNITY_AWARDS_TITLE": "オペレーター",
     "COMMUNITY_AWARDS_DESC": "QRZ.comプロフィールにLQ8を掲載しているアマチュア無線家、クラブ名簿、アワード参加者。",
     "COMMUNITY_FORM_TITLE": "掲載希望・お問い合わせ",
     "COMMUNITY_FORM_DESC": "クラブ、DXペディション主催者、QRZにLQを掲載している運用者の皆様はコンタクトフォームからご連絡ください。不具合の報告や要望はGitHub Issuesまで。",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "アワード",
     "COMMUNITY_FIRST_QSO_USING": "LQ8を使用した初QSO",
     "COMMUNITY_FIRST_POTA_QSO_USING": "LQ8を使用した初のPOTA QSO",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "LQ8を使用した初のSOTA QSO",
     "MODAL_SHARE_TITLE": "リンクをクリップボードにコピーしました！",
     "MODAL_SHARE_DESC": "リンクがコピーされました。アマチュア無線の仲間やフォーラムで共有してください！",
     "MODAL_SHARE_OK": "OK"

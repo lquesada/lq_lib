@@ -234,7 +234,7 @@ const langData = {
     "COMMUNITY_CLUBS_DESC": "রেডিও ক্লাব, প্রতিযোগিতা দল এবং জরুরি যোগাযোগ দল যারা LQ ডিজিটাল মোড পরীক্ষা ও ব্যবহার করছে।",
     "COMMUNITY_DX_TITLE": "DX অভিযান ও অ্যাক্টিভেশন",
     "COMMUNITY_DX_DESC": "DX অভিযান, IOTA, SOTA এবং POTA অপারেটর যারা দ্রুত পাইলআপ সম্পন্ন করতে মাল্টি-স্টেশন ফ্রেম ব্যবহার করে।",
-    "COMMUNITY_AWARDS_TITLE": "অপারেটর, QRZ এবং পুরস্কার",
+    "COMMUNITY_AWARDS_TITLE": "অপারেটর",
     "COMMUNITY_AWARDS_DESC": "রেডিও অপেশাদার যারা তাদের QRZ.com প্রোফাইল এবং ক্লাবের তালিকায় LQ8 অন্তর্ভুক্ত করে।",
     "COMMUNITY_FORM_TITLE": "তালিকায় অন্তর্ভুক্ত হতে বা যোগাযোগ করুন",
     "COMMUNITY_FORM_DESC": "আপনি কি কোনো ক্লাব, ডিএক্স অভিযান সংগঠক বা হ্যাম যার কিউআরজেড-এ এলকিউ রয়েছে? ফর্মের মাধ্যমে যোগাযোগ করুন। বাগ রিপোর্ট করতে GitHub Issues দেখুন।",
@@ -244,6 +244,7 @@ const langData = {
     "COMMUNITY_AWARD_LABEL": "পুরস্কার",
     "COMMUNITY_FIRST_QSO_USING": "LQ8 ব্যবহার করে প্রথম QSO",
     "COMMUNITY_FIRST_POTA_QSO_USING": "LQ8 ব্যবহার করে প্রথম POTA QSO",
+    "COMMUNITY_FIRST_SOTA_QSO_USING": "LQ8 ব্যবহার করে প্রথম SOTA QSO",
     "MODAL_SHARE_TITLE": "लिंक क्लिपबोर्ड पर कॉपी हो गया!",
     "MODAL_SHARE_DESC": "लिंक कॉपी हो गया है। इसे रेडियो मित्रों और मंचों पर साझा करें!",
     "MODAL_SHARE_OK": "OK"
