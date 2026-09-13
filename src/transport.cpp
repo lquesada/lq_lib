@@ -249,7 +249,7 @@ bool verify_sync_tones(const ToneSequence& seq) {
             if (seq[36 + i] == COSTAS_ARRAY_8[i]) match++;
             if (seq[72 + i] == COSTAS_ARRAY_8[i]) match++;
         }
-        return match >= 10;
+        return match >= 5;
     } else if (seq.protocol == Protocol::LQ4 || seq.protocol == Protocol::LQ2) {
         if (seq.size() < 105) return false;
         int match = 0;
@@ -259,7 +259,7 @@ bool verify_sync_tones(const ToneSequence& seq) {
             if (seq[67 + i] == COSTAS_SYNC3_4[i]) match++;
             if (seq[100 + i] == COSTAS_SYNC4_4[i]) match++;
         }
-        return match >= 8;
+        return match >= 5;
     }
     return false;
 }
@@ -274,10 +274,12 @@ bool decode_tones(const ToneSequence& seq, uint8_t payload[PAYLOAD_BYTES]) {
     uint8_t codeword[LDPC_CODEWORD_BYTES];
     tones_to_codeword(seq, codeword);
 
-    // 2. Decode LDPC codeword
+    // 2. Decode LDPC codeword (fast 25 iters, deep 100 iters fallback)
     uint8_t decoded_91[LDPC_INPUT_BYTES];
-    if (ldpc_decode_hard_bits(codeword, decoded_91) < 0) {
-        return false; // LDPC decode failure
+    if (ldpc_decode_hard_bits(codeword, decoded_91, 25) < 0) {
+        if (ldpc_decode_hard_bits(codeword, decoded_91, 100) < 0) {
+            return false; // LDPC decode failure
+        }
     }
 
     // 3. Verify CRC-14
@@ -750,7 +752,7 @@ bool demodulate_audio_soft(const std::vector<float>& audio_samples, size_t offse
     }
 
     int eff_min_sync = (min_sync_matches > 0) ? min_sync_matches
-                      : ((proto == Protocol::LQ8 || proto == Protocol::LQ16) ? 7 : 10);
+                      : ((proto == Protocol::LQ8 || proto == Protocol::LQ16) ? 5 : 6);
 
     llrs.clear();
     llrs.reserve(LDPC_CODEWORD_BITS);
@@ -768,7 +770,7 @@ bool demodulate_audio_soft(const std::vector<float>& audio_samples, size_t offse
     if (proto == Protocol::LQ8 || proto == Protocol::LQ16) {
         int sync_matches_std = 0;
         const int sync_starts[3] = {0, 36, 72};
-        int symbols_checked = 0;
+        int block_matches[3] = {0, 0, 0};
 
         for (int b = 0; b < 3; ++b) {
             for (int k = 0; k < 7; ++k) {
@@ -796,15 +798,14 @@ bool demodulate_audio_soft(const std::vector<float>& audio_samples, size_t offse
                 }
                 if (best_tone == COSTAS_ARRAY_8[k]) {
                     ++sync_matches_std;
-                }
-                ++symbols_checked;
-                int remaining = 21 - symbols_checked;
-                if (sync_matches_std + remaining < eff_min_sync) {
-                    return false;
+                    ++block_matches[b];
                 }
             }
         }
-        if (sync_matches_std < eff_min_sync) {
+        int multi_block_sync = (block_matches[0] >= 2 ? 1 : 0) +
+                               (block_matches[1] >= 2 ? 1 : 0) +
+                               (block_matches[2] >= 2 ? 1 : 0);
+        if (sync_matches_std < eff_min_sync && !(multi_block_sync >= 2 && sync_matches_std >= 4)) {
             return false;
         }
 
@@ -862,12 +863,28 @@ bool demodulate_audio_soft(const std::vector<float>& audio_samples, size_t offse
                 llrs.push_back((max0_b2 - max1_b2) * SCALE);
             }
         }
+
+        // Adaptive LLR normalization to reference variance 24.0
+        float sum_llr = 0.0f;
+        float sum_llr2 = 0.0f;
+        for (float val : llrs) {
+            sum_llr += val;
+            sum_llr2 += val * val;
+        }
+        float var = (sum_llr2 - (sum_llr * sum_llr) / 174.0f) / 174.0f;
+        if (var > 1e-4f) {
+            float norm_factor = std::sqrt(24.0f / var);
+            norm_factor = std::clamp(norm_factor, 0.1f, 10.0f);
+            for (float& val : llrs) {
+                val *= norm_factor;
+            }
+        }
         return true;
     } else {
         int sync_matches_std = 0;
         const int sync_starts[4] = {1, 34, 67, 100};
         const std::array<uint8_t, 4>* sync_patterns[4] = {&COSTAS_SYNC1_4, &COSTAS_SYNC2_4, &COSTAS_SYNC3_4, &COSTAS_SYNC4_4};
-        int symbols_checked = 0;
+        int block_matches[4] = {0, 0, 0, 0};
 
         for (int b = 0; b < 4; ++b) {
             for (int k = 0; k < 4; ++k) {
@@ -895,15 +912,15 @@ bool demodulate_audio_soft(const std::vector<float>& audio_samples, size_t offse
                 }
                 if (best_tone == (*sync_patterns[b])[k]) {
                     ++sync_matches_std;
-                }
-                ++symbols_checked;
-                int remaining = 16 - symbols_checked;
-                if (sync_matches_std + remaining < eff_min_sync) {
-                    return false;
+                    ++block_matches[b];
                 }
             }
         }
-        if (sync_matches_std < eff_min_sync) {
+        int multi_block_sync = 0;
+        for (int b = 0; b < 4; ++b) {
+            if (block_matches[b] >= 2) ++multi_block_sync;
+        }
+        if (sync_matches_std < eff_min_sync && !(multi_block_sync >= 2 && sync_matches_std >= 4)) {
             return false;
         }
 
@@ -945,6 +962,22 @@ bool demodulate_audio_soft(const std::vector<float>& audio_samples, size_t offse
                 constexpr float SCALE = 0.25f;
                 llrs.push_back((max0_b0 - max1_b0) * SCALE);
                 llrs.push_back((max0_b1 - max1_b1) * SCALE);
+            }
+        }
+
+        // Adaptive LLR normalization to reference variance 24.0
+        float sum_llr = 0.0f;
+        float sum_llr2 = 0.0f;
+        for (float val : llrs) {
+            sum_llr += val;
+            sum_llr2 += val * val;
+        }
+        float var = (sum_llr2 - (sum_llr * sum_llr) / 174.0f) / 174.0f;
+        if (var > 1e-4f) {
+            float norm_factor = std::sqrt(24.0f / var);
+            norm_factor = std::clamp(norm_factor, 0.1f, 10.0f);
+            for (float& val : llrs) {
+                val *= norm_factor;
             }
         }
         return true;
@@ -1042,12 +1075,12 @@ std::vector<Message> audio_to_messages(const std::vector<float>& audio_samples, 
 
     if (!is_deep) {
         if (proto == Protocol::LQ8 || proto == Protocol::LQ16) {
-            freq_step = 6.25f;
+            freq_step = 3.125f; // Half-bin resolution in fast mode to eliminate carrier offset blind spots
         } else {
-            freq_step = 10.42f;
+            freq_step = 5.21f;
         }
         time_step = samples_per_sym / 2;
-        sync_threshold = 7;
+        sync_threshold = 5;
     } else {
         if (proto == Protocol::LQ8 || proto == Protocol::LQ16) {
             freq_step = 3.125f;
@@ -1055,7 +1088,7 @@ std::vector<Message> audio_to_messages(const std::vector<float>& audio_samples, 
             freq_step = 5.21f;
         }
         time_step = samples_per_sym / 2;
-        sync_threshold = 5;
+        sync_threshold = 4;
     }
     if (time_step == 0) time_step = 1;
 
@@ -1105,6 +1138,7 @@ std::vector<Message> audio_to_messages(const std::vector<float>& audio_samples, 
                 size_t t_step_base = t_offset / time_step;
 
                 if (proto == Protocol::LQ8 || proto == Protocol::LQ16) {
+                    int block_matches[3] = {0, 0, 0};
                     for (int b = 0; b < 3; ++b) {
                         for (int k = 0; k < 7; ++k) {
                             size_t step_idx = t_step_base + static_cast<size_t>(sync_starts_8[b] + k) * sym_mult;
@@ -1122,14 +1156,19 @@ std::vector<Message> audio_to_messages(const std::vector<float>& audio_samples, 
                             }
                             if (best_tn == costas_tone) {
                                 ++matches;
+                                ++block_matches[b];
                             }
                         }
                     }
-                    if (matches >= threshold) {
+                    int multi_block_sync = (block_matches[0] >= 2 ? 1 : 0) +
+                                           (block_matches[1] >= 2 ? 1 : 0) +
+                                           (block_matches[2] >= 2 ? 1 : 0);
+                    if (matches >= threshold || (multi_block_sync >= 2 && matches >= 4)) {
                         track.time_offsets.push_back(t_offset);
                         track.max_score = std::max(track.max_score, matches);
                     }
                 } else {
+                    int block_matches[4] = {0, 0, 0, 0};
                     for (int b = 0; b < 4; ++b) {
                         for (int k = 0; k < 4; ++k) {
                             size_t step_idx = t_step_base + static_cast<size_t>(sync_starts_4[b] + k) * sym_mult;
@@ -1147,10 +1186,15 @@ std::vector<Message> audio_to_messages(const std::vector<float>& audio_samples, 
                             }
                             if (best_tn == costas_tone) {
                                 ++matches;
+                                ++block_matches[b];
                             }
                         }
                     }
-                    if (matches >= threshold) {
+                    int multi_block_sync = 0;
+                    for (int b = 0; b < 4; ++b) {
+                        if (block_matches[b] >= 2) ++multi_block_sync;
+                    }
+                    if (matches >= threshold || (multi_block_sync >= 2 && matches >= 4)) {
                         track.time_offsets.push_back(t_offset);
                         track.max_score = std::max(track.max_score, matches);
                     }

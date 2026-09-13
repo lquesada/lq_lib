@@ -687,3 +687,606 @@ TEST(TransportTest, DeepDecodeWeakOverlappingSignalSubtraction) {
     EXPECT_TRUE(found_weak);
 }
 
+namespace {
+void apply_test_fading(std::vector<float>& audio, size_t start_sym, size_t num_syms, float factor, size_t samples_per_sym) {
+    size_t start_idx = start_sym * samples_per_sym;
+    size_t end_idx = std::min(audio.size(), (start_sym + num_syms) * samples_per_sym);
+    for (size_t i = start_idx; i < end_idx; ++i) {
+        audio[i] *= factor;
+    }
+}
+} // namespace
+
+TEST(TransportTest, CostasSlicedFadingBeginningMidEndAndCombinations) {
+    Message msg;
+    msg.type = MessageType::CQ_STD;
+    msg.call_1 = "HB9IPH";
+    msg.locator = "JN47";
+
+    float base_f = 1200.0f;
+    float fs = 12000.0f;
+    auto params = get_protocol_params(Protocol::LQ8);
+    size_t sps = static_cast<size_t>(std::round(params.symbol_period * fs));
+
+    std::vector<float> clean_audio;
+    ASSERT_TRUE(message_to_audio(msg, Protocol::LQ8, base_f, fs, clean_audio));
+
+    struct SliceScenario {
+        std::string name;
+        std::vector<std::pair<size_t, size_t>> slices;
+    };
+
+    std::vector<SliceScenario> scenarios = {
+        {"Beg Costas Fade", {{0, 7}}},
+        {"Mid Costas Fade", {{36, 7}}},
+        {"End Costas Fade", {{72, 7}}},
+        {"Beg + Mid Costas Fade", {{0, 7}, {36, 7}}},
+        {"Mid + End Costas Fade", {{36, 7}, {72, 7}}},
+        {"Beg + End Costas Fade", {{0, 7}, {72, 7}}},
+    };
+
+    for (const auto& sc : scenarios) {
+        std::vector<float> audio = clean_audio;
+        for (const auto& sl : sc.slices) {
+            apply_test_fading(audio, sl.first, sl.second, 0.01f, sps);
+        }
+
+        // Fast mode with known base freq
+        auto res_fast = audio_to_messages(audio, base_f, fs, Protocol::LQ8, 1, false);
+        ASSERT_FALSE(res_fast.empty()) << "Failed fast decode on " << sc.name;
+        EXPECT_EQ(res_fast[0].call_1, "HB9IPH") << "Wrong call on " << sc.name;
+
+        // Wideband fast mode
+        auto res_wb = audio_to_messages(audio, 0.0f, fs, Protocol::LQ8, 1, false);
+        bool found_wb = false;
+        for (const auto& m : res_wb) {
+            if (m.call_1 == "HB9IPH") { found_wb = true; break; }
+        }
+        EXPECT_TRUE(found_wb) << "Failed wideband decode on " << sc.name;
+    }
+}
+
+TEST(TransportTest, PayloadSlicedFadingBurstErasures) {
+    Message msg;
+    msg.type = MessageType::CALL_STD;
+    msg.call_1 = "YO1YO";
+    msg.call_2 = "TU2TU";
+    msg.locator = "KL22";
+    msg.rst_db = -3;
+
+    float base_f = 1400.0f;
+    float fs = 12000.0f;
+    auto params = get_protocol_params(Protocol::LQ8);
+    size_t sps = static_cast<size_t>(std::round(params.symbol_period * fs));
+
+    std::vector<float> clean_audio;
+    ASSERT_TRUE(message_to_audio(msg, Protocol::LQ8, base_f, fs, clean_audio));
+
+    // Test 1: Payload 1 burst erasure (10 symbols = 30 bits)
+    {
+        std::vector<float> audio = clean_audio;
+        apply_test_fading(audio, 7, 10, 0.0f, sps);
+        auto res = audio_to_messages(audio, base_f, fs, Protocol::LQ8, 1, false);
+        ASSERT_FALSE(res.empty());
+        EXPECT_EQ(res[0].call_1, "YO1YO");
+        EXPECT_EQ(res[0].call_2, "TU2TU");
+    }
+
+    // Test 2: Payload 2 burst erasure (12 symbols = 36 bits)
+    {
+        std::vector<float> audio = clean_audio;
+        apply_test_fading(audio, 43, 12, 0.0f, sps);
+        auto res = audio_to_messages(audio, base_f, fs, Protocol::LQ8, 1, false);
+        ASSERT_FALSE(res.empty());
+        EXPECT_EQ(res[0].call_1, "YO1YO");
+        EXPECT_EQ(res[0].call_2, "TU2TU");
+    }
+
+    // Test 3: Mixed Beg Costas + 5 symbols Payload 1 fading
+    {
+        std::vector<float> audio = clean_audio;
+        apply_test_fading(audio, 0, 12, 0.05f, sps);
+        auto res = audio_to_messages(audio, base_f, fs, Protocol::LQ8, 1, false);
+        ASSERT_FALSE(res.empty());
+        EXPECT_EQ(res[0].call_1, "YO1YO");
+        EXPECT_EQ(res[0].call_2, "TU2TU");
+    }
+
+    // Test 4: Severe 18 symbols payload erasure (54 bits = 31% of payload) decoded in deep mode
+    {
+        std::vector<float> audio = clean_audio;
+        apply_test_fading(audio, 7, 18, 0.0f, sps);
+        auto res = audio_to_messages(audio, base_f, fs, Protocol::LQ8, 1, true);
+        bool found = false;
+        for (const auto& m : res) {
+            if (m.call_1 == "YO1YO" && m.call_2 == "TU2TU") { found = true; break; }
+        }
+        EXPECT_TRUE(found);
+    }
+}
+
+TEST(TransportTest, CarrierFrequencyOffsetHalfBinWaterfallStress) {
+    Message msg;
+    msg.type = MessageType::CQ_STD;
+    msg.call_1 = "HB9IPH";
+    msg.locator = "JN47";
+
+    float fs = 12000.0f;
+
+    // Test at half-bin boundary (1336.0 Hz has ~3.125 Hz offset from nearest 6.25 Hz grid)
+    for (float carrier_f : {1336.0f, 1339.125f, 1342.25f}) {
+        std::vector<float> audio;
+        ASSERT_TRUE(message_to_audio(msg, Protocol::LQ8, carrier_f, fs, audio));
+
+        // Add moderate AWGN noise (sigma = 0.25)
+        std::mt19937 rng(42);
+        std::normal_distribution<float> dist(0.0f, 0.25f);
+        for (float& s : audio) {
+            s += dist(rng);
+        }
+
+        // Fast mode with known nominal frequency (within 10 Hz)
+        auto res_fast = audio_to_messages(audio, carrier_f, fs, Protocol::LQ8, 1, false);
+        ASSERT_FALSE(res_fast.empty()) << "Failed fast decode at carrier " << carrier_f;
+        EXPECT_EQ(res_fast[0].call_1, "HB9IPH");
+
+        // Fast mode wideband
+        auto res_wb = audio_to_messages(audio, 0.0f, fs, Protocol::LQ8, 1, false);
+        bool found_wb = false;
+        for (const auto& m : res_wb) {
+            if (m.call_1 == "HB9IPH") { found_wb = true; break; }
+        }
+        EXPECT_TRUE(found_wb) << "Failed wideband fast decode at carrier " << carrier_f;
+    }
+}
+
+TEST(TransportTest, CorruptedSyncAndDataTonesRecovery) {
+    Message msg;
+    msg.type = MessageType::CQ_STD;
+    msg.call_1 = "HB9IPH";
+    msg.locator = "JN47";
+
+    ToneSequence clean_seq;
+    ASSERT_TRUE(encode_tones(msg, Protocol::LQ8, clean_seq));
+
+    // Test 1: Corrupt 12 sync tones (more than half of all 21 Costas tones)
+    {
+        ToneSequence corrupted = clean_seq;
+        for (int i = 0; i < 7; ++i) {
+            corrupted[i] = (corrupted[i] + 3) % 8; // Corrupt all 7 tones of Beg Costas
+        }
+        for (int i = 0; i < 5; ++i) {
+            corrupted[36 + i] = (corrupted[36 + i] + 2) % 8; // Corrupt 5 tones of Mid Costas
+        }
+
+        Message dec_msg;
+        EXPECT_TRUE(decode_tones(corrupted, dec_msg));
+        EXPECT_EQ(dec_msg.call_1, "HB9IPH");
+    }
+
+    // Test 2: Corrupt 3 data tones in payload (exercising LDPC deep fallback)
+    {
+        ToneSequence corrupted = clean_seq;
+        const int data_indices[] = {8, 25, 52};
+        for (int idx : data_indices) {
+            corrupted[idx] = (corrupted[idx] + 1) % 8;
+        }
+
+        Message dec_msg;
+        EXPECT_TRUE(decode_tones(corrupted, dec_msg));
+        EXPECT_EQ(dec_msg.call_1, "HB9IPH");
+    }
+}
+
+TEST(TransportTest, MultiProtocolSlicedFadingResilience) {
+    for (Protocol proto : {Protocol::LQ4, Protocol::LQ2, Protocol::LQ16}) {
+        Message msg;
+        msg.type = MessageType::CQ_STD;
+        msg.call_1 = "HB9IPH";
+        msg.locator = "JN47";
+
+        float base_f = 1200.0f;
+        float fs = 12000.0f;
+        auto params = get_protocol_params(proto);
+        size_t sps = static_cast<size_t>(std::round(params.symbol_period * fs));
+
+        std::vector<float> clean_audio;
+        ASSERT_TRUE(message_to_audio(msg, proto, base_f, fs, clean_audio));
+
+        // Test Beginning Sync Fading
+        {
+            std::vector<float> audio = clean_audio;
+            size_t sync1_sym = (proto == Protocol::LQ4 || proto == Protocol::LQ2) ? 1 : 0;
+            size_t sync1_len = (proto == Protocol::LQ4 || proto == Protocol::LQ2) ? 4 : 7;
+            apply_test_fading(audio, sync1_sym, sync1_len, 0.0f, sps);
+
+            auto res = audio_to_messages(audio, base_f, fs, proto, 1, false);
+            ASSERT_FALSE(res.empty()) << "Failed beg sync fade for " << params.name;
+            EXPECT_EQ(res[0].call_1, "HB9IPH");
+        }
+
+        // Test Mid Sync Fading
+        {
+            std::vector<float> audio = clean_audio;
+            size_t sync2_sym = (proto == Protocol::LQ4 || proto == Protocol::LQ2) ? 34 : 36;
+            size_t sync2_len = (proto == Protocol::LQ4 || proto == Protocol::LQ2) ? 4 : 7;
+            apply_test_fading(audio, sync2_sym, sync2_len, 0.0f, sps);
+
+            auto res = audio_to_messages(audio, base_f, fs, proto, 1, false);
+            ASSERT_FALSE(res.empty()) << "Failed mid sync fade for " << params.name;
+            EXPECT_EQ(res[0].call_1, "HB9IPH");
+        }
+
+        // Test Payload Fading (10 symbols erased)
+        {
+            std::vector<float> audio = clean_audio;
+            size_t pay_sym = (proto == Protocol::LQ4 || proto == Protocol::LQ2) ? 5 : 7;
+            apply_test_fading(audio, pay_sym, 10, 0.0f, sps);
+
+            auto res = audio_to_messages(audio, base_f, fs, proto, 1, false);
+            ASSERT_FALSE(res.empty()) << "Failed payload fade for " << params.name;
+            EXPECT_EQ(res[0].call_1, "HB9IPH");
+        }
+    }
+}
+
+TEST(TransportTest, ImpossibleSevereFadingRejectionAndZeroFalsePositives) {
+    Message msg;
+    msg.type = MessageType::CQ_STD;
+    msg.call_1 = "HB9IPH";
+    msg.locator = "JN47";
+
+    float base_f = 1200.0f;
+    float fs = 12000.0f;
+    auto params = get_protocol_params(Protocol::LQ8);
+    size_t sps = static_cast<size_t>(std::round(params.symbol_period * fs));
+
+    std::vector<float> clean_audio;
+    ASSERT_TRUE(message_to_audio(msg, Protocol::LQ8, base_f, fs, clean_audio));
+
+    // Test 1: 26 payload symbols erased (44% of total codeword, exceeds channel capacity)
+    {
+        std::vector<float> audio = clean_audio;
+        apply_test_fading(audio, 7, 26, 0.0f, sps);
+        auto res = audio_to_messages(audio, base_f, fs, Protocol::LQ8, 1, false);
+        EXPECT_TRUE(res.empty()) << "Should cleanly fail on 26 erased symbols";
+    }
+
+    // Test 2: 29 payload symbols erased (entire Payload Block 1 completely zeroed)
+    {
+        std::vector<float> audio = clean_audio;
+        apply_test_fading(audio, 7, 29, 0.0f, sps);
+        auto res = audio_to_messages(audio, base_f, fs, Protocol::LQ8, 1, true); // Deep mode
+        EXPECT_TRUE(res.empty()) << "Should cleanly fail in deep mode when Block 1 is completely wiped";
+    }
+
+    // Test 3: Complete erasure of all 3 Costas blocks (pure silence on sync)
+    {
+        std::vector<float> audio = clean_audio;
+        apply_test_fading(audio, 0, 7, 0.0f, sps);
+        apply_test_fading(audio, 36, 7, 0.0f, sps);
+        apply_test_fading(audio, 72, 7, 0.0f, sps);
+        auto res = audio_to_messages(audio, base_f, fs, Protocol::LQ8, 1, true);
+        EXPECT_TRUE(res.empty()) << "Should cleanly fail when all sync is wiped";
+    }
+
+    // Test 4: Heavy AWGN noise (sigma = 2.0) with 20 erased payload symbols
+    {
+        std::vector<float> audio = clean_audio;
+        apply_test_fading(audio, 7, 20, 0.0f, sps);
+        std::mt19937 rng(9999);
+        std::normal_distribution<float> dist(0.0f, 2.0f);
+        for (float& s : audio) s += dist(rng);
+
+        auto res = audio_to_messages(audio, base_f, fs, Protocol::LQ8, 1, false);
+        // If it fails, must be empty; if it decodes, must NEVER be a false positive
+        for (const auto& m : res) {
+            EXPECT_EQ(m.call_1, "HB9IPH") << "Phantom message produced under heavy noise!";
+        }
+    }
+}
+
+TEST(TransportTest, IntenseFadingNoiseTradeoffBreakdownCurve) {
+    Message msg;
+    msg.type = MessageType::CQ_STD;
+    msg.call_1 = "HB9IPH";
+    msg.locator = "JN47";
+
+    float base_f = 1336.0f;
+    float fs = 12000.0f;
+    auto params = get_protocol_params(Protocol::LQ8);
+    size_t sps = static_cast<size_t>(std::round(params.symbol_period * fs));
+
+    std::vector<float> clean_audio;
+    ASSERT_TRUE(message_to_audio(msg, Protocol::LQ8, base_f, fs, clean_audio));
+
+    std::mt19937 rng(4321);
+
+    // 1. Moderate fading (15 erased syms, sigma 0.4): high success rate expected
+    {
+        int decoded = 0;
+        constexpr int TRIALS = 10;
+        for (int t = 0; t < TRIALS; ++t) {
+            std::vector<float> audio = clean_audio;
+            apply_test_fading(audio, 7, 15, 0.0f, sps);
+            std::normal_distribution<float> dist(0.0f, 0.4f);
+            for (float& s : audio) s += dist(rng);
+
+            auto res = audio_to_messages(audio, base_f, fs, Protocol::LQ8, 1, false);
+            for (const auto& m : res) {
+                EXPECT_EQ(m.call_1, "HB9IPH") << "Wrong message decoded!";
+                if (m.call_1 == "HB9IPH") ++decoded;
+            }
+        }
+        EXPECT_GE(decoded, 8) << "Pass rate too low on moderate fading";
+    }
+
+    // 2. Near-capacity fading (22 erased syms, sigma 0.5): graceful degradation
+    {
+        int decoded = 0;
+        int false_positives = 0;
+        constexpr int TRIALS = 10;
+        for (int t = 0; t < TRIALS; ++t) {
+            std::vector<float> audio = clean_audio;
+            apply_test_fading(audio, 7, 22, 0.0f, sps);
+            std::normal_distribution<float> dist(0.0f, 0.5f);
+            for (float& s : audio) s += dist(rng);
+
+            auto res = audio_to_messages(audio, base_f, fs, Protocol::LQ8, 1, false);
+            for (const auto& m : res) {
+                if (m.call_1 == "HB9IPH") ++decoded;
+                else ++false_positives;
+            }
+        }
+        EXPECT_GT(decoded, 0) << "Should recover some near-capacity frames";
+        EXPECT_EQ(false_positives, 0) << "Zero false positives strictly required!";
+    }
+
+    // 3. Beyond capacity (26 erased syms, sigma 0.8): strictly 0 decodes and 0 false positives
+    {
+        int false_positives = 0;
+        int decoded = 0;
+        constexpr int TRIALS = 10;
+        for (int t = 0; t < TRIALS; ++t) {
+            std::vector<float> audio = clean_audio;
+            apply_test_fading(audio, 7, 26, 0.0f, sps);
+            std::normal_distribution<float> dist(0.0f, 0.8f);
+            for (float& s : audio) s += dist(rng);
+
+            auto res = audio_to_messages(audio, base_f, fs, Protocol::LQ8, 1, false);
+            for (const auto& m : res) {
+                if (m.call_1 == "HB9IPH") ++decoded;
+                else ++false_positives;
+            }
+        }
+        EXPECT_EQ(decoded, 0) << "Should be impossible beyond capacity";
+        EXPECT_EQ(false_positives, 0) << "No false positives allowed!";
+    }
+}
+
+TEST(TransportTest, PureNoiseMultiTrialZeroPhantomGuarantee) {
+    float fs = 12000.0f;
+    auto params = get_protocol_params(Protocol::LQ8);
+    size_t sps = static_cast<size_t>(std::round(params.symbol_period * fs));
+    size_t total_samples = sps * params.total_symbols;
+
+    std::mt19937 rng(777);
+    int total_noise_trials = 50;
+
+    for (int t = 0; t < total_noise_trials; ++t) {
+        float sigma = 0.2f + static_cast<float>(t % 8) * 0.25f; // sigma: 0.2 to 2.0
+        std::normal_distribution<float> dist(0.0f, sigma);
+        std::vector<float> noise(total_samples);
+        for (size_t i = 0; i < total_samples; ++i) noise[i] = dist(rng);
+
+        // Fast mode wideband across passband
+        auto res_fast = audio_to_messages(noise, 0.0f, fs, Protocol::LQ8, 1, false);
+        EXPECT_TRUE(res_fast.empty()) << "Phantom message detected in Fast mode on pure noise!";
+
+        // Deep mode wideband across passband
+        auto res_deep = audio_to_messages(noise, 0.0f, fs, Protocol::LQ8, 1, true);
+        EXPECT_TRUE(res_deep.empty()) << "Phantom message detected in Deep mode on pure noise!";
+    }
+}
+
+TEST(TransportTest, DeepCostasDestructionWithNoisyPayload) {
+    Message msg;
+    msg.type = MessageType::CQ_STD;
+    msg.call_1 = "HB9IPH";
+    msg.locator = "JN47";
+
+    float base_f = 1200.0f;
+    float fs = 12000.0f;
+    auto params = get_protocol_params(Protocol::LQ8);
+    size_t sps = static_cast<size_t>(std::round(params.symbol_period * fs));
+
+    std::vector<float> clean_audio;
+    ASSERT_TRUE(message_to_audio(msg, Protocol::LQ8, base_f, fs, clean_audio));
+
+    // Destroy 2 out of 3 Costas blocks completely (Beginning and Mid wiped)
+    std::vector<float> audio = clean_audio;
+    apply_test_fading(audio, 0, 7, 0.0f, sps);
+    apply_test_fading(audio, 36, 7, 0.0f, sps);
+
+    // Add noise to payload
+    std::mt19937 rng(5555);
+    std::normal_distribution<float> dist(0.0f, 0.3f);
+    for (float& s : audio) s += dist(rng);
+
+    // End Costas (72..78) is the sole survivor (7 tones match)
+    auto res = audio_to_messages(audio, base_f, fs, Protocol::LQ8, 1, false);
+    ASSERT_FALSE(res.empty()) << "Should synchronize on single intact End Costas block";
+    EXPECT_EQ(res[0].call_1, "HB9IPH");
+}
+
+TEST(TransportTest, ContinuousStreamEnvelopeQsbFadingBreakdown) {
+    Message msg;
+    msg.type = MessageType::CQ_STD;
+    msg.call_1 = "HB9IPH";
+    msg.locator = "JN47";
+
+    float base_f = 1200.0f;
+    float fs = 12000.0f;
+
+    std::vector<float> clean_audio;
+    ASSERT_TRUE(message_to_audio(msg, Protocol::LQ8, base_f, fs, clean_audio));
+    size_t N = clean_audio.size();
+
+    std::mt19937 rng(4321);
+
+    // Test continuous sinusoidal QSB envelope fading across the 12.64s audio stream
+    // Fading depth 0.85 dips signal power by -16.5 dB periodically
+    float depth = 0.85f;
+    float f_fade = 0.25f; // One fade cycle every 4 seconds
+
+    // 1. Moderate SNR (+5 dB): 100% decode expected in both modes
+    {
+        float sigma = std::sqrt(0.5f / std::pow(10.0f, 5.0f / 10.0f));
+        std::vector<float> audio(N);
+        for (size_t i = 0; i < N; ++i) {
+            float t = static_cast<float>(i) / fs;
+            float envelope = (1.0f - depth) + depth * 0.5f * (1.0f + std::cos(2.0f * 3.14159265f * f_fade * t));
+            audio[i] = clean_audio[i] * envelope;
+        }
+        std::normal_distribution<float> dist(0.0f, sigma);
+        for (float& s : audio) s += dist(rng);
+
+        auto res_fast = audio_to_messages(audio, base_f, fs, Protocol::LQ8, 1, false);
+        ASSERT_FALSE(res_fast.empty());
+        EXPECT_EQ(res_fast[0].call_1, "HB9IPH");
+
+        auto res_deep = audio_to_messages(audio, base_f, fs, Protocol::LQ8, 1, true);
+        ASSERT_FALSE(res_deep.empty());
+        EXPECT_EQ(res_deep[0].call_1, "HB9IPH");
+    }
+
+    // 2. Severe SNR (-15 dB) under deep QSB: Deep mode recovers signal; zero false positives
+    {
+        float sigma = std::sqrt(0.5f / std::pow(10.0f, -15.0f / 10.0f));
+        int deep_decoded = 0;
+        int false_positives = 0;
+        constexpr int TRIALS = 5;
+
+        for (int t = 0; t < TRIALS; ++t) {
+            float phi = static_cast<float>(t) * 1.25f;
+            std::vector<float> audio(N);
+            for (size_t i = 0; i < N; ++i) {
+                float time = static_cast<float>(i) / fs;
+                float envelope = (1.0f - depth) + depth * 0.5f * (1.0f + std::cos(2.0f * 3.14159265f * f_fade * time + phi));
+                audio[i] = clean_audio[i] * envelope;
+            }
+            std::normal_distribution<float> dist(0.0f, sigma);
+            for (float& s : audio) s += dist(rng);
+
+            auto res_deep = audio_to_messages(audio, base_f, fs, Protocol::LQ8, 1, true);
+            for (const auto& m : res_deep) {
+                if (m.call_1 == "HB9IPH") ++deep_decoded;
+                else ++false_positives;
+            }
+        }
+        EXPECT_GT(deep_decoded, 0) << "Deep mode should recover deep QSB signals at -15 dB SNR";
+        EXPECT_EQ(false_positives, 0) << "No false positives allowed under deep QSB + noise";
+    }
+
+    // 3. Impossible SNR (-25 dB) under deep QSB: clean rejection, zero false positives
+    {
+        float sigma = std::sqrt(0.5f / std::pow(10.0f, -25.0f / 10.0f));
+        int false_positives = 0;
+        constexpr int TRIALS = 5;
+
+        for (int t = 0; t < TRIALS; ++t) {
+            std::vector<float> audio(N);
+            for (size_t i = 0; i < N; ++i) {
+                float time = static_cast<float>(i) / fs;
+                float envelope = (1.0f - depth) + depth * 0.5f * (1.0f + std::cos(2.0f * 3.14159265f * f_fade * time));
+                audio[i] = clean_audio[i] * envelope;
+            }
+            std::normal_distribution<float> dist(0.0f, sigma);
+            for (float& s : audio) s += dist(rng);
+
+            auto res = audio_to_messages(audio, base_f, fs, Protocol::LQ8, 1, false);
+            for (const auto& m : res) {
+                if (m.call_1 != "HB9IPH") ++false_positives;
+            }
+        }
+        EXPECT_EQ(false_positives, 0) << "No false positives allowed at -25 dB SNR";
+    }
+}
+
+TEST(TransportTest, ContinuousStreamMultipathRayleighFading) {
+    Message msg;
+    msg.type = MessageType::CQ_STD;
+    msg.call_1 = "HB9IPH";
+    msg.locator = "JN47";
+
+    float base_f = 1200.0f;
+    float fs = 12000.0f;
+
+    std::vector<float> clean_audio;
+    ASSERT_TRUE(message_to_audio(msg, Protocol::LQ8, base_f, fs, clean_audio));
+    size_t N = clean_audio.size();
+
+    // Two-ray multipath with 2.0 ms delay spread and equal amplitude (creates frequency-selective nulls)
+    size_t delay_samples = static_cast<size_t>(std::round(0.002f * fs));
+    for (float dphase : {0.0f, 0.785f, 1.57f, 3.14159f}) {
+        std::vector<float> audio(N, 0.0f);
+        for (size_t i = 0; i < N; ++i) {
+            float s1 = clean_audio[i];
+            float s2 = (i >= delay_samples) ? clean_audio[i - delay_samples] : 0.0f;
+            audio[i] = s1 + std::cos(dphase) * s2;
+        }
+
+        auto res = audio_to_messages(audio, base_f, fs, Protocol::LQ8, 1, false);
+        ASSERT_FALSE(res.empty()) << "Failed to decode multipath stream with dphase " << dphase;
+        EXPECT_EQ(res[0].call_1, "HB9IPH");
+    }
+}
+
+TEST(TransportTest, ContinuousStreamExtremeNoiseThreshold) {
+    Message msg;
+    msg.type = MessageType::CQ_STD;
+    msg.call_1 = "HB9IPH";
+    msg.locator = "JN47";
+
+    float base_f = 1200.0f;
+    float fs = 12000.0f;
+
+    std::vector<float> clean_audio;
+    ASSERT_TRUE(message_to_audio(msg, Protocol::LQ8, base_f, fs, clean_audio));
+    size_t N = clean_audio.size();
+
+    std::mt19937 rng(8888);
+
+    // 1. Near threshold (-18 dB SNR): reliable decode without false positives
+    {
+        float sigma = std::sqrt(0.5f / std::pow(10.0f, -18.0f / 10.0f));
+        std::vector<float> audio = clean_audio;
+        std::normal_distribution<float> dist(0.0f, sigma);
+        for (float& s : audio) s += dist(rng);
+
+        auto res = audio_to_messages(audio, base_f, fs, Protocol::LQ8, 1, false);
+        ASSERT_FALSE(res.empty());
+        EXPECT_EQ(res[0].call_1, "HB9IPH");
+    }
+
+    // 2. Impossible SNR (-30 dB, buried 30 dB below noise): strictly empty, zero false positives
+    {
+        float sigma = std::sqrt(0.5f / std::pow(10.0f, -30.0f / 10.0f));
+        int false_positives = 0;
+        constexpr int TRIALS = 5;
+
+        for (int t = 0; t < TRIALS; ++t) {
+            std::vector<float> audio = clean_audio;
+            std::normal_distribution<float> dist(0.0f, sigma);
+            for (float& s : audio) s += dist(rng);
+
+            auto res = audio_to_messages(audio, base_f, fs, Protocol::LQ8, 1, true); // Deep mode
+            for (const auto& m : res) {
+                if (m.call_1 != "HB9IPH") ++false_positives;
+            }
+        }
+        EXPECT_EQ(false_positives, 0) << "Zero false positives strictly required at -30 dB SNR";
+    }
+}
+
+

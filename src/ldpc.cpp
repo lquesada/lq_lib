@@ -32,6 +32,7 @@
 
 #include "lq/ldpc.h"
 #include "lq/constants.h"
+#include "lq/crc.h"
 #include <cmath>
 #include <vector>
 #include <cstring>
@@ -264,6 +265,35 @@ inline int popcount64(uint64_t x) {
 #endif
 }
 
+inline void pack_systematic_91(const uint8_t c_hat[174], uint8_t out_91[LDPC_INPUT_BYTES]) {
+    std::memset(out_91, 0, LDPC_INPUT_BYTES);
+    for (int b = 0; b < 11; ++b) {
+        int base = b * 8;
+        out_91[b] = static_cast<uint8_t>(
+            (c_hat[base + 0] << 7) | (c_hat[base + 1] << 6) |
+            (c_hat[base + 2] << 5) | (c_hat[base + 3] << 4) |
+            (c_hat[base + 4] << 3) | (c_hat[base + 5] << 2) |
+            (c_hat[base + 6] << 1) | (c_hat[base + 7])
+        );
+    }
+    out_91[11] = static_cast<uint8_t>(
+        (c_hat[88] << 7) | (c_hat[89] << 6) | (c_hat[90] << 5)
+    );
+}
+
+inline int count_unsatisfied_checks(const uint8_t c_hat[174]) {
+    int errs = 0;
+    for (int m = 0; m < 83; ++m) {
+        uint8_t sum = 0;
+        int deg = LDPC_MAT.check_degrees[m];
+        for (int i = 0; i < deg; ++i) {
+            sum ^= c_hat[LDPC_MAT.check_bits[m][i]];
+        }
+        if (sum != 0) ++errs;
+    }
+    return errs;
+}
+
 } // anonymous namespace
 
 void ldpc_encode(const uint8_t in_91[LDPC_INPUT_BYTES], uint8_t out_174[LDPC_CODEWORD_BYTES]) {
@@ -335,6 +365,10 @@ int ldpc_decode(const float llr[LDPC_CODEWORD_BITS], uint8_t out_91[LDPC_INPUT_B
 
     constexpr float ALPHA = 0.875f; // Normalised min-sum scaling factor
 
+    int best_syn_errs = 999;
+    uint8_t best_c_hat[174];
+    float best_total_llr[174];
+
     for (int iter = 0; iter < max_iters; ++iter) {
         // --- Step 1: Check node update: O(deg) single pass min1/min2/sign ---
         for (int m = 0; m < 83; ++m) {
@@ -372,6 +406,7 @@ int ldpc_decode(const float llr[LDPC_CODEWORD_BITS], uint8_t out_91[LDPC_INPUT_B
 
         // --- Step 2: Variable node update & hard decisions (fully unrolled 3 edges) ---
         uint8_t c_hat[174];
+        float total_llrs[174];
         for (int n = 0; n < 174; ++n) {
             int m0 = LDPC_BIT_TERMS[n][0];
             int m1 = LDPC_BIT_TERMS[n][1];
@@ -386,6 +421,7 @@ int ldpc_decode(const float llr[LDPC_CODEWORD_BITS], uint8_t out_91[LDPC_INPUT_B
             float r2 = r[m2][e2];
 
             float total_llr = llr[n] + r0 + r1 + r2;
+            total_llrs[n] = total_llr;
             c_hat[n] = (total_llr < 0.0f) ? 1 : 0;
 
             q[n][0] = total_llr - r0;
@@ -394,7 +430,7 @@ int ldpc_decode(const float llr[LDPC_CODEWORD_BITS], uint8_t out_91[LDPC_INPUT_B
         }
 
         // --- Step 3: Syndrome check ---
-        bool syndrome_ok = true;
+        int syn_errs = 0;
         for (int m = 0; m < 83; ++m) {
             uint8_t sum = 0;
             int deg = LDPC_MAT.check_degrees[m];
@@ -402,27 +438,85 @@ int ldpc_decode(const float llr[LDPC_CODEWORD_BITS], uint8_t out_91[LDPC_INPUT_B
                 sum ^= c_hat[LDPC_MAT.check_bits[m][i]];
             }
             if (sum != 0) {
-                syndrome_ok = false;
-                break;
+                ++syn_errs;
             }
         }
 
-        if (syndrome_ok) {
-            // Pack systematic 91 bits directly into out_91 bytes
-            std::memset(out_91, 0, LDPC_INPUT_BYTES);
-            for (int b = 0; b < 11; ++b) {
-                int base = b * 8;
-                out_91[b] = static_cast<uint8_t>(
-                    (c_hat[base + 0] << 7) | (c_hat[base + 1] << 6) |
-                    (c_hat[base + 2] << 5) | (c_hat[base + 3] << 4) |
-                    (c_hat[base + 4] << 3) | (c_hat[base + 5] << 2) |
-                    (c_hat[base + 6] << 1) | (c_hat[base + 7])
-                );
+        if (syn_errs == 0) {
+            pack_systematic_91(c_hat, out_91);
+            return iter + 1; // Full syndrome match!
+        }
+
+        if (syn_errs < best_syn_errs) {
+            best_syn_errs = syn_errs;
+            std::memcpy(best_c_hat, c_hat, sizeof(best_c_hat));
+            std::memcpy(best_total_llr, total_llrs, sizeof(best_total_llr));
+        }
+
+        // Trapping set check: if all 83 parity checks are satisfied, verify CRC-14
+        if (syn_errs == 0) {
+            pack_systematic_91(c_hat, out_91);
+            if (verify_crc14(out_91)) {
+                return iter + 1; // Full syndrome match and verified CRC-14!
             }
-            out_91[11] = static_cast<uint8_t>(
-                (c_hat[88] << 7) | (c_hat[89] << 6) | (c_hat[90] << 5)
-            );
-            return iter + 1; // Success!
+        }
+    }
+
+    // --- Step 4: CRC-Assisted Bit-Flipping Rescue on Best Candidate State ---
+    // Only attempt rescue if the candidate state is near-codeword (<= 6 unsatisfied checks)
+    if (best_syn_errs <= 6) {
+        struct BitRel {
+            float abs_llr;
+            uint8_t idx;
+        };
+        BitRel rel[174];
+        for (int n = 0; n < 174; ++n) {
+            rel[n].abs_llr = std::abs(best_total_llr[n]);
+            rel[n].idx = static_cast<uint8_t>(n);
+        }
+        std::sort(rel, rel + 174, [](const BitRel& a, const BitRel& b) {
+            return a.abs_llr < b.abs_llr;
+        });
+
+        uint8_t test_c[174];
+        std::memcpy(test_c, best_c_hat, sizeof(test_c));
+        uint8_t test_91[LDPC_INPUT_BYTES];
+
+        // 1. Single-bit flip rescue across all 174 codeword bits (ordered by least confident)
+        // Strictly require ALL 83 parity checks satisfied (errs == 0) AND CRC-14 verification
+        for (int i = 0; i < 174; ++i) {
+            int bit = rel[i].idx;
+            test_c[bit] ^= 1;
+            int errs = count_unsatisfied_checks(test_c);
+            if (errs == 0) {
+                pack_systematic_91(test_c, test_91);
+                if (verify_crc14(test_91)) {
+                    std::memcpy(out_91, test_91, LDPC_INPUT_BYTES);
+                    return max_iters + 1; // Rescued by 1-bit flip to full valid codeword
+                }
+            }
+            test_c[bit] ^= 1; // Revert
+        }
+
+        // 2. Double-bit flip rescue on top 16 least confident systematic bits
+        constexpr int MAX_2BIT = 16;
+        for (int i = 0; i < MAX_2BIT; ++i) {
+            int b1 = rel[i].idx;
+            test_c[b1] ^= 1;
+            for (int j = i + 1; j < MAX_2BIT; ++j) {
+                int b2 = rel[j].idx;
+                test_c[b2] ^= 1;
+                int errs = count_unsatisfied_checks(test_c);
+                if (errs == 0) {
+                    pack_systematic_91(test_c, test_91);
+                    if (verify_crc14(test_91)) {
+                        std::memcpy(out_91, test_91, LDPC_INPUT_BYTES);
+                        return max_iters + 2; // Rescued by 2-bit flip to full valid codeword
+                    }
+                }
+                test_c[b2] ^= 1;
+            }
+            test_c[b1] ^= 1;
         }
     }
 
