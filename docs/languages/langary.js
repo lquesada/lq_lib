@@ -245,6 +245,7 @@ const langData = {
     "COMMUNITY_FIRST_QSO_USING": "أول اتصال QSO باستعمال LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "أول اتصال POTA QSO باستعمال LQ8",
     "COMMUNITY_FIRST_SOTA_QSO_USING": "أول اتصال SOTA QSO باستعمال LQ8",
+    "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "أول اتصال POTA-to-POTA QSO باستعمال LQ8",
     "MODAL_SHARE_TITLE": "تم نسخ الرابط إلى الحافظة!",
     "MODAL_SHARE_DESC": "تم نسخ الرابط. شاركه مع زملائك هواة اللاسلكي وفي المنتديات!",
     "MODAL_SHARE_OK": "OK"

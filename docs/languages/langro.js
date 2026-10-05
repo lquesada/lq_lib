@@ -245,6 +245,7 @@ const langData = {
     "COMMUNITY_FIRST_QSO_USING": "Primul QSO utilizând LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "Primul QSO POTA utilizând LQ8",
     "COMMUNITY_FIRST_SOTA_QSO_USING": "Primul QSO SOTA utilizând LQ8",
+    "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "Primul QSO POTA-to-POTA utilizând LQ8",
     "MODAL_SHARE_TITLE": "Link copiat în clipboard!",
     "MODAL_SHARE_DESC": "Linkul a fost copiat în clipboard. Trimite-l colegilor radioamatori și pe forumuri!",
     "MODAL_SHARE_OK": "OK"

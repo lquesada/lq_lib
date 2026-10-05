@@ -245,6 +245,7 @@ const langData = {
     "COMMUNITY_FIRST_QSO_USING": "Erstes QSO mit LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "Erstes POTA-QSO mit LQ8",
     "COMMUNITY_FIRST_SOTA_QSO_USING": "Erstes SOTA-QSO mit LQ8",
+    "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "Erstes POTA-to-POTA-QSO mit LQ8",
     "MODAL_SHARE_TITLE": "Link in die Zwischenablage kopiert!",
     "MODAL_SHARE_DESC": "Der Link wurde in Ihre Zwischenablage kopiert. Teilen Sie ihn mit Funkfreunden und in Foren!",
     "MODAL_SHARE_OK": "OK"

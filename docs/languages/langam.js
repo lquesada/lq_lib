@@ -245,6 +245,7 @@ const langData = {
     "COMMUNITY_FIRST_QSO_USING": "በLQ8 የመጀመሪያው የQSO ግንኙነት",
     "COMMUNITY_FIRST_POTA_QSO_USING": "በLQ8 የመጀመሪያው የPOTA QSO ግንኙነት",
     "COMMUNITY_FIRST_SOTA_QSO_USING": "በLQ8 የመጀመሪያው የSOTA QSO ግንኙነት",
+    "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "በLQ8 የመጀመሪያው የPOTA-to-POTA QSO ግንኙነት",
     "MODAL_SHARE_TITLE": "አገናኝ ወደ ቅንጥብ ሰሌዳ ተቀድቷል!",
     "MODAL_SHARE_DESC": "አገናኙ ወደ ቅንጥብ ሰሌዳዎ ተቀድቷል። ለጥፍ እና ከሌሎች የሬዲዮ አማተሮች፣ ገንቢ ቡድኖች እና መድረኮች ላይ ያካፍሉት!",
     "MODAL_SHARE_OK": "OK"

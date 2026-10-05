@@ -245,6 +245,7 @@ const langData = {
     "COMMUNITY_FIRST_QSO_USING": "QSO akọkọ nipa lilo LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "QSO POTA akọkọ nipa lilo LQ8",
     "COMMUNITY_FIRST_SOTA_QSO_USING": "QSO SOTA akọkọ nipa lilo LQ8",
+    "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "QSO POTA-to-POTA akọkọ nipa lilo LQ8",
     "MODAL_SHARE_TITLE": "A daakọ ọna asopọ si Agekuru!",
     "MODAL_SHARE_DESC": "Ọna asopọ naa ti daakọ si agekuru agekuru rẹ. Lẹẹmọ ki o pin pẹlu awọn ope redio ẹlẹgbẹ, awọn ẹgbẹ idagbasoke, ati lori awọn apejọ!",
     "MODAL_SHARE_OK": "OK"

@@ -245,6 +245,7 @@ const langData = {
     "COMMUNITY_FIRST_QSO_USING": "QSO ראשון באמצעות LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "QSO של POTA ראשון באמצעות LQ8",
     "COMMUNITY_FIRST_SOTA_QSO_USING": "QSO של SOTA ראשון באמצעות LQ8",
+    "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "QSO של POTA-to-POTA ראשון באמצעות LQ8",
     "MODAL_SHARE_TITLE": "הקישור הועתק ללוח!",
     "MODAL_SHARE_DESC": "הקישור הועתק ללוח. שתפו אותו עם חובבי רדיו ובפורומים!",
     "MODAL_SHARE_OK": "OK"

@@ -245,6 +245,7 @@ const langData = {
     "COMMUNITY_FIRST_QSO_USING": "First QSO using LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "First POTA QSO using LQ8",
     "COMMUNITY_FIRST_SOTA_QSO_USING": "First SOTA QSO using LQ8",
+    "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "First POTA-to-POTA QSO using LQ8",
     "MODAL_SHARE_TITLE": "Share lq8.org",
     "MODAL_SHARE_DESC": "Link don copy! Share am wit fellow radio operators on air and inside forums!",
     "MODAL_SHARE_OK": "OK"

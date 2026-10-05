@@ -245,6 +245,7 @@ const langData = {
     "COMMUNITY_FIRST_QSO_USING": "Unua QSO uzante LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "Unua POTA-QSO uzante LQ8",
     "COMMUNITY_FIRST_SOTA_QSO_USING": "Unua SOTA-QSO uzante LQ8",
+    "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "Unua POTA-to-POTA-QSO uzante LQ8",
     "MODAL_SHARE_TITLE": "Ligilo kopiita al la tondejo!",
     "MODAL_SHARE_DESC": "La ligilo estas kopiita. Konigu ĝin al viaj radioamatoraj amikoj kaj en forumoj!",
     "MODAL_SHARE_OK": "OK"

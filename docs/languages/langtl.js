@@ -245,6 +245,7 @@ const langData = {
     "COMMUNITY_FIRST_QSO_USING": "Unang QSO gamit ang LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "Unang POTA QSO gamit ang LQ8",
     "COMMUNITY_FIRST_SOTA_QSO_USING": "Unang SOTA QSO gamit ang LQ8",
+    "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "Unang POTA-to-POTA QSO gamit ang LQ8",
     "MODAL_SHARE_TITLE": "Nakopya ang Link sa Clipboard!",
     "MODAL_SHARE_DESC": "Ang link ay nakopya sa iyong clipboard. I-paste at ibahagi ito sa mga kapwa radio amateurs, developer group, at sa mga forum!",
     "MODAL_SHARE_OK": "OK"

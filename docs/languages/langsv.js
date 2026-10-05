@@ -245,6 +245,7 @@ const langData = {
     "COMMUNITY_FIRST_QSO_USING": "Första QSO med LQ8",
     "COMMUNITY_FIRST_POTA_QSO_USING": "Första POTA-QSO med LQ8",
     "COMMUNITY_FIRST_SOTA_QSO_USING": "Första SOTA-QSO med LQ8",
+    "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "Första POTA-to-POTA-QSO med LQ8",
     "MODAL_SHARE_TITLE": "Link kopieret til udklipsholder!",
     "MODAL_SHARE_DESC": "Linket er kopieret til din udklipsholder. Del det med andre radioamatører og på fora!",
     "MODAL_SHARE_OK": "OK"
