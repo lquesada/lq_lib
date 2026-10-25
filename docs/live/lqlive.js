@@ -480,7 +480,7 @@
     this.bandBox = this.mini ? null : root.querySelector('.lqlive-bands');
     if (this.bandBox) {
       this.map.hiddenBands = readHiddenBands();
-      if (window.matchMedia && window.matchMedia('(max-width: 760px)').matches) this.bandBox.open = false;
+      this.bandBox.setAttribute('aria-label', str('LIVE_BANDS_FILTER', 'Bands to show'));
       var all = this.bandBox.querySelector('.lqlive-bands-all');
       if (all) all.addEventListener('click', function () {
         Object.keys(self.map.hiddenBands).forEach(function (b) { delete self.map.hiddenBands[b]; });
