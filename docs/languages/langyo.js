@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "Àwọn bándì tí a ó fihàn",
     "LIVE_BANDS_ALL": "Fi gbogbo rẹ̀ hàn",
     "LIVE_HIDE": "Fi pamọ́",
-    "LIVE_SHOW_HINTS": "Fi àwọn ìmọ̀ràn hàn"
+    "LIVE_SHOW_HINTS": "Fi àwọn ìmọ̀ràn hàn",
+    "LIVE_BANDS_TITLE": "Àwọn bándì"
 };

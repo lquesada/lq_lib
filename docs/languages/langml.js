@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "കാണിക്കേണ്ട ബാൻഡുകൾ",
     "LIVE_BANDS_ALL": "എല്ലാം കാണിക്കുക",
     "LIVE_HIDE": "മറയ്ക്കുക",
-    "LIVE_SHOW_HINTS": "നുറുങ്ങുകൾ കാണിക്കുക"
+    "LIVE_SHOW_HINTS": "നുറുങ്ങുകൾ കാണിക്കുക",
+    "LIVE_BANDS_TITLE": "ബാൻഡുകൾ"
 };

@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "Bands to show",
     "LIVE_BANDS_ALL": "Show all",
     "LIVE_HIDE": "Hide",
-    "LIVE_SHOW_HINTS": "Show hints"
+    "LIVE_SHOW_HINTS": "Show hints",
+    "LIVE_BANDS_TITLE": "Bands"
 };

@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "표시할 밴드",
     "LIVE_BANDS_ALL": "모두 표시",
     "LIVE_HIDE": "숨기기",
-    "LIVE_SHOW_HINTS": "도움말 표시"
+    "LIVE_SHOW_HINTS": "도움말 표시",
+    "LIVE_BANDS_TITLE": "밴드"
 };

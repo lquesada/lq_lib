@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "Bendi za kuonyesha",
     "LIVE_BANDS_ALL": "Onyesha zote",
     "LIVE_HIDE": "Ficha",
-    "LIVE_SHOW_HINTS": "Onyesha vidokezo"
+    "LIVE_SHOW_HINTS": "Onyesha vidokezo",
+    "LIVE_BANDS_TITLE": "Bendi"
 };

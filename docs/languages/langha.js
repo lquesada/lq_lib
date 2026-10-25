@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "Makadan da za a nuna",
     "LIVE_BANDS_ALL": "Nuna duka",
     "LIVE_HIDE": "Ɓoye",
-    "LIVE_SHOW_HINTS": "Nuna shawarwari"
+    "LIVE_SHOW_HINTS": "Nuna shawarwari",
+    "LIVE_BANDS_TITLE": "Makadai"
 };

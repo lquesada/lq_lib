@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "ย่านที่จะแสดง",
     "LIVE_BANDS_ALL": "แสดงทั้งหมด",
     "LIVE_HIDE": "ซ่อน",
-    "LIVE_SHOW_HINTS": "แสดงคำแนะนำ"
+    "LIVE_SHOW_HINTS": "แสดงคำแนะนำ",
+    "LIVE_BANDS_TITLE": "ย่านความถี่"
 };

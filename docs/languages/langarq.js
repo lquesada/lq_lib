@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "النطاقات لي يبانو",
     "LIVE_BANDS_ALL": "بيّن كلش",
     "LIVE_HIDE": "خبّي",
-    "LIVE_SHOW_HINTS": "بيّن التلميحات"
+    "LIVE_SHOW_HINTS": "بيّن التلميحات",
+    "LIVE_BANDS_TITLE": "النطاقات"
 };

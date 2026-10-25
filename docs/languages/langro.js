@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "Benzi afișate",
     "LIVE_BANDS_ALL": "Afișează toate",
     "LIVE_HIDE": "Ascunde",
-    "LIVE_SHOW_HINTS": "Afișează sfaturile"
+    "LIVE_SHOW_HINTS": "Afișează sfaturile",
+    "LIVE_BANDS_TITLE": "Benzi"
 };

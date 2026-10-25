@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "Göstəriləcək diapazonlar",
     "LIVE_BANDS_ALL": "Hamısını göstər",
     "LIVE_HIDE": "Gizlət",
-    "LIVE_SHOW_HINTS": "İpuçlarını göstər"
+    "LIVE_SHOW_HINTS": "İpuçlarını göstər",
+    "LIVE_BANDS_TITLE": "Diapazonlar"
 };

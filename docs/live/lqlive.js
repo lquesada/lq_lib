@@ -18,7 +18,7 @@
 
   var THEME = {
     ocean: '#1E477A', land: '#3B82B6', coast: '#CBD5E1', grid: 'rgba(255,255,255,0.22)',
-    border: 'rgba(226,232,240,0.45)', pin: '#0F172A', pinStroke: '#F8FAFC', dx: '#D81B78', dxStroke: '#0F172A'
+    border: 'rgba(226,232,240,0.7)', pin: '#0F172A', pinStroke: '#F8FAFC', dx: '#D81B78', dxStroke: '#0F172A'
   };
   // One colour per band (text colour chosen for contrast); unknown bands get the last one.
   // the band colours hams know from the usual reception-report maps
@@ -168,11 +168,11 @@
     var gd = '';
     for (var x = 0; x <= 360; x += 20) gd += 'M' + x + ',0V180';
     for (var y = 0; y <= 180; y += 10) gd += 'M0,' + y + 'H360';
-    el('path', { d: window.LQ8_WORLD_LAND || '', fill: THEME.land, stroke: THEME.coast, 'stroke-width': 0.8,
+    el('path', { d: window.LQ8_WORLD_LAND || '', fill: THEME.land, stroke: THEME.coast, 'stroke-width': 1.35,
       'vector-effect': 'non-scaling-stroke', 'stroke-linejoin': 'round' }, tile);
     // country borders (countries.js), thinner and fainter than the coast
     if (window.LQ8_COUNTRY_BORDERS) el('path', { d: window.LQ8_COUNTRY_BORDERS, fill: 'none', stroke: THEME.border,
-      'stroke-width': 0.6, 'vector-effect': 'non-scaling-stroke', 'stroke-linejoin': 'round' }, tile);
+      'stroke-width': 1.0, 'vector-effect': 'non-scaling-stroke', 'stroke-linejoin': 'round' }, tile);
     el('path', { d: gd, fill: 'none', stroke: THEME.grid, 'stroke-width': 0.6, 'vector-effect': 'non-scaling-stroke' }, tile);
     this.world = el('g', {}, this.svg);
     for (var k = -2; k <= 2; k++) el('use', { href: '#' + tile.id, x: k * 360, y: 0 }, this.world);

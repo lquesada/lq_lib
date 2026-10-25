@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "Bandes a mostrar",
     "LIVE_BANDS_ALL": "Mostra-les totes",
     "LIVE_HIDE": "Amaga",
-    "LIVE_SHOW_HINTS": "Mostra els consells"
+    "LIVE_SHOW_HINTS": "Mostra els consells",
+    "LIVE_BANDS_TITLE": "Bandes"
 };

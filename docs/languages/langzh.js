@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "显示的波段",
     "LIVE_BANDS_ALL": "全部显示",
     "LIVE_HIDE": "隐藏",
-    "LIVE_SHOW_HINTS": "显示提示"
+    "LIVE_SHOW_HINTS": "显示提示",
+    "LIVE_BANDS_TITLE": "波段"
 };

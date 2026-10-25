@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "Μπάντες προς εμφάνιση",
     "LIVE_BANDS_ALL": "Εμφάνιση όλων",
     "LIVE_HIDE": "Απόκρυψη",
-    "LIVE_SHOW_HINTS": "Εμφάνιση συμβουλών"
+    "LIVE_SHOW_HINTS": "Εμφάνιση συμβουλών",
+    "LIVE_BANDS_TITLE": "Μπάντες"
 };

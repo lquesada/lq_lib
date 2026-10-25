@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "Band nu ditémbongkeun",
     "LIVE_BANDS_ALL": "Témbongkeun sadayana",
     "LIVE_HIDE": "Sumputkeun",
-    "LIVE_SHOW_HINTS": "Témbongkeun pituduh"
+    "LIVE_SHOW_HINTS": "Témbongkeun pituduh",
+    "LIVE_BANDS_TITLE": "Band"
 };

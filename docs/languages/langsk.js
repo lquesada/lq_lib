@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "Zobrazené pásma",
     "LIVE_BANDS_ALL": "Zobraziť všetko",
     "LIVE_HIDE": "Skryť",
-    "LIVE_SHOW_HINTS": "Zobraziť tipy"
+    "LIVE_SHOW_HINTS": "Zobraziť tipy",
+    "LIVE_BANDS_TITLE": "Pásma"
 };

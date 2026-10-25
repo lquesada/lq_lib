@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "Mga band na ipapakita",
     "LIVE_BANDS_ALL": "Ipakita lahat",
     "LIVE_HIDE": "Itago",
-    "LIVE_SHOW_HINTS": "Ipakita ang mga tip"
+    "LIVE_SHOW_HINTS": "Ipakita ang mga tip",
+    "LIVE_BANDS_TITLE": "Mga band"
 };

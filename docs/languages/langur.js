@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "دکھائے جانے والے بینڈ",
     "LIVE_BANDS_ALL": "سب دکھائیں",
     "LIVE_HIDE": "چھپائیں",
-    "LIVE_SHOW_HINTS": "مشورے دکھائیں"
+    "LIVE_SHOW_HINTS": "مشورے دکھائیں",
+    "LIVE_BANDS_TITLE": "بینڈ"
 };

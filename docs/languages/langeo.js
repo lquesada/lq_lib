@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "Montrotaj bendoj",
     "LIVE_BANDS_ALL": "Montri ĉiujn",
     "LIVE_HIDE": "Kaŝi",
-    "LIVE_SHOW_HINTS": "Montri konsilojn"
+    "LIVE_SHOW_HINTS": "Montri konsilojn",
+    "LIVE_BANDS_TITLE": "Bendoj"
 };

@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "ਦਿਖਾਉਣ ਵਾਲੇ ਬੈਂਡ",
     "LIVE_BANDS_ALL": "ਸਭ ਦਿਖਾਓ",
     "LIVE_HIDE": "ਲੁਕਾਓ",
-    "LIVE_SHOW_HINTS": "ਸੁਝਾਅ ਦਿਖਾਓ"
+    "LIVE_SHOW_HINTS": "ਸੁਝਾਅ ਦਿਖਾਓ",
+    "LIVE_BANDS_TITLE": "ਬੈਂਡ"
 };

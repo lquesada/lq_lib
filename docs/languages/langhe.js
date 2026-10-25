@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "תחומים להצגה",
     "LIVE_BANDS_ALL": "הצג הכול",
     "LIVE_HIDE": "הסתר",
-    "LIVE_SHOW_HINTS": "הצג רמזים"
+    "LIVE_SHOW_HINTS": "הצג רמזים",
+    "LIVE_BANDS_TITLE": "תחומים"
 };

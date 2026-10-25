@@ -109,6 +109,7 @@
     .panel.info p.sub { font-size: 0.85rem; color: var(--muted); line-height: 1.4; }
     /* the band filter: one narrow column of bands down the right edge */
     .panel.bands { grid-column: 4; grid-row: 1 / span 3; align-self: center; padding: 8px; gap: 5px; max-height: 100%; overflow-y: auto; }
+    .panel.bands .lqlive-bands-title { font: 700 0.9rem 'Inter', system-ui, sans-serif; text-align: center; margin: 0 0 2px; }
     .panel.bands .lqlive-band-list { flex-direction: column; flex-wrap: nowrap; gap: 5px; }
     .panel.bands .lqlive-chip { justify-content: flex-start; }
     .panel.bands .lqlive-bands-all { margin-top: 3px; max-width: 7.5rem; white-space: normal; }
@@ -218,6 +219,7 @@
       <button type="button" class="lqlive-reset" data-i18n="LIVE_RESET">Obnoviť pohľad</button>
     </div>
     <div class="panel bands lqlive-bands" role="group">
+      <h3 class="lqlive-bands-title" data-i18n="LIVE_BANDS_TITLE">Pásma</h3>
       <div class="lqlive-band-list"></div>
       <button type="button" class="lqlive-reset lqlive-bands-all" data-i18n="LIVE_BANDS_ALL">Zobraziť všetko</button>
     </div>
@@ -226,7 +228,7 @@
       <ul class="lqlive-dx-list"></ul>
     </aside>
     <div class="panel foot" data-hint="how"><p class="lqlive-how"></p></div>
-    <div class="panel qft8" data-hint="qft8"><a href="https://qft8.com"><img src="../../live/qft8_logo.png" alt="qFT8" width="36" height="36"><span data-i18n="LIVE_QFT8_NOTE">Na spojenia v LQ8 použite qFT8 pre Android, Windows, Linux alebo Mac.</span></a></div>
+    <div class="panel qft8" data-hint="qft8"><a href="https://qft8.com" target="_blank" rel="noopener"><img src="../../live/qft8_logo.png" alt="qFT8" width="36" height="36"><span data-i18n="LIVE_QFT8_NOTE">Na spojenia v LQ8 použite qFT8 pre Android, Windows, Linux alebo Mac.</span></a></div>
     </div>
   </main>
 

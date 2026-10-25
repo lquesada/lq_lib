@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "చూపించాల్సిన బ్యాండ్‌లు",
     "LIVE_BANDS_ALL": "అన్నీ చూపించు",
     "LIVE_HIDE": "దాచు",
-    "LIVE_SHOW_HINTS": "సూచనలు చూపించు"
+    "LIVE_SHOW_HINTS": "సూచనలు చూపించు",
+    "LIVE_BANDS_TITLE": "బ్యాండ్‌లు"
 };

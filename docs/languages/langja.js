@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "表示するバンド",
     "LIVE_BANDS_ALL": "すべて表示",
     "LIVE_HIDE": "閉じる",
-    "LIVE_SHOW_HINTS": "ヒントを表示"
+    "LIVE_SHOW_HINTS": "ヒントを表示",
+    "LIVE_BANDS_TITLE": "バンド"
 };

@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "Getoonde banden",
     "LIVE_BANDS_ALL": "Alles tonen",
     "LIVE_HIDE": "Verbergen",
-    "LIVE_SHOW_HINTS": "Tips tonen"
+    "LIVE_SHOW_HINTS": "Tips tonen",
+    "LIVE_BANDS_TITLE": "Banden"
 };

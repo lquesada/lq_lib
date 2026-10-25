@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "Показывать диапазоны",
     "LIVE_BANDS_ALL": "Показать все",
     "LIVE_HIDE": "Скрыть",
-    "LIVE_SHOW_HINTS": "Показать подсказки"
+    "LIVE_SHOW_HINTS": "Показать подсказки",
+    "LIVE_BANDS_TITLE": "Диапазоны"
 };

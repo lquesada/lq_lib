@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "باندهای نمایش‌داده‌شده",
     "LIVE_BANDS_ALL": "نمایش همه",
     "LIVE_HIDE": "پنهان کردن",
-    "LIVE_SHOW_HINTS": "نمایش راهنماها"
+    "LIVE_SHOW_HINTS": "نمایش راهنماها",
+    "LIVE_BANDS_TITLE": "باندها"
 };

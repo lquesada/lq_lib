@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "Các băng hiển thị",
     "LIVE_BANDS_ALL": "Hiện tất cả",
     "LIVE_HIDE": "Ẩn",
-    "LIVE_SHOW_HINTS": "Hiện gợi ý"
+    "LIVE_SHOW_HINTS": "Hiện gợi ý",
+    "LIVE_BANDS_TITLE": "Băng tần"
 };

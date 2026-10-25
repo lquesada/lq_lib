@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "Bande da mostrare",
     "LIVE_BANDS_ALL": "Mostra tutte",
     "LIVE_HIDE": "Nascondi",
-    "LIVE_SHOW_HINTS": "Mostra suggerimenti"
+    "LIVE_SHOW_HINTS": "Mostra suggerimenti",
+    "LIVE_BANDS_TITLE": "Bande"
 };

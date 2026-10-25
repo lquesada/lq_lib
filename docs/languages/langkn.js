@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "ತೋರಿಸುವ ಬ್ಯಾಂಡ್‌ಗಳು",
     "LIVE_BANDS_ALL": "ಎಲ್ಲವನ್ನೂ ತೋರಿಸಿ",
     "LIVE_HIDE": "ಮರೆಮಾಡಿ",
-    "LIVE_SHOW_HINTS": "ಸಲಹೆಗಳನ್ನು ತೋರಿಸಿ"
+    "LIVE_SHOW_HINTS": "ಸಲಹೆಗಳನ್ನು ತೋರಿಸಿ",
+    "LIVE_BANDS_TITLE": "ಬ್ಯಾಂಡ್‌ಗಳು"
 };

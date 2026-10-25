@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "Näytettävät taajuusalueet",
     "LIVE_BANDS_ALL": "Näytä kaikki",
     "LIVE_HIDE": "Piilota",
-    "LIVE_SHOW_HINTS": "Näytä vihjeet"
+    "LIVE_SHOW_HINTS": "Näytä vihjeet",
+    "LIVE_BANDS_TITLE": "Taajuusalueet"
 };

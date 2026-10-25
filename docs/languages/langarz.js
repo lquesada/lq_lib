@@ -278,5 +278,6 @@ const langData = {
     "LIVE_BANDS_FILTER": "النطاقات اللي تظهر",
     "LIVE_BANDS_ALL": "اعرض الكل",
     "LIVE_HIDE": "اخفي",
-    "LIVE_SHOW_HINTS": "اعرض التلميحات"
+    "LIVE_SHOW_HINTS": "اعرض التلميحات",
+    "LIVE_BANDS_TITLE": "النطاقات"
 };
