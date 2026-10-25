@@ -6,6 +6,7 @@
 .lqmap-mark { cursor: pointer; outline: none; }
 .lqmap-mark:focus-visible rect { stroke: #FFFFFF; stroke-width: 2; }
 .lqmap-label { font: 700 11px 'Inter', system-ui, sans-serif; pointer-events: none; }
+.lqmap-sub { font-weight: 600; }
 .lqmap-more { font: 700 11px 'Inter', system-ui, sans-serif; fill: #F8FAFC; paint-order: stroke; stroke: #0F172A; stroke-width: 3px; }
 .lqmap-pop { position: absolute; z-index: 5; min-width: 170px; max-width: 260px; padding: 10px 12px; border-radius: 10px;
   background: rgba(13, 18, 29, 0.96); border: 1px solid rgba(56, 189, 248, 0.35); color: #F8FAFC;

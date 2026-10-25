@@ -283,13 +283,16 @@
     el('circle', { cx: 0, cy: -13, r: 2.3, fill: THEME.pin }, grp);
     var max = this.mini ? 2 : 4, y = -22;
     for (var i = 0; i < list.length && i < max; i++) {
+      // each tag: the callsign on top, "LQ8 20m" under it
       var it = list[i], label = it.mode + ' ' + it.band;
-      var w = 10 + label.length * 6.6, col = bandColor(it.band);
+      var w = 10 + Math.max(label.length * 6.6, it.call.length * 7.6), col = bandColor(it.band);
       var lg = el('g', { 'class': 'lqmap-mark', 'data-kind': 'st', 'data-idx': this.items.indexOf(it), tabindex: this.mini ? -1 : 0 }, grp);
-      el('rect', { x: -w / 2, y: y - 16, width: w, height: 16, rx: 4, fill: col, stroke: THEME.pin, 'stroke-width': 1 }, lg);
-      var t = el('text', { x: 0, y: y - 4.5, 'text-anchor': 'middle', fill: textOn(col), 'class': 'lqmap-label' }, lg);
+      el('rect', { x: -w / 2, y: y - 29, width: w, height: 29, rx: 4, fill: col, stroke: THEME.pin, 'stroke-width': 1 }, lg);
+      var tc = el('text', { x: 0, y: y - 17.5, 'text-anchor': 'middle', fill: textOn(col), 'class': 'lqmap-label' }, lg);
+      tc.textContent = it.call;
+      var t = el('text', { x: 0, y: y - 4.5, 'text-anchor': 'middle', fill: textOn(col), 'class': 'lqmap-label lqmap-sub' }, lg);
       t.textContent = label;
-      y -= 18;
+      y -= 31;
     }
     if (list.length > max) {
       var more = el('text', { x: 0, y: y - 4, 'text-anchor': 'middle', 'class': 'lqmap-more' }, grp);
