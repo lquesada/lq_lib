@@ -279,5 +279,8 @@ const langData = {
     "LIVE_BANDS_ALL": "Näytä kaikki",
     "LIVE_HIDE": "Piilota",
     "LIVE_SHOW_HINTS": "Näytä vihjeet",
-    "LIVE_BANDS_TITLE": "Taajuusalueet"
+    "LIVE_BANDS_TITLE": "Taajuusalueet",
+    "LIVE_DXCC_ENTITY": "DXCC-maa",
+    "LIVE_DXCC_PREFIX": "Tunnus",
+    "LIVE_DXCC_NUMBER": "DXCC-numero"
 };

@@ -279,5 +279,8 @@ const langData = {
     "LIVE_BANDS_ALL": "Alles tonen",
     "LIVE_HIDE": "Verbergen",
     "LIVE_SHOW_HINTS": "Tips tonen",
-    "LIVE_BANDS_TITLE": "Banden"
+    "LIVE_BANDS_TITLE": "Banden",
+    "LIVE_DXCC_ENTITY": "DXCC-entiteit",
+    "LIVE_DXCC_PREFIX": "Prefix",
+    "LIVE_DXCC_NUMBER": "DXCC-nummer"
 };

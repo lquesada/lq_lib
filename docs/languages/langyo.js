@@ -279,5 +279,8 @@ const langData = {
     "LIVE_BANDS_ALL": "Fi gbogbo rẹ̀ hàn",
     "LIVE_HIDE": "Fi pamọ́",
     "LIVE_SHOW_HINTS": "Fi àwọn ìmọ̀ràn hàn",
-    "LIVE_BANDS_TITLE": "Àwọn bándì"
+    "LIVE_BANDS_TITLE": "Àwọn bándì",
+    "LIVE_DXCC_ENTITY": "Ẹ̀ka DXCC",
+    "LIVE_DXCC_PREFIX": "Ìbẹ̀rẹ̀",
+    "LIVE_DXCC_NUMBER": "Nọ́mbà DXCC"
 };

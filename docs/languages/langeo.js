@@ -279,5 +279,8 @@ const langData = {
     "LIVE_BANDS_ALL": "Montri ĉiujn",
     "LIVE_HIDE": "Kaŝi",
     "LIVE_SHOW_HINTS": "Montri konsilojn",
-    "LIVE_BANDS_TITLE": "Bendoj"
+    "LIVE_BANDS_TITLE": "Bendoj",
+    "LIVE_DXCC_ENTITY": "DXCC-lando",
+    "LIVE_DXCC_PREFIX": "Prefikso",
+    "LIVE_DXCC_NUMBER": "DXCC-numero"
 };

@@ -279,5 +279,8 @@ const langData = {
     "LIVE_BANDS_ALL": "Tümünü göster",
     "LIVE_HIDE": "Gizle",
     "LIVE_SHOW_HINTS": "İpuçlarını göster",
-    "LIVE_BANDS_TITLE": "Bantlar"
+    "LIVE_BANDS_TITLE": "Bantlar",
+    "LIVE_DXCC_ENTITY": "DXCC ülkesi",
+    "LIVE_DXCC_PREFIX": "Önek",
+    "LIVE_DXCC_NUMBER": "DXCC numarası"
 };

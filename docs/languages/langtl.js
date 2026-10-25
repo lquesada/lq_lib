@@ -279,5 +279,8 @@ const langData = {
     "LIVE_BANDS_ALL": "Ipakita lahat",
     "LIVE_HIDE": "Itago",
     "LIVE_SHOW_HINTS": "Ipakita ang mga tip",
-    "LIVE_BANDS_TITLE": "Mga band"
+    "LIVE_BANDS_TITLE": "Mga band",
+    "LIVE_DXCC_ENTITY": "DXCC entity",
+    "LIVE_DXCC_PREFIX": "Prefix",
+    "LIVE_DXCC_NUMBER": "Numero ng DXCC"
 };

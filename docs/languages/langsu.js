@@ -279,5 +279,8 @@ const langData = {
     "LIVE_BANDS_ALL": "Témbongkeun sadayana",
     "LIVE_HIDE": "Sumputkeun",
     "LIVE_SHOW_HINTS": "Témbongkeun pituduh",
-    "LIVE_BANDS_TITLE": "Band"
+    "LIVE_BANDS_TITLE": "Band",
+    "LIVE_DXCC_ENTITY": "Éntitas DXCC",
+    "LIVE_DXCC_PREFIX": "Préfiks",
+    "LIVE_DXCC_NUMBER": "Nomer DXCC"
 };

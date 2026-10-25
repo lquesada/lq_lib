@@ -279,5 +279,8 @@ const langData = {
     "LIVE_BANDS_ALL": "Mostra tutte",
     "LIVE_HIDE": "Nascondi",
     "LIVE_SHOW_HINTS": "Mostra suggerimenti",
-    "LIVE_BANDS_TITLE": "Bande"
+    "LIVE_BANDS_TITLE": "Bande",
+    "LIVE_DXCC_ENTITY": "Entità DXCC",
+    "LIVE_DXCC_PREFIX": "Prefisso",
+    "LIVE_DXCC_NUMBER": "Numero DXCC"
 };

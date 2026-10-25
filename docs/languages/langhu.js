@@ -279,5 +279,8 @@ const langData = {
     "LIVE_BANDS_ALL": "Összes mutatása",
     "LIVE_HIDE": "Elrejtés",
     "LIVE_SHOW_HINTS": "Tippek mutatása",
-    "LIVE_BANDS_TITLE": "Sávok"
+    "LIVE_BANDS_TITLE": "Sávok",
+    "LIVE_DXCC_ENTITY": "DXCC-terület",
+    "LIVE_DXCC_PREFIX": "Előtag",
+    "LIVE_DXCC_NUMBER": "DXCC-szám"
 };

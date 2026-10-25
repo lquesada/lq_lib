@@ -279,5 +279,8 @@ const langData = {
     "LIVE_BANDS_ALL": "نمایش همه",
     "LIVE_HIDE": "پنهان کردن",
     "LIVE_SHOW_HINTS": "نمایش راهنماها",
-    "LIVE_BANDS_TITLE": "باندها"
+    "LIVE_BANDS_TITLE": "باندها",
+    "LIVE_DXCC_ENTITY": "موجودیت DXCC",
+    "LIVE_DXCC_PREFIX": "پیشوند",
+    "LIVE_DXCC_NUMBER": "شماره DXCC"
 };

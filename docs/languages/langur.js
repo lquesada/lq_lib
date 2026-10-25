@@ -279,5 +279,8 @@ const langData = {
     "LIVE_BANDS_ALL": "سب دکھائیں",
     "LIVE_HIDE": "چھپائیں",
     "LIVE_SHOW_HINTS": "مشورے دکھائیں",
-    "LIVE_BANDS_TITLE": "بینڈ"
+    "LIVE_BANDS_TITLE": "بینڈ",
+    "LIVE_DXCC_ENTITY": "DXCC اینٹٹی",
+    "LIVE_DXCC_PREFIX": "سابقہ",
+    "LIVE_DXCC_NUMBER": "DXCC نمبر"
 };

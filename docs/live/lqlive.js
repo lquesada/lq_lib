@@ -143,6 +143,29 @@
       Math.abs(d.lat) <= 90 && Math.abs(d.lon) <= 180;
   }
 
+  // ---- DXCC entity of a station (dxcc.js; its tables, dxcc_data.js, are loaded on the first popup) ------------------
+  var dxccState = 0;   // 0 = not loaded, 1 = loading, 2 = ready
+  function dxccOf(call, map, kind, idx) {
+    var api = window.LqDxcc;
+    if (!api) return null;
+    if (dxccState === 2) return api.resolve(call);
+    if (dxccState === 0) {
+      dxccState = 1;
+      var sc = document.createElement('script');
+      try { sc.src = new URL('dxcc_data.js', SCRIPT_SRC || location.href).href; } catch (e) { dxccState = 0; return null; }
+      sc.onload = function () {
+        if (!window.LQ_DXCC_DATA) { dxccState = 0; return; }
+        api.load(window.LQ_DXCC_DATA);
+        dxccState = 2;
+        // the popup still open for this station gets its entity rows now
+        if (map.popKey === kind + idx && !map.pop.hidden) map.showPop(kind, idx, map.pinned);
+      };
+      sc.onerror = function () { dxccState = 0; };
+      document.head.appendChild(sc);
+    }
+    return null;
+  }
+
   // ---- the map -----------------------------------------------------------------------------------------------------
   function LiveMap(root, opts) {
     this.root = root;
@@ -398,8 +421,14 @@
       var it = this.items[idx];
       if (!it) return;
       h('div', 'lqmap-pop-call', it.call, p);
-      var rows = [[str('LIVE_BAND', 'Band'), it.mode + ' ' + it.band], [str('LIVE_FREQ', 'Frequency'), freqText(it.dial_hz)],
-        [str('LIVE_GRID', 'Grid'), it.grid], [str('LIVE_HEARD', 'Last active'), minutesAgo(it.tx_ms, now)]];
+      var rows = [];
+      var ent = dxccOf(it.call, this, kind, idx);
+      if (ent && ent.name) {
+        rows.push([str('LIVE_DXCC_ENTITY', 'DXCC entity'), ent.name], [str('LIVE_DXCC_PREFIX', 'Prefix'), ent.prefix]);
+        if (ent.dxcc > 0) rows.push([str('LIVE_DXCC_NUMBER', 'DXCC number'), String(ent.dxcc)]);
+      }
+      rows.push([str('LIVE_BAND', 'Band'), it.mode + ' ' + it.band], [str('LIVE_FREQ', 'Frequency'), freqText(it.dial_hz)],
+        [str('LIVE_GRID', 'Grid'), it.grid], [str('LIVE_HEARD', 'Last active'), minutesAgo(it.tx_ms, now)]);
       for (var i = 0; i < rows.length; i++) {
         var r = h('div', 'lqmap-pop-row', null, p);
         h('span', 'k', rows[i][0], r); h('span', 'v', rows[i][1], r);

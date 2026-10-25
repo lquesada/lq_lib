@@ -279,5 +279,8 @@ const langData = {
     "LIVE_BANDS_ALL": "แสดงทั้งหมด",
     "LIVE_HIDE": "ซ่อน",
     "LIVE_SHOW_HINTS": "แสดงคำแนะนำ",
-    "LIVE_BANDS_TITLE": "ย่านความถี่"
+    "LIVE_BANDS_TITLE": "ย่านความถี่",
+    "LIVE_DXCC_ENTITY": "เอนทิตี DXCC",
+    "LIVE_DXCC_PREFIX": "พรีฟิกซ์",
+    "LIVE_DXCC_NUMBER": "หมายเลข DXCC"
 };

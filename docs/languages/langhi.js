@@ -279,5 +279,8 @@ const langData = {
     "LIVE_BANDS_ALL": "सभी दिखाएँ",
     "LIVE_HIDE": "छिपाएँ",
     "LIVE_SHOW_HINTS": "सुझाव दिखाएँ",
-    "LIVE_BANDS_TITLE": "बैंड"
+    "LIVE_BANDS_TITLE": "बैंड",
+    "LIVE_DXCC_ENTITY": "DXCC इकाई",
+    "LIVE_DXCC_PREFIX": "उपसर्ग",
+    "LIVE_DXCC_NUMBER": "DXCC संख्या"
 };

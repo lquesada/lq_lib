@@ -279,5 +279,8 @@ const langData = {
     "LIVE_BANDS_ALL": "Εμφάνιση όλων",
     "LIVE_HIDE": "Απόκρυψη",
     "LIVE_SHOW_HINTS": "Εμφάνιση συμβουλών",
-    "LIVE_BANDS_TITLE": "Μπάντες"
+    "LIVE_BANDS_TITLE": "Μπάντες",
+    "LIVE_DXCC_ENTITY": "Χώρα DXCC",
+    "LIVE_DXCC_PREFIX": "Πρόθεμα",
+    "LIVE_DXCC_NUMBER": "Αριθμός DXCC"
 };

@@ -279,5 +279,8 @@ const langData = {
     "LIVE_BANDS_ALL": "اعرض الكل",
     "LIVE_HIDE": "اخفي",
     "LIVE_SHOW_HINTS": "اعرض التلميحات",
-    "LIVE_BANDS_TITLE": "النطاقات"
+    "LIVE_BANDS_TITLE": "النطاقات",
+    "LIVE_DXCC_ENTITY": "كيان DXCC",
+    "LIVE_DXCC_PREFIX": "البادئة",
+    "LIVE_DXCC_NUMBER": "رقم DXCC"
 };

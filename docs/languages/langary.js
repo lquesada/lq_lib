@@ -279,5 +279,8 @@ const langData = {
     "LIVE_BANDS_ALL": "بيّن كلشي",
     "LIVE_HIDE": "خبّي",
     "LIVE_SHOW_HINTS": "بيّن التلميحات",
-    "LIVE_BANDS_TITLE": "النطاقات"
+    "LIVE_BANDS_TITLE": "النطاقات",
+    "LIVE_DXCC_ENTITY": "كيان DXCC",
+    "LIVE_DXCC_PREFIX": "البادئة",
+    "LIVE_DXCC_NUMBER": "رقم DXCC"
 };

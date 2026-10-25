@@ -279,5 +279,8 @@ const langData = {
     "LIVE_BANDS_ALL": "Показать все",
     "LIVE_HIDE": "Скрыть",
     "LIVE_SHOW_HINTS": "Показать подсказки",
-    "LIVE_BANDS_TITLE": "Диапазоны"
+    "LIVE_BANDS_TITLE": "Диапазоны",
+    "LIVE_DXCC_ENTITY": "Территория DXCC",
+    "LIVE_DXCC_PREFIX": "Префикс",
+    "LIVE_DXCC_NUMBER": "Номер DXCC"
 };

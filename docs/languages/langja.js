@@ -279,5 +279,8 @@ const langData = {
     "LIVE_BANDS_ALL": "すべて表示",
     "LIVE_HIDE": "閉じる",
     "LIVE_SHOW_HINTS": "ヒントを表示",
-    "LIVE_BANDS_TITLE": "バンド"
+    "LIVE_BANDS_TITLE": "バンド",
+    "LIVE_DXCC_ENTITY": "DXCCエンティティ",
+    "LIVE_DXCC_PREFIX": "プリフィックス",
+    "LIVE_DXCC_NUMBER": "DXCC番号"
 };

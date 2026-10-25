@@ -279,5 +279,8 @@ const langData = {
     "LIVE_BANDS_ALL": "모두 표시",
     "LIVE_HIDE": "숨기기",
     "LIVE_SHOW_HINTS": "도움말 표시",
-    "LIVE_BANDS_TITLE": "밴드"
+    "LIVE_BANDS_TITLE": "밴드",
+    "LIVE_DXCC_ENTITY": "DXCC 엔티티",
+    "LIVE_DXCC_PREFIX": "프리픽스",
+    "LIVE_DXCC_NUMBER": "DXCC 번호"
 };

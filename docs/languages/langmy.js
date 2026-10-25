@@ -279,5 +279,8 @@ const langData = {
     "LIVE_BANDS_ALL": "အားလုံးပြပါ",
     "LIVE_HIDE": "ဖျောက်ပါ",
     "LIVE_SHOW_HINTS": "အကြံပြုချက်များ ပြပါ",
-    "LIVE_BANDS_TITLE": "ဘန်းများ"
+    "LIVE_BANDS_TITLE": "ဘန်းများ",
+    "LIVE_DXCC_ENTITY": "DXCC နယ်မြေ",
+    "LIVE_DXCC_PREFIX": "ရှေ့ဆက်",
+    "LIVE_DXCC_NUMBER": "DXCC နံပါတ်"
 };

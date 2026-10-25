@@ -279,5 +279,8 @@ const langData = {
     "LIVE_BANDS_ALL": "Erakutsi denak",
     "LIVE_HIDE": "Ezkutatu",
     "LIVE_SHOW_HINTS": "Erakutsi aholkuak",
-    "LIVE_BANDS_TITLE": "Bandak"
+    "LIVE_BANDS_TITLE": "Bandak",
+    "LIVE_DXCC_ENTITY": "DXCC entitatea",
+    "LIVE_DXCC_PREFIX": "Aurrizkia",
+    "LIVE_DXCC_NUMBER": "DXCC zenbakia"
 };

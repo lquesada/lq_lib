@@ -279,5 +279,8 @@ const langData = {
     "LIVE_BANDS_ALL": "Hammasini ko'rsatish",
     "LIVE_HIDE": "Yashirish",
     "LIVE_SHOW_HINTS": "Maslahatlarni ko'rsatish",
-    "LIVE_BANDS_TITLE": "Diapazonlar"
+    "LIVE_BANDS_TITLE": "Diapazonlar",
+    "LIVE_DXCC_ENTITY": "DXCC hududi",
+    "LIVE_DXCC_PREFIX": "Prefiks",
+    "LIVE_DXCC_NUMBER": "DXCC raqami"
 };

@@ -279,5 +279,8 @@ const langData = {
     "LIVE_BANDS_ALL": "הצג הכול",
     "LIVE_HIDE": "הסתר",
     "LIVE_SHOW_HINTS": "הצג רמזים",
-    "LIVE_BANDS_TITLE": "תחומים"
+    "LIVE_BANDS_TITLE": "תחומים",
+    "LIVE_DXCC_ENTITY": "ישות DXCC",
+    "LIVE_DXCC_PREFIX": "קידומת",
+    "LIVE_DXCC_NUMBER": "מספר DXCC"
 };

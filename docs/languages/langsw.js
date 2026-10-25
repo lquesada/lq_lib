@@ -279,5 +279,8 @@ const langData = {
     "LIVE_BANDS_ALL": "Onyesha zote",
     "LIVE_HIDE": "Ficha",
     "LIVE_SHOW_HINTS": "Onyesha vidokezo",
-    "LIVE_BANDS_TITLE": "Bendi"
+    "LIVE_BANDS_TITLE": "Bendi",
+    "LIVE_DXCC_ENTITY": "Eneo la DXCC",
+    "LIVE_DXCC_PREFIX": "Kiambishi awali",
+    "LIVE_DXCC_NUMBER": "Nambari ya DXCC"
 };

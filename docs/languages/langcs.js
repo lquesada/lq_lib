@@ -279,5 +279,8 @@ const langData = {
     "LIVE_BANDS_ALL": "Zobrazit vše",
     "LIVE_HIDE": "Skrýt",
     "LIVE_SHOW_HINTS": "Zobrazit nápovědy",
-    "LIVE_BANDS_TITLE": "Pásma"
+    "LIVE_BANDS_TITLE": "Pásma",
+    "LIVE_DXCC_ENTITY": "Země DXCC",
+    "LIVE_DXCC_PREFIX": "Prefix",
+    "LIVE_DXCC_NUMBER": "Číslo DXCC"
 };

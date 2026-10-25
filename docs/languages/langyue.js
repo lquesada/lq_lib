@@ -279,5 +279,8 @@ const langData = {
     "LIVE_BANDS_ALL": "全部顯示",
     "LIVE_HIDE": "隱藏",
     "LIVE_SHOW_HINTS": "顯示提示",
-    "LIVE_BANDS_TITLE": "波段"
+    "LIVE_BANDS_TITLE": "波段",
+    "LIVE_DXCC_ENTITY": "DXCC 實體",
+    "LIVE_DXCC_PREFIX": "前綴",
+    "LIVE_DXCC_NUMBER": "DXCC 編號"
 };

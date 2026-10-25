@@ -279,5 +279,8 @@ const langData = {
     "LIVE_BANDS_ALL": "Nuna duka",
     "LIVE_HIDE": "Ɓoye",
     "LIVE_SHOW_HINTS": "Nuna shawarwari",
-    "LIVE_BANDS_TITLE": "Makadai"
+    "LIVE_BANDS_TITLE": "Makadai",
+    "LIVE_DXCC_ENTITY": "Yankin DXCC",
+    "LIVE_DXCC_PREFIX": "Kari",
+    "LIVE_DXCC_NUMBER": "Lambar DXCC"
 };
