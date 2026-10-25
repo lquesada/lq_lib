@@ -21,12 +21,13 @@
     pin: '#0F172A', pinStroke: '#F8FAFC', dx: '#D81B78', dxStroke: '#0F172A'
   };
   // One colour per band (text colour chosen for contrast); unknown bands get the last one.
+  // the band colours hams know from the usual reception-report maps
   var BAND_COLORS = {
-    '160m': '#7C3AED', '80m': '#4F46E5', '60m': '#0284C7', '40m': '#16A34A', '30m': '#65A30D',
-    '20m': '#FACC15', '17m': '#FB923C', '15m': '#EF4444', '12m': '#DB2777', '10m': '#C026D3',
-    '6m': '#14B8A6', '2m': '#F472B6', '70cm': '#A3E635', '23cm': '#E2E8F0', '13cm': '#94A3B8'
+    '160m': '#7CFC00', '80m': '#E550E5', '60m': '#00008B', '40m': '#5959FF', '30m': '#62D962',
+    '20m': '#F2C40C', '17m': '#F2F261', '15m': '#CCA166', '12m': '#B22222', '10m': '#FF69B4',
+    '6m': '#FF0000', '4m': '#CC0044', '2m': '#FF1493', '70cm': '#999900', '23cm': '#5AE5E5', '13cm': '#94A3B8'
   };
-  var BAND_ORDER = ['160m', '80m', '60m', '40m', '30m', '20m', '17m', '15m', '12m', '10m', '6m', '2m', '70cm', '23cm', '13cm'];
+  var BAND_ORDER = ['160m', '80m', '60m', '40m', '30m', '20m', '17m', '15m', '12m', '10m', '6m', '4m', '2m', '70cm', '23cm', '13cm'];
   var MODE_ORDER = ['LQ8', 'LQ4', 'LQ2', 'LQ16'];
   var SVGNS = 'http://www.w3.org/2000/svg';
 
