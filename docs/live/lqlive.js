@@ -379,10 +379,11 @@
 
   LiveMap.prototype.drawPin = function (g, pt, list, sc) {
     var grp = el('g', { transform: 'translate(' + pt.x.toFixed(1) + ',' + pt.y.toFixed(1) + ') scale(' + sc + ')' }, g);
-    // the pin: its tip on the grid square's centre
+    // the pin: its tip on the grid square's centre; hovering or tapping it opens the first station's popup, as its tag does
+    var pin = el('g', { 'class': 'lqmap-mark', 'data-kind': 'st', 'data-idx': this.items.indexOf(list[0]), tabindex: -1 }, grp);
     el('path', { d: 'M0,0 C-1.5,-5 -6,-8 -6,-13 A6,6 0 1 1 6,-13 C6,-8 1.5,-5 0,0 Z', fill: bandColor(list[0].band),
-      stroke: THEME.pin, 'stroke-width': 1.5 }, grp);
-    el('circle', { cx: 0, cy: -13, r: 2.3, fill: THEME.pin }, grp);
+      stroke: THEME.pin, 'stroke-width': 1.5 }, pin);
+    el('circle', { cx: 0, cy: -13, r: 2.3, fill: THEME.pin }, pin);
     var max = this.mini ? 2 : 4, y = -22;
     for (var i = 0; i < list.length && i < max; i++) {
       // each tag: the callsign on top, "LQ8 20m" under it
