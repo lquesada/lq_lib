@@ -475,6 +475,16 @@ def build_live_pages():
     import html as htmlmod
     with open(LIVE_TEMPLATE, "r", encoding="utf-8") as f:
         template = f.read()
+    # The band filter's buttons are written into the page itself, so the Bands panel is complete on the first paint;
+    # lqlive.js then redraws them with their clicks and the viewer's saved choice. One source: lqlive.js's own lists.
+    import re as _re
+    with open(os.path.join(DOCS_DIR, "live", "lqlive.js"), "r", encoding="utf-8") as f:
+        js = f.read()
+    order = _re.findall(r"'([^']+)'", _re.search(r"var BAND_ORDER = \[([^\]]*)\]", js).group(1))
+    colors = dict(_re.findall(r"'([^']+)':\s*'(#[0-9A-Fa-f]{6})'", _re.search(r"var BAND_COLORS = \{(.*?)\};", js, _re.S).group(1)))
+    chips = "".join(f'<button class="lqlive-chip" aria-pressed="true" type="button"><span class="sw" style="background: {colors.get(b, "#64748B")};"></span><span>{b}</span></button>'
+                    for b in order)
+    template = template.replace("{{BAND_CHIPS}}", chips)
     for lang in SUPPORTED_LANGUAGES:
         data = load_translations(lang)
         is_en = lang == 'en'

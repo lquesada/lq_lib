@@ -517,6 +517,7 @@
         saveHiddenBands(self.map.hiddenBands);
         self.update();
       });
+      this.drawBandFilter();   // the list is fixed, so it is drawn at once, not when the first data arrives
     }
     var reset = root.querySelector('.lqlive-reset');
     if (reset) reset.addEventListener('click', function () { self.map.reset(); });
