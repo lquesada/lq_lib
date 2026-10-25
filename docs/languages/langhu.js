@@ -274,5 +274,9 @@ const langData = {
     "LIVE_PATH_SETTINGS": "Beállítások",
     "LIVE_PATH_REPORTING": "Jelentések",
     "LIVE_PATH_LABEL": "LQ8-aktivitás bejelentése a qFT8 szolgáltatásnak",
-    "LIVE_QFT8_NOTE": "LQ8-összeköttetésekhez használja a qFT8-at Androidon, Windowson, Linuxon vagy Macen."
+    "LIVE_QFT8_NOTE": "LQ8-összeköttetésekhez használja a qFT8-at Androidon, Windowson, Linuxon vagy Macen.",
+    "LIVE_BANDS_FILTER": "Megjelenített sávok",
+    "LIVE_BANDS_ALL": "Összes mutatása",
+    "LIVE_HIDE": "Elrejtés",
+    "LIVE_SHOW_HINTS": "Tippek mutatása"
 };

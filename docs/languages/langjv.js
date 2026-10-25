@@ -274,5 +274,9 @@ const langData = {
     "LIVE_PATH_SETTINGS": "Settings",
     "LIVE_PATH_REPORTING": "Reporting",
     "LIVE_PATH_LABEL": "Announce LQ8 activity to the qFT8 service",
-    "LIVE_QFT8_NOTE": "Gunakaken qFT8 kanggo Android, Windows, Linux, utawa Mac kanggo kontak LQ8."
+    "LIVE_QFT8_NOTE": "Gunakaken qFT8 kanggo Android, Windows, Linux, utawa Mac kanggo kontak LQ8.",
+    "LIVE_BANDS_FILTER": "Band sing ditampilake",
+    "LIVE_BANDS_ALL": "Tampilake kabèh",
+    "LIVE_HIDE": "Dhelikake",
+    "LIVE_SHOW_HINTS": "Tampilake pitunjuk"
 };

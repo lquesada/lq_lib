@@ -274,5 +274,9 @@ const langData = {
     "LIVE_PATH_SETTINGS": "Settings",
     "LIVE_PATH_REPORTING": "Reporting",
     "LIVE_PATH_LABEL": "Announce LQ8 activity to the qFT8 service",
-    "LIVE_QFT8_NOTE": "LQ8 సంబంధాలు చేయడానికి Android, Windows, Linux లేదా Mac కోసం qFT8 ఉపయోగించండి."
+    "LIVE_QFT8_NOTE": "LQ8 సంబంధాలు చేయడానికి Android, Windows, Linux లేదా Mac కోసం qFT8 ఉపయోగించండి.",
+    "LIVE_BANDS_FILTER": "చూపించాల్సిన బ్యాండ్‌లు",
+    "LIVE_BANDS_ALL": "అన్నీ చూపించు",
+    "LIVE_HIDE": "దాచు",
+    "LIVE_SHOW_HINTS": "సూచనలు చూపించు"
 };

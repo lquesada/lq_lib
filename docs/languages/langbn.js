@@ -274,5 +274,9 @@ const langData = {
     "LIVE_PATH_SETTINGS": "সেটিংস",
     "LIVE_PATH_REPORTING": "রিপোর্টিং",
     "LIVE_PATH_LABEL": "qFT8 পরিষেবায় LQ8 কার্যকলাপ ঘোষণা করুন",
-    "LIVE_QFT8_NOTE": "LQ8 যোগাযোগ করতে Android, Windows, Linux বা Mac-এর জন্য qFT8 ব্যবহার করুন।"
+    "LIVE_QFT8_NOTE": "LQ8 যোগাযোগ করতে Android, Windows, Linux বা Mac-এর জন্য qFT8 ব্যবহার করুন।",
+    "LIVE_BANDS_FILTER": "দেখানোর ব্যান্ড",
+    "LIVE_BANDS_ALL": "সব দেখান",
+    "LIVE_HIDE": "লুকান",
+    "LIVE_SHOW_HINTS": "টিপস দেখান"
 };

@@ -274,5 +274,9 @@ const langData = {
     "LIVE_PATH_SETTINGS": "Indstillinger",
     "LIVE_PATH_REPORTING": "Rapportering",
     "LIVE_PATH_LABEL": "Meld LQ8-aktivitet til qFT8-tjenesten",
-    "LIVE_QFT8_NOTE": "Brug qFT8 til Android, Windows, Linux eller Mac til at lave LQ8-forbindelser."
+    "LIVE_QFT8_NOTE": "Brug qFT8 til Android, Windows, Linux eller Mac til at lave LQ8-forbindelser.",
+    "LIVE_BANDS_FILTER": "Bånd der vises",
+    "LIVE_BANDS_ALL": "Vis alle",
+    "LIVE_HIDE": "Skjul",
+    "LIVE_SHOW_HINTS": "Vis tip"
 };

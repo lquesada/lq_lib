@@ -27,10 +27,66 @@
     '20m': '#F2C40C', '17m': '#F2F261', '15m': '#CCA166', '12m': '#B22222', '10m': '#FF69B4',
     '6m': '#FF0000', '4m': '#CC0044', '2m': '#FF1493', '70cm': '#999900', '23cm': '#5AE5E5', '13cm': '#94A3B8'
   };
-  var BAND_ORDER = ['160m', '80m', '60m', '40m', '30m', '20m', '17m', '15m', '12m', '10m', '6m', '4m', '2m', '70cm', '23cm', '13cm'];
+  var BAND_ORDER = ['160m', '80m', '60m', '40m', '30m', '20m', '17m', '15m', '12m', '10m', '6m', '2m', '70cm', '23cm', '13cm'];   // the bands the service accepts
   var MODE_ORDER = ['LQ8', 'LQ4', 'LQ2', 'LQ16'];
   var SVGNS = 'http://www.w3.org/2000/svg';
 
+  // The bands the viewer chose to hide on the full map, kept in a cookie for a year (only the list of hidden bands).
+  var BANDS_COOKIE = 'lq8live_hidden_bands';
+  function readHiddenBands() {
+    var out = {};
+    try {
+      var m = document.cookie.match(new RegExp('(?:^|; )' + BANDS_COOKIE + '=([^;]*)'));
+      if (m) decodeURIComponent(m[1]).split(',').forEach(function (b) { if (BAND_ORDER.indexOf(b) >= 0) out[b] = 1; });
+    } catch (e) {}
+    return out;
+  }
+  function saveHiddenBands(hidden) {
+    try {
+      document.cookie = BANDS_COOKIE + '=' + encodeURIComponent(Object.keys(hidden).join(',')) +
+        '; max-age=31536000; path=/; SameSite=Lax' + (location.protocol === 'https:' ? '; Secure' : '');
+    } catch (e) {}
+  }
+  // Hint panels the viewer closed with their X (full map), kept in a cookie for a year; "Show hints" brings them back.
+  var HINTS_COOKIE = 'lq8live_hidden_hints';
+  function readCookieList(name) {
+    try {
+      var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+      return m ? decodeURIComponent(m[1]).split(',').filter(function (x) { return x; }) : [];
+    } catch (e) { return []; }
+  }
+  function writeCookieList(name, list) {
+    try {
+      document.cookie = name + '=' + encodeURIComponent(list.join(',')) +
+        '; max-age=31536000; path=/; SameSite=Lax' + (location.protocol === 'https:' ? '; Secure' : '');
+    } catch (e) {}
+  }
+  function setupHints() {
+    var panels = document.querySelectorAll('[data-hint]');
+    var show = document.querySelector('.lqlive-hints-show');
+    if (!panels.length) return;
+    var closed = readCookieList(HINTS_COOKIE);
+    function apply() {
+      for (var i = 0; i < panels.length; i++) panels[i].hidden = closed.indexOf(panels[i].getAttribute('data-hint')) >= 0;
+      if (show) show.hidden = !closed.length;
+    }
+    Array.prototype.forEach.call(panels, function (p) {
+      var x = h('button', 'lqlive-x', null, p);
+      x.type = 'button';
+      x.setAttribute('aria-label', str('LIVE_HIDE', 'Hide'));
+      x.title = str('LIVE_HIDE', 'Hide');
+      x.innerHTML = '<svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2 2L10 10M10 2L2 10" ' +
+        'stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+      x.addEventListener('click', function () {
+        var id = p.getAttribute('data-hint');
+        if (closed.indexOf(id) < 0) closed.push(id);
+        writeCookieList(HINTS_COOKIE, closed);
+        apply();
+      });
+    });
+    if (show) show.addEventListener('click', function () { closed = []; writeCookieList(HINTS_COOKIE, closed); apply(); });
+    apply();
+  }
   function bandColor(b) { return BAND_COLORS[b] || '#64748B'; }
   function textOn(hex) {
     var n = parseInt(hex.slice(1), 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255;
@@ -398,6 +454,18 @@
     this.dxBox = root.querySelector('.lqlive-dx');
     this.dxList = root.querySelector('.lqlive-dx-list');
     this.raw = null; this.dxRaw = []; this.failed = false;
+    // the band filter (full map only): every band the service accepts, all shown unless the viewer hid some
+    this.bandBox = this.mini ? null : root.querySelector('.lqlive-bands');
+    if (this.bandBox) {
+      this.map.hiddenBands = readHiddenBands();
+      if (window.matchMedia && window.matchMedia('(max-width: 760px)').matches) this.bandBox.open = false;
+      var all = this.bandBox.querySelector('.lqlive-bands-all');
+      if (all) all.addEventListener('click', function () {
+        Object.keys(self.map.hiddenBands).forEach(function (b) { delete self.map.hiddenBands[b]; });
+        saveHiddenBands(self.map.hiddenBands);
+        self.update();
+      });
+    }
     var reset = root.querySelector('.lqlive-reset');
     if (reset) reset.addEventListener('click', function () { self.map.reset(); });
     var how = root.querySelector('.lqlive-how');
@@ -420,7 +488,7 @@
   Page.prototype.poll = function () {
     var self = this;
     if (document.hidden && this.raw) return;
-    fetch(FEED, { credentials: 'omit' }).then(function (r) {
+    fetch(FEED, { credentials: 'omit', cache: 'no-cache' }).then(function (r) {
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return r.json();
     }).then(function (j) {
@@ -466,6 +534,7 @@
       sorted(Object.keys(bands), BAND_ORDER).forEach(function (b) { self.chip(b, bandColor(b), self.map.hiddenBands); });
       this.legend.hidden = !items.length;
     }
+    this.drawBandFilter();
     // DXpeditions list: hidden while there are none
     if (this.dxBox) {
       this.dxBox.hidden = !dx.length;
@@ -486,14 +555,25 @@
       }
     }
   };
-  Page.prototype.chip = function (label, color, hidden) {
-    var self = this, b = h('button', 'lqlive-chip' + (hidden[label] ? ' off' : ''), null, this.legend);
+  Page.prototype.drawBandFilter = function () {
+    var list = this.bandBox && this.bandBox.querySelector('.lqlive-band-list');
+    if (!list) return;
+    var self = this;
+    list.textContent = '';
+    BAND_ORDER.forEach(function (b) { self.chip(b, bandColor(b), self.map.hiddenBands, list); });
+    var all = this.bandBox.querySelector('.lqlive-bands-all');
+    if (all) all.disabled = !Object.keys(this.map.hiddenBands).length;
+  };
+  Page.prototype.chip = function (label, color, hidden, parent) {
+    var self = this, b = h('button', 'lqlive-chip' + (hidden[label] ? ' off' : ''), null, parent || this.legend);
+    b.setAttribute('aria-pressed', hidden[label] ? 'false' : 'true');
     b.type = 'button';
     if (color) { var sw = h('span', 'sw', null, b); sw.style.background = color; }
     h('span', null, label, b);
     if (this.mini) { b.disabled = true; return; }
     b.addEventListener('click', function () {
       if (hidden[label]) delete hidden[label]; else hidden[label] = 1;
+      if (hidden === self.map.hiddenBands && self.bandBox) saveHiddenBands(hidden);
       self.update();
     });
   };
@@ -501,6 +581,7 @@
   function start() {
     var roots = document.querySelectorAll('.lqlive');
     for (var i = 0; i < roots.length; i++) new Page(roots[i]);
+    setupHints();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();

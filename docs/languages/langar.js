@@ -274,5 +274,9 @@ const langData = {
     "LIVE_PATH_SETTINGS": "الإعدادات",
     "LIVE_PATH_REPORTING": "الإبلاغ",
     "LIVE_PATH_LABEL": "الإعلان عن نشاط LQ8 لخدمة qFT8",
-    "LIVE_QFT8_NOTE": "استخدم qFT8 على Android أو Windows أو Linux أو Mac لإجراء اتصالات LQ8."
+    "LIVE_QFT8_NOTE": "استخدم qFT8 على Android أو Windows أو Linux أو Mac لإجراء اتصالات LQ8.",
+    "LIVE_BANDS_FILTER": "النطاقات المعروضة",
+    "LIVE_BANDS_ALL": "عرض الكل",
+    "LIVE_HIDE": "إخفاء",
+    "LIVE_SHOW_HINTS": "عرض التلميحات"
 };

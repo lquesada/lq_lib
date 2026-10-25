@@ -274,5 +274,9 @@ const langData = {
     "LIVE_PATH_SETTINGS": "Configuració",
     "LIVE_PATH_REPORTING": "Informes",
     "LIVE_PATH_LABEL": "Anunciar l'activitat d'LQ8 al servei de qFT8",
-    "LIVE_QFT8_NOTE": "Utilitza qFT8 per a Android, Windows, Linux o Mac per fer contactes en LQ8."
+    "LIVE_QFT8_NOTE": "Utilitza qFT8 per a Android, Windows, Linux o Mac per fer contactes en LQ8.",
+    "LIVE_BANDS_FILTER": "Bandes a mostrar",
+    "LIVE_BANDS_ALL": "Mostra-les totes",
+    "LIVE_HIDE": "Amaga",
+    "LIVE_SHOW_HINTS": "Mostra els consells"
 };

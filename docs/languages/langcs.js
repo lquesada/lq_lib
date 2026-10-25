@@ -274,5 +274,9 @@ const langData = {
     "LIVE_PATH_SETTINGS": "Nastavení",
     "LIVE_PATH_REPORTING": "Hlášení",
     "LIVE_PATH_LABEL": "Hlásit aktivitu v LQ8 službě qFT8",
-    "LIVE_QFT8_NOTE": "Pro spojení v LQ8 použijte qFT8 pro Android, Windows, Linux nebo Mac."
+    "LIVE_QFT8_NOTE": "Pro spojení v LQ8 použijte qFT8 pro Android, Windows, Linux nebo Mac.",
+    "LIVE_BANDS_FILTER": "Zobrazená pásma",
+    "LIVE_BANDS_ALL": "Zobrazit vše",
+    "LIVE_HIDE": "Skrýt",
+    "LIVE_SHOW_HINTS": "Zobrazit nápovědy"
 };

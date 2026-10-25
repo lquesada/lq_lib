@@ -274,5 +274,9 @@ const langData = {
     "LIVE_PATH_SETTINGS": "Settings",
     "LIVE_PATH_REPORTING": "Reporting",
     "LIVE_PATH_LABEL": "Announce LQ8 activity to the qFT8 service",
-    "LIVE_QFT8_NOTE": "የLQ8 ግንኙነቶችን ለማድረግ qFT8ን ለAndroid፣ Windows፣ Linux ወይም Mac ይጠቀሙ።"
+    "LIVE_QFT8_NOTE": "የLQ8 ግንኙነቶችን ለማድረግ qFT8ን ለAndroid፣ Windows፣ Linux ወይም Mac ይጠቀሙ።",
+    "LIVE_BANDS_FILTER": "የሚታዩ ባንዶች",
+    "LIVE_BANDS_ALL": "ሁሉንም አሳይ",
+    "LIVE_HIDE": "ደብቅ",
+    "LIVE_SHOW_HINTS": "ፍንጮችን አሳይ"
 };

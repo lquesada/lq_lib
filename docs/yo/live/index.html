@@ -107,7 +107,12 @@
     .panel[hidden] { display: none; }
     .panel.info { grid-column: 1; grid-row: 1; align-self: start; }
     .panel.info p.sub { font-size: 0.85rem; color: var(--muted); line-height: 1.4; }
-    .panel.dxp { grid-column: 3; grid-row: 1 / span 2; align-self: start; max-height: 100%; overflow: auto; }
+    .panel.bands { grid-column: 3; grid-row: 1; align-self: start; }
+    .panel.bands summary { font: 600 0.9rem 'Inter', system-ui, sans-serif; cursor: pointer; }
+    .panel.bands[open] summary { margin-bottom: 8px; }
+    .panel.bands .lqlive-bands-all { margin-top: 8px; }
+    .panel.bands .lqlive-bands-all:disabled { opacity: 0.4; cursor: default; }
+    .panel.dxp { grid-column: 3; grid-row: 2; align-self: start; max-height: 100%; overflow: auto; }
     .panel.foot { grid-column: 1 / span 2; grid-row: 3; justify-self: start; max-width: 520px; padding: 8px 12px; }
     .lqlive-reset { align-self: flex-start; background: #0d121d; color: var(--text); border: 1px solid rgba(56, 189, 248, 0.35);
                     border-radius: 8px; padding: 4px 10px; font: 600 12px 'Inter', system-ui, sans-serif; cursor: pointer; }
@@ -115,13 +120,14 @@
       .top { padding: 8px 12px; gap: 8px; }
       .top h1 { font-size: 1rem; }
       .top select { max-width: 6.5rem; }
-      .overlay { inset: 8px; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr auto auto auto; }
+      .overlay { inset: 8px; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto 1fr auto auto auto; }
       .panel { padding: 8px 10px; }
       .panel.info { grid-column: 1; grid-row: 1; }
       .panel.info p.sub { display: none; }
-      .panel.dxp { grid-column: 1; grid-row: 3; max-height: 28vh; }
-      .panel.foot { grid-column: 1; grid-row: 4; max-width: none; }
-      .panel.qft8 { grid-column: 1; grid-row: 5; justify-self: stretch; max-width: none; }
+      .panel.bands { grid-column: 1; grid-row: 2; }
+      .panel.dxp { grid-column: 1; grid-row: 4; max-height: 28vh; }
+      .panel.foot { grid-column: 1; grid-row: 5; max-width: none; }
+      .panel.qft8 { grid-column: 1; grid-row: 6; justify-self: stretch; max-width: none; }
       .panel.qft8 a { font-size: 0.75rem; }
       .lqlive-how { font-size: 0.75rem; }
     }
@@ -131,6 +137,7 @@
   <header class="top">
     <a class="back" href="../" data-i18n="LIVE_BACK">&larr; Padà sí LQ8</a>
     <h1><span class="lq" data-i18n="LIVE_TITLE">Àwòrán LQ8 ní ààyè</span></h1>
+    <button type="button" class="lqlive-hints-show" data-i18n="LIVE_SHOW_HINTS" hidden>Fi àwọn ìmọ̀ràn hàn</button>
     <select id="lang-select" aria-label="Language" onchange="lqLiveLang(this.value)">
       <option value="en">English</option>
       <option value="es">Español</option>
@@ -201,18 +208,23 @@
   <main class="lqlive" data-mini="0">
     <div class="lqmap-host"></div>
     <div class="overlay">
-    <div class="panel info">
+    <div class="panel info" data-hint="info">
       <p class="sub" data-i18n="LIVE_SUBTITLE">Àwọn ibùdó tí ń ṣiṣẹ́ ní LQ8 lọ́wọ́lọ́wọ́, bí àwọn olùlò qFT8 ṣe ròyìn. Àwòrán náà ń sọ ara rẹ̀ di tuntun ní ìṣẹ́jú-àáyá 30 kọ̀ọ̀kan.</p>
       <div class="lqlive-status" role="status" aria-live="polite"></div>
       <div class="lqlive-legend" hidden></div>
       <button type="button" class="lqlive-reset" data-i18n="LIVE_RESET">Tún ìwò ṣe</button>
     </div>
+    <details class="panel bands lqlive-bands" open>
+      <summary data-i18n="LIVE_BANDS_FILTER">Àwọn bándì tí a ó fihàn</summary>
+      <div class="lqlive-band-list"></div>
+      <button type="button" class="lqlive-reset lqlive-bands-all" data-i18n="LIVE_BANDS_ALL">Fi gbogbo rẹ̀ hàn</button>
+    </details>
     <aside class="panel dxp lqlive-dx" hidden>
       <h3 data-i18n="LIVE_DX_TITLE">Àwọn DXpedition LQ8 tí ń bọ̀</h3>
       <ul class="lqlive-dx-list"></ul>
     </aside>
-    <div class="panel foot"><p class="lqlive-how"></p></div>
-    <div class="panel qft8"><a href="https://qft8.com"><img src="../../live/qft8_logo.png" alt="qFT8" width="36" height="36"><span data-i18n="LIVE_QFT8_NOTE">Lo qFT8 fún Android, Windows, Linux tàbí Mac láti ṣe ìbánisọ̀rọ̀ LQ8.</span></a></div>
+    <div class="panel foot" data-hint="how"><p class="lqlive-how"></p></div>
+    <div class="panel qft8" data-hint="qft8"><a href="https://qft8.com"><img src="../../live/qft8_logo.png" alt="qFT8" width="36" height="36"><span data-i18n="LIVE_QFT8_NOTE">Lo qFT8 fún Android, Windows, Linux tàbí Mac láti ṣe ìbánisọ̀rọ̀ LQ8.</span></a></div>
     </div>
   </main>
 
@@ -231,6 +243,7 @@
     <span data-i18n="LIVE_DX_DAYS">ní ọjọ́ {n}</span>
     <span data-i18n="LIVE_DX_TOMORROW">ọ̀la</span>
     <span data-i18n="LIVE_DX_ON_AIR">wà lórí afẹ́fẹ́ báyìí</span>
+    <span data-i18n="LIVE_HIDE">Fi pamọ́</span>
     <span data-i18n="LIVE_HOW">Láti hàn lórí àwòrán, ní qFT8 lọ sí {path}, lẹ́yìn náà ṣe ìgbéjáde ní LQ8 nípasẹ̀ rédíò rẹ.</span>
     <span data-i18n="LIVE_PATH_SETTINGS">Settings</span>
     <span data-i18n="LIVE_PATH_REPORTING">Reporting</span>

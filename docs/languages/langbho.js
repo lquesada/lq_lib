@@ -274,5 +274,9 @@ const langData = {
     "LIVE_PATH_SETTINGS": "Settings",
     "LIVE_PATH_REPORTING": "Reporting",
     "LIVE_PATH_LABEL": "Announce LQ8 activity to the qFT8 service",
-    "LIVE_QFT8_NOTE": "LQ8 संपर्क करे खातिर Android, Windows, Linux भा Mac खातिर qFT8 के इस्तेमाल करीं।"
+    "LIVE_QFT8_NOTE": "LQ8 संपर्क करे खातिर Android, Windows, Linux भा Mac खातिर qFT8 के इस्तेमाल करीं।",
+    "LIVE_BANDS_FILTER": "देखावे वाला बैंड",
+    "LIVE_BANDS_ALL": "सब देखाईं",
+    "LIVE_HIDE": "छिपाईं",
+    "LIVE_SHOW_HINTS": "सुझाव देखाईं"
 };

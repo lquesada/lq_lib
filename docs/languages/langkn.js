@@ -274,5 +274,9 @@ const langData = {
     "LIVE_PATH_SETTINGS": "Settings",
     "LIVE_PATH_REPORTING": "Reporting",
     "LIVE_PATH_LABEL": "Announce LQ8 activity to the qFT8 service",
-    "LIVE_QFT8_NOTE": "LQ8 ಸಂಪರ್ಕಗಳನ್ನು ಮಾಡಲು Android, Windows, Linux ಅಥವಾ Mac ಗಾಗಿ qFT8 ಬಳಸಿ."
+    "LIVE_QFT8_NOTE": "LQ8 ಸಂಪರ್ಕಗಳನ್ನು ಮಾಡಲು Android, Windows, Linux ಅಥವಾ Mac ಗಾಗಿ qFT8 ಬಳಸಿ.",
+    "LIVE_BANDS_FILTER": "ತೋರಿಸುವ ಬ್ಯಾಂಡ್‌ಗಳು",
+    "LIVE_BANDS_ALL": "ಎಲ್ಲವನ್ನೂ ತೋರಿಸಿ",
+    "LIVE_HIDE": "ಮರೆಮಾಡಿ",
+    "LIVE_SHOW_HINTS": "ಸಲಹೆಗಳನ್ನು ತೋರಿಸಿ"
 };

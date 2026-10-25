@@ -274,5 +274,9 @@ const langData = {
     "LIVE_PATH_SETTINGS": "Saituna",
     "LIVE_PATH_REPORTING": "Bayar da rahoto",
     "LIVE_PATH_LABEL": "Sanar da ayyukan LQ8 ga sabis na qFT8",
-    "LIVE_QFT8_NOTE": "Yi amfani da qFT8 don Android, Windows, Linux ko Mac don yin hulɗar LQ8."
+    "LIVE_QFT8_NOTE": "Yi amfani da qFT8 don Android, Windows, Linux ko Mac don yin hulɗar LQ8.",
+    "LIVE_BANDS_FILTER": "Makadan da za a nuna",
+    "LIVE_BANDS_ALL": "Nuna duka",
+    "LIVE_HIDE": "Ɓoye",
+    "LIVE_SHOW_HINTS": "Nuna shawarwari"
 };

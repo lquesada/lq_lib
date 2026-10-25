@@ -274,5 +274,9 @@ const langData = {
     "LIVE_PATH_SETTINGS": "Settings",
     "LIVE_PATH_REPORTING": "Reporting",
     "LIVE_PATH_LABEL": "Announce LQ8 activity to the qFT8 service",
-    "LIVE_QFT8_NOTE": "Lo qFT8 fún Android, Windows, Linux tàbí Mac láti ṣe ìbánisọ̀rọ̀ LQ8."
+    "LIVE_QFT8_NOTE": "Lo qFT8 fún Android, Windows, Linux tàbí Mac láti ṣe ìbánisọ̀rọ̀ LQ8.",
+    "LIVE_BANDS_FILTER": "Àwọn bándì tí a ó fihàn",
+    "LIVE_BANDS_ALL": "Fi gbogbo rẹ̀ hàn",
+    "LIVE_HIDE": "Fi pamọ́",
+    "LIVE_SHOW_HINTS": "Fi àwọn ìmọ̀ràn hàn"
 };

@@ -274,5 +274,9 @@ const langData = {
     "LIVE_PATH_SETTINGS": "Settings",
     "LIVE_PATH_REPORTING": "Reporting",
     "LIVE_PATH_LABEL": "Announce LQ8 activity to the qFT8 service",
-    "LIVE_QFT8_NOTE": "LQ8 əlaqələri qurmaq üçün Android, Windows, Linux və ya Mac üçün qFT8-dən istifadə edin."
+    "LIVE_QFT8_NOTE": "LQ8 əlaqələri qurmaq üçün Android, Windows, Linux və ya Mac üçün qFT8-dən istifadə edin.",
+    "LIVE_BANDS_FILTER": "Göstəriləcək diapazonlar",
+    "LIVE_BANDS_ALL": "Hamısını göstər",
+    "LIVE_HIDE": "Gizlət",
+    "LIVE_SHOW_HINTS": "İpuçlarını göstər"
 };

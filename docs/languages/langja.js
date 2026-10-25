@@ -274,5 +274,9 @@ const langData = {
     "LIVE_PATH_SETTINGS": "設定",
     "LIVE_PATH_REPORTING": "レポート送信",
     "LIVE_PATH_LABEL": "LQ8のアクティビティをqFT8サービスに通知",
-    "LIVE_QFT8_NOTE": "LQ8 で交信するには、Android・Windows・Linux・Mac 用の qFT8 をお使いください。"
+    "LIVE_QFT8_NOTE": "LQ8 で交信するには、Android・Windows・Linux・Mac 用の qFT8 をお使いください。",
+    "LIVE_BANDS_FILTER": "表示するバンド",
+    "LIVE_BANDS_ALL": "すべて表示",
+    "LIVE_HIDE": "閉じる",
+    "LIVE_SHOW_HINTS": "ヒントを表示"
 };

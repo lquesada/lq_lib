@@ -274,5 +274,9 @@ const langData = {
     "LIVE_PATH_SETTINGS": "설정",
     "LIVE_PATH_REPORTING": "보고",
     "LIVE_PATH_LABEL": "LQ8 활동을 qFT8 서비스에 알리기",
-    "LIVE_QFT8_NOTE": "LQ8 교신을 하려면 Android, Windows, Linux 또는 Mac용 qFT8을 사용하세요."
+    "LIVE_QFT8_NOTE": "LQ8 교신을 하려면 Android, Windows, Linux 또는 Mac용 qFT8을 사용하세요.",
+    "LIVE_BANDS_FILTER": "표시할 밴드",
+    "LIVE_BANDS_ALL": "모두 표시",
+    "LIVE_HIDE": "숨기기",
+    "LIVE_SHOW_HINTS": "도움말 표시"
 };

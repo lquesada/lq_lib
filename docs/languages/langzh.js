@@ -274,5 +274,9 @@ const langData = {
     "LIVE_PATH_SETTINGS": "设置",
     "LIVE_PATH_REPORTING": "上报",
     "LIVE_PATH_LABEL": "向 qFT8 服务通告 LQ8 活动",
-    "LIVE_QFT8_NOTE": "使用 Android、Windows、Linux 或 Mac 版 qFT8 进行 LQ8 通联。"
+    "LIVE_QFT8_NOTE": "使用 Android、Windows、Linux 或 Mac 版 qFT8 进行 LQ8 通联。",
+    "LIVE_BANDS_FILTER": "显示的波段",
+    "LIVE_BANDS_ALL": "全部显示",
+    "LIVE_HIDE": "隐藏",
+    "LIVE_SHOW_HINTS": "显示提示"
 };
