@@ -115,6 +115,23 @@
     var lat = (g.charCodeAt(1) - 65) * 10 - 90 + (g.charCodeAt(3) - 48) + 0.5;
     return { lon: lon, lat: lat };
   }
+  // The feed's point for a station (lat/lon, LQ8-LIVE-POSITION-1) is used when it lies in the station's grid square.
+  function inSquare(c, gc) {
+    return typeof c.lat === 'number' && typeof c.lon === 'number' && isFinite(c.lat) && isFinite(c.lon) &&
+      Math.abs(c.lon - gc.lon) <= 1.0001 && Math.abs(c.lat - gc.lat) <= 0.5001;
+  }
+  // The screen box of a pin at (x, y) with the stack of tags drawn above it by drawPin (same sizes), in map pixels.
+  function tagWidth(it) { return 10 + Math.max((it.mode + ' ' + it.band).length * 6.6, it.call.length * 7.6); }
+  function stackBox(x, y, list, max, sc) {
+    var shown = Math.min(list.length, max), w = 12;
+    for (var i = 0; i < shown; i++) w = Math.max(w, tagWidth(list[i]));
+    var top = -22 - 31 * (shown - 1) - 29 - (list.length > max ? 16 : 0);
+    return { l: x - (w / 2 + 3) * sc, r: x + (w / 2 + 3) * sc, t: y + (top - 3) * sc, b: y + 2 * sc };
+  }
+  function overlaps(a, b) { return a.l < b.r && b.l < a.r && a.t < b.b && b.t < a.b; }
+  function union(a, b, c) {
+    return { l: Math.min(a.l, b.l, c.l), r: Math.max(a.r, b.r, c.r), t: Math.min(a.t, b.t, c.t), b: Math.max(a.b, b.b, c.b) };
+  }
   function minutesAgo(ms, now) {
     var m = Math.floor((now - ms) / 60000);
     return m < 1 ? str('LIVE_JUST_NOW', 'just now') : str('LIVE_MIN_AGO', '{n} min ago').replace('{n}', String(m));
@@ -363,27 +380,42 @@
       var cs = this.copies(dx.lon, dx.lat);
       for (var c = 0; c < cs.length; c++) this.drawDx(g, cs[c], dx, d, sc);
     }
-    // stations, grouped by grid square: one pin, labels stacked above it
-    var groups = {}, order = [], vis = this.visibleItems();
+    // stations: each at its own point (the one the qFT8 app draws it at: inside its grid square, on land). A station whose
+    // pin + tag would touch another stack of tags joins that stack (newest first, above the stack's first pin; it keeps its
+    // own pin), so tags never cover each other; zooming in pulls the stacks apart. Old feeds without lat/lon: grid centres.
+    var vis = this.visibleItems(), s = this.scale(), max = this.mini ? 2 : 4, clusters = [];
     for (var i = 0; i < vis.length; i++) {
-      var it = vis[i];
-      if (!groups[it.grid]) { groups[it.grid] = []; order.push(it.grid); }
-      groups[it.grid].push(it);
+      var it = vis[i], x = it.lon * s, y = -it.lat * s, cl = null;   // map pixels (the shared screen offset left out)
+      var own = stackBox(x, y, [it], max, sc);
+      for (var k = 0; k < clusters.length && !cl; k++) if (overlaps(clusters[k].box, own)) cl = clusters[k];
+      if (cl) {
+        cl.list.push(it);
+        cl.box = union(stackBox(cl.x, cl.y, cl.list, max, sc), cl.box, own);
+      } else clusters.push({ x: x, y: y, list: [it], box: own });
     }
-    for (var o = 0; o < order.length; o++) {
-      var list = groups[order[o]], gc = gridCenter(order[o]);
-      var ps = this.copies(gc.lon, gc.lat);
-      for (var p = 0; p < ps.length; p++) this.drawPin(g, ps[p], list, sc);
+    for (var c = 0; c < clusters.length; c++) {
+      var list = clusters[c].list, ps = this.copies(list[0].lon, list[0].lat);
+      for (var p = 0; p < ps.length; p++) {
+        for (var m = list.length - 1; m >= 1; m--) {   // the other pins of the stack, at their own points
+          this.drawPinOnly(g, { x: ps[p].x + (list[m].lon - list[0].lon) * s, y: ps[p].y - (list[m].lat - list[0].lat) * s }, list[m], sc);
+        }
+        this.drawPin(g, ps[p], list, sc);
+      }
     }
   };
 
-  LiveMap.prototype.drawPin = function (g, pt, list, sc) {
+  // A pin with its tip on the station's point; hovering or tapping it opens that station's popup, as its tag does.
+  LiveMap.prototype.drawPinOnly = function (g, pt, it, sc) {
     var grp = el('g', { transform: 'translate(' + pt.x.toFixed(1) + ',' + pt.y.toFixed(1) + ') scale(' + sc + ')' }, g);
-    // the pin: its tip on the grid square's centre; hovering or tapping it opens the first station's popup, as its tag does
-    var pin = el('g', { 'class': 'lqmap-mark', 'data-kind': 'st', 'data-idx': this.items.indexOf(list[0]), tabindex: -1 }, grp);
-    el('path', { d: 'M0,0 C-1.5,-5 -6,-8 -6,-13 A6,6 0 1 1 6,-13 C6,-8 1.5,-5 0,0 Z', fill: bandColor(list[0].band),
+    var pin = el('g', { 'class': 'lqmap-mark', 'data-kind': 'st', 'data-idx': this.items.indexOf(it), tabindex: -1 }, grp);
+    el('path', { d: 'M0,0 C-1.5,-5 -6,-8 -6,-13 A6,6 0 1 1 6,-13 C6,-8 1.5,-5 0,0 Z', fill: bandColor(it.band),
       stroke: THEME.pin, 'stroke-width': 1.5 }, pin);
     el('circle', { cx: 0, cy: -13, r: 2.3, fill: THEME.pin }, pin);
+    return grp;
+  };
+
+  LiveMap.prototype.drawPin = function (g, pt, list, sc) {
+    var grp = this.drawPinOnly(g, pt, list[0], sc);
     var max = this.mini ? 2 : 4, y = -22;
     for (var i = 0; i < list.length && i < max; i++) {
       // each tag: the callsign on top, "LQ8 20m" under it
@@ -434,8 +466,7 @@
         var r = h('div', 'lqmap-pop-row', null, p);
         h('span', 'k', rows[i][0], r); h('span', 'v', rows[i][1], r);
       }
-      var gc = gridCenter(it.grid);
-      this.popGeo = gc;
+      this.popGeo = { lon: it.lon, lat: it.lat };
     } else {
       var d = this.dx[idx];
       if (!d) return;
@@ -483,7 +514,8 @@
       if (!c || typeof c.call !== 'string' || !CALL_OK.test(c.call) || typeof c.grid !== 'string' || !GRID_OK.test(c.grid)) continue;
       if (typeof c.band !== 'string' || typeof c.mode !== 'string' || MODE_ORDER.indexOf(c.mode) < 0) continue;
       if (typeof c.dial_hz !== 'number' || typeof c.tx_ms !== 'number' || now - c.tx_ms > MAX_AGE_MS) continue;
-      out.push({ call: c.call, grid: c.grid, band: c.band, mode: c.mode, dial_hz: c.dial_hz, tx_ms: c.tx_ms });
+      var gc = gridCenter(c.grid), pt = inSquare(c, gc) ? c : gc;
+      out.push({ call: c.call, grid: c.grid, band: c.band, mode: c.mode, dial_hz: c.dial_hz, tx_ms: c.tx_ms, lon: pt.lon, lat: pt.lat });
     }
     out.sort(function (a, b) { return b.tx_ms - a.tx_ms; });
     return out;
