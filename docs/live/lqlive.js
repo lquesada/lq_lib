@@ -18,7 +18,7 @@
 
   var THEME = {
     ocean: '#1E477A', land: '#3B82B6', coast: '#CBD5E1', grid: 'rgba(255,255,255,0.22)',
-    pin: '#0F172A', pinStroke: '#F8FAFC', dx: '#D81B78', dxStroke: '#0F172A'
+    border: 'rgba(226,232,240,0.45)', pin: '#0F172A', pinStroke: '#F8FAFC', dx: '#D81B78', dxStroke: '#0F172A'
   };
   // One colour per band (text colour chosen for contrast); unknown bands get the last one.
   // the band colours hams know from the usual reception-report maps
@@ -170,9 +170,13 @@
     for (var y = 0; y <= 180; y += 10) gd += 'M0,' + y + 'H360';
     el('path', { d: window.LQ8_WORLD_LAND || '', fill: THEME.land, stroke: THEME.coast, 'stroke-width': 0.8,
       'vector-effect': 'non-scaling-stroke', 'stroke-linejoin': 'round' }, tile);
+    // country borders (countries.js), thinner and fainter than the coast
+    if (window.LQ8_COUNTRY_BORDERS) el('path', { d: window.LQ8_COUNTRY_BORDERS, fill: 'none', stroke: THEME.border,
+      'stroke-width': 0.6, 'vector-effect': 'non-scaling-stroke', 'stroke-linejoin': 'round' }, tile);
     el('path', { d: gd, fill: 'none', stroke: THEME.grid, 'stroke-width': 0.6, 'vector-effect': 'non-scaling-stroke' }, tile);
     this.world = el('g', {}, this.svg);
     for (var k = -2; k <= 2; k++) el('use', { href: '#' + tile.id, x: k * 360, y: 0 }, this.world);
+    this.names = el('g', { 'class': 'lqmap-names' }, this.svg);
     this.marks = el('g', {}, this.svg);
     this.pop = h('div', 'lqmap-pop', null, this.root);
     this.pop.hidden = true;
@@ -294,6 +298,7 @@
     var s = this.scale();
     var tx = this.W / 2 + this.st.offsetX - 180 * s, ty = this.H / 2 + this.st.offsetY - 90 * s;
     this.world.setAttribute('transform', 'translate(' + tx + ',' + ty + ') scale(' + s + ')');
+    this.drawNames();
     this.drawMarks();
     if (this.popKey) this.placePop();
   };
@@ -306,6 +311,23 @@
       if (x > -60 && x < this.W + 60) out.push({ x: x, y: p.y });
     }
     return out;
+  };
+
+  // Country names on the full map once zoomed in (the same zoom 1.8 as the app's world map).
+  var NAMES_MIN_ZOOM = 1.8;
+  LiveMap.prototype.drawNames = function () {
+    var g = this.names;
+    while (g.firstChild) g.removeChild(g.firstChild);
+    var list = window.LQ8_COUNTRY_NAMES;
+    if (this.mini || !list || this.st.zoom < NAMES_MIN_ZOOM) return;
+    for (var i = 0; i < list.length; i++) {
+      var cs = this.copies(list[i][1], list[i][2]);
+      for (var c = 0; c < cs.length; c++) {
+        if (cs[c].y < -20 || cs[c].y > this.H + 20) continue;
+        var t = el('text', { x: cs[c].x.toFixed(1), y: cs[c].y.toFixed(1), 'text-anchor': 'middle', 'class': 'lqmap-country' }, g);
+        t.textContent = list[i][0];
+      }
+    }
   };
 
   LiveMap.prototype.drawMarks = function () {

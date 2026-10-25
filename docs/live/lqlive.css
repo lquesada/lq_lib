@@ -46,3 +46,5 @@
 .lqlive-hints-show { background: #0d121d; color: #F8FAFC; border: 1px solid rgba(56, 189, 248, 0.35); border-radius: 8px;
   padding: 4px 10px; font: 600 12px 'Inter', system-ui, sans-serif; cursor: pointer; white-space: nowrap; }
 .lqlive-hints-show[hidden] { display: none; }
+.lqmap-country { font: 600 11px 'Inter', system-ui, sans-serif; fill: #E2E8F0; stroke: #0F172A; stroke-width: 3px;
+  stroke-linejoin: round; paint-order: stroke; pointer-events: none; dominant-baseline: middle; }
