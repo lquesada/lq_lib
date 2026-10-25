@@ -115,6 +115,17 @@
   <!-- End Language Switcher & Redirection -->
 
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../live/lqlive.css">
+  <style>
+    .lqlive-mini { display: flex; flex-direction: column; gap: 12px; }
+    .lqlive-mini-map { position: relative; width: 100%; aspect-ratio: 2 / 1; border-radius: var(--radius-md);
+      border: 1px solid var(--border-card); cursor: pointer; }
+    .lqlive-mini-map .lqmap-svg { cursor: pointer; }
+    .lqlive-mini-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+    .lqlive-mini-bar .btn { margin-inline-start: auto; }
+    .lqlive-mini-dx { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 12px 14px; }
+    .lqlive-mini-dx .lqlive-dx-item { cursor: default; }
+  </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -1565,6 +1576,45 @@
       </div>
     </section>
 
+    <!-- Live LQ activity map (lq8.org/live) -->
+    <section id="live" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2 data-i18n="LIVE_SECTION_TITLE">Ao vivo: LQ8 no ar agora</h2>
+          <p data-i18n="LIVE_SUBTITLE">Estações ativas em LQ8 agora, conforme relatado por usuários do qFT8. O mapa é atualizado a cada 30 segundos.</p>
+        </div>
+        <div class="lqlive lqlive-mini" data-mini="1" data-href="live/">
+          <div class="lqmap-host lqlive-mini-map"></div>
+          <div class="lqlive-mini-bar">
+            <div class="lqlive-status" role="status" aria-live="polite"></div>
+            <div class="lqlive-legend" hidden></div>
+            <a class="btn btn-primary" href="live/" data-i18n="LIVE_OPEN_FULL">Abrir o mapa completo ao vivo &rarr;</a>
+          </div>
+          <div class="lqlive-dx lqlive-mini-dx" hidden>
+            <h3 data-i18n="LIVE_DX_TITLE">Próximas DXpedições LQ8</h3>
+            <ul class="lqlive-dx-list"></ul>
+          </div>
+          <p class="lqlive-how"></p>
+        </div>
+        <div id="lqlive-strings" hidden>
+          <span data-i18n="LIVE_TITLE">Mapa ao vivo do LQ8</span>
+          <span data-i18n="LIVE_LOADING">Carregando dados ao vivo…</span>
+          <span data-i18n="LIVE_ERROR">Os dados ao vivo não podem ser acessados agora. Tentando de novo…</span>
+          <span data-i18n="LIVE_EMPTY">Nenhuma atividade em LQ8 agora. Volte em breve, ou entre no ar você mesmo!</span>
+          <span data-i18n="LIVE_COUNT">Estações ativas: {n}</span>
+          <span data-i18n="LIVE_JUST_NOW">agora mesmo</span>
+          <span data-i18n="LIVE_MIN_AGO">há {n} min</span>
+          <span data-i18n="LIVE_DX_DAYS">em {n} dias</span>
+          <span data-i18n="LIVE_DX_TOMORROW">amanhã</span>
+          <span data-i18n="LIVE_DX_ON_AIR">no ar agora</span>
+          <span data-i18n="LIVE_HOW">Para aparecer no mapa, no qFT8 vá para {path} e depois transmita em LQ8 pelo seu rádio.</span>
+          <span data-i18n="LIVE_PATH_SETTINGS">Configurações</span>
+          <span data-i18n="LIVE_PATH_REPORTING">Relatórios</span>
+          <span data-i18n="LIVE_PATH_LABEL">Anunciar a atividade de LQ8 ao serviço qFT8</span>
+        </div>
+      </div>
+    </section>
+
     <!-- Operation Section -->
     <section id="operation" class="section">
       <div class="container">
@@ -2671,5 +2721,7 @@
       }
     });
   </script>
+  <script src="../live/world.js" defer></script>
+  <script src="../live/lqlive.js" defer></script>
 </body>
 </html>

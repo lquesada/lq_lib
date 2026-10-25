@@ -115,6 +115,17 @@
   <!-- End Language Switcher & Redirection -->
 
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../live/lqlive.css">
+  <style>
+    .lqlive-mini { display: flex; flex-direction: column; gap: 12px; }
+    .lqlive-mini-map { position: relative; width: 100%; aspect-ratio: 2 / 1; border-radius: var(--radius-md);
+      border: 1px solid var(--border-card); cursor: pointer; }
+    .lqlive-mini-map .lqmap-svg { cursor: pointer; }
+    .lqlive-mini-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+    .lqlive-mini-bar .btn { margin-inline-start: auto; }
+    .lqlive-mini-dx { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 12px 14px; }
+    .lqlive-mini-dx .lqlive-dx-item { cursor: default; }
+  </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -1565,6 +1576,45 @@
       </div>
     </section>
 
+    <!-- Live LQ activity map (lq8.org/live) -->
+    <section id="live" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2 data-i18n="LIVE_SECTION_TITLE">Live: LQ8 i etern nu</h2>
+          <p data-i18n="LIVE_SUBTITLE">Stationer som är aktiva i LQ8 just nu, enligt rapporter från qFT8-användare. Kartan uppdateras var 30:e sekund.</p>
+        </div>
+        <div class="lqlive lqlive-mini" data-mini="1" data-href="live/">
+          <div class="lqmap-host lqlive-mini-map"></div>
+          <div class="lqlive-mini-bar">
+            <div class="lqlive-status" role="status" aria-live="polite"></div>
+            <div class="lqlive-legend" hidden></div>
+            <a class="btn btn-primary" href="live/" data-i18n="LIVE_OPEN_FULL">Öppna hela livekartan &rarr;</a>
+          </div>
+          <div class="lqlive-dx lqlive-mini-dx" hidden>
+            <h3 data-i18n="LIVE_DX_TITLE">Kommande LQ8-DXpeditioner</h3>
+            <ul class="lqlive-dx-list"></ul>
+          </div>
+          <p class="lqlive-how"></p>
+        </div>
+        <div id="lqlive-strings" hidden>
+          <span data-i18n="LIVE_TITLE">LQ8 livekarta</span>
+          <span data-i18n="LIVE_LOADING">Laddar livedata…</span>
+          <span data-i18n="LIVE_ERROR">Livedatan kan inte nås just nu. Försöker igen…</span>
+          <span data-i18n="LIVE_EMPTY">Ingen LQ8-aktivitet just nu. Titta in snart igen, eller gå själv i etern!</span>
+          <span data-i18n="LIVE_COUNT">Aktiva stationer: {n}</span>
+          <span data-i18n="LIVE_JUST_NOW">nyss</span>
+          <span data-i18n="LIVE_MIN_AGO">för {n} min sedan</span>
+          <span data-i18n="LIVE_DX_DAYS">om {n} dagar</span>
+          <span data-i18n="LIVE_DX_TOMORROW">i morgon</span>
+          <span data-i18n="LIVE_DX_ON_AIR">i etern nu</span>
+          <span data-i18n="LIVE_HOW">För att synas på kartan går du i qFT8 till {path} och sänder sedan i LQ8 via din radio.</span>
+          <span data-i18n="LIVE_PATH_SETTINGS">Inställningar</span>
+          <span data-i18n="LIVE_PATH_REPORTING">Rapportering</span>
+          <span data-i18n="LIVE_PATH_LABEL">Anmäl LQ8-aktivitet till qFT8-tjänsten</span>
+        </div>
+      </div>
+    </section>
+
     <!-- Operation Section -->
     <section id="operation" class="section">
       <div class="container">
@@ -2671,5 +2721,7 @@
       }
     });
   </script>
+  <script src="../live/world.js" defer></script>
+  <script src="../live/lqlive.js" defer></script>
 </body>
 </html>

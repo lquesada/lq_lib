@@ -115,6 +115,17 @@
   <!-- End Language Switcher & Redirection -->
 
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../live/lqlive.css">
+  <style>
+    .lqlive-mini { display: flex; flex-direction: column; gap: 12px; }
+    .lqlive-mini-map { position: relative; width: 100%; aspect-ratio: 2 / 1; border-radius: var(--radius-md);
+      border: 1px solid var(--border-card); cursor: pointer; }
+    .lqlive-mini-map .lqmap-svg { cursor: pointer; }
+    .lqlive-mini-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+    .lqlive-mini-bar .btn { margin-inline-start: auto; }
+    .lqlive-mini-dx { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 12px 14px; }
+    .lqlive-mini-dx .lqlive-dx-item { cursor: default; }
+  </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -1565,6 +1576,45 @@
       </div>
     </section>
 
+    <!-- Live LQ activity map (lq8.org/live) -->
+    <section id="live" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2 data-i18n="LIVE_SECTION_TITLE">لائیو: LQ8 ابھی آن ایئر</h2>
+          <p data-i18n="LIVE_SUBTITLE">qFT8 صارفین کی رپورٹ کے مطابق، اس وقت LQ8 میں سرگرم اسٹیشن۔ نقشہ ہر 30 سیکنڈ بعد تازہ ہوتا ہے۔</p>
+        </div>
+        <div class="lqlive lqlive-mini" data-mini="1" data-href="live/">
+          <div class="lqmap-host lqlive-mini-map"></div>
+          <div class="lqlive-mini-bar">
+            <div class="lqlive-status" role="status" aria-live="polite"></div>
+            <div class="lqlive-legend" hidden></div>
+            <a class="btn btn-primary" href="live/" data-i18n="LIVE_OPEN_FULL">مکمل لائیو نقشہ کھولیں &rarr;</a>
+          </div>
+          <div class="lqlive-dx lqlive-mini-dx" hidden>
+            <h3 data-i18n="LIVE_DX_TITLE">آنے والی LQ8 DXpedition</h3>
+            <ul class="lqlive-dx-list"></ul>
+          </div>
+          <p class="lqlive-how"></p>
+        </div>
+        <div id="lqlive-strings" hidden>
+          <span data-i18n="LIVE_TITLE">LQ8 لائیو نقشہ</span>
+          <span data-i18n="LIVE_LOADING">لائیو ڈیٹا لوڈ ہو رہا ہے…</span>
+          <span data-i18n="LIVE_ERROR">لائیو ڈیٹا ابھی دستیاب نہیں۔ دوبارہ کوشش ہو رہی ہے…</span>
+          <span data-i18n="LIVE_EMPTY">اس وقت LQ8 میں کوئی سرگرمی نہیں ہے۔ تھوڑی دیر بعد دیکھیں، یا خود آن ایئر آئیں!</span>
+          <span data-i18n="LIVE_COUNT">سرگرم اسٹیشن: {n}</span>
+          <span data-i18n="LIVE_JUST_NOW">ابھی ابھی</span>
+          <span data-i18n="LIVE_MIN_AGO">{n} منٹ پہلے</span>
+          <span data-i18n="LIVE_DX_DAYS">{n} دن میں</span>
+          <span data-i18n="LIVE_DX_TOMORROW">کل</span>
+          <span data-i18n="LIVE_DX_ON_AIR">ابھی آن ایئر</span>
+          <span data-i18n="LIVE_HOW">نقشے پر نظر آنے کے لیے qFT8 میں {path} پر جائیں، پھر اپنے ریڈیو سے LQ8 میں ٹرانسمٹ کریں۔</span>
+          <span data-i18n="LIVE_PATH_SETTINGS">ترتیبات</span>
+          <span data-i18n="LIVE_PATH_REPORTING">رپورٹنگ</span>
+          <span data-i18n="LIVE_PATH_LABEL">qFT8 سروس کو LQ8 سرگرمی کا اعلان کریں</span>
+        </div>
+      </div>
+    </section>
+
     <!-- Operation Section -->
     <section id="operation" class="section">
       <div class="container">
@@ -2671,5 +2721,7 @@
       }
     });
   </script>
+  <script src="../live/world.js" defer></script>
+  <script src="../live/lqlive.js" defer></script>
 </body>
 </html>

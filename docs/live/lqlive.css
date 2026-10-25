@@ -1,0 +1,38 @@
+/* LQ live map (lq8.org/live + the small map on the main page). Colours: the site's dark palette + the map theme. */
+.lqmap { position: relative; overflow: hidden; background: #1E477A; user-select: none; -webkit-user-select: none; }
+.lqmap-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; }
+.lqmap-svg.dragging { cursor: grabbing; }
+.lqmap-mark { cursor: pointer; outline: none; }
+.lqmap-mark:focus-visible rect { stroke: #FFFFFF; stroke-width: 2; }
+.lqmap-label { font: 700 11px 'Inter', system-ui, sans-serif; pointer-events: none; }
+.lqmap-more { font: 700 11px 'Inter', system-ui, sans-serif; fill: #F8FAFC; paint-order: stroke; stroke: #0F172A; stroke-width: 3px; }
+.lqmap-pop { position: absolute; z-index: 5; min-width: 170px; max-width: 260px; padding: 10px 12px; border-radius: 10px;
+  background: rgba(13, 18, 29, 0.96); border: 1px solid rgba(56, 189, 248, 0.35); color: #F8FAFC;
+  font: 400 13px 'Inter', system-ui, sans-serif; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45); pointer-events: none; }
+.lqmap-pop-call { font: 800 16px 'Outfit', 'Inter', sans-serif; margin-bottom: 6px; letter-spacing: 0.02em; }
+.lqmap-pop-call.dx { color: #F472B6; }
+.lqmap-pop-row { display: flex; justify-content: space-between; gap: 12px; padding: 2px 0; color: #CBD5E1; }
+.lqmap-pop-row .k { color: #94A3B8; }
+.lqmap-pop-row .v { color: #F8FAFC; font-weight: 600; text-align: end; }
+.lqmap-pop-count { margin-top: 6px; color: #F472B6; font-weight: 700; }
+
+.lqlive-status { font-size: 0.95rem; color: #CBD5E1; }
+.lqlive-status.err { color: #FCA5A5; }
+.lqlive-status.ok { color: #6EE7B7; font-weight: 600; }
+.lqlive-legend { display: flex; flex-wrap: wrap; gap: 6px; }
+.lqlive-chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 9px; border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.15); background: rgba(13, 18, 29, 0.85); color: #F8FAFC;
+  font: 600 12px 'Inter', system-ui, sans-serif; cursor: pointer; }
+.lqlive-chip:disabled { cursor: default; }
+.lqlive-chip.off { opacity: 0.4; text-decoration: line-through; }
+.lqlive-chip .sw { width: 12px; height: 12px; border-radius: 3px; border: 1px solid #0F172A; }
+.lqlive-dx h3 { font: 700 1rem 'Outfit', 'Inter', sans-serif; color: #F8FAFC; margin: 0 0 8px; }
+.lqlive-dx-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.lqlive-dx-item { width: 100%; display: flex; align-items: baseline; gap: 8px; padding: 7px 10px; border-radius: 8px;
+  background: rgba(216, 27, 120, 0.12); border: 1px solid rgba(216, 27, 120, 0.45); color: #F8FAFC;
+  font: 400 13px 'Inter', system-ui, sans-serif; cursor: pointer; text-align: start; }
+.lqlive-dx-item .call { font-weight: 800; color: #F9A8D4; }
+.lqlive-dx-item .name { color: #CBD5E1; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lqlive-dx-item .count { margin-inline-start: auto; color: #F8FAFC; font-weight: 600; white-space: nowrap; }
+.lqlive-dx-list li.on .count { color: #6EE7B7; }
+.lqlive-how { font-size: 0.82rem; color: #94A3B8; line-height: 1.45; }

@@ -1,0 +1,4 @@
+{
+  "_note": "Upcoming LQ DXpeditions shown on lq8.org/live and the main page. Hidden while the list is empty. Entry: {\"call\": \"...\", \"name\": \"entity\", \"lat\": 0.0, \"lon\": 0.0, \"start\": \"YYYY-MM-DD\", \"end\": \"YYYY-MM-DD\", \"bands\": \"...\"} (UTC dates; shown until the end date).",
+  "dxpeditions": []
+}

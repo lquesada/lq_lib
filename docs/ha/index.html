@@ -115,6 +115,17 @@
   <!-- End Language Switcher & Redirection -->
 
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../live/lqlive.css">
+  <style>
+    .lqlive-mini { display: flex; flex-direction: column; gap: 12px; }
+    .lqlive-mini-map { position: relative; width: 100%; aspect-ratio: 2 / 1; border-radius: var(--radius-md);
+      border: 1px solid var(--border-card); cursor: pointer; }
+    .lqlive-mini-map .lqmap-svg { cursor: pointer; }
+    .lqlive-mini-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+    .lqlive-mini-bar .btn { margin-inline-start: auto; }
+    .lqlive-mini-dx { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 12px 14px; }
+    .lqlive-mini-dx .lqlive-dx-item { cursor: default; }
+  </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -1565,6 +1576,45 @@
       </div>
     </section>
 
+    <!-- Live LQ activity map (lq8.org/live) -->
+    <section id="live" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2 data-i18n="LIVE_SECTION_TITLE">Kai tsaye: LQ8 yana kan iska yanzu</h2>
+          <p data-i18n="LIVE_SUBTITLE">Tashoshin da ke aiki a LQ8 yanzu, kamar yadda masu amfani da qFT8 suka bayar da rahoto. Ana sabunta taswirar kowane dakika 30.</p>
+        </div>
+        <div class="lqlive lqlive-mini" data-mini="1" data-href="live/">
+          <div class="lqmap-host lqlive-mini-map"></div>
+          <div class="lqlive-mini-bar">
+            <div class="lqlive-status" role="status" aria-live="polite"></div>
+            <div class="lqlive-legend" hidden></div>
+            <a class="btn btn-primary" href="live/" data-i18n="LIVE_OPEN_FULL">Buɗe cikakken taswirar kai tsaye &rarr;</a>
+          </div>
+          <div class="lqlive-dx lqlive-mini-dx" hidden>
+            <h3 data-i18n="LIVE_DX_TITLE">DXpedition na LQ8 masu zuwa</h3>
+            <ul class="lqlive-dx-list"></ul>
+          </div>
+          <p class="lqlive-how"></p>
+        </div>
+        <div id="lqlive-strings" hidden>
+          <span data-i18n="LIVE_TITLE">Taswirar LQ8 kai tsaye</span>
+          <span data-i18n="LIVE_LOADING">Ana loda bayanai kai tsaye…</span>
+          <span data-i18n="LIVE_ERROR">Ba a iya samun bayanan kai tsaye yanzu. Ana sake gwadawa…</span>
+          <span data-i18n="LIVE_EMPTY">Babu aikin LQ8 yanzu. Ka sake dubawa nan da nan, ko ka fito kan iska da kanka!</span>
+          <span data-i18n="LIVE_COUNT">Tashoshin da ke aiki: {n}</span>
+          <span data-i18n="LIVE_JUST_NOW">yanzu-yanzu</span>
+          <span data-i18n="LIVE_MIN_AGO">mintuna {n} da suka wuce</span>
+          <span data-i18n="LIVE_DX_DAYS">nan da kwanaki {n}</span>
+          <span data-i18n="LIVE_DX_TOMORROW">gobe</span>
+          <span data-i18n="LIVE_DX_ON_AIR">yana kan iska yanzu</span>
+          <span data-i18n="LIVE_HOW">Domin ka bayyana a taswirar, a qFT8 ka je {path}, sannan ka watsa a LQ8 ta rediyonka.</span>
+          <span data-i18n="LIVE_PATH_SETTINGS">Saituna</span>
+          <span data-i18n="LIVE_PATH_REPORTING">Bayar da rahoto</span>
+          <span data-i18n="LIVE_PATH_LABEL">Sanar da ayyukan LQ8 ga sabis na qFT8</span>
+        </div>
+      </div>
+    </section>
+
     <!-- Operation Section -->
     <section id="operation" class="section">
       <div class="container">
@@ -2671,5 +2721,7 @@
       }
     });
   </script>
+  <script src="../live/world.js" defer></script>
+  <script src="../live/lqlive.js" defer></script>
 </body>
 </html>

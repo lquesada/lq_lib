@@ -115,6 +115,17 @@
   <!-- End Language Switcher & Redirection -->
 
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../live/lqlive.css">
+  <style>
+    .lqlive-mini { display: flex; flex-direction: column; gap: 12px; }
+    .lqlive-mini-map { position: relative; width: 100%; aspect-ratio: 2 / 1; border-radius: var(--radius-md);
+      border: 1px solid var(--border-card); cursor: pointer; }
+    .lqlive-mini-map .lqmap-svg { cursor: pointer; }
+    .lqlive-mini-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+    .lqlive-mini-bar .btn { margin-inline-start: auto; }
+    .lqlive-mini-dx { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 12px 14px; }
+    .lqlive-mini-dx .lqlive-dx-item { cursor: default; }
+  </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -1565,6 +1576,45 @@
       </div>
     </section>
 
+    <!-- Live LQ activity map (lq8.org/live) -->
+    <section id="live" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2 data-i18n="LIVE_SECTION_TITLE">Trực tiếp: LQ8 đang phát sóng</h2>
+          <p data-i18n="LIVE_SUBTITLE">Các đài đang hoạt động ở LQ8 ngay lúc này, do người dùng qFT8 báo cáo. Bản đồ làm mới mỗi 30 giây.</p>
+        </div>
+        <div class="lqlive lqlive-mini" data-mini="1" data-href="live/">
+          <div class="lqmap-host lqlive-mini-map"></div>
+          <div class="lqlive-mini-bar">
+            <div class="lqlive-status" role="status" aria-live="polite"></div>
+            <div class="lqlive-legend" hidden></div>
+            <a class="btn btn-primary" href="live/" data-i18n="LIVE_OPEN_FULL">Mở bản đồ trực tiếp đầy đủ &rarr;</a>
+          </div>
+          <div class="lqlive-dx lqlive-mini-dx" hidden>
+            <h3 data-i18n="LIVE_DX_TITLE">Các chuyến DXpedition LQ8 sắp tới</h3>
+            <ul class="lqlive-dx-list"></ul>
+          </div>
+          <p class="lqlive-how"></p>
+        </div>
+        <div id="lqlive-strings" hidden>
+          <span data-i18n="LIVE_TITLE">Bản đồ trực tiếp LQ8</span>
+          <span data-i18n="LIVE_LOADING">Đang tải dữ liệu trực tiếp…</span>
+          <span data-i18n="LIVE_ERROR">Hiện không truy cập được dữ liệu trực tiếp. Đang thử lại…</span>
+          <span data-i18n="LIVE_EMPTY">Hiện chưa có hoạt động LQ8 nào. Hãy quay lại sau, hoặc tự lên sóng!</span>
+          <span data-i18n="LIVE_COUNT">Các đài đang hoạt động: {n}</span>
+          <span data-i18n="LIVE_JUST_NOW">vừa xong</span>
+          <span data-i18n="LIVE_MIN_AGO">{n} phút trước</span>
+          <span data-i18n="LIVE_DX_DAYS">sau {n} ngày</span>
+          <span data-i18n="LIVE_DX_TOMORROW">ngày mai</span>
+          <span data-i18n="LIVE_DX_ON_AIR">đang phát sóng</span>
+          <span data-i18n="LIVE_HOW">Để xuất hiện trên bản đồ, trong qFT8 hãy vào {path}, rồi phát ở LQ8 qua đài của bạn.</span>
+          <span data-i18n="LIVE_PATH_SETTINGS">Cài đặt</span>
+          <span data-i18n="LIVE_PATH_REPORTING">Báo cáo</span>
+          <span data-i18n="LIVE_PATH_LABEL">Thông báo hoạt động LQ8 tới dịch vụ qFT8</span>
+        </div>
+      </div>
+    </section>
+
     <!-- Operation Section -->
     <section id="operation" class="section">
       <div class="container">
@@ -2671,5 +2721,7 @@
       }
     });
   </script>
+  <script src="../live/world.js" defer></script>
+  <script src="../live/lqlive.js" defer></script>
 </body>
 </html>

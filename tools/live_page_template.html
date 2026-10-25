@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="LIVE_TITLE">LQ8 live map</title>
+  <meta name="description" content="{{META_DESC}}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{CANONICAL}}">
+  <meta property="og:title" content="{{TITLE}}">
+  <meta property="og:description" content="{{META_DESC}}">
+  <meta property="og:image" content="https://lq8.org/img/og_banner.png">
+{{HREFLANG}}
+  <link rel="icon" type="image/svg+xml" href="{{ROOT}}favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ASSETS}}lqlive.css">
+  <style>
+    :root { --bg: #07090e; --card: rgba(13, 18, 29, 0.9); --border: rgba(255, 255, 255, 0.08); --cyan: #38bdf8;
+            --text: #f8fafc; --muted: #94a3b8; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, -apple-system, sans-serif;
+           display: flex; flex-direction: column; }
+    a { color: var(--cyan); text-decoration: none; }
+    .top { display: flex; align-items: center; gap: 14px; padding: 10px 16px; border-bottom: 1px solid var(--border);
+           background: rgba(7, 9, 14, 0.95); }
+    .top .back { font-size: 0.9rem; white-space: nowrap; }
+    .top h1 { font: 900 1.2rem 'Outfit', 'Inter', sans-serif; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .top h1 .lq { background: linear-gradient(135deg, #38bdf8, #a855f7); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .top select { background: #0d121d; color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 4px 6px;
+                  font: inherit; font-size: 0.85rem; max-width: 9.5rem; }
+    .lqlive { position: relative; flex: 1; min-height: 0; }
+    .lqmap-host { position: absolute; inset: 0; }
+    .overlay { position: absolute; inset: 12px; z-index: 3; pointer-events: none; display: grid; gap: 8px;
+               grid-template-columns: minmax(0, 360px) 1fr minmax(0, 300px); grid-template-rows: auto 1fr auto; }
+    .panel { pointer-events: auto; background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+             padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+    .panel[hidden] { display: none; }
+    .panel.info { grid-column: 1; grid-row: 1; align-self: start; }
+    .panel.info p.sub { font-size: 0.85rem; color: var(--muted); line-height: 1.4; }
+    .panel.dxp { grid-column: 3; grid-row: 1 / span 2; align-self: start; max-height: 100%; overflow: auto; }
+    .panel.foot { grid-column: 1 / span 2; grid-row: 3; justify-self: start; max-width: 520px; padding: 8px 12px; }
+    .lqlive-reset { align-self: flex-start; background: #0d121d; color: var(--text); border: 1px solid rgba(56, 189, 248, 0.35);
+                    border-radius: 8px; padding: 4px 10px; font: 600 12px 'Inter', system-ui, sans-serif; cursor: pointer; }
+    @media (max-width: 760px) {
+      .top { padding: 8px 12px; gap: 8px; }
+      .top h1 { font-size: 1rem; }
+      .top select { max-width: 6.5rem; }
+      .overlay { inset: 8px; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr auto auto; }
+      .panel { padding: 8px 10px; }
+      .panel.info { grid-column: 1; grid-row: 1; }
+      .panel.info p.sub { display: none; }
+      .panel.dxp { grid-column: 1; grid-row: 3; max-height: 28vh; }
+      .panel.foot { grid-column: 1; grid-row: 4; max-width: none; }
+      .lqlive-how { font-size: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="back" href="../" data-i18n="LIVE_BACK">&larr; Back to LQ8</a>
+    <h1><span class="lq" data-i18n="LIVE_TITLE">LQ8 live map</span></h1>
+    <select id="lang-select" aria-label="Language" onchange="lqLiveLang(this.value)">
+{{LANG_OPTIONS}}
+    </select>
+  </header>
+
+  <main class="lqlive" data-mini="0">
+    <div class="lqmap-host"></div>
+    <div class="overlay">
+    <div class="panel info">
+      <p class="sub" data-i18n="LIVE_SUBTITLE">Stations active in LQ8 right now, as reported by qFT8 users. The map refreshes every 30 seconds.</p>
+      <div class="lqlive-status" role="status" aria-live="polite"></div>
+      <div class="lqlive-legend" hidden></div>
+      <button type="button" class="lqlive-reset" data-i18n="LIVE_RESET">Reset view</button>
+    </div>
+    <aside class="panel dxp lqlive-dx" hidden>
+      <h3 data-i18n="LIVE_DX_TITLE">Upcoming LQ8 DXpeditions</h3>
+      <ul class="lqlive-dx-list"></ul>
+    </aside>
+    <div class="panel foot"><p class="lqlive-how"></p></div>
+    </div>
+  </main>
+
+  <div id="lqlive-strings" hidden>
+    <span data-i18n="LIVE_TITLE">LQ8 live map</span>
+    <span data-i18n="LIVE_LOADING">Loading live data…</span>
+    <span data-i18n="LIVE_ERROR">The live data cannot be reached right now. Retrying…</span>
+    <span data-i18n="LIVE_EMPTY">No LQ8 activity right now. Check back soon, or get on the air yourself!</span>
+    <span data-i18n="LIVE_COUNT">Active stations: {n}</span>
+    <span data-i18n="LIVE_JUST_NOW">just now</span>
+    <span data-i18n="LIVE_MIN_AGO">{n} min ago</span>
+    <span data-i18n="LIVE_BAND">Band</span>
+    <span data-i18n="LIVE_FREQ">Frequency</span>
+    <span data-i18n="LIVE_GRID">Grid</span>
+    <span data-i18n="LIVE_HEARD">Last active</span>
+    <span data-i18n="LIVE_DX_DAYS">in {n} days</span>
+    <span data-i18n="LIVE_DX_TOMORROW">tomorrow</span>
+    <span data-i18n="LIVE_DX_ON_AIR">on the air now</span>
+    <span data-i18n="LIVE_HOW">To appear on the map, in qFT8 go to {path}, then transmit in LQ8 through your radio.</span>
+    <span data-i18n="LIVE_PATH_SETTINGS">Settings</span>
+    <span data-i18n="LIVE_PATH_REPORTING">Reporting</span>
+    <span data-i18n="LIVE_PATH_LABEL">Announce LQ8 activity to the qFT8 service</span>
+  </div>
+
+  <script>
+    function lqLiveLang(lang) {
+      try { localStorage.setItem('lq_user_lang', lang); } catch (e) {}
+      location.href = '{{ROOT}}' + (lang === 'en' ? '' : lang + '/') + 'live/';
+    }
+  </script>
+  <script src="{{ASSETS}}world.js"></script>
+  <script src="{{ASSETS}}lqlive.js"></script>
+</body>
+</html>

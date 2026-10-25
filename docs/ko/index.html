@@ -115,6 +115,17 @@
   <!-- End Language Switcher & Redirection -->
 
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../live/lqlive.css">
+  <style>
+    .lqlive-mini { display: flex; flex-direction: column; gap: 12px; }
+    .lqlive-mini-map { position: relative; width: 100%; aspect-ratio: 2 / 1; border-radius: var(--radius-md);
+      border: 1px solid var(--border-card); cursor: pointer; }
+    .lqlive-mini-map .lqmap-svg { cursor: pointer; }
+    .lqlive-mini-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+    .lqlive-mini-bar .btn { margin-inline-start: auto; }
+    .lqlive-mini-dx { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 12px 14px; }
+    .lqlive-mini-dx .lqlive-dx-item { cursor: default; }
+  </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -1565,6 +1576,45 @@
       </div>
     </section>
 
+    <!-- Live LQ activity map (lq8.org/live) -->
+    <section id="live" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2 data-i18n="LIVE_SECTION_TITLE">라이브: LQ8 지금 온에어</h2>
+          <p data-i18n="LIVE_SUBTITLE">qFT8 사용자가 보고한, 지금 LQ8로 활동 중인 무선국입니다. 지도는 30초마다 새로 고쳐집니다.</p>
+        </div>
+        <div class="lqlive lqlive-mini" data-mini="1" data-href="live/">
+          <div class="lqmap-host lqlive-mini-map"></div>
+          <div class="lqlive-mini-bar">
+            <div class="lqlive-status" role="status" aria-live="polite"></div>
+            <div class="lqlive-legend" hidden></div>
+            <a class="btn btn-primary" href="live/" data-i18n="LIVE_OPEN_FULL">전체 라이브 지도 열기 &rarr;</a>
+          </div>
+          <div class="lqlive-dx lqlive-mini-dx" hidden>
+            <h3 data-i18n="LIVE_DX_TITLE">예정된 LQ8 DX 원정</h3>
+            <ul class="lqlive-dx-list"></ul>
+          </div>
+          <p class="lqlive-how"></p>
+        </div>
+        <div id="lqlive-strings" hidden>
+          <span data-i18n="LIVE_TITLE">LQ8 라이브 지도</span>
+          <span data-i18n="LIVE_LOADING">실시간 데이터 불러오는 중…</span>
+          <span data-i18n="LIVE_ERROR">지금은 실시간 데이터에 접속할 수 없습니다. 다시 시도하는 중…</span>
+          <span data-i18n="LIVE_EMPTY">지금은 LQ8 활동이 없습니다. 잠시 후 다시 확인하거나 직접 전파를 내보내 보세요!</span>
+          <span data-i18n="LIVE_COUNT">활동 중인 무선국: {n}</span>
+          <span data-i18n="LIVE_JUST_NOW">방금</span>
+          <span data-i18n="LIVE_MIN_AGO">{n}분 전</span>
+          <span data-i18n="LIVE_DX_DAYS">{n}일 후</span>
+          <span data-i18n="LIVE_DX_TOMORROW">내일</span>
+          <span data-i18n="LIVE_DX_ON_AIR">지금 온에어</span>
+          <span data-i18n="LIVE_HOW">지도에 표시되려면 qFT8에서 {path}(으)로 이동한 다음 무선기로 LQ8 송신을 하세요.</span>
+          <span data-i18n="LIVE_PATH_SETTINGS">설정</span>
+          <span data-i18n="LIVE_PATH_REPORTING">보고</span>
+          <span data-i18n="LIVE_PATH_LABEL">LQ8 활동을 qFT8 서비스에 알리기</span>
+        </div>
+      </div>
+    </section>
+
     <!-- Operation Section -->
     <section id="operation" class="section">
       <div class="container">
@@ -2671,5 +2721,7 @@
       }
     });
   </script>
+  <script src="../live/world.js" defer></script>
+  <script src="../live/lqlive.js" defer></script>
 </body>
 </html>

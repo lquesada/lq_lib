@@ -466,6 +466,54 @@ def build_sitemap():
     return "\n".join(lines)
 
 
+LIVE_TEMPLATE = os.path.join(BASE_DIR, "tools", "live_page_template.html")
+
+
+def build_live_pages():
+    """The live LQ activity map: tools/live_page_template.html -> docs/live/index.html (English) and
+    docs/<lang>/live/index.html, translated through the same data-i18n keys (LIVE_*) as the main page."""
+    import html as htmlmod
+    with open(LIVE_TEMPLATE, "r", encoding="utf-8") as f:
+        template = f.read()
+    for lang in SUPPORTED_LANGUAGES:
+        data = load_translations(lang)
+        is_en = lang == 'en'
+        root = "../" if is_en else "../../"
+        canonical = f"{BASE_URL}/live/" if is_en else f"{BASE_URL}/{lang}/live/"
+        hreflang = [f'  <link rel="canonical" href="{canonical}">',
+                    f'  <link rel="alternate" hreflang="x-default" href="{BASE_URL}/live/">']
+        for other in SUPPORTED_LANGUAGES:
+            href = f"{BASE_URL}/live/" if other == 'en' else f"{BASE_URL}/{other}/live/"
+            hreflang.append(f'  <link rel="alternate" hreflang="{other}" href="{href}">')
+        options = "\n".join(f'      <option value="{o}"{" selected" if o == lang else ""}>{LANGUAGE_NAMES.get(o, o)}</option>'
+                            for o in SUPPORTED_LANGUAGES)
+        title = data.get("LIVE_TITLE", "LQ8 live map")
+        desc = data.get("LIVE_META_DESC", "")
+        page = (template.replace("{{HREFLANG}}", "\n".join(hreflang))
+                .replace("{{LANG_OPTIONS}}", options)
+                .replace("{{ROOT}}", root)
+                .replace("{{ASSETS}}", "" if is_en else "../../live/")
+                .replace("{{CANONICAL}}", canonical)
+                .replace("{{TITLE}}", htmlmod.escape(htmlmod.unescape(title), quote=True))
+                .replace("{{META_DESC}}", htmlmod.escape(htmlmod.unescape(desc), quote=True)))
+        dir_attr = ' dir="rtl"' if lang in RTL_LANGUAGES else ''
+        page = page.replace('<html lang="en">', f'<html lang="{lang}"{dir_attr}>', 1)
+        for el in reversed(find_i18n_elements(page)):
+            if el['type'] == 'paired' and el['key'] in data:
+                page = page[:el['content_start']] + data[el['key']] + page[el['content_end']:]
+        out_dir = os.path.join(DOCS_DIR, "live") if is_en else os.path.join(DOCS_DIR, lang, "live")
+        os.makedirs(out_dir, exist_ok=True)
+        out = os.path.join(out_dir, "index.html")
+        old = None
+        if os.path.exists(out):
+            with open(out, "r", encoding="utf-8") as f:
+                old = f.read()
+        if old != page:
+            with open(out, "w", encoding="utf-8") as f:
+                f.write(page)
+    print(f"✓ Live map pages: docs/live/ + {len(SUPPORTED_LANGUAGES) - 1} languages")
+
+
 def main():
     print("================================================================================")
     print("  LQ Digital Mode Portal — Static Translations Builder")
@@ -701,6 +749,8 @@ def main():
         page_html = page_html.replace('src="qft8.jpg"', 'src="../qft8.jpg"')
         page_html = page_html.replace('src="tones_waterfall_lq8.png"', 'src="../tones_waterfall_lq8.png"')
         page_html = page_html.replace('href="awards/', 'href="../awards/')
+        page_html = page_html.replace('href="live/lqlive.css"', 'href="../live/lqlive.css"')
+        page_html = page_html.replace('src="live/', 'src="../live/')
 
         # Apply translations across all data-i18n elements and meta tags
         page_html = apply_translations_to_html(page_html, lang, translations)
@@ -710,7 +760,10 @@ def main():
 
         print(f"  [{lang:>3}] {LANGUAGE_NAMES.get(lang, lang):<22} -> docs/{lang}/index.html ({len(page_html):,} bytes)")
 
-    # 7. Generate sitemap.xml
+    # 7. The live map pages (docs/live/ + docs/<lang>/live/)
+    build_live_pages()
+
+    # 8. Generate sitemap.xml
     sitemap_xml = build_sitemap()
     sitemap_path = os.path.join(DOCS_DIR, "sitemap.xml")
     with open(sitemap_path, "w", encoding="utf-8") as f:
