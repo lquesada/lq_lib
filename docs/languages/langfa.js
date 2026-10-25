@@ -273,5 +273,6 @@ const langData = {
     "LIVE_DX_ON_AIR": "هم‌اکنون روی هوا",
     "LIVE_PATH_SETTINGS": "Settings",
     "LIVE_PATH_REPORTING": "Reporting",
-    "LIVE_PATH_LABEL": "Announce LQ8 activity to the qFT8 service"
+    "LIVE_PATH_LABEL": "Announce LQ8 activity to the qFT8 service",
+    "LIVE_QFT8_NOTE": "برای برقراری ارتباط‌های LQ8 از qFT8 برای Android، Windows، Linux یا Mac استفاده کنید."
 };

@@ -273,5 +273,6 @@ const langData = {
     "LIVE_DX_ON_AIR": "indi efirdə",
     "LIVE_PATH_SETTINGS": "Settings",
     "LIVE_PATH_REPORTING": "Reporting",
-    "LIVE_PATH_LABEL": "Announce LQ8 activity to the qFT8 service"
+    "LIVE_PATH_LABEL": "Announce LQ8 activity to the qFT8 service",
+    "LIVE_QFT8_NOTE": "LQ8 əlaqələri qurmaq üçün Android, Windows, Linux və ya Mac üçün qFT8-dən istifadə edin."
 };

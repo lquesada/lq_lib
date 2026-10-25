@@ -273,5 +273,6 @@ const langData = {
     "LIVE_DX_ON_AIR": "i æteren nu",
     "LIVE_PATH_SETTINGS": "Indstillinger",
     "LIVE_PATH_REPORTING": "Rapportering",
-    "LIVE_PATH_LABEL": "Meld LQ8-aktivitet til qFT8-tjenesten"
+    "LIVE_PATH_LABEL": "Meld LQ8-aktivitet til qFT8-tjenesten",
+    "LIVE_QFT8_NOTE": "Brug qFT8 til Android, Windows, Linux eller Mac til at lave LQ8-forbindelser."
 };

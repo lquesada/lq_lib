@@ -273,5 +273,6 @@ const langData = {
     "LIVE_DX_ON_AIR": "mengudara sekarang",
     "LIVE_PATH_SETTINGS": "Pengaturan",
     "LIVE_PATH_REPORTING": "Pelaporan",
-    "LIVE_PATH_LABEL": "Umumkan aktivitas LQ8 ke layanan qFT8"
+    "LIVE_PATH_LABEL": "Umumkan aktivitas LQ8 ke layanan qFT8",
+    "LIVE_QFT8_NOTE": "Gunakan qFT8 untuk Android, Windows, Linux, atau Mac untuk melakukan kontak LQ8."
 };

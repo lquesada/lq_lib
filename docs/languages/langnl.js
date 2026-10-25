@@ -273,5 +273,6 @@ const langData = {
     "LIVE_DX_ON_AIR": "nu in de ether",
     "LIVE_PATH_SETTINGS": "Instellingen",
     "LIVE_PATH_REPORTING": "Rapportage",
-    "LIVE_PATH_LABEL": "LQ8-activiteit melden aan de qFT8-dienst"
+    "LIVE_PATH_LABEL": "LQ8-activiteit melden aan de qFT8-dienst",
+    "LIVE_QFT8_NOTE": "Gebruik qFT8 voor Android, Windows, Linux of Mac om LQ8-verbindingen te maken."
 };

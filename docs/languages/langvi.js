@@ -273,5 +273,6 @@ const langData = {
     "LIVE_DX_ON_AIR": "đang phát sóng",
     "LIVE_PATH_SETTINGS": "Cài đặt",
     "LIVE_PATH_REPORTING": "Báo cáo",
-    "LIVE_PATH_LABEL": "Thông báo hoạt động LQ8 tới dịch vụ qFT8"
+    "LIVE_PATH_LABEL": "Thông báo hoạt động LQ8 tới dịch vụ qFT8",
+    "LIVE_QFT8_NOTE": "Dùng qFT8 cho Android, Windows, Linux hoặc Mac để liên lạc bằng LQ8."
 };

@@ -273,5 +273,6 @@ const langData = {
     "LIVE_DX_ON_AIR": "באוויר עכשיו",
     "LIVE_PATH_SETTINGS": "הגדרות",
     "LIVE_PATH_REPORTING": "דיווח",
-    "LIVE_PATH_LABEL": "לדווח על פעילות LQ8 לשירות qFT8"
+    "LIVE_PATH_LABEL": "לדווח על פעילות LQ8 לשירות qFT8",
+    "LIVE_QFT8_NOTE": "השתמשו ב-qFT8 ל-Android, Windows, Linux או Mac כדי לבצע קשרי LQ8."
 };

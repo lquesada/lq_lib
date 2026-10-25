@@ -273,5 +273,6 @@ const langData = {
     "LIVE_DX_ON_AIR": "運用中",
     "LIVE_PATH_SETTINGS": "設定",
     "LIVE_PATH_REPORTING": "レポート送信",
-    "LIVE_PATH_LABEL": "LQ8のアクティビティをqFT8サービスに通知"
+    "LIVE_PATH_LABEL": "LQ8のアクティビティをqFT8サービスに通知",
+    "LIVE_QFT8_NOTE": "LQ8 で交信するには、Android・Windows・Linux・Mac 用の qFT8 をお使いください。"
 };

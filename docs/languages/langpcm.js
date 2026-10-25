@@ -273,5 +273,6 @@ const langData = {
     "LIVE_DX_ON_AIR": "dey on di air now",
     "LIVE_PATH_SETTINGS": "Settings",
     "LIVE_PATH_REPORTING": "Reporting",
-    "LIVE_PATH_LABEL": "Announce LQ8 activity to the qFT8 service"
+    "LIVE_PATH_LABEL": "Announce LQ8 activity to the qFT8 service",
+    "LIVE_QFT8_NOTE": "Use qFT8 for Android, Windows, Linux or Mac to make LQ8 contact."
 };

@@ -273,5 +273,6 @@ const langData = {
     "LIVE_DX_ON_AIR": "yana kan iska yanzu",
     "LIVE_PATH_SETTINGS": "Saituna",
     "LIVE_PATH_REPORTING": "Bayar da rahoto",
-    "LIVE_PATH_LABEL": "Sanar da ayyukan LQ8 ga sabis na qFT8"
+    "LIVE_PATH_LABEL": "Sanar da ayyukan LQ8 ga sabis na qFT8",
+    "LIVE_QFT8_NOTE": "Yi amfani da qFT8 don Android, Windows, Linux ko Mac don yin hulɗar LQ8."
 };

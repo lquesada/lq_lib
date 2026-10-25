@@ -273,5 +273,6 @@ const langData = {
     "LIVE_DX_ON_AIR": "ilmassa nyt",
     "LIVE_PATH_SETTINGS": "Asetukset",
     "LIVE_PATH_REPORTING": "Raportointi",
-    "LIVE_PATH_LABEL": "Ilmoita LQ8-aktiivisuus qFT8-palveluun"
+    "LIVE_PATH_LABEL": "Ilmoita LQ8-aktiivisuus qFT8-palveluun",
+    "LIVE_QFT8_NOTE": "Käytä qFT8:aa Androidille, Windowsille, Linuxille tai Macille LQ8-yhteyksiin."
 };

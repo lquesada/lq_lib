@@ -273,5 +273,6 @@ const langData = {
     "LIVE_DX_ON_AIR": "正在空中",
     "LIVE_PATH_SETTINGS": "设置",
     "LIVE_PATH_REPORTING": "上报",
-    "LIVE_PATH_LABEL": "向 qFT8 服务通告 LQ8 活动"
+    "LIVE_PATH_LABEL": "向 qFT8 服务通告 LQ8 活动",
+    "LIVE_QFT8_NOTE": "使用 Android、Windows、Linux 或 Mac 版 qFT8 进行 LQ8 通联。"
 };

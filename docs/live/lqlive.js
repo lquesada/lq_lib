@@ -90,6 +90,7 @@
   function LiveMap(root, opts) {
     this.root = root;
     this.mini = !!opts.mini;
+    this.href = opts.href || '';
     this.items = [];
     this.dx = [];
     this.hiddenBands = {};
@@ -120,14 +121,18 @@
     this.pop.hidden = true;
     window.addEventListener('resize', function () { self.render(); });
     if (!this.mini) this.bindPanZoom();
-    else this.svg.addEventListener('click', function () { if (opts.href) location.href = opts.href; });
+    else if (this.href) {
+      // the small map on the main page: a click anywhere opens the full live map
+      this.svg.classList.add('lqmap-link');
+      this.svg.addEventListener('click', function () { location.href = self.href; });
+    }
     this.render();
   };
 
-  // qFT8 web remote: getMapScale / geoToScreen / clampOffsets. Zoom 1 shows the whole world where it fits (a wide
-  // window); a tall phone screen starts at half its height and pans sideways.
+  // qFT8 web remote: getMapScale / geoToScreen / clampOffsets. Zoom 1 fills the window; a tall phone screen pans sideways.
   LiveMap.prototype.scale = function () {
-    var base = this.mini ? this.W / 360.0 : Math.max(Math.min(this.H / 180.0, this.W / 360.0), this.H / 360.0);
+    // the full map always fills the height (it never shows space above the pole or below Antarctica); sideways it wraps
+    var base = this.mini ? this.W / 360.0 : Math.max(this.H / 180.0, this.W / 360.0);
     return base * this.st.zoom;
   };
   LiveMap.prototype.toScreen = function (lon, lat) {
@@ -249,7 +254,7 @@
   LiveMap.prototype.drawMarks = function () {
     var g = this.marks;
     while (g.firstChild) g.removeChild(g.firstChild);
-    var sc = this.mini ? 0.75 : 1;
+    var sc = this.mini ? 1.2 : 1.45;
     // DXpeditions first (underneath the stations)
     for (var d = 0; d < this.dx.length; d++) {
       var dx = this.dx[d];

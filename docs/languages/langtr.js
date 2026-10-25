@@ -273,5 +273,6 @@ const langData = {
     "LIVE_DX_ON_AIR": "şimdi yayında",
     "LIVE_PATH_SETTINGS": "Ayarlar",
     "LIVE_PATH_REPORTING": "Raporlama",
-    "LIVE_PATH_LABEL": "LQ8 etkinliğini qFT8 hizmetine bildir"
+    "LIVE_PATH_LABEL": "LQ8 etkinliğini qFT8 hizmetine bildir",
+    "LIVE_QFT8_NOTE": "LQ8 bağlantıları yapmak için Android, Windows, Linux veya Mac için qFT8 kullanın."
 };

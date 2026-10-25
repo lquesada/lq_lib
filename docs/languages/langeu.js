@@ -273,5 +273,6 @@ const langData = {
     "LIVE_DX_ON_AIR": "airean orain",
     "LIVE_PATH_SETTINGS": "Ezarpenak",
     "LIVE_PATH_REPORTING": "Txostenak",
-    "LIVE_PATH_LABEL": "LQ8ko jarduera qFT8 zerbitzuari iragarri"
+    "LIVE_PATH_LABEL": "LQ8ko jarduera qFT8 zerbitzuari iragarri",
+    "LIVE_QFT8_NOTE": "Erabili qFT8 Android, Windows, Linux edo Macerako LQ8 kontaktuak egiteko."
 };

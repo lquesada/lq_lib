@@ -273,5 +273,6 @@ const langData = {
     "LIVE_DX_ON_AIR": "ယခု လေထုထဲတွင်",
     "LIVE_PATH_SETTINGS": "Settings",
     "LIVE_PATH_REPORTING": "Reporting",
-    "LIVE_PATH_LABEL": "Announce LQ8 activity to the qFT8 service"
+    "LIVE_PATH_LABEL": "Announce LQ8 activity to the qFT8 service",
+    "LIVE_QFT8_NOTE": "LQ8 ဆက်သွယ်မှုများ ပြုလုပ်ရန် Android၊ Windows၊ Linux သို့မဟုတ် Mac အတွက် qFT8 ကို အသုံးပြုပါ။"
 };

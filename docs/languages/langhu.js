@@ -273,5 +273,6 @@ const langData = {
     "LIVE_DX_ON_AIR": "most a levegőben",
     "LIVE_PATH_SETTINGS": "Beállítások",
     "LIVE_PATH_REPORTING": "Jelentések",
-    "LIVE_PATH_LABEL": "LQ8-aktivitás bejelentése a qFT8 szolgáltatásnak"
+    "LIVE_PATH_LABEL": "LQ8-aktivitás bejelentése a qFT8 szolgáltatásnak",
+    "LIVE_QFT8_NOTE": "LQ8-összeköttetésekhez használja a qFT8-at Androidon, Windowson, Linuxon vagy Macen."
 };

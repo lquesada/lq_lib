@@ -273,5 +273,6 @@ const langData = {
     "LIVE_DX_ON_AIR": "فالهواء دروك",
     "LIVE_PATH_SETTINGS": "الإعدادات",
     "LIVE_PATH_REPORTING": "الإبلاغ",
-    "LIVE_PATH_LABEL": "الإعلان عن نشاط LQ8 لخدمة qFT8"
+    "LIVE_PATH_LABEL": "الإعلان عن نشاط LQ8 لخدمة qFT8",
+    "LIVE_QFT8_NOTE": "استعمل qFT8 على Android ولا Windows ولا Linux ولا Mac باش دير اتصالات LQ8."
 };

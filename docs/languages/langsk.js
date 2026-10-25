@@ -273,5 +273,6 @@ const langData = {
     "LIVE_DX_ON_AIR": "práve vo vzduchu",
     "LIVE_PATH_SETTINGS": "Nastavenia",
     "LIVE_PATH_REPORTING": "Hlásenia",
-    "LIVE_PATH_LABEL": "Hlásiť aktivitu v LQ8 službe qFT8"
+    "LIVE_PATH_LABEL": "Hlásiť aktivitu v LQ8 službe qFT8",
+    "LIVE_QFT8_NOTE": "Na spojenia v LQ8 použite qFT8 pre Android, Windows, Linux alebo Mac."
 };

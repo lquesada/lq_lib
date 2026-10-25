@@ -273,5 +273,6 @@ const langData = {
     "LIVE_DX_ON_AIR": "አሁን በአየር ላይ",
     "LIVE_PATH_SETTINGS": "Settings",
     "LIVE_PATH_REPORTING": "Reporting",
-    "LIVE_PATH_LABEL": "Announce LQ8 activity to the qFT8 service"
+    "LIVE_PATH_LABEL": "Announce LQ8 activity to the qFT8 service",
+    "LIVE_QFT8_NOTE": "የLQ8 ግንኙነቶችን ለማድረግ qFT8ን ለAndroid፣ Windows፣ Linux ወይም Mac ይጠቀሙ።"
 };

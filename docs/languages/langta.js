@@ -273,5 +273,6 @@ const langData = {
     "LIVE_DX_ON_AIR": "இப்போது ஒலிபரப்பில்",
     "LIVE_PATH_SETTINGS": "Settings",
     "LIVE_PATH_REPORTING": "Reporting",
-    "LIVE_PATH_LABEL": "Announce LQ8 activity to the qFT8 service"
+    "LIVE_PATH_LABEL": "Announce LQ8 activity to the qFT8 service",
+    "LIVE_QFT8_NOTE": "LQ8 தொடர்புகளை ஏற்படுத்த Android, Windows, Linux அல்லது Mac-க்கான qFT8-ஐப் பயன்படுத்துங்கள்."
 };

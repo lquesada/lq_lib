@@ -99,6 +99,9 @@
     .lqmap-host { position: absolute; inset: 0; }
     .overlay { position: absolute; inset: 12px; z-index: 3; pointer-events: none; display: grid; gap: 8px;
                grid-template-columns: minmax(0, 360px) 1fr minmax(0, 300px); grid-template-rows: auto 1fr auto; }
+    .panel.qft8 { grid-column: 3; grid-row: 3; justify-self: end; align-self: end; max-width: 300px; padding: 8px 12px; }
+    .panel.qft8 a { display: flex; align-items: center; gap: 10px; color: var(--text); font-size: 0.85rem; line-height: 1.35; }
+    .panel.qft8 img { width: 36px; height: 36px; border-radius: 8px; flex: none; }
     .panel { pointer-events: auto; background: var(--card); border: 1px solid var(--border); border-radius: 12px;
              padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
     .panel[hidden] { display: none; }
@@ -112,12 +115,14 @@
       .top { padding: 8px 12px; gap: 8px; }
       .top h1 { font-size: 1rem; }
       .top select { max-width: 6.5rem; }
-      .overlay { inset: 8px; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr auto auto; }
+      .overlay { inset: 8px; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr auto auto auto; }
       .panel { padding: 8px 10px; }
       .panel.info { grid-column: 1; grid-row: 1; }
       .panel.info p.sub { display: none; }
       .panel.dxp { grid-column: 1; grid-row: 3; max-height: 28vh; }
       .panel.foot { grid-column: 1; grid-row: 4; max-width: none; }
+      .panel.qft8 { grid-column: 1; grid-row: 5; justify-self: stretch; max-width: none; }
+      .panel.qft8 a { font-size: 0.75rem; }
       .lqlive-how { font-size: 0.75rem; }
     }
   </style>
@@ -207,6 +212,7 @@
       <ul class="lqlive-dx-list"></ul>
     </aside>
     <div class="panel foot"><p class="lqlive-how"></p></div>
+    <div class="panel qft8"><a href="https://qft8.com"><img src="../../live/qft8_logo.png" alt="qFT8" width="36" height="36"><span data-i18n="LIVE_QFT8_NOTE">ใช้ qFT8 สำหรับ Android, Windows, Linux หรือ Mac เพื่อติดต่อสื่อสารด้วย LQ8</span></a></div>
     </div>
   </main>
 

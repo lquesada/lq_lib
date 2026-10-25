@@ -273,5 +273,6 @@ const langData = {
     "LIVE_DX_ON_AIR": "지금 온에어",
     "LIVE_PATH_SETTINGS": "설정",
     "LIVE_PATH_REPORTING": "보고",
-    "LIVE_PATH_LABEL": "LQ8 활동을 qFT8 서비스에 알리기"
+    "LIVE_PATH_LABEL": "LQ8 활동을 qFT8 서비스에 알리기",
+    "LIVE_QFT8_NOTE": "LQ8 교신을 하려면 Android, Windows, Linux 또는 Mac용 qFT8을 사용하세요."
 };

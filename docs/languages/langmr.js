@@ -273,5 +273,6 @@ const langData = {
     "LIVE_DX_ON_AIR": "आत्ता ऑन-एअर",
     "LIVE_PATH_SETTINGS": "Settings",
     "LIVE_PATH_REPORTING": "Reporting",
-    "LIVE_PATH_LABEL": "Announce LQ8 activity to the qFT8 service"
+    "LIVE_PATH_LABEL": "Announce LQ8 activity to the qFT8 service",
+    "LIVE_QFT8_NOTE": "LQ8 संपर्क करण्यासाठी Android, Windows, Linux किंवा Mac साठी qFT8 वापरा."
 };

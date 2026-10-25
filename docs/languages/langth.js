@@ -273,5 +273,6 @@ const langData = {
     "LIVE_DX_ON_AIR": "ออกอากาศอยู่ตอนนี้",
     "LIVE_PATH_SETTINGS": "การตั้งค่า",
     "LIVE_PATH_REPORTING": "การรายงาน",
-    "LIVE_PATH_LABEL": "แจ้งกิจกรรม LQ8 ไปยังบริการ qFT8"
+    "LIVE_PATH_LABEL": "แจ้งกิจกรรม LQ8 ไปยังบริการ qFT8",
+    "LIVE_QFT8_NOTE": "ใช้ qFT8 สำหรับ Android, Windows, Linux หรือ Mac เพื่อติดต่อสื่อสารด้วย LQ8"
 };

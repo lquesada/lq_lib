@@ -273,5 +273,6 @@ const langData = {
     "LIVE_DX_ON_AIR": "nun en la aero",
     "LIVE_PATH_SETTINGS": "Agordoj",
     "LIVE_PATH_REPORTING": "Raportado",
-    "LIVE_PATH_LABEL": "Anonci LQ8-aktivecon al la qFT8-servo"
+    "LIVE_PATH_LABEL": "Anonci LQ8-aktivecon al la qFT8-servo",
+    "LIVE_QFT8_NOTE": "Uzu qFT8 por Android, Windows, Linux aŭ Mac por fari LQ8-kontaktojn."
 };

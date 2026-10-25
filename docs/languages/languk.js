@@ -273,5 +273,6 @@ const langData = {
     "LIVE_DX_ON_AIR": "в ефірі зараз",
     "LIVE_PATH_SETTINGS": "Налаштування",
     "LIVE_PATH_REPORTING": "Звіти",
-    "LIVE_PATH_LABEL": "Повідомляти про активність у LQ8 сервісу qFT8"
+    "LIVE_PATH_LABEL": "Повідомляти про активність у LQ8 сервісу qFT8",
+    "LIVE_QFT8_NOTE": "Для зв'язків у LQ8 використовуйте qFT8 для Android, Windows, Linux або Mac."
 };

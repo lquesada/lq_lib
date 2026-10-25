@@ -273,5 +273,6 @@ const langData = {
     "LIVE_DX_ON_AIR": "în emisie acum",
     "LIVE_PATH_SETTINGS": "Setări",
     "LIVE_PATH_REPORTING": "Raportare",
-    "LIVE_PATH_LABEL": "Anunță activitatea LQ8 serviciului qFT8"
+    "LIVE_PATH_LABEL": "Anunță activitatea LQ8 serviciului qFT8",
+    "LIVE_QFT8_NOTE": "Folosiți qFT8 pentru Android, Windows, Linux sau Mac pentru a face legături LQ8."
 };
