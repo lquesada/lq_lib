@@ -6,7 +6,7 @@
 (function () {
   'use strict';
 
-  var FEED = 'https://data.qft8.com/lqlive.json';
+  var FEED_DEFAULT = 'https://data.qft8.com/lqlive.json', FEED = FEED_DEFAULT;
   var POLL_MS = 30000;
   var MAX_AGE_MS = 10 * 60 * 1000;
   var SCRIPT_SRC = (document.currentScript && document.currentScript.src) || '';
@@ -585,6 +585,11 @@
     this.dxBox = root.querySelector('.lqlive-dx');
     this.dxList = root.querySelector('.lqlive-dx-list');
     this.raw = null; this.dxRaw = []; this.failed = false;
+    // the DXpeditions written into the page by the site build: their markers are there on the first paint
+    try {
+      var emb = document.getElementById('lqlive-dx-embed'), ej = emb && JSON.parse(emb.textContent || 'null');
+      if (ej && Array.isArray(ej.dxpeditions)) this.dxRaw = ej.dxpeditions.filter(validDx);
+    } catch (e) {}
     // the band filter (full map only): every band the service accepts, all shown unless the viewer hid some
     this.bandBox = this.mini ? null : root.querySelector('.lqlive-bands');
     if (this.bandBox) {
@@ -607,6 +612,7 @@
       how.textContent = str('LIVE_HOW', 'To appear on the map, in qFT8 go to {path}, then transmit in LQ8 through your radio.').replace('{path}', path);
     }
     this.setStatus(str('LIVE_LOADING', 'Loading live data…'));
+    if (this.dxRaw.length) this.update();   // the embedded DXpeditions: drawn at once, before any request returns
     this.loadDx();
     this.poll();
     setInterval(function () { self.poll(); }, POLL_MS);
@@ -622,10 +628,15 @@
   Page.prototype.poll = function () {
     var self = this;
     if (document.hidden && this.raw) return;
-    fetch(FEED, { credentials: 'omit', cache: 'no-cache' }).then(function (r) {
+    // the first poll uses the request the page's head already started (window.__lqFeedEarly), so the stations
+    // arrive while the map scripts are still loading
+    var early = !this.raw && FEED === FEED_DEFAULT && window.__lqFeedEarly;
+    window.__lqFeedEarly = null;
+    (early || fetch(FEED, { credentials: 'omit', cache: 'no-cache' }).then(function (r) {
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return r.json();
-    }).then(function (j) {
+    })).then(function (j) {
+      if (!j) throw new Error('no data');
       self.raw = j; self.failed = false; self.update();
     }).catch(function () {
       self.failed = true; self.update();

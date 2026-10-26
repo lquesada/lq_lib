@@ -485,6 +485,13 @@ def build_live_pages():
     chips = "".join(f'<button class="lqlive-chip" aria-pressed="true" type="button"><span class="sw" style="background: {colors.get(b, "#64748B")};"></span><span>{b}</span></button>'
                     for b in order)
     template = template.replace("{{BAND_CHIPS}}", chips)
+    # The DXpeditions list is written into each page too (lqlive.js still refreshes it from dxpeditions.json), so their
+    # markers appear with the map instead of after a second request.
+    import json as _json
+    with open(os.path.join(DOCS_DIR, "live", "dxpeditions.json"), "r", encoding="utf-8") as f:
+        dxdata = _json.load(f)
+    dx_embed = _json.dumps({"dxpeditions": dxdata.get("dxpeditions", [])}, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+    template = template.replace("{{DX_EMBED}}", dx_embed)
     for lang in SUPPORTED_LANGUAGES:
         data = load_translations(lang)
         is_en = lang == 'en'

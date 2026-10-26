@@ -16,6 +16,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@700;800;900&display=optional" rel="stylesheet">
   <link rel="stylesheet" href="{{ASSETS}}lqlive.css">
+  <!-- the live stations' request starts now, before the map scripts load (lqlive.js uses it for its first poll) -->
+  <script>window.__lqFeedEarly = (function () { try { return fetch('https://data.qft8.com/lqlive.json', { credentials: 'omit', cache: 'no-cache' })
+    .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }); } catch (e) { return null; } })();
+    if (window.__lqFeedEarly) window.__lqFeedEarly.catch(function () {});</script>
   <!-- the hint panels the viewer closed stay hidden from the first paint (lqlive.js takes over and removes this rule) -->
   <script>(function () { try { var m = document.cookie.match(/(?:^|; )lq8live_hidden_hints=([^;]*)/); if (!m) return;
     var ids = decodeURIComponent(m[1]).split(',').map(function (i) { return i.replace(/[^A-Za-z0-9_-]/g, ''); }).filter(Boolean);
@@ -149,6 +153,7 @@
   <script src="{{ASSETS}}world.js"></script>
   <script src="{{ASSETS}}countries.js"></script>
   <script src="{{ASSETS}}dxcc.js"></script>
+  <script type="application/json" id="lqlive-dx-embed">{{DX_EMBED}}</script>
   <script src="{{ASSETS}}lqlive.js"></script>
 </body>
 </html>
