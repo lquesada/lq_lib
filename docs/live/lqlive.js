@@ -219,10 +219,12 @@
   // optional "time": "HH:MM" (UTC) on the start day -> the countdown is exact to the minute
   function utcTime(s) { var m = /^([01]\d|2[0-3]):([0-5]\d)$/.exec(s || ''); return m ? (+m[1] * 60 + +m[2]) * 60000 : 0; }
   // -> null (ended / invalid) or {state:'on'|'soon', days, ms}
+  // the end: "end_time" (HH:MM UTC) on the end day when given, else the end of that day
+  function dxEnd(d) { var b = utcDay(d.end); return isNaN(b) ? NaN : b + (utcTime(d.end_time) || (d.end_time ? 0 : DAY)); }
   function dxStatus(d, now) {
-    var a = utcDay(d.start), b = utcDay(d.end);
+    var a = utcDay(d.start), b = dxEnd(d);
     if (isNaN(a) || isNaN(b)) return null;
-    if (now >= b + DAY) return null;
+    if (now >= b) return null;
     a += utcTime(d.time);
     if (now >= a) return { state: 'on', days: 0, ms: 0 };
     var today = Math.floor(now / DAY) * DAY;   // calendar days, as before: 'tomorrow' = the next UTC day
@@ -230,9 +232,13 @@
   }
   function two(n) { return (n < 10 ? '0' : '') + n; }
   // the live countdown under the marker's call (ticks every second): hours can pass 24, no words to translate
+  // ongoing: "active" (+ band) while the station is in the live data, else "idle"
+  function dxNow(d) {
+    return d.active ? str('LIVE_DX_ACTIVE', 'active') + (d.active.band ? ' \u00B7 ' + d.active.band : '') : str('LIVE_DX_IDLE', 'idle');
+  }
   function dxClock(d, now) {
     var a = utcDay(d.start) + utcTime(d.time);
-    if (isNaN(a) || now >= a) return str('LIVE_DX_ON_AIR', 'on the air now');
+    if (isNaN(a) || now >= a) return dxNow(d);
     var sec = Math.ceil((a - now) / 1000), d = Math.floor(sec / 86400), hh = Math.floor(sec / 3600) % 24,
         mm = Math.floor(sec / 60) % 60, ss = sec % 60;
     var t = d > 0 ? d + 'd ' + hh + 'h' : hh > 0 ? hh + 'h ' + mm + 'm' : mm + 'm ' + ss + 's';   // 2d 5h / 14h 2m / 15m 9s
@@ -892,7 +898,8 @@
     var t = el('text', { x: X(12, w) + w / 2, y: 3.5, 'text-anchor': 'middle', fill: '#FFFFFF', 'class': 'lqmap-label', direction: 'ltr' }, grp);
     t.textContent = dx.call;
     el('rect', { x: X(12, cw), y: 10, width: cw, height: 14, rx: 4, fill: T.dxBadge, stroke: T.dx, 'stroke-width': 1, opacity: 0.92 }, grp);
-    var ck = el('text', { x: X(12, cw) + cw / 2, y: 20.5, 'text-anchor': 'middle', fill: T.dxClock, 'class': 'lqmap-label lqmap-sub lqmap-dxclock' }, grp);
+    if (dx.active) el('rect', { x: X(12, cw), y: 10, width: cw, height: 14, rx: 4, fill: '#15803D', stroke: '#22C55E', 'stroke-width': 1 }, grp);   // transmitting now
+    var ck = el('text', { x: X(12, cw) + cw / 2, y: 20.5, 'text-anchor': 'middle', fill: dx.active ? '#FFFFFF' : T.dxClock, 'class': 'lqmap-label lqmap-sub lqmap-dxclock' }, grp);
     ck.textContent = txt;
     this.dxClocks.push({ node: ck, dx: dx });
     return flip ? { l: pt.x - (right + 2) * sc, t: pt.y + top * sc, r: pt.x + 10 * sc, b: pt.y + 25 * sc }
@@ -932,7 +939,8 @@
       h('div', 'lqmap-pop-call dx', d.call, p);
       h('div', 'lqmap-pop-row lqmap-pop-planned', str('LIVE_DX_PLANNED', 'Planned LQ8 DXpedition'), p);
       if (d.place || d.name) h('div', 'lqmap-pop-row', (d.place ? d.place + (d.name ? ', ' : '') : '') + (d.name || ''), p);
-      h('div', 'lqmap-pop-row', d.start + (d.time ? ' ' + d.time + ' UTC' : '') + (d.end !== d.start ? ' – ' + d.end : ''), p);
+      h('div', 'lqmap-pop-row', d.start + (d.time ? ' ' + d.time + ' UTC' : '') + ' – ' + d.end + (d.end_time ? ' ' + d.end_time + ' UTC' : ''), p);
+      if (d.st && d.st.state === 'on') h('div', 'lqmap-pop-row lqmap-pop-planned', str('LIVE_DX_ONGOING', 'ongoing'), p);
       var loc = dxLocal(d);
       if (loc) h('div', 'lqmap-pop-row lqmap-pop-local', loc, p);
       if (d.bands) h('div', 'lqmap-pop-row', d.bands, p);
@@ -1075,8 +1083,21 @@
       if (st) dx.push(Object.assign({}, this.dxRaw[i], { st: st }));
     }
     dx.sort(function (a, b) { return utcDay(a.start) - utcDay(b.start); });
+    // an ongoing DXpedition whose call is on the air is featured as "active" at its own marker (with its place); its
+    // ordinary station tag is not drawn twice. Calls match exactly or by their base call (SV8/DB5BO ~ DB5BO, DB5BO/P).
+    function baseCall(c) { var p = String(c).toUpperCase().split('/'), b = ''; p.forEach(function (x) { if (x.length > b.length) b = x; }); return b; }
+    var mapItems = items;
+    dx.forEach(function (d) {
+      if (d.st.state !== 'on') return;
+      var bc = baseCall(d.call), hit = null;
+      items.forEach(function (it) { if (!hit && (it.call.toUpperCase() === d.call.toUpperCase() || baseCall(it.call) === bc)) hit = it; });
+      if (hit) {
+        d.active = { band: hit.band, mode: hit.mode };
+        mapItems = mapItems.filter(function (it) { return !(it.call.toUpperCase() === d.call.toUpperCase() || baseCall(it.call) === bc); });
+      }
+    });
     // the first live data (and the DXpeditions written into the page) appear at once; later arrivals / departures fade
-    this.map.setData(items, dx, !!this.shownLive);
+    this.map.setData(mapItems, dx, !!this.shownLive);
     if (this.raw) this.shownLive = true;
     // status line
     if (this.failed && !this.raw) this.setStatus(str('LIVE_ERROR', 'The live data cannot be reached right now. Retrying…'), 'err');
@@ -1110,7 +1131,7 @@
           b.type = 'button';
           h('span', 'call', d.call, b);
           if (d.place || d.name) h('span', 'name', d.place || d.name, b);
-          h('span', 'count', dxCounter(d.st), b);
+          h('span', 'count', d.st.state === 'on' ? str('LIVE_DX_ONGOING', 'ongoing') + ' \u00B7 ' + dxNow(d) : dxCounter(d.st), b);
           b.addEventListener('click', function () {
             if (self.mini) return;
             self.map.showPop('dx', idx, true);
