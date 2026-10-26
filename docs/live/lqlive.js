@@ -858,14 +858,14 @@
       var g = this.keyed(this.gTag, 't' + pn.key, { transform: 'translate(' + (b.l + (grp.stack ? 0 : 0)).toFixed(1) + ',' + top.toFixed(1) + ') scale(' + sc + ')' });
       var t = el('g', { 'class': 'lqmap-mark', 'data-kind': 'st', 'data-idx': this.items.indexOf(it), tabindex: mini ? -1 : 0 }, g);
       el('rect', { x: 0, y: 0, width: tw, height: TAG_H, rx: 4, fill: col, stroke: this.theme.tagStroke, 'stroke-width': 1 }, t);
-      var tc = el('text', { x: tw / 2, y: 11.5, 'text-anchor': 'middle', fill: textOn(col), 'class': 'lqmap-label' }, t);
+      var tc = el('text', { x: tw / 2, y: 11.5, 'text-anchor': 'middle', fill: textOn(col), 'class': 'lqmap-label', direction: 'ltr' }, t);
       tc.textContent = it.call;
-      var s2 = el('text', { x: tw / 2, y: 24.5, 'text-anchor': 'middle', fill: textOn(col), 'class': 'lqmap-label lqmap-sub' }, t);
+      var s2 = el('text', { x: tw / 2, y: 24.5, 'text-anchor': 'middle', fill: textOn(col), 'class': 'lqmap-label lqmap-sub', direction: 'ltr' }, t);
       s2.textContent = it.mode + ' ' + it.band;
     }
     if (grp.stack && grp.members.length > list.length) {
       var mg = this.keyed(this.gTag, 'm' + grp.members[0].key, {});
-      var more = el('text', { x: ((b.l + b.r) / 2).toFixed(1), y: (b.b - 3 * sc).toFixed(1), 'text-anchor': 'middle', 'class': 'lqmap-more' }, mg);
+      var more = el('text', { x: ((b.l + b.r) / 2).toFixed(1), y: (b.b - 3 * sc).toFixed(1), 'text-anchor': 'middle', 'class': 'lqmap-more', direction: 'ltr' }, mg);
       more.textContent = '+' + (grp.members.length - list.length);
     }
   };
@@ -889,7 +889,7 @@
       pl.textContent = dx.place;
     }
     el('rect', { x: X(12, w), y: -8, width: w, height: 16, rx: 4, fill: T.dx, stroke: T.dxStroke, 'stroke-width': 1 }, grp);
-    var t = el('text', { x: X(12, w) + w / 2, y: 3.5, 'text-anchor': 'middle', fill: '#FFFFFF', 'class': 'lqmap-label' }, grp);
+    var t = el('text', { x: X(12, w) + w / 2, y: 3.5, 'text-anchor': 'middle', fill: '#FFFFFF', 'class': 'lqmap-label', direction: 'ltr' }, grp);
     t.textContent = dx.call;
     el('rect', { x: X(12, cw), y: 10, width: cw, height: 14, rx: 4, fill: T.dxBadge, stroke: T.dx, 'stroke-width': 1, opacity: 0.92 }, grp);
     var ck = el('text', { x: X(12, cw) + cw / 2, y: 20.5, 'text-anchor': 'middle', fill: T.dxClock, 'class': 'lqmap-label lqmap-sub lqmap-dxclock' }, grp);
