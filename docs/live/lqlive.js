@@ -8,6 +8,7 @@
 
   var FEED_DEFAULT = 'https://data.qft8.com/lqlive.json', FEED = FEED_DEFAULT;
   var POLL_MS = 30000;
+  var HOLD_MS = 100;   // LQ8-SITE-LOAD-1: how long the map waits for the first stations before it shows without them
   var MAX_AGE_MS = 10 * 60 * 1000;
   var SCRIPT_SRC = (document.currentScript && document.currentScript.src) || '';
   // Local testing only: ?feed=<url> is honoured on localhost, never on the real site.
@@ -1138,6 +1139,9 @@
     if (this.dxRaw.length) this.update();   // the embedded DXpeditions: drawn at once, before any request returns
     this.loadDx();
     this.poll();
+    // LQ8-SITE-LOAD-1: the page's head hides the map (html.lqhold) so that it is first painted with the stations on it;
+    // it shows once the first answer is drawn, or HOLD_MS after the map is ready if the answer is late or fails
+    this.holdTimer = setTimeout(function () { self.unhold(); }, HOLD_MS);
     setInterval(function () { self.poll(); }, POLL_MS);
     setInterval(function () { if (!document.hidden && self.dxRaw && self.dxRaw.length) self.update(); }, 60000);   // the DX list's day / hour wording
     setInterval(function () { if (!document.hidden && self.map && self.map.tickDx) self.map.tickDx(); }, 1000);   // the live DX clocks
@@ -1161,9 +1165,15 @@
     })).then(function (j) {
       if (!j) throw new Error('no data');
       self.raw = j; self.failed = false; self.update();
+      self.unhold();
     }).catch(function () {
       self.failed = true; self.update();
+      self.unhold();
     });
+  };
+  Page.prototype.unhold = function () {
+    if (this.holdTimer) { clearTimeout(this.holdTimer); this.holdTimer = 0; }
+    document.documentElement.classList.remove('lqhold');
   };
   Page.prototype.loadDx = function () {
     var self = this, url;
@@ -1278,6 +1288,10 @@
   function start() {
     var roots = document.querySelectorAll('.lqlive');
     var pages = [];
+    // LQ8-SITE-LOAD-1: the top bar's buttons (hints, full screen) are shown BEFORE the map measures itself: shown after,
+    // they made the bar 2 px taller and the next redraw zoomed the map a little (the "wiggle" on refresh)
+    setupHints();
+    setupFullscreen();
     for (var i = 0; i < roots.length; i++) pages.push(new Page(roots[i]));
     // local testing only: the maps, to point the camera from a test (never on the real site)
     if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') window.__lqTest = {
@@ -1288,8 +1302,6 @@
       },
       theme: function (t, i) { this.maps[i || 0].applyTheme(THEMES[t]); }
     };
-    setupHints();
-    setupFullscreen();
     setupTheme(pages);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
