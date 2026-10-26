@@ -280,7 +280,7 @@ const langData = {
     "LIVE_BANDS_FILTER": "Benzi afișate",
     "LIVE_BANDS_ALL": "Afișează toate",
     "LIVE_HIDE": "Ascunde",
-    "LIVE_SHOW_HINTS": "Afișează sfaturile",
+    "LIVE_SHOW_HINTS": "Resetează sfaturile",
     "LIVE_BANDS_TITLE": "Benzi",
     "LIVE_DXCC_ENTITY": "Entitate DXCC",
     "LIVE_DXCC_PREFIX": "Prefix",

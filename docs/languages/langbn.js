@@ -280,7 +280,7 @@ const langData = {
     "LIVE_BANDS_FILTER": "দেখানোর ব্যান্ড",
     "LIVE_BANDS_ALL": "সব দেখান",
     "LIVE_HIDE": "লুকান",
-    "LIVE_SHOW_HINTS": "টিপস দেখান",
+    "LIVE_SHOW_HINTS": "ইঙ্গিত রিসেট করুন",
     "LIVE_BANDS_TITLE": "ব্যান্ড",
     "LIVE_DXCC_ENTITY": "DXCC এনটিটি",
     "LIVE_DXCC_PREFIX": "প্রিফিক্স",

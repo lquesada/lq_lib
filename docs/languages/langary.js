@@ -280,7 +280,7 @@ const langData = {
     "LIVE_BANDS_FILTER": "النطاقات اللي يبانو",
     "LIVE_BANDS_ALL": "بيّن كلشي",
     "LIVE_HIDE": "خبّي",
-    "LIVE_SHOW_HINTS": "بيّن التلميحات",
+    "LIVE_SHOW_HINTS": "رجّع التلميحات",
     "LIVE_BANDS_TITLE": "النطاقات",
     "LIVE_DXCC_ENTITY": "كيان DXCC",
     "LIVE_DXCC_PREFIX": "البادئة",

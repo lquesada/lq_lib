@@ -280,7 +280,7 @@ const langData = {
     "LIVE_BANDS_FILTER": "Erakutsi beharreko bandak",
     "LIVE_BANDS_ALL": "Erakutsi denak",
     "LIVE_HIDE": "Ezkutatu",
-    "LIVE_SHOW_HINTS": "Erakutsi aholkuak",
+    "LIVE_SHOW_HINTS": "Berrezarri aholkuak",
     "LIVE_BANDS_TITLE": "Bandak",
     "LIVE_DXCC_ENTITY": "DXCC entitatea",
     "LIVE_DXCC_PREFIX": "Aurrizkia",

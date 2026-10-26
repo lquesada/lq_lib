@@ -280,7 +280,7 @@ const langData = {
     "LIVE_BANDS_FILTER": "Mga band na ipapakita",
     "LIVE_BANDS_ALL": "Ipakita lahat",
     "LIVE_HIDE": "Itago",
-    "LIVE_SHOW_HINTS": "Ipakita ang mga tip",
+    "LIVE_SHOW_HINTS": "I-reset ang mga pahiwatig",
     "LIVE_BANDS_TITLE": "Mga band",
     "LIVE_DXCC_ENTITY": "DXCC entity",
     "LIVE_DXCC_PREFIX": "Prefix",

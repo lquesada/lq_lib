@@ -280,7 +280,7 @@ const langData = {
     "LIVE_BANDS_FILTER": "காட்ட வேண்டிய பேண்டுகள்",
     "LIVE_BANDS_ALL": "அனைத்தையும் காட்டு",
     "LIVE_HIDE": "மறை",
-    "LIVE_SHOW_HINTS": "குறிப்புகளைக் காட்டு",
+    "LIVE_SHOW_HINTS": "குறிப்புகளை மீட்டமை",
     "LIVE_BANDS_TITLE": "பேண்டுகள்",
     "LIVE_DXCC_ENTITY": "DXCC நிலப்பகுதி",
     "LIVE_DXCC_PREFIX": "முன்னொட்டு",

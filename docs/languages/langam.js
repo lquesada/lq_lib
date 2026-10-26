@@ -280,7 +280,7 @@ const langData = {
     "LIVE_BANDS_FILTER": "የሚታዩ ባንዶች",
     "LIVE_BANDS_ALL": "ሁሉንም አሳይ",
     "LIVE_HIDE": "ደብቅ",
-    "LIVE_SHOW_HINTS": "ፍንጮችን አሳይ",
+    "LIVE_SHOW_HINTS": "ፍንጮችን ዳግም አስጀምር",
     "LIVE_BANDS_TITLE": "ባንዶች",
     "LIVE_DXCC_ENTITY": "የDXCC አካል",
     "LIVE_DXCC_PREFIX": "ቅድመ ቅጥያ",

@@ -280,7 +280,7 @@ const langData = {
     "LIVE_BANDS_FILTER": "표시할 밴드",
     "LIVE_BANDS_ALL": "모두 표시",
     "LIVE_HIDE": "숨기기",
-    "LIVE_SHOW_HINTS": "도움말 표시",
+    "LIVE_SHOW_HINTS": "힌트 초기화",
     "LIVE_BANDS_TITLE": "밴드",
     "LIVE_DXCC_ENTITY": "DXCC 엔티티",
     "LIVE_DXCC_PREFIX": "프리픽스",

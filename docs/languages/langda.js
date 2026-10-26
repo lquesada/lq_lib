@@ -280,7 +280,7 @@ const langData = {
     "LIVE_BANDS_FILTER": "Bånd der vises",
     "LIVE_BANDS_ALL": "Vis alle",
     "LIVE_HIDE": "Skjul",
-    "LIVE_SHOW_HINTS": "Vis tip",
+    "LIVE_SHOW_HINTS": "Nulstil tip",
     "LIVE_BANDS_TITLE": "Bånd",
     "LIVE_DXCC_ENTITY": "DXCC-land",
     "LIVE_DXCC_PREFIX": "Præfiks",

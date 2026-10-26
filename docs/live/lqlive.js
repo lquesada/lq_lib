@@ -61,13 +61,20 @@
         '; max-age=31536000; path=/; SameSite=Lax' + (location.protocol === 'https:' ? '; Secure' : '');
     } catch (e) {}
   }
+  // the DXpeditions panel is a hint too, but it is also hidden while there is no DXpedition to list
+  var hintsClosed = [], dxListed = false, reapplyHints = null;
+  function hintClosed(id) { return hintsClosed.indexOf(id) >= 0; }
   function setupHints() {
     var panels = document.querySelectorAll('[data-hint]');
     var show = document.querySelector('.lqlive-hints-show');
     if (!panels.length) return;
-    var closed = readCookieList(HINTS_COOKIE);
+    var closed = hintsClosed = readCookieList(HINTS_COOKIE);
     function apply() {
-      for (var i = 0; i < panels.length; i++) panels[i].hidden = closed.indexOf(panels[i].getAttribute('data-hint')) >= 0;
+      hintsClosed = closed;
+      for (var i = 0; i < panels.length; i++) {
+        var id = panels[i].getAttribute('data-hint');
+        panels[i].hidden = closed.indexOf(id) >= 0 || (id === 'dx' && !dxListed);
+      }
       if (show) show.hidden = !closed.length;
       var pre = document.getElementById('lqlive-hints-pre');   // the first-paint rule of the page's head
       if (pre) pre.parentNode.removeChild(pre);
@@ -87,6 +94,7 @@
       });
     });
     if (show) show.addEventListener('click', function () { closed = []; writeCookieList(HINTS_COOKIE, closed); apply(); });
+    reapplyHints = apply;
     apply();
   }
   function bandColor(b) { return BAND_COLORS[b] || '#64748B'; }
@@ -163,7 +171,7 @@
     if (isNaN(a) || now >= a) return str('LIVE_DX_ON_AIR', 'on the air now');
     var sec = Math.ceil((a - now) / 1000), d = Math.floor(sec / 86400), hh = Math.floor(sec / 3600) % 24,
         mm = Math.floor(sec / 60) % 60, ss = sec % 60;
-    var t = d > 0 ? d + 'd' + two(hh) + 'h' : hh > 0 ? hh + 'h' + two(mm) + 'm' : mm + 'm' + two(ss) + 's';   // 1d14h / 14h12m / 15m10s
+    var t = d > 0 ? d + 'd ' + hh + 'h' : hh > 0 ? hh + 'h ' + mm + 'm' : mm + 'm ' + ss + 's';   // 2d 5h / 14h 2m / 15m 9s
     return str('LIVE_DX_IN', 'in {t}').replace('{t}', t);
   }
   // the start as the viewer's own clock shows it, in the page's language (no strings of ours)
@@ -682,7 +690,8 @@
     this.drawBandFilter();
     // DXpeditions list: hidden while there are none
     if (this.dxBox) {
-      this.dxBox.hidden = !dx.length;
+      dxListed = dx.length > 0;
+      this.dxBox.hidden = !dx.length || hintClosed('dx');
       if (this.dxList) {
         this.dxList.textContent = '';
         dx.forEach(function (d, idx) {

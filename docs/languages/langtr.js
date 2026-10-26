@@ -280,7 +280,7 @@ const langData = {
     "LIVE_BANDS_FILTER": "Gösterilecek bantlar",
     "LIVE_BANDS_ALL": "Tümünü göster",
     "LIVE_HIDE": "Gizle",
-    "LIVE_SHOW_HINTS": "İpuçlarını göster",
+    "LIVE_SHOW_HINTS": "İpuçlarını sıfırla",
     "LIVE_BANDS_TITLE": "Bantlar",
     "LIVE_DXCC_ENTITY": "DXCC ülkesi",
     "LIVE_DXCC_PREFIX": "Önek",

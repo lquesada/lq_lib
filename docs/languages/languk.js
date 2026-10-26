@@ -280,7 +280,7 @@ const langData = {
     "LIVE_BANDS_FILTER": "Діапазони для показу",
     "LIVE_BANDS_ALL": "Показати всі",
     "LIVE_HIDE": "Сховати",
-    "LIVE_SHOW_HINTS": "Показати підказки",
+    "LIVE_SHOW_HINTS": "Скинути підказки",
     "LIVE_BANDS_TITLE": "Діапазони",
     "LIVE_DXCC_ENTITY": "Територія DXCC",
     "LIVE_DXCC_PREFIX": "Префікс",

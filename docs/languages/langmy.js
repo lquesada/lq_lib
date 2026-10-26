@@ -280,7 +280,7 @@ const langData = {
     "LIVE_BANDS_FILTER": "ပြသမည့် ဘန်းများ",
     "LIVE_BANDS_ALL": "အားလုံးပြပါ",
     "LIVE_HIDE": "ဖျောက်ပါ",
-    "LIVE_SHOW_HINTS": "အကြံပြုချက်များ ပြပါ",
+    "LIVE_SHOW_HINTS": "အရိပ်အမြွက်များကို ပြန်လည်သတ်မှတ်ရန်",
     "LIVE_BANDS_TITLE": "ဘန်းများ",
     "LIVE_DXCC_ENTITY": "DXCC နယ်မြေ",
     "LIVE_DXCC_PREFIX": "ရှေ့ဆက်",

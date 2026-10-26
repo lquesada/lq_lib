@@ -280,7 +280,7 @@ const langData = {
     "LIVE_BANDS_FILTER": "Band som visas",
     "LIVE_BANDS_ALL": "Visa alla",
     "LIVE_HIDE": "Dölj",
-    "LIVE_SHOW_HINTS": "Visa tips",
+    "LIVE_SHOW_HINTS": "Återställ tips",
     "LIVE_BANDS_TITLE": "Band",
     "LIVE_DXCC_ENTITY": "DXCC-land",
     "LIVE_DXCC_PREFIX": "Prefix",

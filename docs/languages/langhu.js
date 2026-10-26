@@ -280,7 +280,7 @@ const langData = {
     "LIVE_BANDS_FILTER": "Megjelenített sávok",
     "LIVE_BANDS_ALL": "Összes mutatása",
     "LIVE_HIDE": "Elrejtés",
-    "LIVE_SHOW_HINTS": "Tippek mutatása",
+    "LIVE_SHOW_HINTS": "Tippek visszaállítása",
     "LIVE_BANDS_TITLE": "Sávok",
     "LIVE_DXCC_ENTITY": "DXCC-terület",
     "LIVE_DXCC_PREFIX": "Előtag",

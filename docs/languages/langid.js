@@ -280,7 +280,7 @@ const langData = {
     "LIVE_BANDS_FILTER": "Band yang ditampilkan",
     "LIVE_BANDS_ALL": "Tampilkan semua",
     "LIVE_HIDE": "Sembunyikan",
-    "LIVE_SHOW_HINTS": "Tampilkan petunjuk",
+    "LIVE_SHOW_HINTS": "Atur ulang petunjuk",
     "LIVE_BANDS_TITLE": "Band",
     "LIVE_DXCC_ENTITY": "Entitas DXCC",
     "LIVE_DXCC_PREFIX": "Prefiks",

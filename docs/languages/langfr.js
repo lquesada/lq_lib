@@ -280,7 +280,7 @@ const langData = {
     "LIVE_BANDS_FILTER": "Bandes affichées",
     "LIVE_BANDS_ALL": "Tout afficher",
     "LIVE_HIDE": "Masquer",
-    "LIVE_SHOW_HINTS": "Afficher les conseils",
+    "LIVE_SHOW_HINTS": "Réinitialiser les astuces",
     "LIVE_BANDS_TITLE": "Bandes",
     "LIVE_DXCC_ENTITY": "Entité DXCC",
     "LIVE_DXCC_PREFIX": "Préfixe",
