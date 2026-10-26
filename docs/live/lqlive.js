@@ -142,16 +142,25 @@
   // ---- DXpeditions -------------------------------------------------------------------------------------------------
   var DAY = 86400000;
   function utcDay(s) { var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || ''); return m ? Date.UTC(+m[1], +m[2] - 1, +m[3]) : NaN; }
-  // -> null (ended / invalid) or {state:'on'|'soon', days}
+  // optional "time": "HH:MM" (UTC) on the start day -> the countdown is exact to the minute
+  function utcTime(s) { var m = /^([01]\d|2[0-3]):([0-5]\d)$/.exec(s || ''); return m ? (+m[1] * 60 + +m[2]) * 60000 : 0; }
+  // -> null (ended / invalid) or {state:'on'|'soon', days, ms}
   function dxStatus(d, now) {
     var a = utcDay(d.start), b = utcDay(d.end);
     if (isNaN(a) || isNaN(b)) return null;
     if (now >= b + DAY) return null;
-    if (now >= a) return { state: 'on', days: 0 };
-    return { state: 'soon', days: Math.ceil((a - now) / DAY) };
+    a += utcTime(d.time);
+    if (now >= a) return { state: 'on', days: 0, ms: 0 };
+    var today = Math.floor(now / DAY) * DAY;   // calendar days, as before: 'tomorrow' = the next UTC day
+    return { state: 'soon', days: Math.round((utcDay(d.start) - today) / DAY), ms: a - now, timed: !!utcTime(d.time) };
   }
+  function two(n) { return (n < 10 ? '0' : '') + n; }
   function dxCounter(st) {
     if (st.state === 'on') return str('LIVE_DX_ON_AIR', 'on the air now');
+    if (st.timed && st.ms < DAY) {   // a start time given, the last 24 h: hours and minutes, "T−05:12" (no words to translate)
+      var min = Math.ceil(st.ms / 60000);
+      return 'T\u2212' + two(Math.floor(min / 60)) + ':' + two(min % 60);
+    }
     if (st.days <= 1) return str('LIVE_DX_TOMORROW', 'tomorrow');
     return str('LIVE_DX_DAYS', 'in {n} days').replace('{n}', String(st.days));
   }
@@ -472,7 +481,7 @@
       if (!d) return;
       h('div', 'lqmap-pop-call dx', d.call, p);
       if (d.name) h('div', 'lqmap-pop-row', d.name, p);
-      h('div', 'lqmap-pop-row', d.start + ' – ' + d.end, p);
+      h('div', 'lqmap-pop-row', d.start + (d.time ? ' ' + d.time + ' UTC' : '') + (d.end !== d.start ? ' – ' + d.end : ''), p);
       if (d.bands) h('div', 'lqmap-pop-row', d.bands, p);
       h('div', 'lqmap-pop-count', dxCounter(d.st), p);
       this.popGeo = { lon: d.lon, lat: d.lat };
@@ -563,6 +572,7 @@
     this.loadDx();
     this.poll();
     setInterval(function () { self.poll(); }, POLL_MS);
+    setInterval(function () { if (!document.hidden && self.dxRaw && self.dxRaw.length) self.update(); }, 20000);   // the DX countdown
     document.addEventListener('visibilitychange', function () { if (!document.hidden) self.poll(); });
   }
   Page.prototype.setStatus = function (t, cls) {
