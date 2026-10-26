@@ -959,12 +959,12 @@
   };
   LiveMap.prototype.hidePop = function () { this.pop.hidden = true; this.popKey = null; this.popGeo = null; this.pinned = false; };
 
-  LiveMap.prototype.setData = function (items, dx) {
+  LiveMap.prototype.setData = function (items, dx, fade) {
     this.items = items;
     this.dx = dx;
     var key = this.popKey;
     this.hidePop();
-    this.render(true);
+    this.render(!!fade);   // fade only for changes AFTER the first data was shown: the page opens with everything in place
     return key;
   };
 
@@ -1075,7 +1075,9 @@
       if (st) dx.push(Object.assign({}, this.dxRaw[i], { st: st }));
     }
     dx.sort(function (a, b) { return utcDay(a.start) - utcDay(b.start); });
-    this.map.setData(items, dx);
+    // the first live data (and the DXpeditions written into the page) appear at once; later arrivals / departures fade
+    this.map.setData(items, dx, !!this.shownLive);
+    if (this.raw) this.shownLive = true;
     // status line
     if (this.failed && !this.raw) this.setStatus(str('LIVE_ERROR', 'The live data cannot be reached right now. Retrying…'), 'err');
     else if (!this.raw) this.setStatus(str('LIVE_LOADING', 'Loading live data…'));
