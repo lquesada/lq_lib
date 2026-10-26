@@ -144,7 +144,7 @@
     function exit() { var x = document.exitFullscreen || document.webkitExitFullscreen; if (x && fsEl()) x.call(document); }
     function label() {
       var on = !!fsEl(), t = on ? str('LIVE_EXIT_FULLSCREEN', 'Exit full screen') : str('LIVE_FULLSCREEN', 'Full screen');
-      b.classList.toggle('on', on); b.title = t; b.setAttribute('aria-label', t); b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      b.classList.toggle('on', on); document.body.classList.toggle('lqfs', on); b.title = t; b.setAttribute('aria-label', t); b.setAttribute('aria-pressed', on ? 'true' : 'false');
     }
     b.hidden = false; label();
     b.addEventListener('click', function () {

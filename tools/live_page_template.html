@@ -46,6 +46,10 @@
     .lqlive-fs { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 30px;
       background: #0d121d; color: var(--text); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; }
     .lqlive-fs[hidden] { display: none; }
+    /* full screen: no top bar, only its full-screen button, top right over the map (the panels move down to clear it) */
+    body.lqfs .top { position: fixed; top: 8px; right: 8px; z-index: 60; padding: 0; border: 0; background: transparent; overflow: visible; }
+    body.lqfs .top > :not(.lqlive-fs) { display: none !important; }
+    body.lqfs .overlay { top: 50px; }
     .lqlive-fs:hover, .lqlive-fs:focus-visible { border-color: var(--cyan); color: var(--cyan); }
     .lqlive-fs .fs-out { display: none; }
     .lqlive-fs.on .fs-in { display: none; }
