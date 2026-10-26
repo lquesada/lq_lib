@@ -71,11 +71,17 @@
     var closed = hintsClosed = readCookieList(HINTS_COOKIE);
     function apply() {
       hintsClosed = closed;
+      var anyShown = false;
       for (var i = 0; i < panels.length; i++) {
         var id = panels[i].getAttribute('data-hint');
         panels[i].hidden = closed.indexOf(id) >= 0 || (id === 'dx' && !dxListed);
+        if (!panels[i].hidden) anyShown = true;
       }
-      if (show) show.hidden = !closed.length;
+      // one button for all of them: "Hide hints" while any is shown, "Show hints" when all are closed
+      if (show) {
+        show.hidden = false;
+        show.textContent = anyShown ? str('LIVE_HIDE_HINTS', 'Hide hints') : str('LIVE_SHOW_HINTS', 'Show hints');
+      }
       var pre = document.getElementById('lqlive-hints-pre');   // the first-paint rule of the page's head
       if (pre) pre.parentNode.removeChild(pre);
     }
@@ -93,9 +99,44 @@
         apply();
       });
     });
-    if (show) show.addEventListener('click', function () { closed = []; writeCookieList(HINTS_COOKIE, closed); apply(); });
+    if (show) show.addEventListener('click', function () {
+      var anyShown = false;
+      for (var i = 0; i < panels.length; i++) if (!panels[i].hidden) anyShown = true;
+      closed = anyShown ? Array.prototype.map.call(panels, function (p) { return p.getAttribute('data-hint'); }) : [];
+      writeCookieList(HINTS_COOKIE, closed);
+      apply();
+    });
     reapplyHints = apply;
     apply();
+  }
+  // Full screen (top bar, rightmost): the button, Esc or the browser's Back leave it again
+  function setupFullscreen() {
+    var b = document.querySelector('.lqlive-fs'), de = document.documentElement;
+    if (!b) return;
+    var req = de.requestFullscreen || de.webkitRequestFullscreen, can = document.fullscreenEnabled || document.webkitFullscreenEnabled;
+    if (!req || !can) return;   // e.g. Safari on iPhone: no page full screen, so no button
+    function fsEl() { return document.fullscreenElement || document.webkitFullscreenElement; }
+    function exit() { var x = document.exitFullscreen || document.webkitExitFullscreen; if (x && fsEl()) x.call(document); }
+    function label() {
+      var on = !!fsEl(), t = on ? str('LIVE_EXIT_FULLSCREEN', 'Exit full screen') : str('LIVE_FULLSCREEN', 'Full screen');
+      b.classList.toggle('on', on); b.title = t; b.setAttribute('aria-label', t); b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    }
+    b.hidden = false; label();
+    b.addEventListener('click', function () {
+      if (fsEl()) { exit(); return; }
+      try { var r = req.call(de); if (r && r.catch) r.catch(function () {}); } catch (e) {}
+    });
+    function changed() {
+      if (fsEl()) {
+        if (!(history.state && history.state.lqFs)) { try { history.pushState({ lqFs: 1 }, ''); } catch (e) {} }   // Back leaves full screen
+      } else if (history.state && history.state.lqFs) {
+        try { history.back(); } catch (e) {}   // left by the button or Esc: drop the entry Back would have used
+      }
+      label();
+    }
+    document.addEventListener('fullscreenchange', changed);
+    document.addEventListener('webkitfullscreenchange', changed);
+    window.addEventListener('popstate', function () { if (fsEl()) exit(); });
   }
   function bandColor(b) { return BAND_COLORS[b] || '#64748B'; }
   function textOn(hex) {
@@ -696,7 +737,7 @@
     this.drawBandFilter();
     // DXpeditions list: hidden while there are none
     if (this.dxBox) {
-      dxListed = dx.length > 0;
+      if (dxListed !== (dx.length > 0)) { dxListed = dx.length > 0; if (reapplyHints) reapplyHints(); }
       this.dxBox.hidden = !dx.length || hintClosed('dx');
       if (this.dxList) {
         this.dxList.textContent = '';
@@ -742,6 +783,7 @@
     var roots = document.querySelectorAll('.lqlive');
     for (var i = 0; i < roots.length; i++) new Page(roots[i]);
     setupHints();
+    setupFullscreen();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();
