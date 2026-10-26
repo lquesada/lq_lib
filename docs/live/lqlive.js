@@ -27,10 +27,10 @@
   }
   var THEMES = [
     T('BRIGHT_FUTURE', '#1E477A', '#3B82B6', '#CBD5E1', 'rgba(226,232,240,0.7)', 'rgba(255,255,255,0.22)', '#E2E8F0', '#0F172A', '#0F172A',
-      { leader: '#F8FAFC' }),
+      { leader: '#F8FAFC', pinHalo: 'rgba(248,250,252,0.85)' }),
     T('CONSOLE', '#050B05', '#1B3D22', '#22C55E', 'rgba(22,163,74,0.85)', 'rgba(34,197,94,0.3)', '#86EFAC', '#050B05', '#86EFAC'),
     T('EARTH', '#1E3A8A', '#78350F', '#FDE68A', 'rgba(254,243,199,0.6)', 'rgba(254,243,199,0.25)', '#FEF3C7', '#1E293B', '#0F172A',
-      { leader: '#FEF3C7' }),
+      { leader: '#FEF3C7', pinHalo: 'rgba(254,243,199,0.85)' }),
     T('MIDNIGHT', '#090D16', '#223454', '#0EA5E9', 'rgba(100,116,139,0.9)', 'rgba(14,165,233,0.25)', '#E2E8F0', '#090D16', '#E2E8F0'),
     T('AMBER', '#0B0702', '#3D2A0E', '#F59E0B', 'rgba(217,119,6,0.85)', 'rgba(245,158,11,0.25)', '#FCD34D', '#0B0702', '#FCD34D'),
     T('NIGHT_RED', '#050000', '#581010', '#B91C1C', 'rgba(153,27,27,0.9)', 'rgba(185,28,28,0.25)', '#F87171', '#050000', '#FCA5A5'),
@@ -832,6 +832,9 @@
   LiveMap.prototype.drawPinOnly = function (pn, sc) {
     var g = this.keyed(this.gPin, 'p' + pn.key, { transform: 'translate(' + pn.x.toFixed(1) + ',' + pn.y.toFixed(1) + ') scale(' + sc + ')' });
     var pin = el('g', { 'class': 'lqmap-mark', 'data-kind': 'st', 'data-idx': this.items.indexOf(pn.it), tabindex: -1 }, g);
+    // a light rim where the outline is dark on a mid-blue sea, so a dark band colour (60m) still shows
+    if (this.theme.pinHalo) el('path', { d: 'M0,0 C-1.5,-5 -6,-8 -6,-13 A6,6 0 1 1 6,-13 C6,-8 1.5,-5 0,0 Z', fill: 'none',
+      stroke: this.theme.pinHalo, 'stroke-width': 4, 'stroke-linejoin': 'round' }, pin);
     el('path', { d: 'M0,0 C-1.5,-5 -6,-8 -6,-13 A6,6 0 1 1 6,-13 C6,-8 1.5,-5 0,0 Z', fill: bandColor(pn.it.band),
       stroke: this.theme.pinStroke, 'stroke-width': 1.5, 'class': 'lqmap-pin' }, pin);
     el('circle', { cx: 0, cy: -13, r: 2.3, fill: this.theme.pinStroke }, pin);
@@ -872,27 +875,28 @@
   LiveMap.prototype.drawDx = function (pt, dx, idx, sc) {
     var g = this.keyed(this.gDx, 'd' + dx.call + '#' + pt.k, { transform: 'translate(' + pt.x.toFixed(1) + ',' + pt.y.toFixed(1) + ') scale(' + sc + ')' });
     var grp = el('g', { 'class': 'lqmap-mark', 'data-kind': 'dx', 'data-idx': idx, tabindex: this.mini ? -1 : 0 }, g);
-    var T = this.theme;
+    var T = this.theme, txt = dxClock(dx, Date.now());
     el('path', { d: 'M0,-9 L9,0 L0,9 L-9,0 Z', fill: T.dx, stroke: '#FFFFFF', 'stroke-width': 2 }, grp);
     el('circle', { cx: 0, cy: 0, r: 2.5, fill: '#FFFFFF' }, grp);
-    var w = 12 + dx.call.length * 6.6, right = 12 + w, top = -10;
+    var w = 12 + dx.call.length * 6.6, pw = dx.place ? Math.max(w, 10 + String(dx.place).length * 5.8) : 0;
+    var cw = Math.max(w, 10 + txt.length * 5.8), right = 12 + Math.max(w, pw, cw), top = dx.place ? -24 : -10;
+    // the tags go to the right of the diamond, or to its left where the right edge of the map would cut them
+    var flip = pt.x + (right + 2) * sc > this.W - 3 && pt.x - (right + 2) * sc >= 3;
+    function X(x0, ww) { return flip ? -x0 - ww : x0; }
     if (dx.place) {   // the exact place, above the call (e.g. "Corfu Island")
-      var pw = Math.max(w, 10 + String(dx.place).length * 5.8);
-      el('rect', { x: 12, y: -24, width: pw, height: 14, rx: 4, fill: T.dxBadge, stroke: T.dx, 'stroke-width': 1, opacity: 0.92 }, grp);
-      var pl = el('text', { x: 12 + pw / 2, y: -13.5, 'text-anchor': 'middle', fill: T.dxBadgeText, 'class': 'lqmap-label lqmap-sub' }, grp);
+      el('rect', { x: X(12, pw), y: -24, width: pw, height: 14, rx: 4, fill: T.dxBadge, stroke: T.dx, 'stroke-width': 1, opacity: 0.92 }, grp);
+      var pl = el('text', { x: X(12, pw) + pw / 2, y: -13.5, 'text-anchor': 'middle', fill: T.dxBadgeText, 'class': 'lqmap-label lqmap-sub' }, grp);
       pl.textContent = dx.place;
-      right = Math.max(right, 12 + pw); top = -24;
     }
-    el('rect', { x: 12, y: -8, width: w, height: 16, rx: 4, fill: T.dx, stroke: T.dxStroke, 'stroke-width': 1 }, grp);
-    var t = el('text', { x: 12 + w / 2, y: 3.5, 'text-anchor': 'middle', fill: '#FFFFFF', 'class': 'lqmap-label' }, grp);
+    el('rect', { x: X(12, w), y: -8, width: w, height: 16, rx: 4, fill: T.dx, stroke: T.dxStroke, 'stroke-width': 1 }, grp);
+    var t = el('text', { x: X(12, w) + w / 2, y: 3.5, 'text-anchor': 'middle', fill: '#FFFFFF', 'class': 'lqmap-label' }, grp);
     t.textContent = dx.call;
-    var txt = dxClock(dx, Date.now()), cw = Math.max(w, 10 + txt.length * 5.8);
-    el('rect', { x: 12, y: 10, width: cw, height: 14, rx: 4, fill: T.dxBadge, stroke: T.dx, 'stroke-width': 1, opacity: 0.92 }, grp);
-    var ck = el('text', { x: 12 + cw / 2, y: 20.5, 'text-anchor': 'middle', fill: T.dxClock, 'class': 'lqmap-label lqmap-sub lqmap-dxclock' }, grp);
+    el('rect', { x: X(12, cw), y: 10, width: cw, height: 14, rx: 4, fill: T.dxBadge, stroke: T.dx, 'stroke-width': 1, opacity: 0.92 }, grp);
+    var ck = el('text', { x: X(12, cw) + cw / 2, y: 20.5, 'text-anchor': 'middle', fill: T.dxClock, 'class': 'lqmap-label lqmap-sub lqmap-dxclock' }, grp);
     ck.textContent = txt;
     this.dxClocks.push({ node: ck, dx: dx });
-    right = Math.max(right, 12 + cw);
-    return { l: pt.x - 10 * sc, t: pt.y + top * sc, r: pt.x + (right + 2) * sc, b: pt.y + 25 * sc };
+    return flip ? { l: pt.x - (right + 2) * sc, t: pt.y + top * sc, r: pt.x + 10 * sc, b: pt.y + 25 * sc }
+      : { l: pt.x - 10 * sc, t: pt.y + top * sc, r: pt.x + (right + 2) * sc, b: pt.y + 25 * sc };
   };
   // every second: the markers' clocks and the open popup's countdown, nothing else redrawn
   LiveMap.prototype.tickDx = function () {
