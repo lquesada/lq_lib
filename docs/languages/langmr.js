@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "बँड",
     "LIVE_DXCC_ENTITY": "DXCC घटक",
     "LIVE_DXCC_PREFIX": "उपसर्ग",
-    "LIVE_DXCC_NUMBER": "DXCC क्रमांक"
+    "LIVE_DXCC_NUMBER": "DXCC क्रमांक",
+    "LIVE_THEME": "नकाशाची थीम",
+    "LIVE_THEME_BRIGHT_FUTURE": "उज्ज्वल भविष्य",
+    "LIVE_THEME_CONSOLE": "कन्सोल",
+    "LIVE_THEME_EARTH": "पृथ्वी",
+    "LIVE_THEME_MIDNIGHT": "मध्यरात्रीचा निळा",
+    "LIVE_THEME_AMBER": "अंबर",
+    "LIVE_THEME_NIGHT_RED": "रात्रीचा लाल",
+    "LIVE_THEME_DAYLIGHT": "दिवसाचा प्रकाश",
+    "LIVE_THEME_MATRIX_GREEN": "मॅट्रिक्स हिरवा"
 };

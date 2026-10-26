@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "النطاقات",
     "LIVE_DXCC_ENTITY": "كيان DXCC",
     "LIVE_DXCC_PREFIX": "البادئة",
-    "LIVE_DXCC_NUMBER": "رقم DXCC"
+    "LIVE_DXCC_NUMBER": "رقم DXCC",
+    "LIVE_THEME": "مظهر الخريطة",
+    "LIVE_THEME_BRIGHT_FUTURE": "مستقبل مشرق",
+    "LIVE_THEME_CONSOLE": "وحدة التحكم",
+    "LIVE_THEME_EARTH": "الأرض",
+    "LIVE_THEME_MIDNIGHT": "أزرق داكن ليلي",
+    "LIVE_THEME_AMBER": "كهرماني",
+    "LIVE_THEME_NIGHT_RED": "أحمر ليلي",
+    "LIVE_THEME_DAYLIGHT": "ضوء النهار",
+    "LIVE_THEME_MATRIX_GREEN": "أخضر ماتريكس"
 };

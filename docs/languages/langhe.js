@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "תחומים",
     "LIVE_DXCC_ENTITY": "ישות DXCC",
     "LIVE_DXCC_PREFIX": "קידומת",
-    "LIVE_DXCC_NUMBER": "מספר DXCC"
+    "LIVE_DXCC_NUMBER": "מספר DXCC",
+    "LIVE_THEME": "ערכת צבעים למפה",
+    "LIVE_THEME_BRIGHT_FUTURE": "עתיד בהיר",
+    "LIVE_THEME_CONSOLE": "מסוף",
+    "LIVE_THEME_EARTH": "כדור הארץ",
+    "LIVE_THEME_MIDNIGHT": "כחול חצות",
+    "LIVE_THEME_AMBER": "ענבר",
+    "LIVE_THEME_NIGHT_RED": "אדום לילה",
+    "LIVE_THEME_DAYLIGHT": "אור יום",
+    "LIVE_THEME_MATRIX_GREEN": "ירוק מטריקס"
 };

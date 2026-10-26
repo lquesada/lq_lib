@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "ಬ್ಯಾಂಡ್‌ಗಳು",
     "LIVE_DXCC_ENTITY": "DXCC ಘಟಕ",
     "LIVE_DXCC_PREFIX": "ಪೂರ್ವಪ್ರತ್ಯಯ",
-    "LIVE_DXCC_NUMBER": "DXCC ಸಂಖ್ಯೆ"
+    "LIVE_DXCC_NUMBER": "DXCC ಸಂಖ್ಯೆ",
+    "LIVE_THEME": "ನಕ್ಷೆಯ ಥೀಮ್",
+    "LIVE_THEME_BRIGHT_FUTURE": "ಉಜ್ವಲ ಭವಿಷ್ಯ",
+    "LIVE_THEME_CONSOLE": "ಕನ್ಸೋಲ್",
+    "LIVE_THEME_EARTH": "ಭೂಮಿ",
+    "LIVE_THEME_MIDNIGHT": "ಮಧ್ಯರಾತ್ರಿ ನೀಲಿ",
+    "LIVE_THEME_AMBER": "ಅಂಬರ್",
+    "LIVE_THEME_NIGHT_RED": "ರಾತ್ರಿ ಕೆಂಪು",
+    "LIVE_THEME_DAYLIGHT": "ಹಗಲು ಬೆಳಕು",
+    "LIVE_THEME_MATRIX_GREEN": "ಮ್ಯಾಟ್ರಿಕ್ಸ್ ಹಸಿರು"
 };

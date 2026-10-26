@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "Pasma",
     "LIVE_DXCC_ENTITY": "Kraj DXCC",
     "LIVE_DXCC_PREFIX": "Prefiks",
-    "LIVE_DXCC_NUMBER": "Numer DXCC"
+    "LIVE_DXCC_NUMBER": "Numer DXCC",
+    "LIVE_THEME": "Motyw mapy",
+    "LIVE_THEME_BRIGHT_FUTURE": "Jasna przyszłość",
+    "LIVE_THEME_CONSOLE": "Konsola",
+    "LIVE_THEME_EARTH": "Ziemia",
+    "LIVE_THEME_MIDNIGHT": "Granat nocy",
+    "LIVE_THEME_AMBER": "Bursztyn",
+    "LIVE_THEME_NIGHT_RED": "Nocna czerwień",
+    "LIVE_THEME_DAYLIGHT": "Światło dzienne",
+    "LIVE_THEME_MATRIX_GREEN": "Zieleń Matrixa"
 };

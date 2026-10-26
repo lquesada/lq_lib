@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "Taajuusalueet",
     "LIVE_DXCC_ENTITY": "DXCC-maa",
     "LIVE_DXCC_PREFIX": "Tunnus",
-    "LIVE_DXCC_NUMBER": "DXCC-numero"
+    "LIVE_DXCC_NUMBER": "DXCC-numero",
+    "LIVE_THEME": "Kartan teema",
+    "LIVE_THEME_BRIGHT_FUTURE": "Valoisa tulevaisuus",
+    "LIVE_THEME_CONSOLE": "Konsoli",
+    "LIVE_THEME_EARTH": "Maa",
+    "LIVE_THEME_MIDNIGHT": "Keskiyönsininen",
+    "LIVE_THEME_AMBER": "Meripihka",
+    "LIVE_THEME_NIGHT_RED": "Yöpunainen",
+    "LIVE_THEME_DAYLIGHT": "Päivänvalo",
+    "LIVE_THEME_MATRIX_GREEN": "Matrix-vihreä"
 };

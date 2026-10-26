@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "ဘန်းများ",
     "LIVE_DXCC_ENTITY": "DXCC နယ်မြေ",
     "LIVE_DXCC_PREFIX": "ရှေ့ဆက်",
-    "LIVE_DXCC_NUMBER": "DXCC နံပါတ်"
+    "LIVE_DXCC_NUMBER": "DXCC နံပါတ်",
+    "LIVE_THEME": "မြေပုံ အပြင်အဆင်",
+    "LIVE_THEME_BRIGHT_FUTURE": "တောက်ပသော အနာဂတ်",
+    "LIVE_THEME_CONSOLE": "ကွန်ဆိုး",
+    "LIVE_THEME_EARTH": "ကမ္ဘာ",
+    "LIVE_THEME_MIDNIGHT": "သန်းခေါင်ပြာ",
+    "LIVE_THEME_AMBER": "ပယင်းရောင်",
+    "LIVE_THEME_NIGHT_RED": "ညအနီ",
+    "LIVE_THEME_DAYLIGHT": "နေ့အလင်း",
+    "LIVE_THEME_MATRIX_GREEN": "မေထရစ် အစိမ်း"
 };

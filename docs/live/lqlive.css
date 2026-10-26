@@ -7,7 +7,7 @@
 .lqmap-mark:focus-visible rect { stroke: #FFFFFF; stroke-width: 2; }
 .lqmap-label { font: 700 11px 'Inter', system-ui, sans-serif; pointer-events: none; }
 .lqmap-sub { font-weight: 600; }
-.lqmap-more { font: 700 11px 'Inter', system-ui, sans-serif; fill: #F8FAFC; paint-order: stroke; stroke: #0F172A; stroke-width: 3px; }
+.lqmap-more { font: 700 11px 'Inter', system-ui, sans-serif; fill: var(--lq-name, #F8FAFC); paint-order: stroke; stroke: var(--lq-halo, #0F172A); stroke-width: 3px; }
 .lqmap-pop { position: absolute; z-index: 5; min-width: 170px; max-width: 260px; padding: 10px 12px; border-radius: 10px;
   background: rgba(13, 18, 29, 0.96); border: 1px solid rgba(56, 189, 248, 0.35); color: #F8FAFC;
   font: 400 13px 'Inter', system-ui, sans-serif; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45); pointer-events: none; }
@@ -46,7 +46,7 @@
 .lqlive-hints-show { background: #0d121d; color: #F8FAFC; border: 1px solid rgba(56, 189, 248, 0.35); border-radius: 8px;
   padding: 4px 10px; font: 600 12px 'Inter', system-ui, sans-serif; cursor: pointer; white-space: nowrap; }
 .lqlive-hints-show[hidden] { display: none; }
-.lqmap-country { font: 600 14px 'Inter', system-ui, sans-serif; fill: #E2E8F0; stroke: #0F172A; stroke-width: 3px;
+.lqmap-country { font: 600 14px 'Inter', system-ui, sans-serif; fill: var(--lq-name, #E2E8F0); stroke: var(--lq-halo, #0F172A); stroke-width: 3px;
   stroke-linejoin: round; paint-order: stroke; pointer-events: none; dominant-baseline: middle; }
 /* markers fade in / out over a second when the data changes (LQ8-SITE-FADE-1); pan and zoom never fade */
 .lqf { opacity: 1; transition: opacity 1s ease; }

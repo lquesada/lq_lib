@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "ย่านความถี่",
     "LIVE_DXCC_ENTITY": "เอนทิตี DXCC",
     "LIVE_DXCC_PREFIX": "พรีฟิกซ์",
-    "LIVE_DXCC_NUMBER": "หมายเลข DXCC"
+    "LIVE_DXCC_NUMBER": "หมายเลข DXCC",
+    "LIVE_THEME": "ธีมแผนที่",
+    "LIVE_THEME_BRIGHT_FUTURE": "อนาคตสดใส",
+    "LIVE_THEME_CONSOLE": "คอนโซล",
+    "LIVE_THEME_EARTH": "โลก",
+    "LIVE_THEME_MIDNIGHT": "น้ำเงินมิดไนท์",
+    "LIVE_THEME_AMBER": "อำพัน",
+    "LIVE_THEME_NIGHT_RED": "แดงยามค่ำคืน",
+    "LIVE_THEME_DAYLIGHT": "กลางวัน",
+    "LIVE_THEME_MATRIX_GREEN": "เขียวเมทริกซ์"
 };

@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "باندها",
     "LIVE_DXCC_ENTITY": "موجودیت DXCC",
     "LIVE_DXCC_PREFIX": "پیشوند",
-    "LIVE_DXCC_NUMBER": "شماره DXCC"
+    "LIVE_DXCC_NUMBER": "شماره DXCC",
+    "LIVE_THEME": "پوسته نقشه",
+    "LIVE_THEME_BRIGHT_FUTURE": "آینده روشن",
+    "LIVE_THEME_CONSOLE": "کنسول",
+    "LIVE_THEME_EARTH": "زمین",
+    "LIVE_THEME_MIDNIGHT": "سرمه‌ای نیمه‌شب",
+    "LIVE_THEME_AMBER": "کهربایی",
+    "LIVE_THEME_NIGHT_RED": "قرمز شب",
+    "LIVE_THEME_DAYLIGHT": "روشنایی روز",
+    "LIVE_THEME_MATRIX_GREEN": "سبز ماتریکس"
 };

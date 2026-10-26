@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "Pásma",
     "LIVE_DXCC_ENTITY": "Krajina DXCC",
     "LIVE_DXCC_PREFIX": "Prefix",
-    "LIVE_DXCC_NUMBER": "Číslo DXCC"
+    "LIVE_DXCC_NUMBER": "Číslo DXCC",
+    "LIVE_THEME": "Motív mapy",
+    "LIVE_THEME_BRIGHT_FUTURE": "Jasná budúcnosť",
+    "LIVE_THEME_CONSOLE": "Konzola",
+    "LIVE_THEME_EARTH": "Zem",
+    "LIVE_THEME_MIDNIGHT": "Polnočná modrá",
+    "LIVE_THEME_AMBER": "Jantár",
+    "LIVE_THEME_NIGHT_RED": "Nočná červená",
+    "LIVE_THEME_DAYLIGHT": "Denné svetlo",
+    "LIVE_THEME_MATRIX_GREEN": "Matrixová zelená"
 };

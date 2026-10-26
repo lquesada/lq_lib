@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "Băng tần",
     "LIVE_DXCC_ENTITY": "Thực thể DXCC",
     "LIVE_DXCC_PREFIX": "Tiền tố",
-    "LIVE_DXCC_NUMBER": "Số DXCC"
+    "LIVE_DXCC_NUMBER": "Số DXCC",
+    "LIVE_THEME": "Giao diện bản đồ",
+    "LIVE_THEME_BRIGHT_FUTURE": "Tương lai tươi sáng",
+    "LIVE_THEME_CONSOLE": "Bảng điều khiển",
+    "LIVE_THEME_EARTH": "Trái đất",
+    "LIVE_THEME_MIDNIGHT": "Xanh nửa đêm",
+    "LIVE_THEME_AMBER": "Hổ phách",
+    "LIVE_THEME_NIGHT_RED": "Đỏ ban đêm",
+    "LIVE_THEME_DAYLIGHT": "Ánh sáng ban ngày",
+    "LIVE_THEME_MATRIX_GREEN": "Xanh Ma Trận"
 };

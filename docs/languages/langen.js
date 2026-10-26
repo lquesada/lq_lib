@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "Bands",
     "LIVE_DXCC_ENTITY": "DXCC entity",
     "LIVE_DXCC_PREFIX": "Prefix",
-    "LIVE_DXCC_NUMBER": "DXCC number"
+    "LIVE_DXCC_NUMBER": "DXCC number",
+    "LIVE_THEME": "Map theme",
+    "LIVE_THEME_BRIGHT_FUTURE": "Bright Future",
+    "LIVE_THEME_CONSOLE": "Console",
+    "LIVE_THEME_EARTH": "Earth",
+    "LIVE_THEME_MIDNIGHT": "Midnight Navy",
+    "LIVE_THEME_AMBER": "Amber",
+    "LIVE_THEME_NIGHT_RED": "Night red",
+    "LIVE_THEME_DAYLIGHT": "Daylight",
+    "LIVE_THEME_MATRIX_GREEN": "Matrix green"
 };

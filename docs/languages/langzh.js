@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "波段",
     "LIVE_DXCC_ENTITY": "DXCC 实体",
     "LIVE_DXCC_PREFIX": "前缀",
-    "LIVE_DXCC_NUMBER": "DXCC 编号"
+    "LIVE_DXCC_NUMBER": "DXCC 编号",
+    "LIVE_THEME": "地图主题",
+    "LIVE_THEME_BRIGHT_FUTURE": "明朗未来",
+    "LIVE_THEME_CONSOLE": "控制台",
+    "LIVE_THEME_EARTH": "大地",
+    "LIVE_THEME_MIDNIGHT": "午夜深蓝",
+    "LIVE_THEME_AMBER": "琥珀",
+    "LIVE_THEME_NIGHT_RED": "夜间红",
+    "LIVE_THEME_DAYLIGHT": "日光",
+    "LIVE_THEME_MATRIX_GREEN": "黑客帝国绿"
 };

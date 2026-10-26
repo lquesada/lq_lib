@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "Bendoj",
     "LIVE_DXCC_ENTITY": "DXCC-lando",
     "LIVE_DXCC_PREFIX": "Prefikso",
-    "LIVE_DXCC_NUMBER": "DXCC-numero"
+    "LIVE_DXCC_NUMBER": "DXCC-numero",
+    "LIVE_THEME": "Etoso de mapo",
+    "LIVE_THEME_BRIGHT_FUTURE": "Brila estonteco",
+    "LIVE_THEME_CONSOLE": "Konzolo",
+    "LIVE_THEME_EARTH": "Tero",
+    "LIVE_THEME_MIDNIGHT": "Meznokta bluo",
+    "LIVE_THEME_AMBER": "Sukceno",
+    "LIVE_THEME_NIGHT_RED": "Nokta ruĝo",
+    "LIVE_THEME_DAYLIGHT": "Taglumo",
+    "LIVE_THEME_MATRIX_GREEN": "Matrica verdo"
 };

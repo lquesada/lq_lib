@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "பேண்டுகள்",
     "LIVE_DXCC_ENTITY": "DXCC நிலப்பகுதி",
     "LIVE_DXCC_PREFIX": "முன்னொட்டு",
-    "LIVE_DXCC_NUMBER": "DXCC எண்"
+    "LIVE_DXCC_NUMBER": "DXCC எண்",
+    "LIVE_THEME": "வரைபட தீம்",
+    "LIVE_THEME_BRIGHT_FUTURE": "ஒளிமயமான எதிர்காலம்",
+    "LIVE_THEME_CONSOLE": "கன்சோல்",
+    "LIVE_THEME_EARTH": "பூமி",
+    "LIVE_THEME_MIDNIGHT": "நள்ளிரவு நீலம்",
+    "LIVE_THEME_AMBER": "அம்பர்",
+    "LIVE_THEME_NIGHT_RED": "இரவு சிவப்பு",
+    "LIVE_THEME_DAYLIGHT": "பகல் ஒளி",
+    "LIVE_THEME_MATRIX_GREEN": "மேட்ரிக்ஸ் பச்சை"
 };

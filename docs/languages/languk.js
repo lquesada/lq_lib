@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "Діапазони",
     "LIVE_DXCC_ENTITY": "Територія DXCC",
     "LIVE_DXCC_PREFIX": "Префікс",
-    "LIVE_DXCC_NUMBER": "Номер DXCC"
+    "LIVE_DXCC_NUMBER": "Номер DXCC",
+    "LIVE_THEME": "Тема карти",
+    "LIVE_THEME_BRIGHT_FUTURE": "Світле майбутнє",
+    "LIVE_THEME_CONSOLE": "Консоль",
+    "LIVE_THEME_EARTH": "Земля",
+    "LIVE_THEME_MIDNIGHT": "Опівнічний синій",
+    "LIVE_THEME_AMBER": "Бурштин",
+    "LIVE_THEME_NIGHT_RED": "Нічний червоний",
+    "LIVE_THEME_DAYLIGHT": "Денне світло",
+    "LIVE_THEME_MATRIX_GREEN": "Зелений «Матриці»"
 };

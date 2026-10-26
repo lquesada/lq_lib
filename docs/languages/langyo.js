@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "Àwọn bándì",
     "LIVE_DXCC_ENTITY": "Ẹ̀ka DXCC",
     "LIVE_DXCC_PREFIX": "Ìbẹ̀rẹ̀",
-    "LIVE_DXCC_NUMBER": "Nọ́mbà DXCC"
+    "LIVE_DXCC_NUMBER": "Nọ́mbà DXCC",
+    "LIVE_THEME": "Àwòrán máàpù",
+    "LIVE_THEME_BRIGHT_FUTURE": "Ọjọ́ iwájú tó mọ́lẹ̀",
+    "LIVE_THEME_CONSOLE": "Kọ́ńsólù",
+    "LIVE_THEME_EARTH": "Ayé",
+    "LIVE_THEME_MIDNIGHT": "Búlù ọ̀gànjọ́",
+    "LIVE_THEME_AMBER": "Àmbà",
+    "LIVE_THEME_NIGHT_RED": "Pupa òru",
+    "LIVE_THEME_DAYLIGHT": "Ìmọ́lẹ̀ ọ̀sán",
+    "LIVE_THEME_MATRIX_GREEN": "Ewé Matrix"
 };

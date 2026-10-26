@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "بینڈ",
     "LIVE_DXCC_ENTITY": "DXCC اینٹٹی",
     "LIVE_DXCC_PREFIX": "سابقہ",
-    "LIVE_DXCC_NUMBER": "DXCC نمبر"
+    "LIVE_DXCC_NUMBER": "DXCC نمبر",
+    "LIVE_THEME": "نقشے کی تھیم",
+    "LIVE_THEME_BRIGHT_FUTURE": "روشن مستقبل",
+    "LIVE_THEME_CONSOLE": "کنسول",
+    "LIVE_THEME_EARTH": "زمین",
+    "LIVE_THEME_MIDNIGHT": "مڈ نائٹ نیوی",
+    "LIVE_THEME_AMBER": "ایمبر",
+    "LIVE_THEME_NIGHT_RED": "رات کا سرخ",
+    "LIVE_THEME_DAYLIGHT": "دن کی روشنی",
+    "LIVE_THEME_MATRIX_GREEN": "میٹرکس سبز"
 };

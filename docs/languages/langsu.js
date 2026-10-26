@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "Band",
     "LIVE_DXCC_ENTITY": "Éntitas DXCC",
     "LIVE_DXCC_PREFIX": "Préfiks",
-    "LIVE_DXCC_NUMBER": "Nomer DXCC"
+    "LIVE_DXCC_NUMBER": "Nomer DXCC",
+    "LIVE_THEME": "Téma peta",
+    "LIVE_THEME_BRIGHT_FUTURE": "Masa hareup caang",
+    "LIVE_THEME_CONSOLE": "Konsol",
+    "LIVE_THEME_EARTH": "Bumi",
+    "LIVE_THEME_MIDNIGHT": "Bulao tengah peuting",
+    "LIVE_THEME_AMBER": "Amber",
+    "LIVE_THEME_NIGHT_RED": "Beureum peuting",
+    "LIVE_THEME_DAYLIGHT": "Caang beurang",
+    "LIVE_THEME_MATRIX_GREEN": "Héjo Matrix"
 };

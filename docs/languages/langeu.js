@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "Bandak",
     "LIVE_DXCC_ENTITY": "DXCC entitatea",
     "LIVE_DXCC_PREFIX": "Aurrizkia",
-    "LIVE_DXCC_NUMBER": "DXCC zenbakia"
+    "LIVE_DXCC_NUMBER": "DXCC zenbakia",
+    "LIVE_THEME": "Maparen gaia",
+    "LIVE_THEME_BRIGHT_FUTURE": "Etorkizun argia",
+    "LIVE_THEME_CONSOLE": "Kontsola",
+    "LIVE_THEME_EARTH": "Lurra",
+    "LIVE_THEME_MIDNIGHT": "Gauerdiko urdina",
+    "LIVE_THEME_AMBER": "Anbarra",
+    "LIVE_THEME_NIGHT_RED": "Gaueko gorria",
+    "LIVE_THEME_DAYLIGHT": "Egun-argia",
+    "LIVE_THEME_MATRIX_GREEN": "Matrix berdea"
 };

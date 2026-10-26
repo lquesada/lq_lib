@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "Bendi",
     "LIVE_DXCC_ENTITY": "Eneo la DXCC",
     "LIVE_DXCC_PREFIX": "Kiambishi awali",
-    "LIVE_DXCC_NUMBER": "Nambari ya DXCC"
+    "LIVE_DXCC_NUMBER": "Nambari ya DXCC",
+    "LIVE_THEME": "Mandhari ya ramani",
+    "LIVE_THEME_BRIGHT_FUTURE": "Mustakabali angavu",
+    "LIVE_THEME_CONSOLE": "Koni",
+    "LIVE_THEME_EARTH": "Dunia",
+    "LIVE_THEME_MIDNIGHT": "Bluu ya usiku wa manane",
+    "LIVE_THEME_AMBER": "Kaharabu",
+    "LIVE_THEME_NIGHT_RED": "Nyekundu ya usiku",
+    "LIVE_THEME_DAYLIGHT": "Mwanga wa mchana",
+    "LIVE_THEME_MATRIX_GREEN": "Kijani cha Matrix"
 };

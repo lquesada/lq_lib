@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "波段",
     "LIVE_DXCC_ENTITY": "DXCC 實體",
     "LIVE_DXCC_PREFIX": "前綴",
-    "LIVE_DXCC_NUMBER": "DXCC 編號"
+    "LIVE_DXCC_NUMBER": "DXCC 編號",
+    "LIVE_THEME": "地圖主題",
+    "LIVE_THEME_BRIGHT_FUTURE": "明朗未來",
+    "LIVE_THEME_CONSOLE": "主控台",
+    "LIVE_THEME_EARTH": "大地",
+    "LIVE_THEME_MIDNIGHT": "午夜深藍",
+    "LIVE_THEME_AMBER": "琥珀",
+    "LIVE_THEME_NIGHT_RED": "夜間紅",
+    "LIVE_THEME_DAYLIGHT": "日光",
+    "LIVE_THEME_MATRIX_GREEN": "駭客任務綠"
 };

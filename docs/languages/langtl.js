@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "Mga band",
     "LIVE_DXCC_ENTITY": "DXCC entity",
     "LIVE_DXCC_PREFIX": "Prefix",
-    "LIVE_DXCC_NUMBER": "Numero ng DXCC"
+    "LIVE_DXCC_NUMBER": "Numero ng DXCC",
+    "LIVE_THEME": "Tema ng mapa",
+    "LIVE_THEME_BRIGHT_FUTURE": "Maliwanag na Hinaharap",
+    "LIVE_THEME_CONSOLE": "Console",
+    "LIVE_THEME_EARTH": "Daigdig",
+    "LIVE_THEME_MIDNIGHT": "Asul ng Hatinggabi",
+    "LIVE_THEME_AMBER": "Amber",
+    "LIVE_THEME_NIGHT_RED": "Pula sa gabi",
+    "LIVE_THEME_DAYLIGHT": "Liwanag ng araw",
+    "LIVE_THEME_MATRIX_GREEN": "Berdeng Matrix"
 };

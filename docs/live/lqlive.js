@@ -16,11 +16,34 @@
     if (qp && (location.hostname === 'localhost' || location.hostname === '127.0.0.1')) FEED = qp;
   } catch (e) {}
 
-  var THEME = {
-    ocean: '#1E477A', land: '#3B82B6', coast: '#CBD5E1', grid: 'rgba(255,255,255,0.22)',
-    border: 'rgba(226,232,240,0.7)', pinStroke: '#0F172A', tagStroke: '#0F172A', leader: '#F8FAFC', leaderHalo: '#0F172A',
-    dx: '#D81B78', dxStroke: '#0F172A', dxBadge: '#0F172A', dxBadgeText: '#F8FAFC', dxClock: '#F9A8D4'
-  };
+  // The map themes: the qFT8 app's world map palettes, same names, same order (LQ8-SITE-THEMES-1). Land, sea, coast,
+  // borders and grid are the app's; names, pin / tag outlines and lines are chosen per theme for contrast.
+  function T(name, ocean, land, coast, border, grid, name1, halo, outline, extra) {
+    var t = { name: name, ocean: ocean, land: land, coast: coast, border: border, grid: grid, nameFill: name1, nameHalo: halo,
+      pinStroke: outline, tagStroke: outline, leader: name1, leaderHalo: halo, dx: '#D81B78', dxStroke: outline,
+      dxBadge: '#0F172A', dxBadgeText: '#F8FAFC', dxClock: '#F9A8D4' };
+    for (var k in extra) t[k] = extra[k];
+    return t;
+  }
+  var THEMES = [
+    T('BRIGHT_FUTURE', '#1E477A', '#3B82B6', '#CBD5E1', 'rgba(226,232,240,0.7)', 'rgba(255,255,255,0.22)', '#E2E8F0', '#0F172A', '#0F172A',
+      { leader: '#F8FAFC' }),
+    T('CONSOLE', '#050B05', '#1B3D22', '#22C55E', 'rgba(22,163,74,0.85)', 'rgba(34,197,94,0.3)', '#86EFAC', '#050B05', '#86EFAC'),
+    T('EARTH', '#1E3A8A', '#78350F', '#FDE68A', 'rgba(254,243,199,0.6)', 'rgba(254,243,199,0.25)', '#FEF3C7', '#1E293B', '#0F172A',
+      { leader: '#FEF3C7' }),
+    T('MIDNIGHT', '#090D16', '#223454', '#0EA5E9', 'rgba(100,116,139,0.9)', 'rgba(14,165,233,0.25)', '#E2E8F0', '#090D16', '#E2E8F0'),
+    T('AMBER', '#0B0702', '#3D2A0E', '#F59E0B', 'rgba(217,119,6,0.85)', 'rgba(245,158,11,0.25)', '#FCD34D', '#0B0702', '#FCD34D'),
+    T('NIGHT_RED', '#050000', '#581010', '#B91C1C', 'rgba(153,27,27,0.9)', 'rgba(185,28,28,0.25)', '#F87171', '#050000', '#FCA5A5'),
+    T('DAYLIGHT', '#93C5FD', '#F5F0E1', '#64748B', 'rgba(148,163,184,0.9)', 'rgba(71,85,105,0.25)', '#1E293B', '#F8FAFC', '#1E293B',
+      { dxBadge: '#1E293B' }),
+    T('MATRIX_GREEN', '#000000', '#0A3D18', '#00FF41', 'rgba(0,168,43,0.85)', 'rgba(0,168,43,0.25)', '#00FF41', '#000000', '#CCFFD8')
+  ];
+  var THEME_COOKIE = 'lq8live_map_theme';
+  function readTheme() {
+    var v = readCookieList(THEME_COOKIE)[0], i = parseInt(v, 10);
+    return i >= 0 && i < THEMES.length ? i : 0;
+  }
+  var THEME = THEMES[0];
   // One colour per band (text colour chosen for contrast); unknown bands get the last one.
   // the band colours hams know from the usual reception-report maps
   var BAND_COLORS = {
@@ -273,7 +296,7 @@
     this.hiddenModes = {};
     this.st = { zoom: 1, minZoom: 1, maxZoom: 40, offsetX: 0, offsetY: 0 };
     this.pointers = {};
-    this.theme = THEME;
+    this.theme = THEMES[readTheme()];
     this.build();
   }
 
@@ -281,19 +304,22 @@
     var self = this;
     this.root.classList.add('lqmap');
     this.svg = el('svg', { 'class': 'lqmap-svg', role: 'img', 'aria-label': str('LIVE_TITLE', 'LQ8 live map') }, this.root);
-    el('rect', { x: 0, y: 0, width: '100%', height: '100%', fill: THEME.ocean }, this.svg);
+    this.oceanRect = el('rect', { x: 0, y: 0, width: '100%', height: '100%' }, this.svg);
     var defs = el('defs', {}, this.svg);
     var tile = el('g', { id: 'lqtile' + Math.random().toString(36).slice(2) }, defs);
     // Maidenhead fields (20 x 10 degrees)
     var gd = '';
     for (var x = 0; x <= 360; x += 20) gd += 'M' + x + ',0V180';
     for (var y = 0; y <= 180; y += 10) gd += 'M0,' + y + 'H360';
-    el('path', { d: window.LQ8_WORLD_LAND || '', fill: THEME.land, stroke: THEME.coast, 'stroke-width': 1.35,
-      'vector-effect': 'non-scaling-stroke', 'stroke-linejoin': 'round' }, tile);
-    // country borders (countries.js), thinner and fainter than the coast
-    if (window.LQ8_COUNTRY_BORDERS) el('path', { d: window.LQ8_COUNTRY_BORDERS, fill: 'none', stroke: THEME.border,
-      'stroke-width': 1.0, 'vector-effect': 'non-scaling-stroke', 'stroke-linejoin': 'round' }, tile);
-    el('path', { d: gd, fill: 'none', stroke: THEME.grid, 'stroke-width': 0.6, 'vector-effect': 'non-scaling-stroke' }, tile);
+    // land, coast and borders (world.js: one Natural Earth source, so the borders meet the coast); the finer levels
+    // in map/ (updateGeo) replace them once the full map is zoomed in
+    var md = window.LQ8_MAP || {};
+    this.allGeo = []; this.cellEls = {};
+    this.geo = el('g', { transform: 'scale(' + (1 / (md.q || 1)) + ')' }, tile);
+    this.geoPaths(this.geo, md);
+    this.levelG = LEVELS.map(function () { return el('g', { display: 'none' }, tile); });
+    this.pGrid = el('path', { d: gd, fill: 'none', 'stroke-width': 0.6, 'vector-effect': 'non-scaling-stroke' }, tile);
+    this.applyTheme(this.theme);
     this.world = el('g', {}, this.svg);
     for (var k = -2; k <= 2; k++) el('use', { href: '#' + tile.id, x: k * 360, y: 0 }, this.world);
     this.names = el('g', { 'class': 'lqmap-names' }, this.svg);
@@ -313,6 +339,95 @@
       this.svg.addEventListener('click', function () { location.href = self.href; });
     }
     this.render();
+  };
+
+  LiveMap.prototype.applyTheme = function (t) {
+    this.theme = t;
+    this.root.style.background = t.ocean;
+    this.root.style.setProperty('--lq-name', t.nameFill);
+    this.root.style.setProperty('--lq-halo', t.nameHalo);
+    this.oceanRect.setAttribute('fill', t.ocean);
+    this.allGeo.forEach(function (ps) {
+      ps.fill.setAttribute('fill', t.land); ps.land.setAttribute('fill', t.land); ps.land.setAttribute('stroke', t.coast);
+      ps.coast.setAttribute('stroke', t.coast); ps.borders.setAttribute('stroke', t.border);
+    });
+    this.pGrid.setAttribute('stroke', t.grid);
+    if (this.W) this.render();
+  };
+  // Finer map levels (map/<level>/<col>_<row>.json, built from the same Natural Earth source): once the full map is zoomed
+  // in, only the cells on screen (and the ring around them) are fetched; a level is shown when every cell on screen has
+  // arrived, the coarser one until then. Cells that are all sea have no file (404 = empty).
+  var LEVELS = [{ z: 2.5, dir: 'm1', cell: 30 }, { z: 8, dir: 'm2', cell: 10 }];
+  var cellCache = {};   // 'm1/3_2' -> null (loading) | false (empty / failed) | data (shared by every map on the page)
+  LiveMap.prototype.cellRange = function (lv, margin) {
+    var s = this.scale(), cell = lv.cell, out = [];
+    var lonA = (0 - this.W / 2 - this.st.offsetX) / s, lonB = (this.W - this.W / 2 - this.st.offsetX) / s;
+    var latA = (this.H / 2 + this.st.offsetY) / s, latB = (this.H / 2 + this.st.offsetY - this.H) / s;
+    var c0 = Math.floor((lonA + 180) / cell) - margin, c1 = Math.floor((lonB + 180) / cell) + margin;
+    var r0 = Math.max(0, Math.floor((90 - latA) / cell) - margin), r1 = Math.min(180 / cell - 1, Math.floor((90 - latB) / cell) + margin);
+    var nc = 360 / cell;
+    for (var c = c0; c <= c1 && c - c0 < nc; c++)
+      for (var r = r0; r <= r1; r++) out.push(lv.dir + '/' + (((c % nc) + nc) % nc) + '_' + r);
+    return out;
+  };
+  LiveMap.prototype.updateGeo = function () {
+    if (this.mini) return;
+    var self = this, want = -1;
+    for (var i = 0; i < LEVELS.length; i++) if (this.st.zoom >= LEVELS[i].z) want = i;
+    var show = -1;
+    if (want >= 0) {
+      this.cellRange(LEVELS[want], 1).forEach(function (id) { self.loadCell(id); });
+      for (var l = want; l >= 0 && show < 0; l--) {
+        var ok = this.cellRange(LEVELS[l], 0).every(function (id) { return cellCache[id] !== undefined && cellCache[id] !== null; });
+        if (ok) show = l;
+      }
+    }
+    for (var k = 0; k < LEVELS.length; k++) {
+      var g = this.levelG[k];
+      if (k === show) {
+        this.cellRange(LEVELS[k], 1).forEach(function (id) { self.drawCell(g, id); });
+        g.removeAttribute('display');
+      } else g.setAttribute('display', 'none');
+    }
+    if (show >= 0) this.geo.setAttribute('display', 'none'); else this.geo.removeAttribute('display');
+  };
+  function cellExists(id) {
+    var md = window.LQ8_MAP, lv = id.split('/');
+    if (!md || !md.cells || typeof md.cells[lv[0]] !== 'string') return true;
+    return (' ' + md.cells[lv[0]] + ' ').indexOf(' ' + lv[1] + ' ') >= 0;
+  }
+  LiveMap.prototype.loadCell = function (id) {
+    if (cellCache[id] !== undefined) return;
+    if (!cellExists(id)) { cellCache[id] = false; return; }   // all sea: nothing to fetch
+    cellCache[id] = null;
+    var self = this, url;
+    try { url = new URL('map/' + id + '.json', SCRIPT_SRC || location.href).href; } catch (e) { cellCache[id] = false; return; }
+    fetch(url).then(function (r) { return r.ok ? r.json() : false; }).then(function (j) {
+      cellCache[id] = j && j.q ? j : false;
+    }).catch(function () { cellCache[id] = false; }).then(function () {
+      if (!self.geoPending) {   // one redraw for a burst of cells
+        self.geoPending = true;
+        requestAnimationFrame(function () { self.geoPending = false; self.updateGeo(); });
+      }
+    });
+  };
+  LiveMap.prototype.drawCell = function (g, id) {
+    var d = cellCache[id];
+    if (!d || this.cellEls[id]) return;
+    var cg = el('g', { transform: 'scale(' + (1 / d.q) + ')' }, g);
+    this.cellEls[id] = cg;
+    this.geoPaths(cg, d);
+  };
+  // the four paths of a map piece (world.js or one cell), coloured by the theme
+  LiveMap.prototype.geoPaths = function (g, d) {
+    var t = this.theme, ps = {
+      fill: el('path', { d: d.fill || '', fill: t.land, stroke: 'none' }, g),
+      land: el('path', { d: d.land || '', fill: t.land, stroke: t.coast, 'stroke-width': 1.35, 'vector-effect': 'non-scaling-stroke', 'stroke-linejoin': 'round' }, g),
+      coast: el('path', { d: d.coast || '', fill: 'none', stroke: t.coast, 'stroke-width': 1.35, 'vector-effect': 'non-scaling-stroke', 'stroke-linejoin': 'round' }, g),
+      borders: el('path', { d: d.borders || '', fill: 'none', stroke: t.border, 'stroke-width': 1.0, 'vector-effect': 'non-scaling-stroke', 'stroke-linejoin': 'round' }, g)
+    };
+    this.allGeo.push(ps);
+    return ps;
   };
 
   // qFT8 web remote: getMapScale / geoToScreen / clampOffsets. Zoom 1 fills the window; a tall phone screen pans sideways.
@@ -424,8 +539,9 @@
     var s = this.scale();
     var tx = this.W / 2 + this.st.offsetX - 180 * s, ty = this.H / 2 + this.st.offsetY - 90 * s;
     this.world.setAttribute('transform', 'translate(' + tx + ',' + ty + ') scale(' + s + ')');
-    this.drawNames();
+    this.updateGeo();
     this.drawMarks();
+    this.drawNames();   // after the markers: a name keeps off their tags (it is still drawn underneath them)
     if (this.popKey) this.placePop();
   };
 
@@ -439,19 +555,53 @@
     return out;
   };
 
-  // Country names on the full map once zoomed in (the same zoom 1.8 as the app's world map).
-  var NAMES_MIN_ZOOM = 1.8;
+  // Country names on the full map once zoomed in (the same zoom 1.8 as the app's world map), in the page's language:
+  // countries.js gives each its ISO 3166 code, the browser names it (Intl.DisplayNames); English where it cannot
+  // (LQ8-SITE-COUNTRY-NAMES-1). Bigger countries first; a name that would cover another is left out until zoomed in.
+  var NAMES_MIN_ZOOM = 1.8, regionNames = null;
+  function countryName(row) {
+    if (regionNames === null) {
+      regionNames = false;
+      var lang = (document.documentElement.lang || 'en').toLowerCase();
+      try {
+        if (lang !== 'en' && Intl.DisplayNames && Intl.DisplayNames.supportedLocalesOf([lang]).length)
+          regionNames = new Intl.DisplayNames([lang], { type: 'region', fallback: 'none' });
+      } catch (e) { regionNames = false; }
+      countryName.lang = lang;
+    }
+    if (countryName.lang === 'en') return row[1];
+    if (!row[0]) return null;   // a region with no code of its own (e.g. Corsica): only on the English page
+    if (!regionNames) return row[1];
+    var n = null;
+    try { n = regionNames.of(row[0]); } catch (e) {}
+    return n || row[1];
+  }
+  // about how wide a text is at 14 px (wide scripts count double)
+  function textWidth(t, per) {
+    var w = 0;
+    for (var i = 0; i < t.length; i++) w += t.charCodeAt(i) >= 0x2E80 ? per * 1.9 : per;
+    return w;
+  }
   LiveMap.prototype.drawNames = function () {
     var g = this.names;
     while (g.firstChild) g.removeChild(g.firstChild);
     var list = window.LQ8_COUNTRY_NAMES;
     if (this.mini || !list || this.st.zoom < NAMES_MIN_ZOOM) return;
+    // rank: Natural Earth's label zoom; our zoom 1 shows the world, about their zoom 2
+    var maxRank = 2.6 + Math.log(this.st.zoom) / Math.LN2, taken = (this.markBoxes || []).slice();
     for (var i = 0; i < list.length; i++) {
-      var cs = this.copies(list[i][1], list[i][2]);
+      if (list[i][4] > maxRank) continue;
+      var cs = this.copies(list[i][2], list[i][3]);
       for (var c = 0; c < cs.length; c++) {
-        if (cs[c].y < -20 || cs[c].y > this.H + 20) continue;
+        if (cs[c].y < -20 || cs[c].y > this.H + 20 || cs[c].x < -150 || cs[c].x > this.W + 150) continue;
+        var name = list[i]._n !== undefined ? list[i]._n : (list[i]._n = countryName(list[i]));
+        if (!name) continue;
+        var w = textWidth(name, 7.6) + 6, b = { l: cs[c].x - w / 2, r: cs[c].x + w / 2, t: cs[c].y - 10, b: cs[c].y + 10 }, hit = false;
+        for (var k = 0; k < taken.length && !hit; k++) hit = overlaps(b, taken[k]);
+        if (hit) continue;
+        taken.push(b);
         var t = el('text', { x: cs[c].x.toFixed(1), y: cs[c].y.toFixed(1), 'text-anchor': 'middle', 'class': 'lqmap-country' }, g);
-        t.textContent = list[i][0];
+        t.textContent = name;
       }
     }
   };
@@ -520,6 +670,7 @@
       }
     }
     var groups = this.placeTags(pins, obstacles, sc);
+    this.markBoxes = obstacles.concat(groups.map(function (g0) { return g0.box; }), pins.map(function (p0) { return p0.box; }));
     for (var j = 0; j < pins.length; j++) this.drawPinOnly(pins[j], sc);
     for (var gi = 0; gi < groups.length; gi++) this.drawTags(groups[gi], sc);
     this.sweep();
@@ -985,11 +1136,35 @@
     });
   };
 
+  // The map theme (top bar of the full map), kept in a cookie for a year; the small map on the main page follows it.
+  function setupTheme(pages) {
+    var sel = document.querySelector('.lqlive-theme');
+    if (!sel) return;
+    var t = str('LIVE_THEME', 'Map theme');
+    sel.setAttribute('aria-label', t); sel.title = t;
+    sel.value = String(readTheme());
+    sel.addEventListener('change', function () {
+      var i = parseInt(sel.value, 10) || 0;
+      writeCookieList(THEME_COOKIE, [String(i)]);
+      pages.forEach(function (p) { p.map.applyTheme(THEMES[i]); });
+    });
+  }
   function start() {
     var roots = document.querySelectorAll('.lqlive');
-    for (var i = 0; i < roots.length; i++) new Page(roots[i]);
+    var pages = [];
+    for (var i = 0; i < roots.length; i++) pages.push(new Page(roots[i]));
+    // local testing only: the maps, to point the camera from a test (never on the real site)
+    if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') window.__lqTest = {
+      maps: pages.map(function (p) { return p.map; }),
+      view: function (lon, lat, zoom, i) {
+        var m = this.maps[i || 0]; m.st.zoom = zoom; var s = m.scale();
+        m.st.offsetX = -lon * s; m.st.offsetY = lat * s; m.clamp(); m.render();
+      },
+      theme: function (t, i) { this.maps[i || 0].applyTheme(THEMES[t]); }
+    };
     setupHints();
     setupFullscreen();
+    setupTheme(pages);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();

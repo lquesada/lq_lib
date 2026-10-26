@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "밴드",
     "LIVE_DXCC_ENTITY": "DXCC 엔티티",
     "LIVE_DXCC_PREFIX": "프리픽스",
-    "LIVE_DXCC_NUMBER": "DXCC 번호"
+    "LIVE_DXCC_NUMBER": "DXCC 번호",
+    "LIVE_THEME": "지도 테마",
+    "LIVE_THEME_BRIGHT_FUTURE": "밝은 미래",
+    "LIVE_THEME_CONSOLE": "콘솔",
+    "LIVE_THEME_EARTH": "지구",
+    "LIVE_THEME_MIDNIGHT": "미드나이트 네이비",
+    "LIVE_THEME_AMBER": "앰버",
+    "LIVE_THEME_NIGHT_RED": "나이트 레드",
+    "LIVE_THEME_DAYLIGHT": "데이라이트",
+    "LIVE_THEME_MATRIX_GREEN": "매트릭스 그린"
 };

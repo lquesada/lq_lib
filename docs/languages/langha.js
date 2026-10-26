@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "Makadai",
     "LIVE_DXCC_ENTITY": "Yankin DXCC",
     "LIVE_DXCC_PREFIX": "Kari",
-    "LIVE_DXCC_NUMBER": "Lambar DXCC"
+    "LIVE_DXCC_NUMBER": "Lambar DXCC",
+    "LIVE_THEME": "Jigon taswira",
+    "LIVE_THEME_BRIGHT_FUTURE": "Kyakkyawar Makoma",
+    "LIVE_THEME_CONSOLE": "Na'ura",
+    "LIVE_THEME_EARTH": "Duniya",
+    "LIVE_THEME_MIDNIGHT": "Tsakiyar Dare",
+    "LIVE_THEME_AMBER": "Amba",
+    "LIVE_THEME_NIGHT_RED": "Ja na dare",
+    "LIVE_THEME_DAYLIGHT": "Hasken rana",
+    "LIVE_THEME_MATRIX_GREEN": "Koren Matrix"
 };

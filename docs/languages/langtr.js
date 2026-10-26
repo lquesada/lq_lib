@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "Bantlar",
     "LIVE_DXCC_ENTITY": "DXCC ülkesi",
     "LIVE_DXCC_PREFIX": "Önek",
-    "LIVE_DXCC_NUMBER": "DXCC numarası"
+    "LIVE_DXCC_NUMBER": "DXCC numarası",
+    "LIVE_THEME": "Harita teması",
+    "LIVE_THEME_BRIGHT_FUTURE": "Parlak Gelecek",
+    "LIVE_THEME_CONSOLE": "Konsol",
+    "LIVE_THEME_EARTH": "Dünya",
+    "LIVE_THEME_MIDNIGHT": "Gece Mavisi",
+    "LIVE_THEME_AMBER": "Kehribar",
+    "LIVE_THEME_NIGHT_RED": "Gece kırmızısı",
+    "LIVE_THEME_DAYLIGHT": "Gün ışığı",
+    "LIVE_THEME_MATRIX_GREEN": "Matrix yeşili"
 };

@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "Diapazonlar",
     "LIVE_DXCC_ENTITY": "DXCC hududi",
     "LIVE_DXCC_PREFIX": "Prefiks",
-    "LIVE_DXCC_NUMBER": "DXCC raqami"
+    "LIVE_DXCC_NUMBER": "DXCC raqami",
+    "LIVE_THEME": "Xarita mavzusi",
+    "LIVE_THEME_BRIGHT_FUTURE": "Yorqin kelajak",
+    "LIVE_THEME_CONSOLE": "Konsol",
+    "LIVE_THEME_EARTH": "Yer",
+    "LIVE_THEME_MIDNIGHT": "Yarim tun ko‘ki",
+    "LIVE_THEME_AMBER": "Qahrabo",
+    "LIVE_THEME_NIGHT_RED": "Tungi qizil",
+    "LIVE_THEME_DAYLIGHT": "Kunduzgi yorug‘lik",
+    "LIVE_THEME_MATRIX_GREEN": "Matritsa yashili"
 };

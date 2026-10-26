@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "バンド",
     "LIVE_DXCC_ENTITY": "DXCCエンティティ",
     "LIVE_DXCC_PREFIX": "プリフィックス",
-    "LIVE_DXCC_NUMBER": "DXCC番号"
+    "LIVE_DXCC_NUMBER": "DXCC番号",
+    "LIVE_THEME": "地図のテーマ",
+    "LIVE_THEME_BRIGHT_FUTURE": "ブライトフューチャー",
+    "LIVE_THEME_CONSOLE": "コンソール",
+    "LIVE_THEME_EARTH": "地球",
+    "LIVE_THEME_MIDNIGHT": "ミッドナイトネイビー",
+    "LIVE_THEME_AMBER": "アンバー",
+    "LIVE_THEME_NIGHT_RED": "ナイトレッド",
+    "LIVE_THEME_DAYLIGHT": "デイライト",
+    "LIVE_THEME_MATRIX_GREEN": "マトリックスグリーン"
 };

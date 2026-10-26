@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "Benzi",
     "LIVE_DXCC_ENTITY": "Entitate DXCC",
     "LIVE_DXCC_PREFIX": "Prefix",
-    "LIVE_DXCC_NUMBER": "Număr DXCC"
+    "LIVE_DXCC_NUMBER": "Număr DXCC",
+    "LIVE_THEME": "Tema hărții",
+    "LIVE_THEME_BRIGHT_FUTURE": "Viitor luminos",
+    "LIVE_THEME_CONSOLE": "Consolă",
+    "LIVE_THEME_EARTH": "Pământ",
+    "LIVE_THEME_MIDNIGHT": "Albastru miez de noapte",
+    "LIVE_THEME_AMBER": "Chihlimbar",
+    "LIVE_THEME_NIGHT_RED": "Roșu de noapte",
+    "LIVE_THEME_DAYLIGHT": "Lumina zilei",
+    "LIVE_THEME_MATRIX_GREEN": "Verde Matrix"
 };

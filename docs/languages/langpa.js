@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "ਬੈਂਡ",
     "LIVE_DXCC_ENTITY": "DXCC ਇਕਾਈ",
     "LIVE_DXCC_PREFIX": "ਅਗੇਤਰ",
-    "LIVE_DXCC_NUMBER": "DXCC ਨੰਬਰ"
+    "LIVE_DXCC_NUMBER": "DXCC ਨੰਬਰ",
+    "LIVE_THEME": "ਨਕਸ਼ੇ ਦੀ ਥੀਮ",
+    "LIVE_THEME_BRIGHT_FUTURE": "ਰੌਸ਼ਨ ਭਵਿੱਖ",
+    "LIVE_THEME_CONSOLE": "ਕੰਸੋਲ",
+    "LIVE_THEME_EARTH": "ਧਰਤੀ",
+    "LIVE_THEME_MIDNIGHT": "ਅੱਧੀ ਰਾਤ ਨੀਲਾ",
+    "LIVE_THEME_AMBER": "ਅੰਬਰ",
+    "LIVE_THEME_NIGHT_RED": "ਰਾਤ ਲਾਲ",
+    "LIVE_THEME_DAYLIGHT": "ਦਿਨ ਦੀ ਰੌਸ਼ਨੀ",
+    "LIVE_THEME_MATRIX_GREEN": "ਮੈਟ੍ਰਿਕਸ ਹਰਾ"
 };

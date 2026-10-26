@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "Banden",
     "LIVE_DXCC_ENTITY": "DXCC-entiteit",
     "LIVE_DXCC_PREFIX": "Prefix",
-    "LIVE_DXCC_NUMBER": "DXCC-nummer"
+    "LIVE_DXCC_NUMBER": "DXCC-nummer",
+    "LIVE_THEME": "Kaartthema",
+    "LIVE_THEME_BRIGHT_FUTURE": "Heldere toekomst",
+    "LIVE_THEME_CONSOLE": "Console",
+    "LIVE_THEME_EARTH": "Aarde",
+    "LIVE_THEME_MIDNIGHT": "Middernachtblauw",
+    "LIVE_THEME_AMBER": "Amber",
+    "LIVE_THEME_NIGHT_RED": "Nachtrood",
+    "LIVE_THEME_DAYLIGHT": "Daglicht",
+    "LIVE_THEME_MATRIX_GREEN": "Matrix-groen"
 };

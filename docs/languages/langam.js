@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "ባንዶች",
     "LIVE_DXCC_ENTITY": "የDXCC አካል",
     "LIVE_DXCC_PREFIX": "ቅድመ ቅጥያ",
-    "LIVE_DXCC_NUMBER": "የDXCC ቁጥር"
+    "LIVE_DXCC_NUMBER": "የDXCC ቁጥር",
+    "LIVE_THEME": "የካርታ ገጽታ",
+    "LIVE_THEME_BRIGHT_FUTURE": "ብሩህ ወደፊት",
+    "LIVE_THEME_CONSOLE": "ኮንሶል",
+    "LIVE_THEME_EARTH": "ምድር",
+    "LIVE_THEME_MIDNIGHT": "የእኩለ ሌሊት ሰማያዊ",
+    "LIVE_THEME_AMBER": "አምበር",
+    "LIVE_THEME_NIGHT_RED": "የሌሊት ቀይ",
+    "LIVE_THEME_DAYLIGHT": "የቀን ብርሃን",
+    "LIVE_THEME_MATRIX_GREEN": "ማትሪክስ አረንጓዴ"
 };

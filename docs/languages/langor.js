@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "ବ୍ୟାଣ୍ଡ",
     "LIVE_DXCC_ENTITY": "DXCC ଏଣ୍ଟିଟି",
     "LIVE_DXCC_PREFIX": "ଉପସର୍ଗ",
-    "LIVE_DXCC_NUMBER": "DXCC ନମ୍ବର"
+    "LIVE_DXCC_NUMBER": "DXCC ନମ୍ବର",
+    "LIVE_THEME": "ମାନଚିତ୍ର ଥିମ୍",
+    "LIVE_THEME_BRIGHT_FUTURE": "ଉଜ୍ଜ୍ୱଳ ଭବିଷ୍ୟତ",
+    "LIVE_THEME_CONSOLE": "କନସୋଲ",
+    "LIVE_THEME_EARTH": "ପୃଥିବୀ",
+    "LIVE_THEME_MIDNIGHT": "ମଧ୍ୟରାତ୍ରି ନୀଳ",
+    "LIVE_THEME_AMBER": "ଅମ୍ବର",
+    "LIVE_THEME_NIGHT_RED": "ରାତ୍ରି ଲାଲ",
+    "LIVE_THEME_DAYLIGHT": "ଦିନର ଆଲୋକ",
+    "LIVE_THEME_MATRIX_GREEN": "ମ୍ୟାଟ୍ରିକ୍ସ ସବୁଜ"
 };

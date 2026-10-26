@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "Μπάντες",
     "LIVE_DXCC_ENTITY": "Χώρα DXCC",
     "LIVE_DXCC_PREFIX": "Πρόθεμα",
-    "LIVE_DXCC_NUMBER": "Αριθμός DXCC"
+    "LIVE_DXCC_NUMBER": "Αριθμός DXCC",
+    "LIVE_THEME": "Θέμα χάρτη",
+    "LIVE_THEME_BRIGHT_FUTURE": "Λαμπρό μέλλον",
+    "LIVE_THEME_CONSOLE": "Κονσόλα",
+    "LIVE_THEME_EARTH": "Γη",
+    "LIVE_THEME_MIDNIGHT": "Μπλε μεσάνυχτα",
+    "LIVE_THEME_AMBER": "Κεχριμπάρι",
+    "LIVE_THEME_NIGHT_RED": "Νυχτερινό κόκκινο",
+    "LIVE_THEME_DAYLIGHT": "Φως ημέρας",
+    "LIVE_THEME_MATRIX_GREEN": "Πράσινο Matrix"
 };

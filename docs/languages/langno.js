@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "Bånd",
     "LIVE_DXCC_ENTITY": "DXCC-land",
     "LIVE_DXCC_PREFIX": "Prefiks",
-    "LIVE_DXCC_NUMBER": "DXCC-nummer"
+    "LIVE_DXCC_NUMBER": "DXCC-nummer",
+    "LIVE_THEME": "Karttema",
+    "LIVE_THEME_BRIGHT_FUTURE": "Lys framtid",
+    "LIVE_THEME_CONSOLE": "Konsoll",
+    "LIVE_THEME_EARTH": "Jorden",
+    "LIVE_THEME_MIDNIGHT": "Midnattsblå",
+    "LIVE_THEME_AMBER": "Rav",
+    "LIVE_THEME_NIGHT_RED": "Nattrød",
+    "LIVE_THEME_DAYLIGHT": "Dagslys",
+    "LIVE_THEME_MATRIX_GREEN": "Matrix-grønn"
 };

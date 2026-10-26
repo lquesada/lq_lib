@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "Sávok",
     "LIVE_DXCC_ENTITY": "DXCC-terület",
     "LIVE_DXCC_PREFIX": "Előtag",
-    "LIVE_DXCC_NUMBER": "DXCC-szám"
+    "LIVE_DXCC_NUMBER": "DXCC-szám",
+    "LIVE_THEME": "Térkép témája",
+    "LIVE_THEME_BRIGHT_FUTURE": "Fényes jövő",
+    "LIVE_THEME_CONSOLE": "Konzol",
+    "LIVE_THEME_EARTH": "Föld",
+    "LIVE_THEME_MIDNIGHT": "Éjkék",
+    "LIVE_THEME_AMBER": "Borostyán",
+    "LIVE_THEME_NIGHT_RED": "Éjszakai vörös",
+    "LIVE_THEME_DAYLIGHT": "Nappali fény",
+    "LIVE_THEME_MATRIX_GREEN": "Mátrix-zöld"
 };

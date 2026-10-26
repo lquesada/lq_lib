@@ -288,5 +288,14 @@ const langData = {
     "LIVE_BANDS_TITLE": "Bandas",
     "LIVE_DXCC_ENTITY": "Entidad DXCC",
     "LIVE_DXCC_PREFIX": "Prefijo",
-    "LIVE_DXCC_NUMBER": "Número DXCC"
+    "LIVE_DXCC_NUMBER": "Número DXCC",
+    "LIVE_THEME": "Tema del mapa",
+    "LIVE_THEME_BRIGHT_FUTURE": "Futuro brillante",
+    "LIVE_THEME_CONSOLE": "Consola",
+    "LIVE_THEME_EARTH": "Tierra",
+    "LIVE_THEME_MIDNIGHT": "Azul medianoche",
+    "LIVE_THEME_AMBER": "Ámbar",
+    "LIVE_THEME_NIGHT_RED": "Rojo nocturno",
+    "LIVE_THEME_DAYLIGHT": "Luz de día",
+    "LIVE_THEME_MATRIX_GREEN": "Verde Matrix"
 };
