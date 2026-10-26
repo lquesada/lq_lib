@@ -327,7 +327,8 @@
     this.pGrid = el('path', { d: gd, fill: 'none', 'stroke-width': 0.6, 'vector-effect': 'non-scaling-stroke' }, tile);
     this.applyTheme(this.theme);
     this.world = el('g', {}, this.svg);
-    for (var k = -2; k <= 2; k++) el('use', { href: '#' + tile.id, x: k * 360, y: 0 }, this.world);
+    this.worldCopies = [];
+    for (var k = -2; k <= 2; k++) this.worldCopies.push(el('use', { href: '#' + tile.id, x: k * 360, y: 0 }, this.world));
     this.names = el('g', { 'class': 'lqmap-names' }, this.svg);
     this.marks = el('g', {}, this.svg);
     this.gDx = el('g', {}, this.marks);
@@ -455,16 +456,76 @@
     var worldW = 360 * s;
     if (worldW > 0) st.offsetX = ((st.offsetX % worldW) + worldW * 1.5) % worldW - worldW * 0.5;
   };
-  LiveMap.prototype.zoomAt = function (sx, sy, factor) {
+  LiveMap.prototype.zoomAt = function (sx, sy, factor, live) {
     var st = this.st, old = this.scale();
     st.zoom = Math.max(st.minZoom, Math.min(st.maxZoom, st.zoom * factor));
     var f = this.scale() / old;
     st.offsetX = (sx - this.W / 2) * (1 - f) + st.offsetX * f;
     st.offsetY = (sy - this.H / 2) * (1 - f) + st.offsetY * f;
     this.clamp();
+    if (live) this.moveLater(); else this.render();
+  };
+  // LQ8-SITE-DRAG-PERF-1: during a drag, a pinch or a burst of wheel steps only the map and the markers MOVE, once per
+  // displayed frame (moveFrame); the tags, the country names and the finer map are laid out again once the gesture
+  // ends (endGesture -> render), as before. A full layout per touch event cost 15-60 ms on a phone.
+  LiveMap.prototype.moveLater = function () {
+    var self = this;
+    this.gesturing = true;
+    if (!this.rafId) this.rafId = requestAnimationFrame(function () { self.rafId = 0; if (self.gesturing) self.moveFrame(); });
+  };
+  LiveMap.prototype.endGesture = function () {
+    if (this.rafId) { cancelAnimationFrame(this.rafId); this.rafId = 0; }
+    if (this.wheelTimer) { clearTimeout(this.wheelTimer); this.wheelTimer = 0; }
+    if (!this.gesturing) return;
+    this.gesturing = false;
+    this.afterGesture = true;
     this.render();
+    this.afterGesture = false;
+  };
+  // the world map's transform; the copies of the world that are off screen are not drawn (each costs a full layout of
+  // the map's paths whenever the zoom changes)
+  LiveMap.prototype.placeWorld = function () {
+    var s = this.scale();
+    var tx = this.W / 2 + this.st.offsetX - 180 * s, ty = this.H / 2 + this.st.offsetY - 90 * s;
+    this.world.setAttribute('transform', 'translate(' + tx + ',' + ty + ') scale(' + s + ')');
+    for (var i = 0; i < this.worldCopies.length; i++) {
+      var x0 = tx + (i - 2) * 360 * s, on = x0 < this.W && x0 + 360 * s > 0, u = this.worldCopies[i];
+      if (u._on !== on) { u._on = on; if (on) u.removeAttribute('display'); else u.setAttribute('display', 'none'); }
+    }
+  };
+  LiveMap.prototype.moveFrame = function () {
+    this.fadeNew = false;   // pan and zoom never fade
+    this.clamp();
+    this.placeWorld();
+    var now = Date.now();
+    if (!this.geoAt || now - this.geoAt > 300) { this.geoAt = now; this.updateGeo(); }   // cells come in while dragging far
+    var w = 360 * this.scale(), self = this;
+    function shift(e) {
+      var a = e._at, p = self.toScreen(a.lon, a.lat);
+      var dx = p.x + a.k * w - a.x, dy = p.y - a.y;
+      e.setAttribute('transform', 'translate(' + dx.toFixed(1) + ',' + dy.toFixed(1) + ')' + (e._tf ? ' ' + e._tf : ''));
+    }
+    var keys = Object.keys(this.live);
+    for (var i = 0; i < keys.length; i++) { var e = this.live[keys[i]]; if (e._at) shift(e); }
+    var names = this.nameEls || [];
+    for (var n = 0; n < names.length; n++) shift(names[n]);
+    // a station or DXpedition copy that comes into view gets its pin / diamond now, its tag when the gesture ends
+    var sc = 1.45, vis = this.visibleItems();
+    for (var d = 0; d < this.dx.length; d++) {
+      var cd = this.copies(this.dx[d].lon, this.dx[d].lat);
+      for (var c = 0; c < cd.length; c++) if (!this.live['d' + this.dx[d].call + '#' + cd[c].k]) this.drawDx(cd[c], this.dx[d], d, sc);
+    }
+    for (var j = 0; j < vis.length; j++) {
+      var ps = this.copies(vis[j].lon, vis[j].lat);
+      for (var q = 0; q < ps.length; q++) {
+        var key = itemKey(vis[j]) + '#' + ps[q].k;
+        if (!this.live['p' + key]) this.drawPinOnly({ it: vis[j], key: key, k: ps[q].k, x: ps[q].x, y: ps[q].y }, sc);
+      }
+    }
+    if (this.popKey) this.placePop();
   };
   LiveMap.prototype.reset = function () {
+    this.endGesture();
     this.st.zoom = 1; this.st.offsetX = 0; this.st.offsetY = 0;
     this.hidePop();
     this.render();
@@ -476,7 +537,9 @@
     svg.addEventListener('wheel', function (e) {
       e.preventDefault();
       var r = svg.getBoundingClientRect();
-      self.zoomAt(e.clientX - r.left, e.clientY - r.top, e.deltaY < 0 ? 1.25 : 0.8);
+      self.zoomAt(e.clientX - r.left, e.clientY - r.top, e.deltaY < 0 ? 1.25 : 0.8, true);
+      clearTimeout(self.wheelTimer);   // the layout once the wheel stops
+      self.wheelTimer = setTimeout(function () { self.wheelTimer = 0; self.endGesture(); }, 150);
     }, { passive: false });
     svg.addEventListener('pointerdown', function (e) {
       self.pointers[e.pointerId] = { x: e.clientX, y: e.clientY };
@@ -496,15 +559,14 @@
       if (ids.length === 2 && pinch > 0) {
         var a = self.pointers[ids[0]], b = self.pointers[ids[1]];
         var d = Math.hypot(a.x - b.x, a.y - b.y), r = svg.getBoundingClientRect();
-        self.zoomAt((a.x + b.x) / 2 - r.left, (a.y + b.y) / 2 - r.top, d / pinch);
+        self.zoomAt((a.x + b.x) / 2 - r.left, (a.y + b.y) / 2 - r.top, d / pinch, true);
         pinch = d;
       } else if (drag) {
         self.st.offsetX += e.clientX - drag.x;
         self.st.offsetY += e.clientY - drag.y;
         drag.x = e.clientX; drag.y = e.clientY;
         if (Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) >= 6) { svg.classList.add('dragging'); self.hidePop(); }
-        self.clamp();
-        self.render();
+        self.moveLater();
       }
     });
     function up(e) {
@@ -518,6 +580,7 @@
         else self.hidePop();
       }
       drag = null;
+      self.endGesture();   // nothing moves once a finger is up (the other finger of a pinch does not pan)
     }
     svg.addEventListener('pointerup', up);
     svg.addEventListener('pointercancel', up);
@@ -542,9 +605,8 @@
     var r = this.root.getBoundingClientRect();
     this.W = Math.max(1, r.width); this.H = Math.max(1, r.height);
     this.clamp();
-    var s = this.scale();
-    var tx = this.W / 2 + this.st.offsetX - 180 * s, ty = this.H / 2 + this.st.offsetY - 90 * s;
-    this.world.setAttribute('transform', 'translate(' + tx + ',' + ty + ') scale(' + s + ')');
+    this.placeWorld();
+    this.geoAt = Date.now();
     this.updateGeo();
     this.drawMarks();
     this.drawNames();   // after the markers: a name keeps off their tags (it is still drawn underneath them)
@@ -591,6 +653,7 @@
   LiveMap.prototype.drawNames = function () {
     var g = this.names;
     while (g.firstChild) g.removeChild(g.firstChild);
+    this.nameEls = [];
     var list = window.LQ8_COUNTRY_NAMES;
     if (this.mini || !list || this.st.zoom < NAMES_MIN_ZOOM) return;
     // rank: Natural Earth's label zoom; our zoom 1 shows the world, about their zoom 2
@@ -608,6 +671,8 @@
         taken.push(b);
         var t = el('text', { x: cs[c].x.toFixed(1), y: cs[c].y.toFixed(1), 'text-anchor': 'middle', 'class': 'lqmap-country' }, g);
         t.textContent = name;
+        t._at = { lon: list[i][2], lat: list[i][3], k: cs[c].k, x: cs[c].x, y: cs[c].y }; t._tf = '';
+        this.nameEls.push(t);
       }
     }
   };
@@ -619,7 +684,8 @@
   function reducedMotion() {
     try { return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; }
   }
-  LiveMap.prototype.keyed = function (layer, key, attrs) {
+  // at: the point the group moves with during a gesture (lon / lat, the copy k and where it was on screen when drawn)
+  LiveMap.prototype.keyed = function (layer, key, attrs, at) {
     var e = this.live[key];
     if (!e || e._leaving || e.parentNode !== layer) {
       if (e && e.parentNode && !e._leaving) e.parentNode.removeChild(e);
@@ -631,6 +697,9 @@
       }
     } else while (e.firstChild) e.removeChild(e.firstChild);
     for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (!attrs.transform) e.removeAttribute('transform');
+    e._tf = attrs.transform || '';
+    e._at = at || null;
     e._gen = this.gen;
     return e;
   };
@@ -658,6 +727,7 @@
 
   LiveMap.prototype.drawMarks = function () {
     this.gen = (this.gen || 0) + 1;
+    this.prevBefore = this.prevSpot;
     this.dxClocks = [];
     var sc = this.mini ? 1.2 : 1.45, obstacles = [];
     // DXpeditions first (underneath the stations); their diamond and tags are obstacles for the station tags
@@ -671,11 +741,35 @@
       var ps = this.copies(vis[i].lon, vis[i].lat);
       for (var p = 0; p < ps.length; p++) {
         var x = ps[p].x, y = ps[p].y;
-        pins.push({ it: vis[i], key: itemKey(vis[i]) + '#' + ps[p].k, order: i, x: x, y: y,
+        pins.push({ it: vis[i], key: itemKey(vis[i]) + '#' + ps[p].k, k: ps[p].k, order: i, x: x, y: y,
           box: box(x - 7 * sc, y - 20 * sc, 14 * sc, 21 * sc), head: { x: x, y: y - 13 * sc } });
       }
     }
     var groups = this.placeTags(pins, obstacles, sc);
+    if (this.afterGesture) {
+      // the tags kept their spots through a whole gesture: where that now leaves some under a panel, over other marks
+      // or with long lines, a fresh layout may do better (the per-frame layouts of a drag used to find it): the one
+      // that covers less and has the shorter lines wins, the kept spots on a near tie (so tags do not jump)
+      var before = this.prevBefore, panels = this.panelBoxes(), self = this;
+      var cost = function (gs) {
+        var c = 0;
+        gs.forEach(function (g0) {
+          panels.forEach(function (q) { c += overlapArea(g0.box, q); });
+          obstacles.forEach(function (o) { c += overlapArea(g0.box, o); });
+          pins.forEach(function (o) { if (g0.members.indexOf(o) < 0) c += overlapArea(g0.box, o.box); });
+          if (g0.stack) g0.shown.forEach(function (pn) {   // and the stack's lines
+            var b0 = g0.box, ex = Math.max(b0.l, Math.min(b0.r, pn.head.x)), ey = Math.max(b0.t, Math.min(b0.b, pn.head.y));
+            c += Math.hypot(ex - pn.head.x, ey - pn.head.y);
+          });
+        });
+        return c;
+      };
+      var c1 = cost(groups);
+      this.prevSpot = {};
+      var fresh = this.placeTags(pins, obstacles, sc);
+      if (cost(fresh) < c1 * 0.9 - 1) groups = fresh;
+      else { this.prevSpot = before; groups = self.placeTags(pins, obstacles, sc); }
+    }
     this.markBoxes = obstacles.concat(groups.map(function (g0) { return g0.box; }), pins.map(function (p0) { return p0.box; }));
     for (var j = 0; j < pins.length; j++) this.drawPinOnly(pins[j], sc);
     for (var gi = 0; gi < groups.length; gi++) this.drawTags(groups[gi], sc);
@@ -720,7 +814,7 @@
     }
     // 1. single tags, newest station first
     var failed = [];
-    pins.forEach(function (pn) { pn.w = tagWidth(pn.it) * sc; });
+    pins.forEach(function (pn) { pn.w = tagWidth(pn.it) * sc; pn.single = null; });
     // a pin off the visible map has no tag (its tag would only be pushed back onto the map, away from it)
     var tagged = pins.filter(function (pn) { return pn.x >= 0 && pn.x <= W && pn.y - 10 * sc >= 0 && pn.y <= H; });
     tagged.slice().sort(function (a, b) { return a.order - b.order; }).forEach(function (pn) {
@@ -836,7 +930,7 @@
 
   // A pin with its tip on the station's point; hovering or tapping it opens that station's popup, as its tag does.
   LiveMap.prototype.drawPinOnly = function (pn, sc) {
-    var g = this.keyed(this.gPin, 'p' + pn.key, { transform: 'translate(' + pn.x.toFixed(1) + ',' + pn.y.toFixed(1) + ') scale(' + sc + ')' });
+    var g = this.keyed(this.gPin, 'p' + pn.key, { transform: 'translate(' + pn.x.toFixed(1) + ',' + pn.y.toFixed(1) + ') scale(' + sc + ')' }, pinAt(pn));
     var pin = el('g', { 'class': 'lqmap-mark', 'data-kind': 'st', 'data-idx': this.items.indexOf(pn.it), tabindex: -1 }, g);
     // a light rim where the outline is dark on a mid-blue sea, so a dark band colour (60m) still shows
     if (this.theme.pinHalo) el('path', { d: 'M0,0 C-1.5,-5 -6,-8 -6,-13 A6,6 0 1 1 6,-13 C6,-8 1.5,-5 0,0 Z', fill: 'none',
@@ -846,22 +940,24 @@
     el('circle', { cx: 0, cy: -13, r: 2.3, fill: this.theme.pinStroke }, pin);
   };
 
+  function pinAt(pn) { return { lon: pn.it.lon, lat: pn.it.lat, k: pn.k, x: pn.x, y: pn.y }; }
   // One tag or a stack of tags; a stack gets a short line from each tag to its own pin.
   LiveMap.prototype.drawTags = function (grp, sc) {
     var list = grp.stack ? grp.shown : grp.members, b = grp.box, mini = this.mini, w = (b.r - b.l) / sc;
+    var at = pinAt(grp.members[0]);   // a gesture moves the whole stack with its first station
     for (var i = 0; i < list.length; i++) {
       var pn = list[i], it = pn.it, col = bandColor(it.band), tw = grp.stack ? w : pn.w / sc;
       var top = b.t + i * TAG_STEP * sc;
       if (grp.stack) {   // the leader: from the tag's nearest edge to the top of its pin
         var ty = top + TAG_H * sc / 2, hx = pn.head.x, hy = pn.y - 19 * sc;
         var ex = hx < (b.l + b.r) / 2 ? b.l : b.r, ey = ty;   // from the side of the tag (lines run under the tags)
-        var lg = this.keyed(this.gLead, 'l' + pn.key, {});
+        var lg = this.keyed(this.gLead, 'l' + pn.key, {}, at);
         el('line', { x1: ex.toFixed(1), y1: ey.toFixed(1), x2: hx.toFixed(1), y2: hy.toFixed(1), 'class': 'lqmap-leader',
           stroke: this.theme.leaderHalo, 'stroke-width': 3.5 }, lg);
         el('line', { x1: ex.toFixed(1), y1: ey.toFixed(1), x2: hx.toFixed(1), y2: hy.toFixed(1), 'class': 'lqmap-leader',
           stroke: this.theme.leader, 'stroke-width': 1.5 }, lg);
       }
-      var g = this.keyed(this.gTag, 't' + pn.key, { transform: 'translate(' + (b.l + (grp.stack ? 0 : 0)).toFixed(1) + ',' + top.toFixed(1) + ') scale(' + sc + ')' });
+      var g = this.keyed(this.gTag, 't' + pn.key, { transform: 'translate(' + (b.l + (grp.stack ? 0 : 0)).toFixed(1) + ',' + top.toFixed(1) + ') scale(' + sc + ')' }, at);
       var t = el('g', { 'class': 'lqmap-mark', 'data-kind': 'st', 'data-idx': this.items.indexOf(it), tabindex: mini ? -1 : 0 }, g);
       el('rect', { x: 0, y: 0, width: tw, height: TAG_H, rx: 4, fill: col, stroke: this.theme.tagStroke, 'stroke-width': 1 }, t);
       var tc = el('text', { x: tw / 2, y: 11.5, 'text-anchor': 'middle', fill: textOn(col), 'class': 'lqmap-label', direction: 'ltr' }, t);
@@ -870,7 +966,7 @@
       s2.textContent = it.mode + ' ' + it.band;
     }
     if (grp.stack && grp.members.length > list.length) {
-      var mg = this.keyed(this.gTag, 'm' + grp.members[0].key, {});
+      var mg = this.keyed(this.gTag, 'm' + grp.members[0].key, {}, at);
       var more = el('text', { x: ((b.l + b.r) / 2).toFixed(1), y: (b.b - 3 * sc).toFixed(1), 'text-anchor': 'middle', 'class': 'lqmap-more', direction: 'ltr' }, mg);
       more.textContent = '+' + (grp.members.length - list.length);
     }
@@ -879,7 +975,8 @@
   // A diamond on the entity, its call in a magenta tag beside it, the place above and the countdown below.
   // Returns the screen box it covers (station tags keep out of it).
   LiveMap.prototype.drawDx = function (pt, dx, idx, sc) {
-    var g = this.keyed(this.gDx, 'd' + dx.call + '#' + pt.k, { transform: 'translate(' + pt.x.toFixed(1) + ',' + pt.y.toFixed(1) + ') scale(' + sc + ')' });
+    var g = this.keyed(this.gDx, 'd' + dx.call + '#' + pt.k, { transform: 'translate(' + pt.x.toFixed(1) + ',' + pt.y.toFixed(1) + ') scale(' + sc + ')' },
+      { lon: dx.lon, lat: dx.lat, k: pt.k, x: pt.x, y: pt.y });
     var grp = el('g', { 'class': 'lqmap-mark', 'data-kind': 'dx', 'data-idx': idx, tabindex: this.mini ? -1 : 0 }, g);
     var T = this.theme, txt = dxClock(dx, Date.now());
     el('path', { d: 'M0,-9 L9,0 L0,9 L-9,0 Z', fill: T.dx, stroke: '#FFFFFF', 'stroke-width': 2 }, grp);
@@ -959,7 +1056,9 @@
     if (!cs.length) { this.hidePop(); return; }
     var pt = cs[0], best = Infinity;
     for (var i = 0; i < cs.length; i++) { var dd = Math.abs(cs[i].x - this.W / 2); if (dd < best) { best = dd; pt = cs[i]; } }
-    var p = this.pop, pw = p.offsetWidth, ph = p.offsetHeight;
+    var p = this.pop;
+    if (!this.gesturing || !this.popSize) this.popSize = [p.offsetWidth, p.offsetHeight];   // no forced layout per frame
+    var pw = this.popSize[0], ph = this.popSize[1];
     var x = Math.min(Math.max(8, pt.x - pw / 2), this.W - pw - 8);
     var y = pt.y + 14;
     if (y + ph > this.H - 8) y = Math.max(8, pt.y - ph - 40);
