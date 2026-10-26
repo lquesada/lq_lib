@@ -1,6 +1,16 @@
 {
-  "_note": "Upcoming LQ DXpeditions shown on lq8.org/live and the main page. Hidden while the list is empty. Entry: {\"call\": \"...\", \"name\": \"entity\", \"lat\": 0.0, \"lon\": 0.0, \"start\": \"YYYY-MM-DD\", \"end\": \"YYYY-MM-DD\", \"bands\": \"...\", \"time\": \"HH:MM\" (optional, UTC start time on the start day)} (UTC dates; shown until the end date).",
+  "_note": "Upcoming LQ DXpeditions shown on lq8.org/live and the main page. Hidden while the list is empty. Entry: {\"call\": \"...\", \"name\": \"entity\", \"place\": \"exact place (optional, shown above the call)\", \"lat\": 0.0, \"lon\": 0.0, \"start\": \"YYYY-MM-DD\", \"end\": \"YYYY-MM-DD\", \"bands\": \"...\", \"time\": \"HH:MM\" (optional, UTC start time on the start day)} (UTC dates; shown until the end date).",
   "dxpeditions": [
-    {"call": "SV8/DB5BO", "name": "Greece", "lat": 39.8125, "lon": 19.7917, "start": "2026-10-28", "time": "15:00", "end": "2026-10-28", "bands": "20 m"}
+    {
+      "call": "SV8/DB5BO",
+      "name": "Greece",
+      "lat": 39.8125,
+      "lon": 19.7917,
+      "start": "2026-10-28",
+      "time": "15:00",
+      "end": "2026-10-28",
+      "bands": "20 m",
+      "place": "Corfu Island"
+    }
   ]
 }

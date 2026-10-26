@@ -481,6 +481,12 @@
     el('path', { d: 'M0,-9 L9,0 L0,9 L-9,0 Z', fill: THEME.dx, stroke: '#FFFFFF', 'stroke-width': 2 }, grp);
     el('circle', { cx: 0, cy: 0, r: 2.5, fill: '#FFFFFF' }, grp);
     var w = 12 + dx.call.length * 6.6;
+    if (dx.place) {   // the exact place, above the call (e.g. "Corfu Island")
+      var pw = Math.max(w, 10 + String(dx.place).length * 5.8);
+      el('rect', { x: 12, y: -24, width: pw, height: 14, rx: 4, fill: '#0F172A', stroke: THEME.dx, 'stroke-width': 1, opacity: 0.92 }, grp);
+      var pl = el('text', { x: 12 + pw / 2, y: -13.5, 'text-anchor': 'middle', fill: '#F8FAFC', 'class': 'lqmap-label lqmap-sub' }, grp);
+      pl.textContent = dx.place;
+    }
     el('rect', { x: 12, y: -8, width: w, height: 16, rx: 4, fill: THEME.dx, stroke: THEME.dxStroke, 'stroke-width': 1 }, grp);
     var t = el('text', { x: 12 + w / 2, y: 3.5, 'text-anchor': 'middle', fill: '#FFFFFF', 'class': 'lqmap-label' }, grp);
     t.textContent = dx.call;
@@ -523,7 +529,7 @@
       if (!d) return;
       h('div', 'lqmap-pop-call dx', d.call, p);
       h('div', 'lqmap-pop-row lqmap-pop-planned', str('LIVE_DX_PLANNED', 'Planned LQ8 DXpedition'), p);
-      if (d.name) h('div', 'lqmap-pop-row', d.name, p);
+      if (d.place || d.name) h('div', 'lqmap-pop-row', (d.place ? d.place + (d.name ? ', ' : '') : '') + (d.name || ''), p);
       h('div', 'lqmap-pop-row', d.start + (d.time ? ' ' + d.time + ' UTC' : '') + (d.end !== d.start ? ' – ' + d.end : ''), p);
       var loc = dxLocal(d);
       if (loc) h('div', 'lqmap-pop-row lqmap-pop-local', loc, p);
@@ -699,7 +705,7 @@
           var b = h('button', 'lqlive-dx-item', null, li);
           b.type = 'button';
           h('span', 'call', d.call, b);
-          if (d.name) h('span', 'name', d.name, b);
+          if (d.place || d.name) h('span', 'name', d.place || d.name, b);
           h('span', 'count', dxCounter(d.st), b);
           b.addEventListener('click', function () {
             if (self.mini) return;
