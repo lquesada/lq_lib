@@ -270,6 +270,7 @@ const langData = {
     "LIVE_DX_TITLE": "Майбутні DX-експедиції LQ8",
     "LIVE_DX_DAYS": "через {n} дн.",
     "LIVE_DX_TOMORROW": "завтра",
+    "LIVE_DX_PLANNED": "Запланована DX-експедиція LQ8",
     "LIVE_DX_ON_AIR": "в ефірі зараз",
     "LIVE_PATH_SETTINGS": "Налаштування",
     "LIVE_PATH_REPORTING": "Звіти",

@@ -270,6 +270,7 @@ const langData = {
     "LIVE_DX_TITLE": "即将到来个 LQ8 DX 远征",
     "LIVE_DX_DAYS": "{n} 天后",
     "LIVE_DX_TOMORROW": "明朝",
+    "LIVE_DX_PLANNED": "计划中个 LQ8 DXpedition",
     "LIVE_DX_ON_AIR": "现在勒浪空中",
     "LIVE_PATH_SETTINGS": "设置",
     "LIVE_PATH_REPORTING": "上报",

@@ -270,6 +270,7 @@ const langData = {
     "LIVE_DX_TITLE": "Kommende LQ8 DXpeditioner",
     "LIVE_DX_DAYS": "om {n} dage",
     "LIVE_DX_TOMORROW": "i morgen",
+    "LIVE_DX_PLANNED": "Planlagt LQ8-DXpedition",
     "LIVE_DX_ON_AIR": "i æteren nu",
     "LIVE_PATH_SETTINGS": "Indstillinger",
     "LIVE_PATH_REPORTING": "Rapportering",

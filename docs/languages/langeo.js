@@ -270,6 +270,7 @@ const langData = {
     "LIVE_DX_TITLE": "Venontaj LQ8-DXpedicioj",
     "LIVE_DX_DAYS": "post {n} tagoj",
     "LIVE_DX_TOMORROW": "morgaŭ",
+    "LIVE_DX_PLANNED": "Planita LQ8-DX-ekspedicio",
     "LIVE_DX_ON_AIR": "nun en la aero",
     "LIVE_PATH_SETTINGS": "Agordoj",
     "LIVE_PATH_REPORTING": "Raportado",

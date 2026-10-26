@@ -69,6 +69,8 @@
     function apply() {
       for (var i = 0; i < panels.length; i++) panels[i].hidden = closed.indexOf(panels[i].getAttribute('data-hint')) >= 0;
       if (show) show.hidden = !closed.length;
+      var pre = document.getElementById('lqlive-hints-pre');   // the first-paint rule of the page's head
+      if (pre) pre.parentNode.removeChild(pre);
     }
     Array.prototype.forEach.call(panels, function (p) {
       var x = h('button', 'lqlive-x', null, p);
@@ -155,6 +157,13 @@
     return { state: 'soon', days: Math.round((utcDay(d.start) - today) / DAY), ms: a - now, timed: !!utcTime(d.time) };
   }
   function two(n) { return (n < 10 ? '0' : '') + n; }
+  // the live countdown under the marker's call (ticks every second): hours can pass 24, no words to translate
+  function dxClock(d, now) {
+    var a = utcDay(d.start) + utcTime(d.time);
+    if (isNaN(a) || now >= a) return str('LIVE_DX_ON_AIR', 'on the air now');
+    var sec = Math.ceil((a - now) / 1000), hh = Math.floor(sec / 3600);
+    return 'T\u2212' + two(hh) + ':' + two(Math.floor(sec / 60) % 60) + ':' + two(sec % 60);
+  }
   function dxCounter(st) {
     if (st.state === 'on') return str('LIVE_DX_ON_AIR', 'on the air now');
     if (st.timed && st.ms < DAY) {   // a start time given, the last 24 h: hours and minutes, "T−05:12" (no words to translate)
@@ -382,6 +391,7 @@
   LiveMap.prototype.drawMarks = function () {
     var g = this.marks;
     while (g.firstChild) g.removeChild(g.firstChild);
+    this.dxClocks = [];
     var sc = this.mini ? 1.2 : 1.45;
     // DXpeditions first (underneath the stations)
     for (var d = 0; d < this.dx.length; d++) {
@@ -454,6 +464,18 @@
     el('rect', { x: 12, y: -8, width: w, height: 16, rx: 4, fill: THEME.dx, stroke: THEME.dxStroke, 'stroke-width': 1 }, grp);
     var t = el('text', { x: 12 + w / 2, y: 3.5, 'text-anchor': 'middle', fill: '#FFFFFF', 'class': 'lqmap-label' }, grp);
     t.textContent = dx.call;
+    var txt = dxClock(dx, Date.now()), cw = Math.max(w, 10 + txt.length * 5.8);
+    el('rect', { x: 12, y: 10, width: cw, height: 14, rx: 4, fill: '#0F172A', stroke: THEME.dx, 'stroke-width': 1, opacity: 0.92 }, grp);
+    var ck = el('text', { x: 12 + cw / 2, y: 20.5, 'text-anchor': 'middle', fill: '#F9A8D4', 'class': 'lqmap-label lqmap-sub lqmap-dxclock' }, grp);
+    ck.textContent = txt;
+    (this.dxClocks = this.dxClocks || []).push({ node: ck, dx: dx });
+  };
+  // every second: the markers' clocks and the open popup's countdown, nothing else redrawn
+  LiveMap.prototype.tickDx = function () {
+    var now = Date.now(), list = this.dxClocks || [];
+    for (var i = 0; i < list.length; i++) if (list[i].node.isConnected) list[i].node.textContent = dxClock(list[i].dx, now);
+    var pc = this.pop && !this.pop.hidden && this.pop.querySelector('.lqmap-pop-clock');
+    if (pc && pc._dx) pc.textContent = dxClock(pc._dx, now);
   };
 
   LiveMap.prototype.showPop = function (kind, idx, pin) {
@@ -480,10 +502,13 @@
       var d = this.dx[idx];
       if (!d) return;
       h('div', 'lqmap-pop-call dx', d.call, p);
+      h('div', 'lqmap-pop-row lqmap-pop-planned', str('LIVE_DX_PLANNED', 'Planned LQ8 DXpedition'), p);
       if (d.name) h('div', 'lqmap-pop-row', d.name, p);
       h('div', 'lqmap-pop-row', d.start + (d.time ? ' ' + d.time + ' UTC' : '') + (d.end !== d.start ? ' – ' + d.end : ''), p);
       if (d.bands) h('div', 'lqmap-pop-row', d.bands, p);
       h('div', 'lqmap-pop-count', dxCounter(d.st), p);
+      var pc = h('div', 'lqmap-pop-count lqmap-pop-clock', dxClock(d, now), p);
+      pc._dx = d;
       this.popGeo = { lon: d.lon, lat: d.lat };
     }
     this.popKey = kind + idx;
@@ -572,7 +597,8 @@
     this.loadDx();
     this.poll();
     setInterval(function () { self.poll(); }, POLL_MS);
-    setInterval(function () { if (!document.hidden && self.dxRaw && self.dxRaw.length) self.update(); }, 20000);   // the DX countdown
+    setInterval(function () { if (!document.hidden && self.dxRaw && self.dxRaw.length) self.update(); }, 60000);   // the DX list's day / hour wording
+    setInterval(function () { if (!document.hidden && self.map && self.map.tickDx) self.map.tickDx(); }, 1000);   // the live DX clocks
     document.addEventListener('visibilitychange', function () { if (!document.hidden) self.poll(); });
   }
   Page.prototype.setStatus = function (t, cls) {

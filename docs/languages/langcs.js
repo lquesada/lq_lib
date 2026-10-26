@@ -270,6 +270,7 @@ const langData = {
     "LIVE_DX_TITLE": "Připravované DXpedice LQ8",
     "LIVE_DX_DAYS": "za {n} dní",
     "LIVE_DX_TOMORROW": "zítra",
+    "LIVE_DX_PLANNED": "Plánovaná DXpedice LQ8",
     "LIVE_DX_ON_AIR": "právě ve vzduchu",
     "LIVE_PATH_SETTINGS": "Nastavení",
     "LIVE_PATH_REPORTING": "Hlášení",

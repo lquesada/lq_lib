@@ -270,6 +270,7 @@ const langData = {
     "LIVE_DX_TITLE": "Àwọn DXpedition LQ8 tí ń bọ̀",
     "LIVE_DX_DAYS": "ní ọjọ́ {n}",
     "LIVE_DX_TOMORROW": "ọ̀la",
+    "LIVE_DX_PLANNED": "DXpedition LQ8 tí a ti gbèrò",
     "LIVE_DX_ON_AIR": "wà lórí afẹ́fẹ́ báyìí",
     "LIVE_PATH_SETTINGS": "Settings",
     "LIVE_PATH_REPORTING": "Reporting",

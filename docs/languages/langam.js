@@ -270,6 +270,7 @@ const langData = {
     "LIVE_DX_TITLE": "የሚመጡ LQ8 DXpedition ዎች",
     "LIVE_DX_DAYS": "በ{n} ቀናት ውስጥ",
     "LIVE_DX_TOMORROW": "ነገ",
+    "LIVE_DX_PLANNED": "የታቀደ LQ8 ዲኤክስፔዲሽን",
     "LIVE_DX_ON_AIR": "አሁን በአየር ላይ",
     "LIVE_PATH_SETTINGS": "Settings",
     "LIVE_PATH_REPORTING": "Reporting",

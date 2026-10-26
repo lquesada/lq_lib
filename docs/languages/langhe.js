@@ -270,6 +270,7 @@ const langData = {
     "LIVE_DX_TITLE": "משלחות DX קרובות ב-LQ8",
     "LIVE_DX_DAYS": "בעוד {n} ימים",
     "LIVE_DX_TOMORROW": "מחר",
+    "LIVE_DX_PLANNED": "משלחת DX מתוכננת ב-LQ8",
     "LIVE_DX_ON_AIR": "באוויר עכשיו",
     "LIVE_PATH_SETTINGS": "הגדרות",
     "LIVE_PATH_REPORTING": "דיווח",

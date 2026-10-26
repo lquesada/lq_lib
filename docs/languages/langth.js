@@ -270,6 +270,7 @@ const langData = {
     "LIVE_DX_TITLE": "DXpedition LQ8 ที่จะมาถึง",
     "LIVE_DX_DAYS": "ใน {n} วัน",
     "LIVE_DX_TOMORROW": "พรุ่งนี้",
+    "LIVE_DX_PLANNED": "DXpedition LQ8 ที่วางแผนไว้",
     "LIVE_DX_ON_AIR": "ออกอากาศอยู่ตอนนี้",
     "LIVE_PATH_SETTINGS": "การตั้งค่า",
     "LIVE_PATH_REPORTING": "การรายงาน",

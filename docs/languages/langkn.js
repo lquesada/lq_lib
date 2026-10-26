@@ -270,6 +270,7 @@ const langData = {
     "LIVE_DX_TITLE": "ಮುಂಬರುವ LQ8 DXpedition ಗಳು",
     "LIVE_DX_DAYS": "{n} ದಿನಗಳಲ್ಲಿ",
     "LIVE_DX_TOMORROW": "ನಾಳೆ",
+    "LIVE_DX_PLANNED": "ಯೋಜಿತ LQ8 DXpedition",
     "LIVE_DX_ON_AIR": "ಈಗ ಆನ್ ಏರ್",
     "LIVE_PATH_SETTINGS": "Settings",
     "LIVE_PATH_REPORTING": "Reporting",

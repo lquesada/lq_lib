@@ -78,8 +78,14 @@
   <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@700;800;900&display=optional" rel="stylesheet">
   <link rel="stylesheet" href="../../live/lqlive.css">
+  <!-- the hint panels the viewer closed stay hidden from the first paint (lqlive.js takes over and removes this rule) -->
+  <script>(function () { try { var m = document.cookie.match(/(?:^|; )lq8live_hidden_hints=([^;]*)/); if (!m) return;
+    var ids = decodeURIComponent(m[1]).split(',').map(function (i) { return i.replace(/[^A-Za-z0-9_-]/g, ''); }).filter(Boolean);
+    if (!ids.length) return; var st = document.createElement('style'); st.id = 'lqlive-hints-pre';
+    st.textContent = ids.map(function (i) { return '[data-hint="' + i + '"]'; }).join(',') + '{display:none!important}';
+    document.head.appendChild(st); } catch (e) {} })();</script>
   <style>
     :root { --bg: #07090e; --card: rgba(13, 18, 29, 0.9); --border: rgba(255, 255, 255, 0.08); --cyan: #38bdf8;
             --text: #f8fafc; --muted: #94a3b8; }
@@ -250,6 +256,7 @@
     <span data-i18n="LIVE_DX_DAYS">{n} 日後</span>
     <span data-i18n="LIVE_DX_TOMORROW">聽日</span>
     <span data-i18n="LIVE_DX_ON_AIR">而家喺空中</span>
+    <span data-i18n="LIVE_DX_PLANNED">計劃中嘅 LQ8 DXpedition</span>
     <span data-i18n="LIVE_HIDE">隱藏</span>
     <span data-i18n="LIVE_BANDS_FILTER">顯示嘅波段</span>
     <span data-i18n="LIVE_HOW">想喺地圖顯示,請喺 qFT8 去 {path},再用你部電台喺 LQ8 發射。</span>

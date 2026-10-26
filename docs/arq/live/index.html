@@ -78,8 +78,14 @@
   <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@700;800;900&display=optional" rel="stylesheet">
   <link rel="stylesheet" href="../../live/lqlive.css">
+  <!-- the hint panels the viewer closed stay hidden from the first paint (lqlive.js takes over and removes this rule) -->
+  <script>(function () { try { var m = document.cookie.match(/(?:^|; )lq8live_hidden_hints=([^;]*)/); if (!m) return;
+    var ids = decodeURIComponent(m[1]).split(',').map(function (i) { return i.replace(/[^A-Za-z0-9_-]/g, ''); }).filter(Boolean);
+    if (!ids.length) return; var st = document.createElement('style'); st.id = 'lqlive-hints-pre';
+    st.textContent = ids.map(function (i) { return '[data-hint="' + i + '"]'; }).join(',') + '{display:none!important}';
+    document.head.appendChild(st); } catch (e) {} })();</script>
   <style>
     :root { --bg: #07090e; --card: rgba(13, 18, 29, 0.9); --border: rgba(255, 255, 255, 0.08); --cyan: #38bdf8;
             --text: #f8fafc; --muted: #94a3b8; }
@@ -250,6 +256,7 @@
     <span data-i18n="LIVE_DX_DAYS">بعد {n} أيام</span>
     <span data-i18n="LIVE_DX_TOMORROW">غدوة</span>
     <span data-i18n="LIVE_DX_ON_AIR">فالهواء دروك</span>
+    <span data-i18n="LIVE_DX_PLANNED">DXpedition LQ8 مبرمجة</span>
     <span data-i18n="LIVE_HIDE">خبّي</span>
     <span data-i18n="LIVE_BANDS_FILTER">النطاقات لي يبانو</span>
     <span data-i18n="LIVE_HOW">باش تبان فالخريطة، سير فـ qFT8 لـ {path}، وبعدها ابعث بـ LQ8 عبر الراديو ديالك.</span>

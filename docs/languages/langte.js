@@ -270,6 +270,7 @@ const langData = {
     "LIVE_DX_TITLE": "రాబోయే LQ8 DXpedition‌లు",
     "LIVE_DX_DAYS": "{n} రోజుల్లో",
     "LIVE_DX_TOMORROW": "రేపు",
+    "LIVE_DX_PLANNED": "ప్రణాళిక చేసిన LQ8 DXpedition",
     "LIVE_DX_ON_AIR": "ఇప్పుడు ఆన్ ఎయిర్",
     "LIVE_PATH_SETTINGS": "Settings",
     "LIVE_PATH_REPORTING": "Reporting",

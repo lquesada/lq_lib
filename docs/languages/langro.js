@@ -270,6 +270,7 @@ const langData = {
     "LIVE_DX_TITLE": "Următoarele DXpediții LQ8",
     "LIVE_DX_DAYS": "în {n} zile",
     "LIVE_DX_TOMORROW": "mâine",
+    "LIVE_DX_PLANNED": "DXpediție LQ8 planificată",
     "LIVE_DX_ON_AIR": "în emisie acum",
     "LIVE_PATH_SETTINGS": "Setări",
     "LIVE_PATH_REPORTING": "Raportare",
