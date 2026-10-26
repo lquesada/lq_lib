@@ -271,6 +271,7 @@ const langData = {
     "LIVE_DX_DAYS": "nan da kwanaki {n}",
     "LIVE_DX_TOMORROW": "gobe",
     "LIVE_DX_PLANNED": "Shirin DXpedition na LQ8",
+    "LIVE_DX_IN": "cikin {t}",
     "LIVE_DX_ON_AIR": "yana kan iska yanzu",
     "LIVE_PATH_SETTINGS": "Saituna",
     "LIVE_PATH_REPORTING": "Bayar da rahoto",

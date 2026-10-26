@@ -271,6 +271,7 @@ const langData = {
     "LIVE_DX_DAYS": "{n} päivän päästä",
     "LIVE_DX_TOMORROW": "huomenna",
     "LIVE_DX_PLANNED": "Suunniteltu LQ8-DXpeditio",
+    "LIVE_DX_IN": "{t} päästä",
     "LIVE_DX_ON_AIR": "ilmassa nyt",
     "LIVE_PATH_SETTINGS": "Asetukset",
     "LIVE_PATH_REPORTING": "Raportointi",

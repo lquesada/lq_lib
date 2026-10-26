@@ -271,6 +271,7 @@ const langData = {
     "LIVE_DX_DAYS": "{n}일 후",
     "LIVE_DX_TOMORROW": "내일",
     "LIVE_DX_PLANNED": "예정된 LQ8 DX페디션",
+    "LIVE_DX_IN": "{t} 후",
     "LIVE_DX_ON_AIR": "지금 온에어",
     "LIVE_PATH_SETTINGS": "설정",
     "LIVE_PATH_REPORTING": "보고",

@@ -161,8 +161,20 @@
   function dxClock(d, now) {
     var a = utcDay(d.start) + utcTime(d.time);
     if (isNaN(a) || now >= a) return str('LIVE_DX_ON_AIR', 'on the air now');
-    var sec = Math.ceil((a - now) / 1000), hh = Math.floor(sec / 3600);
-    return 'T\u2212' + two(hh) + ':' + two(Math.floor(sec / 60) % 60) + ':' + two(sec % 60);
+    var sec = Math.ceil((a - now) / 1000), d = Math.floor(sec / 86400), hh = Math.floor(sec / 3600) % 24,
+        mm = Math.floor(sec / 60) % 60, ss = sec % 60;
+    var t = d > 0 ? d + 'd' + two(hh) + 'h' : hh > 0 ? hh + 'h' + two(mm) + 'm' : mm + 'm' + two(ss) + 's';   // 1d14h / 14h12m / 15m10s
+    return str('LIVE_DX_IN', 'in {t}').replace('{t}', t);
+  }
+  // the start as the viewer's own clock shows it, in the page's language (no strings of ours)
+  function dxLocal(d) {
+    var a = utcDay(d.start) + utcTime(d.time);
+    if (isNaN(a)) return '';
+    try {
+      var o = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', timeZoneName: 'short' };
+      if (d.time) { o.hour = '2-digit'; o.minute = '2-digit'; }
+      return new Date(a).toLocaleString(document.documentElement.lang || undefined, o);
+    } catch (e) { return ''; }
   }
   function dxCounter(st) {
     if (st.state === 'on') return str('LIVE_DX_ON_AIR', 'on the air now');
@@ -505,9 +517,10 @@
       h('div', 'lqmap-pop-row lqmap-pop-planned', str('LIVE_DX_PLANNED', 'Planned LQ8 DXpedition'), p);
       if (d.name) h('div', 'lqmap-pop-row', d.name, p);
       h('div', 'lqmap-pop-row', d.start + (d.time ? ' ' + d.time + ' UTC' : '') + (d.end !== d.start ? ' – ' + d.end : ''), p);
+      var loc = dxLocal(d);
+      if (loc) h('div', 'lqmap-pop-row lqmap-pop-local', loc, p);
       if (d.bands) h('div', 'lqmap-pop-row', d.bands, p);
-      h('div', 'lqmap-pop-count', dxCounter(d.st), p);
-      var pc = h('div', 'lqmap-pop-count lqmap-pop-clock', dxClock(d, now), p);
+      var pc = h('div', 'lqmap-pop-count lqmap-pop-clock', dxClock(d, now), p);   // the live countdown (no second "in N days")
       pc._dx = d;
       this.popGeo = { lon: d.lon, lat: d.lat };
     }

@@ -271,6 +271,7 @@ const langData = {
     "LIVE_DX_DAYS": "tra {n} giorni",
     "LIVE_DX_TOMORROW": "domani",
     "LIVE_DX_PLANNED": "DXpedition LQ8 prevista",
+    "LIVE_DX_IN": "tra {t}",
     "LIVE_DX_ON_AIR": "in onda ora",
     "LIVE_PATH_SETTINGS": "Impostazioni",
     "LIVE_PATH_REPORTING": "Segnalazioni",

@@ -271,6 +271,7 @@ const langData = {
     "LIVE_DX_DAYS": "{n} nap múlva",
     "LIVE_DX_TOMORROW": "holnap",
     "LIVE_DX_PLANNED": "Tervezett LQ8 DXpedíció",
+    "LIVE_DX_IN": "{t} múlva",
     "LIVE_DX_ON_AIR": "most a levegőben",
     "LIVE_PATH_SETTINGS": "Beállítások",
     "LIVE_PATH_REPORTING": "Jelentések",

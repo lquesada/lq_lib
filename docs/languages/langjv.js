@@ -271,6 +271,7 @@ const langData = {
     "LIVE_DX_DAYS": "{n} dina maneh",
     "LIVE_DX_TOMORROW": "sesuk",
     "LIVE_DX_PLANNED": "DXpedition LQ8 sing direncanakake",
+    "LIVE_DX_IN": "ing {t}",
     "LIVE_DX_ON_AIR": "ana ing udara saiki",
     "LIVE_PATH_SETTINGS": "Settings",
     "LIVE_PATH_REPORTING": "Reporting",

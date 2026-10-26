@@ -271,6 +271,7 @@ const langData = {
     "LIVE_DX_DAYS": "sau {n} ngày",
     "LIVE_DX_TOMORROW": "ngày mai",
     "LIVE_DX_PLANNED": "DXpedition LQ8 dự kiến",
+    "LIVE_DX_IN": "sau {t}",
     "LIVE_DX_ON_AIR": "đang phát sóng",
     "LIVE_PATH_SETTINGS": "Cài đặt",
     "LIVE_PATH_REPORTING": "Báo cáo",

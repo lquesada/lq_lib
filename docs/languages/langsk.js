@@ -271,6 +271,7 @@ const langData = {
     "LIVE_DX_DAYS": "o {n} dní",
     "LIVE_DX_TOMORROW": "zajtra",
     "LIVE_DX_PLANNED": "Plánovaná DXpedícia LQ8",
+    "LIVE_DX_IN": "o {t}",
     "LIVE_DX_ON_AIR": "práve vo vzduchu",
     "LIVE_PATH_SETTINGS": "Nastavenia",
     "LIVE_PATH_REPORTING": "Hlásenia",
