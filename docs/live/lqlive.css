@@ -48,3 +48,8 @@
 .lqlive-hints-show[hidden] { display: none; }
 .lqmap-country { font: 600 14px 'Inter', system-ui, sans-serif; fill: #E2E8F0; stroke: #0F172A; stroke-width: 3px;
   stroke-linejoin: round; paint-order: stroke; pointer-events: none; dominant-baseline: middle; }
+/* markers fade in / out over a second when the data changes (LQ8-SITE-FADE-1); pan and zoom never fade */
+.lqf { opacity: 1; transition: opacity 1s ease; }
+.lqf.lqf-hide { opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .lqf { transition: none; } }
+.lqmap-leader { stroke-linecap: round; pointer-events: none; }

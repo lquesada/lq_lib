@@ -18,7 +18,8 @@
 
   var THEME = {
     ocean: '#1E477A', land: '#3B82B6', coast: '#CBD5E1', grid: 'rgba(255,255,255,0.22)',
-    border: 'rgba(226,232,240,0.7)', pin: '#0F172A', pinStroke: '#F8FAFC', dx: '#D81B78', dxStroke: '#0F172A'
+    border: 'rgba(226,232,240,0.7)', pinStroke: '#0F172A', tagStroke: '#0F172A', leader: '#F8FAFC', leaderHalo: '#0F172A',
+    dx: '#D81B78', dxStroke: '#0F172A', dxBadge: '#0F172A', dxBadgeText: '#F8FAFC', dxClock: '#F9A8D4'
   };
   // One colour per band (text colour chosen for contrast); unknown bands get the last one.
   // the band colours hams know from the usual reception-report maps
@@ -82,6 +83,7 @@
         show.hidden = false;
         show.textContent = anyShown ? str('LIVE_HIDE_HINTS', 'Hide hints') : str('LIVE_SHOW_HINTS', 'Show hints');
       }
+      try { window.dispatchEvent(new Event('resize')); } catch (e) {}   // the station tags keep off the panels shown
       var pre = document.getElementById('lqlive-hints-pre');   // the first-paint rule of the page's head
       if (pre) pre.parentNode.removeChild(pre);
     }
@@ -171,18 +173,16 @@
     return typeof c.lat === 'number' && typeof c.lon === 'number' && isFinite(c.lat) && isFinite(c.lon) &&
       Math.abs(c.lon - gc.lon) <= 1.0001 && Math.abs(c.lat - gc.lat) <= 0.5001;
   }
-  // The screen box of a pin at (x, y) with the stack of tags drawn above it by drawPin (same sizes), in map pixels.
+  // Tag sizes (local units; the map multiplies them by its marker scale): a tag is the callsign over "LQ8 20m".
+  var TAG_H = 29, TAG_STEP = 31, MORE_H = 16;
   function tagWidth(it) { return 10 + Math.max((it.mode + ' ' + it.band).length * 6.6, it.call.length * 7.6); }
-  function stackBox(x, y, list, max, sc) {
-    var shown = Math.min(list.length, max), w = 12;
-    for (var i = 0; i < shown; i++) w = Math.max(w, tagWidth(list[i]));
-    var top = -22 - 31 * (shown - 1) - 29 - (list.length > max ? 16 : 0);
-    return { l: x - (w / 2 + 3) * sc, r: x + (w / 2 + 3) * sc, t: y + (top - 3) * sc, b: y + 2 * sc };
+  function box(l, t, w, hh) { return { l: l, t: t, r: l + w, b: t + hh }; }
+  function overlaps(a, b, pad) { pad = pad || 0; return a.l < b.r + pad && b.l < a.r + pad && a.t < b.b + pad && b.t < a.b + pad; }
+  function overlapArea(a, b) {
+    var w = Math.min(a.r, b.r) - Math.max(a.l, b.l), hh = Math.min(a.b, b.b) - Math.max(a.t, b.t);
+    return w > 0 && hh > 0 ? w * hh : 0;
   }
-  function overlaps(a, b) { return a.l < b.r && b.l < a.r && a.t < b.b && b.t < a.b; }
-  function union(a, b, c) {
-    return { l: Math.min(a.l, b.l, c.l), r: Math.max(a.r, b.r, c.r), t: Math.min(a.t, b.t, c.t), b: Math.max(a.b, b.b, c.b) };
-  }
+  function itemKey(it) { return it.call + '|' + it.band + '|' + it.mode; }
   function minutesAgo(ms, now) {
     var m = Math.floor((now - ms) / 60000);
     return m < 1 ? str('LIVE_JUST_NOW', 'just now') : str('LIVE_MIN_AGO', '{n} min ago').replace('{n}', String(m));
@@ -273,6 +273,7 @@
     this.hiddenModes = {};
     this.st = { zoom: 1, minZoom: 1, maxZoom: 40, offsetX: 0, offsetY: 0 };
     this.pointers = {};
+    this.theme = THEME;
     this.build();
   }
 
@@ -297,6 +298,11 @@
     for (var k = -2; k <= 2; k++) el('use', { href: '#' + tile.id, x: k * 360, y: 0 }, this.world);
     this.names = el('g', { 'class': 'lqmap-names' }, this.svg);
     this.marks = el('g', {}, this.svg);
+    this.gDx = el('g', {}, this.marks);
+    this.gLead = el('g', {}, this.marks);
+    this.gPin = el('g', {}, this.marks);
+    this.gTag = el('g', {}, this.marks);
+    this.live = {};
     this.pop = h('div', 'lqmap-pop', null, this.root);
     this.pop.hidden = true;
     window.addEventListener('resize', function () { self.render(); });
@@ -410,7 +416,8 @@
     return this.items.filter(function (it) { return !self.hiddenBands[it.band] && !self.hiddenModes[it.mode]; });
   };
 
-  LiveMap.prototype.render = function () {
+  LiveMap.prototype.render = function (fade) {
+    this.fadeNew = !!fade;
     var r = this.root.getBoundingClientRect();
     this.W = Math.max(1, r.width); this.H = Math.max(1, r.height);
     this.clamp();
@@ -427,7 +434,7 @@
     var p = this.toScreen(lon, lat), w = 360 * this.scale(), out = [];
     for (var k = -2; k <= 2; k++) {
       var x = p.x + k * w;
-      if (x > -60 && x < this.W + 60) out.push({ x: x, y: p.y });
+      if (x > -60 && x < this.W + 60) out.push({ x: x, y: p.y, k: k });
     }
     return out;
   };
@@ -449,93 +456,292 @@
     }
   };
 
+  // ---- markers: stations (pin + tag) and DXpeditions -------------------------------------------------------------
+  // Every marker is a keyed group that lives across redraws: pan and zoom only move it; a station or DXpedition that
+  // arrives or leaves with new data fades in / out over a second (LQ8-SITE-FADE-1).
+  var FADE_MS = 1000;
+  function reducedMotion() {
+    try { return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; }
+  }
+  LiveMap.prototype.keyed = function (layer, key, attrs) {
+    var e = this.live[key];
+    if (!e || e._leaving || e.parentNode !== layer) {
+      if (e && e.parentNode && !e._leaving) e.parentNode.removeChild(e);
+      e = el('g', { 'data-k': key }, layer);
+      this.live[key] = e;
+      if (this.fadeNew && !reducedMotion()) {
+        e.setAttribute('class', 'lqf lqf-hide');
+        (this.fadeQueue = this.fadeQueue || []).push(e);
+      }
+    } else while (e.firstChild) e.removeChild(e.firstChild);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    e._gen = this.gen;
+    return e;
+  };
+  // after a draw: the groups not drawn this time leave (fading out when the data changed, at once on pan / zoom)
+  LiveMap.prototype.sweep = function () {
+    var self = this, fade = this.fadeNew && !reducedMotion();
+    Object.keys(this.live).forEach(function (key) {
+      var e = self.live[key];
+      if (e._gen === self.gen) return;
+      delete self.live[key];
+      if (fade && !e._leaving && e.parentNode) {
+        e._leaving = true;
+        e.setAttribute('class', 'lqf lqf-hide');
+        e.style.pointerEvents = 'none';
+        setTimeout(function () { if (e.parentNode) e.parentNode.removeChild(e); }, FADE_MS + 50);
+      } else if (!e._leaving && e.parentNode) e.parentNode.removeChild(e);
+    });
+    var q = this.fadeQueue;
+    this.fadeQueue = null;
+    if (q && q.length) {
+      q[0].getBoundingClientRect();   // the hidden state is painted first, so the change below is a transition
+      requestAnimationFrame(function () { q.forEach(function (e) { if (!e._leaving) e.setAttribute('class', 'lqf'); }); });
+    }
+  };
+
   LiveMap.prototype.drawMarks = function () {
-    var g = this.marks;
-    while (g.firstChild) g.removeChild(g.firstChild);
+    this.gen = (this.gen || 0) + 1;
     this.dxClocks = [];
-    var sc = this.mini ? 1.2 : 1.45;
-    // DXpeditions first (underneath the stations)
+    var sc = this.mini ? 1.2 : 1.45, obstacles = [];
+    // DXpeditions first (underneath the stations); their diamond and tags are obstacles for the station tags
     for (var d = 0; d < this.dx.length; d++) {
-      var dx = this.dx[d];
-      var cs = this.copies(dx.lon, dx.lat);
-      for (var c = 0; c < cs.length; c++) this.drawDx(g, cs[c], dx, d, sc);
+      var dx = this.dx[d], cs = this.copies(dx.lon, dx.lat);
+      for (var c = 0; c < cs.length; c++) obstacles.push(this.drawDx(cs[c], dx, d, sc));
     }
-    // stations: each at its own point (the one the qFT8 app draws it at: inside its grid square, on land). A station whose
-    // pin + tag would touch another stack of tags joins that stack (newest first, above the stack's first pin; it keeps its
-    // own pin), so tags never cover each other; zooming in pulls the stacks apart. Old feeds without lat/lon: grid centres.
-    var vis = this.visibleItems(), s = this.scale(), max = this.mini ? 2 : 4, clusters = [];
+    // stations: each pin at its own point (the one the qFT8 app draws it at), its tag placed by placeTags
+    var vis = this.visibleItems(), pins = [];
     for (var i = 0; i < vis.length; i++) {
-      var it = vis[i], x = it.lon * s, y = -it.lat * s, cl = null;   // map pixels (the shared screen offset left out)
-      var own = stackBox(x, y, [it], max, sc);
-      for (var k = 0; k < clusters.length && !cl; k++) if (overlaps(clusters[k].box, own)) cl = clusters[k];
-      if (cl) {
-        cl.list.push(it);
-        cl.box = union(stackBox(cl.x, cl.y, cl.list, max, sc), cl.box, own);
-      } else clusters.push({ x: x, y: y, list: [it], box: own });
-    }
-    for (var c = 0; c < clusters.length; c++) {
-      var list = clusters[c].list, ps = this.copies(list[0].lon, list[0].lat);
+      var ps = this.copies(vis[i].lon, vis[i].lat);
       for (var p = 0; p < ps.length; p++) {
-        for (var m = list.length - 1; m >= 1; m--) {   // the other pins of the stack, at their own points
-          this.drawPinOnly(g, { x: ps[p].x + (list[m].lon - list[0].lon) * s, y: ps[p].y - (list[m].lat - list[0].lat) * s }, list[m], sc);
-        }
-        this.drawPin(g, ps[p], list, sc);
+        var x = ps[p].x, y = ps[p].y;
+        pins.push({ it: vis[i], key: itemKey(vis[i]) + '#' + ps[p].k, order: i, x: x, y: y,
+          box: box(x - 7 * sc, y - 20 * sc, 14 * sc, 21 * sc), head: { x: x, y: y - 13 * sc } });
       }
     }
+    var groups = this.placeTags(pins, obstacles, sc);
+    for (var j = 0; j < pins.length; j++) this.drawPinOnly(pins[j], sc);
+    for (var gi = 0; gi < groups.length; gi++) this.drawTags(groups[gi], sc);
+    this.sweep();
+  };
+
+  // LQ8-SITE-LABELS-1: where each station's tag goes. Every tag first tries the spots around its own pin (above, below,
+  // the sides, the corners, slightly nudged), keeping the spot it had on the last draw when that still fits, so zoom and
+  // pan do not make tags jump. A spot fits when it stays on the visible map and covers no pin, DXpedition tag or other
+  // tag. Only stations whose tag fits nowhere are stacked, together with the stations around them: the stack is centred
+  // among its pins (above, below or beside them), and a short line runs from each tag to its pin.
+  LiveMap.prototype.placeTags = function (pins, obstacles, sc) {
+    var self = this, W = this.W, H = this.H, M = 3, PAD = 2 * sc, prev = this.prevSpot || {}, next = {};
+    var max = this.mini ? 2 : 4, placed = [], panels = this.panelBoxes();
+    function inView(b) { return b.l >= M && b.t >= M && b.r <= W - M && b.b <= H - M; }
+    // strict: also keeps off the page's panels over the map; a tag that cannot keep off them may go under one
+    function clear(b, except, strict) {
+      if (!inView(b)) return false;
+      if (strict) for (var q = 0; q < panels.length; q++) if (overlaps(b, panels[q], PAD)) return false;
+      for (var i = 0; i < pins.length; i++) if (except.indexOf(pins[i]) < 0 && overlaps(b, pins[i].box, PAD)) return false;
+      for (var o = 0; o < obstacles.length; o++) if (overlaps(b, obstacles[o], PAD)) return false;
+      for (var t = 0; t < placed.length; t++) if (placed[t] && overlaps(b, placed[t].box, PAD)) return false;
+      return true;
+    }
+    function singleSpots(pn, w, hh) {
+      var x = pn.x, y = pn.y, s = sc, hy = y - 13 * s, out = [];
+      out.push(box(x - w / 2, y - 22 * s - hh, w, hh));          // above (the usual place)
+      out.push(box(x + 9 * s, hy - hh / 2, w, hh));              // right
+      out.push(box(x - 9 * s - w, hy - hh / 2, w, hh));          // left
+      out.push(box(x - w / 2, y + 4 * s, w, hh));                // below
+      out.push(box(x + 5 * s, y - 20 * s - hh, w, hh));          // above right
+      out.push(box(x - 5 * s - w, y - 20 * s - hh, w, hh));      // above left
+      out.push(box(x + 5 * s, y + 2 * s, w, hh));                // below right
+      out.push(box(x - 5 * s - w, y + 2 * s, w, hh));            // below left
+      [-0.5, 0.5].forEach(function (f) {                          // nudged
+        out.push(box(x - w / 2 + f * w, y - 22 * s - hh, w, hh));
+        out.push(box(x - w / 2 + f * w, y + 4 * s, w, hh));
+        out.push(box(x + 9 * s, hy - hh / 2 + f * hh, w, hh));
+        out.push(box(x - 9 * s - w, hy - hh / 2 + f * hh, w, hh));
+      });
+      return out;
+    }
+    // 1. single tags, newest station first
+    var failed = [];
+    pins.forEach(function (pn) { pn.w = tagWidth(pn.it) * sc; });
+    // a pin off the visible map has no tag (its tag would only be pushed back onto the map, away from it)
+    var tagged = pins.filter(function (pn) { return pn.x >= 0 && pn.x <= W && pn.y - 10 * sc >= 0 && pn.y <= H; });
+    tagged.slice().sort(function (a, b) { return a.order - b.order; }).forEach(function (pn) {
+      var spots = singleSpots(pn, pn.w, TAG_H * sc), order = [], got = -1;
+      if (prev[pn.key] && prev[pn.key].s >= 0) order.push(prev[pn.key].s);
+      for (var i = 0; i < spots.length; i++) if (order.indexOf(i) < 0) order.push(i);
+      for (var k = 0; k < order.length && got < 0; k++) if (clear(spots[order[k]], [pn], true)) got = order[k];
+      for (k = 0; k < order.length && got < 0; k++) if (clear(spots[order[k]], [pn], false)) got = order[k];
+      if (got >= 0) { pn.single = { box: spots[got], members: [pn], spot: got }; placed.push(pn.single); next[pn.key] = { s: got }; }
+      else failed.push(pn);
+    });
+    // 2. stacks: a station without a spot is stacked with the stations whose tags would collide with its own
+    var comp = {}, inStack = {};
+    function find(a) { while (comp[a] !== a) a = comp[a] = comp[comp[a]]; return a; }
+    tagged.forEach(function (pn, i) { comp[i] = i; pn.idx = i; });
+    function near(a, b) { return Math.abs(a.x - b.x) < (a.w + b.w) / 2 + 4 * sc && Math.abs(a.y - b.y) < (TAG_H + 24) * sc; }
+    var queue = failed.slice();
+    failed.forEach(function (f) { inStack[f.idx] = 1; });
+    while (queue.length) {
+      var f = queue.shift();
+      tagged.forEach(function (o) {
+        if (o === f || !near(o, f)) return;
+        comp[find(o.idx)] = find(f.idx);
+        if (!inStack[o.idx]) { inStack[o.idx] = 1; queue.push(o); }
+      });
+    }
+    var byRoot = {};
+    tagged.forEach(function (pn) {
+      if (!inStack[pn.idx]) return;
+      if (pn.single) { placed[placed.indexOf(pn.single)] = null; pn.single = null; delete next[pn.key]; }
+      var r = find(pn.idx);
+      (byRoot[r] = byRoot[r] || []).push(pn);
+    });
+    placed = placed.filter(function (x) { return x; });
+    var stacks = Object.keys(byRoot).map(function (r) { return byRoot[r].sort(function (a, b) { return a.order - b.order; }); });
+    stacks.sort(function (a, b) { return b.length - a.length; });
+    stacks.forEach(function (members) {
+      var shown = members.slice(0, max), w = 0, P = null, cx = 0, cy = 0;
+      shown.forEach(function (pn) { w = Math.max(w, pn.w); });
+      members.forEach(function (pn) {
+        cx += pn.head.x; cy += pn.head.y;
+        P = P ? { l: Math.min(P.l, pn.box.l), t: Math.min(P.t, pn.box.t), r: Math.max(P.r, pn.box.r), b: Math.max(P.b, pn.box.b) } : pn.box;
+      });
+      cx /= members.length; cy /= members.length;
+      var hh = (shown.length * TAG_STEP - (TAG_STEP - TAG_H) + (members.length > max ? MORE_H : 0)) * sc, g = 8 * sc, spots = [];
+      [0, 12, 30, 55, 90].forEach(function (d0) {
+        var d = d0 * sc;
+        [-0.5, -0.25, 0, 0.25, 0.5].forEach(function (f) {
+          spots.push(box(cx - w / 2 + f * w, P.t - g - d - hh, w, hh));          // above, centred among the pins
+          spots.push(box(cx - w / 2 + f * w, P.b + g + d, w, hh));               // below
+          spots.push(box(P.r + g + d, cy - hh / 2 + f * hh, w, hh));             // right
+          spots.push(box(P.l - g - d - w, cy - hh / 2 + f * hh, w, hh));         // left
+        });
+      });
+      // the free spot with the shortest lines to its pins (the last draw's spot wins a tie, so tags do not jump)
+      function lineLen(b0) {
+        var sum = 0;
+        shown.forEach(function (pn) {
+          var ex = Math.max(b0.l, Math.min(b0.r, pn.head.x)), ey = Math.max(b0.t, Math.min(b0.b, pn.head.y));
+          sum += Math.hypot(ex - pn.head.x, ey - pn.head.y);
+        });
+        return sum;
+      }
+      var skey = 'S' + members[0].key, got = -1, bestLen = Infinity, pv = prev[skey] ? prev[skey].s : -1;
+      [true, false].forEach(function (strict) {
+        if (got >= 0) return;
+        for (var i = 0; i < spots.length; i++) {
+          if (!clear(spots[i], members, strict)) continue;
+          // beside the pins first: there every tag's line leaves from its own side without crossing the other tags
+          var len = lineLen(spots[i]) - (i === pv ? 12 * sc : 0) + (i % 4 < 2 ? 30 * sc * shown.length : 0);
+          if (len < bestLen) { bestLen = len; got = i; }
+        }
+      });
+      var b;
+      if (got >= 0) b = spots[got];
+      else {
+        // nothing is free: the spot that covers the least, moved fully onto the visible map
+        var best = Infinity;
+        spots.forEach(function (s0) {
+          var s1 = self.clampBox(s0, M), cost = lineLen(s1) * 0.01;
+          pins.forEach(function (o) { if (members.indexOf(o) < 0) cost += overlapArea(s1, o.box); });
+          placed.forEach(function (t) { cost += overlapArea(s1, t.box); });
+          obstacles.forEach(function (o) { cost += overlapArea(s1, o); });
+          members.forEach(function (o) { cost += overlapArea(s1, o.box) * 2; });
+          if (cost < best) { best = cost; b = s1; }
+        });
+      }
+      next[skey] = { s: got };
+      // tags in the order of their pins from top to bottom, so the lines do not cross
+      shown.sort(function (p1, p2) { return p1.head.y - p2.head.y; });
+      var st = { box: b, members: members, shown: shown, stack: true };
+      placed.push(st);
+    });
+    this.prevSpot = next;
+    return placed;
+  };
+  // the page's panels over the map (hint panels, band filter), in map pixels
+  LiveMap.prototype.panelBoxes = function () {
+    var out = [], ov = this.root.parentNode && this.root.parentNode.querySelectorAll('.overlay .panel');
+    if (!ov || !ov.length) return out;
+    var r0 = this.root.getBoundingClientRect();
+    for (var i = 0; i < ov.length; i++) {
+      if (ov[i].hidden) continue;
+      var r = ov[i].getBoundingClientRect();
+      if (r.width > 0 && r.height > 0) out.push({ l: r.left - r0.left, t: r.top - r0.top, r: r.right - r0.left, b: r.bottom - r0.top });
+    }
+    return out;
+  };
+  LiveMap.prototype.clampBox = function (b, M) {
+    var w = b.r - b.l, hh = b.b - b.t, l = Math.max(M, Math.min(this.W - M - w, b.l)), t = Math.max(M, Math.min(this.H - M - hh, b.t));
+    return box(l, t, w, hh);
   };
 
   // A pin with its tip on the station's point; hovering or tapping it opens that station's popup, as its tag does.
-  LiveMap.prototype.drawPinOnly = function (g, pt, it, sc) {
-    var grp = el('g', { transform: 'translate(' + pt.x.toFixed(1) + ',' + pt.y.toFixed(1) + ') scale(' + sc + ')' }, g);
-    var pin = el('g', { 'class': 'lqmap-mark', 'data-kind': 'st', 'data-idx': this.items.indexOf(it), tabindex: -1 }, grp);
-    el('path', { d: 'M0,0 C-1.5,-5 -6,-8 -6,-13 A6,6 0 1 1 6,-13 C6,-8 1.5,-5 0,0 Z', fill: bandColor(it.band),
-      stroke: THEME.pin, 'stroke-width': 1.5 }, pin);
-    el('circle', { cx: 0, cy: -13, r: 2.3, fill: THEME.pin }, pin);
-    return grp;
+  LiveMap.prototype.drawPinOnly = function (pn, sc) {
+    var g = this.keyed(this.gPin, 'p' + pn.key, { transform: 'translate(' + pn.x.toFixed(1) + ',' + pn.y.toFixed(1) + ') scale(' + sc + ')' });
+    var pin = el('g', { 'class': 'lqmap-mark', 'data-kind': 'st', 'data-idx': this.items.indexOf(pn.it), tabindex: -1 }, g);
+    el('path', { d: 'M0,0 C-1.5,-5 -6,-8 -6,-13 A6,6 0 1 1 6,-13 C6,-8 1.5,-5 0,0 Z', fill: bandColor(pn.it.band),
+      stroke: this.theme.pinStroke, 'stroke-width': 1.5, 'class': 'lqmap-pin' }, pin);
+    el('circle', { cx: 0, cy: -13, r: 2.3, fill: this.theme.pinStroke }, pin);
   };
 
-  LiveMap.prototype.drawPin = function (g, pt, list, sc) {
-    var grp = this.drawPinOnly(g, pt, list[0], sc);
-    var max = this.mini ? 2 : 4, y = -22;
-    for (var i = 0; i < list.length && i < max; i++) {
-      // each tag: the callsign on top, "LQ8 20m" under it
-      var it = list[i], label = it.mode + ' ' + it.band;
-      var w = 10 + Math.max(label.length * 6.6, it.call.length * 7.6), col = bandColor(it.band);
-      var lg = el('g', { 'class': 'lqmap-mark', 'data-kind': 'st', 'data-idx': this.items.indexOf(it), tabindex: this.mini ? -1 : 0 }, grp);
-      el('rect', { x: -w / 2, y: y - 29, width: w, height: 29, rx: 4, fill: col, stroke: THEME.pin, 'stroke-width': 1 }, lg);
-      var tc = el('text', { x: 0, y: y - 17.5, 'text-anchor': 'middle', fill: textOn(col), 'class': 'lqmap-label' }, lg);
+  // One tag or a stack of tags; a stack gets a short line from each tag to its own pin.
+  LiveMap.prototype.drawTags = function (grp, sc) {
+    var list = grp.stack ? grp.shown : grp.members, b = grp.box, mini = this.mini, w = (b.r - b.l) / sc;
+    for (var i = 0; i < list.length; i++) {
+      var pn = list[i], it = pn.it, col = bandColor(it.band), tw = grp.stack ? w : pn.w / sc;
+      var top = b.t + i * TAG_STEP * sc;
+      if (grp.stack) {   // the leader: from the tag's nearest edge to the top of its pin
+        var ty = top + TAG_H * sc / 2, hx = pn.head.x, hy = pn.y - 19 * sc;
+        var ex = hx < (b.l + b.r) / 2 ? b.l : b.r, ey = ty;   // from the side of the tag (lines run under the tags)
+        var lg = this.keyed(this.gLead, 'l' + pn.key, {});
+        el('line', { x1: ex.toFixed(1), y1: ey.toFixed(1), x2: hx.toFixed(1), y2: hy.toFixed(1), 'class': 'lqmap-leader',
+          stroke: this.theme.leaderHalo, 'stroke-width': 3.5 }, lg);
+        el('line', { x1: ex.toFixed(1), y1: ey.toFixed(1), x2: hx.toFixed(1), y2: hy.toFixed(1), 'class': 'lqmap-leader',
+          stroke: this.theme.leader, 'stroke-width': 1.5 }, lg);
+      }
+      var g = this.keyed(this.gTag, 't' + pn.key, { transform: 'translate(' + (b.l + (grp.stack ? 0 : 0)).toFixed(1) + ',' + top.toFixed(1) + ') scale(' + sc + ')' });
+      var t = el('g', { 'class': 'lqmap-mark', 'data-kind': 'st', 'data-idx': this.items.indexOf(it), tabindex: mini ? -1 : 0 }, g);
+      el('rect', { x: 0, y: 0, width: tw, height: TAG_H, rx: 4, fill: col, stroke: this.theme.tagStroke, 'stroke-width': 1 }, t);
+      var tc = el('text', { x: tw / 2, y: 11.5, 'text-anchor': 'middle', fill: textOn(col), 'class': 'lqmap-label' }, t);
       tc.textContent = it.call;
-      var t = el('text', { x: 0, y: y - 4.5, 'text-anchor': 'middle', fill: textOn(col), 'class': 'lqmap-label lqmap-sub' }, lg);
-      t.textContent = label;
-      y -= 31;
+      var s2 = el('text', { x: tw / 2, y: 24.5, 'text-anchor': 'middle', fill: textOn(col), 'class': 'lqmap-label lqmap-sub' }, t);
+      s2.textContent = it.mode + ' ' + it.band;
     }
-    if (list.length > max) {
-      var more = el('text', { x: 0, y: y - 4, 'text-anchor': 'middle', 'class': 'lqmap-more' }, grp);
-      more.textContent = '+' + (list.length - max);
+    if (grp.stack && grp.members.length > list.length) {
+      var mg = this.keyed(this.gTag, 'm' + grp.members[0].key, {});
+      var more = el('text', { x: ((b.l + b.r) / 2).toFixed(1), y: (b.b - 3 * sc).toFixed(1), 'text-anchor': 'middle', 'class': 'lqmap-more' }, mg);
+      more.textContent = '+' + (grp.members.length - list.length);
     }
   };
 
-  LiveMap.prototype.drawDx = function (g, pt, dx, idx, sc) {
-    var grp = el('g', { transform: 'translate(' + pt.x.toFixed(1) + ',' + pt.y.toFixed(1) + ') scale(' + sc + ')',
-      'class': 'lqmap-mark', 'data-kind': 'dx', 'data-idx': idx, tabindex: this.mini ? -1 : 0 }, g);
-    // a diamond on the entity, its call in a magenta tag beside it
-    el('path', { d: 'M0,-9 L9,0 L0,9 L-9,0 Z', fill: THEME.dx, stroke: '#FFFFFF', 'stroke-width': 2 }, grp);
+  // A diamond on the entity, its call in a magenta tag beside it, the place above and the countdown below.
+  // Returns the screen box it covers (station tags keep out of it).
+  LiveMap.prototype.drawDx = function (pt, dx, idx, sc) {
+    var g = this.keyed(this.gDx, 'd' + dx.call + '#' + pt.k, { transform: 'translate(' + pt.x.toFixed(1) + ',' + pt.y.toFixed(1) + ') scale(' + sc + ')' });
+    var grp = el('g', { 'class': 'lqmap-mark', 'data-kind': 'dx', 'data-idx': idx, tabindex: this.mini ? -1 : 0 }, g);
+    var T = this.theme;
+    el('path', { d: 'M0,-9 L9,0 L0,9 L-9,0 Z', fill: T.dx, stroke: '#FFFFFF', 'stroke-width': 2 }, grp);
     el('circle', { cx: 0, cy: 0, r: 2.5, fill: '#FFFFFF' }, grp);
-    var w = 12 + dx.call.length * 6.6;
+    var w = 12 + dx.call.length * 6.6, right = 12 + w, top = -10;
     if (dx.place) {   // the exact place, above the call (e.g. "Corfu Island")
       var pw = Math.max(w, 10 + String(dx.place).length * 5.8);
-      el('rect', { x: 12, y: -24, width: pw, height: 14, rx: 4, fill: '#0F172A', stroke: THEME.dx, 'stroke-width': 1, opacity: 0.92 }, grp);
-      var pl = el('text', { x: 12 + pw / 2, y: -13.5, 'text-anchor': 'middle', fill: '#F8FAFC', 'class': 'lqmap-label lqmap-sub' }, grp);
+      el('rect', { x: 12, y: -24, width: pw, height: 14, rx: 4, fill: T.dxBadge, stroke: T.dx, 'stroke-width': 1, opacity: 0.92 }, grp);
+      var pl = el('text', { x: 12 + pw / 2, y: -13.5, 'text-anchor': 'middle', fill: T.dxBadgeText, 'class': 'lqmap-label lqmap-sub' }, grp);
       pl.textContent = dx.place;
+      right = Math.max(right, 12 + pw); top = -24;
     }
-    el('rect', { x: 12, y: -8, width: w, height: 16, rx: 4, fill: THEME.dx, stroke: THEME.dxStroke, 'stroke-width': 1 }, grp);
+    el('rect', { x: 12, y: -8, width: w, height: 16, rx: 4, fill: T.dx, stroke: T.dxStroke, 'stroke-width': 1 }, grp);
     var t = el('text', { x: 12 + w / 2, y: 3.5, 'text-anchor': 'middle', fill: '#FFFFFF', 'class': 'lqmap-label' }, grp);
     t.textContent = dx.call;
     var txt = dxClock(dx, Date.now()), cw = Math.max(w, 10 + txt.length * 5.8);
-    el('rect', { x: 12, y: 10, width: cw, height: 14, rx: 4, fill: '#0F172A', stroke: THEME.dx, 'stroke-width': 1, opacity: 0.92 }, grp);
-    var ck = el('text', { x: 12 + cw / 2, y: 20.5, 'text-anchor': 'middle', fill: '#F9A8D4', 'class': 'lqmap-label lqmap-sub lqmap-dxclock' }, grp);
+    el('rect', { x: 12, y: 10, width: cw, height: 14, rx: 4, fill: T.dxBadge, stroke: T.dx, 'stroke-width': 1, opacity: 0.92 }, grp);
+    var ck = el('text', { x: 12 + cw / 2, y: 20.5, 'text-anchor': 'middle', fill: T.dxClock, 'class': 'lqmap-label lqmap-sub lqmap-dxclock' }, grp);
     ck.textContent = txt;
-    (this.dxClocks = this.dxClocks || []).push({ node: ck, dx: dx });
+    this.dxClocks.push({ node: ck, dx: dx });
+    right = Math.max(right, 12 + cw);
+    return { l: pt.x - 10 * sc, t: pt.y + top * sc, r: pt.x + (right + 2) * sc, b: pt.y + 25 * sc };
   };
   // every second: the markers' clocks and the open popup's countdown, nothing else redrawn
   LiveMap.prototype.tickDx = function () {
@@ -603,7 +809,7 @@
     this.dx = dx;
     var key = this.popKey;
     this.hidePop();
-    this.render();
+    this.render(true);
     return key;
   };
 
