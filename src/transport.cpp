@@ -39,6 +39,8 @@
 #include <cstring>
 #include <fstream>
 #include <algorithm>
+#include <array>
+#include <atomic>
 #include <thread>
 
 namespace lq {
@@ -47,31 +49,6 @@ namespace {
 
 constexpr double TWO_PI = 6.28318530717958647692;
 constexpr float PI_F = 3.14159265358979323846f;
-
-// In-place Radix-2 Cooley-Tukey FFT for fast spectrogram pre-screening
-void fft_radix2(std::vector<std::complex<float>>& a) {
-    size_t n = a.size();
-    for (size_t i = 1, j = 0; i < n; ++i) {
-        size_t bit = n >> 1;
-        for (; j & bit; bit >>= 1) j ^= bit;
-        j ^= bit;
-        if (i < j) std::swap(a[i], a[j]);
-    }
-    for (size_t len = 2; len <= n; len <<= 1) {
-        float ang = -2.0f * PI_F / static_cast<float>(len);
-        std::complex<float> wlen(std::cos(ang), std::sin(ang));
-        for (size_t i = 0; i < n; i += len) {
-            std::complex<float> w(1.0f, 0.0f);
-            for (size_t j = 0; j < len / 2; ++j) {
-                std::complex<float> u = a[i + j];
-                std::complex<float> v = a[i + j + len / 2] * w;
-                a[i + j] = u + v;
-                a[i + j + len / 2] = u - v;
-                w *= wlen;
-            }
-        }
-    }
-}
 
 struct GfskPulseCache {
     int n_spsym = 0;
@@ -1052,418 +1029,974 @@ bool audio_to_message(const std::vector<float>& audio_samples, float base_freq_h
     return false;
 }
 
+// =============================================================================
+// Multi-signal decoder
+//
+//   1. Candidate search on a power spectrogram (half-tone frequency bins, quarter-symbol time steps):
+//      soft Costas score = sync-tone power against the mean power of the other tones.
+//   2. Per candidate: band-limited complex baseband (one FFT of the whole buffer, one small inverse FFT
+//      per candidate, 32 samples per symbol), then a fine time / frequency search on the sync symbols and
+//      over the whole frame.
+//   3. Complex tone correlations per symbol; carrier calibration: turn per symbol and timing from the sync
+//      blocks, then all sync symbols coherent together (sidelobes judged with the data symbols) for the
+//      carrier phase of the frame.
+//   4. Soft bits: coherent (carrier phase known) symbol by symbol, and noncoherent over groups of symbols.
+//   5. Sum-product LDPC on each; in deep mode ordered-statistics decoding on the coherent soft bits
+//      (CRC-14 checked, distance-gated).
+//   6. Deep mode: the decoded signals are masked in the spectrogram and the search runs again.
+// =============================================================================
+
+namespace {
+
+using cfloat = std::complex<float>;
+
+// Plain complex product (std::complex's operator* also handles inf/NaN, which costs a library call per product).
+inline cfloat cmul(cfloat a, cfloat b) {
+    return cfloat(a.real() * b.real() - a.imag() * b.imag(), a.real() * b.imag() + a.imag() * b.real());
+}
+
+inline cfloat unit(double phase) {
+    return cfloat(static_cast<float>(std::cos(phase)), static_cast<float>(std::sin(phase)));
+}
+
+// Decoder settings, measured on AWGN at the protocols' threshold SNRs.
+constexpr int DEEP_MAX_CANDIDATES = 200;   // candidates decoded per pass
+constexpr int FAST_MAX_CANDIDATES = 60;
+constexpr float DEEP_MIN_SCORE = 1.1f;     // sync score against the noise floor of the score
+constexpr float FAST_MIN_SCORE = 1.3f;
+constexpr int PEAKS_PER_BIN = 4;           // start times kept per frequency bin
+constexpr int FREQ_STEPS = 8;              // fine frequency search: +/- half a tone spacing in 2 * 8 steps
+constexpr double TIMING_RANGE = 3.0;       // sync-block timing search, baseband samples (of ~32 per symbol)
+constexpr int BLOCK_W_STEPS = 25;          // sync-block turn search: +/- 0.5 rad per symbol ...
+constexpr double BLOCK_W_STEP = 0.02;      // ... in 0.02 rad steps
+constexpr int GLOBAL_W_STEPS = 150;        // whole-frame turn search: +/- 0.3 rad per symbol ...
+constexpr double GLOBAL_W_STEP = 0.002;    // ... in 0.002 rad steps
+constexpr int W_CANDIDATES = 5;            // whole-frame turn peaks judged with the data symbols
+constexpr float LLR_GAIN = 1.5f;           // applied to the model LLRs (the amplitude estimate is noisy)
+constexpr float LLR_CLAMP = 12.0f;
+constexpr float LLR_MEDIAN_CAP = 4.0f;      // typical |llr| kept at most this (see condition_llrs)
+constexpr int OSD_ORDER = 2;
+constexpr int OSD_PAIR_SPAN = 40;
+constexpr float OSD_MAX_DISTANCE = 0.04f;  // OSD codeword: disagreement / total |llr|
+constexpr int OSD_MAX_SILENT_BITS = 8;     // bits with |llr| < 2 % of the mean allowed before OSD (AWGN: 0..6)
+
+// ---- Mixed-radix FFT (any length; fast for lengths made of 2, 3 and 5) ----
+
+struct FftPlan {
+    int n = 0;
+    std::vector<int> factors;
+    std::vector<cfloat> twiddles;   // exp(-2 pi i k / n)
+};
+
+FftPlan make_fft_plan(int n) {
+    FftPlan plan;
+    plan.n = n;
+    int m = n;
+    for (int p : {4, 2, 3, 5}) {
+        while (m % p == 0 && m > 1) { plan.factors.push_back(p); m /= p; }
+    }
+    for (int p = 7; m > 1; p += 2) {
+        while (m % p == 0) { plan.factors.push_back(p); m /= p; }
+    }
+    if (plan.factors.empty()) plan.factors.push_back(1);
+    plan.twiddles.resize(static_cast<size_t>(n));
+    for (int k = 0; k < n; ++k) {
+        double a = -TWO_PI * static_cast<double>(k) / static_cast<double>(n);
+        plan.twiddles[static_cast<size_t>(k)] = cfloat(static_cast<float>(std::cos(a)), static_cast<float>(std::sin(a)));
+    }
+    return plan;
+}
+
+void fft_pass(const cfloat* in, cfloat* out, int n, int in_stride, const int* factors, const FftPlan& plan, int tw_stride) {
+    const int p = factors[0];
+    const int m = n / p;
+    if (m == 1) {
+        for (int q = 0; q < p; ++q) out[q] = in[q * in_stride];
+    } else {
+        for (int q = 0; q < p; ++q) {
+            fft_pass(in + q * in_stride, out + q * m, m, in_stride * p, factors + 1, plan, tw_stride * p);
+        }
+    }
+    if (p == 1) return;
+    const cfloat* tw = plan.twiddles.data();
+    const int big_n = plan.n;
+    if (p == 2) {
+        for (int k = 0; k < m; ++k) {
+            cfloat a = out[k];
+            cfloat b = cmul(out[m + k], tw[k * tw_stride]);
+            out[k] = a + b;
+            out[m + k] = a - b;
+        }
+        return;
+    }
+    if (p == 4) {
+        for (int k = 0; k < m; ++k) {
+            cfloat a0 = out[k];
+            cfloat a1 = cmul(out[m + k], tw[k * tw_stride]);
+            cfloat a2 = cmul(out[2 * m + k], tw[2 * k * tw_stride]);
+            cfloat a3 = cmul(out[3 * m + k], tw[3 * k * tw_stride]);
+            cfloat s02 = a0 + a2, d02 = a0 - a2, s13 = a1 + a3, d13 = a1 - a3;
+            cfloat d13_mj(d13.imag(), -d13.real());   // d13 * (-i)
+            out[k] = s02 + s13;
+            out[m + k] = d02 + d13_mj;
+            out[2 * m + k] = s02 - s13;
+            out[3 * m + k] = d02 - d13_mj;
+        }
+        return;
+    }
+    cfloat tmp_small[16];
+    std::vector<cfloat> tmp_big;
+    cfloat* tmp = tmp_small;
+    if (p > 16) { tmp_big.resize(static_cast<size_t>(p)); tmp = tmp_big.data(); }
+    for (int k = 0; k < m; ++k) {
+        for (int q = 0; q < p; ++q) tmp[q] = cmul(out[q * m + k], tw[q * k * tw_stride]);
+        for (int r = 0; r < p; ++r) {
+            cfloat acc = tmp[0];
+            for (int q = 1; q < p; ++q) {
+                acc += cmul(tmp[q], tw[(static_cast<long long>(q) * r * m * tw_stride) % big_n]);
+            }
+            out[r * m + k] = acc;
+        }
+    }
+}
+
+void fft_forward(const FftPlan& plan, const cfloat* in, cfloat* out) {
+    fft_pass(in, out, plan.n, 1, plan.factors.data(), plan, 1);
+}
+
+void fft_inverse(const FftPlan& plan, std::vector<cfloat>& buf, std::vector<cfloat>& out) {
+    for (auto& v : buf) v = std::conj(v);
+    out.resize(buf.size());
+    fft_forward(plan, buf.data(), out.data());
+    for (auto& v : out) v = std::conj(v);
+}
+
+int next_fast_size(int n) {
+    for (int m = std::max(n, 1);; ++m) {
+        int r = m;
+        for (int p : {2, 3, 5}) while (r % p == 0) r /= p;
+        if (r == 1) return m;
+    }
+}
+
+// ---- Frame layout ----
+
+struct FrameLayout {
+    int num_tones = 8;
+    int bits_per_symbol = 3;
+    int total_symbols = 79;
+    int center_tone = 3;                    // tone placed near 0 Hz in the baseband
+    std::vector<std::pair<int, int>> sync;  // (symbol index, tone)
+    std::vector<int> data_symbols;          // symbol indices in codeword bit order
+    const uint8_t* gray_inv = nullptr;      // tone -> bit value
+};
+
+FrameLayout make_frame_layout(Protocol proto) {
+    FrameLayout L;
+    if (proto == Protocol::LQ8 || proto == Protocol::LQ16) {
+        L.num_tones = 8; L.bits_per_symbol = 3; L.total_symbols = 79; L.center_tone = 3;
+        for (int start : COSTAS_OFFSETS_8) {
+            for (int k = 0; k < 7; ++k) L.sync.push_back({start + k, COSTAS_ARRAY_8[k]});
+        }
+        for (int s = 7; s < 36; ++s) L.data_symbols.push_back(s);
+        for (int s = 43; s < 72; ++s) L.data_symbols.push_back(s);
+        L.gray_inv = GRAY_INV_MAP_8.data();
+    } else {
+        L.num_tones = 4; L.bits_per_symbol = 2; L.total_symbols = 105; L.center_tone = 1;
+        const int starts[4] = {1, 34, 67, 100};
+        const std::array<uint8_t, 4>* pats[4] = {&COSTAS_SYNC1_4, &COSTAS_SYNC2_4, &COSTAS_SYNC3_4, &COSTAS_SYNC4_4};
+        for (int b = 0; b < 4; ++b) {
+            for (int k = 0; k < 4; ++k) L.sync.push_back({starts[b] + k, (*pats[b])[k]});
+        }
+        for (int s = 5; s < 34; ++s) L.data_symbols.push_back(s);
+        for (int s = 38; s < 67; ++s) L.data_symbols.push_back(s);
+        for (int s = 71; s < 100; ++s) L.data_symbols.push_back(s);
+        L.gray_inv = GRAY_INV_MAP_4.data();
+    }
+    return L;
+}
+
+// ---- Shared state of one decode call ----
+
+struct DecodeContext {
+    Protocol proto;
+    ProtocolParams params;
+    FrameLayout layout;
+    float sample_rate = 12000.0f;
+    bool deep = false;
+
+    // Candidate spectrogram
+    int sym_len = 0;          // samples per symbol (rounded)
+    int time_osr = 4;         // spectrogram steps per symbol
+    int freq_osr = 2;         // spectrogram bins per tone spacing
+    int hop = 0;              // samples per spectrogram step
+    int spec_fft = 0;
+    int num_steps = 0;
+    int bin_lo = 0, bin_hi = 0;   // candidate tone-0 bins searched
+    int spec_bins = 0;            // bins kept per step (from 0)
+    std::vector<float> power;     // num_steps x spec_bins
+
+    // Whole-buffer spectrum for baseband extraction
+    int big_n = 0;
+    std::vector<cfloat> spectrum;
+    int base_n = 0;               // baseband length
+    FftPlan base_plan;
+    double base_rate = 0.0;       // baseband sample rate
+    double base_sps = 0.0;        // baseband samples per symbol
+    int base_sym = 0;             // samples integrated per symbol
+    std::vector<cfloat> tone_base;   // tone t at (t - center_tone) * spacing, base_sym samples each
+};
+
+struct Candidate {
+    float score;
+    int bin;    // tone-0 spectrogram bin
+    int step;   // spectrogram step of symbol 0
+};
+
+struct CandidateResult {
+    bool ok = false;
+    Message msg;
+    float freq_hz = 0.0f;
+    double start_sample = 0.0;
+};
+
+bool finish_decode(const uint8_t decoded_91[LDPC_INPUT_BYTES], Protocol proto, Message& msg) {
+    bool all_zero = true;
+    for (int i = 0; i < LDPC_INPUT_BYTES; ++i) {
+        if (decoded_91[i] != 0) { all_zero = false; break; }
+    }
+    if (all_zero || !verify_crc14(decoded_91)) return false;
+    uint8_t payload[PAYLOAD_BYTES];
+    extract_payload(decoded_91, payload);
+    if (proto == Protocol::LQ4 || proto == Protocol::LQ2) {
+        for (size_t i = 0; i < PAYLOAD_BYTES; ++i) payload[i] ^= FT4_XOR_SEQUENCE[i];
+    }
+    if (!decode_message(payload, msg)) return false;
+    msg.raw_payload.assign(payload, payload + PAYLOAD_BYTES);
+    return true;
+}
+
+void build_spectrogram(DecodeContext& ctx, const std::vector<float>& audio) {
+    const int L = ctx.sym_len;
+    ctx.spec_fft = next_fast_size(L * ctx.freq_osr);
+    FftPlan plan = make_fft_plan(ctx.spec_fft);
+    ctx.hop = std::max(1, L / ctx.time_osr);
+    long long avail = static_cast<long long>(audio.size()) - L;
+    ctx.num_steps = avail < 0 ? 0 : static_cast<int>(avail / ctx.hop) + 1;
+    ctx.power.assign(static_cast<size_t>(ctx.num_steps) * ctx.spec_bins, 0.0f);
+    std::vector<cfloat> in(static_cast<size_t>(ctx.spec_fft)), out(static_cast<size_t>(ctx.spec_fft));
+    // Two real frames per complex FFT (one in the real part, one in the imaginary part).
+    const int n = ctx.spec_fft;
+    for (int t = 0; t < ctx.num_steps; t += 2) {
+        const bool pair = t + 1 < ctx.num_steps;
+        const size_t a = static_cast<size_t>(t) * ctx.hop;
+        const size_t b = a + static_cast<size_t>(ctx.hop);
+        for (int i = 0; i < L; ++i) in[i] = cfloat(audio[a + i], pair ? audio[b + i] : 0.0f);
+        for (int i = L; i < n; ++i) in[i] = cfloat(0.0f, 0.0f);
+        fft_forward(plan, in.data(), out.data());
+        float* row_a = &ctx.power[static_cast<size_t>(t) * ctx.spec_bins];
+        float* row_b = pair ? &ctx.power[static_cast<size_t>(t + 1) * ctx.spec_bins] : nullptr;
+        for (int k = 0; k < ctx.spec_bins; ++k) {
+            const cfloat zk = out[k];
+            const cfloat zc = std::conj(out[(n - k) % n]);
+            row_a[k] = 0.25f * std::norm(zk + zc);
+            if (row_b) row_b[k] = 0.25f * std::norm(zk - zc);
+        }
+    }
+}
+
+float tone_bin_offset(const DecodeContext& ctx, int tone) {
+    return static_cast<float>(tone) * ctx.params.tone_spacing * static_cast<float>(ctx.spec_fft) / ctx.sample_rate;
+}
+
+// Soft Costas score: power on the sync tones against the mean power of the other tones of the same symbols.
+float sync_score(const DecodeContext& ctx, int bin, int step) {
+    const int nt = ctx.layout.num_tones;
+    int off[16];
+    for (int t = 0; t < nt; ++t) off[t] = static_cast<int>(std::lround(tone_bin_offset(ctx, t)));
+    if (bin < 0 || bin + off[nt - 1] >= ctx.spec_bins) return 0.0f;
+    double sig = 0.0, all = 0.0;
+    for (const auto& st : ctx.layout.sync) {
+        int s = step + st.first * ctx.time_osr;
+        if (s < 0 || s >= ctx.num_steps) continue;
+        const float* row = &ctx.power[static_cast<size_t>(s) * ctx.spec_bins + bin];
+        for (int t = 0; t < nt; ++t) all += row[off[t]];
+        sig += row[off[st.second]];
+    }
+    const double rest = (all - sig) / static_cast<double>(nt - 1);
+    return rest > 0.0 ? static_cast<float>(sig / rest) : 0.0f;
+}
+
+std::vector<Candidate> find_candidates(const DecodeContext& ctx, int max_candidates, float min_score,
+                                       const std::vector<Candidate>& exclude) {
+    std::vector<Candidate> out;
+    const int frame_steps = (ctx.layout.total_symbols - 1) * ctx.time_osr + 1;
+    // Starts from a little before the buffer (partially received frames) to where the frame still fits.
+    const int step_lo = -ctx.time_osr * 2;
+    const int step_hi = std::max(0, ctx.num_steps - frame_steps + ctx.time_osr * 2);
+    const int min_sep = 2 * ctx.time_osr;
+
+    // Per frequency bin, the strongest few start times (each at least two symbols from the others).
+    const int nbins = ctx.bin_hi - ctx.bin_lo + 1;
+    std::vector<std::vector<Candidate>> peaks(static_cast<size_t>(nbins));
+    std::vector<float> best_scores;
+    std::vector<float> scores(static_cast<size_t>(step_hi - step_lo + 1));
+    std::vector<char> used(scores.size());
+    for (int b = ctx.bin_lo; b <= ctx.bin_hi; ++b) {
+        for (int s = step_lo; s <= step_hi; ++s) scores[s - step_lo] = sync_score(ctx, b, s);
+        std::fill(used.begin(), used.end(), 0);
+        auto& pk = peaks[static_cast<size_t>(b - ctx.bin_lo)];
+        for (int n = 0; n < PEAKS_PER_BIN; ++n) {
+            int best = -1;
+            for (size_t i = 0; i < scores.size(); ++i) {
+                if (!used[i] && scores[i] > 0.0f && (best < 0 || scores[i] > scores[static_cast<size_t>(best)])) best = static_cast<int>(i);
+            }
+            if (best < 0) break;
+            pk.push_back({scores[static_cast<size_t>(best)], b, best + step_lo});
+            for (int i = std::max(0, best - min_sep + 1); i < std::min(static_cast<int>(scores.size()), best + min_sep); ++i) used[i] = 1;
+        }
+        best_scores.push_back(pk.empty() ? 0.0f : pk[0].score);
+    }
+    if (best_scores.empty()) return out;
+
+    // Normalise by a low percentile of the per-bin best scores (the noise floor of the score).
+    std::vector<float> sorted = best_scores;
+    size_t k = sorted.size() * 2 / 5;
+    std::nth_element(sorted.begin(), sorted.begin() + static_cast<long>(k), sorted.end());
+    float floor_score = std::max(sorted[k], 1e-6f);
+
+    // Keep local maxima across neighbouring bins with a similar start time.
+    std::vector<Candidate> kept;
+    for (int bi = 0; bi < nbins; ++bi) {
+        for (const auto& c : peaks[static_cast<size_t>(bi)]) {
+            const float sc = c.score / floor_score;
+            if (sc < min_score) continue;
+            bool dominated = false;
+            for (int nb = std::max(0, bi - 1); nb <= std::min(nbins - 1, bi + 1) && !dominated; ++nb) {
+                if (nb == bi) continue;
+                for (const auto& o : peaks[static_cast<size_t>(nb)]) {
+                    if (std::abs(o.step - c.step) <= ctx.time_osr && (o.score > c.score || (o.score == c.score && o.bin < c.bin))) {
+                        dominated = true;
+                        break;
+                    }
+                }
+            }
+            if (dominated) continue;
+            bool excluded = false;
+            for (const auto& e : exclude) {
+                if (std::abs(e.bin - c.bin) <= 1 && std::abs(e.step - c.step) <= ctx.time_osr) { excluded = true; break; }
+            }
+            if (!excluded) kept.push_back({sc, c.bin, c.step});
+        }
+    }
+    std::stable_sort(kept.begin(), kept.end(), [](const Candidate& a, const Candidate& b) { return a.score > b.score; });
+    if (static_cast<int>(kept.size()) > max_candidates) kept.resize(static_cast<size_t>(max_candidates));
+    return kept;
+}
+
+void build_spectrum(DecodeContext& ctx, const std::vector<float>& audio) {
+    // Baseband: about 32 samples per symbol. The whole-buffer FFT length is chosen so that the baseband
+    // length is FFT friendly too.
+    // With a whole number of audio samples per baseband sample, symbols start on exact baseband samples.
+    const int sps_target = 32;
+    const double decim = static_cast<double>(ctx.sym_len) / sps_target;
+    ctx.base_n = next_fast_size(static_cast<int>(std::ceil(static_cast<double>(audio.size()) / decim)) + 1);
+    if (ctx.sym_len % sps_target == 0) {
+        ctx.big_n = ctx.base_n * (ctx.sym_len / sps_target);
+    } else {
+        ctx.big_n = next_fast_size(static_cast<int>(std::ceil(ctx.base_n * decim)));
+    }
+    ctx.base_rate = static_cast<double>(ctx.base_n) * ctx.sample_rate / static_cast<double>(ctx.big_n);
+    ctx.base_sps = ctx.base_rate * ctx.params.symbol_period;
+    ctx.base_sym = static_cast<int>(std::lround(ctx.base_sps));
+    ctx.base_plan = make_fft_plan(ctx.base_n);
+    ctx.base_sym = std::min(ctx.base_sym, 128);
+    ctx.tone_base.resize(static_cast<size_t>(ctx.layout.num_tones) * ctx.base_sym);
+    for (int t = 0; t < ctx.layout.num_tones; ++t) {
+        const double w = -TWO_PI * (t - ctx.layout.center_tone) * static_cast<double>(ctx.params.tone_spacing) / ctx.base_rate;
+        for (int i = 0; i < ctx.base_sym; ++i) ctx.tone_base[static_cast<size_t>(t) * ctx.base_sym + i] = unit(w * i);
+    }
+
+    FftPlan plan = make_fft_plan(ctx.big_n);
+    std::vector<cfloat> in(static_cast<size_t>(ctx.big_n), cfloat(0.0f, 0.0f));
+    for (size_t i = 0; i < audio.size(); ++i) in[i] = cfloat(audio[i], 0.0f);
+    ctx.spectrum.resize(static_cast<size_t>(ctx.big_n));
+    fft_forward(plan, in.data(), ctx.spectrum.data());
+}
+
+// Complex baseband around tone `center_tone` of a signal whose tone 0 is at `f0` Hz.
+// Returns the frequency (Hz) that sits at 0 Hz in the baseband.
+double extract_baseband(const DecodeContext& ctx, double f0, std::vector<cfloat>& z) {
+    const double bin_hz = ctx.sample_rate / static_cast<double>(ctx.big_n);
+    const double spacing = ctx.params.tone_spacing;
+    const double fc = f0 + ctx.layout.center_tone * spacing;
+    const long ic = std::lround(fc / bin_hz);
+    // Pass band: the tones plus one spacing on each side, with a raised-cosine edge of one spacing.
+    const double half_pass = (ctx.layout.num_tones / 2.0 + 1.0) * spacing;
+    const double edge = spacing;
+    const long half = static_cast<long>(std::ceil((half_pass + edge) / bin_hz));
+    std::vector<cfloat> buf(static_cast<size_t>(ctx.base_n), cfloat(0.0f, 0.0f));
+    const float scale = 1.0f / static_cast<float>(ctx.big_n);
+    for (long d = -half; d <= half; ++d) {
+        long idx = ic + d;
+        if (idx <= 0 || idx >= ctx.big_n / 2) continue;
+        double w = 1.0;
+        const double middle = ((ctx.layout.num_tones - 1) / 2.0 - ctx.layout.center_tone) * spacing;
+        const double from_center = std::fabs(static_cast<double>(d) * bin_hz - middle);
+        if (from_center > half_pass) {
+            double x = (from_center - half_pass) / edge;
+            w = x >= 1.0 ? 0.0 : 0.5 * (1.0 + std::cos(PI_F * x));
+        }
+        if (w <= 0.0) continue;
+        long slot = ((d % ctx.base_n) + ctx.base_n) % ctx.base_n;
+        buf[static_cast<size_t>(slot)] = ctx.spectrum[static_cast<size_t>(idx)] * (scale * static_cast<float>(w));
+    }
+    fft_inverse(ctx.base_plan, buf, z);
+    return static_cast<double>(ic) * bin_hz;
+}
+
+// Tone reference vectors for one baseband symbol: tone t at (t - center_tone) * spacing + df.
+void make_tone_refs(const DecodeContext& ctx, double df, std::vector<cfloat>& refs) {
+    const int n = ctx.base_sym;
+    const int nt = ctx.layout.num_tones;
+    refs.resize(static_cast<size_t>(nt) * n);
+    cfloat rot[128];
+    const double w = -TWO_PI * df / ctx.base_rate;
+    for (int i = 0; i < n && i < 128; ++i) rot[i] = unit(w * i);
+    for (int t = 0; t < nt; ++t) {
+        const cfloat* base = &ctx.tone_base[static_cast<size_t>(t) * n];
+        for (int i = 0; i < n; ++i) refs[static_cast<size_t>(t) * n + i] = cmul(base[i], rot[i]);
+    }
+}
+
+inline cfloat symbol_tone(const DecodeContext& ctx, const std::vector<cfloat>& z, long start, const cfloat* ref) {
+    const int n = ctx.base_sym;
+    float re = 0.0f, im = 0.0f;
+    long lo = std::max(0L, -start);
+    long hi = std::min(static_cast<long>(n), static_cast<long>(z.size()) - start);
+    const cfloat* zp = z.data() + start;
+    for (long i = lo; i < hi; ++i) {
+        re += zp[i].real() * ref[i].real() - zp[i].imag() * ref[i].imag();
+        im += zp[i].real() * ref[i].imag() + zp[i].imag() * ref[i].real();
+    }
+    return cfloat(re, im);
+}
+
+inline long symbol_start(const DecodeContext& ctx, long tau, int sym) {
+    return tau + std::lround(static_cast<double>(sym) * ctx.base_sps);
+}
+
+double sync_power(const DecodeContext& ctx, const std::vector<cfloat>& z, long tau, const std::vector<cfloat>& refs) {
+    double p = 0.0;
+    for (const auto& st : ctx.layout.sync) {
+        cfloat c = symbol_tone(ctx, z, symbol_start(ctx, tau, st.first), &refs[static_cast<size_t>(st.second) * ctx.base_sym]);
+        p += std::norm(c);
+    }
+    return p;
+}
+
+// log I0(x), the modified Bessel function of order 0 (noncoherent detection of a tone of unknown phase).
+inline double log_bessel_i0(double x) {
+    if (x < 3.75) {
+        double t = (x / 3.75) * (x / 3.75);
+        return std::log(1.0 + t * (3.5156229 + t * (3.0899424 + t * (1.2067492 + t * (0.2659732 + t * (0.0360768 + t * 0.0045813))))));
+    }
+    double t = 3.75 / x;
+    double p = 0.39894228 + t * (0.01328592 + t * (0.00225319 + t * (-0.00157565 + t * (0.00916281 + t * (-0.02057706 +
+               t * (0.02635537 + t * (-0.01647633 + t * 0.00392377)))))));
+    return x - 0.5 * std::log(x) + std::log(p);
+}
+
+// Log-likelihood ratios of `group` consecutive data symbols taken together, for a tone of amplitude `amp` in complex
+// noise of power `noise` per tone correlation: each tone combination has likelihood I0(2 amp |sum| / noise), summed
+// over the combinations with the bit at 0 and at 1.
+void group_llrs(const FrameLayout& L, const std::vector<cfloat>& c, int group, double amp, double noise, float* out) {
+    const int nt = L.num_tones;
+    const int nb = L.bits_per_symbol;
+    const int nd = static_cast<int>(L.data_symbols.size());
+    const double k = 2.0 * amp / noise;
+    int bit = 0;
+    int d = 0;
+    std::vector<double> lv;
+    while (d < nd) {
+        int g = 1;
+        while (g < group && d + g < nd && L.data_symbols[d + g] == L.data_symbols[d + g - 1] + 1) ++g;
+        const int gbits = g * nb;
+        int combos = 1;
+        for (int j = 0; j < g; ++j) combos *= nt;
+        lv.resize(static_cast<size_t>(combos));
+        double vmax = -1e300;
+        for (int idx = 0; idx < combos; ++idx) {
+            int rem = idx;
+            cfloat sum(0.0f, 0.0f);
+            for (int j = g - 1; j >= 0; --j) {
+                sum += c[static_cast<size_t>(d + j) * nt + rem % nt];
+                rem /= nt;
+            }
+            lv[idx] = log_bessel_i0(k * std::abs(sum));
+            vmax = std::max(vmax, lv[idx]);
+        }
+        double p0[12], p1[12];
+        for (int b = 0; b < gbits; ++b) { p0[b] = 0.0; p1[b] = 0.0; }
+        for (int idx = 0; idx < combos; ++idx) {
+            double w = std::exp(lv[idx] - vmax);
+            int rem = idx;
+            for (int j = g - 1; j >= 0; --j) {
+                int val = L.gray_inv[rem % nt];
+                rem /= nt;
+                for (int b = 0; b < nb; ++b) {
+                    if ((val >> (nb - 1 - b)) & 1) p1[j * nb + b] += w; else p0[j * nb + b] += w;
+                }
+            }
+        }
+        for (int b = 0; b < gbits && bit < LDPC_CODEWORD_BITS; ++b) {
+            out[bit++] = static_cast<float>(std::log(std::max(p0[b], 1e-300)) - std::log(std::max(p1[b], 1e-300)));
+        }
+        d += g;
+    }
+}
+
+// Coherent log-likelihood ratios: with the carrier phase known (taken out of `c`), a tone of amplitude `amp` in
+// complex noise of power `noise` has likelihood exp(2 amp Re(c) / noise).
+void coherent_llrs(const FrameLayout& L, const std::vector<cfloat>& c, double amp, double noise, float* out) {
+    const int nt = L.num_tones;
+    const int nb = L.bits_per_symbol;
+    const double k = 2.0 * amp / noise;
+    int bit = 0;
+    for (size_t d = 0; d < L.data_symbols.size(); ++d) {
+        double v[16];
+        double vmax = -1e300;
+        for (int t = 0; t < nt; ++t) {
+            v[t] = k * c[d * nt + t].real();
+            vmax = std::max(vmax, v[t]);
+        }
+        double p0[4] = {0.0, 0.0, 0.0, 0.0}, p1[4] = {0.0, 0.0, 0.0, 0.0};
+        for (int t = 0; t < nt; ++t) {
+            double w = std::exp(v[t] - vmax);
+            int val = L.gray_inv[t];
+            for (int b = 0; b < nb; ++b) {
+                if ((val >> (nb - 1 - b)) & 1) p1[b] += w; else p0[b] += w;
+            }
+        }
+        for (int b = 0; b < nb && bit < LDPC_CODEWORD_BITS; ++b) {
+            out[bit++] = static_cast<float>(std::log(std::max(p0[b], 1e-300)) - std::log(std::max(p1[b], 1e-300)));
+        }
+    }
+}
+
+// Applies the LLR gain, then keeps the typical (median) magnitude at most LLR_MEDIAN_CAP before clipping. At high SNR
+// the model LLRs are all huge; without this, clipping would give a faded or missing stretch of the frame the same
+// confidence as the rest.
+void condition_llrs(float* llr) {
+    float mags[LDPC_CODEWORD_BITS];
+    for (int i = 0; i < LDPC_CODEWORD_BITS; ++i) mags[i] = std::fabs(llr[i]) * LLR_GAIN;
+    std::nth_element(mags, mags + LDPC_CODEWORD_BITS / 2, mags + LDPC_CODEWORD_BITS);
+    const float median = mags[LDPC_CODEWORD_BITS / 2];
+    const float scale = LLR_GAIN * (median > LLR_MEDIAN_CAP ? LLR_MEDIAN_CAP / median : 1.0f);
+    for (int i = 0; i < LDPC_CODEWORD_BITS; ++i) llr[i] = std::clamp(llr[i] * scale, -LLR_CLAMP, LLR_CLAMP);
+}
+
+// Fine time / frequency search on the sync symbols, then over the whole frame. Returns the baseband start sample;
+// `best_k` receives the frequency step (in units of `fstep` from `df0`).
+long fine_sync(const DecodeContext& ctx, const std::vector<cfloat>& z, double df0, double fstep, long tau0, int& best_k) {
+    const FrameLayout& L = ctx.layout;
+    std::vector<cfloat> refs;
+    make_tone_refs(ctx, df0, refs);
+    const long tspan = std::max(2L, std::lround(ctx.base_sps / ctx.time_osr)) + 2;
+    long best_tau = tau0;
+    double best_p = -1.0;
+    for (long tau = tau0 - tspan; tau <= tau0 + tspan; ++tau) {
+        double p = sync_power(ctx, z, tau, refs);
+        if (p > best_p) { best_p = p; best_tau = tau; }
+    }
+    best_k = 0;
+    for (int k = -FREQ_STEPS; k <= FREQ_STEPS; ++k) {
+        make_tone_refs(ctx, df0 + k * fstep, refs);
+        double p = sync_power(ctx, z, best_tau, refs);
+        if (p > best_p) { best_p = p; best_k = k; }
+    }
+    for (int round = 0; round < 2; ++round) {
+        const long ct = best_tau;
+        const int ck = best_k;
+        for (int k = ck - 1; k <= ck + 1; ++k) {
+            make_tone_refs(ctx, df0 + k * fstep, refs);
+            for (long tau = ct - 2; tau <= ct + 2; ++tau) {
+                double p = sync_power(ctx, z, tau, refs);
+                if (p > best_p) { best_p = p; best_tau = tau; best_k = k; }
+            }
+        }
+        if (best_tau == ct && best_k == ck) break;
+    }
+
+    // Whole frame: the known tone of every sync symbol plus the strongest tone of every data symbol, four times as
+    // many symbols as the sync blocks alone.
+    auto frame_energy = [&](long tau, const std::vector<cfloat>& r) {
+        double e = 0.0;
+        for (const auto& st : L.sync) {
+            e += std::norm(symbol_tone(ctx, z, symbol_start(ctx, tau, st.first), &r[static_cast<size_t>(st.second) * ctx.base_sym]));
+        }
+        for (int sym : L.data_symbols) {
+            const long st = symbol_start(ctx, tau, sym);
+            double m = 0.0;
+            for (int t = 0; t < L.num_tones; ++t) {
+                m = std::max(m, static_cast<double>(std::norm(symbol_tone(ctx, z, st, &r[static_cast<size_t>(t) * ctx.base_sym]))));
+            }
+            e += m;
+        }
+        return e;
+    };
+    make_tone_refs(ctx, df0 + best_k * fstep, refs);
+    double best_e = frame_energy(best_tau, refs);
+    for (int round = 0; round < 3; ++round) {
+        const long ct = best_tau;
+        const int ck = best_k;
+        for (int k = ck - 1; k <= ck + 1; ++k) {
+            make_tone_refs(ctx, df0 + k * fstep, refs);
+            for (long tau = ct - 1; tau <= ct + 1; ++tau) {
+                if (k == ck && tau == ct) continue;
+                double e = frame_energy(tau, refs);
+                if (e > best_e) { best_e = e; best_tau = tau; best_k = k; }
+            }
+        }
+        if (best_tau == ct && best_k == ck) break;
+    }
+    return best_tau;
+}
+
+CandidateResult decode_candidate(const DecodeContext& ctx, const Candidate& cand) {
+    CandidateResult res;
+    const FrameLayout& L = ctx.layout;
+    const int nt = L.num_tones;
+    const int nsym = L.total_symbols;
+    const int nsync = static_cast<int>(L.sync.size());
+    const double spacing = ctx.params.tone_spacing;
+    const double f0 = cand.bin * static_cast<double>(ctx.sample_rate) / ctx.spec_fft;
+    std::vector<cfloat> z;
+    const double f_base = extract_baseband(ctx, f0, z);
+    // Offset of the candidate's center tone from the baseband's 0 Hz.
+    const double df0 = (f0 + L.center_tone * spacing) - f_base;
+    const double audio_per_base = static_cast<double>(ctx.big_n) / static_cast<double>(ctx.base_n);
+    const long tau0 = std::lround(static_cast<double>(cand.step) * ctx.hop / audio_per_base);
+
+    const double fstep = spacing / (2.0 * FREQ_STEPS);
+    int best_k = 0;
+    long best_tau = fine_sync(ctx, z, df0, fstep, tau0, best_k);
+    const double best_df = df0 + best_k * fstep;
+    std::vector<cfloat> refs;
+    make_tone_refs(ctx, best_df, refs);
+
+    // Complex tone correlations of every symbol, with the carrier's turn per symbol (2 pi df T) taken out: tones an
+    // integer number of cycles per symbol apart keep a continuous-phase signal on one phase from symbol to symbol.
+    std::vector<cfloat> cs(static_cast<size_t>(nsym) * nt);
+    const double turn = TWO_PI * best_df * ctx.params.symbol_period;
+    auto correlate_all = [&]() {
+        for (int k = 0; k < nsym; ++k) {
+            const long st = symbol_start(ctx, best_tau, k);
+            const cfloat rot = unit(-turn * k);
+            for (int t = 0; t < nt; ++t) {
+                cs[static_cast<size_t>(k) * nt + t] = cmul(symbol_tone(ctx, z, st, &refs[static_cast<size_t>(t) * ctx.base_sym]), rot);
+            }
+        }
+    };
+    correlate_all();
+    auto sync_value = [&](int i) { return cs[static_cast<size_t>(L.sync[i].first) * nt + L.sync[i].second]; };
+    // Phase of tone t after a timing error of e baseband samples, relative to the center tone.
+    auto timing_phase = [&](int tone, double e) { return -TWO_PI * (tone - L.center_tone) * e / ctx.base_sps; };
+
+    // Phase calibration on the sync blocks, each block coherent and the blocks added in power: the residual turn per
+    // symbol (w) and the timing error (e). An error of half a sample or more moves the symbol windows and the search
+    // runs again.
+    std::vector<int> block_of(static_cast<size_t>(nsync));
+    for (int i = 0, blk = 0; i < nsync; ++i) {
+        if (i > 0 && L.sync[i].first != L.sync[i - 1].first + 1) ++blk;
+        block_of[static_cast<size_t>(i)] = blk;
+    }
+    auto make_rotations = [&](const std::vector<double>& ws, std::vector<cfloat>& table) {
+        table.resize(ws.size() * static_cast<size_t>(nsync));
+        for (size_t j = 0; j < ws.size(); ++j) {
+            for (int i = 0; i < nsync; ++i) table[j * nsync + i] = unit(-ws[j] * L.sync[i].first);
+        }
+    };
+    std::vector<double> coarse_w, fine_w_list;
+    for (int iw = -BLOCK_W_STEPS; iw <= BLOCK_W_STEPS; ++iw) coarse_w.push_back(iw * BLOCK_W_STEP);
+    std::vector<cfloat> coarse_rot, fine_rot, sv(static_cast<size_t>(nsync));
+    make_rotations(coarse_w, coarse_rot);
+    double best_e = 0.0, best_w = 0.0;
+    for (int pass = 0; pass < 3; ++pass) {
+        double best_val = -1.0;
+        auto search = [&](double e_lo, double e_hi, double e_step, const std::vector<double>& ws, const std::vector<cfloat>& rot) {
+            for (double e = e_lo; e <= e_hi + 1e-9; e += e_step) {
+                for (int i = 0; i < nsync; ++i) sv[i] = cmul(sync_value(i), unit(timing_phase(L.sync[i].second, e)));
+                for (size_t j = 0; j < ws.size(); ++j) {
+                    const cfloat* r = &rot[j * nsync];
+                    double tot = 0.0;
+                    cfloat acc(0.0f, 0.0f);
+                    int blk = 0;
+                    for (int i = 0; i < nsync; ++i) {
+                        if (block_of[i] != blk) { tot += std::norm(acc); acc = cfloat(0.0f, 0.0f); blk = block_of[i]; }
+                        acc += cmul(sv[i], r[i]);
+                    }
+                    tot += std::norm(acc);
+                    if (tot > best_val) { best_val = tot; best_e = e; best_w = ws[j]; }
+                }
+            }
+        };
+        const double e_range = pass == 0 ? TIMING_RANGE : 0.6;
+        search(-e_range, e_range, 0.1, coarse_w, coarse_rot);
+        const double ce = best_e, cw = best_w;
+        fine_w_list.clear();
+        for (int k = -4; k <= 4; ++k) fine_w_list.push_back(cw + k * BLOCK_W_STEP / 5.0);
+        make_rotations(fine_w_list, fine_rot);
+        search(ce - 0.1, ce + 0.1, 0.02, fine_w_list, fine_rot);
+        if (std::fabs(best_e) < 0.5 || pass == 2) break;
+        // The windows start `best_e` samples late: move them back by the whole samples and correlate again.
+        best_tau -= std::lround(best_e);
+        correlate_all();
+    }
+    for (int k = 0; k < nsym; ++k) {
+        for (int t = 0; t < nt; ++t) {
+            cfloat& v = cs[static_cast<size_t>(k) * nt + t];
+            v = cmul(v, unit(-best_w * k + timing_phase(t, best_e)));
+        }
+    }
+
+    // All sync symbols coherent together. The blocks leave sidelobes in w (every 2 pi / block spacing) almost as high
+    // as the true peak, so the strongest few are judged again with the data symbols: with the right turn and phase,
+    // the strongest tone of each data symbol lines up with the carrier. Then the timing once more, and the carrier
+    // phase of the frame.
+    double fine_w = 0.0, fine_e = 0.0;
+    cfloat carrier(1.0f, 0.0f);
+    {
+        auto coherent_sum = [&](double w, double e) {
+            cfloat acc(0.0f, 0.0f);
+            for (int i = 0; i < nsync; ++i) acc += cmul(sync_value(i), unit(-w * L.sync[i].first + timing_phase(L.sync[i].second, e)));
+            return acc;
+        };
+        std::vector<double> sync_val(static_cast<size_t>(2 * GLOBAL_W_STEPS + 1));
+        std::vector<cfloat> y(static_cast<size_t>(nsync)), step(static_cast<size_t>(nsync));
+        for (int i = 0; i < nsync; ++i) {
+            y[i] = cmul(sync_value(i), unit(GLOBAL_W_STEPS * GLOBAL_W_STEP * L.sync[i].first));
+            step[i] = unit(-GLOBAL_W_STEP * L.sync[i].first);
+        }
+        for (int iw = -GLOBAL_W_STEPS; iw <= GLOBAL_W_STEPS; ++iw) {
+            cfloat acc(0.0f, 0.0f);
+            for (int i = 0; i < nsync; ++i) {
+                acc += y[i];
+                y[i] = cmul(y[i], step[i]);
+            }
+            sync_val[static_cast<size_t>(iw + GLOBAL_W_STEPS)] = std::norm(acc);
+        }
+        std::vector<std::pair<double, int>> maxima;
+        for (int i = 0; i <= 2 * GLOBAL_W_STEPS; ++i) {
+            const bool left = i == 0 || sync_val[static_cast<size_t>(i)] >= sync_val[static_cast<size_t>(i - 1)];
+            const bool right = i == 2 * GLOBAL_W_STEPS || sync_val[static_cast<size_t>(i)] > sync_val[static_cast<size_t>(i + 1)];
+            if (left && right) maxima.push_back({sync_val[static_cast<size_t>(i)], i - GLOBAL_W_STEPS});
+        }
+        std::sort(maxima.begin(), maxima.end(), [](const auto& a, const auto& b) { return a.first > b.first; });
+        if (maxima.size() > static_cast<size_t>(W_CANDIDATES)) maxima.resize(static_cast<size_t>(W_CANDIDATES));
+        double best_val = -1e300;
+        for (const auto& mx : maxima) {
+            const double w = mx.second * GLOBAL_W_STEP;
+            const cfloat acc = coherent_sum(w, 0.0);
+            const float am = std::abs(acc);
+            if (am <= 0.0f) continue;
+            const cfloat ph0 = std::conj(acc) / am;
+            double data = 0.0;
+            for (int sym : L.data_symbols) {
+                const cfloat rot = cmul(ph0, unit(-w * sym));
+                float m = -1e30f;
+                for (int t = 0; t < nt; ++t) m = std::max(m, cmul(cs[static_cast<size_t>(sym) * nt + t], rot).real());
+                data += m;
+            }
+            if (am + data > best_val) { best_val = am + data; fine_w = w; }
+        }
+        carrier = coherent_sum(fine_w, 0.0);
+        best_val = std::norm(carrier);
+        const double cw = fine_w;
+        for (int ie = -10; ie <= 10; ++ie) {
+            for (int iw = -4; iw <= 4; ++iw) {
+                const double w = cw + iw * 0.0005, e = ie * 0.05;
+                const cfloat acc = coherent_sum(w, e);
+                if (std::norm(acc) > best_val) { best_val = std::norm(acc); fine_w = w; fine_e = e; carrier = acc; }
+            }
+        }
+        const float cmag = std::abs(carrier);
+        carrier = cmag > 0.0f ? std::conj(carrier) / cmag : cfloat(1.0f, 0.0f);
+    }
+
+    // Data symbols in codeword order: as they are (noncoherent readings) and with the carrier phase taken out.
+    const size_t ndata = L.data_symbols.size();
+    std::vector<cfloat> cd(ndata * nt), cc(ndata * nt);
+    for (size_t d = 0; d < ndata; ++d) {
+        const int sym = L.data_symbols[d];
+        for (int t = 0; t < nt; ++t) {
+            cd[d * nt + t] = cs[static_cast<size_t>(sym) * nt + t];
+            cc[d * nt + t] = cmul(cd[d * nt + t], cmul(carrier, unit(-fine_w * sym + timing_phase(t, fine_e))));
+        }
+    }
+
+    // Signal amplitude and noise per tone correlation, from the sync symbols (known tones).
+    double sig_p = 0.0, noise_p = 0.0;
+    for (const auto& st : L.sync) {
+        for (int t = 0; t < nt; ++t) {
+            const double p = std::norm(cs[static_cast<size_t>(st.first) * nt + t]);
+            if (t == st.second) sig_p += p; else noise_p += p;
+        }
+    }
+    noise_p /= static_cast<double>(nsync * (nt - 1));
+    sig_p /= static_cast<double>(nsync);
+    if (!(noise_p > 0.0)) return res;
+    const double amp = std::sqrt(std::max(sig_p - noise_p, 0.05 * noise_p));
+
+    // Two readings: coherent symbol by symbol, then noncoherent over groups of symbols (3 for 8 tones, 4 for 4 tones,
+    // robust when the carrier phase wanders). Belief propagation on each; in deep mode, ordered statistics on the
+    // coherent reading (ordered by the belief-propagation trajectory, then by the channel values), accepted only when
+    // CRC-14 passes and the codeword is close to the soft values.
+    const int group = (nt == 8) ? 3 : 4;
+    const int bp_iters = ctx.deep ? 50 : 30;
+    uint8_t decoded_91[LDPC_INPUT_BYTES];
+    float coherent[LDPC_CODEWORD_BITS], trajectory[LDPC_CODEWORD_BITS], grouped[LDPC_CODEWORD_BITS];
+    coherent_llrs(L, cc, amp, noise_p, coherent);
+    condition_llrs(coherent);
+    bool ok = ldpc_decode_sum_product(coherent, decoded_91, bp_iters, trajectory) >= 0 && finish_decode(decoded_91, ctx.proto, res.msg);
+    if (!ok) {
+        group_llrs(L, cd, group, amp * group, noise_p * group, grouped);
+        condition_llrs(grouped);
+        ok = ldpc_decode_sum_product(grouped, decoded_91, bp_iters) >= 0 && finish_decode(decoded_91, ctx.proto, res.msg);
+    }
+    // Ordered statistics needs soft values on (nearly) every bit: a frame that is partly silence (a candidate that
+    // only overlaps a signal) leaves bits with no information, which the search would fit freely.
+    bool informative = true;
+    if (!ok && ctx.deep) {
+        double mean_mag = 0.0;
+        for (float v : coherent) mean_mag += std::fabs(v);
+        mean_mag /= LDPC_CODEWORD_BITS;
+        int silent = 0;
+        for (float v : coherent) silent += std::fabs(v) < 0.02 * mean_mag ? 1 : 0;
+        informative = mean_mag > 0.0 && silent <= OSD_MAX_SILENT_BITS;
+    }
+    if (!ok && ctx.deep && informative) {
+        for (const float* in : {static_cast<const float*>(trajectory), static_cast<const float*>(coherent)}) {
+            float distance = 1.0f;
+            if (ldpc_decode_osd(in, decoded_91, OSD_ORDER, OSD_PAIR_SPAN, &distance) == 0 && distance <= OSD_MAX_DISTANCE &&
+                finish_decode(decoded_91, ctx.proto, res.msg)) {
+                ok = true;
+                break;
+            }
+        }
+    }
+    if (!ok) return res;
+    res.ok = true;
+    res.freq_hz = static_cast<float>(f_base - L.center_tone * spacing + best_df);
+    res.start_sample = static_cast<double>(best_tau) * audio_per_base;
+    return res;
+}
+
+std::vector<CandidateResult> decode_candidates(const DecodeContext& ctx, const std::vector<Candidate>& cands, int threads) {
+    std::vector<CandidateResult> results(cands.size());
+    int workers = std::clamp(threads, 1, 64);
+    workers = std::min<int>(workers, static_cast<int>(cands.size()));
+    if (workers <= 1) {
+        for (size_t i = 0; i < cands.size(); ++i) results[i] = decode_candidate(ctx, cands[i]);
+        return results;
+    }
+    std::atomic<size_t> next{0};
+    std::vector<std::thread> pool;
+    pool.reserve(static_cast<size_t>(workers));
+    for (int w = 0; w < workers; ++w) {
+        pool.emplace_back([&]() {
+            for (;;) {
+                size_t i = next.fetch_add(1);
+                if (i >= cands.size()) break;
+                results[i] = decode_candidate(ctx, cands[i]);
+            }
+        });
+    }
+    for (auto& th : pool) th.join();
+    return results;
+}
+
+// Lowers the spectrogram cells of a decoded signal so the next search sees what was underneath.
+void mask_decoded(DecodeContext& ctx, const Message& msg, float freq_hz, double start_sample) {
+    ToneSequence seq;
+    if (!encode_tones(msg, ctx.proto, seq)) return;
+    const double bin_per_hz = static_cast<double>(ctx.spec_fft) / ctx.sample_rate;
+    const int step0 = static_cast<int>(std::lround(start_sample / ctx.hop));
+    for (size_t sym = 0; sym < seq.tones.size(); ++sym) {
+        int bin = static_cast<int>(std::lround((freq_hz + seq.tones[sym] * ctx.params.tone_spacing) * bin_per_hz));
+        for (int s = 0; s < ctx.time_osr; ++s) {
+            int step = step0 + static_cast<int>(sym) * ctx.time_osr + s;
+            if (step < 0 || step >= ctx.num_steps) continue;
+            float* row = &ctx.power[static_cast<size_t>(step) * ctx.spec_bins];
+            for (int d = -1; d <= 1; ++d) {
+                int b = bin + d;
+                if (b < 0 || b >= ctx.spec_bins) continue;
+                row[b] *= (d == 0) ? 0.1f : 0.25f;
+            }
+        }
+    }
+}
+
+} // anonymous namespace
+
 std::vector<Message> audio_to_messages(const std::vector<float>& audio_samples, float base_freq_hz, float sample_rate, Protocol proto, int num_threads, bool is_deep) {
     std::vector<Message> decoded_messages;
+    if (sample_rate <= 0.0f) return decoded_messages;
     auto params = get_protocol_params(proto);
 
     size_t samples_per_sym = static_cast<size_t>(std::round(params.symbol_period * sample_rate));
     if (samples_per_sym == 0) return decoded_messages;
     size_t frame_samples = samples_per_sym * params.total_symbols;
+    if (audio_samples.size() < frame_samples) return decoded_messages;
 
-    if (audio_samples.size() < frame_samples) {
-        return decoded_messages;
-    }
+    double energy = 0.0;
+    for (float s : audio_samples) energy += static_cast<double>(s) * s;
+    if (!(energy > 1e-5)) return decoded_messages;   // silence (or NaN)
 
-    int max_ldpc_iters = is_deep ? 100 : 25;
+    DecodeContext ctx;
+    ctx.proto = proto;
+    ctx.params = params;
+    ctx.layout = make_frame_layout(proto);
+    ctx.sample_rate = sample_rate;
+    ctx.deep = is_deep;
+    ctx.sym_len = static_cast<int>(samples_per_sym);
 
+    // Tone-0 search range, as before: 300 .. 2500 Hz, or +/- 60 Hz around the requested frequency.
     float freq_min = (base_freq_hz > 0.0f) ? std::max(200.0f, base_freq_hz - 60.0f) : 300.0f;
     float freq_max = (base_freq_hz > 0.0f) ? (base_freq_hz + 60.0f) : 2500.0f;
+    ctx.spec_fft = next_fast_size(ctx.sym_len * ctx.freq_osr);
+    const float bin_hz = sample_rate / static_cast<float>(ctx.spec_fft);
+    const float top_hz = std::min(freq_max + params.occupied_bw + 2.0f * params.tone_spacing, sample_rate * 0.5f);
+    ctx.spec_bins = std::min(ctx.spec_fft / 2, static_cast<int>(std::ceil(top_hz / bin_hz)) + 1);
+    ctx.bin_lo = std::max(1, static_cast<int>(std::floor(freq_min / bin_hz)));
+    ctx.bin_hi = std::min(static_cast<int>(std::ceil(freq_max / bin_hz)),
+                          ctx.spec_bins - 1 - static_cast<int>(std::ceil(tone_bin_offset(ctx, ctx.layout.num_tones - 1))));
+    if (ctx.bin_hi < ctx.bin_lo) return decoded_messages;
 
-    float freq_step;
-    size_t time_step;
-    int sync_threshold;
+    build_spectrogram(ctx, audio_samples);
+    if (ctx.num_steps <= 0) return decoded_messages;
+    build_spectrum(ctx, audio_samples);
 
-    if (!is_deep) {
-        if (proto == Protocol::LQ8 || proto == Protocol::LQ16) {
-            freq_step = 3.125f; // Half-bin resolution in fast mode to eliminate carrier offset blind spots
-        } else {
-            freq_step = 5.21f;
+    const int max_candidates = is_deep ? DEEP_MAX_CANDIDATES : FAST_MAX_CANDIDATES;
+    const float min_score = is_deep ? DEEP_MIN_SCORE : FAST_MIN_SCORE;
+
+    std::vector<Candidate> tried;
+    const int passes = is_deep ? 2 : 1;
+    for (int pass = 0; pass < passes; ++pass) {
+        std::vector<Candidate> cands = find_candidates(ctx, max_candidates, min_score, tried);
+        if (cands.empty()) break;
+        auto results = decode_candidates(ctx, cands, num_threads);
+        tried.insert(tried.end(), cands.begin(), cands.end());
+        int new_hits = 0;
+        for (const auto& r : results) {
+            if (!r.ok) continue;
+            if (std::find(decoded_messages.begin(), decoded_messages.end(), r.msg) != decoded_messages.end()) continue;
+            decoded_messages.push_back(r.msg);
+            mask_decoded(ctx, r.msg, r.freq_hz, r.start_sample);
+            ++new_hits;
         }
-        time_step = samples_per_sym / 2;
-        sync_threshold = 5;
-    } else {
-        if (proto == Protocol::LQ8 || proto == Protocol::LQ16) {
-            freq_step = 3.125f;
-        } else {
-            freq_step = 5.21f;
-        }
-        time_step = samples_per_sym / 2;
-        sync_threshold = 4;
+        if (new_hits == 0) break;
     }
-    if (time_step == 0) time_step = 1;
-
-    size_t max_time_offset = audio_samples.size() - frame_samples;
-
-    struct CandidateTrack {
-        float f;
-        std::vector<size_t> time_offsets;
-        int max_score = 0;
-    };
-
-    struct DecodedHit {
-        Message msg;
-        float freq;
-        size_t t_offset;
-    };
-
-    size_t n_fft = 2048;
-    while (n_fft < samples_per_sym) n_fft <<= 1;
-
-    size_t num_time_steps = (audio_samples.size() - samples_per_sym) / time_step + 1;
-    size_t spec_stride = n_fft / 2 + 1;
-    std::vector<float> spec(num_time_steps * spec_stride, 0.0f);
-
-    float bin_factor = static_cast<float>(n_fft) / sample_rate;
-    const int sync_starts_8[3] = {0, 36, 72};
-    const int sync_starts_4[4] = {1, 34, 67, 100};
-    const std::array<uint8_t, 4>* sync_patterns_4[4] = {&COSTAS_SYNC1_4, &COSTAS_SYNC2_4, &COSTAS_SYNC3_4, &COSTAS_SYNC4_4};
-
-    float eff_freq_step = (proto == Protocol::LQ16 && freq_step > params.tone_spacing) ? params.tone_spacing : freq_step;
-    size_t sym_mult = std::max<size_t>(1, samples_per_sym / time_step);
-
-    auto scan_tracks = [&](const std::vector<float>& current_spec, int threshold) -> std::vector<CandidateTrack> {
-        std::vector<CandidateTrack> result_tracks;
-
-        auto test_freq = [&](float f) {
-            int tone_bins[16];
-            for (int tn = 0; tn < params.num_tones; ++tn) {
-                tone_bins[tn] = std::clamp(static_cast<int>(std::round((f + static_cast<float>(tn) * params.tone_spacing) * bin_factor)), 0, static_cast<int>(n_fft / 2));
-            }
-
-            CandidateTrack track;
-            track.f = f;
-
-            for (size_t t_offset = 0; t_offset <= max_time_offset; t_offset += time_step) {
-                int matches = 0;
-                size_t t_step_base = t_offset / time_step;
-
-                if (proto == Protocol::LQ8 || proto == Protocol::LQ16) {
-                    int block_matches[3] = {0, 0, 0};
-                    for (int b = 0; b < 3; ++b) {
-                        for (int k = 0; k < 7; ++k) {
-                            size_t step_idx = t_step_base + static_cast<size_t>(sync_starts_8[b] + k) * sym_mult;
-                            if (step_idx >= num_time_steps) continue;
-                            uint8_t costas_tone = COSTAS_ARRAY_8[k];
-                            const float* row = &current_spec[step_idx * spec_stride];
-                            float max_e = -1.0f;
-                            int best_tn = 0;
-                            for (int tn = 0; tn < 8; ++tn) {
-                                float e = row[tone_bins[tn]];
-                                if (e > max_e) {
-                                    max_e = e;
-                                    best_tn = tn;
-                                }
-                            }
-                            if (best_tn == costas_tone) {
-                                ++matches;
-                                ++block_matches[b];
-                            }
-                        }
-                    }
-                    int multi_block_sync = (block_matches[0] >= 2 ? 1 : 0) +
-                                           (block_matches[1] >= 2 ? 1 : 0) +
-                                           (block_matches[2] >= 2 ? 1 : 0);
-                    if (matches >= threshold || (multi_block_sync >= 2 && matches >= 4)) {
-                        track.time_offsets.push_back(t_offset);
-                        track.max_score = std::max(track.max_score, matches);
-                    }
-                } else {
-                    int block_matches[4] = {0, 0, 0, 0};
-                    for (int b = 0; b < 4; ++b) {
-                        for (int k = 0; k < 4; ++k) {
-                            size_t step_idx = t_step_base + static_cast<size_t>(sync_starts_4[b] + k) * sym_mult;
-                            if (step_idx >= num_time_steps) continue;
-                            uint8_t costas_tone = (*sync_patterns_4[b])[k];
-                            const float* row = &current_spec[step_idx * spec_stride];
-                            float max_e = -1.0f;
-                            int best_tn = 0;
-                            for (int tn = 0; tn < 4; ++tn) {
-                                float e = row[tone_bins[tn]];
-                                if (e > max_e) {
-                                    max_e = e;
-                                    best_tn = tn;
-                                }
-                            }
-                            if (best_tn == costas_tone) {
-                                ++matches;
-                                ++block_matches[b];
-                            }
-                        }
-                    }
-                    int multi_block_sync = 0;
-                    for (int b = 0; b < 4; ++b) {
-                        if (block_matches[b] >= 2) ++multi_block_sync;
-                    }
-                    if (matches >= threshold || (multi_block_sync >= 2 && matches >= 4)) {
-                        track.time_offsets.push_back(t_offset);
-                        track.max_score = std::max(track.max_score, matches);
-                    }
-                }
-            }
-
-            if (!track.time_offsets.empty()) {
-                result_tracks.push_back(std::move(track));
-            }
-        };
-
-        if (base_freq_hz > 0.0f) {
-            int k_max = static_cast<int>(std::ceil(60.0f / eff_freq_step));
-            for (int k = -k_max; k <= k_max; ++k) {
-                float f = base_freq_hz + static_cast<float>(k) * eff_freq_step;
-                if (f >= freq_min && f <= freq_max) {
-                    test_freq(f);
-                }
-            }
-        } else {
-            for (float f = freq_min; f <= freq_max; f += eff_freq_step) {
-                test_freq(f);
-            }
-        }
-
-        // Sort candidate tracks by max_score descending so strongest signals are decoded first
-        std::sort(result_tracks.begin(), result_tracks.end(), [](const CandidateTrack& a, const CandidateTrack& b) {
-            return a.max_score > b.max_score;
-        });
-
-        if (result_tracks.size() > 64) {
-            result_tracks.resize(64);
-        }
-
-        return result_tracks;
-    };
-
-    // Defensive clamping on thread count (1 to 64)
-    int effective_threads = std::clamp(num_threads, 1, 64);
-
-    std::vector<CandidateTrack> tracks;
-
-    if (base_freq_hz <= 0.0f || is_deep) {
-        // Fast FFT-based Costas sync correlation pre-screener
-        if (effective_threads > 1 && num_time_steps > 1) {
-            size_t n_workers = std::min(static_cast<size_t>(effective_threads), num_time_steps);
-            size_t chunk = (num_time_steps + n_workers - 1) / n_workers;
-            std::vector<std::thread> stft_threads;
-            stft_threads.reserve(n_workers);
-
-            for (size_t w = 0; w < n_workers; ++w) {
-                size_t t_start = w * chunk;
-                size_t t_end = std::min(t_start + chunk, num_time_steps);
-
-                stft_threads.emplace_back([&, t_start, t_end]() {
-                    std::vector<std::complex<float>> local_fft(n_fft);
-                    for (size_t t = t_start; t < t_end; ++t) {
-                        size_t start = t * time_step;
-                        for (size_t i = 0; i < samples_per_sym; ++i) {
-                            local_fft[i] = std::complex<float>(audio_samples[start + i], 0.0f);
-                        }
-                        for (size_t i = samples_per_sym; i < n_fft; ++i) {
-                            local_fft[i] = std::complex<float>(0.0f, 0.0f);
-                        }
-                        fft_radix2(local_fft);
-                        float* row = &spec[t * spec_stride];
-                        for (size_t b = 0; b <= n_fft / 2; ++b) {
-                            float r = local_fft[b].real();
-                            float im = local_fft[b].imag();
-                            row[b] = r * r + im * im;
-                        }
-                    }
-                });
-            }
-            for (auto& th : stft_threads) {
-                if (th.joinable()) th.join();
-            }
-        } else {
-            std::vector<std::complex<float>> fft_buf(n_fft);
-            for (size_t t = 0; t < num_time_steps; ++t) {
-                size_t start = t * time_step;
-                for (size_t i = 0; i < samples_per_sym; ++i) {
-                    fft_buf[i] = std::complex<float>(audio_samples[start + i], 0.0f);
-                }
-                for (size_t i = samples_per_sym; i < n_fft; ++i) {
-                    fft_buf[i] = std::complex<float>(0.0f, 0.0f);
-                }
-                fft_radix2(fft_buf);
-                float* row = &spec[t * spec_stride];
-                for (size_t b = 0; b <= n_fft / 2; ++b) {
-                    float r = fft_buf[b].real();
-                    float im = fft_buf[b].imag();
-                    row[b] = r * r + im * im;
-                }
-            }
-        }
-
-        tracks = scan_tracks(spec, sync_threshold);
-    } else {
-        int k_max = static_cast<int>(std::ceil(60.0f / eff_freq_step));
-        for (int k = -k_max; k <= k_max; ++k) {
-            float f = base_freq_hz + static_cast<float>(k) * eff_freq_step;
-            if (f < freq_min || f > freq_max) continue;
-            CandidateTrack track;
-            track.f = f;
-            for (size_t t_offset = 0; t_offset <= max_time_offset; t_offset += time_step) {
-                track.time_offsets.push_back(t_offset);
-            }
-            if (!track.time_offsets.empty()) {
-                tracks.push_back(std::move(track));
-            }
-        }
-    }
-
-    auto decode_tracks = [&](const std::vector<CandidateTrack>& candidate_tracks,
-                             std::vector<DecodedHit>& hits) {
-        if (candidate_tracks.empty()) return;
-
-        // Single-thread fast path: executes directly on calling thread without thread spawning overhead
-        if (effective_threads <= 1 || candidate_tracks.size() <= 1) {
-            for (const auto& track : candidate_tracks) {
-                for (size_t t_offset : track.time_offsets) {
-                    bool near_existing_hit = false;
-                    for (const auto& h : hits) {
-                        if (std::abs(track.f - h.freq) < params.tone_spacing * 0.75f &&
-                            std::abs(static_cast<long long>(t_offset) - static_cast<long long>(h.t_offset)) <= static_cast<long long>(time_step)) {
-                            near_existing_hit = true;
-                            break;
-                        }
-                    }
-                    if (near_existing_hit) continue;
-
-                    std::vector<float> llrs;
-                    if (demodulate_audio_soft(audio_samples, t_offset, track.f, sample_rate, proto, llrs, sync_threshold)) {
-                        Message msg;
-                        if (decode_soft_llrs(llrs, msg, proto, max_ldpc_iters)) {
-                            bool exists = false;
-                            for (const auto& h : hits) {
-                                if (h.msg == msg) { exists = true; break; }
-                            }
-                            if (!exists) {
-                                hits.push_back({msg, track.f, t_offset});
-                            }
-                            break;
-                        }
-                    }
-                }
-            }
-            return;
-        }
-
-        // Multi-threaded path: partition tracks across worker threads
-        size_t num_workers = std::min(static_cast<size_t>(effective_threads), candidate_tracks.size());
-        size_t chunk_size = (candidate_tracks.size() + num_workers - 1) / num_workers;
-
-        std::vector<std::vector<DecodedHit>> worker_results(num_workers);
-        std::vector<std::thread> workers;
-        workers.reserve(num_workers);
-
-        for (size_t w = 0; w < num_workers; ++w) {
-            size_t start_track = w * chunk_size;
-            size_t end_track = std::min(start_track + chunk_size, candidate_tracks.size());
-
-            workers.emplace_back([&, w, start_track, end_track]() {
-                for (size_t i = start_track; i < end_track; ++i) {
-                    const auto& track = candidate_tracks[i];
-                    for (size_t t_offset : track.time_offsets) {
-                        bool near_existing_hit = false;
-                        for (const auto& h : worker_results[w]) {
-                            if (std::abs(track.f - h.freq) < params.tone_spacing * 0.75f &&
-                                std::abs(static_cast<long long>(t_offset) - static_cast<long long>(h.t_offset)) <= static_cast<long long>(time_step)) {
-                                near_existing_hit = true;
-                                break;
-                            }
-                        }
-                        if (near_existing_hit) continue;
-
-                        std::vector<float> llrs;
-                        if (demodulate_audio_soft(audio_samples, t_offset, track.f, sample_rate, proto, llrs, sync_threshold)) {
-                            Message msg;
-                            if (decode_soft_llrs(llrs, msg, proto, max_ldpc_iters)) {
-                                bool exists = false;
-                                for (const auto& h : worker_results[w]) {
-                                    if (h.msg == msg) { exists = true; break; }
-                                }
-                                if (!exists) {
-                                    worker_results[w].push_back({msg, track.f, t_offset});
-                                }
-                                break;
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-        for (auto& worker : workers) {
-            if (worker.joinable()) {
-                worker.join();
-            }
-        }
-
-        // Merge worker results in deterministic track order
-        for (size_t w = 0; w < num_workers; ++w) {
-            for (const auto& hit : worker_results[w]) {
-                bool exists = false;
-                for (const auto& h : hits) {
-                    if (h.msg == hit.msg) { exists = true; break; }
-                }
-                if (!exists) {
-                    hits.push_back(hit);
-                }
-            }
-        }
-    };
-
-    std::vector<DecodedHit> first_pass_hits;
-    decode_tracks(tracks, first_pass_hits);
-
-    for (const auto& hit : first_pass_hits) {
-        if (std::find(decoded_messages.begin(), decoded_messages.end(), hit.msg) == decoded_messages.end()) {
-            decoded_messages.push_back(hit.msg);
-        }
-    }
-
-    // Multi-pass signal subtraction in deep mode
-    if (is_deep && !first_pass_hits.empty() && !spec.empty()) {
-        size_t steps_per_sym = std::max<size_t>(1, samples_per_sym / time_step);
-
-        for (const auto& hit : first_pass_hits) {
-            ToneSequence seq;
-            if (!encode_tones(hit.msg, proto, seq)) {
-                continue;
-            }
-
-            for (size_t sym = 0; sym < seq.tones.size(); ++sym) {
-                uint8_t tone = seq.tones[sym];
-                float tone_freq = hit.freq + static_cast<float>(tone) * params.tone_spacing;
-                int tone_bin = std::clamp(static_cast<int>(std::round(tone_freq * bin_factor)), 0, static_cast<int>(n_fft / 2));
-                size_t step_start = (hit.t_offset + sym * samples_per_sym) / time_step;
-
-                for (size_t s = 0; s < steps_per_sym; ++s) {
-                    size_t step_idx = step_start + s;
-                    if (step_idx < num_time_steps) {
-                        float* row = &spec[step_idx * spec_stride];
-                        row[tone_bin] *= 0.1f;
-                        if (tone_bin > 0) {
-                            row[tone_bin - 1] *= 0.25f;
-                        }
-                        if (tone_bin + 1 <= static_cast<int>(n_fft / 2)) {
-                            row[tone_bin + 1] *= 0.25f;
-                        }
-                    }
-                }
-            }
-        }
-
-        std::vector<CandidateTrack> secondary_tracks = scan_tracks(spec, 5);
-
-        std::vector<DecodedHit> second_pass_hits;
-        decode_tracks(secondary_tracks, second_pass_hits);
-
-        for (const auto& hit : second_pass_hits) {
-            if (std::find(decoded_messages.begin(), decoded_messages.end(), hit.msg) == decoded_messages.end()) {
-                decoded_messages.push_back(hit.msg);
-            }
-        }
-    }
-
     return decoded_messages;
 }
 

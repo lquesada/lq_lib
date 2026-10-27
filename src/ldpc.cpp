@@ -33,6 +33,7 @@
 #include "lq/ldpc.h"
 #include "lq/constants.h"
 #include "lq/crc.h"
+#include <array>
 #include <cmath>
 #include <vector>
 #include <cstring>
@@ -529,6 +530,236 @@ int ldpc_decode_hard_bits(const uint8_t in_174[LDPC_CODEWORD_BYTES], uint8_t out
         llr[i] = ((in_174[i >> 3] >> (7 - (i & 7))) & 1U) ? -10.0f : 10.0f;
     }
     return ldpc_decode(llr, out_91, max_iters);
+}
+
+int ldpc_decode_sum_product(const float llr[LDPC_CODEWORD_BITS], uint8_t out_91[LDPC_INPUT_BYTES], int max_iters,
+                            float out_soft[LDPC_CODEWORD_BITS]) {
+    // Sum-product (tanh-rule) belief propagation. Messages are LLRs (positive = bit 0).
+    float q[174][3];   // variable -> check
+    float r[83][7];    // check -> variable
+    std::memset(r, 0, sizeof(r));
+    for (int n = 0; n < 174; ++n) {
+        q[n][0] = q[n][1] = q[n][2] = llr[n];
+    }
+
+    uint8_t c_hat[174];
+    float total[174];
+    float accum[174];
+    for (int n = 0; n < 174; ++n) accum[n] = 0.0f;
+    int last_errs = 999;
+    int stalled = 0;
+    for (int iter = 0; iter < max_iters; ++iter) {
+        // Check node update: r = 2 atanh( prod tanh(q/2) ) over the other edges of the check.
+        for (int m = 0; m < 83; ++m) {
+            int deg = LDPC_MAT.check_degrees[m];
+            float t[7];
+            for (int i = 0; i < deg; ++i) {
+                float v = q[LDPC_MAT.check_bits[m][i]][LDPC_MAT.check_var_k[m][i]];
+                float e = std::exp(-std::min(std::fabs(v), 30.0f));
+                float th = (1.0f - e) / (1.0f + e);   // tanh(|v| / 2)
+                t[i] = v < 0.0f ? -th : th;
+            }
+            for (int i = 0; i < deg; ++i) {
+                float prod = 1.0f;
+                for (int j = 0; j < deg; ++j) {
+                    if (j != i) prod *= t[j];
+                }
+                prod = std::clamp(prod, -0.999999f, 0.999999f);
+                r[m][i] = std::log((1.0f + prod) / (1.0f - prod));   // 2 atanh(prod)
+            }
+        }
+        // Variable node update and hard decisions.
+        for (int n = 0; n < 174; ++n) {
+            float r0 = r[LDPC_BIT_TERMS[n][0]][LDPC_MAT.var_check_edge[n][0]];
+            float r1 = r[LDPC_BIT_TERMS[n][1]][LDPC_MAT.var_check_edge[n][1]];
+            float r2 = r[LDPC_BIT_TERMS[n][2]][LDPC_MAT.var_check_edge[n][2]];
+            float t_llr = llr[n] + r0 + r1 + r2;
+            total[n] = t_llr;
+            accum[n] += t_llr;
+            c_hat[n] = (t_llr < 0.0f) ? 1 : 0;
+            q[n][0] = t_llr - r0;
+            q[n][1] = t_llr - r1;
+            q[n][2] = t_llr - r2;
+        }
+        int errs = count_unsatisfied_checks(c_hat);
+        if (errs == 0) {
+            pack_systematic_91(c_hat, out_91);
+            if (out_soft) std::memcpy(out_soft, accum, sizeof(accum));
+            return iter + 1;
+        }
+        // Early exit when the decoder is clearly not converging (saves time on noise candidates).
+        if (errs >= last_errs) {
+            if (++stalled >= 6 && iter >= 10) break;
+        } else {
+            stalled = 0;
+        }
+        last_errs = errs;
+    }
+    if (out_soft) std::memcpy(out_soft, accum, sizeof(accum));
+    return -1;
+}
+
+namespace {
+
+constexpr int OSD_WORDS = 3;   // 174 bits in three 64-bit words
+using OsdRow = std::array<uint64_t, OSD_WORDS>;
+
+inline bool osd_get(const OsdRow& v, int b) { return ((v[b >> 6] >> (b & 63)) & 1ULL) != 0; }
+inline void osd_flip(OsdRow& v, int b) { v[b >> 6] ^= (1ULL << (b & 63)); }
+inline void osd_xor(OsdRow& a, const OsdRow& b) { a[0] ^= b[0]; a[1] ^= b[1]; a[2] ^= b[2]; }
+
+inline int lowest_set_bit(uint64_t x) {
+#if defined(__GNUC__) || defined(__clang__)
+    return __builtin_ctzll(x);
+#elif defined(_MSC_VER)
+    unsigned long idx;
+    _BitScanForward64(&idx, x);
+    return static_cast<int>(idx);
+#else
+    int n = 0;
+    while (!(x & 1ULL)) { x >>= 1; ++n; }
+    return n;
+#endif
+}
+
+// Generator rows of the systematic code: info bit i -> codeword bit i plus the parity bits that use it.
+struct OsdGenerator {
+    OsdRow rows[91];
+};
+
+OsdGenerator make_osd_generator() {
+    OsdGenerator g{};
+    for (int i = 0; i < 91; ++i) {
+        OsdRow row{};
+        osd_flip(row, i);
+        for (int j = 0; j < 83; ++j) {
+            uint64_t w = (i < 64) ? LDPC_MAT.G_bits[j][0] : LDPC_MAT.G_bits[j][1];
+            int b = (i < 64) ? i : (i - 64);
+            if ((w >> b) & 1ULL) osd_flip(row, 91 + j);
+        }
+        g.rows[i] = row;
+    }
+    return g;
+}
+
+const OsdGenerator& osd_generator() {
+    static const OsdGenerator g = make_osd_generator();
+    return g;
+}
+
+} // anonymous namespace
+
+int ldpc_decode_osd(const float llr[LDPC_CODEWORD_BITS], uint8_t out_91[LDPC_INPUT_BYTES], int order,
+                    int order2_span, float* out_distance) {
+    // Ordered-statistics decoding: re-encode from the 91 most reliable independent positions and try
+    // flipping the least reliable of them (order 1: every one; order 2: pairs among the last `order2_span`).
+    // Among the candidates whose 91 information bits pass CRC-14, the one closest to the received soft
+    // values (sum of |llr| over disagreeing positions) wins.
+    if (order < 0) order = 0;
+
+    // 1. Sort codeword positions by reliability, most reliable first.
+    int perm[174];
+    for (int n = 0; n < 174; ++n) perm[n] = n;
+    std::stable_sort(perm, perm + 174, [&](int a, int b) { return std::fabs(llr[a]) > std::fabs(llr[b]); });
+
+    // 2. Generator in permuted column order, Gaussian elimination to a systematic form on the most reliable
+    //    independent columns.
+    const OsdGenerator& gen = osd_generator();
+    OsdRow g[91];
+    for (int i = 0; i < 91; ++i) {
+        OsdRow row{};
+        for (int c = 0; c < 174; ++c) {
+            if (osd_get(gen.rows[i], perm[c])) osd_flip(row, c);
+        }
+        g[i] = row;
+    }
+    int basis[91];   // permuted column index of each pivot
+    int rank = 0;
+    for (int c = 0; c < 174 && rank < 91; ++c) {
+        int piv = -1;
+        for (int i = rank; i < 91; ++i) {
+            if (osd_get(g[i], c)) { piv = i; break; }
+        }
+        if (piv < 0) continue;
+        std::swap(g[piv], g[rank]);
+        for (int i = 0; i < 91; ++i) {
+            if (i != rank && osd_get(g[i], c)) osd_xor(g[i], g[rank]);
+        }
+        basis[rank++] = c;
+    }
+    if (rank < 91) return -1;
+
+    // 3. Hard decisions and reliabilities in permuted order.
+    OsdRow hard{};
+    float rel[174];
+    for (int c = 0; c < 174; ++c) {
+        float v = llr[perm[c]];
+        if (v < 0.0f) osd_flip(hard, c);
+        rel[c] = std::fabs(v);
+    }
+
+    // Order-0 codeword: information bits taken from the hard decisions on the basis columns.
+    OsdRow base{};
+    for (int i = 0; i < 91; ++i) {
+        if (osd_get(hard, basis[i])) osd_xor(base, g[i]);
+    }
+
+    // Distance of a codeword from the received soft values, abandoned as soon as it cannot beat `limit`.
+    auto distance = [&](const OsdRow& cw, float limit) {
+        float d = 0.0f;
+        for (int w = 0; w < OSD_WORDS; ++w) {
+            uint64_t diff = cw[w] ^ hard[w];
+            while (diff) {
+                d += rel[w * 64 + lowest_set_bit(diff)];
+                if (d >= limit) return d;
+                diff &= diff - 1;
+            }
+        }
+        return d;
+    };
+
+    float best_d = 1e30f;
+    OsdRow best = base;
+    auto consider = [&](const OsdRow& cw) {
+        float d = distance(cw, best_d);
+        if (d < best_d) { best_d = d; best = cw; }
+    };
+
+    consider(base);
+    if (order >= 1) {
+        for (int i = 90; i >= 0; --i) {
+            OsdRow cw = base;
+            osd_xor(cw, g[i]);
+            consider(cw);
+        }
+    }
+    if (order >= 2) {
+        // Pairs among the least reliable basis positions (the last pivots).
+        int span = std::clamp(order2_span, 2, 91);
+        for (int i = 90; i > 90 - span; --i) {
+            OsdRow cw1 = base;
+            osd_xor(cw1, g[i]);
+            for (int j = i - 1; j > 90 - span; --j) {
+                OsdRow cw = cw1;
+                osd_xor(cw, g[j]);
+                consider(cw);
+            }
+        }
+    }
+
+    // The most likely codeword is accepted only if its information bits pass CRC-14.
+    uint8_t bits[174];
+    for (int c = 0; c < 174; ++c) bits[perm[c]] = osd_get(best, c) ? 1 : 0;
+    uint8_t info[LDPC_INPUT_BYTES];
+    pack_systematic_91(bits, info);
+    if (out_distance) {
+        float total = 0.0f;
+        for (int c = 0; c < 174; ++c) total += rel[c];
+        *out_distance = total > 0.0f ? best_d / total : 1.0f;
+    }
+    if (!verify_crc14(info)) return -1;
+    std::memcpy(out_91, info, LDPC_INPUT_BYTES);
+    return 0;
 }
 
 } // namespace lq

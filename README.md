@@ -80,7 +80,7 @@ For live, up-to-date recommended dial frequencies, IARU band-plan coordination n
 
 ## 🛠️ Key Technical Specifications
 
-* **Forward Error Correction:** Systematic LDPC(174, 91) code with CRC-14 (`0x2757`) parity check. Normalized Min-Sum belief propagation decoding with 9.1 dB coding gain.
+* **Forward Error Correction:** Systematic LDPC(174, 91) code with CRC-14 (`0x2757`) parity check. Sum-product belief propagation with an ordered-statistics (OSD) fallback in the multi-signal decoder (Normalized Min-Sum also available); 9.1 dB coding gain.
 * **Standard Callsigns:** 28-bit mixed-radix encoding ($37 \times 36 \times 10 \times 27^3$), supporting all standard ITU prefix structures and native 1-bit dedicated portable suffix (`/P`, none).
 * **Non-Standard Callsigns:** 38-character alphabet base-38 big-integer packing supporting up to 9 characters plus standard suffix (or 9 characters including non-standard suffix) in structured QSOs (48 bits) and up to 13 characters plus standard suffix in CQ frames (69 bits).
 * **Callsign Hash:** 24-bit CRC-24/Q hash (`0x864CFB`, mask `0xFFFFFF`), providing 16.78M collision-resistant bins, with a 16-bit DX hash for multi-reply transmissions.
@@ -122,7 +122,7 @@ LQ8/
 │   ├── modifier.h              # 20-bit CQ modifier numeric & Base-32 codecs
 │   ├── rst.h                   # 5-bit RST signal report codecs
 │   ├── crc.h                   # CRC-14 parity and CRC-24/Q callsign hashing
-│   ├── ldpc.h                  # LDPC(174, 91) encoder and Normalized Min-Sum decoder
+│   ├── ldpc.h                  # LDPC(174, 91) encoder; min-sum, sum-product and OSD decoders
 │   ├── varicode.h              # Optimal 104-symbol Huffman Varicode codec
 │   └── huffman.h               # Message-type prefix Huffman tree parser
 │
@@ -146,6 +146,7 @@ LQ8/
 │   ├── test_c_api.cpp          # Full verification of pure C API functions
 │   ├── test_waterfall_dsp.cpp  # 2D Costas sync, parabolic refinement, LLR extraction
 │   ├── test_parallel_decoder.cpp # Multi-core candidate parallelism & zero-seam tests
+│   ├── test_decoder_sensitivity.cpp # AWGN sensitivity near the threshold SNRs, no decodes on noise
 │   ├── test_comprehensive_matrix.cpp # Extensive edge-case, fuzzing, and round-trip matrix
 │   ├── test_easy_api.cpp       # Verification of the high-level C++ easy API
 │   ├── test_callsign.cpp       # ITU standard callsign mixed-radix tests
@@ -345,7 +346,7 @@ if (lq_c_decode_tones(tones, &rx_msg, LQ_MODE_LQ8)) {
 
 ### 10. Multi-Core Candidate Parallelism Architecture
 
-Weak-signal demodulation, soft LLR extraction, LDPC(174,91) Normalized Min-Sum belief propagation, and CRC-14 verification consume over 90% of receiver CPU time. `lq_lib` provides native **multi-core candidate parallelism** across all decoding pipelines:
+Weak-signal demodulation, soft LLR extraction, LDPC(174,91) belief propagation and OSD, and CRC-14 verification consume over 90% of receiver CPU time. `lq_lib` provides native **multi-core candidate parallelism** across all decoding pipelines:
 
 #### Architectural Guarantees:
 1. **Zero Boundary Seams & Zero Dropped Signals:** Raw audio waveforms and waterfall frequency matrices are **never sliced** into time or frequency sub-bands. The candidate search space is evaluated continuously, generating a discrete candidate index array $[0, M)$.
@@ -494,7 +495,7 @@ public:
 * `bool audio_to_message(const std::vector<float>& audio_samples, float base_freq_hz, float sample_rate, Protocol proto, Message& msg, int num_threads = 1, bool is_deep = false)`  
   End-to-end audio to message demodulator and decoder.
 * `std::vector<Message> audio_to_messages(const std::vector<float>& audio_samples, float base_freq_hz, float sample_rate, Protocol proto, int num_threads = 1, bool is_deep = false)`  
-  Multi-signal passband scanner with Fast vs Deep decode strategy and multi-pass signal subtraction.
+  Multi-signal passband scanner (soft Costas candidates, fine time/frequency/phase calibration, coherent and noncoherent soft bits) with Fast vs Deep decode strategy (Deep: OSD and a second pass after masking decoded signals). On AWGN it reaches the protocols' threshold SNRs (LQ8 -21, LQ16 -24, LQ4 -17.5, LQ2 -14 dB in 2500 Hz) with well over 50 % of frames decoded.
 * `bool save_wav_file(const std::string& filename, const std::vector<float>& audio_samples, float sample_rate)`  
   Exports audio to 16-bit PCM WAV.
 * `bool load_wav_file(const std::string& filename, std::vector<float>& audio_samples, float& sample_rate)`  
@@ -584,7 +585,7 @@ cmake --build build -j$(nproc)
 cd build
 ctest --output-on-failure
 ```
-All **23 test suites** verify 100% pass across codecs, error correction, and transceiver transport.
+All **24 test suites** verify 100% pass across codecs, error correction, and transceiver transport.
 
 ---
 

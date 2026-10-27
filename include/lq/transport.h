@@ -247,7 +247,10 @@ bool audio_to_message(const std::vector<float>& audio_samples, float base_freq_h
  * Multi-Signal Audio Waterfall Decoder:
  * Scans the entire audio buffer across time and frequency, decoding all active transmissions.
  * `num_threads`: Number of worker threads for parallel candidate decoding (1 = sequential fast-path).
- * `is_deep`: Fast vs Deep decoding strategy (true = half-bin refinement, relaxed sync threshold, 100 LDPC iterations, and multi-pass subtraction).
+ * Each candidate gets a fine time / frequency search, a carrier phase calibration on the sync blocks, coherent and
+ * noncoherent soft bits, and sum-product LDPC decoding.
+ * `is_deep`: Fast vs Deep decoding strategy (true = more candidates, a lower sync threshold, ordered-statistics
+ * decoding when belief propagation fails, and a second pass after masking the decoded signals).
  */
 std::vector<Message> audio_to_messages(const std::vector<float>& audio_samples, float base_freq_hz, float sample_rate, Protocol proto, int num_threads = 1, bool is_deep = false);
 

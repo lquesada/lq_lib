@@ -64,6 +64,27 @@ int ldpc_decode(const float llr[LDPC_CODEWORD_BITS], uint8_t out_91[LDPC_INPUT_B
 int ldpc_decode_hard_bits(const uint8_t in_174[LDPC_CODEWORD_BYTES], uint8_t out_91[LDPC_INPUT_BYTES], int max_iters = 25);
 
 /**
+ * Decode 174 LLRs with sum-product (tanh rule) belief propagation.
+ * Same LLR convention as ldpc_decode (positive = bit 0). Stops early when the parity checks stop improving.
+ * `out_soft` (optional): the a-posteriori LLRs summed over the iterations run (the decoder's trajectory), a more
+ *   reliable ordering than the channel LLRs for ldpc_decode_osd.
+ * Returns iterations taken on success (all 83 checks satisfied), or -1.
+ */
+int ldpc_decode_sum_product(const float llr[LDPC_CODEWORD_BITS], uint8_t out_91[LDPC_INPUT_BYTES], int max_iters = 30,
+                            float out_soft[LDPC_CODEWORD_BITS] = nullptr);
+
+/**
+ * Ordered-statistics decoding (OSD) of 174 LLRs: re-encodes from the 91 most reliable independent bits and tests
+ * flips of the least reliable ones (`order` 0, 1 or 2; order 2 tries pairs among the last `order2_span` of them).
+ * The candidate closest to the received soft values (smallest sum of |llr| over disagreeing bits) is accepted only if
+ * its information bits pass CRC-14.
+ * `out_distance` (optional): that sum divided by the sum of all |llr| (0 = no disagreement; lower = more trustworthy).
+ * Returns 0 on success, -1 if the most likely candidate fails CRC-14.
+ */
+int ldpc_decode_osd(const float llr[LDPC_CODEWORD_BITS], uint8_t out_91[LDPC_INPUT_BYTES], int order = 2,
+                    int order2_span = 40, float* out_distance = nullptr);
+
+/**
  * Check if a 174-bit codeword satisfies all 83 parity check equations (H * c == 0 mod 2).
  * Returns true if syndrome is all zeros.
  */

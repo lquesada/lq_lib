@@ -290,3 +290,79 @@ TEST(LdpcTest, ImpossibleBitErrorsCleanRejection) {
 }
 
 
+
+namespace {
+
+// A random 77-bit payload with its CRC-14, encoded, and noisy LLRs for it (positive = bit 0).
+struct NoisyCodeword {
+    uint8_t in_91[LDPC_INPUT_BYTES];
+    float llr[LDPC_CODEWORD_BITS];
+};
+
+NoisyCodeword make_noisy_codeword(unsigned seed, float amplitude, float sigma) {
+    NoisyCodeword nc{};
+    std::mt19937 rng(seed);
+    uint8_t payload[PAYLOAD_BYTES];
+    for (auto& b : payload) b = static_cast<uint8_t>(rng());
+    payload[PAYLOAD_BYTES - 1] &= 0xF8;
+    append_crc14(payload, nc.in_91);
+    uint8_t cw[LDPC_CODEWORD_BYTES];
+    ldpc_encode(nc.in_91, cw);
+    std::normal_distribution<float> noise(0.0f, sigma);
+    for (int i = 0; i < LDPC_CODEWORD_BITS; ++i) {
+        const int bit = (cw[i >> 3] >> (7 - (i & 7))) & 1;
+        nc.llr[i] = (bit ? -amplitude : amplitude) + noise(rng);
+    }
+    return nc;
+}
+
+}  // namespace
+
+TEST(LdpcTest, SumProductDecodesNoisyCodewords) {
+    int decoded = 0;
+    for (unsigned seed = 1; seed <= 20; ++seed) {
+        NoisyCodeword nc = make_noisy_codeword(seed, 2.0f, 1.3f);
+        uint8_t out[LDPC_INPUT_BYTES];
+        float soft[LDPC_CODEWORD_BITS];
+        if (ldpc_decode_sum_product(nc.llr, out, 50, soft) >= 0 && std::memcmp(out, nc.in_91, LDPC_INPUT_BYTES) == 0) {
+            ++decoded;
+        }
+    }
+    EXPECT_GE(decoded, 18);
+}
+
+TEST(LdpcTest, OsdRecoversWhatBeliefPropagationMisses) {
+    int bp_only = 0, osd = 0;
+    for (unsigned seed = 100; seed < 140; ++seed) {
+        NoisyCodeword nc = make_noisy_codeword(seed, 2.0f, 2.3f);
+        uint8_t out[LDPC_INPUT_BYTES];
+        float soft[LDPC_CODEWORD_BITS];
+        if (ldpc_decode_sum_product(nc.llr, out, 50, soft) >= 0 && std::memcmp(out, nc.in_91, LDPC_INPUT_BYTES) == 0) {
+            ++bp_only;
+            ++osd;
+            continue;
+        }
+        float distance = 1.0f;
+        if (ldpc_decode_osd(soft, out, 2, 40, &distance) == 0) {
+            EXPECT_EQ(std::memcmp(out, nc.in_91, LDPC_INPUT_BYTES), 0) << "OSD returned a wrong codeword, seed " << seed;
+            EXPECT_GE(distance, 0.0f);
+            EXPECT_LE(distance, 1.0f);
+            ++osd;
+        }
+    }
+    EXPECT_GT(osd, bp_only);
+}
+
+TEST(LdpcTest, OsdRejectsPureNoise) {
+    std::mt19937 rng(7);
+    std::normal_distribution<float> noise(0.0f, 2.0f);
+    int accepted = 0;
+    for (int trial = 0; trial < 50; ++trial) {
+        float llr[LDPC_CODEWORD_BITS];
+        for (float& v : llr) v = noise(rng);
+        uint8_t out[LDPC_INPUT_BYTES];
+        float distance = 0.0f;
+        if (ldpc_decode_osd(llr, out, 2, 40, &distance) == 0 && distance < 0.04f) ++accepted;
+    }
+    EXPECT_EQ(accepted, 0);
+}

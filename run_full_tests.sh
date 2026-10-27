@@ -79,7 +79,7 @@ cmake --build build -j"$(nproc)"
 
 # 2. Run complete automated CTest test suite
 echo ""
-echo ">>> [2/5] Running complete automated CTest test suite (23 test targets)..."
+echo ">>> [2/5] Running complete automated CTest test suite (24 test targets)..."
 ctest --test-dir build --output-on-failure
 
 # 3. Run standalone golden vector and paper worked example verifiers
