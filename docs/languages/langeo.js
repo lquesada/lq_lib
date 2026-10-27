@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "Vojmapo",
     "NAV_TECH_SPECS": "Teknikaj detaloj & Biblioteko",
     "NAV_COMMUNITY": "Komunumo &amp; Kontakto",
+    "NAV_LIVE": "Viva mapo",
     "NAV_SHARE": "Konigi",
     "HERO_MODE_TITLE": "La cifereca reĝimo LQ8",
     "HERO_TITLE_1": "Plenaj 4-paŝaj Kontaktoj en 60 Sekundoj",

@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "План розвитку",
     "NAV_TECH_SPECS": "Технічні дані та бібліотека",
     "NAV_COMMUNITY": "Спільнота та Контакти",
+    "NAV_LIVE": "Жива карта",
     "NAV_SHARE": "Поділитися",
     "HERO_MODE_TITLE": "Цифровий протокол LQ8",
     "HERO_TITLE_1": "Повний зв'язок за 4 передачі за 60 секунд",

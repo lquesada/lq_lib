@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "Ilana opopona",
     "NAV_TECH_SPECS": "Awọn alaye lẹkunrẹrẹ",
     "NAV_COMMUNITY": "Agbegbe &amp; Olubasọrọ",
+    "NAV_LIVE": "Àwòrán ní ààyè",
     "NAV_SHARE": "Pin",
     "HERO_MODE_TITLE": "Awọn LQ8 Digital Ipo",
     "HERO_TITLE_1": "Awọn olubasọrọ ni kikun 4-Igbese ni 60 Aaya",

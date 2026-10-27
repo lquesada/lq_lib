@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "Stappenplan",
     "NAV_TECH_SPECS": "Technische Specificaties & Bibliotheek",
     "NAV_COMMUNITY": "Gemeenschap &amp; Contact",
+    "NAV_LIVE": "Livekaart",
     "NAV_SHARE": "Delen",
     "HERO_MODE_TITLE": "De digitale modus LQ8",
     "HERO_TITLE_1": "Volledige 4-stapscontacten in 60 seconden",

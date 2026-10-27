@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "Taswirar hanya",
     "NAV_TECH_SPECS": "Takaddun bayanai",
     "NAV_COMMUNITY": "Al'umma &amp; Tuntuba",
+    "NAV_LIVE": "Taswirar kai tsaye",
     "NAV_SHARE": "Raba",
     "HERO_MODE_TITLE": "Yanayin Dijital LQ8",
     "HERO_TITLE_1": "Cikakkun lambobi 4-Mataki a cikin daƙiƙa 60",

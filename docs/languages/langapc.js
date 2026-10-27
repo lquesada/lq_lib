@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "خارطة الطريق",
     "NAV_TECH_SPECS": "المواصفات التقنية والمكتبة",
     "NAV_COMMUNITY": "المجتمع والتواصل",
+    "NAV_LIVE": "الخريطة المباشرة",
     "NAV_SHARE": "مشاركة",
     "HERO_MODE_TITLE": "النمط الرقمي LQ8",
     "HERO_TITLE_1": "اتصالات كاملة من 4 خطوات في 60 ثانية",

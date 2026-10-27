@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "Plán vývoje",
     "NAV_TECH_SPECS": "Technické specifikace & Knihovna",
     "NAV_COMMUNITY": "Komunita a Kontakt",
+    "NAV_LIVE": "Živá mapa",
     "NAV_SHARE": "Sdílet",
     "HERO_MODE_TITLE": "Digitální mód LQ8",
     "HERO_TITLE_1": "Kompletní 4-krokové kontakty za 60 sekund",

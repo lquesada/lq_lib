@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "نقشه راه",
     "NAV_TECH_SPECS": "مشخصات فنی و کتابخانه",
     "NAV_COMMUNITY": "کمیونٹی اور رابطہ",
+    "NAV_LIVE": "لائیو نقشہ",
     "NAV_SHARE": "اشتراک",
     "HERO_MODE_TITLE": "مد دیجیتال LQ8",
     "HERO_TITLE_1": "60 سیکنڈ میں مکمل 4 قدمی رابطے",

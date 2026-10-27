@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "Lộ trình",
     "NAV_TECH_SPECS": "Thông số kỹ thuật & Thư viện",
     "NAV_COMMUNITY": "Cộng đồng &amp; Liên hệ",
+    "NAV_LIVE": "Bản đồ trực tiếp",
     "NAV_SHARE": "Chia sẻ",
     "HERO_MODE_TITLE": "Chế độ số LQ8",
     "HERO_TITLE_1": "Danh bạ 4 bước đầy đủ trong 60 giây",

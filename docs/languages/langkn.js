@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "ರೋಡ್‌ಮ್ಯಾಪ್",
     "NAV_TECH_SPECS": "ತಾಂತ್ರಿಕ ವಿವರಣೆಗಳು & ಲೈಬ್ರರಿ",
     "NAV_COMMUNITY": "ಸಮುದಾಯ ಮತ್ತು ಸಂಪರ್ಕ",
+    "NAV_LIVE": "ಲೈವ್ ನಕ್ಷೆ",
     "NAV_SHARE": "ಹಂಚಿಕೊಳ್ಳಿ",
     "HERO_MODE_TITLE": "LQ8 டிஜிட்டல் முறை",
     "HERO_TITLE_1": "60 ಸೆಕೆಂಡುಗಳಲ್ಲಿ ಪೂರ್ಣ 4-ಹಂತದ ಸಂಪರ್ಕಗಳು",

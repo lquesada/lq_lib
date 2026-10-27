@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "Yol Xəritəsi",
     "NAV_TECH_SPECS": "Texniki Göstəricilər & Kitabxana",
     "NAV_COMMUNITY": "İcma və Əlaqə",
+    "NAV_LIVE": "Canlı xəritəsi",
     "NAV_SHARE": "Paylaş",
     "HERO_MODE_TITLE": "LQ8 Dijital Modu",
     "HERO_TITLE_1": "60 Saniyədə Tam 4 Addımlı Kontaktlar",

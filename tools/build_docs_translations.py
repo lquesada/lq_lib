@@ -557,6 +557,7 @@ def main():
         <li><a href="#roadmap" data-i18n="NAV_ROADMAP">Roadmap</a></li>
         <li><a href="#technical" data-i18n="NAV_TECH_SPECS">Specs</a></li>
         <li><a href="#community" data-i18n="NAV_COMMUNITY">Community</a></li>
+        <li><a href="live/" data-i18n="NAV_LIVE">Live map</a></li>
       </ul>"""
     fixed_html = re.sub(nav_links_target, nav_links_replacement, fixed_html)
     print("✓ Streamlined nav-links items in base template.")

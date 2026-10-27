@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "Køreplan",
     "NAV_TECH_SPECS": "Tekniske Data & Bibliotek",
     "NAV_COMMUNITY": "Fællesskab &amp; Kontakt",
+    "NAV_LIVE": "Livekort",
     "NAV_SHARE": "Del",
     "HERO_MODE_TITLE": "Den digitale mode LQ8",
     "HERO_TITLE_1": "Fuld 4-trins kontakter på 60 sekunder",

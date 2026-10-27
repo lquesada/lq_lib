@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "Tiekartta",
     "NAV_TECH_SPECS": "Tekniset tiedot & Kirjasto",
     "NAV_COMMUNITY": "Yhteisö ja Yhteydenotto",
+    "NAV_LIVE": "Livekartta",
     "NAV_SHARE": "Jaa",
     "HERO_MODE_TITLE": "Digitaalitila LQ8",
     "HERO_TITLE_1": "Täydelliset 4-vaiheiset kontaktit 60 sekunnissa",

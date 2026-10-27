@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "Foaie de parcurs",
     "NAV_TECH_SPECS": "Specificații & Bibliotecă",
     "NAV_COMMUNITY": "Comunitate și Contact",
+    "NAV_LIVE": "Harta live",
     "NAV_SHARE": "Distribuie",
     "HERO_MODE_TITLE": "Modul digital LQ8",
     "HERO_TITLE_1": "Contacte complete în 4 pași în 60 de secunde",

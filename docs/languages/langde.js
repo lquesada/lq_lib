@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "Entwicklungsplan",
     "NAV_TECH_SPECS": "Technische Daten & Bibliothek",
     "NAV_COMMUNITY": "Gemeinschaft &amp; Kontakt",
+    "NAV_LIVE": "Live-Karte",
     "NAV_SHARE": "Teilen",
     "HERO_MODE_TITLE": "Die digitale Betriebsart LQ8",
     "HERO_TITLE_1": "Vollständige 4-Schritt-QSOs in 60 Sekunden",

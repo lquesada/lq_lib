@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "ରୋଡ୍ ମ୍ୟାପ୍",
     "NAV_TECH_SPECS": "ନିର୍ଦ୍ଦିଷ୍ଟ |",
     "NAV_COMMUNITY": "ସମ୍ପ୍ରଦାୟ ଏବଂ ଯୋଗାଯୋଗ",
+    "NAV_LIVE": "ଲାଇଭ୍ ମାନଚିତ୍ର",
     "NAV_SHARE": "ସେୟାର କରନ୍ତୁ",
     "HERO_MODE_TITLE": "LQ8 ଡିଜିଟାଲ୍ ମୋଡ୍ |",
     "HERO_TITLE_1": "60 ସେକେଣ୍ଡରେ ପୂର୍ଣ୍ଣ 4-ଷ୍ଟେପ୍ ସମ୍ପର୍କ |",

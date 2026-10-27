@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "发展路线",
     "NAV_TECH_SPECS": "技术规格与软件库",
     "NAV_COMMUNITY": "社區支持與聯絡",
+    "NAV_LIVE": "即時地圖",
     "NAV_SHARE": "分享",
     "HERO_MODE_TITLE": "LQ8 数字通信模式",
     "HERO_TITLE_1": "60 秒内完成完整 7 步通联",

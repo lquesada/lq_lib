@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "Bide-orria",
     "NAV_TECH_SPECS": "Zehaztapen Teknikoak eta Liburutegia",
     "NAV_COMMUNITY": "Komunitatea eta Kontaktua",
+    "NAV_LIVE": "Zuzeneko mapa",
     "NAV_SHARE": "Partekatu",
     "HERO_MODE_TITLE": "LQ8 modu digitala",
     "HERO_TITLE_1": "4 urratseko kontaktu osoak 60 segundotan",

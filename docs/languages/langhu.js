@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "Ütemterv",
     "NAV_TECH_SPECS": "Műszaki adatok & Könyvtár",
     "NAV_COMMUNITY": "Közösség és Kapcsolat",
+    "NAV_LIVE": "Élő térkép",
     "NAV_SHARE": "Megosztás",
     "HERO_MODE_TITLE": "Az LQ8 digitális üzemmód",
     "HERO_TITLE_1": "Teljes 4 lépéses kapcsolatfelvétel 60 másodperc alatt",

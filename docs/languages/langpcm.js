@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "Plan for front",
     "NAV_TECH_SPECS": "Tech Specs &amp; Library",
     "NAV_COMMUNITY": "Pipul &amp; Reach us",
+    "NAV_LIVE": "Live map",
     "NAV_SHARE": "Share",
     "HERO_MODE_TITLE": "Di LQ8 Digital Mode",
     "HERO_TITLE_1": "Full 4-Step Contact inside 60 Seconds",

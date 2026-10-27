@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "Mpangilio",
     "NAV_TECH_SPECS": "Maelezo ya Kiufundi & Maktaba",
     "NAV_COMMUNITY": "Jumuiya na Mawasiliano",
+    "NAV_LIVE": "Ramani moja kwa moja",
     "NAV_SHARE": "Shiriki",
     "HERO_MODE_TITLE": "Njia ya Kidijitali ya LQ8",
     "HERO_TITLE_1": "Anwani Kamili za Hatua 4 ndani ya Sekunde 60",

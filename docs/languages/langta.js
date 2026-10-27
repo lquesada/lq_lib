@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "வளர்ச்சித் திட்டம்",
     "NAV_TECH_SPECS": "தொழில்நுட்ப விவரங்கள் & நூலகம்",
     "NAV_COMMUNITY": "சமூகம் மற்றும் தொடர்பு",
+    "NAV_LIVE": "நேரலை வரைபடம்",
     "NAV_SHARE": "பகிர்",
     "HERO_MODE_TITLE": "LQ8 டிஜிட்டல் முறை",
     "HERO_TITLE_1": "60 வினாடிகளில் முழு 4-படி தொடர்புகள்",

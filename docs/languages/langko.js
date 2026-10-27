@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "로드맵",
     "NAV_TECH_SPECS": "기술 사양 & 라이브러리",
     "NAV_COMMUNITY": "커뮤니티 및 문의",
+    "NAV_LIVE": "라이브 지도",
     "NAV_SHARE": "공유",
     "HERO_MODE_TITLE": "LQ8 디지털 모드",
     "HERO_TITLE_1": "60초 만에 전체 4단계 연락처",

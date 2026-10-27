@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "የመንገድ ካርታ",
     "NAV_TECH_SPECS": "ዝርዝሮች",
     "NAV_COMMUNITY": "ማህበረሰብ እና አድራሻ",
+    "NAV_LIVE": "የቀጥታ ካርታ",
     "NAV_SHARE": "አጋራ",
     "HERO_MODE_TITLE": "የ LQ8 ዲጂታል ሁነታ",
     "HERO_TITLE_1": "ባለ 4-ደረጃ እውቂያዎች በ60 ሰከንድ ውስጥ",

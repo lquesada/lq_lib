@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "Plano ng Pagpapaunlad",
     "NAV_TECH_SPECS": "Teknikal na Detalye & Aklatan",
     "NAV_COMMUNITY": "Komunidad at Makipag-ugnayan",
+    "NAV_LIVE": "Live map",
     "NAV_SHARE": "Ibahagi",
     "HERO_MODE_TITLE": "Ang LQ8 Digital Mode",
     "HERO_TITLE_1": "Buong 4-Step na Contact sa loob ng 60 Segundo",

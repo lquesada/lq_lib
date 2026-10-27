@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "Plan rozwoju",
     "NAV_TECH_SPECS": "Specyfikacja techniczna i biblioteka",
     "NAV_COMMUNITY": "Społeczność i Kontakt",
+    "NAV_LIVE": "Mapa na żywo",
     "NAV_SHARE": "Udostępnij",
     "HERO_MODE_TITLE": "Cyfrowy tryb LQ8",
     "HERO_TITLE_1": "Pełne 4-etapowe kontakty w 60 sekund",

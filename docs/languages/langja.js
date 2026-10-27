@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "ロードマップ",
     "NAV_TECH_SPECS": "技術仕様 & ライブラリ",
     "NAV_COMMUNITY": "コミュニティ＆お問い合わせ",
+    "NAV_LIVE": "ライブマップ",
     "NAV_SHARE": "共有",
     "HERO_MODE_TITLE": "デジタル通信モード LQ8",
     "HERO_TITLE_1": "60秒で完了する完全7ステップQSO",

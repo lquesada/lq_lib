@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "แผนงาน",
     "NAV_TECH_SPECS": "ข้อมูลทางเทคนิคและไลบรารี",
     "NAV_COMMUNITY": "ชุมชนและการติดต่อ",
+    "NAV_LIVE": "แผนที่สด",
     "NAV_SHARE": "แชร์",
     "HERO_MODE_TITLE": "โหมดดิจิทัล LQ8",
     "HERO_TITLE_1": "ติดต่อ 4 ขั้นตอนแบบเต็มใน 60 วินาที",

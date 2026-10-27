@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "מפת דרכים",
     "NAV_TECH_SPECS": "מפרט טכני וספרייה",
     "NAV_COMMUNITY": "קהילה וצור קשר",
+    "NAV_LIVE": "מפה חיה",
     "NAV_SHARE": "שיתוף",
     "HERO_MODE_TITLE": "המצב הדיגיטלי LQ8",
     "HERO_TITLE_1": "אנשי קשר מלאים ב-4 שלבים תוך 60 שניות",

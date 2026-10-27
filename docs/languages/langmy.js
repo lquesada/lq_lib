@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "လမ်းပြမြေပုံ",
     "NAV_TECH_SPECS": "Specs များ",
     "NAV_COMMUNITY": "အသိုင်းအဝိုင်းနှင့် ဆက်သွယ်ရန်",
+    "NAV_LIVE": "တိုက်ရိုက်မြေပုံ",
     "NAV_SHARE": "မျှဝေပါ",
     "HERO_MODE_TITLE": "LQ8 ဒစ်ဂျစ်တယ်မုဒ်",
     "HERO_TITLE_1": "စက္ကန့် 60 အတွင်း 4 အဆင့် အဆက်အသွယ်များ အပြည့်အစုံ",

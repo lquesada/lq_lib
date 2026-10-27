@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "Peta dalan",
     "NAV_TECH_SPECS": "Spesifikasi",
     "NAV_COMMUNITY": "Masyarakat",
+    "NAV_LIVE": "Peta langsung",
     "NAV_SHARE": "Bagi",
     "HERO_MODE_TITLE": "Mode Digital LQ8",
     "HERO_TITLE_1": "Kontak 4-Langkah Lengkap ing 60 Detik",

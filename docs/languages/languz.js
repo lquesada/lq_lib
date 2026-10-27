@@ -40,6 +40,7 @@ const langData = {
     "NAV_ROADMAP": "Yoʻl xaritasi",
     "NAV_TECH_SPECS": "Texnik xususiyatlar & Kutubxona",
     "NAV_COMMUNITY": "Hamjamiyat va Aloqa",
+    "NAV_LIVE": "Jonli xaritasi",
     "NAV_SHARE": "Ulashish",
     "HERO_MODE_TITLE": "LQ8 Dijital Modu",
     "HERO_TITLE_1": "60 soniyada to'liq 4 bosqichli kontaktlar",
