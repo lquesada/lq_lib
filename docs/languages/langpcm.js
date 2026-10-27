@@ -166,7 +166,7 @@ const langData = {
     "LIBRARY_TITLE": "Reference C++20 Library (lq_lib)",
     "LIBRARY_DESC": "High-performance, zero-allocation reference implementation in modern C++20 with pure C99 bindings. Includes message packing, GFSK audio generation, Costas sync, and LDPC(174,91) decoding.",
     "LIBRARY_BADGE_1": "C++20 &amp; Pure C99 Code",
-    "LIBRARY_BADGE_2": ">95% Test Coverage",
+    "LIBRARY_BADGE_2": ">90% Test Coverage",
     "LIBRARY_BADGE_3": "Multi-Threaded / Parallel DSP Audio",
     "LIBRARY_BADGE_4": "MIT License",
     "LIBRARY_BTN": "See on GitHub &rarr;",
