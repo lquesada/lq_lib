@@ -71,7 +71,7 @@ As summarized in Table~\ref{tab:ft8qso}, \LQ8 completes a contact in 4 time slot
   \item \textbf{T1 (Slot 1, Even):} Station~A transmits a \msgtype{CQ} broadcast (catalogued in Section~\ref{sec:msg_arch}, Types~1--4) containing its callsign, optional portable suffix, grid locator, or CQ modifier.
   \item \textbf{T2 (Slot 2, Odd):} Station~B transmits a directed \msgtype{CALL} reply (Types~5--7) packing Station~A's target address, caller callsign, measured SNR report, and grid locator into a single frame.
   \item \textbf{T3 (Slot 3, Even):} Station~A acknowledges with \msgtype{REPORT+73} (Type~8 for standard callsigns, or multi-station Type~11), delivering its measured SNR report for Station~B.
-  \item \textbf{T4 (Slot 4, Odd):} Station~B transmits a final \msgtype{73} acknowledgment (Types~9 or 10), completing the confirmed bidirectional contact.
+  \item \textbf{T4 (Slot 4, Odd):} Station~B transmits a final \msgtype{73} acknowledgment (Types~9 or 10; Type~12 for 10--13-character compound callsigns), completing the confirmed bidirectional contact.
 \end{enumerate}
 
 \subsection{Retransmission, Error Recovery and Logging Semantics}

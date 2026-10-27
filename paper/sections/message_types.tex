@@ -92,11 +92,11 @@ Stations select transmission formats according to the operational categories def
 \midrule
 \textbf{A} & Standard (no suffixes) & Type 1 & Type 5 & Type 8 & Type 9 \\
 \textbf{B} & Standard + std suffix (\texttt{/P}) & Type 1 & Type 6 & Type 8 & Type 9 \\
-\textbf{C} & Non-standard ($\le 9$ chars) + optional suffix & Type 2 / 3 & Type 7$^*$ / Type 6 & Type 11 & Type 10 / 12 \\
+\textbf{C} & Non-standard ($\le 9$ chars) + optional suffix & Type 2 / 3 & Type 7$^*$ / Type 6 & Type 11 & Type 10 \\
 \textbf{D} & Long compound ($10$--$13$ chars) + optional suffix & Type 4 & ---$^\ddagger$ & Type 11 & Type 12 \\
-\textbf{E} & Multi-station reply & --- & --- & Type 11 (Fox) & \makecell{Type 12 (Fox) /\\ Type 9, 10 (Hounds)} \\
+\textbf{E} & Multi-station reply & --- & --- & Type 11 (Fox) & Type 9 / 10 (Hounds)$^\S$ \\
 \bottomrule
-\multicolumn{6}{@{}p{\textwidth}@{}}{\vspace{2pt}\footnotesize $^*$In Step~2, Category~C callers transmit Type~7 (clear-text callsign, suffix, SNR to target 20-bit hash); standard callers answering a Category~C CQ transmit Type~6 (locator, SNR to target 24-bit hash). \quad $^\ddagger$Category~D compound stations ($10$--$13$ chars) initiate contact via CQ (Type~4) or free text (Type~13).}
+\multicolumn{6}{@{}p{\textwidth}@{}}{\vspace{2pt}\footnotesize $^*$In Step~2, Category~C callers transmit Type~7 (clear-text callsign, suffix, SNR to target 20-bit hash); standard callers answering a Category~C CQ transmit Type~6 (locator, SNR to target 24-bit hash). \quad $^\ddagger$Category~D compound stations ($10$--$13$ chars) initiate contact via CQ (Type~4) or free text (Type~13). \quad $^\S$A Hound with a 10--13-character callsign sends Type~12; the Fox may send an optional \msgtype{MULTI-73} (Type~12) after the exchange.}
 \end{tabular*}
 
 \vspace{6pt plus 1fill}
