@@ -337,31 +337,39 @@ int main(int argc, char* argv[]) {
         int type_id = msg_type_to_id(msg.type);
         std::string type_name = msg_type_to_str(msg.type);
 
-        uint16_t crc14 = lq::compute_payload_crc14(payload);
-        std::string crc_hex_str = crc_to_hex(crc14);
-        std::string crc_bin_str = crc_to_bin(crc14);
-
-        // 91-bit LDPC input
-        std::string ldpc_input_bin = bin_str + crc_bin_str;
-
-        // 174-bit LDPC codeword
-        uint8_t in_91[lq::LDPC_INPUT_BYTES] = {0};
-        lq::append_crc14(payload, in_91);
-
-        uint8_t codeword_bytes[lq::LDPC_CODEWORD_BYTES] = {0};
-        lq::ldpc_encode(in_91, codeword_bytes);
-
-        std::string codeword_bin;
-        codeword_bin.reserve(174);
-        for (int i = 0; i < 174; ++i) {
-            uint8_t bit = (codeword_bytes[i / 8] >> (7 - (i % 8))) & 1;
-            codeword_bin.push_back(bit ? '1' : '0');
-        }
-        std::string codeword_hex = bytes_to_hex(codeword_bytes, 22);
-
         for (const auto& mode_str : mode_names) {
             lq::Protocol proto = parse_protocol_name(mode_str);
             const auto prof = lq::get_protocol_params(proto);
+
+            // LQ4 / LQ2 whiten the 77-bit payload before CRC-14 and LDPC (as encode_payload does);
+            // LQ8 / LQ16 do not. CRC, LDPC input and codeword are those of the transmitted frame.
+            uint8_t ldpc_payload[lq::PAYLOAD_BYTES];
+            std::memcpy(ldpc_payload, payload, lq::PAYLOAD_BYTES);
+            if (proto == lq::Protocol::LQ4 || proto == lq::Protocol::LQ2) {
+                for (size_t b = 0; b < lq::PAYLOAD_BYTES; ++b) ldpc_payload[b] ^= lq::FT4_XOR_SEQUENCE[b];
+            }
+
+            uint16_t crc14 = lq::compute_payload_crc14(ldpc_payload);
+            std::string crc_hex_str = crc_to_hex(crc14);
+            std::string crc_bin_str = crc_to_bin(crc14);
+
+            // 91-bit LDPC input
+            std::string ldpc_input_bin = lq::payload_to_binary(ldpc_payload) + crc_bin_str;
+
+            // 174-bit LDPC codeword
+            uint8_t in_91[lq::LDPC_INPUT_BYTES] = {0};
+            lq::append_crc14(ldpc_payload, in_91);
+
+            uint8_t codeword_bytes[lq::LDPC_CODEWORD_BYTES] = {0};
+            lq::ldpc_encode(in_91, codeword_bytes);
+
+            std::string codeword_bin;
+            codeword_bin.reserve(174);
+            for (int i = 0; i < 174; ++i) {
+                uint8_t bit = (codeword_bytes[i / 8] >> (7 - (i % 8))) & 1;
+                codeword_bin.push_back(bit ? '1' : '0');
+            }
+            std::string codeword_hex = bytes_to_hex(codeword_bytes, 22);
 
             lq::ToneSequence seq;
             lq::encode_payload(payload, proto, seq);

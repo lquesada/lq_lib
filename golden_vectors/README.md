@@ -123,8 +123,9 @@ Third-party implementations should execute the two compliance pipelines:
 ### Pipeline A: Message & Codec Compliance (`golden_vectors_encoding.json`)
 1. **Text to Payload**: Parse `plaintext` into the 77-bit bitfield. Assert binary equality with `payload_77bit_bin` and hex equality with `payload_10byte_hex`.
 2. **Payload to Text**: Unpack `payload_10byte_hex` back into text. Assert equality with `canonical_text`.
-3. **CRC-14 Checksum**: Compute the 14-bit CRC over the 77-bit payload zero-extended to 82 bits using $G_{\text{CRC14}}(x) = \texttt{0x2757}$. Assert equality with `crc14_val`.
-4. **LDPC(174,91) Encoding**: Encode the 91-bit block ($77\text{ payload} + 14\text{ CRC}$) via Gallager generator matrix $G_{83\times 91}$. Assert equality with `codeword_174bit_bin` and `codeword_22byte_hex`.
+3. **LQ4 / LQ2 Whitening**: For `LQ4` and `LQ2` only, XOR the 77-bit payload with the whitening sequence `4A 5E 89 B4 B0 8A 79 55 BE 28` before steps 4 and 5 (the paper's extended-modes section). `payload_77bit_bin` / `payload_10byte_hex` hold the payload before whitening; `crc14_*`, `ldpc_input_91bit_bin` and `codeword_*` are those of the transmitted (whitened) frame. `LQ8` and `LQ16` are not whitened.
+4. **CRC-14 Checksum**: Compute the 14-bit CRC over the 77-bit payload zero-extended to 82 bits using $G_{\text{CRC14}}(x) = \texttt{0x2757}$. Assert equality with `crc14_val`.
+5. **LDPC(174,91) Encoding**: Encode the 91-bit block ($77\text{ payload} + 14\text{ CRC}$) via Gallager generator matrix $G_{83\times 91}$. Assert equality with `codeword_174bit_bin` and `codeword_22byte_hex`.
 
 ### Pipeline B: Physical Layer & RF Channel Compliance (`golden_vectors_physical.json`)
 1. **Timing & Symbol Parameters**: Assert `slot_duration_s`, `tx_duration_s`, `symbol_period_s`, `tone_spacing_hz`, and `bandwidth_hz`.

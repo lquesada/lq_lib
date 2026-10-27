@@ -36,6 +36,7 @@
 #include <vector>
 #include <string>
 #include <cmath>
+#include <cstring>
 #include "lq/lq.h"
 #include "lq/constants.h"
 
@@ -46,6 +47,14 @@ lq::Protocol parse_protocol_name(std::string_view name) {
     if (name == "LQ4") return lq::Protocol::LQ4;
     if (name == "LQ2") return lq::Protocol::LQ2;
     return lq::Protocol::LQ8;
+}
+
+// LQ4 / LQ2 whiten the 77-bit payload before CRC-14 and LDPC (as encode_payload does); LQ8 / LQ16 do not.
+void ldpc_payload_for(const uint8_t payload[lq::PAYLOAD_BYTES], lq::Protocol proto, uint8_t out[lq::PAYLOAD_BYTES]) {
+    std::memcpy(out, payload, lq::PAYLOAD_BYTES);
+    if (proto == lq::Protocol::LQ4 || proto == lq::Protocol::LQ2) {
+        for (size_t b = 0; b < lq::PAYLOAD_BYTES; ++b) out[b] ^= lq::FT4_XOR_SEQUENCE[b];
+    }
 }
 
 struct GoldenVector {
@@ -513,11 +522,13 @@ TEST_F(GoldenVectorsTest, ExhaustiveForwardEncoding) {
         EXPECT_EQ(msg.to_string(), gv.canonical_text);
 
         // 4. CRC-14 Checksum
-        uint16_t crc14 = lq::compute_payload_crc14(payload);
+        uint8_t ldpc_payload[lq::PAYLOAD_BYTES];
+        ldpc_payload_for(payload, parse_protocol_name(gv.mode_str), ldpc_payload);
+        uint16_t crc14 = lq::compute_payload_crc14(ldpc_payload);
         EXPECT_EQ(crc14, gv.crc14_val);
 
         uint8_t in_91[lq::LDPC_INPUT_BYTES] = {0};
-        lq::append_crc14(payload, in_91);
+        lq::append_crc14(ldpc_payload, in_91);
         EXPECT_TRUE(lq::verify_crc14(in_91));
 
         // 5. LDPC(174,91) Codeword
@@ -666,8 +677,10 @@ TEST_F(GoldenVectorsTest, ExhaustiveReverseChannelDecoding) {
         EXPECT_GT(iters, 0) << "LDPC hard bit decode failed for " << gv.id;
         EXPECT_TRUE(lq::verify_crc14(decoded_91));
 
+        uint8_t whitened_payload[lq::PAYLOAD_BYTES] = {0};
+        lq::extract_payload(decoded_91, whitened_payload);
         uint8_t extracted_payload[lq::PAYLOAD_BYTES] = {0};
-        lq::extract_payload(decoded_91, extracted_payload);
+        ldpc_payload_for(whitened_payload, proto, extracted_payload);  // the XOR also de-whitens
         EXPECT_EQ(lq::payload_to_hex(extracted_payload), gv.payload_10byte_hex);
         EXPECT_EQ(lq::hex_to_text(lq::payload_to_hex(extracted_payload), calls, num_calls), gv.canonical_text);
     }
@@ -805,7 +818,9 @@ TEST_F(GoldenVectorsTest, PaperWorkedExamplesAreExactMatch) {
         ASSERT_TRUE(lq::encode_message(msg, payload));
 
         EXPECT_EQ(lq::payload_to_hex(payload), gv.payload_10byte_hex);
-        EXPECT_EQ(lq::compute_payload_crc14(payload), gv.crc14_val);
+        uint8_t ldpc_payload[lq::PAYLOAD_BYTES];
+        ldpc_payload_for(payload, parse_protocol_name(gv.mode_str), ldpc_payload);
+        EXPECT_EQ(lq::compute_payload_crc14(ldpc_payload), gv.crc14_val);
         EXPECT_EQ(lq::binary_to_text(gv.payload_77bit_bin, calls, num_calls), gv.canonical_text);
         EXPECT_EQ(lq::hex_to_text(gv.payload_10byte_hex, calls, num_calls), gv.canonical_text);
     }
@@ -1019,10 +1034,12 @@ TEST_F(GoldenVectorsTest, EncodingForwardAndReverseVerification) {
         EXPECT_EQ(lq::payload_to_binary(payload), gve.payload_77bit_bin);
         EXPECT_EQ(lq::format_message(msg), gve.canonical_text);
 
-        EXPECT_EQ(lq::compute_payload_crc14(payload), gve.crc14_val);
+        uint8_t ldpc_payload[lq::PAYLOAD_BYTES];
+        ldpc_payload_for(payload, proto, ldpc_payload);
+        EXPECT_EQ(lq::compute_payload_crc14(ldpc_payload), gve.crc14_val);
 
         uint8_t in_91[lq::LDPC_INPUT_BYTES] = {0};
-        lq::append_crc14(payload, in_91);
+        lq::append_crc14(ldpc_payload, in_91);
         uint8_t codeword[lq::LDPC_CODEWORD_BYTES] = {0};
         lq::ldpc_encode(in_91, codeword);
 

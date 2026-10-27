@@ -456,7 +456,14 @@ int main(int argc, char* argv[]) {
         ++total_checks;
 
         // 4. CRC-14 Checksum Check
-        uint16_t crc14 = lq::compute_payload_crc14(payload);
+        // LQ4 / LQ2 whiten the payload before CRC-14 and LDPC (as encode_payload does).
+        const lq::Protocol ldpc_proto = parse_protocol_name(gv.mode_str);
+        uint8_t ldpc_payload[lq::PAYLOAD_BYTES];
+        std::memcpy(ldpc_payload, payload, lq::PAYLOAD_BYTES);
+        if (ldpc_proto == lq::Protocol::LQ4 || ldpc_proto == lq::Protocol::LQ2) {
+            for (size_t b = 0; b < lq::PAYLOAD_BYTES; ++b) ldpc_payload[b] ^= lq::FT4_XOR_SEQUENCE[b];
+        }
+        uint16_t crc14 = lq::compute_payload_crc14(ldpc_payload);
         if (crc14 != gv.crc14_val) {
             std::cerr << "\033[31m[FAIL]\033[0m " << gv.id << " -> CRC-14 mismatch!\n";
             continue;
@@ -465,7 +472,7 @@ int main(int argc, char* argv[]) {
 
         // 5. LDPC(174,91) Codeword Check
         uint8_t in_91[lq::LDPC_INPUT_BYTES] = {0};
-        lq::append_crc14(payload, in_91);
+        lq::append_crc14(ldpc_payload, in_91);
         uint8_t codeword_bytes[lq::LDPC_CODEWORD_BYTES] = {0};
         lq::ldpc_encode(in_91, codeword_bytes);
 
