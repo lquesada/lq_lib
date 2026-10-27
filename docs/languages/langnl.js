@@ -145,7 +145,7 @@ const langData = {
     "ROADMAP_SUBTITLE": "Unser Weg zur weltweiten Amateurfunk-Standardisierung, Multiplattform-Apps und Logbuch-Integration.",
     "ROADMAP_P1_TITLE": "Phase 1: Mathematische Spezifikation & Referenzbibliothek",
     "ROADMAP_P1_STATUS": "Abgeschlossen",
-    "ROADMAP_P1_TEXT": "Vollständige Definition der Huffman-Präfixbäume, 61-Zeichen-Varicode, CRC-14/CRC-24Q-Algorithmen und C++20-Referenzbibliothek (<code>lq_lib</code>) mit 100% Testabdeckung.",
+    "ROADMAP_P1_TEXT": "Volledige definitie van de Huffman-prefixbomen met variabele lengte, de Varicode met 104 tekens, de CRC-14/CRC-24Q-algoritmen en de opensource-referentiebibliotheek in C++20 (<code>lq_lib</code>) met geverifieerde testdekking en uitgebreide validatie op meerdere platforms.",
     "ROADMAP_P2_TITLE": "Phase 2: Native Mobil-Apps & Praxiserprobung",
     "ROADMAP_P2_STATUS": "Aktiv / In Arbeit",
     "ROADMAP_P2_TEXT": "Umfassende Funkerprobung auf den Bändern. Native Implementierung in <strong>qFT8 für Android</strong> (<a href=\"https://qft8.com\" target=\"_blank\">qft8.com</a>) und Entwicklung nativer <strong>iPhone / iPad (iOS) Transceiver-Apps</strong>.",

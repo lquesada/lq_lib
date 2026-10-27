@@ -1574,7 +1574,7 @@
             <ul class="pitch-list">
               <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_4_LI_1">LQ4 : QSO 4 étapes en 30s (83.3 Hz)</span></li>
               <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_4_LI_2">LQ2 : QSO 4 étapes en 15s (166.7 Hz)</span></li>
-              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_4_LI_3">120–240 contacts/heure</span></li>
+              <li><span class="check"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span data-i18n="PITCH_CARD_4_LI_3">LQ16: &minus;24.0 dB DX (25.0 Hz)</span></li>
             </ul>
           </div>
         </div>
@@ -1865,7 +1865,7 @@
       <div class="container">
         <div class="section-header">
           <h2 data-i18n="SPEEDUP_TITLE">Comment le QSO en 60 secondes et l'accélération en pileup sont-ils atteints ?</h2>
-          <p data-i18n="SPEEDUP_SUBTITLE">En remplaçant les échanges rigides par des codes préfixes de Huffman de longueur variable, du hachage résistant aux collisions de 24/14 bits et des trames de réponse multi-stations, tout en respectant deux principes clés : le localisateur et les rapports de signal sont échangés (sauf en CQ pour les indicatifs très longs), et les 73 sont échangés pour confirmer la réception du localisateur et du rapport de signal de l'autre station.</p>
+          <p data-i18n="SPEEDUP_SUBTITLE">En remplaçant les échanges rigides par des codes préfixes de Huffman de longueur variable, du hachage résistant aux collisions de 24/16 bits et des trames de réponse multi-stations, tout en respectant deux principes clés : le localisateur et les rapports de signal sont échangés (sauf en CQ pour les indicatifs très longs), et les 73 sont échangés pour confirmer la réception du localisateur et du rapport de signal de l'autre station.</p>
         </div>
 
         <div class="speedup-quad-grid">
@@ -1926,7 +1926,7 @@
                 <div class="flow-step-msg msg-lq">HB9IPH TU2TU 73</div>
               </div>
             </div>
-            <div class="flow-summary summary-fast" data-i18n="SPEEDUP_STD_LQ8_SUMMARY"><strong>Temps total de QSO :</strong> 60 secondes (7 créneaux) &mdash; <span style="color: var(--cyan); font-weight: 700;">1.50× vs 6 créneaux / 1.25× vs RR73</span></div>
+            <div class="flow-summary summary-fast" data-i18n="SPEEDUP_STD_LQ8_SUMMARY"><strong>Temps total de QSO :</strong> 60 secondes (4 créneaux) &mdash; <span style="color: var(--cyan); font-weight: 700;">1.50× vs 6 créneaux / 1.25× vs RR73</span></div>
           </div>
 
           <!-- 3. FT8 Pileup -->
@@ -1977,7 +1977,7 @@
             <div class="flow-steps">
               <div class="flow-step">
                 <div class="flow-step-num">1</div>
-                <div class="flow-step-msg msg-lq">HB9IPH TU2TU -02 / HB9IPH YO1YO -05</div>
+                <div class="flow-step-msg msg-lq">HB9IPH TU2TU KL22 -02 / HB9IPH YO1YO KN34 -05</div>
               </div>
               <div class="flow-step">
                 <div class="flow-step-num">2</div>
@@ -2007,7 +2007,7 @@
             <div class="roadmap-status-icon status-done"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
             <div class="roadmap-content">
               <h4><span data-i18n="ROADMAP_P1_TITLE">Phase 1: Spécification Mathématique & Bibliothèque de Référence</span> <span class="pill pill-emerald" data-i18n="ROADMAP_P1_STATUS">Terminée</span></h4>
-              <p data-i18n="ROADMAP_P1_TEXT">Définition complète des arbres de préfixes de Huffman, Varicode à 61 caractères, algorithmes CRC-14/CRC-24Q et bibliothèque open source C++20 (<code>lq_lib</code>) vérifiée à 100% de couverture de tests.</p>
+              <p data-i18n="ROADMAP_P1_TEXT">Définition complète des arbres de préfixes de Huffman, Varicode à 104 caractères, algorithmes CRC-14/CRC-24Q et bibliothèque open source C++20 (<code>lq_lib</code>) vérifiée à &gt;90% de couverture de tests.</p>
             </div>
           </div>
 
@@ -2145,7 +2145,7 @@
           <!-- Complete Bit-Level Serialization Inspector -->
           <div class="tech-sub-section">
             <h3 data-i18n="INSPECTOR_TITLE">Inspecteur de Sérialisation au Niveau du Bit (13 Types de Messages)</h3>
-            <p data-i18n="INSPECTOR_SUBTITLE">Sélectionnez un type de message structuré ou un fragment multi-trames LQ4 pour inspecter sa décomposition binaire, son hexadécimal et sa parité CRC-14.</p>
+            <p data-i18n="INSPECTOR_SUBTITLE">Sélectionnez un type de message structuré pour inspecter ses champs binaires, son hexadécimal compacté et sa parité CRC-14 calculée.</p>
             
             <div class="inspector-card">
               <div class="presets-category-title" data-i18n="PRESET_CAT_1">Formats d'Appel CQ :</div>
@@ -2460,9 +2460,9 @@
         snr: "-17.5 dB",
         rate: "2.00 QSO/min",
         desc: `<div class="mode-compare-title"><strong>LQ4 vs FT4:</strong> High-Speed VHF / Contesting Profile</div>
-               <p>Combines 4-GFSK modulation across 7.5-second time slots with LQ's 4-step Huffman prefix exchange to complete QSOs in just 30 seconds (vs 45 seconds in FT4), offering double the QSO rate of FT4 with zero SNR penalty relative to FT4.</p>
+               <p>Combines 4-GFSK modulation across 7.5-second time slots with LQ's 4-step Huffman prefix exchange to complete QSOs in just 30 seconds (vs 37.5–45 seconds in FT4), offering 1.25–1.5× the QSO rate of FT4 (120 vs 80–96 QSOs/h) with zero SNR penalty relative to FT4.</p>
                <ul class="mode-compare-list">
-                 <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>30-Second QSO:</strong> 4 steps in 30s vs 45s in FT4 (1.5× faster).</span></li>
+                 <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>30-Second QSO:</strong> 4 steps in 30s vs 37.5–45s in FT4 (1.25–1.5× faster).</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>High-Throughput Pileups:</strong> Confirm multiple stations in parallel.</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>Contest Optimized:</strong> Maximizes contact rates during band openings.</span></li>
                </ul>`
@@ -2489,7 +2489,7 @@
         snr: "-24.0 dB",
         rate: "0.50 QSO/min",
         desc: `<div class="mode-compare-title"><strong>LQ16:</strong> Extreme Weak-Signal DX Profile</div>
-               <p>Ultra-narrowband profile providing extreme sensitivity (-24.0 dB SNR, 3 dB deeper than FT8) for LF/MF, trans-equatorial DX, and highly challenging propagation paths.</p>
+               <p>Ultra-narrowband profile providing extreme sensitivity (-24.0 dB SNR, 3 dB deeper than FT8) for EME and extreme weak-signal paths.</p>
                <ul class="mode-compare-list">
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>Extreme Sensitivity:</strong> -24.0 dB SNR (3 dB advantage over FT8).</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>Ultra-Narrow Bandwidth:</strong> 25.0 Hz channel footprint.</span></li>

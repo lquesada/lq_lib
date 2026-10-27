@@ -33,7 +33,7 @@ By assigning a **1-bit codeword (`1`)** to the most data-dense `CALL std` messag
 |:---:|---|---|
 | **1** | `CQ YO1YO JN47` | `CQ YO1YO JN47` |
 | **2** | `YO1YO TU2TU KL22` | `YO1YO TU2TU KL22 -03` *(Caller answers with locator & report in 1-bit frame)* |
-| **3** | `TU2TU YO1YO +05` | `TU2TU YO1YO R+05` *(DX returns report & first 73)* |
+| **3** | `TU2TU YO1YO +05` | `TU2TU YO1YO R+05` *(DX returns its report and its 73 in one `REPORT+73` message)* |
 | **4** | `YO1YO TU2TU R-03` | `YO1YO TU2TU 73` *(Caller transmits concluding 73 acknowledgment)* |
 | **5** | `TU2TU YO1YO RR73` | *— (Eliminated)* |
 | **6** | `YO1YO TU2TU 73` | *— (Eliminated)* |
@@ -41,7 +41,7 @@ By assigning a **1-bit codeword (`1`)** to the most data-dense `CALL std` messag
 ### 🚀 High-Throughput Pileup Confirmation (`MULTI-REPORT+73`)
 
 For contest and DXpedition pileups where multiple stations answer simultaneously, LQ introduces **`MULTI-REPORT+73` (Type 11)**:
-* **Single Transmission:** The DX station confirms **up to 2 stations simultaneously** in a single 15-second transmission ($3\text{b prefix} + 16\text{b DX hash} + 2 \times [24\text{b Target Hash} + 5\text{b SNR}] = 77\text{ bits}$).
+* **Single Transmission:** The DX station confirms **up to 2 stations simultaneously** in a single 12.64 s transmission within one 15 s slot ($3\text{b prefix} + 16\text{b DX hash} + 2 \times [24\text{b Target Hash} + 5\text{b SNR}] = 77\text{ bits}$).
 * **Throughput Multiplier Analysis:**
   * **$\mathbf{4\times}$ over Single-Carrier FT8:** In continuous pileup operation where message 3 overlaps with incoming calls on split frequencies, LQ8 completes 2 QSOs every 30 seconds ($\mathbf{240\text{ QSOs/h}}$ vs $60\text{ QSOs/h}$ in single-carrier FT8, or $80\text{--}120\text{ QSOs/h}$ in FT8 Fox & Hound). In isolated 3-slot exchanges, LQ8 achieves $160\text{ QSOs/h}$ vs $\sim 69\text{ QSOs/h}$ ($2.33\times$).
   * **0.0 dB Power Penalty:** LQ8 operates as a single-carrier constant-envelope 50.0 Hz transmission (0.0 dB power splitting penalty, 0 IMD splatter), whereas FT8 multi-streaming splits power by $-3.0\text{ dB}$ (2 streams) to $-7.0\text{ dB}$ (5 streams) and requires PA backoff.
@@ -61,10 +61,10 @@ For contest and DXpedition pileups where multiple stations answer simultaneously
 | **TX Duration** | 12.64 s | **12.64 s** | 5.04 s | **5.04 s** | **2.52 s** | **25.28 s** |
 | **Time Slot** | 15.0 s | **15.0 s** | 7.5 s | **7.5 s** | **3.75 s** | **30.0 s** |
 | **Sensitivity (SNR)** | **$-$21.0 dB** | **$-$21.0 dB** | $-$17.5 dB | **$-$17.5 dB** | **$-$14.0 dB** | **$-$24.0 dB** |
-| **QSO Messages** | 6 | **4** | 6 | **4** | **4** | **4** |
-| **Min. QSO Time** | 90 s | **60 s** | 45 s | **30 s** | **15 s** | **120 s** |
-| **Max Contact Rate** | 0.67 QSO/min | **1.00 QSO/min** | 1.33 QSO/min | **2.00 QSO/min** | **4.00 QSO/min** | **0.50 QSO/min** |
-| **Performance Edge** | Baseline | **1.5x throughput at FT8 sensitivity (+3.5 dB over FT4)** | Baseline | **1.5x throughput at FT4 sensitivity (+3.5 dB over FT2)** | **15s Meteor scatter burst** | **Deep DX down to -24 dB SNR** |
+| **QSO Messages** | 5–6 | **4** | 5–6 | **4** | **4** | **4** |
+| **QSO Time** | 75–90 s | **60 s** | 37.5–45 s | **30 s** | **15 s** | **120 s** |
+| **Max Contact Rate** | 0.67–0.80 QSO/min | **1.00 QSO/min** | 1.33–1.60 QSO/min | **2.00 QSO/min** | **4.00 QSO/min** | **0.50 QSO/min** |
+| **Performance Edge** | Baseline | **1.25–1.5x throughput at FT8 sensitivity (+3.5 dB over FT4)** | Baseline | **1.25–1.5x throughput at FT4 sensitivity (+3.5 dB over FT2)** | **15s Meteor scatter burst** | **Deep DX down to -24 dB SNR** |
 
 ---
 
@@ -232,7 +232,7 @@ To compile and run the tutorial:
 ```cpp
 #include "lq/lq.h"
 
-// Construct a 3-message QSO contact request (Step 2: CALL std)
+// Construct the CALL of a 4-message QSO (Step 2: CALL std)
 lq::Message msg;
 msg.type    = lq::MessageType::CALL_STD;
 msg.call_1  = "YO1YO";   // Station being called

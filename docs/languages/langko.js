@@ -157,7 +157,7 @@ const langData = {
     "ROADMAP_P4_TEXT": "<strong>Amateur Data Interchange Format(ADIF)</strong> 작업 그룹에 <code>LQ8</code> 열거형 토큰을 공식 제출합니다(기존 100% 호환 <code><MODE:4>DATA</code> + <code><SUBMODE></code> 내보내기 보완). 타사 로깅 제품군, <strong>QRZ.com Logbook API</strong>, <strong>ARRL Logbook of the World(LoTW / TQSL)</strong>, <strong>eQSL.cc</strong> 및 <strong>Club Log</strong> 전반에 걸친 전용 기본 드롭다운 및 원클릭 클라우드 동기화 통합.",
     "ROADMAP_P5_TITLE": "5단계: LQ4(고속 프로필) 도입 및 프로토콜 확장",
     "ROADMAP_P5_STATUS": "미래 로드맵",
-    "ROADMAP_P5_TEXT": "LQ8의 광범위한 운영 채택에 이어 <strong>LQ4</strong>가 도입되었습니다. 이는 두 배의 대역폭(4-GFSK, 83.33Hz 대역폭, 7.5초 UTC 슬롯에서 5.04초 전송)에서 두 배의 QSO 처리량을 제공하는 고속 콘테스트 및 VHF/UHF 확장입니다. LQ4는 LQ8과 FT4는 FT8과 같습니다. 4-GFSK 7.5초 물리적 전송 계층과 LQ의 4단계 Huffman 접두사 교환을 결합함으로써 LQ4는 FT4에 비해 SNR 페널티 없이 단 30초(FT4의 경우 45초) 만에 전체 확인된 QSO를 완료합니다. 5단계에는 추가 아마추어 밴드(160m, 80m, 60m 포함)와 확장된 속도 프로필(LQ16, LQ2)로의 조정된 확장도 포함됩니다.",
+    "ROADMAP_P5_TEXT": "LQ8이 널리 쓰이게 된 뒤 <strong>LQ4</strong>를 도입합니다. LQ4는 LQ8의 두 배 QSO 속도를 내는 콘테스트 및 VHF/UHF용 고속 확장입니다(4-GFSK, 대역폭 83.3&nbsp;Hz, 7.5&nbsp;s UTC 슬롯에서 5.04&nbsp;s 송신). FT4가 FT8에 대해 갖는 관계를 LQ4는 LQ8에 대해 갖습니다. 7.5초 4-GFSK 물리 계층과 LQ의 허프만 접두어 4단계 교환을 결합하여, LQ4는 확인된 QSO를 단 30&nbsp;초 만에 마칩니다(FT4는 37.5&ndash;45&nbsp;초). FT4 대비 SNR 손실은 없습니다. 5단계에는 추가 아마추어 밴드(160m, 80m, 60m 포함)로의 조율된 확장과 확장 속도 프로필(LQ16, LQ2)도 포함됩니다.",
     "TECH_TITLE": "기술 사양 & 라이브러리",
     "TECH_SUBTITLE": "공식 학술 사양, 오픈 소스 참조 구현, 대화형 물리 계층 탐색기 및 비트 수준 메시지 검사 도구입니다.",
     "PAPER_BANNER_TITLE": "공식 사양 논문",

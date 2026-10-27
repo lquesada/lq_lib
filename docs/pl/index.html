@@ -1977,7 +1977,7 @@
             <div class="flow-steps">
               <div class="flow-step">
                 <div class="flow-step-num">1</div>
-                <div class="flow-step-msg msg-lq">HB9IPH TU2TU -02 / HB9IPH YO1YO -05</div>
+                <div class="flow-step-msg msg-lq">HB9IPH TU2TU KL22 -02 / HB9IPH YO1YO KN34 -05</div>
               </div>
               <div class="flow-step">
                 <div class="flow-step-num">2</div>
@@ -2007,7 +2007,7 @@
             <div class="roadmap-status-icon status-done"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
             <div class="roadmap-content">
               <h4><span data-i18n="ROADMAP_P1_TITLE">Этап 1: Математическая спецификация и библиотека</span> <span class="pill pill-emerald" data-i18n="ROADMAP_P1_STATUS">Завершен</span></h4>
-              <p data-i18n="ROADMAP_P1_TEXT">Полное описание префиксных деревьев Хаффмана, 61-символьного варикода, алгоритмов CRC-14/CRC-24Q и открытой библиотеки на C++20 (<code>lq_lib</code>) со 100% покрытием тестами.</p>
+              <p data-i18n="ROADMAP_P1_TEXT">Pełna definicja drzew prefiksowych Huffmana o zmiennej długości, 104-znakowego Varicode, algorytmów CRC-14/CRC-24Q oraz otwartej biblioteki referencyjnej w C++20 (<code>lq_lib</code>) ze zweryfikowanym pokryciem testami i wyczerpującą walidacją na wielu platformach.</p>
             </div>
           </div>
 
@@ -2074,7 +2074,7 @@
             <div class="library-card">
               <div class="library-content">
                 <h3 data-i18n="LIBRARY_TITLE">Biblioteka referencyjna open-source (lq_lib) — C++20 i C</h3>
-                <p data-i18n="LIBRARY_DESC">Высокопроизводительная библиотека на C++20 и чистом C99 без динамических выделений памяти, поддерживающая все типы сообщений LQ, синтез непрерывной фазы 8-GFSK, синхронизацию Костаса 2D STFT, декодер LDPC(174,91) и чат LQ4 с покрытием тестами &gt;95%.</p>
+                <p data-i18n="LIBRARY_DESC">Wydajna implementacja referencyjna w C++20 i czystym C99/C11 bez alokacji pamięci, obsługująca wszystkie kodowania wiadomości LQ, syntezę dźwięku GFSK z ciągłą fazą, synchronizację Costas na wodospadzie 2D STFT, kodek LDPC(174,91) Normalized Min-Sum z automatycznym pokryciem testami &gt;95% i równoległą demodulację wielu kandydatów.</p>
                 <div class="library-badges">
                   <span class="pill pill-emerald" data-i18n="LIBRARY_BADGE_1">API C++20 i czystego C99</span>
                   <span class="pill pill-cyan" data-i18n="LIBRARY_BADGE_2">&gt;95% Покрытие тестами</span>
@@ -2145,7 +2145,7 @@
           <!-- Complete Bit-Level Serialization Inspector -->
           <div class="tech-sub-section">
             <h3 data-i18n="INSPECTOR_TITLE">Полный инспектор сериализации на уровне бит (все 13 типов сообщений)</h3>
-            <p data-i18n="INSPECTOR_SUBTITLE">Выберите любой тип сообщения или фрагмент LQ4 для анализа битовых полей, шестнадцатеричной упаковки и контрольной суммы CRC-14.</p>
+            <p data-i18n="INSPECTOR_SUBTITLE">Wybierz dowolny ustrukturyzowany typ wiadomości, aby zobaczyć jego binarne pola bitowe, spakowany hex i obliczoną parzystość CRC-14.</p>
             
             <div class="inspector-card">
               <div class="presets-category-title" data-i18n="PRESET_CAT_1">Форматы начала вызова CQ:</div>
@@ -2460,9 +2460,9 @@
         snr: "-17.5 dB",
         rate: "2.00 QSO/min",
         desc: `<div class="mode-compare-title"><strong>LQ4 vs FT4:</strong> High-Speed VHF / Contesting Profile</div>
-               <p>Combines 4-GFSK modulation across 7.5-second time slots with LQ's 4-step Huffman prefix exchange to complete QSOs in just 30 seconds (vs 45 seconds in FT4), offering double the QSO rate of FT4 with zero SNR penalty relative to FT4.</p>
+               <p>Combines 4-GFSK modulation across 7.5-second time slots with LQ's 4-step Huffman prefix exchange to complete QSOs in just 30 seconds (vs 37.5–45 seconds in FT4), offering 1.25–1.5× the QSO rate of FT4 (120 vs 80–96 QSOs/h) with zero SNR penalty relative to FT4.</p>
                <ul class="mode-compare-list">
-                 <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>30-Second QSO:</strong> 4 steps in 30s vs 45s in FT4 (1.5× faster).</span></li>
+                 <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>30-Second QSO:</strong> 4 steps in 30s vs 37.5–45s in FT4 (1.25–1.5× faster).</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>High-Throughput Pileups:</strong> Confirm multiple stations in parallel.</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>Contest Optimized:</strong> Maximizes contact rates during band openings.</span></li>
                </ul>`
@@ -2489,7 +2489,7 @@
         snr: "-24.0 dB",
         rate: "0.50 QSO/min",
         desc: `<div class="mode-compare-title"><strong>LQ16:</strong> Extreme Weak-Signal DX Profile</div>
-               <p>Ultra-narrowband profile providing extreme sensitivity (-24.0 dB SNR, 3 dB deeper than FT8) for LF/MF, trans-equatorial DX, and highly challenging propagation paths.</p>
+               <p>Ultra-narrowband profile providing extreme sensitivity (-24.0 dB SNR, 3 dB deeper than FT8) for EME and extreme weak-signal paths.</p>
                <ul class="mode-compare-list">
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>Extreme Sensitivity:</strong> -24.0 dB SNR (3 dB advantage over FT8).</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>Ultra-Narrow Bandwidth:</strong> 25.0 Hz channel footprint.</span></li>

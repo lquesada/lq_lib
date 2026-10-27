@@ -131,7 +131,7 @@ const langData = {
     "ADIF_EXAMPLE_HEADING": "Exemplo de registro ADIF QSO padrão (<code>.adi</code>):",
     "ADIF_POTA_EXCEPTION": "<strong>Exceção POTA:</strong> Ao exportar registros para o aplicativo <strong>Parks on the Air (POTA)</strong>, os contatos devem ser definidos com o modo <code class=\"radio-val\">&lt;MODE:4&gt;MFSK</code> sem etiqueta de submodo, pois o POTA requer <code>MFSK</code> para a aceitação do registro.",
     "SPEEDUP_TITLE": "Como o QSO de 60 segundos e a aceleração em pileup são alcançados?",
-    "SPEEDUP_SUBTITLE": "Reemplazando los intercambios rígidos y repetitivos por códigos prefijo de Huffman de longitud variable, hashing resistente a colisiones de 24/14 bits y tramas multirrespuesta, cumpliendo dos principios clave: se intercambian el localizador y los reportes de señal (excepto en CQ para indicativos muy largos), y se intercambian los 73 para confirmar la recepción del localizador y el reporte de señal de la otra estación.",
+    "SPEEDUP_SUBTITLE": "Ao substituir trocas rígidas e repetitivas por códigos de prefixo de comprimento variável, hashing resistente a colisões de 24/16 bits e quadros de resposta múltipla, a troca mútua completa fica garantida: tanto o localizador Maidenhead como os relatórios de sinal são trocados, com confirmações 73 recíprocas.",
     "SPEEDUP_CARD_STD_FT8_TITLE": "FT8 Standard",
     "SPEEDUP_CARD_STD_LQ8_TITLE": "Padrão LQ8",
     "SPEEDUP_CARD_PL_FT8_TITLE": "FT8 Pileup",

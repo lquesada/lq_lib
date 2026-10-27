@@ -1977,7 +1977,7 @@
             <div class="flow-steps">
               <div class="flow-step">
                 <div class="flow-step-num">1</div>
-                <div class="flow-step-msg msg-lq">HB9IPH TU2TU -02 / HB9IPH YO1YO -05</div>
+                <div class="flow-step-msg msg-lq">HB9IPH TU2TU KL22 -02 / HB9IPH YO1YO KN34 -05</div>
               </div>
               <div class="flow-step">
                 <div class="flow-step-num">2</div>
@@ -2007,7 +2007,7 @@
             <div class="roadmap-status-icon status-done"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
             <div class="roadmap-content">
               <h4><span data-i18n="ROADMAP_P1_TITLE">Phase 1: Mathematische Spezifikation & Referenzbibliothek</span> <span class="pill pill-emerald" data-i18n="ROADMAP_P1_STATUS">Abgeschlossen</span></h4>
-              <p data-i18n="ROADMAP_P1_TEXT">Vollständige Definition der Huffman-Präfixbäume, 61-Zeichen-Varicode, CRC-14/CRC-24Q-Algorithmen und C++20-Referenzbibliothek (<code>lq_lib</code>) mit 100% Testabdeckung.</p>
+              <p data-i18n="ROADMAP_P1_TEXT">Fuld definition af Huffman-præfikstræerne med variabel længde, Varicode med 104 tegn, CRC-14/CRC-24Q-algoritmerne og open source-referencebiblioteket i C++20 (<code>lq_lib</code>) med verificeret testdækning og grundig validering på tværs af platforme.</p>
             </div>
           </div>
 
@@ -2039,7 +2039,7 @@
             <div class="roadmap-status-icon status-upcoming"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4.5c1.62-1.63 5-2.5 5-2.5"/><path d="M15 15v5s3.03-.55 4.5-2c1.63-1.62 2.5-5 2.5-5"/></svg></div>
             <div class="roadmap-content">
               <h4><span data-i18n="ROADMAP_P5_TITLE">Phase 5: Einführung von LQ4 (High-Speed-Profil) & Protokollerweiterung</span> <span class="pill pill-amber" data-i18n="ROADMAP_P5_STATUS">Zukunft</span></h4>
-              <p data-i18n="ROADMAP_P5_TEXT">Nach breiter Einführung von LQ8 folgt <strong>LQ4</strong> — eine High-Speed-Erweiterung für Conteste und VHF/UHF mit doppeltem Durchsatz (4-GFSK, 83.33&nbsp;Hz Bandbreite, 5.04&nbsp;s Sendedauer in 7.5&nbsp;s UTC-Schlitzen). LQ4 schließt QSOs in 30&nbsp;Sekunden ab. Phase 5 umfasst zudem die koordinierte Erweiterung auf zusätzliche Bänder (u.a. 160m, 80m, 60m) sowie erweiterte Geschwindigkeitsprofile (LQ16, LQ2).</p>
+              <p data-i18n="ROADMAP_P5_TEXT">Efter bred operationel udbredelse af LQ8 introduceres <strong>LQ4</strong> — en hurtig udvidelse til contests og VHF/UHF med dobbelt så høj QSO-rate som LQ8 (4-GFSK, 83.3&nbsp;Hz båndbredde, 5.04&nbsp;s udsendelse i 7.5&nbsp;s UTC-slots). LQ4 er for LQ8, hvad FT4 er for FT8: ved at kombinere det fysiske 4-GFSK-lag med 7.5-sekunders slots og LQ's 4-trins udveksling med Huffman-præfikser gennemfører LQ4 bekræftede QSO'er på kun 30&nbsp;sekunder (mod 37.5&ndash;45&nbsp;sekunder i FT4) uden SNR-tab i forhold til FT4. Fase 5 omfatter også koordineret udvidelse til flere amatørbånd (herunder 160m, 80m og 60m) samt udvidede hastighedsprofiler (LQ16, LQ2).</p>
             </div>
           </div>
         </div>
@@ -2460,9 +2460,9 @@
         snr: "-17.5 dB",
         rate: "2.00 QSO/min",
         desc: `<div class="mode-compare-title"><strong>LQ4 vs FT4:</strong> High-Speed VHF / Contesting Profile</div>
-               <p>Combines 4-GFSK modulation across 7.5-second time slots with LQ's 4-step Huffman prefix exchange to complete QSOs in just 30 seconds (vs 45 seconds in FT4), offering double the QSO rate of FT4 with zero SNR penalty relative to FT4.</p>
+               <p>Combines 4-GFSK modulation across 7.5-second time slots with LQ's 4-step Huffman prefix exchange to complete QSOs in just 30 seconds (vs 37.5–45 seconds in FT4), offering 1.25–1.5× the QSO rate of FT4 (120 vs 80–96 QSOs/h) with zero SNR penalty relative to FT4.</p>
                <ul class="mode-compare-list">
-                 <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>30-Second QSO:</strong> 4 steps in 30s vs 45s in FT4 (1.5× faster).</span></li>
+                 <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>30-Second QSO:</strong> 4 steps in 30s vs 37.5–45s in FT4 (1.25–1.5× faster).</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>High-Throughput Pileups:</strong> Confirm multiple stations in parallel.</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>Contest Optimized:</strong> Maximizes contact rates during band openings.</span></li>
                </ul>`
@@ -2489,7 +2489,7 @@
         snr: "-24.0 dB",
         rate: "0.50 QSO/min",
         desc: `<div class="mode-compare-title"><strong>LQ16:</strong> Extreme Weak-Signal DX Profile</div>
-               <p>Ultra-narrowband profile providing extreme sensitivity (-24.0 dB SNR, 3 dB deeper than FT8) for LF/MF, trans-equatorial DX, and highly challenging propagation paths.</p>
+               <p>Ultra-narrowband profile providing extreme sensitivity (-24.0 dB SNR, 3 dB deeper than FT8) for EME and extreme weak-signal paths.</p>
                <ul class="mode-compare-list">
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>Extreme Sensitivity:</strong> -24.0 dB SNR (3 dB advantage over FT8).</span></li>
                  <li><span class="bullet"><svg class="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span><strong>Ultra-Narrow Bandwidth:</strong> 25.0 Hz channel footprint.</span></li>
