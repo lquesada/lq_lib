@@ -762,6 +762,10 @@ def main():
 
         # Update relative assets to parent directory
         page_html = page_html.replace('href="favicon.svg"', 'href="../favicon.svg"')
+        page_html = page_html.replace('href="favicon-32.png"', 'href="../favicon-32.png"')
+        page_html = page_html.replace('href="favicon.ico"', 'href="../favicon.ico"')
+        page_html = page_html.replace('href="apple-touch-icon.png"', 'href="../apple-touch-icon.png"')
+        page_html = page_html.replace('href="site.webmanifest"', 'href="../site.webmanifest"')
         page_html = page_html.replace('href="lq_digitalmode.pdf"', 'href="../lq_digitalmode.pdf"')
         page_html = page_html.replace('src="qft8.jpg"', 'src="../qft8.jpg"')
         page_html = page_html.replace('src="tones_waterfall_lq8.png"', 'src="../tones_waterfall_lq8.png"')
