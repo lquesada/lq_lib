@@ -247,6 +247,7 @@ const langData = {
     "COMMUNITY_FIRST_POTA_QSO_USING": "LQ8 yordamida birinchi POTA QSO",
     "COMMUNITY_FIRST_SOTA_QSO_USING": "LQ8 yordamida birinchi SOTA QSO",
     "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "LQ8 yordamida birinchi POTA-to-POTA QSO",
+    "COMMUNITY_FIRST_DXPEDITION_USING": "LQ8 bilan birinchi DXpedition",
     "MODAL_SHARE_TITLE": "Bağlantı Panoya Kopyalandı!",
     "MODAL_SHARE_DESC": "Bağlantı kopyalandı. Telsizci arkadaşlarınızla ve forumlarda paylaşın!",
     "MODAL_SHARE_OK": "OK",

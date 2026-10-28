@@ -247,6 +247,7 @@ const langData = {
     "COMMUNITY_FIRST_POTA_QSO_USING": "首次使用 LQ8 嘅 POTA QSO",
     "COMMUNITY_FIRST_SOTA_QSO_USING": "首次使用 LQ8 嘅 SOTA QSO",
     "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "首次使用 LQ8 嘅 POTA-to-POTA QSO",
+    "COMMUNITY_FIRST_DXPEDITION_USING": "首次使用 LQ8 嘅 DX 遠征",
     "MODAL_SHARE_TITLE": "链接已复制到剪贴板！",
     "MODAL_SHARE_DESC": "网址已成功复制。欢迎分享给无线电爱好者同仁、开发者群体及各大技术论坛！",
     "MODAL_SHARE_OK": "OK",

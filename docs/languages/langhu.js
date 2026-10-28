@@ -247,6 +247,7 @@ const langData = {
     "COMMUNITY_FIRST_POTA_QSO_USING": "Első POTA QSO LQ8 használatával",
     "COMMUNITY_FIRST_SOTA_QSO_USING": "Első SOTA QSO LQ8 használatával",
     "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "Első POTA-to-POTA QSO LQ8 használatával",
+    "COMMUNITY_FIRST_DXPEDITION_USING": "Az első DXpedíció LQ8-cal",
     "MODAL_SHARE_TITLE": "A hivatkozás a vágólapra másolva!",
     "MODAL_SHARE_DESC": "A link a vágólapra került. Oszd meg rádióamatőr társaiddal és a fórumokon!",
     "MODAL_SHARE_OK": "OK",

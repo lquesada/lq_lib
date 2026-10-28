@@ -247,6 +247,7 @@ const langData = {
     "COMMUNITY_FIRST_POTA_QSO_USING": "LQ8을 사용한 첫 POTA QSO",
     "COMMUNITY_FIRST_SOTA_QSO_USING": "LQ8을 사용한 첫 SOTA QSO",
     "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "LQ8을 사용한 첫 POTA-to-POTA QSO",
+    "COMMUNITY_FIRST_DXPEDITION_USING": "LQ8을 사용한 최초의 DX 페디션",
     "MODAL_SHARE_TITLE": "링크가 클립보드에 복사되었습니다!",
     "MODAL_SHARE_DESC": "링크가 복사되었습니다. 무선 동호인 및 포럼에 공유하세요!",
     "MODAL_SHARE_OK": "OK",

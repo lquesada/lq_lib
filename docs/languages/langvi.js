@@ -247,6 +247,7 @@ const langData = {
     "COMMUNITY_FIRST_POTA_QSO_USING": "POTA QSO đầu tiên sử dụng LQ8",
     "COMMUNITY_FIRST_SOTA_QSO_USING": "SOTA QSO đầu tiên sử dụng LQ8",
     "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "POTA-to-POTA QSO đầu tiên sử dụng LQ8",
+    "COMMUNITY_FIRST_DXPEDITION_USING": "DXpedition đầu tiên dùng LQ8",
     "MODAL_SHARE_TITLE": "Đã sao chép liên kết vào bộ nhớ tạm!",
     "MODAL_SHARE_DESC": "Liên kết đã được sao chép. Hãy chia sẻ với bạn bè vô tuyến và trên các diễn đàn!",
     "MODAL_SHARE_OK": "OK",

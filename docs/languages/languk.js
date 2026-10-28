@@ -247,6 +247,7 @@ const langData = {
     "COMMUNITY_FIRST_POTA_QSO_USING": "Перше POTA QSO з використанням LQ8",
     "COMMUNITY_FIRST_SOTA_QSO_USING": "Перше SOTA QSO з використанням LQ8",
     "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "Перше POTA-to-POTA QSO з використанням LQ8",
+    "COMMUNITY_FIRST_DXPEDITION_USING": "Перша DX-експедиція з LQ8",
     "MODAL_SHARE_TITLE": "Посилання скопійовано в буфер обміну!",
     "MODAL_SHARE_DESC": "Посилання скопійовано. Поділіться ним з колегами-радіоаматорами та на форумах!",
     "MODAL_SHARE_OK": "OK",

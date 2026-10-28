@@ -247,6 +247,7 @@ const langData = {
     "COMMUNITY_FIRST_POTA_QSO_USING": "LQ8 ಬಳಸಿಕೊಂಡು ಮೊದಲ POTA QSO",
     "COMMUNITY_FIRST_SOTA_QSO_USING": "LQ8 ಬಳಸಿಕೊಂಡು ಮೊದಲ SOTA QSO",
     "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "LQ8 ಬಳಸಿಕೊಂಡು ಮೊದಲ POTA-to-POTA QSO",
+    "COMMUNITY_FIRST_DXPEDITION_USING": "LQ8 ಬಳಸಿ ಮೊದಲ DXpedition",
     "MODAL_SHARE_TITLE": "இணைப்பு கிளிப்போர்டில் நகலெடுக்கப்பட்டது!",
     "MODAL_SHARE_DESC": "இணைப்பு நகலெடுக்கப்பட்டது. உங்கள் நண்பர்களுடன் பகிரவும்!",
     "MODAL_SHARE_OK": "OK",
