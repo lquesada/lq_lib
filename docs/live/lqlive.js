@@ -601,8 +601,15 @@
     return this.items.filter(function (it) { return !self.hiddenBands[it.band] && !self.hiddenModes[it.mode]; });
   };
 
+  // LQ8-SITE-FADE-HIDDEN-1: no fading while the tab is in the background, nor on the first draw after it comes back --
+  // the browser holds the page's timers and animations while hidden, so a fade would only start on return, for
+  // stations that left long ago. They appear / leave at once instead.
+  var pageWasHidden = false;
+  document.addEventListener('visibilitychange', function () { if (document.hidden) pageWasHidden = true; });
   LiveMap.prototype.render = function (fade) {
-    this.fadeNew = !!fade;
+    var away = document.hidden || pageWasHidden;
+    if (!document.hidden) pageWasHidden = false;
+    this.fadeNew = !!fade && !away;
     var r = this.root.getBoundingClientRect();
     this.W = Math.max(1, r.width); this.H = Math.max(1, r.height);
     this.clamp();
