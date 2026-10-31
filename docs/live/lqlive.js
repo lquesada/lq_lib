@@ -1115,7 +1115,16 @@
     setInterval(function () { self.poll(); }, POLL_MS);
     setInterval(function () { if (!document.hidden && self.dxRaw && self.dxRaw.length) self.update(); }, 60000);   // the DX list's day / hour wording
     setInterval(function () { if (!document.hidden && self.map && self.map.tickDx) self.map.tickDx(); }, 1000);   // the live DX clocks
-    document.addEventListener('visibilitychange', function () { if (!document.hidden) self.poll(); });
+    // LQ8-SITE-BG-EXPIRE-1: stale stations must already be gone when the tab comes back. While hidden, the browser holds
+    // the page's animation frames and throttles its timers, so expiry used to be applied only at the first draw after
+    // the return. Now (1) a 60 s tick (timers still run in background tabs) prunes the expired stations from the raw
+    // feed and, if the last answer is older than ~55 s, fetches a fresh one; (2) on return (visible / focus / pageshow)
+    // the expiry is applied synchronously BEFORE the first paint (no fade: render() sees pageWasHidden), then polled.
+    function refreshNow() { if (self.raw) self.update(); }
+    setInterval(function () { if (document.hidden) { refreshNow(); self.poll(); } }, 60000);
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) { refreshNow(); self.poll(); } });
+    window.addEventListener('focus', refreshNow);
+    window.addEventListener('pageshow', refreshNow);
   }
   Page.prototype.setStatus = function (t, cls) {
     if (!this.status) return;
@@ -1124,7 +1133,8 @@
   };
   Page.prototype.poll = function () {
     var self = this;
-    if (document.hidden && this.raw) return;
+    if (document.hidden && this.raw && Date.now() - (this.polledAt || 0) < 55000) return;   // hidden: at most about once a minute
+    this.polledAt = Date.now();
     // the first poll uses the request the page's head already started (window.__lqFeedEarly), so the stations
     // arrive while the map scripts are still loading
     var early = !this.raw && FEED === FEED_DEFAULT && window.__lqFeedEarly;
