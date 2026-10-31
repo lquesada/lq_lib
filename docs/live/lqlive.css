@@ -53,3 +53,8 @@
 .lqf.lqf-hide { opacity: 0; }
 @media (prefers-reduced-motion: reduce) { .lqf { transition: none; } }
 .lqmap-leader { stroke-linecap: round; pointer-events: none; }
+
+/* WEB-LIVEMAP-SPRAY-1: the band focus chips (the spray canvas was cancelled, WEB-LIVEMAP-LABELS-1) */
+.lqlive-chip.dim { opacity: 0.5; }
+.lqlive-chip.sel { border-color: #F8FAFC; box-shadow: 0 0 0 2px rgba(248, 250, 252, 0.55); }
+.lqlive-chip.act:not(.sel) { border-color: rgba(110, 231, 183, 0.8); box-shadow: 0 0 6px rgba(110, 231, 183, 0.35); opacity: 1; }

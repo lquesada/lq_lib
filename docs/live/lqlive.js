@@ -198,8 +198,8 @@
       Math.abs(c.lon - gc.lon) <= 1.0001 && Math.abs(c.lat - gc.lat) <= 0.5001;
   }
   // Tag sizes (local units; the map multiplies them by its marker scale): a tag is the callsign over "LQ8 20m".
-  var TAG_H = 29, TAG_STEP = 31, MORE_H = 16;
-  function tagWidth(it) { return 10 + Math.max((it.mode + ' ' + it.band).length * 6.6, it.call.length * 7.6); }
+  var TAG_H = 29, COMPACT_H = 16;
+  function tagWidth(it, compact) { return compact ? 8 + it.call.length * 7.6 : 10 + Math.max((it.mode + ' ' + it.band).length * 6.6, it.call.length * 7.6); }
   function box(l, t, w, hh) { return { l: l, t: t, r: l + w, b: t + hh }; }
   function overlaps(a, b, pad) { pad = pad || 0; return a.l < b.r + pad && b.l < a.r + pad && a.t < b.b + pad && b.t < a.b + pad; }
   function overlapArea(a, b) {
@@ -300,6 +300,7 @@
     this.items = [];
     this.dx = [];
     this.hiddenBands = {};
+    this.focusBand = null;
     this.hiddenModes = {};
     this.st = { zoom: 1, minZoom: 1, maxZoom: 40, offsetX: 0, offsetY: 0 };
     this.pointers = {};
@@ -520,7 +521,7 @@
       var ps = this.copies(vis[j].lon, vis[j].lat);
       for (var q = 0; q < ps.length; q++) {
         var key = itemKey(vis[j]) + '#' + ps[q].k;
-        if (!this.live['p' + key]) this.drawPinOnly({ it: vis[j], key: key, k: ps[q].k, x: ps[q].x, y: ps[q].y }, sc);
+        if (!this.live['p' + key] && !(this.hiddenPins && this.hiddenPins[key])) this.drawPinOnly({ it: vis[j], key: key, k: ps[q].k, x: ps[q].x, y: ps[q].y }, sc);
       }
     }
     if (this.popKey) this.placePop();
@@ -577,7 +578,8 @@
       svg.classList.remove('dragging');
       if (drag && Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) < 6) {
         var m = drag.target && drag.target.closest ? drag.target.closest('[data-idx]') : null;
-        if (m) self.showPop(m.getAttribute('data-kind'), +m.getAttribute('data-idx'), true);
+        if (m && m.getAttribute('data-kind') === 'cl') self.tapCluster(+m.getAttribute('data-idx'));
+        else if (m) self.showPop(m.getAttribute('data-kind'), +m.getAttribute('data-idx'), true);
         else self.hidePop();
       }
       drag = null;
@@ -598,7 +600,25 @@
 
   LiveMap.prototype.visibleItems = function () {
     var self = this;
-    return this.items.filter(function (it) { return !self.hiddenBands[it.band] && !self.hiddenModes[it.mode]; });
+    return this.items.filter(function (it) { return (!self.focusBand || it.band === self.focusBand) && !self.hiddenModes[it.mode]; });
+  };
+
+  // The viewer's own place (browser geolocation), drawn like the qFT8 app's own station: a white reticle with a
+  // dark backing (cross, ring, centre dot). Nothing is drawn unless the browser gave a position.
+  LiveMap.prototype.drawMe = function () {
+    if (!this.me) return;
+    var cs = this.copies(this.me.lon, this.me.lat);
+    for (var i = 0; i < cs.length; i++) {
+      var g = this.keyed(this.gPin, 'me#' + cs[i].k, { transform: 'translate(' + cs[i].x.toFixed(1) + ',' + cs[i].y.toFixed(1) + ')' }, { lon: this.me.lon, lat: this.me.lat, k: cs[i].k, x: cs[i].x, y: cs[i].y });
+      g.setAttribute('pointer-events', 'none');
+      g.removeAttribute('class'); this.fadeQueue = null;   // drawn after the sweep: never left in a fade state
+      el('circle', { r: 12, fill: 'rgba(0,0,0,0.47)' }, g);
+      [['#000', 3.2], ['#fff', 1.2]].forEach(function (c) {
+        el('path', { d: 'M-13,0H13M0,-13V13', stroke: c[0], 'stroke-width': c[1], fill: 'none' }, g);
+        el('circle', { r: 7.5, stroke: c[0], 'stroke-width': c[1], fill: 'none' }, g);
+      });
+      el('circle', { r: 3.5, fill: '#fff', stroke: '#000', 'stroke-width': 1.5 }, g);
+    }
   };
 
   // LQ8-SITE-FADE-HIDDEN-1: no fading while the tab is in the background, nor on the first draw after it comes back --
@@ -617,6 +637,7 @@
     this.geoAt = Date.now();
     this.updateGeo();
     this.drawMarks();
+    this.drawMe();
     this.drawNames();   // after the markers: a name keeps off their tags (it is still drawn underneath them)
     if (this.popKey) this.placePop();
   };
@@ -753,169 +774,104 @@
           box: box(x - 7 * sc, y - 20 * sc, 14 * sc, 21 * sc), head: { x: x, y: y - 13 * sc } });
       }
     }
+    // WEB-LIVEMAP-LABELS-1: pins that would sit on top of each other collapse into one pin with a "+N" badge; the
+    // pins left get a tag where one fits, in a fixed order, and a tag that was shown stays where it was
+    // two passes: the first only settles which pins lead and which tags were shown (the order the second pass serves
+    // them in), so drawing the same stations again gives the same picture
+    var all = pins, cl = this.clusterPins(all, sc);
+    this.placeTags(cl.leaders, obstacles, sc);
+    all.forEach(function (q) { q.group = null; q.box = box(q.x - 7 * sc, q.y - 20 * sc, 14 * sc, 21 * sc); });
+    cl = this.clusterPins(all, sc);
+    pins = cl.leaders;
     var groups = this.placeTags(pins, obstacles, sc);
-    if (this.afterGesture) {
-      // the tags kept their spots through a whole gesture: where that now leaves some under a panel, over other marks
-      // or with long lines, a fresh layout may do better (the per-frame layouts of a drag used to find it): the one
-      // that covers less and has the shorter lines wins, the kept spots on a near tie (so tags do not jump)
-      var before = this.prevBefore, panels = this.panelBoxes(), self = this;
-      var cost = function (gs) {
-        var c = 0;
-        gs.forEach(function (g0) {
-          panels.forEach(function (q) { c += overlapArea(g0.box, q); });
-          obstacles.forEach(function (o) { c += overlapArea(g0.box, o); });
-          pins.forEach(function (o) { if (g0.members.indexOf(o) < 0) c += overlapArea(g0.box, o.box); });
-          if (g0.stack) g0.shown.forEach(function (pn) {   // and the stack's lines
-            var b0 = g0.box, ex = Math.max(b0.l, Math.min(b0.r, pn.head.x)), ey = Math.max(b0.t, Math.min(b0.b, pn.head.y));
-            c += Math.hypot(ex - pn.head.x, ey - pn.head.y);
-          });
-        });
-        return c;
-      };
-      var c1 = cost(groups);
-      this.prevSpot = {};
-      var fresh = this.placeTags(pins, obstacles, sc);
-      if (cost(fresh) < c1 * 0.9 - 1) groups = fresh;
-      else { this.prevSpot = before; groups = self.placeTags(pins, obstacles, sc); }
-    }
+    this.hiddenPins = cl.hidden;
+    this.clusters = cl.list;
     this.markBoxes = obstacles.concat(groups.map(function (g0) { return g0.box; }), pins.map(function (p0) { return p0.box; }));
     for (var j = 0; j < pins.length; j++) this.drawPinOnly(pins[j], sc);
     for (var gi = 0; gi < groups.length; gi++) this.drawTags(groups[gi], sc);
+    for (var ci = 0; ci < cl.list.length; ci++) this.drawBadge(cl.list[ci], sc);
     this.sweep();
   };
 
-  // LQ8-SITE-LABELS-1: where each station's tag goes. Every tag first tries the spots around its own pin (above, below,
-  // the sides, the corners, slightly nudged), keeping the spot it had on the last draw when that still fits, so zoom and
-  // pan do not make tags jump. A spot fits when it stays on the visible map and covers no pin, DXpedition tag or other
-  // tag. Only stations whose tag fits nowhere are stacked, together with the stations around them: the stack is centred
-  // among its pins (above, below or beside them), and a short line runs from each tag to its pin.
+  // The order stations are served in: those that had a tag / were a cluster's lead last time first (so nothing is
+  // reshuffled between refreshes), then the most recently heard (the feed is sorted that way), then by call.
+  LiveMap.prototype.clusterPins = function (pins, sc) {
+    var prevLead = this.prevLead || {}, prev = this.prevSpot || {};
+    var ord = pins.slice().sort(function (a, b) {
+      var pa = (prev[a.key] ? 2 : 0) + (prevLead[a.key] ? 1 : 0), pb = (prev[b.key] ? 2 : 0) + (prevLead[b.key] ? 1 : 0);
+      return pb - pa || a.order - b.order || (a.key < b.key ? -1 : a.key > b.key ? 1 : 0);
+    });
+    var rx = 17 * sc, ry = 15 * sc, W = this.W, H = this.H, leaders = [], hidden = {}, list = [], lead = {};
+    for (var i = 0; i < ord.length; i++) {
+      var pn = ord[i], on = pn.x > -20 && pn.x < W + 20 && pn.y > -20 && pn.y < H + 40, home = null;
+      if (on) for (var j = 0; j < leaders.length; j++) {
+        var l = leaders[j];
+        if (Math.abs(l.x - pn.x) < rx && Math.abs(l.y - pn.y) < ry) { home = l; break; }
+      }
+      if (!home) { leaders.push(pn); lead[pn.key] = 1; continue; }
+      hidden[pn.key] = 1;
+      (home.group = home.group || [home]).push(pn);
+    }
+    leaders.forEach(function (l) {
+      if (!l.group) return;
+      l.box = { l: l.box.l, t: l.box.t - 8 * sc, r: l.box.r + 9 * sc, b: l.box.b };
+      list.push({ lead: l, members: l.group });
+    });
+    list.forEach(function (c, i) { c.id = i; });
+    this.prevLead = lead;
+    leaders.sort(function (a, b) { return a.order - b.order; });
+    return { leaders: leaders, hidden: hidden, list: list };
+  };
+
+  // "+N" on a pin that stands for N + 1 stations; tapping it zooms in on them, hovering it lists their calls
+  LiveMap.prototype.drawBadge = function (c, sc) {
+    var pn = c.lead, n = c.members.length - 1;
+    var g = this.keyed(this.gTag, 'c' + pn.key, { transform: 'translate(' + (pn.x + 9 * sc).toFixed(1) + ',' + (pn.y - 25 * sc).toFixed(1) + ') scale(' + sc + ')' }, pinAt(pn));
+    var m = el('g', { 'class': 'lqmap-mark', 'data-kind': 'cl', 'data-idx': c.id, tabindex: this.mini ? -1 : 0 }, g);
+    var w = (n > 99 ? 24 : n > 9 ? 20 : 16);
+    el('rect', { x: -w / 2, y: -8, width: w, height: 16, rx: 8, fill: '#0F172A', stroke: '#FFFFFF', 'stroke-width': 1.5 }, m);
+    var t = el('text', { x: 0, y: 4, 'text-anchor': 'middle', fill: '#FFFFFF', 'class': 'lqmap-label' }, m);
+    t.textContent = '+' + n;
+  };
+
+  // LQ8-SITE-LABELS-1 / WEB-LIVEMAP-LABELS-1: where each station's tag goes. One pass, in a fixed order (tags that were
+  // shown last time first, then the most recently heard, then by call): the tag tries the spots around its own pin
+  // (right, left, above, below, the corners) and takes the first that stays on the visible map and covers no pin,
+  // DXpedition tag, panel or tag already placed. A tag that fits nowhere is simply not drawn: its pin is, and hovering
+  // or tapping the pin shows the call. With many stations the tags are the compact one-line kind (call only).
   LiveMap.prototype.placeTags = function (pins, obstacles, sc) {
-    var self = this, W = this.W, H = this.H, M = 3, PAD = 2 * sc, prev = this.prevSpot || {}, next = {};
-    var max = this.mini ? 2 : 4, placed = [], panels = this.panelBoxes();
+    var W = this.W, H = this.H, M = 3, PAD = 1.5 * sc, prev = this.prevSpot || {}, next = {};
+    var placed = [], panels = this.panelBoxes(), cap = this.mini ? 6 : 1e9;
     function inView(b) { return b.l >= M && b.t >= M && b.r <= W - M && b.b <= H - M; }
-    // strict: also keeps off the page's panels over the map; a tag that cannot keep off them may go under one
-    function clear(b, except, strict) {
+    function clear(b, self) {
       if (!inView(b)) return false;
-      if (strict) for (var q = 0; q < panels.length; q++) if (overlaps(b, panels[q], PAD)) return false;
-      for (var i = 0; i < pins.length; i++) if (except.indexOf(pins[i]) < 0 && overlaps(b, pins[i].box, PAD)) return false;
+      for (var q = 0; q < panels.length; q++) if (overlaps(b, panels[q], PAD)) return false;
+      for (var i = 0; i < pins.length; i++) if (pins[i] !== self && overlaps(b, pins[i].box, PAD)) return false;
       for (var o = 0; o < obstacles.length; o++) if (overlaps(b, obstacles[o], PAD)) return false;
-      for (var t = 0; t < placed.length; t++) if (placed[t] && overlaps(b, placed[t].box, PAD)) return false;
+      for (var t = 0; t < placed.length; t++) if (overlaps(b, placed[t].box, PAD)) return false;
       return true;
     }
-    function singleSpots(pn, w, hh) {
-      var x = pn.x, y = pn.y, s = sc, hy = y - 13 * s, out = [];
-      out.push(box(x - w / 2, y - 22 * s - hh, w, hh));          // above (the usual place)
-      out.push(box(x + 9 * s, hy - hh / 2, w, hh));              // right
-      out.push(box(x - 9 * s - w, hy - hh / 2, w, hh));          // left
-      out.push(box(x - w / 2, y + 4 * s, w, hh));                // below
-      out.push(box(x + 5 * s, y - 20 * s - hh, w, hh));          // above right
-      out.push(box(x - 5 * s - w, y - 20 * s - hh, w, hh));      // above left
-      out.push(box(x + 5 * s, y + 2 * s, w, hh));                // below right
-      out.push(box(x - 5 * s - w, y + 2 * s, w, hh));            // below left
-      [-0.5, 0.5].forEach(function (f) {                          // nudged
-        out.push(box(x - w / 2 + f * w, y - 22 * s - hh, w, hh));
-        out.push(box(x - w / 2 + f * w, y + 4 * s, w, hh));
-        out.push(box(x + 9 * s, hy - hh / 2 + f * hh, w, hh));
-        out.push(box(x - 9 * s - w, hy - hh / 2 + f * hh, w, hh));
-      });
-      return out;
-    }
-    // 1. single tags, newest station first
-    var failed = [];
-    pins.forEach(function (pn) { pn.w = tagWidth(pn.it) * sc; pn.single = null; });
-    // a pin off the visible map has no tag (its tag would only be pushed back onto the map, away from it)
     var tagged = pins.filter(function (pn) { return pn.x >= 0 && pn.x <= W && pn.y - 10 * sc >= 0 && pn.y <= H; });
-    tagged.slice().sort(function (a, b) { return a.order - b.order; }).forEach(function (pn) {
-      var spots = singleSpots(pn, pn.w, TAG_H * sc), order = [], got = -1;
-      if (prev[pn.key] && prev[pn.key].s >= 0) order.push(prev[pn.key].s);
-      for (var i = 0; i < spots.length; i++) if (order.indexOf(i) < 0) order.push(i);
-      for (var k = 0; k < order.length && got < 0; k++) if (clear(spots[order[k]], [pn], true)) got = order[k];
-      for (k = 0; k < order.length && got < 0; k++) if (clear(spots[order[k]], [pn], false)) got = order[k];
-      if (got >= 0) { pn.single = { box: spots[got], members: [pn], spot: got }; placed.push(pn.single); next[pn.key] = { s: got }; }
-      else failed.push(pn);
-    });
-    // 2. stacks: a station without a spot is stacked with the stations whose tags would collide with its own
-    var comp = {}, inStack = {};
-    function find(a) { while (comp[a] !== a) a = comp[a] = comp[comp[a]]; return a; }
-    tagged.forEach(function (pn, i) { comp[i] = i; pn.idx = i; });
-    function near(a, b) { return Math.abs(a.x - b.x) < (a.w + b.w) / 2 + 4 * sc && Math.abs(a.y - b.y) < (TAG_H + 24) * sc; }
-    var queue = failed.slice();
-    failed.forEach(function (f) { inStack[f.idx] = 1; });
-    while (queue.length) {
-      var f = queue.shift();
-      tagged.forEach(function (o) {
-        if (o === f || !near(o, f)) return;
-        comp[find(o.idx)] = find(f.idx);
-        if (!inStack[o.idx]) { inStack[o.idx] = 1; queue.push(o); }
-      });
+    var compact = tagged.length > 40, ts = compact ? 0.9 : 1, hh = (compact ? COMPACT_H : TAG_H) * sc * ts;
+    this.compactTags = compact;
+    tagged.forEach(function (pn) { pn.w = tagWidth(pn.it, compact) * sc * ts; });
+    function spots(pn) {
+      var x = pn.x, y = pn.y, w = pn.w, hy = y - 13 * sc;
+      return [box(x + 8 * sc, hy - hh / 2, w, hh), box(x - 8 * sc - w, hy - hh / 2, w, hh),
+        box(x - w / 2, y - 22 * sc - hh, w, hh), box(x - w / 2, y + 3 * sc, w, hh),
+        box(x + 5 * sc, y - 20 * sc - hh, w, hh), box(x - 5 * sc - w, y - 20 * sc - hh, w, hh),
+        box(x + 5 * sc, y + 2 * sc, w, hh), box(x - 5 * sc - w, y + 2 * sc, w, hh)];
     }
-    var byRoot = {};
-    tagged.forEach(function (pn) {
-      if (!inStack[pn.idx]) return;
-      if (pn.single) { placed[placed.indexOf(pn.single)] = null; pn.single = null; delete next[pn.key]; }
-      var r = find(pn.idx);
-      (byRoot[r] = byRoot[r] || []).push(pn);
+    var order = tagged.slice().sort(function (a, b) {
+      return (prev[b.key] ? 1 : 0) - (prev[a.key] ? 1 : 0) || a.order - b.order || (a.key < b.key ? -1 : a.key > b.key ? 1 : 0);
     });
-    placed = placed.filter(function (x) { return x; });
-    var stacks = Object.keys(byRoot).map(function (r) { return byRoot[r].sort(function (a, b) { return a.order - b.order; }); });
-    stacks.sort(function (a, b) { return b.length - a.length; });
-    stacks.forEach(function (members) {
-      var shown = members.slice(0, max), w = 0, P = null, cx = 0, cy = 0;
-      shown.forEach(function (pn) { w = Math.max(w, pn.w); });
-      members.forEach(function (pn) {
-        cx += pn.head.x; cy += pn.head.y;
-        P = P ? { l: Math.min(P.l, pn.box.l), t: Math.min(P.t, pn.box.t), r: Math.max(P.r, pn.box.r), b: Math.max(P.b, pn.box.b) } : pn.box;
-      });
-      cx /= members.length; cy /= members.length;
-      var hh = (shown.length * TAG_STEP - (TAG_STEP - TAG_H) + (members.length > max ? MORE_H : 0)) * sc, g = 8 * sc, spots = [];
-      [0, 12, 30, 55, 90].forEach(function (d0) {
-        var d = d0 * sc;
-        [-0.5, -0.25, 0, 0.25, 0.5].forEach(function (f) {
-          spots.push(box(cx - w / 2 + f * w, P.t - g - d - hh, w, hh));          // above, centred among the pins
-          spots.push(box(cx - w / 2 + f * w, P.b + g + d, w, hh));               // below
-          spots.push(box(P.r + g + d, cy - hh / 2 + f * hh, w, hh));             // right
-          spots.push(box(P.l - g - d - w, cy - hh / 2 + f * hh, w, hh));         // left
-        });
-      });
-      // the free spot with the shortest lines to its pins (the last draw's spot wins a tie, so tags do not jump)
-      function lineLen(b0) {
-        var sum = 0;
-        shown.forEach(function (pn) {
-          var ex = Math.max(b0.l, Math.min(b0.r, pn.head.x)), ey = Math.max(b0.t, Math.min(b0.b, pn.head.y));
-          sum += Math.hypot(ex - pn.head.x, ey - pn.head.y);
-        });
-        return sum;
-      }
-      var skey = 'S' + members[0].key, got = -1, bestLen = Infinity, pv = prev[skey] ? prev[skey].s : -1;
-      [true, false].forEach(function (strict) {
-        if (got >= 0) return;
-        for (var i = 0; i < spots.length; i++) {
-          if (!clear(spots[i], members, strict)) continue;
-          // beside the pins first: there every tag's line leaves from its own side without crossing the other tags
-          var len = lineLen(spots[i]) - (i === pv ? 12 * sc : 0) + (i % 4 < 2 ? 30 * sc * shown.length : 0);
-          if (len < bestLen) { bestLen = len; got = i; }
-        }
-      });
-      var b;
-      if (got >= 0) b = spots[got];
-      else {
-        // nothing is free: the spot that covers the least, moved fully onto the visible map
-        var best = Infinity;
-        spots.forEach(function (s0) {
-          var s1 = self.clampBox(s0, M), cost = lineLen(s1) * 0.01;
-          pins.forEach(function (o) { if (members.indexOf(o) < 0) cost += overlapArea(s1, o.box); });
-          placed.forEach(function (t) { cost += overlapArea(s1, t.box); });
-          obstacles.forEach(function (o) { cost += overlapArea(s1, o); });
-          members.forEach(function (o) { cost += overlapArea(s1, o.box) * 2; });
-          if (cost < best) { best = cost; b = s1; }
-        });
-      }
-      next[skey] = { s: got };
-      // tags in the order of their pins from top to bottom, so the lines do not cross
-      shown.sort(function (p1, p2) { return p1.head.y - p2.head.y; });
-      var st = { box: b, members: members, shown: shown, stack: true };
-      placed.push(st);
-    });
+    for (var n = 0; n < order.length && placed.length < cap; n++) {
+      var pn = order[n], sp = spots(pn), tryOrder = [], got = -1, k;
+      if (prev[pn.key] && prev[pn.key].s >= 0) tryOrder.push(prev[pn.key].s);
+      for (k = 0; k < sp.length; k++) if (tryOrder.indexOf(k) < 0) tryOrder.push(k);
+      for (k = 0; k < tryOrder.length && got < 0; k++) if (clear(sp[tryOrder[k]], pn)) got = tryOrder[k];
+      if (got >= 0) { placed.push({ box: sp[got], members: [pn], compact: compact }); next[pn.key] = { s: got }; }
+    }
     this.prevSpot = next;
     return placed;
   };
@@ -949,34 +905,18 @@
   };
 
   function pinAt(pn) { return { lon: pn.it.lon, lat: pn.it.lat, k: pn.k, x: pn.x, y: pn.y }; }
-  // One tag or a stack of tags; a stack gets a short line from each tag to its own pin.
+  // One station's tag: the call over "LQ8 20m", or just the call when the map is crowded.
   LiveMap.prototype.drawTags = function (grp, sc) {
-    var list = grp.stack ? grp.shown : grp.members, b = grp.box, mini = this.mini, w = (b.r - b.l) / sc;
-    var at = pinAt(grp.members[0]);   // a gesture moves the whole stack with its first station
-    for (var i = 0; i < list.length; i++) {
-      var pn = list[i], it = pn.it, col = bandColor(it.band), tw = grp.stack ? w : pn.w / sc;
-      var top = b.t + i * TAG_STEP * sc;
-      if (grp.stack) {   // the leader: from the tag's nearest edge to the top of its pin
-        var ty = top + TAG_H * sc / 2, hx = pn.head.x, hy = pn.y - 19 * sc;
-        var ex = hx < (b.l + b.r) / 2 ? b.l : b.r, ey = ty;   // from the side of the tag (lines run under the tags)
-        var lg = this.keyed(this.gLead, 'l' + pn.key, {}, at);
-        el('line', { x1: ex.toFixed(1), y1: ey.toFixed(1), x2: hx.toFixed(1), y2: hy.toFixed(1), 'class': 'lqmap-leader',
-          stroke: this.theme.leaderHalo, 'stroke-width': 3.5 }, lg);
-        el('line', { x1: ex.toFixed(1), y1: ey.toFixed(1), x2: hx.toFixed(1), y2: hy.toFixed(1), 'class': 'lqmap-leader',
-          stroke: this.theme.leader, 'stroke-width': 1.5 }, lg);
-      }
-      var g = this.keyed(this.gTag, 't' + pn.key, { transform: 'translate(' + (b.l + (grp.stack ? 0 : 0)).toFixed(1) + ',' + top.toFixed(1) + ') scale(' + sc + ')' }, at);
-      var t = el('g', { 'class': 'lqmap-mark', 'data-kind': 'st', 'data-idx': this.items.indexOf(it), tabindex: mini ? -1 : 0 }, g);
-      el('rect', { x: 0, y: 0, width: tw, height: TAG_H, rx: 4, fill: col, stroke: this.theme.tagStroke, 'stroke-width': 1 }, t);
-      var tc = el('text', { x: tw / 2, y: 11.5, 'text-anchor': 'middle', fill: textOn(col), 'class': 'lqmap-label', direction: 'ltr' }, t);
-      tc.textContent = it.call;
+    var b = grp.box, mini = this.mini, pn = grp.members[0], it = pn.it, col = bandColor(it.band), co = grp.compact, ts = co ? 0.9 : 1;
+    var tw = pn.w / sc / ts, h0 = co ? COMPACT_H : TAG_H;
+    var g = this.keyed(this.gTag, 't' + pn.key, { transform: 'translate(' + b.l.toFixed(1) + ',' + b.t.toFixed(1) + ') scale(' + (sc * ts).toFixed(3) + ')' }, pinAt(pn));
+    var t = el('g', { 'class': 'lqmap-mark', 'data-kind': 'st', 'data-idx': this.items.indexOf(it), tabindex: mini ? -1 : 0 }, g);
+    el('rect', { x: 0, y: 0, width: tw, height: h0, rx: 4, fill: col, stroke: this.theme.tagStroke, 'stroke-width': 1 }, t);
+    var tc = el('text', { x: tw / 2, y: co ? 11.5 : 11.5, 'text-anchor': 'middle', fill: textOn(col), 'class': 'lqmap-label', direction: 'ltr' }, t);
+    tc.textContent = it.call;
+    if (!co) {
       var s2 = el('text', { x: tw / 2, y: 24.5, 'text-anchor': 'middle', fill: textOn(col), 'class': 'lqmap-label lqmap-sub', direction: 'ltr' }, t);
       s2.textContent = it.mode + ' ' + it.band;
-    }
-    if (grp.stack && grp.members.length > list.length) {
-      var mg = this.keyed(this.gTag, 'm' + grp.members[0].key, {}, at);
-      var more = el('text', { x: ((b.l + b.r) / 2).toFixed(1), y: (b.b - 3 * sc).toFixed(1), 'text-anchor': 'middle', 'class': 'lqmap-more', direction: 'ltr' }, mg);
-      more.textContent = '+' + (grp.members.length - list.length);
     }
   };
 
@@ -1018,10 +958,25 @@
     if (pc && pc._dx) pc.textContent = dxClock(pc._dx, now);
   };
 
+  // a "+N" badge: zoom in on its stations; at the closest zoom, pin the list of their calls instead
+  LiveMap.prototype.tapCluster = function (id) {
+    var c = this.clusters && this.clusters[id]; if (!c) return;
+    if (this.st.zoom < this.st.maxZoom * 0.97) { this.hidePop(); this.zoomAt(c.lead.x, c.lead.y - 13 * 1.45, 2.6, false); }
+    else this.showPop('cl', id, true);
+  };
   LiveMap.prototype.showPop = function (kind, idx, pin) {
     var now = Date.now(), p = this.pop;
     p.textContent = '';
-    if (kind === 'st') {
+    if (kind === 'cl') {
+      var c = this.clusters && this.clusters[idx]; if (!c) return;
+      h('div', 'lqmap-pop-call', c.lead.it.call + ' +' + (c.members.length - 1), p);
+      c.members.slice(0, 14).forEach(function (m) {
+        var r = h('div', 'lqmap-pop-row', null, p);
+        h('span', 'k', m.it.call, r); h('span', 'v', m.it.mode + ' ' + m.it.band, r);
+      });
+      if (c.members.length > 14) h('div', 'lqmap-pop-row', '+' + (c.members.length - 14), p);
+      this.popGeo = { lon: c.lead.it.lon, lat: c.lead.it.lat };
+    } else if (kind === 'st') {
       var it = this.items[idx];
       if (!it) return;
       h('div', 'lqmap-pop-call', it.call, p);
@@ -1124,15 +1079,22 @@
     // the band filter (full map only): every band the service accepts, all shown unless the viewer hid some
     this.bandBox = this.mini ? null : root.querySelector('.lqlive-bands');
     if (this.bandBox) {
-      this.map.hiddenBands = readHiddenBands();
+      try { document.cookie = BANDS_COOKIE + '=; max-age=0; path=/'; } catch (e) {}   // the old "hide a band" choice is gone
       this.bandBox.setAttribute('aria-label', str('LIVE_BANDS_FILTER', 'Bands to show'));
       var all = this.bandBox.querySelector('.lqlive-bands-all');
       if (all) all.addEventListener('click', function () {
-        Object.keys(self.map.hiddenBands).forEach(function (b) { delete self.map.hiddenBands[b]; });
-        saveHiddenBands(self.map.hiddenBands);
+        self.map.focusBand = null;
         self.update();
       });
       this.drawBandFilter();   // the list is fixed, so it is drawn at once, not when the first data arrives
+    }
+    if (!this.mini && navigator.geolocation) {   // ask once; refused or unavailable = nothing drawn, no second ask
+      try {
+        navigator.geolocation.getCurrentPosition(function (pos) {
+          var la = pos.coords.latitude, lo = pos.coords.longitude;
+          if (isFinite(la) && isFinite(lo) && Math.abs(la) <= 90 && Math.abs(lo) <= 180) { self.map.me = { lat: la, lon: lo }; self.map.render(); }
+        }, function () {}, { maximumAge: 600000, timeout: 20000 });
+      } catch (e) {}
     }
     var reset = root.querySelector('.lqlive-reset');
     if (reset) reset.addEventListener('click', function () { self.map.reset(); });
@@ -1231,7 +1193,7 @@
       items.forEach(function (it) { bands[it.band] = 1; modes[it.mode] = 1; });
       var ml = sorted(Object.keys(modes), MODE_ORDER);
       if (ml.length > 1) ml.forEach(function (m) { self.chip(m, null, self.map.hiddenModes); });
-      sorted(Object.keys(bands), BAND_ORDER).forEach(function (b) { self.chip(b, bandColor(b), self.map.hiddenBands); });
+      sorted(Object.keys(bands), BAND_ORDER).forEach(function (b) { self.chip(b, bandColor(b), self.map.hiddenBands, null, true); });
       this.legend.hidden = !items.length;
     }
     this.drawBandFilter();
@@ -1261,20 +1223,24 @@
     if (!list) return;
     var self = this;
     list.textContent = '';
-    BAND_ORDER.forEach(function (b) { self.chip(b, bandColor(b), self.map.hiddenBands, list); });
+    var act = {};
+    (this.map.items || []).forEach(function (it) { act[it.band] = 1; });
+    BAND_ORDER.forEach(function (b) { self.chip(b, bandColor(b), self.map.hiddenBands, list, true, !!act[b]); });
     var all = this.bandBox.querySelector('.lqlive-bands-all');
-    if (all) all.disabled = !Object.keys(this.map.hiddenBands).length;
+    if (all) all.disabled = !this.map.focusBand;
   };
-  Page.prototype.chip = function (label, color, hidden, parent) {
-    var self = this, b = h('button', 'lqlive-chip' + (hidden[label] ? ' off' : ''), null, parent || this.legend);
-    b.setAttribute('aria-pressed', hidden[label] ? 'false' : 'true');
+  Page.prototype.chip = function (label, color, hidden, parent, isBand, active) {
+    var self = this, foc = this.map.focusBand;
+    var cls = isBand ? (foc ? (foc === label ? ' sel' : ' dim') : '') + (active ? ' act' : '') : (hidden[label] ? ' off' : '');
+    var b = h('button', 'lqlive-chip' + cls, null, parent || this.legend);
+    b.setAttribute('aria-pressed', isBand ? (foc === label ? 'true' : 'false') : (hidden[label] ? 'false' : 'true'));
     b.type = 'button';
     if (color) { var sw = h('span', 'sw', null, b); sw.style.background = color; }
     h('span', null, label, b);
     if (this.mini) { b.disabled = true; return; }
     b.addEventListener('click', function () {
-      if (hidden[label]) delete hidden[label]; else hidden[label] = 1;
-      if (hidden === self.map.hiddenBands && self.bandBox) saveHiddenBands(hidden);
+      if (isBand) self.map.focusBand = self.map.focusBand === label ? null : label;   // focus on one band; again = all
+      else if (hidden[label]) delete hidden[label]; else hidden[label] = 1;
       self.update();
     });
   };
