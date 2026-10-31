@@ -199,7 +199,7 @@
   }
   // Tag sizes (local units; the map multiplies them by its marker scale): a tag is the callsign over "LQ8 20m".
   var TAG_H = 29, COMPACT_H = 16;
-  function tagWidth(it, compact) { return compact ? 8 + it.call.length * 7.6 : 10 + Math.max((it.mode + ' ' + it.band).length * 6.6, it.call.length * 7.6); }
+  function tagWidth(it, compact, band) { return compact ? 8 + (band ? it.call.length * 7.6 + 4 + it.band.length * 6.8 : it.call.length * 7.6) : 10 + Math.max((it.mode + ' ' + it.band).length * 6.6, it.call.length * 7.6); }
   function box(l, t, w, hh) { return { l: l, t: t, r: l + w, b: t + hh }; }
   function overlaps(a, b, pad) { pad = pad || 0; return a.l < b.r + pad && b.l < a.r + pad && a.t < b.b + pad && b.t < a.b + pad; }
   function overlapArea(a, b) {
@@ -852,9 +852,10 @@
       return true;
     }
     var tagged = pins.filter(function (pn) { return pn.x >= 0 && pn.x <= W && pn.y - 10 * sc >= 0 && pn.y <= H; });
-    var compact = tagged.length > 40, ts = compact ? 0.9 : 1, hh = (compact ? COMPACT_H : TAG_H) * sc * ts;
+    // busy and zoomed out: the call only; busy but zoomed in: the call and the band on one line; few: the two-line tag
+    var compact = tagged.length > 40, withBand = compact && this.st.zoom >= 2.5, ts = compact ? 0.9 : 1, hh = (compact ? COMPACT_H : TAG_H) * sc * ts;
     this.compactTags = compact;
-    tagged.forEach(function (pn) { pn.w = tagWidth(pn.it, compact) * sc * ts; });
+    tagged.forEach(function (pn) { pn.w = tagWidth(pn.it, compact, withBand) * sc * ts; });
     function spots(pn) {
       var x = pn.x, y = pn.y, w = pn.w, hy = y - 13 * sc;
       return [box(x + 8 * sc, hy - hh / 2, w, hh), box(x - 8 * sc - w, hy - hh / 2, w, hh),
@@ -870,7 +871,7 @@
       if (prev[pn.key] && prev[pn.key].s >= 0) tryOrder.push(prev[pn.key].s);
       for (k = 0; k < sp.length; k++) if (tryOrder.indexOf(k) < 0) tryOrder.push(k);
       for (k = 0; k < tryOrder.length && got < 0; k++) if (clear(sp[tryOrder[k]], pn)) got = tryOrder[k];
-      if (got >= 0) { placed.push({ box: sp[got], members: [pn], compact: compact }); next[pn.key] = { s: got }; }
+      if (got >= 0) { placed.push({ box: sp[got], members: [pn], compact: compact, band: withBand }); next[pn.key] = { s: got }; }
     }
     this.prevSpot = next;
     return placed;
@@ -913,7 +914,7 @@
     var t = el('g', { 'class': 'lqmap-mark', 'data-kind': 'st', 'data-idx': this.items.indexOf(it), tabindex: mini ? -1 : 0 }, g);
     el('rect', { x: 0, y: 0, width: tw, height: h0, rx: 4, fill: col, stroke: this.theme.tagStroke, 'stroke-width': 1 }, t);
     var tc = el('text', { x: tw / 2, y: co ? 11.5 : 11.5, 'text-anchor': 'middle', fill: textOn(col), 'class': 'lqmap-label', direction: 'ltr' }, t);
-    tc.textContent = it.call;
+    tc.textContent = co && grp.band ? it.call + ' ' + it.band : it.call;
     if (!co) {
       var s2 = el('text', { x: tw / 2, y: 24.5, 'text-anchor': 'middle', fill: textOn(col), 'class': 'lqmap-label lqmap-sub', direction: 'ltr' }, t);
       s2.textContent = it.mode + ' ' + it.band;
