@@ -801,7 +801,9 @@
       var pa = (prev[a.key] ? 2 : 0) + (prevLead[a.key] ? 1 : 0), pb = (prev[b.key] ? 2 : 0) + (prevLead[b.key] ? 1 : 0);
       return pb - pa || a.order - b.order || (a.key < b.key ? -1 : a.key > b.key ? 1 : 0);
     });
-    var rx = 17 * sc, ry = 15 * sc, W = this.W, H = this.H, leaders = [], hidden = {}, list = [], lead = {};
+    // user 11-02: collapse only pins that really sit on top of each other (a pin is 14 x 21); pins merely close keep
+    // their own pin (their tags go where they fit, or show on hover / tap)
+    var rx = 9 * sc, ry = 12 * sc, W = this.W, H = this.H, leaders = [], hidden = {}, list = [], lead = {};
     for (var i = 0; i < ord.length; i++) {
       var pn = ord[i], on = pn.x > -20 && pn.x < W + 20 && pn.y > -20 && pn.y < H + 40, home = null;
       if (on) for (var j = 0; j < leaders.length; j++) {
