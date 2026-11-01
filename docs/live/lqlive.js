@@ -199,7 +199,20 @@
   }
   // Tag sizes (local units; the map multiplies them by its marker scale): a tag is the callsign over "LQ8 20m".
   var TAG_H = 29, COMPACT_H = 16;
-  function tagWidth(it, compact, band) { return compact ? 8 + (band ? it.call.length * 7.6 + 4 + it.band.length * 6.8 : it.call.length * 7.6) : 10 + Math.max((it.mode + ' ' + it.band).length * 6.6, it.call.length * 7.6); }
+  // LQLIVE-SAME-CALL-CLUSTER-1 (user 11-02): one station (one call at one point) on several bands / modes is ONE pin whose
+  // tag lists every entry under the call, newest first ("R3WDU / LQ8 17m / LQ8 20m"); `rows` = those entries.
+  var ROW_H = 12;
+  function rowText(it) { return it.mode + ' ' + it.band; }
+  function bandsText(rows) { return rows.map(function (r) { return r.band; }).join('/'); }
+  function tagWidth(rows, compact, band) {
+    var it = rows[0];
+    if (compact) return 8 + (band ? it.call.length * 7.6 + 4 + bandsText(rows).length * 6.8 : it.call.length * 7.6);
+    var w = it.call.length * 7.6;
+    rows.forEach(function (r) { w = Math.max(w, rowText(r).length * 6.6); });
+    return 10 + w;
+  }
+  function tagHeight(rows, compact) { return compact ? COMPACT_H : TAG_H + (rows.length - 1) * ROW_H; }
+  function stationKey(it) { return it.call + '@' + it.lon.toFixed(4) + ',' + it.lat.toFixed(4); }
   function box(l, t, w, hh) { return { l: l, t: t, r: l + w, b: t + hh }; }
   function overlaps(a, b, pad) { pad = pad || 0; return a.l < b.r + pad && b.l < a.r + pad && a.t < b.b + pad && b.t < a.b + pad; }
   function overlapArea(a, b) {
@@ -765,12 +778,18 @@
       for (var c = 0; c < cs.length; c++) obstacles.push(this.drawDx(cs[c], dx, d, sc));
     }
     // stations: each pin at its own point (the one the qFT8 app draws it at), its tag placed by placeTags
-    var vis = this.visibleItems(), pins = [];
-    for (var i = 0; i < vis.length; i++) {
-      var ps = this.copies(vis[i].lon, vis[i].lat);
+    // the same call at the same point = one station: one pin, its entries listed on the tag (the feed is newest first)
+    var vis = this.visibleItems(), pins = [], stations = [], byKey = {};
+    for (var v = 0; v < vis.length; v++) {
+      var sk = stationKey(vis[v]);
+      if (byKey[sk]) byKey[sk].push(vis[v]);
+      else stations.push(byKey[sk] = [vis[v]]);
+    }
+    for (var i = 0; i < stations.length; i++) {
+      var lead0 = stations[i][0], ps = this.copies(lead0.lon, lead0.lat);
       for (var p = 0; p < ps.length; p++) {
         var x = ps[p].x, y = ps[p].y;
-        pins.push({ it: vis[i], key: itemKey(vis[i]) + '#' + ps[p].k, k: ps[p].k, order: i, x: x, y: y,
+        pins.push({ it: lead0, rows: stations[i], key: itemKey(lead0) + '#' + ps[p].k, k: ps[p].k, order: i, x: x, y: y,
           box: box(x - 7 * sc, y - 20 * sc, 14 * sc, 21 * sc), head: { x: x, y: y - 13 * sc } });
       }
     }
@@ -855,11 +874,11 @@
     }
     var tagged = pins.filter(function (pn) { return pn.x >= 0 && pn.x <= W && pn.y - 10 * sc >= 0 && pn.y <= H; });
     // busy and zoomed out: the call only; busy but zoomed in: the call and the band on one line; few: the two-line tag
-    var compact = tagged.length > 40, withBand = compact && this.st.zoom >= 2.5, ts = compact ? 0.9 : 1, hh = (compact ? COMPACT_H : TAG_H) * sc * ts;
+    var compact = tagged.length > 40, withBand = compact && this.st.zoom >= 2.5, ts = compact ? 0.9 : 1;
     this.compactTags = compact;
-    tagged.forEach(function (pn) { pn.w = tagWidth(pn.it, compact, withBand) * sc * ts; });
+    tagged.forEach(function (pn) { pn.w = tagWidth(pn.rows, compact, withBand) * sc * ts; pn.hh = tagHeight(pn.rows, compact) * sc * ts; });
     function spots(pn) {
-      var x = pn.x, y = pn.y, w = pn.w, hy = y - 13 * sc;
+      var x = pn.x, y = pn.y, w = pn.w, hh = pn.hh, hy = y - 13 * sc;
       return [box(x + 8 * sc, hy - hh / 2, w, hh), box(x - 8 * sc - w, hy - hh / 2, w, hh),
         box(x - w / 2, y - 22 * sc - hh, w, hh), box(x - w / 2, y + 3 * sc, w, hh),
         box(x + 5 * sc, y - 20 * sc - hh, w, hh), box(x - 5 * sc - w, y - 20 * sc - hh, w, hh),
@@ -911,16 +930,16 @@
   // One station's tag: the call over "LQ8 20m", or just the call when the map is crowded.
   LiveMap.prototype.drawTags = function (grp, sc) {
     var b = grp.box, mini = this.mini, pn = grp.members[0], it = pn.it, col = bandColor(it.band), co = grp.compact, ts = co ? 0.9 : 1;
-    var tw = pn.w / sc / ts, h0 = co ? COMPACT_H : TAG_H;
+    var tw = pn.w / sc / ts, h0 = tagHeight(pn.rows, co);
     var g = this.keyed(this.gTag, 't' + pn.key, { transform: 'translate(' + b.l.toFixed(1) + ',' + b.t.toFixed(1) + ') scale(' + (sc * ts).toFixed(3) + ')' }, pinAt(pn));
     var t = el('g', { 'class': 'lqmap-mark', 'data-kind': 'st', 'data-idx': this.items.indexOf(it), tabindex: mini ? -1 : 0 }, g);
     el('rect', { x: 0, y: 0, width: tw, height: h0, rx: 4, fill: col, stroke: this.theme.tagStroke, 'stroke-width': 1 }, t);
     var tc = el('text', { x: tw / 2, y: co ? 11.5 : 11.5, 'text-anchor': 'middle', fill: textOn(col), 'class': 'lqmap-label', direction: 'ltr' }, t);
-    tc.textContent = co && grp.band ? it.call + ' ' + it.band : it.call;
-    if (!co) {
-      var s2 = el('text', { x: tw / 2, y: 24.5, 'text-anchor': 'middle', fill: textOn(col), 'class': 'lqmap-label lqmap-sub', direction: 'ltr' }, t);
-      s2.textContent = it.mode + ' ' + it.band;
-    }
+    tc.textContent = co && grp.band ? it.call + ' ' + bandsText(pn.rows) : it.call;
+    if (!co) pn.rows.forEach(function (r, ri) {
+      var s2 = el('text', { x: tw / 2, y: 24.5 + ri * ROW_H, 'text-anchor': 'middle', fill: textOn(col), 'class': 'lqmap-label lqmap-sub', direction: 'ltr' }, t);
+      s2.textContent = rowText(r);
+    });
   };
 
   // A diamond on the entity, its call in a magenta tag beside it, the place above and the countdown below.
@@ -975,7 +994,7 @@
       h('div', 'lqmap-pop-call', c.lead.it.call + ' +' + (c.members.length - 1), p);
       c.members.slice(0, 14).forEach(function (m) {
         var r = h('div', 'lqmap-pop-row', null, p);
-        h('span', 'k', m.it.call, r); h('span', 'v', m.it.mode + ' ' + m.it.band, r);
+        h('span', 'k', m.it.call, r); h('span', 'v', m.rows.map(rowText).join(', '), r);
       });
       if (c.members.length > 14) h('div', 'lqmap-pop-row', '+' + (c.members.length - 14), p);
       this.popGeo = { lon: c.lead.it.lon, lat: c.lead.it.lat };
@@ -989,8 +1008,15 @@
         rows.push([str('LIVE_DXCC_ENTITY', 'DXCC entity'), ent.name], [str('LIVE_DXCC_PREFIX', 'Prefix'), ent.prefix]);
         if (ent.dxcc > 0) rows.push([str('LIVE_DXCC_NUMBER', 'DXCC number'), String(ent.dxcc)]);
       }
-      rows.push([str('LIVE_BAND', 'Band'), it.mode + ' ' + it.band], [str('LIVE_FREQ', 'Frequency'), freqText(it.dial_hz)],
-        [str('LIVE_GRID', 'Grid'), it.grid], [str('LIVE_HEARD', 'Last active'), minutesAgo(it.tx_ms, now)]);
+      // every entry of this station (same call, same point), newest first: band, frequency, last active each
+      var sk0 = stationKey(it), same = this.items.filter(function (o) { return stationKey(o) === sk0; });
+      if (same.length < 2) same = [it];
+      same.forEach(function (o) {
+        rows.push([str('LIVE_BAND', 'Band'), rowText(o)], [str('LIVE_FREQ', 'Frequency'), freqText(o.dial_hz)]);
+        if (same.length > 1) rows.push([str('LIVE_HEARD', 'Last active'), minutesAgo(o.tx_ms, now)]);
+      });
+      rows.push([str('LIVE_GRID', 'Grid'), it.grid]);
+      if (same.length === 1) rows.push([str('LIVE_HEARD', 'Last active'), minutesAgo(it.tx_ms, now)]);
       for (var i = 0; i < rows.length; i++) {
         var r = h('div', 'lqmap-pop-row', null, p);
         h('span', 'k', rows[i][0], r); h('span', 'v', rows[i][1], r);
