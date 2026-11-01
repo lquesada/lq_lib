@@ -31,7 +31,7 @@
 // =============================================================================
 
 const langData = {
-    "META_DESC": "A következő generációs rádióamatőr digitális mód család (LQ8, LQ4, LQ2, LQ16). Teljes 4-lépcsős érintkezők 60 másodpercen belül teljes rács- és jelentéscserével (75–90 másodperccel az FT8-ban), >2,3-szoros felhalmozódási sebességgel (160 vs ~69 QSOs/h) 0,0 dB teljesítménybüntetéssel és -21,0 dB SNR érzékenységgel változó hosszúságú előtag kódolással. Natív támogatás a qFT8-ban Androidra.",
+    "META_DESC": "A következő generációs amatőr rádiós digitális üzemmódcsalád (LQ8, LQ4, LQ2, LQ16). Teljes, 4 lépéses összeköttetések 60s alatt teljes lokátor- &amp; riportcserével (szemben az FT8 75–90s-ével), 4× pileup-sebesség egy vivővel (240 vs. 60 QSO/h) 0.0 dB teljesítményveszteséggel, és -21.0 dB SNR érzékenység a változó hosszúságú prefixkódolásnak köszönhetően. Natív támogatás a qFT8-ban Androidra.",
     "OG_DESC": "Teljes 4-lépcsős érintkezők 60 másodpercen belül teljes grid- és jelentéscserével (75–90 másodperccel az FT8-ban), 4× felhalmozódási sebesség egyetlen vivővel (240 vs 60 QSOs/h) 0,0 dB teljesítménybüntetéssel. Folyamatos fázisú 8-GFSK változó hosszúságú előtag kódolással. Natív támogatás a qFT8-ban Androidra.",
     "TWITTER_DESC": "Teljes 4-lépcsős érintkezők 60 másodpercen belül teljes grid- és jelentéscserével (75–90 másodperccel az FT8-ban), 4× felhalmozódási sebesség egyetlen vivővel (240 vs 60 QSOs/h) 0,0 dB teljesítménybüntetéssel. Folyamatos fázisú 8-GFSK változó hosszúságú előtag kódolással. Natív támogatás a qFT8-ban Androidra.",
     "NAV_OVERVIEW": "Áttekintés",

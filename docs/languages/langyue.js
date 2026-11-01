@@ -46,7 +46,7 @@ const langData = {
     "HERO_TITLE_1": "60 秒内完成完整 4 步通联",
     "HERO_TITLE_2": "單載波 4× 堆疊通聯速度 (240 vs 60 QSOs/h)",
     "HERO_TITLE_3": "0.0 dB 功率惩罚",
-    "HERO_SUBTITLE": "<strong>LQ8</strong> 是下一代业余无线电弱信号协议，在成熟可靠的 <strong>FT8 物理传输层</strong>（8-GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR）上采用变长前缀编码重构报文打包。通过 <strong>4 次传输（60秒 vs 75–90秒）</strong> 完成包含网格、信号报告和 73 确认的双向通联，在堆叠中实现 <strong>160 QSOs/h（比 FT8 Fox &amp; Hound 双流提高 >2.3×）</strong> 且具有 0.0 dB 射频功率惩罚（双载波可扩展至 <strong>480 QSOs/h</strong>）。",
+    "HERO_SUBTITLE": "<strong>LQ8</strong> 係新一代弱訊號業餘無線電協定，喺同一個身經百戰嘅 <strong>FT8 實體傳輸層</strong> 之上，用可變長度前綴碼重新設計訊息打包 (8-GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR)。雙向交換網格、報告同 73 確認，<strong>4 次發射（60s 對 75–90s）</strong> 就可以完成完整通聯，喺 pileup 入面可以做到 <strong>每小時 240 QSO（係單載波 FT8 嘅 4 倍，每 30s 兩個 QSO）</strong>，RF 功率損失 0.0 dB（雙載波可以升到 <strong>每小時 480 QSO</strong>）。",
     "HERO_BTN_DISCOVER": "探索 LQ8 &rarr;",
     "HERO_BTN_PAPER": "閱讀論文與規格 (PDF)",
     "PITCH_CARD_1_BADGE": "60秒 QSO 提速",

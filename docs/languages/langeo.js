@@ -46,7 +46,7 @@ const langData = {
     "HERO_TITLE_1": "Plenaj 4-paŝaj Kontaktoj en 60 Sekundoj",
     "HERO_TITLE_2": "4× Pileup-rapido kun ununura portanto (240 kontraŭ 60 QSOs/h)",
     "HERO_TITLE_3": "0.0 dB Potenca Puno",
-    "HERO_SUBTITLE": "<strong>LQ8</strong> estas venontgeneracia amatora radio&minus;malforta signala protokolo, kiu rekonstruas mesaĝpakadon uzante variablo&minus;longajn prefiksajn kodojn super la ĝusta, batalprovita <strong>FT8&minus;fizika transporttavolo</strong> (8&minus;GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). Kompletigu plenajn kontaktojn kun dudirekta krado, raporto kaj 73&minus;konfirmo en <strong>4 dissendoj (60&minus;aj kontraŭ 75–90&minus;aj jaroj)</strong> kaj atingu <strong>160 QSO&minus;ojn/h en amasiĝoj (>2.3× super duflua FT8 Fox & Hound)</strong> kun sen RF-potenca puno (0,0 dB), skalebla al <strong>480 QSO/h</strong> per duobla portanto.",
+    "HERO_SUBTITLE": "<strong>LQ8</strong> estas venontgeneracia malfortsignala protokolo por radioamatoroj, kiu reprojektas la pakadon de mesaĝoj per prefiksaj kodoj kun varia longo sur la ekzakta, pruvita <strong>FT8-a fizika transporta tavolo</strong> (8-GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). Kompletigu plenajn kontaktojn kun duflanka lokatoro, raporto kaj 73-konfirmo en <strong>4 dissendoj (60s kontraŭ 75–90s)</strong> kaj atingu <strong>240 QSO/h en amasvokado (4× pli ol unu-portanta FT8, 2 QSO ĉiun 30s)</strong> kun 0.0 dB da RF-potenca puno (skalante al <strong>480 QSO/h</strong>, duportanta).",
     "HERO_BTN_DISCOVER": "Malkovru LQ8 &rarr;",
     "HERO_BTN_PAPER": "Legu Paperon kaj Specojn (PDF)",
     "PITCH_CARD_1_BADGE": "60-aj jaroj QSO Akcelo",

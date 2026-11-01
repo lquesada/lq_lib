@@ -46,7 +46,7 @@ const langData = {
     "HERO_TITLE_1": "ባለ 4-ደረጃ እውቂያዎች በ60 ሰከንድ ውስጥ",
     "HERO_TITLE_2": "በአንድ ተሸካሚ የ 4× የፓይልአፕ ፍጥነት (240 vs 60 QSOs/h)",
     "HERO_TITLE_3": "0.0 dB የኃይል ቅጣት",
-    "HERO_SUBTITLE": "<strong>LQ8</strong>የቀጣዩ ትውልድ አማተር ራዲዮ ደካማ ሲግናል ፕሮቶኮል ነው በተለዋዋጭ ርዝመት ቅድመ ቅጥያ ኮዶችን በመጠቀም የመልእክት ማሸግ በትክክለኛ፣ በጦርነት የተፈተነ<strong>FT8 የአካል ማጓጓዣ ንብርብር</strong>(8&minus;GFSK፣ 50&nbsp;Hz፣ &minus;21.0&nbsp;dB SNR)። በ<strong>4 ስርጭቶች (60s vs 75–90s) ውስጥ ሙሉ ግንኙነቶችን ያጠናቅቁ እና የ 73 ማረጋገጫዎች<strong>160 QSOs/ሰ በክምችት (>2.3× ባለሁለት&minus;ዥረት FT8 Fox & Hound)</strong>ከ ያለ ምንም የ RF ኃይል ቅጣት (0.0 dB) ፣ በባለሁለት ተሸካሚ እስከ <strong>480 QSOs/ሰ</strong> ድረስ የሚደርስ።",
+    "HERO_SUBTITLE": "<strong>LQ8</strong> የቀጣይ ትውልድ ደካማ ምልክት አማተር ሬዲዮ ፕሮቶኮል ነው፤ በተረጋገጠው <strong>FT8 አካላዊ የማስተላለፊያ ንብርብር</strong> ላይ ተለዋዋጭ ርዝመት ያላቸው ቅድመ ቅጥያ ኮዶችን በመጠቀም የመልዕክት ማሸግን እንደገና ይቀይሳል (8-GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). የሁለት አቅጣጫ ግሪድ፣ ሪፖርትና የ73 ማረጋገጫ ያለው ሙሉ ግንኙነት በ<strong>4 ስርጭቶች (60s ከ75–90s ጋር ሲነጻጸር)</strong> ያጠናቅቁ፤ እንዲሁም በፓይልአፕ ውስጥ <strong>በሰዓት 240 QSO (ከነጠላ ተሸካሚ FT8 4 እጥፍ፣ በእያንዳንዱ 30s 2 QSO)</strong> ያግኙ፣ የ0.0 dB RF ኃይል ቅጣት ሳይኖር (በሁለት ተሸካሚ ወደ <strong>በሰዓት 480 QSO</strong> ያድጋል)።",
     "HERO_BTN_DISCOVER": "LQ8 ን ያግኙ",
     "HERO_BTN_PAPER": "ወረቀት እና ዝርዝሮች (ፒዲኤፍ) ያንብቡ",
     "PITCH_CARD_1_BADGE": "60 ዎቹ QSO ፍጥነት",

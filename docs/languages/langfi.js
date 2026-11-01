@@ -31,8 +31,8 @@
 // =============================================================================
 
 const langData = {
-    "META_DESC": "Seuraavan sukupolven amatööriradiodigitaalitilaperhe (LQ8, LQ4, LQ2, LQ16). Täydelliset 4-vaiheiset kontaktit 60 sekunnissa täydellisellä ruudukon ja raporttien vaihdolla (75–90 s FT8:ssa), >2,3-kertainen pileup-nopeus (160 vs. ~69 QSOs/h) 0,0 dB:n tehorajoituksella ja -21,0 dB SNR-herkkyys muuttuvan pituuden etuliitteen koodauksella. Alkuperäinen tuki qFT8:ssa Androidille.",
-    "OG_DESC": "Täydelliset 4-vaiheiset kontaktit 60 sekunnissa täydellisellä ruudukon ja raporttien vaihdolla (vs. 75–90 s FT8:ssa), >2,3-kertainen pileup-läpäisykyky (160 vs. ~69 QSOs/h) 0,0 dB:n tehorajoituksella. Jatkuvan vaiheen 8-GFSK vaihtuvapituisella etuliitekoodauksella. Alkuperäinen tuki qFT8:ssa Androidille.",
+    "META_DESC": "Seuraavan sukupolven amatööriradion digitaalimoodien perhe (LQ8, LQ4, LQ2, LQ16). Täydelliset 4-vaiheiset yhteydet 60s:ssa täydellä lokaattorin &amp; raportin vaihdolla (vs. 75–90s FT8:ssa), 4× pileup-nopeus yhdellä kantoaallolla (240 vs. 60 QSO:ta/h) 0.0 dB:n tehomenetyksellä, ja -21.0 dB:n SNR-herkkyys muuttuvapituisen etuliitekoodauksen ansiosta. Natiivi tuki qFT8:ssa Androidille.",
+    "OG_DESC": "Täydelliset 4-vaiheiset yhteydet 60s:ssa täydellä lokaattorin &amp; raportin vaihdolla (vs. 75–90s FT8:ssa), 4× pileup-nopeus yhdellä kantoaallolla (240 vs. 60 QSO:ta/h) 0.0 dB:n tehomenetyksellä. Jatkuvavaiheinen 8-GFSK muuttuvapituisella etuliitekoodauksella. Natiivi tuki qFT8:ssa Androidille.",
     "TWITTER_DESC": "Täydelliset 4-vaiheiset kontaktit 60 sekunnissa täydellisellä ruudukon ja raporttien vaihdolla (vs. 75–90 s FT8:ssa), 4× pileup-nopeus yhdellä kantoaallolla (240 vs 60 QSOs/h) 0,0 dB:n tehonrajoituksella. Jatkuvan vaiheen 8-GFSK vaihtuvapituisella etuliitekoodauksella. Alkuperäinen tuki qFT8:ssa Androidille.",
     "NAV_OVERVIEW": "Yleiskatsaus",
     "NAV_OPERATION": "Käyttö",
@@ -46,7 +46,7 @@ const langData = {
     "HERO_TITLE_1": "Täydelliset 4-vaiheiset kontaktit 60 sekunnissa",
     "HERO_TITLE_2": "4× Pileup-nopeus yhdellä kantoaallolla (240 vs 60 QSOs/h)",
     "HERO_TITLE_3": "0,0 dB tehorangaistus",
-    "HERO_SUBTITLE": "<strong>LQ8</strong> on seuraavan sukupolven heikkojen signaalien radioamatööriprotokolla, joka uudistaa viestien pakkaamisen muuttuvamittaisilla etuliitekoodeilla luotettavan <strong>FT8:n fyysisen siirtokerroksen</strong> (8-GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR) päälle. Saavuta täydelliset yhteydet kaksisuuntaisella lokaattorin, raportin ja 73-kuitauksen vaihdolla <strong>4 lähetyksessä (60 s vs. 75–90 s)</strong> ja saavuta <strong>160 QSO:ta/h pileupeissa (>2,3× verrattuna kaksivirtauksiseen FT8 Fox &amp; Houndiin)</strong> ilman tehohäviötä (0,0 dB), skaalautuen <strong>480 QSO:hon/h</strong> kaksoiskantoaallolla.",
+    "HERO_SUBTITLE": "<strong>LQ8</strong> on uuden sukupolven heikkojen signaalien radioamatööriprotokolla, joka suunnittelee viestien pakkaamisen uudelleen muuttuvapituisilla etuliitekoodeilla täsmälleen samalla, taistelukentällä koetellulla <strong>FT8:n fyysisellä siirtokerroksella</strong> (8-GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). Suorita täydelliset yhteydet kaksisuuntaisella lokaattorin, raportin ja 73-vahvistuksen vaihdolla <strong>4 lähetyksessä (60s vs. 75–90s)</strong> ja saavuta <strong>240 QSO:ta/h pileupissa (4× yhden kantoaallon FT8:aan verrattuna, 2 QSO:ta joka 30s)</strong> 0.0 dB:n RF-tehomenetyksellä (kahdella kantoaallolla jopa <strong>480 QSO:ta/h</strong>).",
     "HERO_BTN_DISCOVER": "Tutustu LQ8 &rarr;",
     "HERO_BTN_PAPER": "Lue paperi ja tekniset tiedot (PDF)",
     "PITCH_CARD_1_BADGE": "60-luvun QSO Speedup",

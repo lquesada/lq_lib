@@ -46,7 +46,7 @@ const langData = {
     "HERO_TITLE_1": "Anwani Kamili za Hatua 4 ndani ya Sekunde 60",
     "HERO_TITLE_2": "Kasi ya Pileup ya 4× kwa Kibeberu Kimoja (240 dhidi ya 60 QSOs/h)",
     "HERO_TITLE_3": "0.0 dB Adhabu ya Nguvu",
-    "HERO_SUBTITLE": "<strong>LQ8</strong> ni itifaki ya kizazi kijacho ya mawimbi hafifu ya redio ambayo wahandisi hutuma ujumbe kwenye upakiaji kwa kutumia misimbo ya kiambishi awali ya urefu tofauti juu ya safu halisi ya usafiri halisi iliyojaribiwa <strong>FT8</strong> (8&minus;GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). Kamilisha anwani kamili ukitumia gridi ya maelekezo mawili, ripoti na uthibitishaji 73 katika <strong>utumaji 4 (miaka ya 60 dhidi ya 75–90)</strong> na ufikie <strong>QSOs 160 kwa saa katika mirundiko (>2.3× kupitia mkondo&minus;mbili wa FT8 Fox & Hound)</strong> na bila adhabu ya nguvu ya RF (0.0 dB), ikiongezeka hadi <strong>QSO 480/saa</strong> kwa vibeba viwili.",
+    "HERO_SUBTITLE": "<strong>LQ8</strong> ni itifaki ya kizazi kipya ya redio ya wasomi kwa mawimbi hafifu, inayobuni upya ufungashaji wa ujumbe kwa kutumia misimbo ya kiambishi yenye urefu tofauti juu ya <strong>safu halisi ya usafirishaji ya FT8</strong> ile ile iliyothibitishwa (8-GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). Kamilisha mawasiliano kamili yenye ubadilishanaji wa gridi, ripoti na uthibitisho wa 73 pande zote mbili ndani ya <strong>usambazaji 4 (60s dhidi ya 75–90s)</strong> na ufikie <strong>QSO 240/saa kwenye pileup (mara 4 ya FT8 yenye mbebaji mmoja, QSO 2 kila 30s)</strong> bila hasara ya nguvu ya RF ya 0.0 dB (hadi <strong>QSO 480/saa</strong>, wabebaji wawili).",
     "HERO_BTN_DISCOVER": "Gundua LQ8 &rarr;",
     "HERO_BTN_PAPER": "Soma Karatasi na Maelezo (PDF)",
     "PITCH_CARD_1_BADGE": "60s QSO Speedup",

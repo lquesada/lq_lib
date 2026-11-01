@@ -46,7 +46,7 @@ const langData = {
     "HERO_TITLE_1": "Kontak 4-Langkah Lengkap ing 60 Detik",
     "HERO_TITLE_2": "Kacepetan Pileup 4× nganggo Carrier Tunggal (240 vs 60 QSOs/jam)",
     "HERO_TITLE_3": "0,0 dB paukuman daya",
-    "HERO_SUBTITLE": "<strong>LQ8</strong> yaiku protokol sinyal lemah radio amatir generasi sabanjure sing ngrancang ulang pengepakan pesen nggunakake kode awalan dawa variabel liwat <strong>lapisan transportasi fisik FT8</strong> sing wis diuji perang (8&minus;GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). Ngrampungake kontak lengkap karo kothak bidirectional, laporan, lan konfirmasi 73 ing <strong>4 transmisi (60s vs 75&minus;90s)</strong>lan entuk <strong>160 QSOs / h ing pileups (>2.3× liwat dual&minus;stream FT8 Fox & Hound)</strong>karo tanpa paukuman daya RF (0,0 dB), bisa ditingkatake nganti <strong>480 QSO/jam</strong> nganggo dual-carrier.",
+    "HERO_SUBTITLE": "<strong>LQ8</strong> yaiku protokol radio amatir sinyal lemah generasi anyar sing ngrancang ulang pengemasan pesen nganggo kode prefiks dawa variabel ing ndhuwur <strong>lapisan transpor fisik FT8</strong> sing padha lan wis teruji (8-GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). Rampungna kontak lengkap kanthi tukar grid, laporan, lan konfirmasi 73 rong arah ing <strong>4 transmisi (60s tinimbang 75–90s)</strong> lan entuk <strong>240 QSO/jam ing pileup (4× tinimbang FT8 siji pembawa, 2 QSO saben 30s)</strong> tanpa penalti daya RF 0.0 dB (munggah nganti <strong>480 QSO/jam</strong>, rong pembawa).",
     "HERO_BTN_DISCOVER": "Temokake LQ8 &rarr;",
     "HERO_BTN_PAPER": "Maca Kertas & Spesifikasi (PDF)",
     "PITCH_CARD_1_BADGE": "Kacepetan 60d",

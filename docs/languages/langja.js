@@ -31,9 +31,9 @@
 // =============================================================================
 
 const langData = {
-    "META_DESC": "次世代アマチュア無線デジタルモード（LQ8、LQ4、LQ2、LQ16）。60秒での完全4ステップQSO（FT8の75–90秒に対し）、パイルアップ速度>2.3×（160 vs ~69 QSOs/h）、0.0 dB電力ペナルティ、-21.0 dB SNR感度。AndroidアプリqFT8でネイティブ対応。",
-    "OG_DESC": "60秒での完全4ステップQSO（FT8の75–90秒に対し）、パイルアップスループット>2.3×（160 vs ~69 QSOs/h）、0.0 dB電力ペナルティ。AndroidアプリqFT8でネイティブ対応。",
-    "TWITTER_DESC": "60秒での完全4ステップQSO（FT8の75–90秒に対し）、パイルアップスループット>2.3×（160 vs ~69 QSOs/h）、0.0 dB電力ペナルティ。AndroidアプリqFT8でネイティブ対応。",
+    "META_DESC": "次世代アマチュア無線デジタルモードファミリー（LQ8、LQ4、LQ2、LQ16）。グリッド &amp; レポートを完全に交換する 4 ステップの完全な交信を 60s で完了（FT8 は 75–90s）、単一キャリアでパイルアップ速度 4 倍（240 対 60 QSO/h）、電力ペナルティ 0.0 dB、さらに可変長プレフィックス符号化により -21.0 dB の SNR 感度。Android 向け qFT8 でネイティブ対応。",
+    "OG_DESC": "グリッド &amp; レポートを完全に交換する 4 ステップの完全な交信を 60s で完了（FT8 は 75–90s）、単一キャリアでパイルアップ速度 4 倍（240 対 60 QSO/h）、電力ペナルティ 0.0 dB。位相連続 8-GFSK と可変長プレフィックス符号化。Android 向け qFT8 でネイティブ対応。",
+    "TWITTER_DESC": "グリッド &amp; レポートを完全に交換する 4 ステップの完全な交信を 60s で完了（FT8 は 75–90s）、単一キャリアでパイルアップ速度 4 倍（240 対 60 QSO/h）、電力ペナルティ 0.0 dB。位相連続 8-GFSK と可変長プレフィックス符号化。Android 向け qFT8 でネイティブ対応。",
     "NAV_OVERVIEW": "概要",
     "NAV_OPERATION": "運用方法",
     "NAV_SPEEDUP": "速度",
@@ -46,7 +46,7 @@ const langData = {
     "HERO_TITLE_1": "60秒で完了する完全4ステップQSO",
     "HERO_TITLE_2": "単一キャリアで4倍のパイルアップ速度 (240 vs 60 QSOs/h)",
     "HERO_TITLE_3": "0.0 dB 電力ペナルティ",
-    "HERO_SUBTITLE": "<strong>LQ8</strong>は、実戦で検証された<strong>FT8物理層</strong>（8-GFSK、50&nbsp;Hz、&minus;21.0&nbsp;dB SNR）上で可変長プレフィックスコードを採用した次世代アマチュア無線プロトコルです。グリッド・レポート・73を含む完全な交信を<strong>4回の送信（60秒 vs 75–90秒）</strong>で完了し、電力ペナルティなしにパイルアップで<strong>160 QSOs/h（FT8 Fox &amp; Hound比 >2.3×）</strong>を達成（デュアルキャリアで<strong>480 QSOs/h</strong>に拡張可能）。",
+    "HERO_SUBTITLE": "<strong>LQ8</strong> は次世代の微弱信号向けアマチュア無線プロトコルで、実戦で鍛えられたそのままの <strong>FT8 物理伝送レイヤー</strong> の上で、可変長プレフィックス符号によりメッセージのパッキングを再設計しています (8-GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR)。グリッド、レポート、73 確認を双方向でやり取りする完全な交信を <strong>4 回の送信（60s 対 75–90s）</strong> で完了でき、パイルアップでは <strong>毎時 240 QSO（単一キャリアの FT8 の 4 倍、30s ごとに 2 QSO）</strong> を達成します。RF 出力のペナルティは 0.0 dB です（2 キャリアでは <strong>毎時 480 QSO</strong> まで拡大）。",
     "HERO_BTN_DISCOVER": "LQ8 を発見 &rarr;",
     "HERO_BTN_PAPER": "論文と仕様を読む (PDF)",
     "PITCH_CARD_1_BADGE": "60秒 QSO 高速化",

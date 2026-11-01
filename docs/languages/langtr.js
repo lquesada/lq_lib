@@ -31,9 +31,9 @@
 // =============================================================================
 
 const langData = {
-    "META_DESC": "Yeni nesil amatör radyo dijital mod ailesi (LQ8, LQ4, LQ2, LQ16). 60'lı yıllarda tam şebeke ve rapor alışverişi ile tam 4 adımlı bağlantılar (FT8'de 75-90 saniyeye kıyasla), 0,0 dB güç cezası ile >2,3 kat yığılma hızı (160'a karşı ~69 QSO/saat) ve değişken uzunluklu önek kodlaması aracılığıyla -21,0 dB SNR hassasiyeti. Android için qFT8'de yerel destek.",
-    "OG_DESC": "60'lı yıllarda tam şebeke ve rapor alışverişi ile tam 4 adımlı bağlantılar (FT8'de 75-90'lara kıyasla), 0,0 dB güç kesintisi ile >2,3 kat yığılma verimi (160'a karşı ~69 QSO/saat). Değişken uzunluklu önek kodlamalı sürekli fazlı 8-GFSK. Android için qFT8'de yerel destek.",
-    "TWITTER_DESC": "60'lı yıllarda tam şebeke ve rapor alışverişi ile tam 4 adımlı bağlantılar (FT8'de 75-90'lara kıyasla), 0,0 dB güç kesintisi ile >2,3 kat yığılma verimi (160'a karşı ~69 QSO/saat). Değişken uzunluklu önek kodlamalı sürekli fazlı 8-GFSK. Android için qFT8'de yerel destek.",
+    "META_DESC": "Yeni nesil amatör telsiz dijital mod ailesi (LQ8, LQ4, LQ2, LQ16). Tam lokatör &amp; rapor değişimiyle 60s'de tam 4 adımlı bağlantılar (FT8'de 75–90s), tek taşıyıcıyla 4× pileup hızı (240'a karşı 60 QSO/saat), 0.0 dB güç kaybı, ve değişken uzunluklu önek kodlaması sayesinde -21.0 dB SNR hassasiyeti. Android için qFT8'de yerel destek.",
+    "OG_DESC": "Tam lokatör &amp; rapor değişimiyle 60s'de tam 4 adımlı bağlantılar (FT8'de 75–90s), tek taşıyıcıyla 4× pileup hızı (240'a karşı 60 QSO/saat), 0.0 dB güç kaybı. Değişken uzunluklu önek kodlamalı sürekli fazlı 8-GFSK. Android için qFT8'de yerel destek.",
+    "TWITTER_DESC": "Tam lokatör &amp; rapor değişimiyle 60s'de tam 4 adımlı bağlantılar (FT8'de 75–90s), tek taşıyıcıyla 4× pileup hızı (240'a karşı 60 QSO/saat), 0.0 dB güç kaybı. Değişken uzunluklu önek kodlamalı sürekli fazlı 8-GFSK. Android için qFT8'de yerel destek.",
     "NAV_OVERVIEW": "Genel Bakış",
     "NAV_OPERATION": "Kullanım",
     "NAV_SPEEDUP": "Hızlandırma",
@@ -46,7 +46,7 @@ const langData = {
     "HERO_TITLE_1": "60 Saniyede Tam 4 Adımlı İletişim",
     "HERO_TITLE_2": "Tek Taşıyıcı ile 4× Pileup Hızı (240 vs 60 QSOs/saat)",
     "HERO_TITLE_3": "0,0 dB Güç Cezası",
-    "HERO_SUBTITLE": "<strong>LQ8</strong>, savaşta test edilmiş <strong>FT8 fiziksel aktarım katmanı</strong> (8&minus;GFSK, 50 Hz, &minus;21,0 dB SNR) üzerinden değişken uzunluklu önek kodları kullanarak mesaj paketlemeyi yeniden tasarlayan yeni nesil amatör radyo zayıf sinyal protokolüdür. <strong>4 iletimde (60'lar ve 75&minus;90'lar)</strong> çift yönlü şebeke, rapor ve 73 onayıyla tam bağlantıları tamamlayın ve 0,0 dB RF güç cezasıyla (çift taşıyıcıda <strong>480 QSO/sa</strong>'ye ölçeklenir) <strong>160 QSO/saat (çift akışlı FT8 Fox & Hound'a göre >2,3 kat)</strong> başarın.",
+    "HERO_SUBTITLE": "<strong>LQ8</strong> zayıf sinyaller için yeni nesil bir amatör telsiz protokolüdür; mesaj paketlemeyi, aynı ve savaşta denenmiş <strong>FT8 fiziksel taşıma katmanı</strong> üzerinde değişken uzunluklu önek kodlarıyla yeniden tasarlar (8-GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). Çift yönlü lokatör, rapor ve 73 onayıyla tam bağlantıları <strong>4 iletimde (60s, 75–90s'ye karşı)</strong> tamamlayın ve pileup'larda <strong>saatte 240 QSO (tek taşıyıcılı FT8'in 4 katı, her 30s'de 2 QSO)</strong> elde edin, 0.0 dB RF güç kaybıyla (çift taşıyıcıyla <strong>saatte 480 QSO</strong> seviyesine kadar).",
     "HERO_BTN_DISCOVER": "LQ8'i keşfedin &rarr;",
     "HERO_BTN_PAPER": "Makaleyi ve Özellikleri Okuyun (PDF)",
     "PITCH_CARD_1_BADGE": "60'ların QSO Hızlandırması",

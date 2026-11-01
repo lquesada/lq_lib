@@ -46,7 +46,7 @@ const langData = {
     "HERO_TITLE_1": "Cikakkun lambobi 4-Mataki a cikin daƙiƙa 60",
     "HERO_TITLE_2": "Saurin Pileup Sau 4 Tare da Mai Daukar Hoto Daya (240 vs 60 QSOs/h)",
     "HERO_TITLE_3": "0.0 dB Hukuncin Wuta",
-    "HERO_SUBTITLE": "<strong>LQ8</strong> ƙa'idar siginar rauni ce ta mai son ta gaba wacce ke sake sabunta saƙon injiniyoyi ta amfani da lambobin prefix masu tsayi&minus;tsawon daidai, gwajin yaƙi<strong>FT8 Layer sufuri na zahiri</strong>(8&minus;GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). Cikakken cikakkun lambobin sadarwa tare da grid bidirectional, rahoto, da tabbatarwa na 73 a cikin <strong>4 watsawa (60s vs 75&minus;90s)</strong>da kuma cimma <strong>160 QSOs / h a cikin pileups (> 2.3 × a kan dual&minus;rafi FT8 Fox & Hound)</strong>tare da ba tare da asarar ƙarfin RF ba (0.0 dB), yana iya hawa zuwa <strong>480 QSOs/h</strong> tare da dako biyu.",
+    "HERO_SUBTITLE": "<strong>LQ8</strong> ƙa'ida ce ta rediyon mai son ta ƙarni na gaba don sigina masu rauni, wadda ke sake tsara tattara saƙonni ta amfani da lambobin prefix masu tsayi daban-daban a kan sanannen <strong>tsarin jigilar FT8 na zahiri</strong> (8-GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). Kammala cikakkun hulɗa tare da musayar grid, rahoto da tabbatar da 73 ta bangarorin biyu cikin <strong>watsawa 4 (60s da 75–90s)</strong> kuma ka samu <strong>QSO 240 a sa'a a cikin pileup (sau 4 na FT8 mai ɗauka ɗaya, QSO 2 a kowane 30s)</strong> ba tare da asarar ƙarfin RF ba, 0.0 dB (yana ƙaruwa zuwa <strong>QSO 480 a sa'a</strong>, masu ɗauka biyu).",
     "HERO_BTN_DISCOVER": "Gano LQ8 &rarr;",
     "HERO_BTN_PAPER": "Karanta Takarda & Tambayoyi (PDF)",
     "PITCH_CARD_1_BADGE": "Gudun 60s Mai Sauri",

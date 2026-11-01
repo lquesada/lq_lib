@@ -46,7 +46,7 @@ const langData = {
     "HERO_TITLE_1": "Volledige 4-stapscontacten in 60 seconden",
     "HERO_TITLE_2": "4× Pileup-snelheid met enkele draaggolf (240 vs 60 QSOs/u)",
     "HERO_TITLE_3": "0,0 dB vermogensstraf",
-    "HERO_SUBTITLE": "<strong>LQ8</strong> is een amateurradioprotocol voor zwakke signalen van de volgende generatie dat het inpakken van berichten opnieuw ontwerpt met behulp van prefixcodes met variabele lengte over de beproefde <strong>fysieke transportlaag van FT8</strong> (8-GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). Voltooi volledige verbindingen met bidirectioneel locator-, rapport- en 73-bevestiging in <strong>4 transmissies (60 s versus 75–90 s)</strong> en bereik <strong>160 QSO's/u in pileups (>2,3× sneller dan dual-stream FT8 Fox &amp; Hound)</strong> zonder RF-vermogensverlies (0,0 dB), opschalend naar <strong>480 QSO's/u</strong> met dubbele draaggolf.",
+    "HERO_SUBTITLE": "<strong>LQ8</strong> is een amateurradioprotocol van de volgende generatie voor zwakke signalen, dat het inpakken van berichten opnieuw ontwerpt met prefixcodes van variabele lengte bovenop de exacte, beproefde <strong>fysieke transportlaag van FT8</strong> (8-GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). Voltooi complete contacten met tweezijdige locator-, rapport- en 73-bevestiging in <strong>4 zendingen (60s versus 75–90s)</strong> en haal <strong>240 QSO's/u in pileups (4× zoveel als FT8 met één draaggolf, 2 QSO's elke 30s)</strong> met 0.0 dB RF-vermogensverlies (schaalbaar tot <strong>480 QSO's/u</strong>, twee draaggolven).",
     "HERO_BTN_DISCOVER": "Ontdek LQ8 &rarr;",
     "HERO_BTN_PAPER": "Lees papier en specificaties (PDF)",
     "PITCH_CARD_1_BADGE": "QSO-versnelling uit de jaren 60",

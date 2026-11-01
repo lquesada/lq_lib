@@ -46,7 +46,7 @@ const langData = {
     "HERO_TITLE_1": "60 soniyada to'liq 4 bosqichli kontaktlar",
     "HERO_TITLE_2": "Yagona tashuvchi bilan 4× Pileup tezligi (240 vs 60 QSOs/soat)",
     "HERO_TITLE_3": "0,0 dB quvvat jazosi",
-    "HERO_SUBTITLE": "<strong>LQ8</strong> bu yangi avlod havaskor radio zaif signal protokoli boʻlib, u aniq, jangovar sinovdan oʻtgan <strong>FT8 jismoniy transport qatlami</strong> (8&minus;GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR) ustidan oʻzgaruvchan uzunlikdagi prefiks kodlari yordamida xabarlarni qadoqlashni qayta ishlab chiqadi. Ikki tomonlama tarmoq, hisobot va 73 tasdiqlash bilan <strong>4 ta uzatishda (60s va 75–90s)</strong> toʻliq kontaktlarni toʻldiring va toʻplamlarda <strong>160 QSOs/soatga erishing (>2,3× ikki oqimli FT8 Fox & Hound)</strong> 0,0 dB <strong RF0 skal quvvat bilan. QSOs/h</strong>ikki tashuvchi).",
+    "HERO_SUBTITLE": "<strong>LQ8</strong> zaif signallar uchun yangi avlod havaskor radio protokoli bo'lib, xabarlarni qadoqlashni sinovdan o'tgan <strong>FT8 jismoniy uzatish qatlami</strong> ustida o'zgaruvchan uzunlikdagi prefiks kodlari bilan qayta loyihalaydi (8-GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). Ikki tomonlama lokator, rapor va 73 tasdig'i bilan to'liq aloqalarni <strong>4 ta uzatishda (60s, 75–90s ga qarshi)</strong> yakunlang va pileup'da <strong>soatiga 240 QSO (bitta tashuvchili FT8 dan 4 baravar ko'p, har 30s da 2 QSO)</strong> oling, 0.0 dB RF quvvat yo'qotishisiz (ikki tashuvchi bilan <strong>soatiga 480 QSO</strong> gacha).",
     "HERO_BTN_DISCOVER": "LQ8 ni kashf eting &rarr;",
     "HERO_BTN_PAPER": "Qog'oz va texnik xususiyatlarni o'qing (PDF)",
     "PITCH_CARD_1_BADGE": "60-yillarning QSO tezligi",

@@ -46,7 +46,7 @@ const langData = {
     "HERO_TITLE_1": "Kontak Penuh 4 Langkah dalam 60 Detik",
     "HERO_TITLE_2": "Kecepatan Pileup 4× dengan Pembawa Tunggal (240 vs 60 QSOs/jam)",
     "HERO_TITLE_3": "Penalti Daya 0,0 dB",
-    "HERO_SUBTITLE": "<strong>LQ8</strong> adalah protokol sinyal lemah radio amatir generasi berikutnya yang merekayasa ulang pengemasan pesan menggunakan kode awalan dengan panjang variabel pada <strong>lapisan transport fisik FT8</strong> yang tepat dan telah teruji dalam pertempuran (8&minus;GFSK, 50&nbsp;Hz, &minus;21,0&nbsp;dB SNR). Selesaikan kontak penuh dengan jaringan dua arah, laporan, dan 73 konfirmasi dalam <strong>4 transmisi (60 detik vs 75–90 detik)</strong> dan capai <strong>160 QSO/jam dalam tumpukan (>2,3× melalui aliran ganda FT8 Fox & Hound)</strong> dengan penalti daya RF 0,0 dB (menskalakan hingga <strong>480 QSO/jam</strong> operator ganda).",
+    "HERO_SUBTITLE": "<strong>LQ8</strong> adalah protokol radio amatir sinyal lemah generasi berikutnya yang merancang ulang pengemasan pesan memakai kode prefiks panjang variabel di atas <strong>lapisan transport fisik FT8</strong> yang sama persis dan teruji (8-GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). Selesaikan kontak lengkap dengan pertukaran grid, laporan, dan konfirmasi 73 dua arah dalam <strong>4 transmisi (60s vs 75–90s)</strong> dan capai <strong>240 QSO/jam dalam pileup (4× dibanding FT8 satu pembawa, 2 QSO setiap 30s)</strong> tanpa penalti daya RF 0.0 dB (naik hingga <strong>480 QSO/jam</strong>, dua pembawa).",
     "HERO_BTN_DISCOVER": "Temukan LQ8 &rarr;",
     "HERO_BTN_PAPER": "Baca Kertas & Spesifikasi (PDF)",
     "PITCH_CARD_1_BADGE": "Percepatan QSO tahun 60an",

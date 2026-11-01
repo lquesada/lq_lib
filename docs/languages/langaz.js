@@ -46,7 +46,7 @@ const langData = {
     "HERO_TITLE_1": "60 Saniyədə Tam 4 Addımlı Kontaktlar",
     "HERO_TITLE_2": "Tək Daşıyıcı ilə 4× Pileup Sürəti (240 vs 60 QSOs/saat)",
     "HERO_TITLE_3": "0,0 dB güc cəzası",
-    "HERO_SUBTITLE": "<strong>LQ8</strong> dəqiq, döyüş sınaqlarından keçmiş <strong>FT8 fiziki nəqliyyat təbəqəsi</strong> (8&minus;GFSK, 50&nbsp;Hz, &minus;21,0&nbsp;dB SNR) üzərində dəyişən uzunluqlu prefiks kodlarından istifadə edərək mesaj qablaşdırmasını yenidən tərtib edən yeni nəsil həvəskar radio zəif siqnal protokoludur. <strong>4 ötürmədə (60&minus;lara qarşı 75&minus;90&minus;lara qarşı)</strong> iki istiqamətli şəbəkə, hesabat və 73 təsdiqi ilə tam kontaktları tamamlayın və yığınlarda <strong>160 QSOs/saata nail olun (>2,3× ikili axın FT8 Fox & Hound)</strong> 0,0 dB <strong RF02 skal gücündə QSOs/h</strong>ikili daşıyıcı).",
+    "HERO_SUBTITLE": "<strong>LQ8</strong> yeni nəsil zəif siqnal həvəskar radio protokoludur; mesaj qablaşdırmasını sınaqdan çıxmış <strong>FT8 fiziki ötürmə qatı</strong> üzərində dəyişən uzunluqlu prefiks kodları ilə yenidən qurur (8-GFSK, 50&nbsp;Hz, &minus;21.0&nbsp;dB SNR). Qarşılıqlı şəbəkə kvadratı, raport və 73 təsdiqi ilə tam əlaqələri <strong>4 ötürmədə (60s, 75–90s-ə qarşı)</strong> tamamlayın və pileaplarda <strong>saatda 240 QSO (təkdaşıyıcılı FT8-dən 4 dəfə çox, hər 30s-də 2 QSO)</strong> əldə edin, 0.0 dB RF güc itkisi ilə (ikidaşıyıcılı rejimdə <strong>saatda 480 QSO</strong> -ə qədər).",
     "HERO_BTN_DISCOVER": "LQ8-i kəşf edin &rarr;",
     "HERO_BTN_PAPER": "Kağız və Xüsusiyyətləri Oxuyun (PDF)",
     "PITCH_CARD_1_BADGE": "60s QSO sürətləndirilməsi",
