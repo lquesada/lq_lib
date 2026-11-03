@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "ከ{n} ደቂቃ በፊት",
     "LIVE_BAND": "ባንድ",
     "LIVE_FREQ": "ፍሪኩዌንሲ",
+    "LIVE_TX_AUDIO": "የTX ድምፅ",
     "LIVE_GRID": "ግሪድ",
     "LIVE_HEARD": "መጨረሻ ንቁ የነበረው",
     "LIVE_OPEN_FULL": "ሙሉውን የቀጥታ ካርታ ክፈት &rarr;",

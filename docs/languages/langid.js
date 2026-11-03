@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "{n} mnt lalu",
     "LIVE_BAND": "Band",
     "LIVE_FREQ": "Frekuensi",
+    "LIVE_TX_AUDIO": "Audio TX",
     "LIVE_GRID": "Grid",
     "LIVE_HEARD": "Terakhir aktif",
     "LIVE_OPEN_FULL": "Buka peta langsung penuh &rarr;",

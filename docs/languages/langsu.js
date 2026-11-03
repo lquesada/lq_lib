@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "{n} mnt kaliwat",
     "LIVE_BAND": "Band",
     "LIVE_FREQ": "Frékuénsi",
+    "LIVE_TX_AUDIO": "Audio TX",
     "LIVE_GRID": "Grid",
     "LIVE_HEARD": "Aktif panungtungan",
     "LIVE_OPEN_FULL": "Buka peta langsung pinuh &rarr;",

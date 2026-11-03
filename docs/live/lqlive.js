@@ -225,6 +225,11 @@
     return m < 1 ? str('LIVE_JUST_NOW', 'just now') : str('LIVE_MIN_AGO', '{n} min ago').replace('{n}', String(m));
   }
   function freqText(hz) { return (hz / 1e6).toFixed(3) + ' MHz'; }
+  // "1500 Hz · Seq 1" (as in the qFT8 app); the sequence only when the station's app sent it; null without an offset
+  function txAudioText(it) {
+    if (typeof it.offset_hz !== 'number') return null;
+    return it.offset_hz + ' Hz' + (it.seq === 0 || it.seq === 1 ? ' \u00b7 Seq ' + it.seq : '');
+  }
   var GRID_OK = /^[A-R]{2}[0-9]{2}$/, CALL_OK = /^[A-Z0-9/]{3,13}$/;
 
   // ---- DXpeditions -------------------------------------------------------------------------------------------------
@@ -1013,6 +1018,8 @@
       if (same.length < 2) same = [it];
       same.forEach(function (o) {
         rows.push([str('LIVE_BAND', 'Band'), rowText(o)], [str('LIVE_FREQ', 'Frequency'), freqText(o.dial_hz)]);
+        var ta = txAudioText(o);
+        if (ta) rows.push([str('LIVE_TX_AUDIO', 'TX audio'), ta]);
         if (same.length > 1) rows.push([str('LIVE_HEARD', 'Last active'), minutesAgo(o.tx_ms, now)]);
       });
       rows.push([str('LIVE_GRID', 'Grid'), it.grid]);
@@ -1077,7 +1084,11 @@
       if (typeof c.band !== 'string' || typeof c.mode !== 'string' || MODE_ORDER.indexOf(c.mode) < 0) continue;
       if (typeof c.dial_hz !== 'number' || typeof c.tx_ms !== 'number' || now - c.tx_ms > MAX_AGE_MS) continue;
       var gc = gridCenter(c.grid), pt = inSquare(c, gc) ? c : gc;
-      out.push({ call: c.call, grid: c.grid, band: c.band, mode: c.mode, dial_hz: c.dial_hz, tx_ms: c.tx_ms, lon: pt.lon, lat: pt.lat });
+      var row = { call: c.call, grid: c.grid, band: c.band, mode: c.mode, dial_hz: c.dial_hz, tx_ms: c.tx_ms, lon: pt.lon, lat: pt.lat };
+      // the audio offset the station transmits at and its TX sequence (left out by older apps / services: not shown)
+      if (Number.isInteger(c.offset_hz) && c.offset_hz >= 0 && c.offset_hz <= 5000) row.offset_hz = c.offset_hz;
+      if (c.seq === 0 || c.seq === 1) row.seq = c.seq;
+      out.push(row);
     }
     out.sort(function (a, b) { return b.tx_ms - a.tx_ms; });
     return out;

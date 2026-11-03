@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "{n} min ang nakalipas",
     "LIVE_BAND": "Band",
     "LIVE_FREQ": "Frequency",
+    "LIVE_TX_AUDIO": "TX audio",
     "LIVE_GRID": "Grid",
     "LIVE_HEARD": "Huling aktibo",
     "LIVE_OPEN_FULL": "Buksan ang buong live map &rarr;",

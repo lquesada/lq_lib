@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "{n} min geleden",
     "LIVE_BAND": "Band",
     "LIVE_FREQ": "Frequentie",
+    "LIVE_TX_AUDIO": "TX-audio",
     "LIVE_GRID": "Locator",
     "LIVE_HEARD": "Laatst actief",
     "LIVE_OPEN_FULL": "Open de volledige livekaart &rarr;",

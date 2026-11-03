@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "قبل {n} دقيقة",
     "LIVE_BAND": "نطاق",
     "LIVE_FREQ": "التردد",
+    "LIVE_TX_AUDIO": "صوت الإرسال",
     "LIVE_GRID": "الشبكة",
     "LIVE_HEARD": "آخر نشاط",
     "LIVE_OPEN_FULL": "افتح الخريطة المباشرة الكاملة &rarr;",

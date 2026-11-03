@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "{n} min sitten",
     "LIVE_BAND": "Kaista",
     "LIVE_FREQ": "Taajuus",
+    "LIVE_TX_AUDIO": "TX-ääni",
     "LIVE_GRID": "Lokaattori",
     "LIVE_HEARD": "Viimeksi aktiivinen",
     "LIVE_OPEN_FULL": "Avaa koko livekartta &rarr;",

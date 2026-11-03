@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "mintuna {n} da suka wuce",
     "LIVE_BAND": "Band",
     "LIVE_FREQ": "Mita",
+    "LIVE_TX_AUDIO": "Sautin TX",
     "LIVE_GRID": "Grid",
     "LIVE_HEARD": "Aiki na ƙarshe",
     "LIVE_OPEN_FULL": "Buɗe cikakken taswirar kai tsaye &rarr;",

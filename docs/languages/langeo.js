@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "antaŭ {n} min.",
     "LIVE_BAND": "Bando",
     "LIVE_FREQ": "Frekvenco",
+    "LIVE_TX_AUDIO": "TX-sono",
     "LIVE_GRID": "Lokatoro",
     "LIVE_HEARD": "Laste aktiva",
     "LIVE_OPEN_FULL": "Malfermi la plenan vivan mapon &rarr;",

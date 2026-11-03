@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "{n} phút trước",
     "LIVE_BAND": "Băng tần",
     "LIVE_FREQ": "Tần số",
+    "LIVE_TX_AUDIO": "Âm thanh TX",
     "LIVE_GRID": "Lưới",
     "LIVE_HEARD": "Hoạt động gần nhất",
     "LIVE_OPEN_FULL": "Mở bản đồ trực tiếp đầy đủ &rarr;",

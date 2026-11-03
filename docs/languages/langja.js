@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "{n}分前",
     "LIVE_BAND": "バンド",
     "LIVE_FREQ": "周波数",
+    "LIVE_TX_AUDIO": "送信オーディオ",
     "LIVE_GRID": "グリッド",
     "LIVE_HEARD": "最終運用",
     "LIVE_OPEN_FULL": "ライブマップ全体を開く &rarr;",

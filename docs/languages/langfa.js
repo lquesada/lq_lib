@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "{n} دقیقه پیش",
     "LIVE_BAND": "باند",
     "LIVE_FREQ": "فرکانس",
+    "LIVE_TX_AUDIO": "صدای ارسال",
     "LIVE_GRID": "گرید",
     "LIVE_HEARD": "آخرین فعالیت",
     "LIVE_OPEN_FULL": "باز کردن نقشهٔ زندهٔ کامل &rarr;",

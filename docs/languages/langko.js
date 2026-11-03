@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "{n}분 전",
     "LIVE_BAND": "밴드",
     "LIVE_FREQ": "주파수",
+    "LIVE_TX_AUDIO": "송신 오디오",
     "LIVE_GRID": "그리드",
     "LIVE_HEARD": "마지막 활동",
     "LIVE_OPEN_FULL": "전체 라이브 지도 열기 &rarr;",

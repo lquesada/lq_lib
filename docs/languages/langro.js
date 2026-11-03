@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "acum {n} min",
     "LIVE_BAND": "Bandă",
     "LIVE_FREQ": "Frecvență",
+    "LIVE_TX_AUDIO": "Audio TX",
     "LIVE_GRID": "Locator",
     "LIVE_HEARD": "Ultima activitate",
     "LIVE_OPEN_FULL": "Deschide harta live completă &rarr;",

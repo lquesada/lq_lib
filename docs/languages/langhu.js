@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "{n} perce",
     "LIVE_BAND": "Sáv",
     "LIVE_FREQ": "Frekvencia",
+    "LIVE_TX_AUDIO": "TX hang",
     "LIVE_GRID": "Lokátor",
     "LIVE_HEARD": "Utoljára aktív",
     "LIVE_OPEN_FULL": "A teljes élő térkép megnyitása &rarr;",

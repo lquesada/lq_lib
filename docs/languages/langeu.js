@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "duela {n} min",
     "LIVE_BAND": "Banda",
     "LIVE_FREQ": "Maiztasuna",
+    "LIVE_TX_AUDIO": "TX audioa",
     "LIVE_GRID": "Lokalizatzailea",
     "LIVE_HEARD": "Azken jarduera",
     "LIVE_OPEN_FULL": "Ireki zuzeneko mapa osoa &rarr;",

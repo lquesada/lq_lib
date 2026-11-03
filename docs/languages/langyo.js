@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "ìṣẹ́jú {n} sẹ́yìn",
     "LIVE_BAND": "Band",
     "LIVE_FREQ": "Ìgbóhùnsáfẹ́fẹ́",
+    "LIVE_TX_AUDIO": "Ohùn TX",
     "LIVE_GRID": "Grid",
     "LIVE_HEARD": "Ìgbà ìkẹyìn tó ṣiṣẹ́",
     "LIVE_OPEN_FULL": "Ṣí àwòrán ní ààyè kíkún &rarr;",

@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "pred {n} min",
     "LIVE_BAND": "Pásmo",
     "LIVE_FREQ": "Frekvencia",
+    "LIVE_TX_AUDIO": "TX audio",
     "LIVE_GRID": "Lokátor",
     "LIVE_HEARD": "Naposledy aktívna",
     "LIVE_OPEN_FULL": "Otvoriť celú živú mapu &rarr;",

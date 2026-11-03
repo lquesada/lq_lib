@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "{n} நிமிடம் முன்",
     "LIVE_BAND": "பேண்ட்",
     "LIVE_FREQ": "அலைவரிசை",
+    "LIVE_TX_AUDIO": "TX ஒலி",
     "LIVE_GRID": "கிரிட்",
     "LIVE_HEARD": "கடைசியாக செயலில்",
     "LIVE_OPEN_FULL": "முழு நேரலை வரைபடத்தைத் திற &rarr;",

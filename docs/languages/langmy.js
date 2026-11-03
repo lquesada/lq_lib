@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "{n} မိနစ်က",
     "LIVE_BAND": "ဘန်း",
     "LIVE_FREQ": "ကြိမ်နှုန်း",
+    "LIVE_TX_AUDIO": "TX အသံ",
     "LIVE_GRID": "ဂရစ်",
     "LIVE_HEARD": "နောက်ဆုံး လှုပ်ရှားချိန်",
     "LIVE_OPEN_FULL": "တိုက်ရိုက်မြေပုံအပြည့် ဖွင့်ပါ &rarr;",

@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "{n} 分鐘前",
     "LIVE_BAND": "波段",
     "LIVE_FREQ": "頻率",
+    "LIVE_TX_AUDIO": "發射音訊",
     "LIVE_GRID": "網格",
     "LIVE_HEARD": "最近活躍",
     "LIVE_OPEN_FULL": "打開完整即時地圖 &rarr;",

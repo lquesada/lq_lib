@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "{n} min fa",
     "LIVE_BAND": "Banda",
     "LIVE_FREQ": "Frequenza",
+    "LIVE_TX_AUDIO": "Audio TX",
     "LIVE_GRID": "Locatore",
     "LIVE_HEARD": "Ultima attività",
     "LIVE_OPEN_FULL": "Apri la mappa completa dal vivo &rarr;",

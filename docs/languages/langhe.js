@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "לפני {n} דק׳",
     "LIVE_BAND": "תחום",
     "LIVE_FREQ": "תדר",
+    "LIVE_TX_AUDIO": "שמע שידור",
     "LIVE_GRID": "גריד",
     "LIVE_HEARD": "פעילות אחרונה",
     "LIVE_OPEN_FULL": "פתחו את המפה החיה המלאה &rarr;",

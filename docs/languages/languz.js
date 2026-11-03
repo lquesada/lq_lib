@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "{n} daqiqa oldin",
     "LIVE_BAND": "Diapazon",
     "LIVE_FREQ": "Chastota",
+    "LIVE_TX_AUDIO": "TX audio",
     "LIVE_GRID": "Lokator",
     "LIVE_HEARD": "Oxirgi faollik",
     "LIVE_OPEN_FULL": "To'liq jonli xaritani ochish &rarr;",

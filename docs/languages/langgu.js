@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "{n} મિનિટ પહેલાં",
     "LIVE_BAND": "બેન્ડ",
     "LIVE_FREQ": "ફ્રીક્વન્સી",
+    "LIVE_TX_AUDIO": "TX ઑડિયો",
     "LIVE_GRID": "ગ્રિડ",
     "LIVE_HEARD": "છેલ્લે સક્રિય",
     "LIVE_OPEN_FULL": "સંપૂર્ણ લાઇવ નકશો ખોલો &rarr;",

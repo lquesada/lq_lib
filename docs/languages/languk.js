@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "{n} хв тому",
     "LIVE_BAND": "Діапазон",
     "LIVE_FREQ": "Частота",
+    "LIVE_TX_AUDIO": "Аудіо TX",
     "LIVE_GRID": "Локатор",
     "LIVE_HEARD": "Остання активність",
     "LIVE_OPEN_FULL": "Відкрити повну живу карту &rarr;",

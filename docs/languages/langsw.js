@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "dakika {n} zilizopita",
     "LIVE_BAND": "Bendi",
     "LIVE_FREQ": "Masafa",
+    "LIVE_TX_AUDIO": "Sauti ya TX",
     "LIVE_GRID": "Gridi",
     "LIVE_HEARD": "Mara ya mwisho kufanya kazi",
     "LIVE_OPEN_FULL": "Fungua ramani kamili ya moja kwa moja &rarr;",

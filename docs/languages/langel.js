@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "πριν από {n} λεπτά",
     "LIVE_BAND": "Μπάντα",
     "LIVE_FREQ": "Συχνότητα",
+    "LIVE_TX_AUDIO": "Ήχος TX",
     "LIVE_GRID": "Τετράγωνο",
     "LIVE_HEARD": "Τελευταία δραστηριότητα",
     "LIVE_OPEN_FULL": "Άνοιγμα του πλήρους ζωντανού χάρτη &rarr;",

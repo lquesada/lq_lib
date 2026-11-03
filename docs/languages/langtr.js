@@ -264,6 +264,7 @@ const langData = {
     "LIVE_MIN_AGO": "{n} dk önce",
     "LIVE_BAND": "Bant",
     "LIVE_FREQ": "Frekans",
+    "LIVE_TX_AUDIO": "TX sesi",
     "LIVE_GRID": "Lokatör",
     "LIVE_HEARD": "Son aktiflik",
     "LIVE_OPEN_FULL": "Tam canlı haritayı aç &rarr;",
