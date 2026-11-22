@@ -248,6 +248,8 @@ const langData = {
     "COMMUNITY_FIRST_SOTA_QSO_USING": "Első SOTA QSO LQ8 használatával",
     "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "Első POTA-to-POTA QSO LQ8 használatával",
     "COMMUNITY_FIRST_DXPEDITION_USING": "Az első DXpedíció LQ8-cal",
+    "COMMUNITY_FIRST_PILEUP_STATION_USING": "Első QSO pileup állomás LQ8 használatával",
+    "COMMUNITY_FIRST_PILEUP_PARTICIPANT_USING": "Első QSO pileup résztvevő LQ8 használatával",
     "MODAL_SHARE_TITLE": "A hivatkozás a vágólapra másolva!",
     "MODAL_SHARE_DESC": "A link a vágólapra került. Oszd meg rádióamatőr társaiddal és a fórumokon!",
     "MODAL_SHARE_OK": "OK",

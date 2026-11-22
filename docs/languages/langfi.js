@@ -248,6 +248,8 @@ const langData = {
     "COMMUNITY_FIRST_SOTA_QSO_USING": "Ensimmäinen SOTA-QSO LQ8:lla",
     "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "Ensimmäinen POTA-to-POTA-QSO LQ8:lla",
     "COMMUNITY_FIRST_DXPEDITION_USING": "Ensimmäinen DXpeditio LQ8:lla",
+    "COMMUNITY_FIRST_PILEUP_STATION_USING": "Ensimmäinen QSO-pileup-asema LQ8:lla",
+    "COMMUNITY_FIRST_PILEUP_PARTICIPANT_USING": "Ensimmäinen QSO-pileupin osallistuja LQ8:lla",
     "MODAL_SHARE_TITLE": "Linkki kopioitu leikepöydälle!",
     "MODAL_SHARE_DESC": "Linkki kopioitiin leikepöydälle. Jaa se radioamatööriystävillesi ja foorumeilla!",
     "MODAL_SHARE_OK": "OK",

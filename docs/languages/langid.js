@@ -248,6 +248,8 @@ const langData = {
     "COMMUNITY_FIRST_SOTA_QSO_USING": "QSO SOTA pertama menggunakan LQ8",
     "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "QSO POTA-to-POTA pertama menggunakan LQ8",
     "COMMUNITY_FIRST_DXPEDITION_USING": "DXpedition pertama menggunakan LQ8",
+    "COMMUNITY_FIRST_PILEUP_STATION_USING": "Stasiun pileup QSO pertama menggunakan LQ8",
+    "COMMUNITY_FIRST_PILEUP_PARTICIPANT_USING": "Peserta pileup QSO pertama menggunakan LQ8",
     "MODAL_SHARE_TITLE": "Tautan Disalin ke Papan Klip!",
     "MODAL_SHARE_DESC": "Tautan telah disalin. Bagikan kepada sesama amatir radio dan di forum!",
     "MODAL_SHARE_OK": "OK",

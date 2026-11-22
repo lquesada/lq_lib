@@ -248,6 +248,8 @@ const langData = {
     "COMMUNITY_FIRST_SOTA_QSO_USING": "QSO ya kwanza ya SOTA kwa kutumia LQ8",
     "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "QSO ya kwanza ya POTA-to-POTA kwa kutumia LQ8",
     "COMMUNITY_FIRST_DXPEDITION_USING": "DXpedition ya kwanza kwa kutumia LQ8",
+    "COMMUNITY_FIRST_PILEUP_STATION_USING": "Kituo cha kwanza cha pileup ya QSO kwa kutumia LQ8",
+    "COMMUNITY_FIRST_PILEUP_PARTICIPANT_USING": "Mshiriki wa kwanza wa pileup ya QSO kwa kutumia LQ8",
     "MODAL_SHARE_TITLE": "Kiungo kimenakiliwa kwenye ubao wa kunakili!",
     "MODAL_SHARE_DESC": "Kiungo kimenakiliwa. Shiriki na wenzako kwenye redio na majukwaa!",
     "MODAL_SHARE_OK": "OK",

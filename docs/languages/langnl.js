@@ -248,6 +248,8 @@ const langData = {
     "COMMUNITY_FIRST_SOTA_QSO_USING": "Eerste SOTA-QSO met behulp van LQ8",
     "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "Eerste POTA-to-POTA-QSO met behulp van LQ8",
     "COMMUNITY_FIRST_DXPEDITION_USING": "Eerste DXpeditie met LQ8",
+    "COMMUNITY_FIRST_PILEUP_STATION_USING": "Eerste QSO-pileupstation met behulp van LQ8",
+    "COMMUNITY_FIRST_PILEUP_PARTICIPANT_USING": "Eerste QSO-pileupdeelnemer met behulp van LQ8",
     "MODAL_SHARE_TITLE": "Link gekopieerd naar klembord!",
     "MODAL_SHARE_DESC": "De link is gekopieerd. Deel hem met collega-zendamateurs en op fora!",
     "MODAL_SHARE_OK": "OK",

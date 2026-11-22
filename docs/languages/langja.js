@@ -248,6 +248,8 @@ const langData = {
     "COMMUNITY_FIRST_SOTA_QSO_USING": "LQ8を使用した初のSOTA QSO",
     "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "LQ8を使用した初のPOTA-to-POTA QSO",
     "COMMUNITY_FIRST_DXPEDITION_USING": "LQ8による初のDXペディション",
+    "COMMUNITY_FIRST_PILEUP_STATION_USING": "LQ8を使用した初のQSOパイルアップ局",
+    "COMMUNITY_FIRST_PILEUP_PARTICIPANT_USING": "LQ8を使用した初のQSOパイルアップ参加局",
     "MODAL_SHARE_TITLE": "リンクをクリップボードにコピーしました！",
     "MODAL_SHARE_DESC": "リンクがコピーされました。アマチュア無線の仲間やフォーラムで共有してください！",
     "MODAL_SHARE_OK": "OK",

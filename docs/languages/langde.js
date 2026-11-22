@@ -248,6 +248,8 @@ const langData = {
     "COMMUNITY_FIRST_SOTA_QSO_USING": "Erstes SOTA-QSO mit LQ8",
     "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "Erstes POTA-to-POTA-QSO mit LQ8",
     "COMMUNITY_FIRST_DXPEDITION_USING": "Erste DXpedition mit LQ8",
+    "COMMUNITY_FIRST_PILEUP_STATION_USING": "Erste QSO-Pileup-Station mit LQ8",
+    "COMMUNITY_FIRST_PILEUP_PARTICIPANT_USING": "Erster QSO-Pileup-Teilnehmer mit LQ8",
     "MODAL_SHARE_TITLE": "Link in die Zwischenablage kopiert!",
     "MODAL_SHARE_DESC": "Der Link wurde in Ihre Zwischenablage kopiert. Teilen Sie ihn mit Funkfreunden und in Foren!",
     "MODAL_SHARE_OK": "OK",

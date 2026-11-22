@@ -248,6 +248,8 @@ const langData = {
     "COMMUNITY_FIRST_SOTA_QSO_USING": "LQ8 kullanılarak yapılan ilk SOTA QSO",
     "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "LQ8 kullanılarak yapılan ilk POTA-to-POTA QSO",
     "COMMUNITY_FIRST_DXPEDITION_USING": "LQ8 ile ilk DXpedition",
+    "COMMUNITY_FIRST_PILEUP_STATION_USING": "LQ8 kullanılarak yapılan ilk QSO pileup istasyonu",
+    "COMMUNITY_FIRST_PILEUP_PARTICIPANT_USING": "LQ8 kullanılarak yapılan ilk QSO pileup katılımcısı",
     "MODAL_SHARE_TITLE": "Bağlantı Panoya Kopyalandı!",
     "MODAL_SHARE_DESC": "Bağlantı kopyalandı. Telsizci arkadaşlarınızla ve forumlarda paylaşın!",
     "MODAL_SHARE_OK": "OK",

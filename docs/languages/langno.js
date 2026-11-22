@@ -248,6 +248,8 @@ const langData = {
     "COMMUNITY_FIRST_SOTA_QSO_USING": "Første SOTA-QSO med LQ8",
     "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "Første POTA-to-POTA-QSO med LQ8",
     "COMMUNITY_FIRST_DXPEDITION_USING": "Første DXpedition med LQ8",
+    "COMMUNITY_FIRST_PILEUP_STATION_USING": "Første QSO-pileup-stasjon med LQ8",
+    "COMMUNITY_FIRST_PILEUP_PARTICIPANT_USING": "Første QSO-pileup-deltaker med LQ8",
     "MODAL_SHARE_TITLE": "Link kopieret til udklipsholder!",
     "MODAL_SHARE_DESC": "Linket er kopieret til din udklipsholder. Del det med andre radioamatører og på fora!",
     "MODAL_SHARE_OK": "OK",

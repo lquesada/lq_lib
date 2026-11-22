@@ -248,6 +248,8 @@ const langData = {
     "COMMUNITY_FIRST_SOTA_QSO_USING": "Primeiro QSO SOTA usando LQ8",
     "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "Primeiro QSO POTA-to-POTA usando LQ8",
     "COMMUNITY_FIRST_DXPEDITION_USING": "Primeira DXpedición usando LQ8",
+    "COMMUNITY_FIRST_PILEUP_STATION_USING": "Primeira estación de pileup QSO usando LQ8",
+    "COMMUNITY_FIRST_PILEUP_PARTICIPANT_USING": "Primeiro participante nun pileup QSO usando LQ8",
     "MODAL_SHARE_TITLE": "Ligazón copiada ao portapapeis!",
     "MODAL_SHARE_DESC": "A ligazón copiouse ao teu portapapeis. Pégaa e compártea con outros compañeiros radioafeccionados!",
     "MODAL_SHARE_OK": "OK",

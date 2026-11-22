@@ -248,6 +248,8 @@ const langData = {
     "COMMUNITY_FIRST_SOTA_QSO_USING": "First SOTA QSO using LQ8",
     "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "First POTA-to-POTA QSO using LQ8",
     "COMMUNITY_FIRST_DXPEDITION_USING": "First DXpedition using LQ8",
+    "COMMUNITY_FIRST_PILEUP_STATION_USING": "First QSO pileup station using LQ8",
+    "COMMUNITY_FIRST_PILEUP_PARTICIPANT_USING": "First QSO pileup participant using LQ8",
     "MODAL_SHARE_TITLE": "Link Copied to Clipboard!",
     "MODAL_SHARE_DESC": "The link has been copied to your clipboard. Paste and share it with fellow radio amateurs, developer groups, and on forums!",
     "MODAL_SHARE_OK": "OK",

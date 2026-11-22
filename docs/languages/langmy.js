@@ -248,6 +248,8 @@ const langData = {
     "COMMUNITY_FIRST_SOTA_QSO_USING": "LQ8 အသုံးပြု၍ ပထမဆုံး SOTA QSO",
     "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "LQ8 အသုံးပြု၍ ပထမဆုံး POTA-to-POTA QSO",
     "COMMUNITY_FIRST_DXPEDITION_USING": "LQ8 ဖြင့် ပထမဆုံး DXpedition",
+    "COMMUNITY_FIRST_PILEUP_STATION_USING": "LQ8 အသုံးပြု၍ ပထမဆုံး QSO pileup စခန်း",
+    "COMMUNITY_FIRST_PILEUP_PARTICIPANT_USING": "LQ8 အသုံးပြု၍ ပထမဆုံး QSO pileup ပါဝင်သူ",
     "MODAL_SHARE_TITLE": "လင့်ခ်ကို ကလစ်ဘုတ်သို့ ကူးယူထားသည်။",
     "MODAL_SHARE_DESC": "လင့်ခ်ကို သင့်ကလစ်ဘုတ်သို့ ကူးယူလိုက်ပါပြီ။ ၎င်းကို အပျော်တမ်း ရေဒီယိုဖော်၊ ဆော့ဖ်ဝဲရေးသားသူအဖွဲ့များနှင့် ဖိုရမ်များတွင် ကူးထည့်ပါ။",
     "MODAL_SHARE_OK": "OK",

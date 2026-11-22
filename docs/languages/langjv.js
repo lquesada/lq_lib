@@ -248,6 +248,8 @@ const langData = {
     "COMMUNITY_FIRST_SOTA_QSO_USING": "QSO SOTA pisanan nggunakake LQ8",
     "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "QSO POTA-to-POTA pisanan nggunakake LQ8",
     "COMMUNITY_FIRST_DXPEDITION_USING": "DXpedition pisanan nganggo LQ8",
+    "COMMUNITY_FIRST_PILEUP_STATION_USING": "Stasiun pileup QSO pisanan nggunakake LQ8",
+    "COMMUNITY_FIRST_PILEUP_PARTICIPANT_USING": "Peserta pileup QSO pisanan nggunakake LQ8",
     "MODAL_SHARE_TITLE": "Link Disalin menyang Clipboard!",
     "MODAL_SHARE_DESC": "Link wis disalin menyang clipboard sampeyan. Tempel lan enggo bareng karo kanca radio amatir, grup pangembang, lan ing forum!",
     "MODAL_SHARE_OK": "OK",

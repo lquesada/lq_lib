@@ -248,6 +248,8 @@ const langData = {
     "COMMUNITY_FIRST_SOTA_QSO_USING": "První QSO SOTA pomocí LQ8",
     "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "První QSO POTA-to-POTA pomocí LQ8",
     "COMMUNITY_FIRST_DXPEDITION_USING": "První DXpedice s LQ8",
+    "COMMUNITY_FIRST_PILEUP_STATION_USING": "První stanice QSO pileupu pomocí LQ8",
+    "COMMUNITY_FIRST_PILEUP_PARTICIPANT_USING": "První účastník QSO pileupu pomocí LQ8",
     "MODAL_SHARE_TITLE": "Odkaz byl zkopírován do schránky!",
     "MODAL_SHARE_DESC": "Odkaz byl zkopírován. Sdílejte jej s radioamatéry a na fórech!",
     "MODAL_SHARE_OK": "OK",

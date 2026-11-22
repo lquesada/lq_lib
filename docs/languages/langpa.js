@@ -248,6 +248,8 @@ const langData = {
     "COMMUNITY_FIRST_SOTA_QSO_USING": "LQ8 ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਪਹਿਲਾ SOTA QSO",
     "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "LQ8 ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਪਹਿਲਾ POTA-to-POTA QSO",
     "COMMUNITY_FIRST_DXPEDITION_USING": "LQ8 ਨਾਲ ਪਹਿਲੀ DXpedition",
+    "COMMUNITY_FIRST_PILEUP_STATION_USING": "LQ8 ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਪਹਿਲਾ QSO ਪਾਇਲਅੱਪ ਸਟੇਸ਼ਨ",
+    "COMMUNITY_FIRST_PILEUP_PARTICIPANT_USING": "LQ8 ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਪਹਿਲਾ QSO ਪਾਇਲਅੱਪ ਭਾਗੀਦਾਰ",
     "MODAL_SHARE_TITLE": "ਲਿੰਕ ਕਲਿੱਪਬੋਰਡ 'ਤੇ ਕਾਪੀ ਕੀਤਾ ਗਿਆ!",
     "MODAL_SHARE_DESC": "ਲਿੰਕ ਨੂੰ ਤੁਹਾਡੇ ਕਲਿੱਪਬੋਰਡ 'ਤੇ ਕਾਪੀ ਕੀਤਾ ਗਿਆ ਹੈ। ਪੇਸਟ ਕਰੋ ਅਤੇ ਇਸਨੂੰ ਸਾਥੀ ਰੇਡੀਓ ਸ਼ੌਕੀਨਾਂ, ਵਿਕਾਸਕਾਰ ਸਮੂਹਾਂ ਅਤੇ ਫੋਰਮਾਂ 'ਤੇ ਸਾਂਝਾ ਕਰੋ!",
     "MODAL_SHARE_OK": "OK",

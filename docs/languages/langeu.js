@@ -248,6 +248,8 @@ const langData = {
     "COMMUNITY_FIRST_SOTA_QSO_USING": "Lehen SOTA QSOa LQ8 erabiliz",
     "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "Lehen POTA-to-POTA QSOa LQ8 erabiliz",
     "COMMUNITY_FIRST_DXPEDITION_USING": "LQ8 erabilita lehen DXpedizioa",
+    "COMMUNITY_FIRST_PILEUP_STATION_USING": "Lehen QSO pileup estazioa LQ8 erabiliz",
+    "COMMUNITY_FIRST_PILEUP_PARTICIPANT_USING": "Lehen QSO pileup parte-hartzailea LQ8 erabiliz",
     "MODAL_SHARE_TITLE": "Esteka arbelera kopiatu da!",
     "MODAL_SHARE_DESC": "Esteka kopiatu da. Partekatu irrati-zaleekin eta foroetan!",
     "MODAL_SHARE_OK": "OK",

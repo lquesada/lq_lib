@@ -248,6 +248,8 @@ const langData = {
     "COMMUNITY_FIRST_SOTA_QSO_USING": "QSO SOTA munggaran ngagunakeun LQ8",
     "COMMUNITY_FIRST_POTA2POTA_QSO_USING": "QSO POTA-to-POTA munggaran ngagunakeun LQ8",
     "COMMUNITY_FIRST_DXPEDITION_USING": "DXpedition munggaran maké LQ8",
+    "COMMUNITY_FIRST_PILEUP_STATION_USING": "Stasion pileup QSO munggaran ngagunakeun LQ8",
+    "COMMUNITY_FIRST_PILEUP_PARTICIPANT_USING": "Pamilon pileup QSO munggaran ngagunakeun LQ8",
     "MODAL_SHARE_TITLE": "Link Disalin ka Clipboard!",
     "MODAL_SHARE_DESC": "Tautan parantos ditiron kana clipboard anjeun. Tempelkeun sareng bagikeun ka sasama radio amatir, grup pamekar, sareng dina forum!",
     "MODAL_SHARE_OK": "OK",
