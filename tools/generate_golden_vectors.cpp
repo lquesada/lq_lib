@@ -504,10 +504,10 @@ int main(int argc, char* argv[]) {
                 poss << "        ]\n";
             } else {
                 poss << "        \"sync_blocks\": [\n";
-                poss << "          {\"block\": 1, \"start_symbol\": 1, \"end_symbol\": 4, \"symbols_count\": 4, \"pattern\": [0, 2, 3, 1]},\n";
-                poss << "          {\"block\": 2, \"start_symbol\": 34, \"end_symbol\": 37, \"symbols_count\": 4, \"pattern\": [1, 3, 2, 0]},\n";
-                poss << "          {\"block\": 3, \"start_symbol\": 67, \"end_symbol\": 70, \"symbols_count\": 4, \"pattern\": [2, 0, 1, 3]},\n";
-                poss << "          {\"block\": 4, \"start_symbol\": 100, \"end_symbol\": 103, \"symbols_count\": 4, \"pattern\": [3, 1, 0, 2]}\n";
+                poss << "          {\"block\": 1, \"start_symbol\": 1, \"end_symbol\": 4, \"symbols_count\": 4, \"pattern\": [1, 3, 2, 0]},\n";
+                poss << "          {\"block\": 2, \"start_symbol\": 34, \"end_symbol\": 37, \"symbols_count\": 4, \"pattern\": [3, 1, 0, 2]},\n";
+                poss << "          {\"block\": 3, \"start_symbol\": 67, \"end_symbol\": 70, \"symbols_count\": 4, \"pattern\": [0, 2, 3, 1]},\n";
+                poss << "          {\"block\": 4, \"start_symbol\": 100, \"end_symbol\": 103, \"symbols_count\": 4, \"pattern\": [2, 0, 1, 3]}\n";
                 poss << "        ]\n";
             }
             poss << "      },\n";

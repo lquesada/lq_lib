@@ -73,10 +73,10 @@ public class LqProtocol {
     public static final int[] COSTAS_ARRAY_8 = {2, 5, 6, 1, 3, 0, 4};
 
     // Unique 4-GFSK Costas synchronization arrays for LQ4 / LQ2 (4 bursts of length 4)
-    public static final int[] COSTAS_SYNC1_4 = {0, 2, 3, 1};
-    public static final int[] COSTAS_SYNC2_4 = {1, 3, 2, 0};
-    public static final int[] COSTAS_SYNC3_4 = {2, 0, 1, 3};
-    public static final int[] COSTAS_SYNC4_4 = {3, 1, 0, 2};
+    public static final int[] COSTAS_SYNC1_4 = {1, 3, 2, 0};
+    public static final int[] COSTAS_SYNC2_4 = {3, 1, 0, 2};
+    public static final int[] COSTAS_SYNC3_4 = {0, 2, 3, 1};
+    public static final int[] COSTAS_SYNC4_4 = {2, 0, 1, 3};
 
     // 8-GFSK Gray Code Mapping (3 bits <-> 8 tones)
     public static final int[] GRAY_MAP_8 = {0, 1, 3, 2, 5, 6, 4, 7};

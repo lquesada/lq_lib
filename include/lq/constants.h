@@ -156,11 +156,16 @@ constexpr std::array<uint8_t, 4> GRAY_INV_MAP_4 = {0, 1, 3, 2};
 constexpr std::array<uint8_t, 7> COSTAS_ARRAY_8 = {2, 5, 6, 1, 3, 0, 4};
 constexpr std::array<int, 3> COSTAS_OFFSETS_8 = {0, 36, 72};
 
-/// Unique 4-symbol Costas arrays for LQ4 / LQ2 synchronization (distinct from FT4)
-constexpr std::array<uint8_t, 4> COSTAS_SYNC1_4 = {0, 2, 3, 1};
-constexpr std::array<uint8_t, 4> COSTAS_SYNC2_4 = {1, 3, 2, 0};
-constexpr std::array<uint8_t, 4> COSTAS_SYNC3_4 = {2, 0, 1, 3};
-constexpr std::array<uint8_t, 4> COSTAS_SYNC4_4 = {3, 1, 0, 2};
+/// 4-symbol Costas arrays for LQ4 / LQ2 synchronization. Changed on 2026-11-22 so that FT4 / FT2 frames (the same
+/// whitening, Gray map, LDPC and CRC-14) are no longer read as LQ4 / LQ2: they share NO symbol with FT4's / FT2's ramps
+/// ({0,1,3,2} {1,0,2,3} {2,3,1,0} {3,2,0,1}) at the alignment where a frame decodes. The earlier arrays ({0,2,3,1}
+/// {1,3,2,0} {2,0,1,3} {3,1,0,2}) shared 8 of 16 and passed the 5-of-16 sync check. These are the earlier arrays in the
+/// order 2, 4, 1, 3: 0 aligned coincidences with them too (stations with the earlier arrays and these do not hear each
+/// other), worst autocorrelation sidelobe 4 (earlier: 5).
+constexpr std::array<uint8_t, 4> COSTAS_SYNC1_4 = {1, 3, 2, 0};
+constexpr std::array<uint8_t, 4> COSTAS_SYNC2_4 = {3, 1, 0, 2};
+constexpr std::array<uint8_t, 4> COSTAS_SYNC3_4 = {0, 2, 3, 1};
+constexpr std::array<uint8_t, 4> COSTAS_SYNC4_4 = {2, 0, 1, 3};
 
 /// FT4 / LQ4 / LQ2 whitening sequence (10 bytes / 77 bits)
 constexpr std::array<uint8_t, 10> FT4_XOR_SEQUENCE = {

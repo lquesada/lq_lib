@@ -152,6 +152,7 @@ set(TEST_SOURCES
     tests/test_decoder_sensitivity.cpp
     tests/test_battery_validation.cpp
     tests/test_golden_vectors.cpp
+    tests/test_sister_frames.cpp
 )
 
 
